@@ -55,8 +55,6 @@ HIST_STAMPS="dd.mm.yyyy"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git catimg command-not-found common-aliases node npm pip python sudo supervisor)
 
-source $ZSH/oh-my-zsh.sh
-
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -100,3 +98,5 @@ POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="↳ "
 eval "$(thefuck --alias)"
 # You can use whatever you want as an alias, like for Mondays:
 eval "$(thefuck --alias fuck)"
+
+source $ZSH/oh-my-zsh.sh
