@@ -1,4 +1,4 @@
-#!/usr/bin
+#!/usr/bin/env bash
 
 # This script is the result of stow not supporting environment variables in .stowrc
 # The day that stow can do that, I will simply stow .stowrc too and remove this :)
