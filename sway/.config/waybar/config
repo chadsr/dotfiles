@@ -4,9 +4,9 @@
     "height": 20, // Waybar height (to be removed for auto height)
 
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-center": ["clock", "custom/weather", "idle_inhibitor"],
-    "modules-right": ["tray", "network", "network#wired", "temperature", "cpu", "memory", "backlight", "pulseaudio", "battery", "battery#bat1"],
+    "modules-left": ["clock", "sway/workspaces", "tray", "idle_inhibitor", "sway/mode"],
+    "modules-center": ["cpu", "memory", "temperature", "custom/weather", "custom/crypto"],
+    "modules-right": ["network", "network#wired", "backlight", "pulseaudio", "battery", "battery#bat1"],
 
 
     "sway/workspaces": {
@@ -114,5 +114,12 @@
         "return-type": "json",
         "exec": "~/.config/waybar/modules/weather.sh",
         "exec-if": "ping wttr.in -c1"
+    },
+    "custom/crypto": {
+        "format": "{}",
+        "interval": 600,
+        "return-type": "json",
+        "exec": "~/.config/waybar/modules/crypto.py",
+        "exec-if": "ping pro-api.coinmarketcap.com -c1"
     }
 }
