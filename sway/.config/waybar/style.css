@@ -13,7 +13,7 @@ window#waybar {
     transition-duration: .5s;
 }
 
-window#waybar.hidded {
+window#waybar.hidden {
     opacity: 0.2;
 }
 
@@ -66,7 +66,7 @@ window#waybar.chromium #workspaces button.focused {
     border-bottom: 3px solid #ffffff;
 }
 
-#clock, #battery, #cpu, #memory, #temperature, #backlight, #network, #pulseaudio, #custom-media, #tray, #mode, #idle_inhibitor {
+#clock, #battery, #cpu, #memory, #temperature, #backlight, #network, #pulseaudio, #custom-media, #tray, #mode, #idle_inhibitor, #custom-weather {
     padding: 0 5px;
     margin: 0;
     color: #ffffff;
@@ -121,7 +121,7 @@ label:focus {
 }
 
 #network {
-    background: #2980b9;
+    background: #29b930;
 }
 
 #network.disconnected {
@@ -141,6 +141,10 @@ label:focus {
 #custom-media {
     background: #66cc99;
     color: #2a5c45;
+}
+
+#custom-weather {
+    background: #2e6d97;
 }
 
 .custom-spotify {

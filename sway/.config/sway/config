@@ -5,14 +5,11 @@
 # \__/ \_/\_/ \__,_|\__, | \____/\___/|_| |_|_| |_|\__, |   (_)  | |
 #                   |___/                          |___/        /_/ 
 
-# External package requirements:
-# light playerctl waybar libappindicator-gtk3 dex
-
 # Read `man 5 sway` for a complete reference.
 
 # Autostarts
     # Launch desktop entries
-    exec dex -a -s /etc/xdg/autostart/:~/.config/autostart/
+    exec dex -a -s :~/.config/autostart/
 
 ### Variables
 
@@ -28,11 +25,11 @@ set $right l
 # Terminal Emulator
 set $term termite
 
-# Application Launcher
-set $menu dmenu_run
+# Rofi menu
+set $menu rofi --terminal $term --normal-window
 
 # Background wallpaper
-output * bg $HOME/.config/sway/background.jpg fill
+output * bg $HOME/.config/sway/background.png fill
 
 ### Output configuration (swaymsg -t get_outputs)
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
@@ -50,8 +47,14 @@ output * bg $HOME/.config/sway/background.jpg fill
     # kill focused window
     bindsym $mod+Shift+q kill
 
-    # start your launcher
-    bindsym $mod+d exec $menu
+    # start rofi run menu
+    bindsym $mod+x exec $menu -show drun
+
+    # start rofi ssh menu
+    bindsym $mod+s exec $menu -show ssh
+
+    # start rofi window switcher
+    bindsym $mod+w exec $menu -show window
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -126,9 +129,9 @@ output * bg $HOME/.config/sway/background.jpg fill
     bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
-    bindsym $mod+w layout tabbed
-    bindsym $mod+e layout toggle split
+    bindsym $mod+equal layout stacking
+    bindsym $mod+t layout tabbed
+    bindsym $mod+slash layout toggle split
 
     # Make the current focus fullscreen
     bindsym $mod+f fullscreen
