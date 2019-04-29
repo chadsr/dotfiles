@@ -5,46 +5,40 @@
 # \__/ \_/\_/ \__,_|\__, | \____/\___/|_| |_|_| |_|\__, |   (_)  | |
 #                   |___/                          |___/        /_/ 
 
+# External package requirements:
+# light playerctl waybar libappindicator-gtk3 dex
+
 # Read `man 5 sway` for a complete reference.
 
+# Autostarts
+    # Launch desktop entries
+    exec dex -a -s /etc/xdg/autostart/:~/.config/autostart/
+
 ### Variables
-#
+
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
+
 # Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
-# Your preferred terminal emulator
-set $term urxvt
-# Your preferred application launcher
+
+# Terminal Emulator
+set $term termite
+
+# Application Launcher
 set $menu dmenu_run
 
-### Output configuration
-#
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-#
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
+# Background wallpaper
+output * bg $HOME/.config/sway/background.jpg fill
 
-### Input configuration
-#
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
+### Output configuration (swaymsg -t get_outputs)
+#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+
+
+### Input configuration (swaymsg -t get_inputs)
 
 ### Key bindings
 #
@@ -67,7 +61,7 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
     floating_modifier $mod normal
 
     # reload the configuration file
-    bindsym $mod+Shift+c reload
+    bindsym $mod+Shift+r reload
 
     # exit sway (logs you out of your wayland session)
     bindsym $mod+Shift+e exit
@@ -188,17 +182,30 @@ bindsym $mod+r mode "resize"
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
-bar {
-    position top
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
-}
 
 bar {
-    status_command i3status
+    swaybar_command waybar
 }
+
+#
+# Thinkpad Brightness controls using light
+#
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10
+
+#
+# Pulse Audio
+#
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+#
+# Media player controls (Requires playerctl)
+#
+bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
 
 include /etc/sway/config.d/*
