@@ -85,7 +85,7 @@
         "on-click": "networkmanager_dmenu"
     },
     "network#wired": {
-        "interval": 60,
+        "interval": 5,
         "interface": "enp0s25",
         "format-ethernet": "{ipaddr} ",
         "format-disconnected": "Disconnected ",
@@ -110,7 +110,7 @@
     "custom/weather": {
         "format": "{}",
         "format-alt": "{alt}: {}",
-        "interval": 1800,
+        "interval": 600,
         "return-type": "json",
         "exec": "~/.config/waybar/modules/weather.sh",
         "exec-if": "ping wttr.in -c1"
