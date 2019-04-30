@@ -11,6 +11,9 @@
     # Launch desktop entries
     exec dex -a -s :~/.config/autostart/
 
+### Theming
+default_border pixel
+
 ### Variables
 
 # Logo key. Use Mod1 for Alt.
