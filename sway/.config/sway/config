@@ -67,7 +67,7 @@ output * bg $HOME/.config/sway/background.png fill
     bindsym $mod+Shift+r reload
 
     # exit sway (logs you out of your wayland session)
-    bindsym $mod+Shift+e exit
+    bindsym $mod+Shift+Escape exit
 #
 # Moving around:
 #
@@ -191,6 +191,11 @@ bar {
 }
 
 #
+# Screenshots
+#
+bindsym --release Print exec grim -g \"$(slurp)" - | wl-copy
+
+#
 # Thinkpad Brightness controls using light
 #
 bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
@@ -210,5 +215,10 @@ bindsym XF86AudioPlay exec playerctl play
 bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
+
+#
+# Swaylock
+#
+bindsym $mod+Escape exec swaylock-blur
 
 include /etc/sway/config.d/*
