@@ -9,7 +9,9 @@
 
 # Autostarts
     # Launch desktop entries
-    exec dex -a -s :~/.config/autostart/
+    exec --no-startup-id dex -a -s :~/.config/autostart/
+    exec --no-startup-id mako
+    exec --no-startup-id redshift-gtk
 
 ### Theming
 default_border pixel
@@ -223,5 +225,15 @@ bindsym XF86AudioPrev exec playerctl previous
 # Swaylock
 #
 bindsym $mod+Escape exec swaylock-blur
+
+### Idle configuration
+# Lock after 300 seconds (5 minutes), turn off screen after 600 seconds (10 minutes)
+# Turn screen back on when resumed
+# lock screen before sleep.
+exec swayidle \
+    timeout 300 'swaylock-blur' \
+    timeout 600 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"' \
+    before-sleep 'swaylock-blur'
 
 include /etc/sway/config.d/*
