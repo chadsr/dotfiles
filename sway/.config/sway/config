@@ -15,6 +15,11 @@
 
 ### Theming
 default_border pixel
+exec_always {
+    gsettings set org.gnome.desktop.interface gtk-theme 'Arc-Darker'
+    gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark-Maia'
+    gsettings set $gnome-schema cursor-theme 'Adwaita'
+}
 
 ### Variables
 
@@ -28,7 +33,7 @@ set $up k
 set $right l
 
 # Terminal Emulator
-set $term termite
+set $term alacritty
 
 # Rofi menu
 set $menu rofi --terminal $term --normal-window
