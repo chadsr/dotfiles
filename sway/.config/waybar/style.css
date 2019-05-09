@@ -1,8 +1,8 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: Inconsolata, monospace;
-    font-size: 14px;
+    font-family: Hack;
+    font-size: 11px;
     min-height: 0;
 }
 
@@ -148,6 +148,7 @@ label:focus {
 }
 
 #custom-crypto {
+    font-family: cryptocoins, monospace;
     background: linear-gradient(90deg, #fca09a, #fcccd3, #ffcc9d, #98ddad, #81d7ec, #a0aaed);
     color: #000;
 }

@@ -19,7 +19,7 @@ exec_always {
     gsettings set org.gnome.desktop.interface gtk-theme 'Sweet-Dark'
     gsettings set org.gnome.desktop.wm.preferences theme "Sweet-Dark" # Don't think this does anything but hey
     gsettings set org.gnome.desktop.interface icon-theme 'Suru++'
-    gsettings set $gnome-schema cursor-theme 'Adwaita'
+    gsettings set $gnome-schema cursor-theme 'Suru++-Telinkrin'
 }
 
 ### Variables
