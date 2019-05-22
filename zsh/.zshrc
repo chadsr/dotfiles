@@ -52,7 +52,7 @@ HIST_STAMPS="dd.mm.yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git catimg command-not-found common-aliases node npm pip python sudo supervisor)
+plugins=(git catimg command-not-found common-aliases node npm pip python sudo supervisor golang archlinux colorize cp docker-compose git-flow github systemd vscode)
 
 # User configuration
 
@@ -86,7 +86,7 @@ plugins=(git catimg command-not-found common-aliases node npm pip python sudo su
 POWERLEVEL9K_MODE='awesome-fontconfig'
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ip root_indicator context dir rbenv vcs nodeenv virtualenv anaconda pyenv)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time custom_wifi_signal battery)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time battery)
 
 POWERLEVEL9K_BACKGROUND_JOBS_VERBOSE=true
 POWERLEVEL9K_BATTERY_VERBOSE=true
