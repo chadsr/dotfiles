@@ -153,11 +153,7 @@ label:focus {
     color: #000;
 }
 
-.custom-spotify {
-    background: #66cc99;
-}
-
-.custom-vlc {
+#custom-vlc {
     background: #ffa000;
 }
 
