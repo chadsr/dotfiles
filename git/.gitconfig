@@ -1,13 +1,16 @@
 [user]
 	name = Ross Chadwick
 	email = git@ross.ch
-	signingkey = A6C9F349967F1AC6
+	signingKey = A6C9F349967F1AC6
+
+[commit]
+	gpgsign = true
 
 [color]
     ui = true
 
 [diff]
-mnemonicprefix = true
+    mnemonicprefix = true
 
 [merge]
     log = true
