@@ -1,0 +1,29 @@
+[user]
+	name = Ross Chadwick
+	email = git@ross.ch
+	signingkey = A6C9F349967F1AC6
+
+[color]
+    ui = true
+
+[diff]
+mnemonicprefix = true
+
+[merge]
+    log = true
+    ff = false
+
+[push]
+    default = simple
+
+[url "https://bitbucket.org/"]
+    insteadOf = bb:
+
+[url "https://github.com/"]
+    insteadOf = gh:
+
+[url "https://gist.github.com/"]
+    insteadOf = gist:
+
+[url "git@github.com:"]
+	insteadOf = https://github.com/
