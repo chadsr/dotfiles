@@ -3,6 +3,9 @@
 # This script is the result of stow not supporting environment variables in .stowrc
 # The day that stow can do that, I will simply stow .stowrc too and remove this :)
 
+echo "Checking if stow is installed"
+yay -S --needed stow
+
 if echo "--target=${HOME}" > $HOME/.stowrc; then
     echo ".stowrc written to '$HOME/.stowrc' successfully"
 else
