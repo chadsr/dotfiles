@@ -1,3 +1,6 @@
 [submodule "zsh/.oh-my-zsh/themes/powerlevel10k"]
 	path = zsh/.oh-my-zsh/themes/powerlevel10k
 	url = https://github.com/romkatv/powerlevel10k.git
+[submodule "sway/.config/waybar/modules/waybar-crypto"]
+	path = sway/.config/waybar/modules/waybar-crypto
+	url = git@github.com:Chadsr/waybar-crypto.git
