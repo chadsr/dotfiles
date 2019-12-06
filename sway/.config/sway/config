@@ -16,10 +16,10 @@
 ### Theming
 default_border pixel
 exec_always {
-    gsettings set org.gnome.desktop.interface gtk-theme 'Sweet-Dark'
-    gsettings set org.gnome.desktop.wm.preferences theme "Sweet-Dark" # Don't think this does anything but hey
-    gsettings set org.gnome.desktop.interface icon-theme 'Suru++'
-    gsettings set $gnome-schema cursor-theme 'Suru++-Telinkrin'
+    gsettings set org.gnome.desktop.interface gtk-theme 'sweet_dark'
+    gsettings set org.gnome.desktop.wm.preferences theme "sweet_dark" # Don't think this does anything but hey
+    gsettings set org.gnome.desktop.interface icon-theme 'Ultimate-Punk-Suru++'
+    gsettings set org.gnome.desktop.interface cursor-theme 'PUNK-Cyan-Cursor'
 }
 
 ### Variables

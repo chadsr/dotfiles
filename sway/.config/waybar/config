@@ -85,14 +85,14 @@
     },
     "network": {
         "interval": 5,
-        "interface": "wlp3s0",
+        "interface": "wlp61s0",
         "format-wifi": "{ipaddr} ({essid} {signalStrength}%) ",
         "format-disconnected": "Disconnected ",
         "on-click": "networkmanager_dmenu"
     },
     "network#wired": {
         "interval": 5,
-        "interface": "enp0s25",
+        "interface": "enp0s31f6",
         "format-ethernet": "{ipaddr} ",
         "format-disconnected": "Disconnected ",
         "on-click": "networkmanager_dmenu"

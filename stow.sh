@@ -27,13 +27,18 @@ else
     exit 1
 fi
 
+echo "Getting git submodules"
+git submodule update --init --recursive
+
 echo "Checking for ZSH dependencies to install"
-yay -S --needed zsh
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"x
+yay -S --needed zsh thefuck
 
 echo "Checking for Sway dependencies to install"
 yay -S --needed sway light waybar libappindicator-gtk3 dex rofi otf-font-awesome python python-requests networkmanager-dmenu slurp grim swayshot swaylock-blur-git mako redshift-wlr-gamma-control-git sweet-theme-git gtk-engines alacritty suru-plus-git
 
 echo "Setting up user directory configs"
+source ${HOME}/.stowrc
 stow -v firefox
 stow -v zsh
 stow -v sway
