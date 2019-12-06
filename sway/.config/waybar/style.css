@@ -49,7 +49,7 @@ window#waybar.chromium #workspaces button {
 }
 
 #workspaces button.focused {
-    background: #64727D;
+    background-color: rgb(51, 111, 167);
     border-bottom: 3px solid #ffffff;
 }
 
@@ -67,23 +67,22 @@ window#waybar.chromium #workspaces button.focused {
 }
 
 #clock, #battery, #cpu, #memory, #temperature, #backlight, #network, #pulseaudio, #custom-media, #tray, #mode, #idle_inhibitor, #custom-weather, #custom-crypto {
-    padding: 0 5px;
+    padding: 0 10px;
     margin: 0;
     color: #ffffff;
 }
 
 #clock {
-    background-color: #64727D;
+    /* background-color: #64727D; */
 }
 
 #battery {
-    background-color: #ffffff;
-    color: #000000;
+    /* background-color: #ffffff; */
 }
 
 #battery.charging {
     color: #ffffff;
-    background-color: #26A65B;
+    /* background-color: #26A65B; */
 }
 
 @keyframes blink {
@@ -108,34 +107,38 @@ label:focus {
 }
 
 #cpu {
-    background: #2ecc71;
-    color: #000000;
+    /*background: #2ecc71;*/
+    /* color: #fff; */
 }
 
 #memory {
-    background: #9b59b6;
+    /* background: #9b59b6; */
 }
 
 #backlight {
-    background: #0dd3d3;
+    /* background: #0dd3d3; */
 }
 
 #network {
-    background: #29b930;
+    /*background: #29b930;*/
+}
+
+#network.connected {
+    background: #2ecc71;
 }
 
 #network.disconnected {
-    background: #f53c3c;
+    /* background: #f53c3c; */
 }
 
 #pulseaudio {
-    background: #f1c40f;
-    color: #000000;
+    /* background: #f1c40f;
+    color: #000000; */
 }
 
 #pulseaudio.muted {
-    background: #90b1b1;
-    color: #2a5c45;
+    /* background: #90b1b1;
+    color: #2a5c45; */
 }
 
 #custom-media {
@@ -144,13 +147,13 @@ label:focus {
 }
 
 #custom-weather {
-    background: #2e6d97;
+    /*background: #2e6d97;*/
 }
 
 #custom-crypto {
     font-family: cryptocoins, monospace;
-    background: linear-gradient(90deg, #fca09a, #fcccd3, #ffcc9d, #98ddad, #81d7ec, #a0aaed);
-    color: #000;
+    /* background: linear-gradient(90deg, #fca09a, #fcccd3, #ffcc9d, #98ddad, #81d7ec, #a0aaed); */
+    color: #fff;
 }
 
 #custom-vlc {
@@ -158,7 +161,7 @@ label:focus {
 }
 
 #temperature {
-    background: #f0932b;
+    /* background: #f0932b; */
 }
 
 #temperature.critical {
@@ -170,7 +173,7 @@ label:focus {
 }
 
 #idle_inhibitor {
-    background-color: #2d3436;
+    /*background-color: #2d3436;*/
 }
 
 #idle_inhibitor.activated {
