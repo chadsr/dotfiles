@@ -12,6 +12,7 @@
     exec dex -a -s :~/.config/autostart/
     exec mako
     exec redshift-gtk
+    exec cadence
 
 ### Theming
 default_border pixel

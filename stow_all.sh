@@ -47,9 +47,13 @@ yay -S --needed zsh thefuck
 echo "Checking for Sway dependencies to install"
 yay -S --needed sway ranger shotwell light waybar libappindicator-gtk3 dex rofi otf-font-awesome python python-requests networkmanager-dmenu slurp grim swayshot swaylock-blur-git mako redshift-wlr-gamma-control-git gtk-engines alacritty
 
+echo "Checking for Cadence/Jack dependencies to install"
+yay -S --needed jack2 pulseaudio-alsa pulseaudio-jack pavucontrol cadence
+
 echo "Setting up user directory configs"
 stow -v firefox
 stow -v zsh
+stow -v cadence
 stow -v sway
 stow -v git
 
