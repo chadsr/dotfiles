@@ -31,7 +31,7 @@
     },
     "tray": {
         "icon-size": 16,
-        "spacing": 8
+        "spacing": 10
     },
     "clock": {
         "interval": 60,
@@ -88,14 +88,14 @@
         "interface": "wlp61s0",
         "format-wifi": "{ipaddr} ({essid} {signalStrength}%) ",
         "format-disconnected": "Disconnected ",
-        "on-click": "networkmanager_dmenu"
+        "on-click": "networkmanager_dmenu -normal-window"
     },
     "network#wired": {
         "interval": 5,
         "interface": "enp0s31f6",
         "format-ethernet": "{ipaddr} ",
         "format-disconnected": "Disconnected ",
-        "on-click": "networkmanager_dmenu"
+        "on-click": "networkmanager_dmenu -normal-window"
     },
     "pulseaudio": {
         "scroll-step": 1,
@@ -129,7 +129,7 @@
         "exec-if": "ping pro-api.coinmarketcap.com -c1"
     },
     "custom/yay": {
-        "format": "{} ",
+        "format": "{}  ",
         "interval": 3600,                     // every hour
         "exec": "checkupdates | wc -l",       // # of updates
         "exec-if": "exit 0",                  // always run; consider advanced run conditions
