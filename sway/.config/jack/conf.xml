@@ -4,7 +4,7 @@ JACK settings, as persisted by D-Bus object.
 You probably don't want to edit this because
 it will be overwritten next time jackdbus saves.
 -->
-<!-- Thu Oct 31 13:17:21 2019 -->
+<!-- Fri Dec  6 19:28:24 2019 -->
 <jack>
  <engine>
   <option name="driver">alsa</option>
@@ -13,43 +13,43 @@ it will be overwritten next time jackdbus saves.
   <option name="sync">false</option>
  </engine>
  <drivers>
-  <driver name="netone">
-  </driver>
-  <driver name="loopback">
-   <option name="channels">0</option>
-  </driver>
-  <driver name="dummy">
-   <option name="period">256</option>
-  </driver>
-  <driver name="net">
-  </driver>
   <driver name="alsa">
-   <option name="device">hw:BTR1K</option>
-   <option name="capture">hw:BTR1K</option>
-   <option name="playback">hw:BTR1K</option>
+   <option name="device">hw:BTR1K,0</option>
+   <option name="capture">hw:BTR1K,0</option>
+   <option name="playback">hw:BTR1K,0</option>
    <option name="rate">48000</option>
    <option name="period">1024</option>
    <option name="nperiods">2</option>
    <option name="hwmeter">false</option>
-   <option name="duplex">true</option>
+   <option name="duplex">false</option>
    <option name="softmode">false</option>
    <option name="monitor">false</option>
    <option name="dither">n</option>
    <option name="shorts">false</option>
   </driver>
-  <driver name="alsarawmidi">
+  <driver name="dummy">
+   <option name="period">256</option>
   </driver>
   <driver name="proxy">
   </driver>
+  <driver name="netone">
+  </driver>
+  <driver name="net">
+  </driver>
+  <driver name="alsarawmidi">
+  </driver>
+  <driver name="loopback">
+   <option name="channels">0</option>
+  </driver>
  </drivers>
  <internals>
-  <internal name="netmanager">
-  </internal>
   <internal name="audioadapter">
   </internal>
-  <internal name="profiler">
+  <internal name="netmanager">
   </internal>
   <internal name="netadapter">
+  </internal>
+  <internal name="profiler">
   </internal>
  </internals>
 </jack>

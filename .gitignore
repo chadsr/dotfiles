@@ -1,0 +1,4 @@
+sway/.themes/*
+sway/.config/gtk-3.0/bookmarks
+sway/.icons/*
+sway/.config/waybar/modules/waybar-crypto/crypto/crypto.ini
