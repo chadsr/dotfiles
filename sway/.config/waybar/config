@@ -4,7 +4,7 @@
     "height": 20, // Waybar height (to be removed for auto height)
 
     // Choose the order of the modules
-    "modules-left": ["clock", "sway/workspaces", "tray", "idle_inhibitor", "sway/mode"],
+    "modules-left": ["clock", "sway/workspaces", "tray", "custom/yay", "idle_inhibitor", "sway/mode"],
     "modules-center": ["cpu", "memory", "temperature", "custom/weather", "custom/crypto"],
     "modules-right": ["network", "network#wired", "backlight", "pulseaudio", "battery", "battery#bat1"],
 
@@ -127,5 +127,13 @@
         "return-type": "json",
         "exec": "~/.config/waybar/modules/waybar-crypto/crypto/crypto.py",
         "exec-if": "ping pro-api.coinmarketcap.com -c1"
+    },
+    "custom/yay": {
+        "format": "{} ",
+        "interval": 3600,                     // every hour
+        "exec": "checkupdates | wc -l",       // # of updates
+        "exec-if": "exit 0",                  // always run; consider advanced run conditions
+        "on-click": "alacritty -e 'sudo yay -Syu'; pkill -SIGRTMIN+8 waybar", // update system
+        "signal": 8
     }
 }
