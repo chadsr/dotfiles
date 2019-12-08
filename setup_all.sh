@@ -79,6 +79,19 @@ git rebase origin/nova || {
     exit 1
 }
 
+cd "$GIT_SUBMODULES"/waybar-modules || {
+    echo "failed to cd to ${GIT_SUBMODULES}/wwaybar-modules"
+    exit 1
+}
+git fetch origin master || {
+    echo "failed to pull updates"
+    exit 1
+}
+git rebase origin/master || {
+    echo "failed to rebase on top of updates"
+    exit 1
+}
+
 cd "$BASE_PATH"/sway/.config/waybar/modules/waybar-crypto || {
     echo "failed to cd to ${BASE_PATH}/sway/.config/waybar/modules/waybar-crypto"
     exit 1

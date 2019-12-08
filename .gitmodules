@@ -15,3 +15,7 @@ branch = nova
 path = .git_submodules/punk_theme
 url = git@github.com:rtlewis88/rtl88-Themes.git
 branch = Ultimate-Punk-Complete-Desktop
+
+[submodule ".git_submodules/waybar-modules"]
+path = .git_submodules/waybar-modules
+url = git@gitlab.com:Chadsr/waybar-modules.git
