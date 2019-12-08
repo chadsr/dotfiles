@@ -166,7 +166,7 @@ cp -Rv "$GIT_SUBMODULES"/sweet_theme ./sway/.themes/ || {
 }
 
 echo "Checking for ZSH dependencies to install"
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" # This will fail if already installed, so don't bother checking
+nohup sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" >/dev/null 2>&1 &# This will fail if already installed, so don't bother checking
 
 yay -S --needed --noredownload zsh thefuck || {
     echo 'failed to install ZSH config dependencies'
