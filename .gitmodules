@@ -9,6 +9,9 @@ url = git@github.com:Chadsr/waybar-crypto.git
 [submodule ".git_submodules/sweet_theme"]
 path = .git_submodules/sweet_theme
 url = git@github.com:EliverLara/Sweet.git
+branch = nova
+
 [submodule ".git_submodules/punk_theme"]
-	path = .git_submodules/punk_theme
-	url = git@github.com:rtlewis88/rtl88-Themes.git
+path = .git_submodules/punk_theme
+url = git@github.com:rtlewis88/rtl88-Themes.git
+branch = Ultimate-Punk-Complete-Desktop
