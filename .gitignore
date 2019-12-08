@@ -2,3 +2,5 @@ sway/.themes/*
 sway/.config/gtk-3.0/bookmarks
 sway/.icons/*
 sway/.config/waybar/modules/waybar-crypto/crypto/crypto.ini
+sway/.config/pulse/*
+!sway/.config/pulse/default.pa

@@ -137,7 +137,7 @@ yay -S --needed --noredownload zsh thefuck || {
     exit 1
 }
 echo "Checking for Sway dependencies to install"
-yay -S --needed --combinedupgrade --batchinstall --noredownload sway ranger shotwell light waybar libappindicator-gtk3 dex rofi otf-font-awesome python python-requests networkmanager-dmenu slurp grim swayshot swaylock-blur-git mako redshift-wlr-gamma-control-git gtk-engines alacritty || {
+yay -S --needed --combinedupgrade --batchinstall --noredownload sway ranger pulseaudio-ctl shotwell light waybar libappindicator-gtk3 dex rofi otf-font-awesome python python-requests networkmanager-dmenu slurp grim swayshot swaylock-blur-git mako redshift-wlr-gamma-control-git gtk-engines alacritty || {
     echo 'failed to install Sway dependencies'
     exit 1
 }
@@ -149,6 +149,7 @@ yay -S --needed --noredownload jack2 pulseaudio-alsa pulseaudio-jack pavucontrol
 }
 
 echo "Setting up user directory configs"
+mkdir "$HOME"/.config/pulse # Make this if it doesn't exist, so PulseAudio doesn't complain about there being too many levels of symbolic links from stow
 stow -v firefox
 stow -v zsh
 stow -v cadence
