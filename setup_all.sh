@@ -49,22 +49,64 @@ cd "$GIT_SUBMODULES"/punk_theme || {
     echo "failed to cd to ${GIT_SUBMODULES}/punk_theme"
     exit 1
 }
-git checkout Ultimate-Punk-Complete-Desktop
+git checkout Ultimate-Punk-Complete-Desktop || {
+    echo "failed to checkout branch"
+    exit 1
+}
+git fetch origin Ultimate-Punk-Complete-Desktop || {
+    echo "failed to pull updates"
+    exit 1
+}
+git rebase origin/Ultimate-Punk-Complete-Desktop || {
+    echo "failed to rebase on top of updates"
+    exit 1
+}
 
 cd "$GIT_SUBMODULES"/sweet_theme || {
     echo "failed to cd to ${GIT_SUBMODULES}/sweet_theme"
     exit 1
 }
-git checkout nova
-
-cd "$BASE_PATH" || {
-    echo "failed to cd back to ${BASE_PATH}"
+git checkout nova || {
+    echo "failed to checkout branch"
+    exit 1
+}
+git fetch origin nova || {
+    echo "failed to pull updates"
+    exit 1
+}
+git rebase origin/nova || {
+    echo "failed to rebase on top of updates"
     exit 1
 }
 
-echo "Pulling updated git submodules"
-git submodule foreach git pull || {
-    echo 'failed to pull git submodule repo updates'
+cd "$BASE_PATH"/sway/.config/waybar/modules/waybar-crypto || {
+    echo "failed to cd to ${BASE_PATH}/sway/.config/waybar/modules/waybar-crypto"
+    exit 1
+}
+git fetch origin master || {
+    echo "failed to fetch updates"
+    exit 1
+}
+git rebase origin/master || {
+    echo "failed to rebase on top of updates"
+    exit 1
+}
+
+cd "$BASE_PATH"/zsh/.oh-my-zsh/themes/powerlevel10k || {
+    echo "failed to cd to ${BASE_PATH}/zsh/.oh-my-zsh/themes/powerlevel10k"
+    exit 1
+}
+git fetch origin master || {
+    echo "failed to fetch updates"
+    exit 1
+}
+git rebase origin/master || {
+    echo "failed to rebase on top of updates"
+    exit 1
+}
+
+cd "$BASE_PATH" || {
+    echo "failed to cd back to ${BASE_PATH}"
     exit 1
 }
 
@@ -88,10 +130,7 @@ cp -Rv "$GIT_SUBMODULES"/sweet_theme ./sway/.themes/ || {
 }
 
 echo "Checking for ZSH dependencies to install"
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || {
-    echo 'failed to download OhMyZSH install script'
-    exit 1
-}
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" # This will fail if already installed, so don't bother checking
 
 yay -S --needed --noredownload zsh thefuck || {
     echo 'failed to install ZSH config dependencies'
