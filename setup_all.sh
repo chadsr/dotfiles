@@ -16,6 +16,8 @@ prompt() {
     esac
 }
 
+prompt "This script will remove existing system settings"
+
 "$BASE_PATH"/stow_setup.sh
 
 echo "Updating package databases"
@@ -24,7 +26,10 @@ yay -Syy || {
     exit 1
 }
 
-prompt "This script will remove existing system settings"
+git submodule update --init --recursive || {
+    echo 'failed to update git submodules'
+    exit 1
+}
 
 echo "Checkout out correct submodule branches"
 cd "$GIT_SUBMODULES"/punk_theme || {
@@ -105,11 +110,6 @@ git rebase origin/master || {
 
 cd "$BASE_PATH" || {
     echo "failed to cd back to ${BASE_PATH}"
-    exit 1
-}
-
-git submodule update --init --recursive || {
-    echo 'failed to update git submodules'
     exit 1
 }
 
