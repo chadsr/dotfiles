@@ -26,24 +26,6 @@ yay -Syy || {
 
 prompt "This script will remove existing system settings"
 
-echo "Copying common system configuration"
-sudo cp -Rv "$SYSTEM_CONFIG"/common/* /
-
-if [ "$1" == "laptop" ]; then
-    echo "Checking if tpacpi-bat is installed"
-    yay -S --needed --noredownload tpacpi-bat || {
-        echo 'failed to install TLP packages'
-        exit 1
-    }
-    echo "Copying laptop system configuration"
-    sudo cp -Rv "$SYSTEM_CONFIG"/laptop/* /
-elif [ "$1" == "workstation" ]; then
-    sudo cp -Rv "$SYSTEM_CONFIG"/workstation/* /
-else
-    echo "$0: first argument must be 'laptop' or 'workstation'"
-    exit 1
-fi
-
 echo "Checkout out correct submodule branches"
 cd "$GIT_SUBMODULES"/punk_theme || {
     echo "failed to cd to ${GIT_SUBMODULES}/punk_theme"
@@ -80,12 +62,15 @@ git rebase origin/nova || {
 }
 
 cd "$GIT_SUBMODULES"/waybar-modules || {
-    echo "failed to cd to ${GIT_SUBMODULES}/wwaybar-modules"
+    echo "failed to cd to ${GIT_SUBMODULES}/waybar-modules"
     exit 1
 }
 git fetch origin master || {
     echo "failed to pull updates"
     exit 1
+}
+git checkout master || {
+    echo 'failed to check out master branch'
 }
 git rebase origin/master || {
     echo "failed to rebase on top of updates"
@@ -127,6 +112,44 @@ git submodule update --init --recursive || {
     echo 'failed to update git submodules'
     exit 1
 }
+
+echo "Copying common system configuration"
+sudo cp -Rv "$SYSTEM_CONFIG"/common/* /
+
+if [ "$1" == "laptop" ]; then
+    echo "Checking if tpacpi-bat is installed"
+    yay -S --needed --noredownload tpacpi-bat || {
+        echo 'failed to install TLP packages'
+        exit 1
+    }
+    echo "Copying laptop system configuration"
+    sudo cp -Rv "$SYSTEM_CONFIG"/laptop/* /
+
+    echo "Building and copying battery module for Waybar"
+    cd "$GIT_SUBMODULES"/waybar-modules/battery || {
+        echo "failed changing directory to ${GIT_SUBMODULES}/waybar-modules/battery"
+        exit 1
+    }
+    make || {
+        echo 'failed to make battery modules'
+        exit 1
+    }
+
+    cp -v "$GIT_SUBMODULES"/waybar-modules/battery/wbm_battery_0 "$BASE_PATH"/sway/.config/waybar/modules/battery || {
+        echo "failed copying battery module to ${GIT_SUBMODULES}/waybar-modules/battery"
+        exit 1
+    }
+
+    cp -v "$GIT_SUBMODULES"/waybar-modules/batterywbm_battery_1 "$BASE_PATH"/sway/.config/waybar/modules/battery || {
+        echo "failed copying battery module to ${GIT_SUBMODULES}/waybar-modules/battery"
+        exit 1
+    }
+elif [ "$1" == "workstation" ]; then
+    sudo cp -Rv "$SYSTEM_CONFIG"/workstation/* /
+else
+    echo "$0: first argument must be 'laptop' or 'workstation'"
+    exit 1
+fi
 
 echo "Copying themes from git repo to dotfiles locations"
 cp -Rv "$GIT_SUBMODULES"/punk_theme/PUNK-Cyan-Cursor "$BASE_PATH"/sway/.icons/ || {

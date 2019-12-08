@@ -18,4 +18,5 @@ branch = Ultimate-Punk-Complete-Desktop
 
 [submodule ".git_submodules/waybar-modules"]
 path = .git_submodules/waybar-modules
-url = git@gitlab.com:Chadsr/waybar-modules.git
+url = git@github.com:sl424/waybar.git
+branch = master
