@@ -1,0 +1,2 @@
+set-default-sink jack_out
+set-default-source jack_in
