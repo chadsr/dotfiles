@@ -1,12 +1,14 @@
 [submodule "zsh/.oh-my-zsh/themes/powerlevel10k"]
-	path = zsh/.oh-my-zsh/themes/powerlevel10k
-	url = https://github.com/romkatv/powerlevel10k.git
+path = zsh/.oh-my-zsh/themes/powerlevel10k
+url = https://github.com/romkatv/powerlevel10k.git
+
 [submodule "sway/.config/waybar/modules/waybar-crypto"]
-	path = sway/.config/waybar/modules/waybar-crypto
-	url = git@github.com:Chadsr/waybar-crypto.git
-[submodule "sway/.themes/PUNK"]
-	path = git_themes/PUNK
+path = sway/.config/waybar/modules/waybar-crypto
+url = git@github.com:Chadsr/waybar-crypto.git
+
+[submodule ".git_submodules/sweet_theme"]
+path = .git_submodules/sweet_theme
+url = git@github.com:EliverLara/Sweet.git
+[submodule ".git_submodules/punk_theme"]
+	path = .git_submodules/punk_theme
 	url = git@github.com:rtlewis88/rtl88-Themes.git
-[submodule "git_themes/sweet_dark"]
-	path = git_themes/sweet_dark
-	url = git@github.com:EliverLara/Sweet.git
