@@ -14,10 +14,13 @@ prompt () {
 
 ./stow_setup.sh
 
+echo "Updating package databases"
+yay -Syy
+
 if [ $1 == "laptop" ] ; then
     prompt "This will remove existing system settings"
     echo "Checking if tpacpi-bat is installed"
-    yay -S --needed tpacpi-bat
+    yay -S --needed --noredownload tpacpi-bat
     sudo cp -Rv laptop_system/* /
 elif [ $1 == "workstation" ] ; then
     prompt "This will remove existing system settings"
@@ -27,7 +30,8 @@ else
     exit 1
 fi
 
-echo "Getting git submodules"
+echo "Getting updated git submodules"
+git submodule foreach git pull origin master
 git submodule update --init --recursive
 cd git_themes/PUNK
 git checkout Ultimate-Punk-Complete-Desktop
@@ -42,13 +46,12 @@ cp -Rv ./git_themes/sweet_dark ./sway/.themes/
 
 echo "Checking for ZSH dependencies to install"
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"x
-yay -S --needed zsh thefuck
-
+yay -S --needed --noredownload zsh thefuck
 echo "Checking for Sway dependencies to install"
-yay -S --needed sway ranger shotwell light waybar libappindicator-gtk3 dex rofi otf-font-awesome python python-requests networkmanager-dmenu slurp grim swayshot swaylock-blur-git mako redshift-wlr-gamma-control-git gtk-engines alacritty
+yay -S --needed --combinedupgrade --batchinstall --noredownload sway ranger shotwell light waybar libappindicator-gtk3 dex rofi otf-font-awesome python python-requests networkmanager-dmenu slurp grim swayshot swaylock-blur-git mako redshift-wlr-gamma-control-git gtk-engines alacritty
 
 echo "Checking for Cadence/Jack dependencies to install"
-yay -S --needed jack2 pulseaudio-alsa pulseaudio-jack pavucontrol cadence
+yay -S --needed --noredownload jack2 pulseaudio-alsa pulseaudio-jack pavucontrol cadence
 
 echo "Setting up user directory configs"
 stow -v firefox
@@ -57,4 +60,5 @@ stow -v cadence
 stow -v sway
 stow -v git
 
+echo "Setup finished successfully!"
 exit 0
