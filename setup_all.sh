@@ -135,12 +135,12 @@ if [ "$1" == "laptop" ]; then
         exit 1
     }
 
-    cp -v "$GIT_SUBMODULES"/waybar-modules/battery/wbm_battery_0 "$BASE_PATH"/sway/.config/waybar/modules/battery || {
+    cp -v "$GIT_SUBMODULES"/waybar-modules/battery/wbm_battery0 "$BASE_PATH"/sway/.config/waybar/modules/battery || {
         echo "failed copying battery module to ${GIT_SUBMODULES}/waybar-modules/battery"
         exit 1
     }
 
-    cp -v "$GIT_SUBMODULES"/waybar-modules/batterywbm_battery_1 "$BASE_PATH"/sway/.config/waybar/modules/battery || {
+    cp -v "$GIT_SUBMODULES"/waybar-modules/battery/wbm_battery1 "$BASE_PATH"/sway/.config/waybar/modules/battery || {
         echo "failed copying battery module to ${GIT_SUBMODULES}/waybar-modules/battery"
         exit 1
     }
