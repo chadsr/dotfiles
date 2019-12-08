@@ -31,12 +31,12 @@ cd "$GIT_SUBMODULES"/punk_theme || {
     echo "failed to cd to ${GIT_SUBMODULES}/punk_theme"
     exit 1
 }
-git checkout Ultimate-Punk-Complete-Desktop || {
-    echo "failed to checkout branch"
-    exit 1
-}
 git fetch origin Ultimate-Punk-Complete-Desktop || {
     echo "failed to pull updates"
+    exit 1
+}
+git checkout Ultimate-Punk-Complete-Desktop || {
+    echo "failed to checkout branch"
     exit 1
 }
 git rebase origin/Ultimate-Punk-Complete-Desktop || {
@@ -48,12 +48,12 @@ cd "$GIT_SUBMODULES"/sweet_theme || {
     echo "failed to cd to ${GIT_SUBMODULES}/sweet_theme"
     exit 1
 }
-git checkout nova || {
-    echo "failed to checkout branch"
-    exit 1
-}
 git fetch origin nova || {
     echo "failed to pull updates"
+    exit 1
+}
+git checkout nova || {
+    echo "failed to checkout branch"
     exit 1
 }
 git rebase origin/nova || {
