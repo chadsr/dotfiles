@@ -174,7 +174,7 @@
         "signal": 8
     },
     "custom/battery0": {
-        "interval": 5,
+        "interval": 30,
         "tooltip": false,
         "format": "{percentage}% {}{icon}",
         // "format-icons": [
@@ -188,7 +188,7 @@
         "exec": "$HOME/.config/waybar/modules/battery/battery_0"
     },
     "custom/battery1": {
-        "interval": 5,
+        "interval": 60,
         "tooltip": false,
         "format": "{percentage}% {}{icon}",
         // "format-icons": [
