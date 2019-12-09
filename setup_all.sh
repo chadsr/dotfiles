@@ -170,6 +170,12 @@ yay -S --needed --combinedupgrade --batchinstall --noredownload sway ranger puls
     exit 1
 }
 
+echo "Checking or Thunderbird dependencies"
+yay -S --needed --noredownload thunderbird birdtray || {
+    echo 'failed to install Thunderbird dependencies'
+    exit 1
+}
+
 echo "Checking for Cadence/Jack dependencies to install"
 yay -S --needed --noredownload jack2 pulseaudio-alsa pulseaudio-jack pavucontrol cadence || {
     echo 'failed to install audio dependencies'
