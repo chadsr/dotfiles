@@ -31,17 +31,12 @@ git submodule update --init --recursive || {
     exit 1
 }
 
-echo "Checkout out correct submodule branches"
 cd "$GIT_SUBMODULES"/punk_theme || {
     echo "failed to cd to ${GIT_SUBMODULES}/punk_theme"
     exit 1
 }
 git fetch origin Ultimate-Punk-Complete-Desktop || {
     echo "failed to pull updates"
-    exit 1
-}
-git checkout Ultimate-Punk-Complete-Desktop || {
-    echo "failed to checkout branch"
     exit 1
 }
 git rebase origin/Ultimate-Punk-Complete-Desktop || {
@@ -57,10 +52,6 @@ git fetch origin nova || {
     echo "failed to pull updates"
     exit 1
 }
-git checkout nova || {
-    echo "failed to checkout branch"
-    exit 1
-}
 git rebase origin/nova || {
     echo "failed to rebase on top of updates"
     exit 1
@@ -73,9 +64,6 @@ cd "$GIT_SUBMODULES"/waybar-modules || {
 git fetch origin master || {
     echo "failed to pull updates"
     exit 1
-}
-git checkout master || {
-    echo 'failed to check out master branch'
 }
 git rebase origin/master || {
     echo "failed to rebase on top of updates"
@@ -160,7 +148,11 @@ cp -Rv "$GIT_SUBMODULES"/punk_theme/Ultimate-Punk-Suru++ "$BASE_PATH"/sway/.icon
     echo 'failed copying Ultimate-Punk-Suru++ to sway'
     exit 1
 }
-cp -Rv "$GIT_SUBMODULES"/sweet_theme ./sway/.themes/ || {
+cp -Rv "$GIT_SUBMODULES"/punk_theme/Ultimate-PUNK-Suru "$BASE_PATH"/sway/.icons/ || {
+    echo 'failed copying Ultimate-PUNK-Suru to sway'
+    exit 1
+}
+cp -Rv "$GIT_SUBMODULES"/sweet_theme "$BASE_PATH"/sway/.themes/ || {
     echo 'failed copying sweet theme to sway'
     exit 1
 }
@@ -181,6 +173,11 @@ yay -S --needed --combinedupgrade --batchinstall --noredownload sway ranger puls
 echo "Checking for Cadence/Jack dependencies to install"
 yay -S --needed --noredownload jack2 pulseaudio-alsa pulseaudio-jack pavucontrol cadence || {
     echo 'failed to install audio dependencies'
+    exit 1
+}
+
+cd "$BASE_DIR" || {
+    echo "failed to cd to ${BASE_DIR}"
     exit 1
 }
 
