@@ -9,10 +9,10 @@
 
 # Autostarts
     # Launch desktop entries
-    exec dex -a -s :~/.config/autostart/
     exec mako
     exec redshift-gtk
     exec cadence
+    exec dex -a -s :~/.config/autostart/
 
 ### Theming
 default_border pixel
