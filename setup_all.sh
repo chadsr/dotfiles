@@ -174,7 +174,6 @@ cd "$BASE_PATH" || {
 
 echo "Setting up user directory configs"
 mkdir "$HOME"/.config/pulse # Make this if it doesn't exist, so PulseAudio doesn't complain about there being too many levels of symbolic links from stow
-stow -v firefox
 stow -v zsh
 stow -v cadence
 stow -v sway
