@@ -31,16 +31,17 @@ git submodule update --init --recursive || {
     exit 1
 }
 
+git submodule foreach --recursive git fetch || {
+    echo 'failed to fetch git submodule updates'
+    exit 1
+}
+
 cd "$GIT_SUBMODULES"/punk_theme || {
     echo "failed to cd to ${GIT_SUBMODULES}/punk_theme"
     exit 1
 }
-git fetch origin Ultimate-Punk-Complete-Desktop || {
-    echo "failed to pull updates"
-    exit 1
-}
 git rebase origin/Ultimate-Punk-Complete-Desktop || {
-    echo "failed to rebase on top of updates"
+    echo "failed to rebase updates"
     exit 1
 }
 
@@ -48,12 +49,8 @@ cd "$GIT_SUBMODULES"/sweet_theme || {
     echo "failed to cd to ${GIT_SUBMODULES}/sweet_theme"
     exit 1
 }
-git fetch origin nova || {
-    echo "failed to pull updates"
-    exit 1
-}
 git rebase origin/nova || {
-    echo "failed to rebase on top of updates"
+    echo "failed to rebase updates"
     exit 1
 }
 
@@ -61,12 +58,8 @@ cd "$GIT_SUBMODULES"/waybar-modules || {
     echo "failed to cd to ${GIT_SUBMODULES}/waybar-modules"
     exit 1
 }
-git fetch origin master || {
-    echo "failed to pull updates"
-    exit 1
-}
 git rebase origin/master || {
-    echo "failed to rebase on top of updates"
+    echo "failed to rebase updates"
     exit 1
 }
 
@@ -74,12 +67,8 @@ cd "$BASE_PATH"/sway/.config/waybar/modules/waybar-crypto || {
     echo "failed to cd to ${BASE_PATH}/sway/.config/waybar/modules/waybar-crypto"
     exit 1
 }
-git fetch origin master || {
-    echo "failed to fetch updates"
-    exit 1
-}
 git rebase origin/master || {
-    echo "failed to rebase on top of updates"
+    echo "failed to rebase updates"
     exit 1
 }
 
@@ -87,12 +76,8 @@ cd "$BASE_PATH"/zsh/.oh-my-zsh/themes/powerlevel10k || {
     echo "failed to cd to ${BASE_PATH}/zsh/.oh-my-zsh/themes/powerlevel10k"
     exit 1
 }
-git fetch origin master || {
-    echo "failed to fetch updates"
-    exit 1
-}
 git rebase origin/master || {
-    echo "failed to rebase on top of updates"
+    echo "failed to rebase updates"
     exit 1
 }
 
@@ -182,8 +167,8 @@ yay -S --needed --noredownload jack2 pulseaudio-alsa pulseaudio-jack pavucontrol
     exit 1
 }
 
-cd "$BASE_DIR" || {
-    echo "failed to cd to ${BASE_DIR}"
+cd "$BASE_PATH" || {
+    echo "failed to cd to ${BASE_PATH}"
     exit 1
 }
 
