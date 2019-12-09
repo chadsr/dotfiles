@@ -125,19 +125,19 @@ else
 fi
 
 echo "Copying themes from git repo to dotfiles locations"
-cp -Rv "$GIT_SUBMODULES"/punk_theme/PUNK-Cyan-Cursor "$BASE_PATH"/sway/.icons/ || {
+cp -Ruv "$GIT_SUBMODULES"/punk_theme/PUNK-Cyan-Cursor "$BASE_PATH"/sway/.icons/ || {
     echo 'failed copying PUNK-Cyan-Cursor to sway'
     exit 1
 }
-cp -Rv "$GIT_SUBMODULES"/punk_theme/Ultimate-Punk-Suru++ "$BASE_PATH"/sway/.icons/ || {
+cp -Ruv "$GIT_SUBMODULES"/punk_theme/Ultimate-Punk-Suru++ "$BASE_PATH"/sway/.icons/ || {
     echo 'failed copying Ultimate-Punk-Suru++ to sway'
     exit 1
 }
-cp -Rv "$GIT_SUBMODULES"/punk_theme/Ultimate-PUNK-Suru "$BASE_PATH"/sway/.icons/ || {
+cp -Ruv "$GIT_SUBMODULES"/punk_theme/Ultimate-PUNK-Suru "$BASE_PATH"/sway/.icons/ || {
     echo 'failed copying Ultimate-PUNK-Suru to sway'
     exit 1
 }
-cp -Rv "$GIT_SUBMODULES"/sweet_theme "$BASE_PATH"/sway/.themes/ || {
+cp -Ruv "$GIT_SUBMODULES"/sweet_theme "$BASE_PATH"/sway/.themes/ || {
     echo 'failed copying sweet theme to sway'
     exit 1
 }
