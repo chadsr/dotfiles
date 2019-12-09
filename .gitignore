@@ -4,3 +4,4 @@ sway/.icons/*
 sway/.config/waybar/modules/waybar-crypto/crypto/crypto.ini
 sway/.config/pulse/*
 !sway/.config/pulse/default.pa
+sway/.config/waybar/modules/battery
