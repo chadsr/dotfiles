@@ -10,8 +10,7 @@
 # Autostarts
     # Launch desktop entries
     exec mako
-    exec redshift-gtk
-    exec cadence
+    exec cadence-session-start --system-start
     exec dex -a -s :~/.config/autostart/
 
 ### Theming
