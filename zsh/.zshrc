@@ -3,12 +3,12 @@ export TERM="xterm-256color"
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/$USER/.oh-my-zsh
+export ZSH=/home/$USER/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
+export ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -83,16 +83,16 @@ plugins=(git catimg command-not-found common-aliases node npm pip python sudo su
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-POWERLEVEL9K_MODE='awesome-fontconfig'
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ip root_indicator context dir rbenv vcs nodeenv virtualenv anaconda pyenv)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time battery)
+export POWERLEVEL9K_MODE='awesome-fontconfig'
+export POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+export POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ip root_indicator context dir rbenv vcs nodeenv virtualenv anaconda pyenv)
+export POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time battery)
 
-POWERLEVEL9K_BACKGROUND_JOBS_VERBOSE=true
-POWERLEVEL9K_BATTERY_VERBOSE=true
+export POWERLEVEL9K_BACKGROUND_JOBS_VERBOSE=true
+export POWERLEVEL9K_BATTERY_VERBOSE=true
 
-POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="↱"
-POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="↳ "
+export POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="↱"
+export POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="↳ "
 
 eval "$(thefuck --alias)"
 # You can use whatever you want as an alias, like for Mondays:

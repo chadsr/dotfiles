@@ -10,8 +10,8 @@ export GEM_HOME=$HOME/.gem
 export PATH=$PATH:$GEM_HOME/ruby/2.6.0/bin
 
 # Start the Gnome Keyring Daemon
-if [ -n "$DESKTOP_SESSION" ];then
-    eval $(gnome-keyring-daemon --start)
+if [ -n "$DESKTOP_SESSION" ]; then
+    eval "$(gnome-keyring-daemon --start)"
     export SSH_AUTH_SOCK
 fi
 
@@ -22,3 +22,5 @@ export PATH="$NPM_PACKAGES/bin:$PATH"
 # Unset manpath so we can inherit from /etc/manpath via the `manpath` command
 unset MANPATH # delete if you already modified MANPATH elsewhere in your config
 export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+
+export XDG_CURRENT_DESKTOP=Unity
