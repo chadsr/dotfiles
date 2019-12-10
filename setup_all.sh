@@ -161,6 +161,9 @@ yay -S --needed --noredownload thunderbird birdtray || {
     exit 1
 }
 
+echo "Adding user to audio group"
+sudo groupadd audio
+sudo usermod -a -G audio "$USER"
 echo "Checking for Cadence/Jack dependencies to install"
 yay -S --needed --noredownload jack2 pulseaudio-alsa pulseaudio-jack pavucontrol cadence || {
     echo 'failed to install audio dependencies'
