@@ -7,6 +7,7 @@ image/jpeg=shotwell-viewer.desktop;
 text/plain=org.gnome.gedit.desktop
 application/pdf=okularApplication_pdf.desktop
 image/jpeg=shotwell-viewer.desktop
+image/png=shotwell-viewer.desktop
 
 # Browser
 text/html=brave.desktop
@@ -24,3 +25,13 @@ x-scheme-handler/magnet=tribler.desktop
 # Audio
 audio/flac=org.gnome.Lollypop.desktop
 audio/mp3=org.gnome.Lollypop.desktop
+
+# Video
+video/mp4=vlc.desktop
+video/wav=vlc.desktop
+video/webm=vlc.desktop
+video/mov=vlc.desktop
+video/avi=vlc.desktop
+video/wmv=vlc.desktop
+video/flv=vlc.desktop
+video/3gp=vlc.desktop
