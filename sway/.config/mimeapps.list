@@ -20,3 +20,7 @@ x-scheme-handler/mailto=thunderbird.desktop
 
 # Torrent
 x-scheme-handler/magnet=tribler.desktop
+
+# Audio
+audio/flac=org.gnome.Lollypop.desktop
+audio/mp3=org.gnome.Lollypop.desktop
