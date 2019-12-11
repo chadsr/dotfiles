@@ -176,11 +176,10 @@ cd "$BASE_PATH" || {
 }
 
 echo "Setting up user directory configs"
-mkdir "$HOME"/.config/pulse # Make this if it doesn't exist, so PulseAudio doesn't complain about there being too many levels of symbolic links from stow
 stow -v zsh
-stow -v cadence
 stow -v sway
 stow -v git
 
-echo "Setup finished successfully!"
-exit 0
+prompt "Install JACK audio configuration"
+mkdir "$HOME"/.config/pulse # Make this if it doesn't exist, so PulseAudio doesn't complain about there being too many levels of symbolic links from stow
+stow -v jack
