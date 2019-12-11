@@ -40,8 +40,8 @@ cd "$GIT_SUBMODULES"/punk_theme || {
     echo "failed to cd to ${GIT_SUBMODULES}/punk_theme"
     exit 1
 }
-git rebase origin/Ultimate-Punk-Complete-Desktop || {
-    echo "failed to rebase updates"
+git pull origin Ultimate-Punk-Complete-Desktop || {
+    echo "failed to pull updates"
     exit 1
 }
 
@@ -49,8 +49,8 @@ cd "$GIT_SUBMODULES"/sweet_theme || {
     echo "failed to cd to ${GIT_SUBMODULES}/sweet_theme"
     exit 1
 }
-git rebase origin/nova || {
-    echo "failed to rebase updates"
+git pull origin nova || {
+    echo "failed to pull updates"
     exit 1
 }
 
@@ -58,8 +58,8 @@ cd "$GIT_SUBMODULES"/waybar-modules || {
     echo "failed to cd to ${GIT_SUBMODULES}/waybar-modules"
     exit 1
 }
-git rebase origin/master || {
-    echo "failed to rebase updates"
+git pull origin master || {
+    echo "failed to pull updates"
     exit 1
 }
 
@@ -67,8 +67,8 @@ cd "$BASE_PATH"/sway/.config/waybar/modules/waybar-crypto || {
     echo "failed to cd to ${BASE_PATH}/sway/.config/waybar/modules/waybar-crypto"
     exit 1
 }
-git rebase origin/master || {
-    echo "failed to rebase updates"
+git pull origin master || {
+    echo "failed to pull updates"
     exit 1
 }
 
@@ -76,8 +76,8 @@ cd "$BASE_PATH"/zsh/.oh-my-zsh/themes/powerlevel10k || {
     echo "failed to cd to ${BASE_PATH}/zsh/.oh-my-zsh/themes/powerlevel10k"
     exit 1
 }
-git rebase origin/master || {
-    echo "failed to rebase updates"
+git pull origin master || {
+    echo "failed to pull updates"
     exit 1
 }
 
@@ -161,15 +161,6 @@ yay -S --needed --noredownload thunderbird birdtray || {
     exit 1
 }
 
-echo "Adding user to audio group"
-sudo groupadd audio
-sudo usermod -a -G audio "$USER"
-echo "Checking for Cadence/Jack dependencies to install"
-yay -S --needed --noredownload jack2 pulseaudio-alsa pulseaudio-jack pavucontrol cadence || {
-    echo 'failed to install audio dependencies'
-    exit 1
-}
-
 cd "$BASE_PATH" || {
     echo "failed to cd to ${BASE_PATH}"
     exit 1
@@ -181,5 +172,14 @@ stow -v sway
 stow -v git
 
 prompt "Install JACK audio configuration"
+echo "Adding user to audio group"
+sudo groupadd audio
+sudo usermod -a -G audio "$USER"
+echo "Checking for Cadence/Jack dependencies to install"
+yay -S --needed --noredownload jack2 pulseaudio-alsa pulseaudio-jack pavucontrol cadence || {
+    echo 'failed to install audio dependencies'
+    exit 1
+}
+
 mkdir "$HOME"/.config/pulse # Make this if it doesn't exist, so PulseAudio doesn't complain about there being too many levels of symbolic links from stow
 stow -v jack
