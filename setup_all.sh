@@ -96,7 +96,10 @@ if [ "$1" == "laptop" ]; then
         exit 1
     }
     echo "Copying laptop system configuration"
-    sudo cp -Rv "$SYSTEM_CONFIG"/laptop/* /
+    sudo cp -Rv "$SYSTEM_CONFIG"/laptop / || {
+        echo "failed copying laptop configuration"
+        exit 1
+    }
 
     echo "Building and copying battery module for Waybar"
     cd "$GIT_SUBMODULES"/waybar-modules/battery || {
@@ -118,7 +121,10 @@ if [ "$1" == "laptop" ]; then
         exit 1
     }
 elif [ "$1" == "workstation" ]; then
-    sudo cp -Rv "$SYSTEM_CONFIG"/workstation/* /
+    sudo cp -Rv "$SYSTEM_CONFIG"/workstation / || {
+        echo "failed copying workstation configuration"
+        exit 1
+    }
 else
     echo "$0: first argument must be 'laptop' or 'workstation'"
     exit 1
