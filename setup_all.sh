@@ -182,7 +182,7 @@ echo "Adding user to audio group"
 sudo groupadd audio
 sudo usermod -a -G audio "$USER"
 echo "Checking for Cadence/Jack dependencies to install"
-yay -S --needed --noredownload jack2 pulseaudio-alsa pulseaudio-jack pavucontrol cadence || {
+yay -S --needed --noredownload jack2 qt5-wayland pulseaudio-alsa pulseaudio-jack pavucontrol cadence || {
     echo 'failed to install audio dependencies'
     exit 1
 }
