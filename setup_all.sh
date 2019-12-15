@@ -87,7 +87,7 @@ cd "$BASE_PATH" || {
 }
 
 echo "Copying common system configuration"
-sudo cp -Rv "$SYSTEM_CONFIG"/common/* /
+sudo rsync -av "$SYSTEM_CONFIG"/common/* /
 
 if [ "$1" == "laptop" ]; then
     echo "Checking if tpacpi-bat is installed"
@@ -96,7 +96,7 @@ if [ "$1" == "laptop" ]; then
         exit 1
     }
     echo "Copying laptop system configuration"
-    sudo cp -Rv "$SYSTEM_CONFIG"/laptop / || {
+    sudo rsync -av "$SYSTEM_CONFIG"/laptop / || {
         echo "failed copying laptop configuration"
         exit 1
     }
@@ -121,7 +121,7 @@ if [ "$1" == "laptop" ]; then
         exit 1
     }
 elif [ "$1" == "workstation" ]; then
-    sudo cp -Rv "$SYSTEM_CONFIG"/workstation / || {
+    sudo rsync -av "$SYSTEM_CONFIG"/workstation / || {
         echo "failed copying workstation configuration"
         exit 1
     }
@@ -131,19 +131,19 @@ else
 fi
 
 echo "Copying themes from git repo to dotfiles locations"
-cp -Ruv "$GIT_SUBMODULES"/punk_theme/PUNK-Cyan-Cursor "$BASE_PATH"/sway/.icons/ || {
+rsync -av "$GIT_SUBMODULES"/punk_theme/PUNK-Cyan-Cursor "$BASE_PATH"/sway/.icons || {
     echo 'failed copying PUNK-Cyan-Cursor to sway'
     exit 1
 }
-cp -Ruv "$GIT_SUBMODULES"/punk_theme/Ultimate-Punk-Suru++ "$BASE_PATH"/sway/.icons/ || {
+rsync -av "$GIT_SUBMODULES"/punk_theme/Ultimate-Punk-Suru++ "$BASE_PATH"/sway/.icons || {
     echo 'failed copying Ultimate-Punk-Suru++ to sway'
     exit 1
 }
-cp -Ruv "$GIT_SUBMODULES"/punk_theme/Ultimate-PUNK-Suru "$BASE_PATH"/sway/.icons/ || {
+rsync -av "$GIT_SUBMODULES"/punk_theme/Ultimate-PUNK-Suru "$BASE_PATH"/sway/.icons || {
     echo 'failed copying Ultimate-PUNK-Suru to sway'
     exit 1
 }
-cp -Ruv "$GIT_SUBMODULES"/sweet_theme "$BASE_PATH"/sway/.themes/ || {
+rsync -av "$GIT_SUBMODULES"/sweet_theme "$BASE_PATH"/sway/.themes || {
     echo 'failed copying sweet theme to sway'
     exit 1
 }
