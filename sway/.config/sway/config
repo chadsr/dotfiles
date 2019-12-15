@@ -10,7 +10,6 @@
 # Autostarts
     # Launch desktop entries
     exec mako
-    exec cadence-session-start --system-start
     exec dex -a -s :~/.config/autostart/
 
 ### Theming
