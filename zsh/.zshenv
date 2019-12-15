@@ -24,3 +24,4 @@ unset MANPATH # delete if you already modified MANPATH elsewhere in your config
 export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
 export XDG_CURRENT_DESKTOP=Unity
+export QT_QPA_PLATFORM=wayland-egl
