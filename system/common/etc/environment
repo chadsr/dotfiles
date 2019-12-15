@@ -1,0 +1,9 @@
+#
+# This file is parsed by pam_env module
+#
+# Syntax: simple "KEY=VAL" pairs on separate lines
+#
+EDITOR=/usr/bin/nano
+QT_QPA_PLATFORMTHEME="qt5ct"
+XDG_CURRENT_DESKTOP=Unity
+QT_QPA_PLATFORM=wayland-egl
