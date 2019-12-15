@@ -173,6 +173,7 @@ cd "$BASE_PATH" || {
 }
 
 echo "Setting up user directory configs"
+rm -f "$HOME"/.config/mimeapps.list
 stow -v zsh
 stow -v sway
 stow -v git
