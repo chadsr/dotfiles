@@ -79,7 +79,8 @@
         "format-icons": [
             "",
             ""
-        ]
+        ],
+        "on-click": "wdisplays"
     },
     "battery": {
         "bat": "BAT0",
