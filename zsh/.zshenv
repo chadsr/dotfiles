@@ -13,7 +13,7 @@ export GOROOT=/usr/lib/go
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
 # Enable Go modules by default
-export GO111MODULE=on
+# export GO111MODULE=on
 
 ############
 # Electron #
