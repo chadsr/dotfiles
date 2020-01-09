@@ -20,7 +20,7 @@ x-scheme-handler/unknown=brave.desktop
 x-scheme-handler/mailto=thunderbird.desktop
 
 # Torrent
-x-scheme-handler/magnet=tribler.desktop
+x-scheme-handler/magnet=qbitorrent.desktop
 
 # Audio
 audio/flac=org.gnome.Lollypop.desktop

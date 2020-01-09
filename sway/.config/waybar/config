@@ -21,6 +21,7 @@
     "modules-right": [
         "network",
         "network#wired",
+        "network#vpn",
         "backlight",
         "pulseaudio",
         // "battery",
@@ -79,7 +80,8 @@
         "format-icons": [
             "",
             ""
-        ]
+        ],
+        "on-click": "wdisplays"
     },
     "battery": {
         "bat": "BAT0",
@@ -119,16 +121,23 @@
     },
     "network": {
         "interval": 5,
-        "interface": "wlp9s0",
+        "interface": "wlp61s0",
         "format-wifi": "{ipaddr} ({essid} {signalStrength}%) ",
-        "format-disconnected": "Disconnected ",
+        "tooltip-format": "WiFi → {ifname} → {ipaddr}/{cidr}",
         "on-click": "networkmanager_dmenu -normal-window"
     },
     "network#wired": {
         "interval": 5,
-        "interface": "enp10s0",
+        "interface": "enp0s31f6",
         "format-ethernet": "{ipaddr} ",
-        "format-disconnected": "Disconnected ",
+        "tooltip-format": "Ethernet → {ifname} → {ipaddr}/{cidr}",
+        "on-click": "networkmanager_dmenu -normal-window"
+    },
+    "network#vpn": {
+        "interval": 5,
+        "interface": "tun.ross.ch",
+        "format": "VPN:{ipaddr} ",
+        "tooltip-format": "VPN → {ifname} → {ipaddr}/{cidr}",
         "on-click": "networkmanager_dmenu -normal-window"
     },
     "pulseaudio": {
