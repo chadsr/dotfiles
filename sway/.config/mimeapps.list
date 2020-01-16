@@ -20,18 +20,18 @@ x-scheme-handler/unknown=brave.desktop
 x-scheme-handler/mailto=thunderbird.desktop
 
 # Torrent
-x-scheme-handler/magnet=qbitorrent.desktop
+x-scheme-handler/magnet=transmission.desktop
 
 # Audio
 audio/flac=org.gnome.Lollypop.desktop
 audio/mp3=org.gnome.Lollypop.desktop
 
 # Video
-video/mp4=vlc.desktop
-video/wav=vlc.desktop
-video/webm=vlc.desktop
-video/mov=vlc.desktop
-video/avi=vlc.desktop
-video/wmv=vlc.desktop
-video/flv=vlc.desktop
-video/3gp=vlc.desktop
+video/mp4=mpv.desktop
+video/wav=mpv.desktop
+video/webm=mpv.desktop
+video/mov=mpv.desktop
+video/avi=mpv.desktop
+video/wmv=mpv.desktop
+video/flv=mpv.desktop
+video/3gp=mpv.desktop
