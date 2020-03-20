@@ -121,14 +121,14 @@
     },
     "network": {
         "interval": 5,
-        "interface": "wlp61s0",
+        "interface": "wlp9s0",
         "format-wifi": "{ipaddr} ({essid} {signalStrength}%) ",
         "tooltip-format": "WiFi → {ifname} → {ipaddr}/{cidr}",
         "on-click": "networkmanager_dmenu -normal-window"
     },
     "network#wired": {
         "interval": 5,
-        "interface": "enp0s31f6",
+        "interface": "enp10s0",
         "format-ethernet": "{ipaddr} ",
         "tooltip-format": "Ethernet → {ifname} → {ipaddr}/{cidr}",
         "on-click": "networkmanager_dmenu -normal-window"
@@ -171,7 +171,7 @@
         "format": "{}",
         "interval": 600,
         "return-type": "json",
-        "exec": "$HOME/.config/waybar/modules/waybar-crypto/crypto/crypto.py",
+        "exec": "$HOME/.config/waybar/modules/crypto/crypto.py",
         "exec-if": "ping pro-api.coinmarketcap.com -c1"
     },
     "custom/yay": {

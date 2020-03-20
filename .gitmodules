@@ -8,9 +8,9 @@
 [submodule ".git_submodules/waybar-modules"]
 	path = .git_submodules/waybar-modules
 	url = git@github.com:sl424/waybar.git
-[submodule "sway/.config/waybar/modules/waybar-crypto"]
-	path = sway/.config/waybar/modules/waybar-crypto
-	url = git@github.com:Chadsr/waybar-crypto.git
 [submodule "zsh/.oh-my-zsh/themes/powerlevel10k"]
 	path = zsh/.oh-my-zsh/themes/powerlevel10k
 	url = git@github.com:romkatv/powerlevel10k.git
+[submodule "sway/.config/waybar/modules/crypto"]
+	path = sway/.config/waybar/modules/crypto
+	url = https://github.com/Chadsr/waybar-crypto

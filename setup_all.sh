@@ -63,8 +63,8 @@ git pull origin master || {
     exit 1
 }
 
-cd "$BASE_PATH"/sway/.config/waybar/modules/waybar-crypto || {
-    echo "failed to cd to ${BASE_PATH}/sway/.config/waybar/modules/waybar-crypto"
+cd "$BASE_PATH"/sway/.config/waybar/modules/crypto || {
+    echo "failed to cd to ${BASE_PATH}/sway/.config/waybar/modules/crypto"
     exit 1
 }
 git pull origin master || {
