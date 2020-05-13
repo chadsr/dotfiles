@@ -1,0 +1,2 @@
+alias VirtualBox="env QT_QPA_PLATFORM=xcb VirtualBox"
+alias virtualbox="env QT_QPA_PLATFORM=xcb virtualbox"

@@ -2,6 +2,9 @@
 # General Environment Variables #
 #################################
 
+# Set Sway as desktop
+export XDG_CURRENT_DESKTOP=sway
+
 # Add any local binaries to PATH
 export PATH=$PATH:$HOME/.local/bin
 
@@ -33,12 +36,14 @@ export PATH=$PATH:$GEM_HOME/ruby/2.6.0/bin
 # Node.js Environment Variables #
 #################################
 
-NPM_PACKAGES="${HOME}/.npm-packages"
+NPM_PACKAGES="${HOME}/.npm-packages:${HOME}/.nvm/versions/node/v10.19.0/bin"
 export PATH="$NPM_PACKAGES/bin:$PATH"
 
 # Unset manpath so we can inherit from /etc/manpath via the `manpath` command
 unset MANPATH # delete if you already modified MANPATH elsewhere in your config
 export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+
+export NODE_PATH=$(npm root -g)
 
 #################
 # Gnome Keyring #
@@ -49,3 +54,8 @@ if [ -n "$DESKTOP_SESSION" ]; then
     eval "$(gnome-keyring-daemon --start)"
     export SSH_AUTH_SOCK
 fi
+
+################
+#    Other     #
+################
+export PATH=${HOME}/.tymlez:$PATH

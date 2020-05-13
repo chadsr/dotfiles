@@ -156,7 +156,7 @@ yay -S --needed --noredownload zsh thefuck || {
     exit 1
 }
 echo "Checking for Sway dependencies to install"
-yay -S --needed --combinedupgrade --batchinstall --noredownload sway kanshi wdisplays-git gdk-pixbuf2 ranger pulseaudio-ctl shotwell light waybar libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome python python-requests networkmanager-dmenu slurp grim swayshot swaylock-blur-git mako redshift-wlr-gamma-control-git gtk-engines alacritty || {
+yay -S --needed --combinedupgrade --batchinstall --noredownload sway kanshi pulseaudio-alsa xdg-desktop-portal-wlr-git pavucontrol qt5-wayland pipewire pipewire-pulse wdisplays-git gdk-pixbuf2 ranger pulseaudio-ctl shotwell light waybar libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome python python-requests networkmanager-dmenu slurp grim swayshot swaylock-blur-git mako redshift-wlr-gamma-control-git gtk-engines alacritty || {
     echo 'failed to install Sway dependencies'
     exit 1
 }
@@ -183,7 +183,7 @@ echo "Adding user to audio group"
 sudo groupadd audio
 sudo usermod -a -G audio "$USER"
 echo "Checking for Cadence/Jack dependencies to install"
-yay -S --needed --noredownload jack2 qt5-wayland pulseaudio-alsa pulseaudio-jack pavucontrol cadence || {
+yay -S --needed --noredownload jack2 pipewire-jack pulseaudio-jack cadence || {
     echo 'failed to install audio dependencies'
     exit 1
 }
