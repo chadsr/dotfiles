@@ -95,6 +95,13 @@ if [ "$1" == "laptop" ]; then
         echo 'failed to install TLP packages'
         exit 1
     }
+
+    echo "Checking if python-validity is installed"
+    yay -S --needed --noredownload python-validity || {
+        echo 'failed to install python-validity'
+        exit 1
+    }
+
     echo "Copying laptop system configuration"
     sudo rsync -av "$SYSTEM_CONFIG"/laptop / || {
         echo "failed copying laptop configuration"
