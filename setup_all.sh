@@ -26,7 +26,7 @@ yay -Syy || {
     exit 1
 }
 
-git submodule update --init --recursive || {
+git submodule update -f --init --recursive || {
     echo 'failed to update git submodules'
     exit 1
 }
