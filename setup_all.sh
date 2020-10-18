@@ -161,6 +161,12 @@ yay -S --needed --combinedupgrade --batchinstall --noredownload sway kanshi puls
     exit 1
 }
 
+echo "Installing git flow"
+yay -S --needed --combinedupgrade --batchinstall --noredownload gitflow-avh || {
+    echo 'failed to install git flow'
+    exit 1
+}
+
 echo "Checking or Thunderbird dependencies"
 yay -S --needed --noredownload thunderbird birdtray || {
     echo 'failed to install Thunderbird dependencies'
