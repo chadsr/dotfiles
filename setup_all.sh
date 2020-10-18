@@ -196,7 +196,7 @@ echo "Adding user to audio group"
 sudo groupadd audio
 sudo usermod -a -G audio "$USER"
 echo "Checking for Cadence/Jack dependencies to install"
-yay -S --needed --noredownload jack2 pipewire-jack pulseaudio-jack cadence || {
+yay -S --needed --noredownload jack2 pipewire-jack pulseaudio-jack cadence libffado || {
     echo 'failed to install audio dependencies'
     exit 1
 }
