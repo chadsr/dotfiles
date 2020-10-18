@@ -201,5 +201,5 @@ yay -S --needed --noredownload jack2 pipewire-jack pulseaudio-jack cadence libff
     exit 1
 }
 
-mkdir "$HOME"/.config/pulse # Make this if it doesn't exist, so PulseAudio doesn't complain about there being too many levels of symbolic links from stow
+mkdir "$HOME"/.pulse # Make this if it doesn't exist, so PulseAudio doesn't complain about there being too many levels of symbolic links from stow
 stow -v jack
