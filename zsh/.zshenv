@@ -5,6 +5,9 @@
 # Set Sway as desktop
 export XDG_CURRENT_DESKTOP=sway
 
+# Firefox Wayland
+export MOZ_ENABLE_WAYLAND=1
+
 # Add any local binaries to PATH
 export PATH=$PATH:$HOME/.local/bin
 

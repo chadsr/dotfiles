@@ -6,4 +6,10 @@ sway/.icons/*
 sway/.config/waybar/modules/waybar-crypto/crypto/crypto.ini
 sway/.config/pulse/*
 !sway/.config/pulse/default.pa
+!sway/.config/pulse/daemon.conf
 sway/.config/waybar/modules/battery
+sway/.config/gtk-3.0/bookmarks
+sway/.config/gtk-3.0/servers
+sway/.config/gtk-4.0/bookmarks
+sway/.config/gtk-4.0/servers
+nerd-fonts-complete
