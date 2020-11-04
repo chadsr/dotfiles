@@ -149,34 +149,40 @@ debug.persistent_logging: false
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
 
-# Colors (Monokai Pro)
+# Cyber Punk Neon
+# Source: https://github.com/Roboron3042/Cyberpunk-Neon
 colors:
   # Default colors
   primary:
-    background: '0x2D2A2E'
-    foreground: '0xFCFCFA'
+    background: "0x000b1e"
+    foreground: "0x0abdc6"
+
+  # Colors the cursor will use if `custom_cursor_colors` is true
+  cursor:
+    text:   "0x000b1e"
+    cursor: "0x0abdc6"
 
   # Normal colors
   normal:
-    black:   '0x403E41'
-    red:     '0xFF6188'
-    green:   '0xA9DC76'
-    yellow:  '0xFFD866'
-    blue:    '0xFC9867'
-    magenta: '0xAB9DF2'
-    cyan:    '0x78DCE8'
-    white:   '0xFCFCFA'
+    black:   "0x123e7c"
+    red:     "0xff0000"
+    green:   "0xd300c4"
+    yellow:  "0xf57800"
+    blue:    "0x123e7c"
+    magenta: "0x711c91"
+    cyan:    "0x0abdc6"
+    white:   "0xd7d7d5"
 
   # Bright colors
   bright:
-    black:   '0x727072'
-    red:     '0xFF6188'
-    green:   '0xA9DC76'
-    yellow:  '0xFFD866'
-    blue:    '0xFC9867'
-    magenta: '0xAB9DF2'
-    cyan:    '0x78DCE8'
-    white:   '0xFCFCFA'
+    black:   "0x1c61c2"
+    red:     "0xff0000"
+    green:   "0xd300c4"
+    yellow:  "0xf57800"
+    blue:    "0x00ff00"
+    magenta: "0x711c91"
+    cyan:    "0x0abdc6"
+    white:   "0xd7d7d5"
 
   # Dim colors
   #
