@@ -129,12 +129,12 @@ if [ "$1" == "laptop" ]; then
     }
 
     mv -v "$GIT_SUBMODULES"/waybar-modules/battery/wbm_battery0 "$BASE_PATH"/sway/.config/waybar/modules/battery || {
-        echo "failed copying battery module to ${GIT_SUBMODULES}/waybar-modules/battery"
+        echo "failed moving battery module to ${GIT_SUBMODULES}/waybar-modules/battery"
         exit 1
     }
 
     mv -v "$GIT_SUBMODULES"/waybar-modules/battery/wbm_battery1 "$BASE_PATH"/sway/.config/waybar/modules/battery || {
-        echo "failed copying battery module to ${GIT_SUBMODULES}/waybar-modules/battery"
+        echo "failed moving battery module to ${GIT_SUBMODULES}/waybar-modules/battery"
         exit 1
     }
 elif [ "$1" == "workstation" ]; then
