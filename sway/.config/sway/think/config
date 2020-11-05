@@ -1,0 +1,7 @@
+# Thinkpad T480s Specific Configuration
+
+#
+# Thinkpad Brightness controls using light
+#
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5

@@ -217,12 +217,6 @@ bar {
 bindsym --release Print exec grim -g \"$(slurp)" - | wl-copy
 
 #
-# Thinkpad Brightness controls using light
-#
-bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5
-bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5
-
-#
 # Pulse Audio
 #
 bindsym XF86AudioRaiseVolume exec --no-startup-id pulseaudio-ctl up 5
@@ -252,4 +246,6 @@ exec swayidle \
     resume 'swaymsg "output * dpms on"' \
     before-sleep 'swaylock-blur'
 
+# External Config Includes
 include /etc/sway/config.d/*
+include ~/.config/sway/$(hostname)/*
