@@ -14,3 +14,6 @@
 [submodule "sway/.config/waybar/modules/crypto"]
 	path = sway/.config/waybar/modules/crypto
 	url = https://github.com/Chadsr/waybar-crypto
+[submodule ".git_submodules/Cyberpunk-Neon"]
+	path = .git_submodules/Cyberpunk-Neon
+	url = git@github.com:Roboron3042/Cyberpunk-Neon.git

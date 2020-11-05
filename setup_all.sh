@@ -45,11 +45,20 @@ git checkout --force origin/Ultimate-Punk-Complete-Desktop || {
     exit 1
 }
 
-cd "$GIT_SUBMODULES"/sweet_theme || {
-    echo "failed to cd to ${GIT_SUBMODULES}/sweet_theme"
+# cd "$GIT_SUBMODULES"/sweet_theme || {
+#     echo "failed to cd to ${GIT_SUBMODULES}/sweet_theme"
+#     exit 1
+# }
+# git checkout --force origin/nova || {
+#     echo "failed to checkout updates"
+#     exit 1
+# }
+
+cd "$GIT_SUBMODULES"/Cyberpunk-Neon || {
+    echo "failed to cd to ${GIT_SUBMODULES}/Cyberpunk-Neon"
     exit 1
 }
-git checkout --force origin/nova || {
+git checkout --force origin/master || {
     echo "failed to checkout updates"
     exit 1
 }
@@ -156,10 +165,14 @@ rsync -av "$GIT_SUBMODULES"/punk_theme/Ultimate-Punk-Suru++ "$BASE_PATH"/sway/.i
     echo "failed copying Ultimate-Punk-Suru++ to sway"
     exit 1
 }
-rsync -av "$GIT_SUBMODULES"/sweet_theme "$BASE_PATH"/sway/.themes || {
+rsync -av "$GIT_SUBMODULES"/Cyberpunk-Neon/gtk "$BASE_PATH"/sway/.themes || {
     echo "failed copying sweet theme to sway"
     exit 1
 }
+# rsync -av "$GIT_SUBMODULES"/sweet_theme "$BASE_PATH"/sway/.themes || {
+#     echo "failed copying sweet theme to sway"
+#     exit 1
+# }
 
 echo "Checking for ZSH dependencies to install"
 nohup sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" >/dev/null 2>&1 &# This will fail if already installed, so don"t bother checking
@@ -173,7 +186,7 @@ echo "Checking for old Sway dependencies to remove"
 yay -R --noconfirm pipewire-pulseaudio pipewire-pulseaudio-git
 
 echo "Checking for Sway dependencies to install"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sway kanshi pulseaudio-alsa libopenaptx-git xdg-desktop-portal xdg-desktop-portal-wlr pavucontrol qt5-base qt5-wayland wayland-protocols pipewire wdisplays-git gdk-pixbuf2 ranger pulseaudio-ctl shotwell light waybar libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome nerd-fonts-hack python python-requests networkmanager-dmenu slurp grim swayshot swaylock-blur-git mako redshift-wayland-git gtk-engines alacritty udiskie wayvnc ansiweather qgnomeplatform || {
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sway kanshi pulseaudio-alsa libopenaptx-git xdg-desktop-portal xdg-desktop-portal-wlr pavucontrol qt5-base qt5-wayland wayland-protocols pipewire wdisplays-git gdk-pixbuf2 ranger pulseaudio-ctl shotwell light waybar-git libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome nerd-fonts-hack python python-requests networkmanager-dmenu slurp grim swayshot swaylock-blur-git mako redshift-wayland-git gtk-engines alacritty udiskie wayvnc ansiweather qgnomeplatform || {
     echo "failed to install Sway dependencies"
     exit 1
 }
@@ -211,6 +224,12 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sway
 echo "Installing obs"
 yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload obs-studio-wayland wlrobs-hg obs-xdg-portal-git || {
     echo "failed to install git flow"
+    exit 1
+}
+
+echo "Installing VSCodium fork"
+yay -S --noconfirm --needed --noredownload vscodium-bin || {
+    echo "failed to install VSCodium"
     exit 1
 }
 
