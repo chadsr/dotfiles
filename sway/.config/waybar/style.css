@@ -8,9 +8,10 @@
 
 window#waybar {
     background: rgba(43, 48, 59, 0.5);
-    color: #ffffff;
+    color:  #0abdc6;
     transition-property: background, background-color;
     transition-duration: .5s;
+    border-bottom: 1px solid rgba(43, 48, 59, 0.5);
 }
 
 window#waybar.hidden {
@@ -26,7 +27,7 @@ window#waybar.solo {
 }
 */
 
-window#waybar.termite {
+/* window#waybar.termite {
     background-color: #3F3F3F;
 }
 
@@ -34,43 +35,43 @@ window#waybar.chromium {
     background-color: #DEE1E6;
     color: #000000;
     border: none;
-}
+} */
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button {
     padding: 0 5px;
     background: transparent;
-    color: #ffffff;
-    border-bottom: 3px solid transparent;
+    color: #0abdc6;
+    /* border-bottom: 3px solid transparent; */
 }
 
-window#waybar.chromium #workspaces button {
+/* window#waybar.chromium #workspaces button {
     color: #3F3F3F;
-}
+} */
 
 #workspaces button.focused {
-    color: #fff;
+    color: #123e7c;
     background-color: #0abdc6;
-    /* border-bottom: 3px solid #123e7c; */
+    border-bottom: 1px solid rgba(43, 48, 59, 0.5);
 }
 
-window#waybar.chromium #workspaces button.focused {
+/* window#waybar.chromium #workspaces button.focused {
     color: #ffffff;
-}
+} */
 
 #workspaces button.urgent {
     background-color: #d300c4;
 }
 
 #mode {
-    background: #64727D;
-    border-bottom: 3px solid #ffffff;
+    background: #123e7c;
+    border-bottom: 1px solid rgba(43, 48, 59, 0.5);
 }
 
 #clock, #battery, #cpu, #memory, #temperature, #backlight, #network, #pulseaudio, #custom-media, #tray, #mode, #idle_inhibitor, #custom-weather, #custom-crypto {
     padding: 0 10px;
     margin: 0;
-    color: #ffffff;
+    color:  #0abdc6;
 }
 
 #clock {
@@ -82,20 +83,20 @@ window#waybar.chromium #workspaces button.focused {
 }
 
 #battery.charging {
-    color: #ffffff;
+    color: #d300c4;
     /* background-color: #26A65B; */
 }
 
 @keyframes blink {
     to {
-        background-color: #ffffff;
-        color: #000000;
+        background-color: #0abdc6;
+        color: #123e7c;
     }
 }
 
 #battery.critical:not(.charging) {
-    background: #f53c3c;
-    color: #ffffff;
+    background-color: #ff0000;
+    color: #123e7c;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
@@ -104,7 +105,7 @@ window#waybar.chromium #workspaces button.focused {
 }
 
 label:focus {
-    background-color: #000000;
+    background-color: #d300c4;
 }
 
 #cpu {
@@ -125,7 +126,7 @@ label:focus {
 }
 
 #network.connected {
-    background: #2ecc71;
+    background: #00ff00;
 }
 
 #network.disconnected {
@@ -142,10 +143,10 @@ label:focus {
     color: #2a5c45; */
 }
 
-#custom-media {
+/* #custom-media {
     background: #66cc99;
     color: #2a5c45;
-}
+} */
 
 #custom-weather {
     /*background: #2e6d97;*/
@@ -154,19 +155,18 @@ label:focus {
 #custom-crypto {
     font-family: cryptocoins, monospace;
     /* background: linear-gradient(90deg, #fca09a, #fcccd3, #ffcc9d, #98ddad, #81d7ec, #a0aaed); */
-    color: #fff;
 }
-
+/* 
 #custom-vlc {
     background: #ffa000;
-}
+} */
 
 #temperature {
     /* background: #f0932b; */
 }
 
 #temperature.critical {
-    background: #eb4d4b;
+    background: #ff0000;
 }
 
 #tray {
@@ -178,23 +178,24 @@ label:focus {
 }
 
 #idle_inhibitor.activated {
-    background-color: #ecf0f1;
-    color: #2d3436;
+    background-color: #0abdc6;
+    color: #123e7c;
+    border-bottom: 1px solid rgba(43, 48, 59, 0.5);
 }
 
-#mpd {
+/* #mpd {
     background: #66cc99;
     color: #2a5c45;
-}
+} */
 
-#mpd.disconnected {
-    background: #f53c3c;
-}
+/* #mpd.disconnected {
+    background: #ff0000;
+} */
 
-#mpd.stopped {
+/* #mpd.stopped {
     background: #90b1b1;
 }
 
 #mpd.paused {
     background: #51a37a;
-}
+} */
