@@ -1,7 +1,7 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: "FontAwesome 5 Free Solid", Hack;
+    font-family: Hack, "FontAwesome 5 Free Solid";
     font-size: 11px;
     min-height: 0;
 }
