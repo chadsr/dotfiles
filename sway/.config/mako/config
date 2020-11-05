@@ -1,4 +1,4 @@
-anchor=top-right
+#anchor=
 font=Hack 10
 background-color=#0abdc6
 border-color=#123e7c
@@ -6,7 +6,7 @@ text-color=#123e7c
 margin=10
 padding=10
 border-size=2
-default-timeout=5000
+default-timeout=10000
 layer=overlay
 group-by=summary
 max-icon-size=48
