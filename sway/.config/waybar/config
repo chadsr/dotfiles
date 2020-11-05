@@ -160,13 +160,12 @@
         "on-click": "pavucontrol"
     },
     "custom/weather": {
-        "format": "{}",
-        "format-alt": "{alt}: {}",
-        "interval": 600,
-        "return-type": "json",
-        "exec": "~/.config/waybar/modules/weather.sh",
-        "exec-if": "ping wttr.in -c1"
-    },
+		"format": "{}",
+		"interval": 18000,
+		"exec": "ansiweather -l amsterdam,NL -u metric -s true -f 1 -a false | cut -d' ' -f2,7,8,9",
+		"exec-if": "ping openweathermap.org -c1",
+		"tooltip": "false"
+	},
     "custom/crypto": {
         "format": "{}",
         "interval": 600,

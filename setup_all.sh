@@ -106,11 +106,11 @@ if [ "$1" == "laptop" ]; then
         exit 1
     }
 
-    echo "Checking if throttled is installed"
-    yay -S --noconfirm --needed --noredownload throttled || {
-        echo "failed to install throttled"
-        exit 1
-    }
+    # echo "Checking if throttled is installed"
+    # yay -S --noconfirm --needed --noredownload throttled || {
+    #     echo "failed to install throttled"
+    #     exit 1
+    # }
 
     echo "Copying laptop system configuration"
     sudo rsync -av "$SYSTEM_CONFIG"/laptop / || {
@@ -173,7 +173,7 @@ echo "Checking for old Sway dependencies to remove"
 yay -R --noconfirm pipewire-pulseaudio pipewire-pulseaudio-git
 
 echo "Checking for Sway dependencies to install"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sway kanshi pulseaudio-alsa libopenaptx-git xdg-desktop-portal xdg-desktop-portal-wlr pavucontrol qt5-wayland wayland-protocols pipewire wdisplays-git gdk-pixbuf2 ranger pulseaudio-ctl shotwell light waybar libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome nerd-fonts-hack python python-requests networkmanager-dmenu slurp grim swayshot swaylock-blur-git mako redshift-wayland-git gtk-engines alacritty udiskie wayvnc || {
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sway kanshi pulseaudio-alsa libopenaptx-git xdg-desktop-portal xdg-desktop-portal-wlr pavucontrol qt5-wayland wayland-protocols pipewire wdisplays-git gdk-pixbuf2 ranger pulseaudio-ctl shotwell light waybar libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome nerd-fonts-hack python python-requests networkmanager-dmenu slurp grim swayshot swaylock-blur-git mako redshift-wayland-git gtk-engines alacritty udiskie wayvnc ansiweather || {
     echo "failed to install Sway dependencies"
     exit 1
 }
