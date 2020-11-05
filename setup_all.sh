@@ -214,6 +214,12 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload obs-
     exit 1
 }
 
+echo "Installing ungoogled chromium (ozone)"
+yay -S --noconfirm --needed --noredownload ungoogled-chromium-ozone || {
+    echo "failed to install ungoogled chromium (ozone)"
+    exit 1
+}
+
 echo "Installing git flow"
 yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload gitflow-avh || {
     echo "failed to install git flow"
