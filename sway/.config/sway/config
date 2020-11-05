@@ -12,8 +12,6 @@
     exec mako
     exec dex -a -s :~/.config/autostart/
 
-### Theming
-default_border pixel
 exec_always {
     gsettings set org.gnome.desktop.interface gtk-theme 'sweet_theme'
     gsettings set org.gnome.desktop.wm.preferences theme "sweet_theme" # Don't think this does anything but hey
@@ -22,6 +20,17 @@ exec_always {
     gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 600
     gsettings set org.gnome.mutter.wayland xwayland-grab-access-rules "['Remmina', 'VirtualBox Machine']"
 }
+
+### Theming
+
+#
+# Windows:
+#
+default_border pixel 1
+# class          border    bg        text      indicator child_border
+client.focused   #0abdc6   #0abdc6   #123e7c   #000000aa #0abdc6
+client.unfocused #123e7c   #000000aa #ffffffbb #000000aa #000000aa
+client.urgent    #d300c4   #d300c4   #123e7c   #d300c4   #d300c4
 
 ### Variables
 

@@ -49,8 +49,9 @@ window#waybar.chromium #workspaces button {
 }
 
 #workspaces button.focused {
-    background-color: rgb(51, 111, 167);
-    border-bottom: 3px solid #ffffff;
+    color: #fff;
+    background-color: #0abdc6;
+    /* border-bottom: 3px solid #123e7c; */
 }
 
 window#waybar.chromium #workspaces button.focused {
@@ -58,7 +59,7 @@ window#waybar.chromium #workspaces button.focused {
 }
 
 #workspaces button.urgent {
-    background-color: #eb4d4b;
+    background-color: #d300c4;
 }
 
 #mode {
