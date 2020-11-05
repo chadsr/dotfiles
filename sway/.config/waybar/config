@@ -161,7 +161,7 @@
         "on-click": "pavucontrol"
     },
     "mpd": {
-        "format": " {stateIcon} {artist}|{album}|{title}",
+        "format": " {stateIcon} {artist}|{title}",
         "format-disconnected": " Disconnected",
         "format-stopped": " {stateIcon} Stopped",
         "interval": 10,
