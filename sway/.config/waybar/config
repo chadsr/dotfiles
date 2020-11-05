@@ -9,7 +9,8 @@
         "tray",
         "custom/yay",
         "idle_inhibitor",
-        "sway/mode"
+        "sway/mode",
+        "mpd",
     ],
     "modules-center": [
         "cpu",
@@ -158,6 +159,33 @@
             ]
         },
         "on-click": "pavucontrol"
+    },
+    "mpd": {
+        "format": " {stateIcon} {artist}|{album}|{title}",
+        "format-disconnected": " Disconnected",
+        "format-stopped": " {stateIcon} Stopped",
+        "interval": 10,
+        "consume-icons": {
+            "on": " " // Icon shows only when "consume" is on
+        },
+        "random-icons": {
+            "off": "<span color=\"#f53c3c\"></span> ", // Icon grayed out when "random" is off
+            "on": " "
+        },
+        "repeat-icons": {
+            "on": " "
+        },
+        "single-icons": {
+            "on": "1 "
+        },
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+        "tooltip-format": "MPD (connected)",
+        "tooltip-format-disconnected": "MPD (disconnected)",
+        "server": "nas.lan",
+        "password": "GimmeMusicPls"
     },
     "custom/weather": {
 		"format": "{}",

@@ -65,6 +65,18 @@ if [ -n "$DESKTOP_SESSION" ]; then
     export SSH_AUTH_SOCK
 fi
 
+#################
+#  MPD Hackery  #
+#################
+if nmcli --mode tabular --terse --fields TYPE,NAME connection show --active | grep -q vpn:tun.ross.ch; then
+    export MPD_HOST=10.19.49.5
+else
+    export MPD_HOST=nas.lan
+fi
+
+# If you have access to my LAN, congratulations, you're probably trusted enough to play with my local MPD server so here's the password
+export MPD_PASS=GimmeMusicPls
+
 ################
 #    Other     #
 ################
