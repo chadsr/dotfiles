@@ -24,10 +24,10 @@
         "network#vpn",
         "backlight",
         "pulseaudio",
-        // "battery",
-        // "battery#bat1",
-        "custom/battery0",
-        "custom/battery1"
+        "battery",
+        "battery#bat1"
+        //"custom/battery0",
+        //"custom/battery1"
     ],
     "sway/workspaces": {
         "disable-scroll": true,
@@ -183,30 +183,18 @@
         "signal": 8
     },
     "custom/battery0": {
-        "interval": 30,
+        "interval": 5,
         "tooltip": false,
         "format": "{percentage}% {}{icon}",
-        // "format-icons": [
-        //     "",
-        //     "",
-        //     "",
-        //     "",
-        //     ""
-        // ],
+        "format-icons": ["", "", "", "", "", "", ""],
         "return-type": "json",
         "exec": "$HOME/.config/waybar/modules/battery/battery_0"
     },
     "custom/battery1": {
-        "interval": 60,
+        "interval": 5,
         "tooltip": false,
         "format": "{percentage}% {}{icon}",
-        // "format-icons": [
-        //     "",
-        //     "",
-        //     "",
-        //     "",
-        //     ""
-        // ],
+        "format-icons": ["", "", "", "", "", "", ""],
         "return-type": "json",
         "exec": "$HOME/.config/waybar/modules/battery/battery_1"
     }
