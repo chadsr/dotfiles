@@ -74,16 +74,16 @@ window#waybar.chromium {
     color:  #0abdc6;
 }
 
-#clock {
-    /* background-color: #64727D; */
-}
+/* #clock {
+    background-color: #64727D;
+} */
 
-#battery {
-    /* background-color: #ffffff; */
-}
+/* #battery {
+    background-color: #ffffff;
+} */
 
 #battery.charging {
-    color: #d300c4;
+    color: #00ff00;
     /* background-color: #26A65B; */
 }
 
@@ -108,49 +108,49 @@ label:focus {
     background-color: #d300c4;
 }
 
-#cpu {
-    /*background: #2ecc71;*/
-    /* color: #fff; */
-}
+/*#cpu {
+    background: #2ecc71;
+    color: #fff;
+} */
 
-#memory {
-    /* background: #9b59b6; */
-}
+/* #memory {
+    background: #9b59b6;
+} */
 
-#backlight {
-    /* background: #0dd3d3; */
-}
+/* #backlight {
+    background: #0dd3d3;
+} */
 
-#network {
-    /*background: #29b930;*/
-}
+/* #network {
+    background: #29b930;
+} */
 
 #network.connected {
     background: #00ff00;
 }
 
-#network.disconnected {
-    /* background: #f53c3c; */
-}
+/* #network.disconnected {
+    background: #f53c3c;
+} */
 
-#pulseaudio {
-    /* background: #f1c40f;
-    color: #000000; */
-}
+/* #pulseaudio {
+    background: #f1c40f;
+    color: #000000;
+} */
 
-#pulseaudio.muted {
-    /* background: #90b1b1;
-    color: #2a5c45; */
-}
+/* #pulseaudio.muted {
+    background: #90b1b1;
+    color: #2a5c45;
+} */
 
 /* #custom-media {
     background: #66cc99;
     color: #2a5c45;
 } */
 
-#custom-weather {
-    /*background: #2e6d97;*/
-}
+/* #custom-weather {
+    background: #2e6d97;
+} */
 
 #custom-crypto {
     font-family: cryptocoins, monospace;
@@ -161,21 +161,21 @@ label:focus {
     background: #ffa000;
 } */
 
-#temperature {
-    /* background: #f0932b; */
-}
+/* #temperature {
+    background: #f0932b;
+} */
 
 #temperature.critical {
     background: #ff0000;
 }
 
-#tray {
-    /*background-color: #2980b9;*/
-}
+/* #tray {
+    background-color: #2980b9;
+} */
 
-#idle_inhibitor {
-    /*background-color: #2d3436;*/
-}
+/* #idle_inhibitor {
+    background-color: #2d3436;
+} */
 
 #idle_inhibitor.activated {
     background-color: #0abdc6;
@@ -183,10 +183,9 @@ label:focus {
     border-bottom: 1px solid rgba(43, 48, 59, 0.5);
 }
 
-/* #mpd {
-    background: #66cc99;
-    color: #2a5c45;
-} */
+#mpd {
+    margin-left: 5px;
+}
 
 /* #mpd.disconnected {
     background: #ff0000;

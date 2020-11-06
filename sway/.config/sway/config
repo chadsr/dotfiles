@@ -29,7 +29,7 @@ exec_always {
 default_border pixel 1
 # class          border    bg        text      indicator child_border
 client.focused   #0abdc6   #0abdc6   #123e7c   #000000aa #0abdc6
-client.unfocused #0abdc6   #000000aa #ffffffbb #000000aa #000000aa
+client.unfocused #0abdc6aa #000000aa #0abdc6aa #000000aa #000000aa
 client.urgent    #d300c4   #d300c4   #123e7c   #d300c4   #d300c4
 
 ### Variables
