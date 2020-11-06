@@ -2,9 +2,6 @@
 [submodule ".git_submodules/punk_theme"]
 	path = .git_submodules/punk_theme
 	url = git@github.com:rtlewis88/rtl88-Themes.git
-[submodule ".git_submodules/sweet_theme"]
-	path = .git_submodules/sweet_theme
-	url = git@github.com:EliverLara/Sweet.git
 [submodule ".git_submodules/waybar-modules"]
 	path = .git_submodules/waybar-modules
 	url = git@github.com:sl424/waybar.git
