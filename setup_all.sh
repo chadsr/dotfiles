@@ -4,7 +4,7 @@ BASE_PATH=$PWD
 SYSTEM_CONFIG="$BASE_PATH"/system
 GIT_SUBMODULES="$BASE_PATH"/.git_submodules
 
-prompt() {
+prompt_exit() {
     read -rp "$1 Continue (y/n)? " answer
     case ${answer:0:1} in
     y | Y)
@@ -16,7 +16,7 @@ prompt() {
     esac
 }
 
-prompt "This script will remove existing system settings"
+prompt_exit "This script will remove existing system settings"
 
 "$BASE_PATH"/stow_setup.sh
 
@@ -186,7 +186,7 @@ echo "Checking for old Sway dependencies to remove"
 yay -R --noconfirm pipewire-pulseaudio pipewire-pulseaudio-git
 
 echo "Checking for Sway dependencies to install"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sway kanshi pulseaudio-alsa libopenaptx-git xdg-desktop-portal xdg-desktop-portal-wlr pavucontrol qt5-base qt5-wayland wayland-protocols pipewire wdisplays-git gdk-pixbuf2 ranger pulseaudio-ctl shotwell light waybar-git libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome nerd-fonts-hack python python-requests networkmanager-dmenu slurp grim swayshot swaylock-blur-git mako redshift-wayland-git gtk-engines alacritty udiskie wayvnc ansiweather qgnomeplatform || {
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sway kanshi pulseaudio-alsa libopenaptx-git xdg-desktop-portal libpipewire02 xdg-desktop-portal-wlr-git pavucontrol qt5-base qt5-wayland wayland-protocols pipewire wdisplays-git gdk-pixbuf2 ranger pulseaudio-ctl shotwell light waybar-git libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome nerd-fonts-hack ttf-hack python python-requests networkmanager-dmenu slurp grim swayshot swaylock-blur-git mako redshift-wayland-git gtk-engines alacritty udiskie wayvnc ansiweather qgnomeplatform || {
     echo "failed to install Sway dependencies"
     exit 1
 }
@@ -227,17 +227,11 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload obs-
     exit 1
 }
 
-echo "Installing VSCodium fork"
-yay -S --noconfirm --needed --noredownload vscodium-bin || {
-    echo "failed to install VSCodium"
-    exit 1
-}
-
-echo "Installing ungoogled chromium (ozone)"
-yay -S --noconfirm --needed --noredownload ungoogled-chromium-ozone || {
-    echo "failed to install ungoogled chromium (ozone)"
-    exit 1
-}
+# echo "Installing VSCodium fork"
+# yay -S --noconfirm --needed --noredownload vscodium-bin || {
+#     echo "failed to install VSCodium"
+#     exit 1
+# }
 
 echo "Installing git flow"
 yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload gitflow-avh || {
@@ -251,6 +245,21 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload thun
     exit 1
 }
 
+echo "Checking or GPG / YubiKey dependencies"
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload gnupg pcsclite ccid hopenpgp-tools yubikey-personalization yubikey-manager || {
+    echo "failed to install GPG / YubiKey dependencies"
+    exit 1
+}
+
+echo "Disabling GNOME Keyring SSH agent"
+(
+    cat /etc/xdg/autostart/gnome-keyring-ssh.desktop
+    echo Hidden=true
+) >"$HOME"/.config/autostart/gnome-keyring-ssh.desktop || {
+    echo "Failed to disable GNOME Keyring SSH agent"
+    exit 1
+}
+
 cd "$BASE_PATH" || {
     echo "failed to cd to ${BASE_PATH}"
     exit 1
@@ -258,11 +267,34 @@ cd "$BASE_PATH" || {
 
 echo "Setting up user directory configs"
 rm -f "$HOME"/.config/mimeapps.list
-stow -v zsh
-stow -v sway
-stow -v git
 
-prompt "Install JACK audio configuration"
+stow -v zsh || {
+    echo "Failed to stow ZSH config"
+    exit 1
+}
+
+stow -v gpg || {
+    echo "Failed to stow GPG config"
+    exit 1
+}
+
+stow -v sway || {
+    echo "Failed to stow Sway config"
+    exit 1
+}
+
+stow -v git || {
+    echo "Failed to stow Git config"
+    exit 1
+}
+
+# echo "Installing ungoogled chromium (ozone)"
+# yay -S --noconfirm --needed --noredownload ungoogled-chromium-ozone || {
+#     echo "failed to install ungoogled chromium (ozone)"
+#     exit 1
+# }
+
+prompt_exit "Install JACK audio configuration"
 echo "Checking for Cadence/Jack dependencies to install"
 yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload jack2 pipewire-jack pulseaudio-jack cadence libffado || {
     echo "failed to install audio dependencies"
