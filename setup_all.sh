@@ -233,6 +233,12 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload obs-
 #     exit 1
 # }
 
+echo "Installing  neovim"
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload neovim || {
+    echo "failed to install neovim"
+    exit 1
+}
+
 echo "Installing git flow"
 yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload gitflow-avh || {
     echo "failed to install git flow"
