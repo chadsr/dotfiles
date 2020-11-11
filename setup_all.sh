@@ -234,7 +234,7 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload obs-
 # }
 
 echo "Installing  neovim"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload neovim || {
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload neovim python-pynvim neovim-symlinks || {
     echo "failed to install neovim"
     exit 1
 }
@@ -291,6 +291,11 @@ stow -v sway || {
 
 stow -v git || {
     echo "Failed to stow Git config"
+    exit 1
+}
+
+stow -v vim || {
+    echo "Failed to stow Vim config"
     exit 1
 }
 

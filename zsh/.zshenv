@@ -11,7 +11,8 @@ export MOZ_ENABLE_WAYLAND=1
 export QT_QPA_PLATFORMTHEME='gnome'
 
 # Set default editor
-export EDITOR=/usr/bin/nano
+export EDITOR=/usr/bin/nvim
+export VISUAL=/usr/bin/nvim
 
 # Add any local binaries to PATH
 export PATH=$PATH:$HOME/.local/bin
