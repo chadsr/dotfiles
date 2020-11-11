@@ -53,7 +53,7 @@ MAN_PATH=$(manpath)
 export MANPATH="$NPM_PACKAGES/share/man:${MAN_PATH}"
 
 NODE_PATH=$(npm root -g)
-export NODE_PATH=NODE_PATH
+export NODE_PATH=${NODE_PATH}
 
 #################
 # Gnome Keyring #
@@ -61,9 +61,18 @@ export NODE_PATH=NODE_PATH
 
 # Start the Gnome Keyring Daemon for headless zsh sessions
 if [ -n "$DESKTOP_SESSION" ]; then
-    eval "$(gnome-keyring-daemon --start)"
-    export SSH_AUTH_SOCK
+    eval "$(gnome-keyring-daemon --start --components=secrets,pkcs11)"
 fi
+
+#################
+#  GPG for SSH  #
+#################
+TTY=$(tty)
+export GPG_TTY=${TTY}
+
+GPGCONF=$(gpgconf --list-dirs agent-ssh-socket)
+export SSH_AUTH_SOCK=${GPGCONF}
+gpgconf --launch gpg-agent
 
 #################
 #  MPD Hackery  #
