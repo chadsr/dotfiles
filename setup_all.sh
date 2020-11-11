@@ -233,6 +233,9 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload obs-
 #     exit 1
 # }
 
+echo "Removing vim"
+yay -R --noconfirm vim vi
+
 echo "Installing  neovim"
 yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload neovim python-pynvim neovim-symlinks || {
     echo "failed to install neovim"
