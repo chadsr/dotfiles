@@ -122,3 +122,8 @@ if [[ -n $SSH_CONNECTION ]]; then
 else
     export EDITOR='nvim'
 fi
+
+# If it's a zsh terminal session, use curses for pinentry over the default GUI
+GPG_TTY=$(tty)
+export GPG_TTY
+export PINENTRY_USER_DATA="curses"

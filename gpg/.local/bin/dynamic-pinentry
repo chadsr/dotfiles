@@ -1,0 +1,15 @@
+#!/bin/bash
+# switch pinentry depending on PINENTRY_USER_DATA
+case $PINENTRY_USER_DATA in
+curses)
+  exec /usr/bin/pinentry-curses "$@"
+  ;;
+none)
+  # disabled
+  exit 1
+  ;;
+*)
+  # Default to gnome3
+  exec /usr/bin/pinentry-gnome3 "$@"
+  ;;
+esac

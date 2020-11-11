@@ -287,6 +287,9 @@ stow -v gpg || {
     exit 1
 }
 
+echo "Appending custom pinentry wrapper to gpg-agent.conf"
+echo "pinentry-program /home/${USER}/.local/bin/dynamic-pinentry" | tee -a $HOME/.gnupg/gpg-agent.conf
+
 stow -v sway || {
     echo "Failed to stow Sway config"
     exit 1
