@@ -12,6 +12,9 @@ ui = true
 [diff]
 mnemonicprefix = true
 
+[pull]
+ff = only
+
 [merge]
 log = true
 ff = false
