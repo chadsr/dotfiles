@@ -1,7 +1,7 @@
 [user]
-name = Ross Chadwick
-email = git@ross.ch
-signingKey = A6C9F349967F1AC6
+name = Ross
+email = me@ross.ch
+signingKey = 98B1F6BDC25DDD2560398F212B7340DB13C85766
 
 [commit]
 gpgsign = true
@@ -33,6 +33,9 @@ insteadOf = gist:
 
 [url "git@github.com:"]
 insteadOf = https://github.com/
+
+[tag]
+forceSignAnnotated = true
 
 [alias]
 fea = fetch --all
