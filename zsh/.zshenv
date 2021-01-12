@@ -17,6 +17,9 @@ export VISUAL=/usr/bin/nvim
 # Add any local binaries to PATH
 export PATH=$PATH:$HOME/.local/bin
 
+# Anaconda
+export PATH=$PATH:/opt/anaconda/bin
+
 ################################
 # Golang Environment Variables #
 ################################
