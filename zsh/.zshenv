@@ -20,6 +20,10 @@ export PATH=$PATH:$HOME/.local/bin
 # Anaconda
 export PATH=$PATH:/opt/anaconda/bin
 
+# Android
+export PATH=$PATH:/opt/android-sdk/platform-tools
+export PATH=$PATH:/opt/android-sdk/emulator
+
 ################################
 # Golang Environment Variables #
 ################################
@@ -93,3 +97,5 @@ export MPD_PASS=GimmeMusicPls
 ################
 #    Other     #
 ################
+
+# export _JAVA_AWT_WM_NONREPARENTING=1
