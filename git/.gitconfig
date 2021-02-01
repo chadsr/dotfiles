@@ -72,4 +72,4 @@ f = "!git ls-files | grep -i"
 gr = grep -Ii
 la = "!git config -l | grep alias | cut -c 7-"
 [credential]
-	helper = cache
+	helper = cache timeout=14400
