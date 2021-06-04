@@ -52,7 +52,7 @@ HIST_STAMPS="dd.mm.yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git catimg command-not-found common-aliases node npm pip python sudo supervisor golang archlinux colorize cp docker-compose git-flow github systemd vscode)
+plugins=(git catimg command-not-found common-aliases node npm pip python sudo supervisor golang archlinux colorize cp docker-compose git-flow github systemd vscode kubectl)
 
 # User configuration
 
@@ -127,3 +127,4 @@ fi
 GPG_TTY=$(tty)
 export GPG_TTY
 export PINENTRY_USER_DATA="curses"
+
