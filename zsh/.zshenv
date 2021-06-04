@@ -32,7 +32,7 @@ export GOROOT=/usr/lib/go
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
 # Enable Go modules by default
-# export GO111MODULE=on
+export GO111MODULE=on
 
 ############
 # Electron #
@@ -99,3 +99,4 @@ export MPD_PASS=GimmeMusicPls
 ################
 
 # export _JAVA_AWT_WM_NONREPARENTING=1
+source $HOME/.drone.env
