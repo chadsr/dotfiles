@@ -45,15 +45,6 @@ git checkout --force origin/Ultimate-Punk-Complete-Desktop || {
     exit 1
 }
 
-# cd "$GIT_SUBMODULES"/sweet_theme || {
-#     echo "failed to cd to ${GIT_SUBMODULES}/sweet_theme"
-#     exit 1
-# }
-# git checkout --force origin/nova || {
-#     echo "failed to checkout updates"
-#     exit 1
-# }
-
 cd "$GIT_SUBMODULES"/Cyberpunk-Neon || {
     echo "failed to cd to ${GIT_SUBMODULES}/Cyberpunk-Neon"
     exit 1
@@ -165,14 +156,11 @@ rsync -av "$GIT_SUBMODULES"/punk_theme/Ultimate-Punk-Suru++ "$BASE_PATH"/sway/.i
     echo "failed copying Ultimate-Punk-Suru++ to sway"
     exit 1
 }
-rsync -av "$GIT_SUBMODULES"/Cyberpunk-Neon/gtk "$BASE_PATH"/sway/.themes || {
-    echo "failed copying sweet theme to sway"
+
+tar xvzf "$GIT_SUBMODULES"/Cyberpunk-Neon/gtk/materia-cyberpunk-neon.tar.gz -C "$BASE_PATH"/sway/.themes || {
+    echo "failed copying Cyberpunk-Neon theme to sway"
     exit 1
 }
-# rsync -av "$GIT_SUBMODULES"/sweet_theme "$BASE_PATH"/sway/.themes || {
-#     echo "failed copying sweet theme to sway"
-#     exit 1
-# }
 
 echo "Checking for ZSH dependencies to install"
 nohup sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" >/dev/null 2>&1 &# This will fail if already installed, so don"t bother checking
@@ -294,9 +282,6 @@ stow -v gpg || {
     echo "Failed to stow GPG config"
     exit 1
 }
-
-echo "Appending custom pinentry wrapper to gpg-agent.conf"
-echo "pinentry-program /home/${USER}/.local/bin/dynamic-pinentry" | tee -a $HOME/.gnupg/gpg-agent.conf
 
 stow -v sway || {
     echo "Failed to stow Sway config"
