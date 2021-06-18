@@ -4,7 +4,7 @@ email = git@ross.ch
 signingKey = 98B1F6BDC25DDD2560398F212B7340DB13C85766
 
 [commit]
-gpgsign = true
+	gpgsign = true
 
 [color]
 ui = true
@@ -78,3 +78,5 @@ la = "!git config -l | grep alias | cut -c 7-"
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[gpg]
+	program = gpg2
