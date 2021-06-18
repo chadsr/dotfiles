@@ -14,10 +14,10 @@
     exec dex -a -s :~/.config/autostart/
 
 exec_always {
-    gsettings set org.gnome.desktop.interface gtk-theme 'Arc-Cyberpunk-Neon'
-    gsettings set org.gnome.desktop.wm.preferences theme 'Arc-Cyberpunk-Neon' # Don't think this does anything but hey
+    gsettings set org.gnome.desktop.interface gtk-theme 'materia-cyberpunk-neon'
+    gsettings set org.gnome.desktop.wm.preferences theme 'materia-cyberpunk-neon' # Don't think this does anything but hey
     gsettings set org.gnome.desktop.interface icon-theme 'Ultimate-Punk-Suru++'
-    gsettings set org.gnome.desktop.interface cursor-theme 'PUNK-Cyan-Cursor'
+    gsettings set org.gnome.desktop.interface cursor-theme 'Ultimate-PUNK-Cyan-Cursor'
     gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 600
     gsettings set org.gnome.mutter.wayland xwayland-grab-access-rules "['Remmina', 'VirtualBox Machine']"
 }
