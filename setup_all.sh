@@ -186,7 +186,7 @@ echo "Checking for old Sway dependencies to remove"
 yay -R --noconfirm pipewire-pulseaudio pipewire-pulseaudio-git
 
 echo "Checking for Sway dependencies to install"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sway kanshi pulseaudio-alsa libopenaptx-git xdg-desktop-portal libpipewire02 xdg-desktop-portal-wlr-git pavucontrol qt5-base qt5-wayland wayland-protocols pipewire wdisplays-git gdk-pixbuf2 ranger pulseaudio-ctl shotwell light waybar-git libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome nerd-fonts-hack ttf-hack python python-requests networkmanager-dmenu slurp grim swayshot swaylock-blur-git mako redshift-wayland-git gtk-engines alacritty udiskie wayvnc ansiweather qgnomeplatform || {
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sway kanshi pulseaudio-alsa libopenaptx xdg-desktop-portal libpipewire02 xdg-desktop-portal-wlr pavucontrol qt5-base qt5-wayland wayland-protocols pipewire wdisplays gdk-pixbuf2 ranger pulseaudio-ctl shotwell light waybar libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome nerd-fonts-hack ttf-hack python python-requests networkmanager-dmenu slurp grim swayshot swaylock-blur-git mako redshift-wayland-git gtk-engines alacritty udiskie wayvnc ansiweather qgnomeplatform || {
     echo "failed to install Sway dependencies"
     exit 1
 }
@@ -222,7 +222,7 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sway
 # }
 
 echo "Installing obs"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload obs-studio-wayland wlrobs-hg obs-xdg-portal-git || {
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload obs-studio wlrobs-hg || {
     echo "failed to install git flow"
     exit 1
 }
@@ -234,7 +234,7 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload obs-
 # }
 
 echo "Removing vim"
-yay -R --noconfirm vim vi
+yay -R --noconfirmstow vi
 
 echo "Installing  neovim"
 yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload neovim python-pynvim neovim-symlinks || {
@@ -253,6 +253,14 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload thun
     echo "failed to install Thunderbird dependencies"
     exit 1
 }
+
+echo "Enabling pcscd.socket"
+sudo systemctl enable pcscd.socket && sudo systemctl start pcscd.socket || {
+    echo "failed to enable pcscd.socket"
+    exit 1
+}
+
+sudo systemctl start pcscd.socket
 
 echo "Checking or GPG / YubiKey dependencies"
 yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload gnupg pcsclite ccid hopenpgp-tools yubikey-personalization yubikey-manager || {
