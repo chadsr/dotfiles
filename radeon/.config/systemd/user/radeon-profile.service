@@ -1,0 +1,11 @@
+[Unit]
+Description=Radeon-Profile Desktop Client
+After=radeon-profile-daemon.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/radeon-profile
+Restart=always
+
+[Install]
+WantedBy=default.target
