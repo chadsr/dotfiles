@@ -18,13 +18,88 @@ prompt_exit() {
 
 prompt_exit "This script will remove existing system settings"
 
-"$BASE_PATH"/stow_setup.sh
-
 echo "Updating package databases"
 yay -Syy || {
     echo "failed to update package databases"
     exit 1
 }
+
+"$BASE_PATH"/stow_setup.sh
+
+if [ "$1" == "laptop" ]; then
+    echo "Checking if tpacpi-bat is installed"
+    yay -S --noconfirm --needed --noredownload tpacpi-bat || {
+        echo "failed to install TLP packages"
+        exit 1
+    }
+
+    echo "Checking if python-validity is installed"
+    yay -S --noconfirm --needed --noredownload python-validity || {
+        echo "failed to install python-validity"
+        exit 1
+    }
+
+    # echo "Checking if throttled is installed"
+    # yay -S --noconfirm --needed --noredownload throttled || {
+    #     echo "failed to install throttled"
+    #     exit 1
+    # }
+
+    echo "Copying laptop system configuration"
+    sudo rsync -av "$SYSTEM_CONFIG"/laptop / || {
+        echo "failed copying laptop configuration"
+        exit 1
+    }
+
+    echo "Building and copying battery module for Waybar"
+    cd "$GIT_SUBMODULES"/waybar-modules/battery || {
+        echo "failed changing directory to ${GIT_SUBMODULES}/waybar-modules/battery"
+        exit 1
+    }
+    make || {
+        echo "failed to make battery modules"
+        exit 1
+    }
+
+    mv -v "$GIT_SUBMODULES"/waybar-modules/battery/wbm_battery0 "$BASE_PATH"/sway/.config/waybar/modules/battery || {
+        echo "failed moving battery module to ${GIT_SUBMODULES}/waybar-modules/battery"
+        exit 1
+    }
+
+    mv -v "$GIT_SUBMODULES"/waybar-modules/battery/wbm_battery1 "$BASE_PATH"/sway/.config/waybar/modules/battery || {
+        echo "failed moving battery module to ${GIT_SUBMODULES}/waybar-modules/battery"
+        exit 1
+    }
+elif [ "$1" == "workstation" ]; then
+    sudo rsync -av "$SYSTEM_CONFIG"/workstation / || {
+        echo "failed copying workstation configuration"
+        exit 1
+    }
+
+    echo "Installing radeon-profile"
+    yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload radeon-profile radeon-profile-daemon || {
+        echo "failed to install radeon-profile dependencies"
+        exit 1
+    }
+
+    sudo systemctl enable radeon-profile-daemon || {
+        echo "failed to enable radeon-profile-daemon systemd unit"
+        exit 1
+    }
+
+    stow -v radeon || {
+        echo "failed to stow radeon"
+        exit 1
+    }
+
+    systemctl --user enable radeon-profile || {
+        echo "failed to enable radeon-profile user systemd unit"
+        exit 1
+    }
+else
+    echo "$0: first argument must be <laptop|workstation>"
+    exit 1
+fi
 
 git submodule update -f --init --recursive || {
     echo "failed to update git submodules"
@@ -93,60 +168,6 @@ echo "Adding user to audio group"
 sudo groupadd audio
 sudo usermod -a -G audio "$USER"
 
-if [ "$1" == "laptop" ]; then
-    echo "Checking if tpacpi-bat is installed"
-    yay -S --noconfirm --needed --noredownload tpacpi-bat || {
-        echo "failed to install TLP packages"
-        exit 1
-    }
-
-    echo "Checking if python-validity is installed"
-    yay -S --noconfirm --needed --noredownload python-validity || {
-        echo "failed to install python-validity"
-        exit 1
-    }
-
-    # echo "Checking if throttled is installed"
-    # yay -S --noconfirm --needed --noredownload throttled || {
-    #     echo "failed to install throttled"
-    #     exit 1
-    # }
-
-    echo "Copying laptop system configuration"
-    sudo rsync -av "$SYSTEM_CONFIG"/laptop / || {
-        echo "failed copying laptop configuration"
-        exit 1
-    }
-
-    echo "Building and copying battery module for Waybar"
-    cd "$GIT_SUBMODULES"/waybar-modules/battery || {
-        echo "failed changing directory to ${GIT_SUBMODULES}/waybar-modules/battery"
-        exit 1
-    }
-    make || {
-        echo "failed to make battery modules"
-        exit 1
-    }
-
-    mv -v "$GIT_SUBMODULES"/waybar-modules/battery/wbm_battery0 "$BASE_PATH"/sway/.config/waybar/modules/battery || {
-        echo "failed moving battery module to ${GIT_SUBMODULES}/waybar-modules/battery"
-        exit 1
-    }
-
-    mv -v "$GIT_SUBMODULES"/waybar-modules/battery/wbm_battery1 "$BASE_PATH"/sway/.config/waybar/modules/battery || {
-        echo "failed moving battery module to ${GIT_SUBMODULES}/waybar-modules/battery"
-        exit 1
-    }
-elif [ "$1" == "workstation" ]; then
-    sudo rsync -av "$SYSTEM_CONFIG"/workstation / || {
-        echo "failed copying workstation configuration"
-        exit 1
-    }
-else
-    echo "$0: first argument must be <laptop|workstation>"
-    exit 1
-fi
-
 echo "Copying themes from git repo to dotfiles locations"
 rsync -av "$GIT_SUBMODULES"/punk_theme/Ultimate-PUNK-Cyan-Cursor "$BASE_PATH"/sway/.icons || {
     echo "failed copying Ultimate-PUNK-Cyan-Cursor to sway"
@@ -170,11 +191,11 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload zsh 
     exit 1
 }
 
-echo "Checking for old Sway dependencies to remove"
-yay -R --noconfirm pipewire-pulseaudio pipewire-pulseaudio-git
+echo "Checking for old dependencies to remove"
+yay -R --noconfirm pipewire-pulseaudio pipewire-pulseaudio-git pulseaudio-equalizer pulseaudio-lirc pulseaudio-zeroconf pulseaudio pulseaudio-bluetooth redshift-wayland-git
 
 echo "Checking for Sway dependencies to install"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sway kanshi pulseaudio-alsa alsa-tools libopenaptx xdg-desktop-portal libpipewire02 xdg-desktop-portal-wlr pavucontrol qt5-base qt5-wayland wayland-protocols pipewire wdisplays gdk-pixbuf2 ranger pulseaudio-ctl shotwell light waybar libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome nerd-fonts-hack ttf-hack python python-requests networkmanager-dmenu slurp grim swayshot swaylock-blur-git mako redshift-wayland-git gtk-engines alacritty udiskie wayvnc ansiweather qgnomeplatform || {
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sway kanshi pipewire-pulse pipewire-alsa pulseaudio-alsa alsa-tools libopenaptx xdg-desktop-portal libpipewire02 xdg-desktop-portal-wlr pavucontrol qt5-base qt5-wayland wayland-protocols pipewire wdisplays gdk-pixbuf2 ranger pulseaudio-ctl shotwell light waybar libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome nerd-fonts-hack ttf-hack python python-requests networkmanager-dmenu slurp grim swayshot swaylock-blur-git mako gammastep gtk-engines alacritty udiskie wayvnc ansiweather qgnomeplatform || {
     echo "failed to install Sway dependencies"
     exit 1
 }
@@ -247,8 +268,6 @@ sudo systemctl enable pcscd.socket && sudo systemctl start pcscd.socket || {
     echo "failed to enable pcscd.socket"
     exit 1
 }
-
-sudo systemctl start pcscd.socket
 
 echo "Checking or GPG / YubiKey dependencies"
 yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload gnupg pcsclite ccid hopenpgp-tools yubikey-personalization yubikey-manager || {
