@@ -174,7 +174,7 @@ echo "Checking for old Sway dependencies to remove"
 yay -R --noconfirm pipewire-pulseaudio pipewire-pulseaudio-git
 
 echo "Checking for Sway dependencies to install"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sway kanshi pulseaudio-alsa alsa-tools libopenaptx xdg-desktop-portal libpipewire02 xdg-desktop-portal-wlr pavucontrol qt5-base qt5-wayland qt5-styleplugins wayland-protocols pipewire wdisplays gdk-pixbuf2 ranger pulseaudio-ctl shotwell light waybar libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome nerd-fonts-hack ttf-hack python python-requests networkmanager-dmenu slurp grim swayshot swaylock-blur-git mako redshift-wayland-git gtk-engines alacritty udiskie wayvnc ansiweather qgnomeplatform || {
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sway kanshi pulseaudio-alsa alsa-tools libopenaptx xdg-desktop-portal libpipewire02 xdg-desktop-portal-wlr pavucontrol qt5-base qt5-wayland wayland-protocols pipewire wdisplays gdk-pixbuf2 ranger pulseaudio-ctl shotwell light waybar libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome nerd-fonts-hack ttf-hack python python-requests networkmanager-dmenu slurp grim swayshot swaylock-blur-git mako redshift-wayland-git gtk-engines alacritty udiskie wayvnc ansiweather qgnomeplatform || {
     echo "failed to install Sway dependencies"
     exit 1
 }
