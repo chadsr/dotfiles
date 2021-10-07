@@ -11,6 +11,7 @@ export PATH=$PATH:$HOME/.local/bin
 
 # Anaconda
 export PATH=$PATH:/opt/anaconda/bin
+export CONDA_AUTO_ACTIVATE_BASE=false
 
 # Android
 export PATH=$PATH:/opt/android-sdk/platform-tools
