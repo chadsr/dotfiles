@@ -15,3 +15,6 @@ sway/.config/gtk-4.0/servers
 sway/.config/waybar/modules/crypto/crypto.ini
 nerd-fonts-complete
 gpg/.gnupg/gpg-agent.conf
+gpg/.local
+!gpg/.local/bin/dynamic-pinentry
+vim/.config/nvim/pack
