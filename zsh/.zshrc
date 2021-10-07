@@ -128,3 +128,5 @@ GPG_TTY=$(tty)
 export GPG_TTY
 export PINENTRY_USER_DATA="curses"
 
+# Use vscodium when code is run
+alias code='codium'
