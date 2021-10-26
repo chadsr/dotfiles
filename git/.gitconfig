@@ -32,7 +32,7 @@ insteadOf = gh:
 insteadOf = gist:
 
 [url "git@github.com:"]
-insteadOf = https://github.com/
+	insteadOf = https://github.com/
 
 [tag]
 forceSignAnnotated = true
