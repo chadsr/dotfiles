@@ -2,3 +2,5 @@
 #alias virtualbox="env QT_QPA_PLATFORM=xcb virtualbox"
 alias vim="nvim"
 alias vi="nvim"
+
+alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
