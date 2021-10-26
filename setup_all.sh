@@ -257,6 +257,12 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload gitf
     exit 1
 }
 
+echo "Installing VSCodium"
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload vscodium-bin vscodium-bin-features vscodium-bin-marketplace || {
+    echo "failed to install VSCodium Dependencies"
+    exit 1
+}
+
 echo "Checking or Thunderbird dependencies"
 yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload thunderbird birdtray || {
     echo "failed to install Thunderbird dependencies"
