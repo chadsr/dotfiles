@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<auxStuff>
+    <RPEvents/>
+    <ExecProfiles/>
+    <FanProfiles>
+        <fanProfile name="Main">
+            <step temperature="30" speed="10"/>
+            <step temperature="40" speed="20"/>
+            <step temperature="50" speed="30"/>
+            <step temperature="60" speed="40"/>
+            <step temperature="70" speed="60"/>
+            <step temperature="80" speed="80"/>
+            <step temperature="90" speed="90"/>
+            <step temperature="99" speed="99"/>
+        </fanProfile>
+        <fanProfile name="default">
+            <step temperature="30" speed="10"/>
+            <step temperature="40" speed="20"/>
+            <step temperature="50" speed="30"/>
+            <step temperature="60" speed="40"/>
+            <step temperature="70" speed="60"/>
+            <step temperature="80" speed="80"/>
+            <step temperature="90" speed="90"/>
+            <step temperature="99" speed="99"/>
+        </fanProfile>
+    </FanProfiles>
+    <Plots>
+        <plot name="Core Frequency" enabled="1" background="#4e4f4f">
+            <axis align="left" enabled="1" unit="0" ticks="10" penStyle="1" penWidth="1" penColor="#fafcfc"/>
+            <serie align="left" id="0" color="#d40000"/>
+            <axis align="right" enabled="0" unit="0" ticks="4" penStyle="1" penWidth="0" penColor="#fafcfc"/>
+        </plot>
+        <plot name="Memory Frequency" enabled="1" background="#464747">
+            <axis align="left" enabled="1" unit="0" ticks="4" penStyle="1" penWidth="1" penColor="#fafcfc"/>
+            <serie align="left" id="1" color="#32c327"/>
+            <axis align="right" enabled="0" unit="0" ticks="4" penStyle="1" penWidth="0" penColor="#fafcfc"/>
+        </plot>
+        <plot name="Temperature" enabled="1" background="#464646">
+            <axis align="left" enabled="1" unit="2" ticks="10" penStyle="1" penWidth="1" penColor="#fafcfc"/>
+            <serie align="left" id="6" color="#ff622e"/>
+            <serie align="left" id="8" color="#5ebfff"/>
+            <serie align="left" id="9" color="#ff0004"/>
+            <axis align="right" enabled="0" unit="1702130753" ticks="4" penStyle="1" penWidth="0" penColor="#fafcfc"/>
+        </plot>
+    </Plots>
+    <TopbarItems>
+        <topbarItem type="0" primaryValueId="0" primaryColor="#000000" secondaryValueIdEnabled="1" secondaryValueId="1" secondaryColor="#000000" pieMaxValue="100"/>
+        <topbarItem type="1" primaryValueId="6" primaryColor="#000000" secondaryValueIdEnabled="0" secondaryValueId="-248" secondaryColor="#000000" pieMaxValue="100"/>
+        <topbarItem type="2" primaryValueId="13" primaryColor="#0000ff" secondaryValueIdEnabled="0" secondaryValueId="-248" secondaryColor="#000000" pieMaxValue="100"/>
+        <topbarItem type="2" primaryValueId="10" primaryColor="#ff0000" secondaryValueIdEnabled="0" secondaryValueId="-248" secondaryColor="#000000" pieMaxValue="100"/>
+        <topbarItem type="2" primaryValueId="11" primaryColor="#ffff00" secondaryValueIdEnabled="0" secondaryValueId="-248" secondaryColor="#000000" pieMaxValue="100"/>
+    </TopbarItems>
+    <OcProfiles/>
+</auxStuff>
