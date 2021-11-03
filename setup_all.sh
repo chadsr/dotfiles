@@ -24,7 +24,7 @@ yay -Syy || {
     exit 1
 }
 
-stow -d ~/ stow || {
+stow -t ~/ stow || {
     echo "failed to stow stow"
     exit 1
 }
@@ -76,6 +76,11 @@ if [ "$1" == "laptop" ]; then
 elif [ "$1" == "workstation" ]; then
     sudo rsync -av "$SYSTEM_CONFIG"/workstation / || {
         echo "failed copying workstation configuration"
+        exit 1
+    }
+
+    sudo systemctl enable cpupower || {
+        echo "failed to enable cpupower systemd unit"
         exit 1
     }
 
@@ -198,7 +203,7 @@ echo "Checking for old dependencies to remove"
 yay -R --noconfirm pipewire-pulseaudio pipewire-pulseaudio-git pulseaudio-equalizer pulseaudio-lirc pulseaudio-zeroconf pulseaudio pulseaudio-bluetooth redshift-wayland-git
 
 echo "Checking for Sway dependencies to install"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sway kanshi pipewire-pulse pipewire-alsa pulseaudio-alsa alsa-tools libopenaptx xdg-desktop-portal wlsunset libpipewire02 xdg-desktop-portal-wlr pavucontrol qt5-base qt5-wayland wayland-protocols pipewire wdisplays gdk-pixbuf2 ranger pulseaudio-ctl shotwell light waybar libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome nerd-fonts-hack ttf-hack python python-requests networkmanager-dmenu slurp grim swayshot swaylock-blur-git mako gammastep gtk-engines alacritty udiskie wayvnc ansiweather qgnomeplatform || {
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sway kanshi pipewire-pulse pipewire-alsa pulseaudio-alsa alsa-tools xdg-desktop-portal wlsunset libpipewire02 xdg-desktop-portal-wlr pavucontrol qt5-base qt5-wayland wayland-protocols pipewire wdisplays gdk-pixbuf2 ranger pulseaudio-ctl shotwell light waybar libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome nerd-fonts-hack ttf-hack python python-requests networkmanager-dmenu slurp grim swayshot swaylock-blur-git mako gammastep gtk-engines alacritty udiskie wayvnc ansiweather qgnomeplatform || {
     echo "failed to install Sway dependencies"
     exit 1
 }
