@@ -1,6 +1,6 @@
 [Unit]
 Description=Radeon-Profile Desktop Client
-After=radeon-profile-daemon.service
+PartOf=graphical-session.target
 
 [Service]
 Type=simple
