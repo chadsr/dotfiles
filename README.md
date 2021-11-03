@@ -16,8 +16,6 @@ Setup stow configs and also system configurations for the given system name:
 ...or manually for local configs only:
 
 ```
-./stow_setup.sh (only needs running once)
+stow -d ~/ stow
 stow <FOLDER_NAME>
 ```
-
-*The silly stow-setup.sh script is because stow doesn't support environment variables in .stowrc, and I don't want to use absolute paths in this repo...*

@@ -16,7 +16,7 @@ prompt_exit() {
     esac
 }
 
-prompt_exit "This script will remove existing system settings"
+prompt_exit "This script will remove/change existing system settings"
 
 echo "Updating package databases"
 yay -Syy || {
@@ -24,7 +24,10 @@ yay -Syy || {
     exit 1
 }
 
-"$BASE_PATH"/stow_setup.sh
+stow -d ~/ stow || {
+    echo "failed to stow stow"
+    exit 1
+}
 
 if [ "$1" == "laptop" ]; then
     echo "Checking if tpacpi-bat is installed"
