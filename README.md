@@ -16,6 +16,6 @@ Setup stow configs and also system configurations for the given system name:
 ...or manually for local configs only:
 
 ```
-stow -d ~/ stow
+stow -t ~/ stow
 stow <FOLDER_NAME>
 ```
