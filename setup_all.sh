@@ -236,14 +236,8 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload obs-
     exit 1
 }
 
-# echo "Installing VSCodium fork"
-# yay -S --noconfirm --needed --noredownload vscodium-bin || {
-#     echo "failed to install VSCodium"
-#     exit 1
-# }
-
 echo "Removing vim"
-yay -R --noconfirmstow vi
+yay -R --noconfirm vi
 
 echo "Installing  neovim"
 yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload neovim python-pynvim neovim-symlinks || {
@@ -300,6 +294,11 @@ rm -f "$HOME"/.config/mimeapps.list
 
 stow -v zsh || {
     echo "Failed to stow ZSH config"
+    exit 1
+}
+
+stow -v systemd || {
+    echo "Failed to stow systemd user config"
     exit 1
 }
 
