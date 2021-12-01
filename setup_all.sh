@@ -84,6 +84,12 @@ elif [ "$1" == "workstation" ]; then
         exit 1
     }
 
+    echo "Installing liquidctl"
+    yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload liquidctl || {
+        echo "failed to install liquidctl dependencies"
+        exit 1
+    }
+
     echo "Installing radeon-profile"
     yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload radeon-profile radeon-profile-daemon || {
         echo "failed to install radeon-profile dependencies"
