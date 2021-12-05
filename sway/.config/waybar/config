@@ -198,7 +198,7 @@
         "format": "{}",
         "interval": 600,
         "return-type": "json",
-        "exec": "$HOME/.config/waybar/modules/crypto/crypto.py",
+        "exec": "$HOME/.config/waybar/modules/crypto/waybar_crypto.py",
         "exec-if": "ping pro-api.coinmarketcap.com -c1"
     },
     "custom/yay": {
