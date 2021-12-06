@@ -10,4 +10,4 @@ ExecStart=liquidctl set pump speed 90
 ExecStart=liquidctl set logo color blackout
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target
