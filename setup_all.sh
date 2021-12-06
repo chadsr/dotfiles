@@ -100,6 +100,11 @@ elif [ "$1" == "workstation" ]; then
         exit 1
     }
 
+    systemctl --user enable yoda || {
+        echo "failed to enable yoda user systemd unit"
+        exit 1
+    }
+
     echo "Installing radeon-profile"
     yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload radeon-profile radeon-profile-daemon || {
         echo "failed to install radeon-profile dependencies"

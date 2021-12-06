@@ -7,8 +7,7 @@ Restart=on-failure
 RestartSec=1s
 ExecStart=liquidctl initialize all
 ExecStart=liquidctl set pump speed 90
-ExecStart=liquidctl set fan speed 20 30  30 50  40 70  50 80  60 90  80 100
 ExecStart=liquidctl set logo color blackout
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target
