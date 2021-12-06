@@ -90,6 +90,16 @@ elif [ "$1" == "workstation" ]; then
         exit 1
     }
 
+    stow -v liquidctl || {
+        echo "failed to stow liquidctl"
+        exit 1
+    }
+
+    systemctl --user enable liquidctl || {
+        echo "failed to enable liquidctl user systemd unit"
+        exit 1
+    }
+
     echo "Installing radeon-profile"
     yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload radeon-profile radeon-profile-daemon || {
         echo "failed to install radeon-profile dependencies"
