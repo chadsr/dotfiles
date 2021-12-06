@@ -14,3 +14,6 @@
 [submodule ".git_submodules/Cyberpunk-Neon"]
 	path = .git_submodules/Cyberpunk-Neon
 	url = git@github.com:Roboron3042/Cyberpunk-Neon.git
+[submodule ".git_submodules/liquidctl"]
+	path = .git_submodules/liquidctl
+	url = git@github.com:liquidctl/liquidctl.git
