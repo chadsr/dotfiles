@@ -6,3 +6,6 @@
 ^/@.*
 README.*
 .gitkeep
+system/workstation
+system/common
+system/laptop
