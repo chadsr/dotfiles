@@ -191,6 +191,11 @@ tar xvzf "$GIT_SUBMODULES"/Cyberpunk-Neon/gtk/materia-cyberpunk-neon.tar.gz -C "
     exit 1
 }
 
+rsync -av "$GIT_SUBMODULES"/sweet-theme "$BASE_PATH"/sway/.themes || {
+    echo "failed copying sweet-theme to sway"
+    exit 1
+}
+
 echo "Checking for ZSH dependencies to install"
 nohup sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" >/dev/null 2>&1 & # This will fail if already installed, so don"t bother checking
 
@@ -244,22 +249,26 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload core
     exit 1
 }
 
-echo "Setting up polkit for Corectrl"
-(
-    echo 'polkit.addRule(function(action, subject) {
-if ((action.id == "org.corectrl.helper.init" ||
-    action.id == "org.corectrl.helperkiller.init") &&
-    subject.local == true &&
-    subject.active == true &&
-    subject.isInGroup("'${GROUP}'")) {
-        return polkit.Result.YES;
+corectrl_rules=/etc/polkit-1/rules.d/90-corectrl.rules
+
+if [ ! -f ${corectrl_rules} ]; then
+    echo "Setting up polkit for Corectrl"
+    (
+        echo 'polkit.addRule(function(action, subject) {
+    if ((action.id == "org.corectrl.helper.init" ||
+        action.id == "org.corectrl.helperkiller.init") &&
+        subject.local == true &&
+        subject.active == true &&
+        subject.isInGroup("'${GROUP}'")) {
+            return polkit.Result.YES;
+        }
+    });
+    '
+    ) | sudo tee ${corectrl_rules} || {
+        echo "Failed to setup polkit for Corectrl"
+        exit 1
     }
-});
-'
-) >/etc/polkit-1/rules.d/90-corectrl.rules || {
-    echo "Failed to setup polkit for Corectrl"
-    exit 1
-}
+fi
 
 echo "Installing obs"
 yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload obs-studio wlrobs-hg || {
