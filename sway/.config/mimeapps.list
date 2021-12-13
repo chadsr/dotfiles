@@ -5,6 +5,7 @@ image/jpeg=shotwell-viewer.desktop;
 application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop;
 
 [Default Applications]
+inode/directory=nautilus.desktop
 text/plain=org.gnome.gedit.desktop
 application/pdf=okularApplication_pdf.desktop
 image/jpeg=shotwell-viewer.desktop
