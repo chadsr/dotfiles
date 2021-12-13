@@ -17,3 +17,6 @@
 [submodule ".git_submodules/liquidctl"]
 	path = .git_submodules/liquidctl
 	url = git@github.com:liquidctl/liquidctl.git
+[submodule ".git_submodules/sweet-theme"]
+	path = .git_submodules/sweet-theme
+	url = git@github.com:EliverLara/Sweet.git
