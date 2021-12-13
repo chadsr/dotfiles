@@ -10,6 +10,7 @@
 # Autostarts
     # Launch desktop entries
     exec nmcli radio wifi off
+    exec xsettingsd
     exec mako
     exec wlsunset -l 52.37 -L 4.89
     exec dex -a -s :~/.config/autostart/
