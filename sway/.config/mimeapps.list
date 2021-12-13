@@ -2,31 +2,22 @@
 text/plain=org.gnome.gedit.desktop;
 application/pdf=okularApplication_pdf.desktop;
 image/jpeg=shotwell-viewer.desktop;
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop;
 
 [Default Applications]
 text/plain=org.gnome.gedit.desktop
 application/pdf=okularApplication_pdf.desktop
 image/jpeg=shotwell-viewer.desktop
 image/png=shotwell-viewer.desktop
-
-# Browser
 text/html=brave.desktop
 x-scheme-handler/http=brave.desktop
 x-scheme-handler/https=brave.desktop
 x-scheme-handler/about=brave.desktop
 x-scheme-handler/unknown=brave.desktop
-
-# Mail
 x-scheme-handler/mailto=thunderbird.desktop
-
-# Torrent
 x-scheme-handler/magnet=transmission.desktop
-
-# Audio
 audio/flac=org.gnome.Lollypop.desktop
 audio/mp3=org.gnome.Lollypop.desktop
-
-# Video
 video/mp4=mpv.desktop
 video/wav=mpv.desktop
 video/webm=mpv.desktop
@@ -35,3 +26,5 @@ video/avi=mpv.desktop
 video/wmv=mpv.desktop
 video/flv=mpv.desktop
 video/3gp=mpv.desktop
+x-scheme-handler/nxm=vortex-stl-dl.desktop
+x-scheme-handler/nxm-protocol=vortex-stl-dl.desktop
