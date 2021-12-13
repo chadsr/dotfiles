@@ -104,27 +104,6 @@ elif [ "$1" == "workstation" ]; then
         echo "failed to enable yoda user systemd unit"
         exit 1
     }
-
-    echo "Installing radeon-profile"
-    yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload radeon-profile radeon-profile-daemon || {
-        echo "failed to install radeon-profile dependencies"
-        exit 1
-    }
-
-    sudo systemctl enable radeon-profile-daemon || {
-        echo "failed to enable radeon-profile-daemon systemd unit"
-        exit 1
-    }
-
-    stow -v radeon || {
-        echo "failed to stow radeon"
-        exit 1
-    }
-
-    systemctl --user enable radeon-profile || {
-        echo "failed to enable radeon-profile user systemd unit"
-        exit 1
-    }
 else
     echo "$0: first argument must be <laptop|workstation>"
     exit 1
@@ -258,6 +237,29 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sway
 #     echo "failed to clean up nerd-fonts-complete"
 #     exit 1
 # }
+
+echo "Installing corectrl"
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload corectrl || {
+    echo "failed to install corectrl dependencies"
+    exit 1
+}
+
+echo "Setting up polkit for Corectrl"
+(
+    echo 'polkit.addRule(function(action, subject) {
+if ((action.id == "org.corectrl.helper.init" ||
+    action.id == "org.corectrl.helperkiller.init") &&
+    subject.local == true &&
+    subject.active == true &&
+    subject.isInGroup("'${GROUP}'")) {
+        return polkit.Result.YES;
+    }
+});
+'
+) >/etc/polkit-1/rules.d/90-corectrl.rules || {
+    echo "Failed to setup polkit for Corectrl"
+    exit 1
+}
 
 echo "Installing obs"
 yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload obs-studio wlrobs-hg || {
