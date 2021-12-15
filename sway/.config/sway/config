@@ -14,6 +14,14 @@
     exec mako
     exec wlsunset -l 52.37 -L 4.89
     exec dex -a -s :~/.config/autostart/
+    exec wlr-sunclock \
+        --margins "0,16,0,16" \
+        --width 200 \
+        --layer bottom \
+        --anchors tr \
+        --border-width 1 \
+        --colour-ocean "#C4B5FD" \
+        --colour-land "#6D28D9"
 
 set $gnome-schema org.gnome.desktop.interface
 
@@ -219,7 +227,7 @@ bar {
 #
 # Screenshots
 #
-bindsym --release Print exec grim -g \"$(slurp)" - | wl-copy
+bindsym Ctrl+Print exec grim -g "$(slurp)" - | swappy -f -
 
 #
 # Pulse Audio
@@ -239,17 +247,34 @@ bindsym XF86AudioPrev exec playerctl previous
 #
 # Swaylock
 #
-bindsym $mod+Escape exec swaylock-blur
+bindsym $mod+Escape exec swaylock \
+	--screenshots \
+	--clock \
+	--indicator \
+    --effect-pixelate 20 \
+	--effect-vignette 0.5:0.5 \
+	--ring-color bb00cc \
+    --ring-clear-color bb00cc \
+	--key-hl-color 0abdc6 \
+	--line-color 00000000 \
+	--inside-color 00000088 \
+    --inside-clear-color 00000088 \
+	--separator-color 00000000 \
+    --text-color 0abdc6 \
+    --text-clear-color 0abdc6 \
+    --text-caps-lock-color 0abdc6 \
+	--grace 2 \
+	--fade-in 0.2
 
 ### Idle configuration
-# Lock after 300 seconds (5 minutes), turn off screen after 600 seconds (10 minutes)
+# Lock after 300 seconds (5 minutes), turn off screen after 3600 seconds (60 minutes)
 # Turn screen back on when resumed
 # lock screen before sleep.
 exec swayidle \
-    timeout 300 'swaylock-blur' \
-    timeout 600 'swaymsg "output * dpms off"' \
+    timeout 300 'swaylock' \
+    timeout 3600 'swaymsg "output * dpms off"' \
     resume 'swaymsg "output * dpms on"' \
-    before-sleep 'swaylock-blur'
+    before-sleep 'swaylock'
 
 # External Config Includes
 include /etc/sway/config.d/*
