@@ -213,36 +213,6 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sway
     exit 1
 }
 
-# echo "Installing nerd-fonts-complete"
-# cd "$BASE_PATH" || {
-#     echo "failed to cd back to ${BASE_PATH}"
-#     exit 1
-# }
-# yay --getpkgbuild nerd-fonts-complete || {
-#     echo "failed to get pkgbuild for nerd-fonts-complete"
-#     exit 1
-# }
-# cd nerd-fonts-complete/ || {
-#     echo "failed to cd to nerd-fonts-complete build directory"
-#     exit 1
-# }
-# wget -c -O nerd-fonts-2.1.0.tar.gz https://github.com/ryanoasis/nerd-fonts/archive/v2.1.0.tar.gz || {
-#     echo "failed to wget nerd-fonts-complete"
-#     exit 1
-# }
-# makepkg -sci BUILDDIR=. || {
-#     echo "failed to makepkg nerd-fonts-complete"
-#     exit 1
-# }
-# cd "$BASE_PATH" || {
-#     echo "failed to cd back to ${BASE_PATH}"
-#     exit 1
-# }
-# rm -rfv nerd-fonts-complete/ || {
-#     echo "failed to clean up nerd-fonts-complete"
-#     exit 1
-# }
-
 echo "Installing corectrl"
 yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload corectrl || {
     echo "failed to install corectrl dependencies"
@@ -361,12 +331,6 @@ stow -v vim || {
     echo "Failed to stow Vim config"
     exit 1
 }
-
-# echo "Installing ungoogled chromium (ozone)"
-# yay -S --noconfirm --needed --noredownload ungoogled-chromium-ozone || {
-#     echo "failed to install ungoogled chromium (ozone)"
-#     exit 1
-# }
 
 prompt_exit "Install JACK audio configuration"
 echo "Checking for Cadence/Jack dependencies to install"
