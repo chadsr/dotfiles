@@ -1,0 +1,3 @@
+# Workstation specific config, loaded on hostname "shifty"
+
+output DP-3 pos 0 0 res 3440x1440@143.975Hz
