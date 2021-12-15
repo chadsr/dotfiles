@@ -255,14 +255,14 @@ if [ ! -f ${corectrl_rules} ]; then
     echo "Setting up polkit for Corectrl"
     (
         echo 'polkit.addRule(function(action, subject) {
-    if ((action.id == "org.corectrl.helper.init" ||
-        action.id == "org.corectrl.helperkiller.init") &&
-        subject.local == true &&
-        subject.active == true &&
-        subject.isInGroup("'${GROUP}'")) {
-            return polkit.Result.YES;
-        }
-    });
+if ((action.id == "org.corectrl.helper.init" ||
+    action.id == "org.corectrl.helperkiller.init") &&
+    subject.local == true &&
+    subject.active == true &&
+    subject.isInGroup("'${USER}'")) {
+        return polkit.Result.YES;
+    }
+});
     '
     ) | sudo tee ${corectrl_rules} || {
         echo "Failed to setup polkit for Corectrl"
