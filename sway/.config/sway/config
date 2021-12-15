@@ -15,13 +15,13 @@
     exec wlsunset -l 52.37 -L 4.89
     exec dex -a -s :~/.config/autostart/
     exec wlr-sunclock \
-        --margins "0,16,0,16" \
+        --margins "5,5,0,0" \
         --width 200 \
         --layer bottom \
         --anchors tr \
-        --border-width 1 \
-        --colour-ocean "#C4B5FD" \
-        --colour-land "#6D28D9"
+        --border-width 0 \
+        --colour-ocean "#bb00cc" \
+        --colour-land "#0abdc6"
 
 set $gnome-schema org.gnome.desktop.interface
 
