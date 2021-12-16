@@ -15,7 +15,7 @@
     exec wlsunset -l 52.37 -L 4.89
     exec dex -a -s :~/.config/autostart/
     exec wlr-sunclock \
-        --margins "5,5,0,0" \
+        --margins "5,5,5,5" \
         --width 200 \
         --layer bottom \
         --anchors tr \
