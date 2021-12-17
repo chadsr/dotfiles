@@ -7,6 +7,7 @@ application/json=org.gnome.gedit.desktop;
 
 [Default Applications]
 inode/directory=nautilus.desktop
+application/x-gnome-saved-search=nautilus.desktop
 text/plain=org.gnome.gedit.desktop
 application/pdf=okularApplication_pdf.desktop
 image/jpeg=shotwell-viewer.desktop
@@ -31,5 +32,3 @@ video/flv=mpv.desktop
 video/3gp=mpv.desktop
 x-scheme-handler/nxm=vortex-stl-dl.desktop
 x-scheme-handler/nxm-protocol=vortex-stl-dl.desktop
-inode/directory=nautilus.desktop
-application/x-gnome-saved-search=nautilus.desktop
