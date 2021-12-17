@@ -95,6 +95,11 @@ elif [ "$1" == "workstation" ]; then
         exit 1
     }
 
+    stow -v corectrl || {
+        echo "failed to stow corectrl"
+        exit 1
+    }
+
     systemctl --user enable liquidctl || {
         echo "failed to enable liquidctl user systemd unit"
         exit 1
