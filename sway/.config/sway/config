@@ -20,8 +20,8 @@
         --layer bottom \
         --anchors tr \
         --border-width 0 \
-        --colour-ocean "#bb00cc" \
-        --colour-land "#0abdc6"
+        --colour-ocean "#0abdc6" \
+        --colour-land "#bb00cc"
 
 set $gnome-schema org.gnome.desktop.interface
 
