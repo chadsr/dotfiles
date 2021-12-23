@@ -6,6 +6,9 @@
 export EDITOR=/usr/bin/nvim
 export VISUAL=/usr/bin/nvim
 
+# XDG
+XDG_SCREENSHOTS_DIR=$HOME/Pictures/screenshots
+
 # Add any local binaries to PATH
 export PATH=$PATH:$HOME/.local/bin
 

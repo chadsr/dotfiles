@@ -8,12 +8,11 @@
 # Read `man 5 sway` for a complete reference.
 
 # Autostarts
-    # Launch desktop entries
     exec nmcli radio wifi off
     exec xsettingsd
     exec mako
     exec wlsunset -l 52.37 -L 4.89
-    exec dex -a -s :~/.config/autostart/
+    exec dex -a -s :~/.config/autostart/ # Launch desktop entries
     exec wlr-sunclock \
         --margins "5,5,5,5" \
         --width 200 \
@@ -234,8 +233,8 @@ bar {
 # Screenshots
 #
 bindsym Ctrl+Print exec grim -g "$(slurp)" - | swappy -f -
-bindsym Print exec grimshot --notify save screen
-bindsym Alt+Print exec grimshot --notify save active
+bindsym Print exec source ~/.zshenv && grimshot --notify save screen
+bindsym Alt+Print exec source ~/.zshenv && grimshot --notify save active
 
 #
 # Pulse Audio
