@@ -228,6 +228,8 @@ bar {
 # Screenshots
 #
 bindsym Ctrl+Print exec grim -g "$(slurp)" - | swappy -f -
+bindsym Print exec grimshot --notify save screen
+bindsym Alt+Print exec grimshot --notify save active
 
 #
 # Pulse Audio
