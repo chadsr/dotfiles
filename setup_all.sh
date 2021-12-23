@@ -213,7 +213,7 @@ echo "Checking for old dependencies to remove"
 yay -R --noconfirm swaylock-blur pipewire-pulseaudio pipewire-pulseaudio-git pulseaudio-equalizer pulseaudio-lirc pulseaudio-zeroconf pulseaudio pulseaudio-bluetooth redshift-wayland-git
 
 echo "Checking for Sway dependencies to install"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sway xsettingsd kanshi helvum pipewire-pulse pipewire-alsa wireplumber pulseaudio-alsa alsa-tools xdg-desktop-portal wlsunset libpipewire02 xdg-desktop-portal-wlr pavucontrol qt5-base qt5-wayland wayland-protocols pipewire wdisplays gdk-pixbuf2 ranger pulseaudio-ctl shotwell light waybar libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome nerd-fonts-hack ttf-hack python python-requests networkmanager-dmenu azote slurp grim swappy wl-clipboard wf-recorder grimshot swaylock-effects mako gammastep gtk-engines alacritty udiskie wayvnc ansiweather qgnomeplatform qgnomeplatform-qt6 || {
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sway xsettingsd kanshi helvum pipewire-pulse pipewire-alsa wireplumber pulseaudio-alsa alsa-tools xdg-desktop-portal wlsunset libpipewire02 xdg-desktop-portal-wlr pavucontrol qt5-base qt5-wayland wayland-protocols pipewire wdisplays gdk-pixbuf2 ranger pulseaudio-ctl shotwell rbw rofi-rbw light waybar libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome nerd-fonts-hack ttf-hack python python-requests networkmanager-dmenu azote slurp grim swappy wl-clipboard wf-recorder grimshot swaylock-effects mako gammastep gtk-engines alacritty udiskie wayvnc ansiweather qgnomeplatform qgnomeplatform-qt6 || {
     echo "failed to install Sway dependencies"
     exit 1
 }

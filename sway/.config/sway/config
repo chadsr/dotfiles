@@ -84,11 +84,16 @@ output * bg $HOME/.config/sway/background.png fill
     # start rofi run menu
     bindsym $mod+x exec $menu -show drun
 
+    # start rofi filebrowser menu
+    bindsym $mod+d exec $menu -show filebrowser
+
     # start rofi ssh menu
     bindsym $mod+s exec $menu -show ssh
 
     # start rofi window switcher
     bindsym $mod+w exec $menu -show window
+
+    bindsym $mod+b exec rofi-rbw
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -157,9 +162,10 @@ output * bg $HOME/.config/sway/background.png fill
 # Layout stuff:
 #
     # You can "split" the current object of your focus with
-    # $mod+b or $mod+v, for horizontal and vertical splits
+    # $mod+h or $mod+v, for horizontal and vertical splits
     # respectively.
-    bindsym $mod+b splith
+    unbindsym $mod+h
+    bindsym $mod+h splith
     bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
