@@ -12,8 +12,9 @@ XDG_SCREENSHOTS_DIR=$HOME/Pictures/screenshots
 # Add any local binaries to PATH
 export PATH=$PATH:$HOME/.local/bin
 
-# Anaconda
+# Conda
 export PATH=$PATH:/opt/anaconda/bin
+export PATH=$PATH:/opt/miniconda3/bin
 export CONDA_AUTO_ACTIVATE_BASE=false
 
 # Android
