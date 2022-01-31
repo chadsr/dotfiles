@@ -94,6 +94,7 @@ export MPD_PASS=GimmeMusicPls
 ################
 #    Other     #
 ################
+export PATH=$PATH:/opt/brother/scanner/brscan5
 
 # export _JAVA_AWT_WM_NONREPARENTING=1
 source $HOME/.drone.env
