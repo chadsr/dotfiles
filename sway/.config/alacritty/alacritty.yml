@@ -40,6 +40,9 @@ window:
   # Spread additional padding evenly around the terminal content.
   dynamic_padding: false
 
+  # Allow terminal applications to change Alacritty's window title.
+  dynamic_title: true
+
   # Window decorations
   #
   # Values for `decorations`:
@@ -52,6 +55,8 @@ window:
   decorations: full
 
   startup_mode: Windowed
+
+  opacity: 0.8
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -208,12 +213,6 @@ colors:
   #
   indexed_colors: []
 
-# Background opacity
-#
-# Window opacity as a floating point number from `0.0` to `1.0`.
-# The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.8
-
 # Mouse bindings
 #
 # Available fields:
@@ -249,9 +248,6 @@ selection:
 
   # When set to `true`, selected text will be copied to the primary clipboard.
   save_to_clipboard: false
-
-# Allow terminal applications to change Alacritty's window title.
-window.dynamic_title: true
 
 cursor:
   # Cursor style
