@@ -18,3 +18,4 @@ gpg/.gnupg/gpg-agent.conf
 gpg/.local
 !gpg/.local/bin/dynamic-pinentry
 vim/.config/nvim/pack
+.vscode/
