@@ -5,7 +5,7 @@ SYSTEM_CONFIG="$BASE_PATH"/system
 GIT_SUBMODULES="$BASE_PATH"/.git_submodules
 
 prompt_exit() {
-    read -rp "$1 Continue (y/n)? " answer
+    read -rp "$1 Continue (y/N)? " answer
     case ${answer:0:1} in
     y | Y)
         return
@@ -29,6 +29,16 @@ stow -t ~/ stow || {
     exit 1
 }
 
+git submodule update -f --init --recursive || {
+    echo "failed to update git submodules"
+    exit 1
+}
+
+git submodule foreach --recursive git fetch || {
+    echo "failed to fetch git submodule updates"
+    exit 1
+}
+
 if [ "$1" == "laptop" ]; then
     echo "Checking if tpacpi-bat is installed"
     yay -S --noconfirm --needed --noredownload tpacpi-bat || {
@@ -42,6 +52,12 @@ if [ "$1" == "laptop" ]; then
         exit 1
     }
 
+    echo "Enable fprintd resume/suspend services"
+    sudo systemctl enable open-fprintd-resume open-fprintd-suspend || {
+        echo "failed to enable fprintd resume/suspend services"
+        exit 1
+    }
+
     # echo "Checking if throttled is installed"
     # yay -S --noconfirm --needed --noredownload throttled || {
     #     echo "failed to install throttled"
@@ -51,26 +67,6 @@ if [ "$1" == "laptop" ]; then
     echo "Copying laptop system configuration"
     sudo rsync -av "$SYSTEM_CONFIG"/laptop / || {
         echo "failed copying laptop configuration"
-        exit 1
-    }
-
-    echo "Building and copying battery module for Waybar"
-    cd "$GIT_SUBMODULES"/waybar-modules/battery || {
-        echo "failed changing directory to ${GIT_SUBMODULES}/waybar-modules/battery"
-        exit 1
-    }
-    make || {
-        echo "failed to make battery modules"
-        exit 1
-    }
-
-    mv -v "$GIT_SUBMODULES"/waybar-modules/battery/wbm_battery0 "$BASE_PATH"/sway/.config/waybar/modules/battery || {
-        echo "failed moving battery module to ${GIT_SUBMODULES}/waybar-modules/battery"
-        exit 1
-    }
-
-    mv -v "$GIT_SUBMODULES"/waybar-modules/battery/wbm_battery1 "$BASE_PATH"/sway/.config/waybar/modules/battery || {
-        echo "failed moving battery module to ${GIT_SUBMODULES}/waybar-modules/battery"
         exit 1
     }
 elif [ "$1" == "workstation" ]; then
@@ -113,16 +109,6 @@ else
     echo "$0: first argument must be <laptop|workstation>"
     exit 1
 fi
-
-git submodule update -f --init --recursive || {
-    echo "failed to update git submodules"
-    exit 1
-}
-
-git submodule foreach --recursive git fetch || {
-    echo "failed to fetch git submodule updates"
-    exit 1
-}
 
 cd "$GIT_SUBMODULES"/punk_theme || {
     echo "failed to cd to ${GIT_SUBMODULES}/punk_theme"
@@ -191,7 +177,7 @@ rsync -av "$GIT_SUBMODULES"/punk_theme/Ultimate-Punk-Suru++ "$BASE_PATH"/sway/.i
     exit 1
 }
 
-tar xvzf "$GIT_SUBMODULES"/Cyberpunk-Neon/gtk/materia-cyberpunk-neon.tar.gz -C "$BASE_PATH"/sway/.themes || {
+unzip -o "$GIT_SUBMODULES"/Cyberpunk-Neon/gtk/materia-cyberpunk-neon.zip -d "$BASE_PATH"/sway/.themes || {
     echo "failed copying Cyberpunk-Neon theme to sway"
     exit 1
 }
@@ -210,10 +196,10 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload zsh 
 }
 
 echo "Checking for old dependencies to remove"
-yay -R --noconfirm swaylock-blur pipewire-pulseaudio pipewire-pulseaudio-git pulseaudio-equalizer pulseaudio-lirc pulseaudio-zeroconf pulseaudio pulseaudio-bluetooth redshift-wayland-git
+yay -R --noconfirm swaylock-blur pipewire-media-session pipewire-pulseaudio pipewire-pulseaudio-git pulseaudio-equalizer pulseaudio-lirc pulseaudio-zeroconf pulseaudio pulseaudio-bluetooth redshift-wayland-git
 
 echo "Checking for Sway dependencies to install"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sway xsettingsd kanshi helvum pipewire-pulse pipewire-alsa wireplumber pulseaudio-alsa alsa-tools xdg-desktop-portal wlsunset libpipewire02 xdg-desktop-portal-wlr pavucontrol qt5-base qt5-wayland wayland-protocols pipewire wdisplays gdk-pixbuf2 ranger pulseaudio-ctl shotwell rbw rofi-rbw light waybar libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome nerd-fonts-hack ttf-hack python python-requests networkmanager-dmenu azote slurp grim swappy wl-clipboard wf-recorder grimshot swaylock-effects mako gammastep gtk-engines alacritty udiskie wayvnc ansiweather qgnomeplatform qgnomeplatform-qt6 || {
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sway libnotify xsettingsd kanshi helvum pipewire-pulse pipewire-alsa wireplumber pulseaudio-alsa alsa-tools xdg-desktop-portal wlsunset libpipewire02 xdg-desktop-portal-wlr pavucontrol qt5-base qt5-wayland wayland-protocols pipewire wdisplays gdk-pixbuf2 ranger pulseaudio-ctl shotwell rbw rofi-rbw light waybar libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome nerd-fonts-hack ttf-hack python python-requests networkmanager-dmenu azote slurp grim swappy wl-clipboard wf-recorder grimshot swaylock-effects-git mako gammastep gtk-engines alacritty udiskie wayvnc ansiweather qgnomeplatform qgnomeplatform-qt6 || {
     echo "failed to install Sway dependencies"
     exit 1
 }
@@ -252,7 +238,7 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload obs-
 }
 
 echo "Removing vim"
-yay -R --noconfirm vi
+yay -R --noconfirm vim
 
 echo "Installing  neovim"
 yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload neovim python-pynvim neovim-symlinks || {
@@ -272,7 +258,7 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload vsco
     exit 1
 }
 
-echo "Checking or Thunderbird dependencies"
+echo "Installing Thunderbird dependencies"
 yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload thunderbird birdtray || {
     echo "failed to install Thunderbird dependencies"
     exit 1
@@ -284,20 +270,23 @@ sudo systemctl enable pcscd.socket && sudo systemctl start pcscd.socket || {
     exit 1
 }
 
-echo "Checking or GPG / YubiKey dependencies"
+echo "Installing GPG / YubiKey dependencies"
 yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload gnupg pcsclite ccid hopenpgp-tools yubikey-personalization yubikey-manager || {
     echo "failed to install GPG / YubiKey dependencies"
     exit 1
 }
 
-echo "Disabling GNOME Keyring SSH agent"
-(
-    cat /etc/xdg/autostart/gnome-keyring-ssh.desktop
-    echo Hidden=true
-) >"$HOME"/.config/autostart/gnome-keyring-ssh.desktop || {
-    echo "Failed to disable GNOME Keyring SSH agent"
-    exit 1
-}
+gnome_ssh=/etc/xdg/autostart/gnome-keyring-ssh.desktop
+if [ -f "${gnome_ssh}" ]; then
+    echo "Disabling GNOME Keyring SSH agent"
+    (
+        cat "${gnome_ssh}"
+        echo Hidden=true
+    ) >"$HOME"/.config/autostart/gnome-keyring-ssh.desktop || {
+        echo "Failed to disable GNOME Keyring SSH agent"
+        exit 1
+    }
+fi
 
 cd "$BASE_PATH" || {
     echo "failed to cd to ${BASE_PATH}"
@@ -336,13 +325,3 @@ stow -v vim || {
     echo "Failed to stow Vim config"
     exit 1
 }
-
-prompt_exit "Install JACK audio configuration"
-echo "Checking for Cadence/Jack dependencies to install"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload jack2 pipewire-jack pulseaudio-jack cadence libffado || {
-    echo "failed to install audio dependencies"
-    exit 1
-}
-
-mkdir "$HOME"/.pulse # Make this if it doesn"t exist, so PulseAudio doesn"t complain about there being too many levels of symbolic links from stow
-stow -v jack
