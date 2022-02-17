@@ -27,8 +27,6 @@
         "pulseaudio",
         "battery",
         "battery#bat1"
-        //"custom/battery0",
-        //"custom/battery1"
     ],
     "sway/workspaces": {
         "disable-scroll": true,
@@ -188,12 +186,12 @@
         "password": "GimmeMusicPls"
     },
     "custom/weather": {
-		"format": "{}",
-		"interval": 18000,
-		"exec": "ansiweather -l amsterdam,NL -u metric -s true -f 1 -a false | cut -d' ' -f2,7,8,9",
-		"exec-if": "ping openweathermap.org -c1",
-		"tooltip": "false"
-	},
+        "format": "{}",
+        "interval": 18000,
+        "exec": "ansiweather -l amsterdam,NL -u metric -s true -f 1 -a false | cut -d' ' -f2,7,8,9",
+        "exec-if": "ping openweathermap.org -c1",
+        "tooltip": "false"
+    },
     "custom/crypto": {
         "format": "{}",
         "interval": 600,
@@ -213,7 +211,15 @@
         "interval": 5,
         "tooltip": false,
         "format": "{percentage}% {}{icon}",
-        "format-icons": ["", "", "", "", "", "", ""],
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+        ],
         "return-type": "json",
         "exec": "$HOME/.config/waybar/modules/battery/battery_0"
     },
@@ -221,7 +227,15 @@
         "interval": 5,
         "tooltip": false,
         "format": "{percentage}% {}{icon}",
-        "format-icons": ["", "", "", "", "", "", ""],
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+        ],
         "return-type": "json",
         "exec": "$HOME/.config/waybar/modules/battery/battery_1"
     }
