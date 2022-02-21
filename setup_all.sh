@@ -70,6 +70,12 @@ if [ "$1" == "laptop" ]; then
         exit 1
     }
 elif [ "$1" == "workstation" ]; then
+    echo "Installing Radeon/Mesa/Vulkan drivers"
+    yay -S --noconfirm --needed --noredownload mesa lib32-mesa xf86-video-amdgpu vulkan-radeon lib32-vulkan-radeon libva-mesa-driver lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau || {
+        echo "failed to install Radeon/Mesa/Vulkan drivers"
+        exit 1
+    }
+
     sudo rsync -av "$SYSTEM_CONFIG"/workstation / || {
         echo "failed copying workstation configuration"
         exit 1
