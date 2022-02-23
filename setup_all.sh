@@ -40,8 +40,14 @@ git submodule foreach --recursive git fetch || {
 }
 
 if [ "$1" == "laptop" ]; then
+    echo "Checking if mesa is installed"
+    yay -S --noconfirm --needed --noredownload mesa lib32-mesa xf86-video-intel vulkan-intel || {
+        echo "failed to install TLP packages"
+        exit 1
+    }
+
     echo "Checking if TLP is installed"
-    yay -S --noconfirm --needed --noredownload tpacpi-bat acpi_call || {
+    yay -S --noconfirm --needed --noredownload tlp tpacpi-bat acpi_call || {
         echo "failed to install TLP packages"
         exit 1
     }
