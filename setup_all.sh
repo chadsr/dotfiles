@@ -277,7 +277,7 @@ sudo systemctl enable pcscd.socket && sudo systemctl start pcscd.socket || {
 }
 
 echo "Installing GPG / YubiKey dependencies"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload gnupg pcsclite ccid hopenpgp-tools yubikey-personalization yubikey-manager || {
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload gnupg pcsclite ccid hopenpgp-tools yubikey-agent yubikey-personalization yubikey-manager || {
     echo "failed to install GPG / YubiKey dependencies"
     exit 1
 }
