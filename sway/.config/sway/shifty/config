@@ -1,3 +1,5 @@
 # Workstation specific config, loaded on hostname "shifty"
 
+exec nmcli radio wifi off
+
 output DP-3 pos 0 0 res 3440x1440@143.975Hz

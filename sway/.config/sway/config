@@ -8,7 +8,6 @@
 # Read `man 5 sway` for a complete reference.
 
 # Autostarts
-    exec nmcli radio wifi off
     exec xsettingsd
     exec mako
     exec wlsunset -l 52.37 -L 4.89
