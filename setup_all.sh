@@ -40,14 +40,20 @@ git submodule foreach --recursive git fetch || {
 }
 
 if [ "$1" == "laptop" ]; then
-    echo "Checking if tpacpi-bat is installed"
-    yay -S --noconfirm --needed --noredownload tpacpi-bat || {
+    echo "Checking if TLP is installed"
+    yay -S --noconfirm --needed --noredownload tpacpi-bat tlp || {
         echo "failed to install TLP packages"
         exit 1
     }
 
+    echo "Enable TLP service"
+    sudo systemctl enable tlp || {
+        echo "failed to enable TLP service"
+        exit 1
+    }
+
     echo "Checking if python-validity is installed"
-    yay -S --noconfirm --needed --noredownload python-validity || {
+    yay -S --noconfirm --needed --noredownload python-validity-git || {
         echo "failed to install python-validity"
         exit 1
     }
