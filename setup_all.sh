@@ -41,7 +41,7 @@ git submodule foreach --recursive git fetch || {
 
 if [ "$1" == "laptop" ]; then
     echo "Checking if TLP is installed"
-    yay -S --noconfirm --needed --noredownload tpacpi-bat tlp || {
+    yay -S --noconfirm --needed --noredownload tpacpi-bat acpi_call || {
         echo "failed to install TLP packages"
         exit 1
     }
