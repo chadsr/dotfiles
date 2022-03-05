@@ -6,7 +6,6 @@ Type=oneshot
 Restart=on-failure
 RestartSec=1s
 ExecStart=liquidctl initialize all
-ExecStart=liquidctl set pump speed 90
 ExecStart=liquidctl set logo color blackout
 
 [Install]
