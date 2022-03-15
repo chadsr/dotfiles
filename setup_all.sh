@@ -205,6 +205,9 @@ rsync -av "$GIT_SUBMODULES"/sweet-theme "$BASE_PATH"/sway/.themes || {
     exit 1
 }
 
+echo "Checking for old dependencies to remove"
+yay -R --noconfirm swaylock-blur pipewire-media-session pipewire-pulseaudio pipewire-pulseaudio-git pulseaudio-equalizer pulseaudio-lirc pulseaudio-zeroconf pulseaudio pulseaudio-bluetooth redshift-wayland-git
+
 echo "Checking for ZSH dependencies to install"
 nohup sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" >/dev/null 2>&1 & # This will fail if already installed, so don"t bother checking
 
@@ -213,8 +216,17 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload zsh 
     exit 1
 }
 
-echo "Checking for old dependencies to remove"
-yay -R --noconfirm swaylock-blur pipewire-media-session pipewire-pulseaudio pipewire-pulseaudio-git pulseaudio-equalizer pulseaudio-lirc pulseaudio-zeroconf pulseaudio pulseaudio-bluetooth redshift-wayland-git
+echo "Checking for general utilities dependencies to install"
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload smartmontools || {
+    echo "failed to install utilities dependencies"
+    exit 1
+}
+
+echo "Enabling smartd service"
+sudo systemctl enable smartd.service && sudo systemctl start smartd.service || {
+    echo "failed to enable smartd service"
+    exit 1
+}
 
 echo "Checking for Sway dependencies to install"
 yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sway libnotify wlr-sunclock-git xsettingsd kanshi helvum pipewire-pulse pipewire-alsa wireplumber pulseaudio-alsa alsa-tools xdg-desktop-portal wlsunset libpipewire02 xdg-desktop-portal-wlr pavucontrol qt5-base qt5-wayland wayland-protocols pipewire wdisplays gdk-pixbuf2 ranger shotwell rbw rofi-rbw light waybar libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome nerd-fonts-hack ttf-hack python python-requests networkmanager-dmenu azote slurp grim swappy wl-clipboard wf-recorder grimshot swaylock-effects-git mako gammastep gtk-engines alacritty udiskie wayvnc ansiweather qgnomeplatform qgnomeplatform-qt6 || {
