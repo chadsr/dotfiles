@@ -217,7 +217,7 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload zsh 
 }
 
 echo "Checking for general utilities dependencies to install"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload smartmontools || {
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload smartmontools batsignal || {
     echo "failed to install utilities dependencies"
     exit 1
 }
@@ -225,6 +225,12 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload smar
 echo "Enabling smartd service"
 sudo systemctl enable smartd.service && sudo systemctl start smartd.service || {
     echo "failed to enable smartd service"
+    exit 1
+}
+
+echo "Enabling batsignal service"
+systemctl --user enable batsignal.service && systemctl --user start batsignal.service || {
+    echo "failed to enable batsignal service"
     exit 1
 }
 
