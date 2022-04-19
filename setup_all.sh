@@ -294,6 +294,12 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sola
     exit 1
 }
 
+echo "Installing Ungoogled Chromium"
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload ungoogled-chromium chromium-extension-web-store n|| {
+    echo "failed to install Ungoogled Chromium"
+    exit 1
+}
+
 echo "Installing VSCodium"
 yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload vscodium-bin vscodium-bin-features vscodium-bin-marketplace || {
     echo "failed to install VSCodium Dependencies"
