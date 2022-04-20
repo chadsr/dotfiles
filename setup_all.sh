@@ -146,15 +146,6 @@ git checkout --force origin/master || {
     exit 1
 }
 
-cd "$GIT_SUBMODULES"/waybar-modules || {
-    echo "failed to cd to ${GIT_SUBMODULES}/waybar-modules"
-    exit 1
-}
-git checkout --force origin/master || {
-    echo "failed to checkout updates"
-    exit 1
-}
-
 cd "$BASE_PATH"/sway/.config/waybar/modules/crypto || {
     echo "failed to cd to ${BASE_PATH}/sway/.config/waybar/modules/crypto"
     exit 1
@@ -295,7 +286,7 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sola
 }
 
 echo "Installing Ungoogled Chromium"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload ungoogled-chromium chromium-extension-web-store n || {
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload ungoogled-chromium chromium-extension-web-store || {
     echo "failed to install Ungoogled Chromium"
     exit 1
 }
