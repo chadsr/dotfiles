@@ -29,12 +29,12 @@ stow -t ~/ stow || {
     exit 1
 }
 
-git submodule update -f --init --recursive || {
+git submodule update --progress -f --init --recursive || {
     echo "failed to update git submodules"
     exit 1
 }
 
-git submodule foreach --recursive git fetch || {
+git submodule foreach --recursive git fetch --progress || {
     echo "failed to fetch git submodule updates"
     exit 1
 }
@@ -295,7 +295,7 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sola
 }
 
 echo "Installing Ungoogled Chromium"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload ungoogled-chromium chromium-extension-web-store n|| {
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload ungoogled-chromium chromium-extension-web-store n || {
     echo "failed to install Ungoogled Chromium"
     exit 1
 }
