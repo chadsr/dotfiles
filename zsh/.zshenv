@@ -100,3 +100,4 @@ export PATH=$PATH:/opt/brother/scanner/brscan5
 # source $HOME/.drone.env
 
 export ANDROID_HOME=/opt/android-sdk
+export ANDROID_USER_HOME=$HOME/.android
