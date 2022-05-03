@@ -60,6 +60,15 @@ export MANPATH="$NPM_PACKAGES/share/man:${MAN_PATH}"
 NODE_PATH=$(npm root -g)
 export NODE_PATH=${NODE_PATH}
 
+################
+# Android/Java #
+################
+
+export _JAVA_AWT_WM_NONREPARENTING=1
+export ANDROID_HOME=/opt/android-sdk
+export ANDROID_USER_HOME=$HOME/.android
+export ANDROID_EMULATOR_HOME=$ANDROID_USER_HOME
+
 #################
 # Gnome Keyring #
 #################
@@ -95,9 +104,3 @@ export MPD_PASS=GimmeMusicPls
 #    Other     #
 ################
 export PATH=$PATH:/opt/brother/scanner/brscan5
-
-# export _JAVA_AWT_WM_NONREPARENTING=1
-# source $HOME/.drone.env
-
-export ANDROID_HOME=/opt/android-sdk
-export ANDROID_USER_HOME=$HOME/.android
