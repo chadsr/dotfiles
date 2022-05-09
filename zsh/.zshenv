@@ -65,6 +65,7 @@ export NODE_PATH=${NODE_PATH}
 ################
 
 export _JAVA_AWT_WM_NONREPARENTING=1
+export JAVA_HOME=/usr/lib/jvm/default
 export ANDROID_HOME=/opt/android-sdk
 export ANDROID_USER_HOME=$HOME/.android
 export ANDROID_EMULATOR_HOME=$ANDROID_USER_HOME
