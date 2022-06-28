@@ -75,15 +75,6 @@ export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/platform-toolsexport ANDROID_USER_HOME=$HOME/.android
 
 #################
-# Gnome Keyring #
-#################
-
-# Start the Gnome Keyring Daemon for headless zsh sessions
-if [ -n "$DESKTOP_SESSION" ]; then
-    eval "$(gnome-keyring-daemon --start --components=secrets,pkcs11)"
-fi
-
-#################
 #  GPG for SSH  #
 #################
 TTY=$(tty)
