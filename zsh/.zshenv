@@ -21,10 +21,6 @@ export CONDA_AUTO_ACTIVATE_BASE=false
 export PATH=$PATH:/opt/android-sdk/platform-tools
 export PATH=$PATH:/opt/android-sdk/emulator
 
-# OMZ
-export UPDATE_ZSH_DAYS=14
-export DISABLE_UPDATE_PROMPT=true
-
 ################################
 # Golang Environment Variables #
 ################################

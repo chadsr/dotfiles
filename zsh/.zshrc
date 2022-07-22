@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 export TERM="xterm-256color"
 
 # If you come from bash you might have to change your $PATH.
@@ -21,7 +28,7 @@ export ZSH_THEME="powerlevel10k/powerlevel10k"
 # DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
-export UPDATE_ZSH_DAYS=1
+export UPDATE_ZSH_DAYS=7
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -52,57 +59,9 @@ HIST_STAMPS="dd.mm.yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git catimg command-not-found common-aliases node npm pip python sudo supervisor golang archlinux colorize cp docker-compose git-flow github systemd vscode kubectl)
+plugins=(gitfast node npm pip python sudo golang colorize cp systemd)
 
 # User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# export POWERLEVEL9K_MODE="awesome-fontconfig"
-export POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-export POWERLEVEL9K_BACKGROUND_JOBS_VERBOSE=true
-export POWERLEVEL9K_BATTERY_VERBOSE=true
-export POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="↱"
-export POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="↳ "
-
-export POWERLEVEL9K_MODE="nerdfont-complete"
-export POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator context dir rbenv vcs nodeenv virtualenv anaconda pyenv)
-export POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs history battery time)
-export POWERLEVEL9K_CONTEXT_TEMPLATE=$'\ue795'
-export POWERLEVEL9K_CONTEXT_DEFAULT_FOREGROUND='201'
-export POWERLEVEL9K_CONTEXT_DEFAULT_BACKGROUND='017'
-export POWERLEVEL9K_DIR_HOME_FOREGROUND='044'
-export POWERLEVEL9K_DIR_HOME_BACKGROUND='025'
-export POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND='044'
-export POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND='025'
-export POWERLEVEL9K_DIR_ETC_FOREGROUND='044'
-export POWERLEVEL9K_DIR_ETC_BACKGROUND='025'
-export POWERLEVEL9K_DIR_DEFAULT_FOREGROUND='044'
-export POWERLEVEL9K_DIR_DEFAULT_BACKGROUND='025'
-export POWERLEVEL9K_STATUS_OK_BACKGROUND='017'
-export POWERLEVEL9K_HISTORY_BACKGROUND='013'
-export POWERLEVEL9K_HISTORY_FOREGROUND='044'
-export POWERLEVEL9K_TIME_BACKGROUND='201'
-export POWERLEVEL9K_TIME_FOREGROUND='255'
-export POWERLEVEL9K_TIME_FORMAT='%D{%H:%M}'
 
 eval "$(thefuck --alias)"
 # You can use whatever you want as an alias, like for Mondays:
@@ -133,7 +92,7 @@ alias code='codium'
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
@@ -146,3 +105,5 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
