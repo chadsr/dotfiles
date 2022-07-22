@@ -153,5 +153,5 @@ X-GNOME-Autostart-Notify=true
 X-GNOME-Bugzilla-Bugzilla=GNOME
 X-GNOME-Bugzilla-Product=gnome-keyring
 X-GNOME-Bugzilla-Component=general
-X-GNOME-Bugzilla-Version=40.0
+X-GNOME-Bugzilla-Version=42.1
 Hidden=true

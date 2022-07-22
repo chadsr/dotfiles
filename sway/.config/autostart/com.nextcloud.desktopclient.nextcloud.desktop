@@ -6,6 +6,6 @@ Terminal=false
 Icon=Nextcloud
 Categories=Network
 Type=Application
-StartupNotify=false
+StartupNotify=true
 X-GNOME-Autostart-enabled=true
 X-GNOME-Autostart-Delay=10
