@@ -208,7 +208,7 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload zsh 
 }
 
 echo "Checking for general utilities dependencies to install"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload smartmontools batsignal || {
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload smartmontools batsignal blueman bluez bluez-utils || {
     echo "failed to install utilities dependencies"
     exit 1
 }
