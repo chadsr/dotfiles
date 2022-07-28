@@ -1,22 +1,24 @@
-
 [submodule ".git_submodules/punk_theme"]
-	path = .git_submodules/punk_theme
-	url = git@github.com:rtlewis88/rtl88-Themes.git
+path = .git_submodules/punk_theme
+url = git@github.com:rtlewis88/rtl88-Themes.git
 [submodule ".git_submodules/waybar-modules"]
-	path = .git_submodules/waybar-modules
-	url = git@github.com:sl424/waybar.git
+path = .git_submodules/waybar-modules
+url = git@github.com:sl424/waybar.git
 [submodule "zsh/.oh-my-zsh/themes/powerlevel10k"]
-	path = zsh/.oh-my-zsh/themes/powerlevel10k
-	url = git@github.com:romkatv/powerlevel10k.git
+path = zsh/.oh-my-zsh/themes/powerlevel10k
+url = git@github.com:romkatv/powerlevel10k.git
 [submodule "sway/.config/waybar/modules/crypto"]
-	path = sway/.config/waybar/modules/crypto
-	url = https://github.com/Chadsr/waybar-crypto
+path = sway/.config/waybar/modules/crypto
+url = https://github.com/Chadsr/waybar-crypto
 [submodule ".git_submodules/Cyberpunk-Neon"]
-	path = .git_submodules/Cyberpunk-Neon
-	url = git@github.com:Roboron3042/Cyberpunk-Neon.git
+path = .git_submodules/Cyberpunk-Neon
+url = git@github.com:Roboron3042/Cyberpunk-Neon.git
 [submodule ".git_submodules/liquidctl"]
-	path = .git_submodules/liquidctl
-	url = git@github.com:liquidctl/liquidctl.git
+path = .git_submodules/liquidctl
+url = git@github.com:liquidctl/liquidctl.git
 [submodule ".git_submodules/sweet-theme"]
-	path = .git_submodules/sweet-theme
-	url = git@github.com:EliverLara/Sweet.git
+path = .git_submodules/sweet-theme
+url = git@github.com:EliverLara/Sweet.git
+[submodule ".git_submodules/alacritty-theme"]
+path = .git_submodules/alacritty-theme
+url = git@github.com:eendroroy/alacritty-theme.git

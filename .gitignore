@@ -13,6 +13,7 @@ sway/.config/gtk-3.0/servers
 sway/.config/gtk-4.0/bookmarks
 sway/.config/gtk-4.0/servers
 sway/.config/waybar/modules/crypto/crypto.ini
+sway/.config/alacritty/colors
 nerd-fonts-complete
 gpg/.gnupg/gpg-agent.conf
 gpg/.local
