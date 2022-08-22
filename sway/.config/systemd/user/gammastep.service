@@ -1,0 +1,11 @@
+[Unit]
+Description=Gammastep Color Temperature / Brightness Control
+
+[Service]
+Type=simple
+Restart=on-failure
+RestartSec=1s
+ExecStart=/usr/bin/gammastep-indicator
+
+[Install]
+WantedBy=default.target
