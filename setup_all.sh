@@ -70,17 +70,12 @@ if [ "$1" == "laptop" ]; then
         exit 1
     }
 
-    # echo "Checking if throttled is installed"
-    # yay -S --noconfirm --needed --noredownload throttled || {
-    #     echo "failed to install throttled"
-    #     exit 1
-    # }
-
     echo "Copying laptop system configuration"
     sudo rsync -av "$SYSTEM_CONFIG"/laptop / || {
         echo "failed copying laptop configuration"
         exit 1
     }
+
 elif [ "$1" == "workstation" ]; then
     echo "Installing Radeon/Mesa/Vulkan drivers"
     yay -S --noconfirm --needed --noredownload mesa lib32-mesa xf86-video-amdgpu vulkan-radeon lib32-vulkan-radeon libva-mesa-driver lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau || {
@@ -90,11 +85,6 @@ elif [ "$1" == "workstation" ]; then
 
     sudo rsync -av "$SYSTEM_CONFIG"/workstation / || {
         echo "failed copying workstation configuration"
-        exit 1
-    }
-
-    sudo systemctl enable cpupower || {
-        echo "failed to enable cpupower systemd unit"
         exit 1
     }
 
@@ -111,6 +101,11 @@ elif [ "$1" == "workstation" ]; then
 
     stow -v corectrl || {
         echo "failed to stow corectrl"
+        exit 1
+    }
+
+    systemctl --user daemon-reload || {
+        echo "failed to daemon-reload"
         exit 1
     }
 
@@ -245,7 +240,7 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sway
 }
 
 echo "Installing corectrl"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload corectrl-git || {
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload corectrl || {
     echo "failed to install corectrl dependencies"
     exit 1
 }
@@ -295,12 +290,6 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload gitf
 echo "Installing Solaar"
 yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload solaar || {
     echo "failed to install solaar Dependencies"
-    exit 1
-}
-
-echo "Installing Ungoogled Chromium"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload ungoogled-chromium chromium-extension-web-store || {
-    echo "failed to install Ungoogled Chromium"
     exit 1
 }
 
@@ -375,5 +364,17 @@ stow -v git || {
 
 stow -v vim || {
     echo "Failed to stow Vim config"
+    exit 1
+}
+
+echo "Reloading Systemd manager congfiguration"
+systemctl --user daemon-reload && sudo systemctl daemon-reload || {
+    echo "failed to daemon-reload"
+    exit 1
+}
+
+echo "Enabling Gammastep service"
+systemctl --user enable gammastep.service && systemctl --user start gammastep.service || {
+    echo "failed to enable gammastep.service"
     exit 1
 }
