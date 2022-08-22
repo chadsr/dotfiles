@@ -10,7 +10,6 @@
 # Autostarts
     exec xsettingsd
     exec mako
-    exec wlsunset -l 52.37 -L 4.89
     exec dex -a -s :~/.config/autostart/ # Launch desktop entries
     exec wlr-sunclock \
         --margins "5,5,5,5" \
