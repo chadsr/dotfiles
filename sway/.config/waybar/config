@@ -6,6 +6,7 @@
     "modules-left": [
         "clock",
         "sway/workspaces",
+        "wlr/workspaces",
         "tray",
         "custom/yay",
         "idle_inhibitor",
@@ -34,6 +35,20 @@
         "format-icons": {
             "urgent": "",
             "focused": "",
+            "default": ""
+        }
+    },
+    "wlr/workspaces": {
+        "format": "{icon}",
+        "on-click": "activate",
+        "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "",
+            "urgent": "",
+            "active": "",
             "default": ""
         }
     },
