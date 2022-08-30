@@ -239,6 +239,12 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sway
     exit 1
 }
 
+echo "Installing Hyprland"
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload hyprland || {
+    echo "failed to install hyprland dependencies"
+    exit 1
+}
+
 echo "Installing corectrl"
 yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload corectrl || {
     echo "failed to install corectrl dependencies"
@@ -354,6 +360,11 @@ stow -v gpg || {
 
 stow -v sway || {
     echo "Failed to stow Sway config"
+    exit 1
+}
+
+stow -v hyprland || {
+    echo "Failed to stow Hyprland config"
     exit 1
 }
 
