@@ -39,14 +39,10 @@
         }
     },
     "wlr/workspaces": {
-        "format": "{icon}",
+        "format": "{name} {icon}",
         "on-click": "activate",
+        "all-outputs": true,
         "format-icons": {
-            "1": "",
-            "2": "",
-            "3": "",
-            "4": "",
-            "5": "",
             "urgent": "",
             "active": "",
             "default": ""
@@ -82,7 +78,7 @@
         "tooltip": true
     },
     "temperature": {
-        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         "critical-threshold": 80,
         "format-critical": "{temperatureC}°C ",
         "format": "{temperatureC}°C "
