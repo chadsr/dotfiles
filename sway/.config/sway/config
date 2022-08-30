@@ -230,9 +230,9 @@ bar {
 #
 # Screenshots
 #
-bindsym Ctrl+Print exec grim -g "$(slurp)" - | swappy -f -
-bindsym Print exec source ~/.zshenv && grimshot --notify save screen
-bindsym Alt+Print exec source ~/.zshenv && grimshot --notify save active
+bindsym Ctrl+Print exec ~/.local/bin/screenshot-crop
+bindsym Print exec ~/.local/bin/screenshot
+bindsym Alt+Print exec ~/.local/bin/screenshot-active
 
 #
 # Pulse Audio
@@ -253,34 +253,13 @@ bindsym XF86AudioPrev exec playerctl previous
 #
 # Swaylock
 #
-bindsym $mod+Escape exec swaylock \
-	--screenshots \
-	--clock \
-	--indicator \
-    --effect-pixelate 20 \
-	--effect-vignette 0.5:0.5 \
-	--ring-color bb00cc \
-    --ring-clear-color bb00cc \
-	--key-hl-color 0abdc6 \
-	--line-color 00000000 \
-	--inside-color 00000088 \
-    --inside-clear-color 00000088 \
-	--separator-color 00000000 \
-    --text-color 0abdc6 \
-    --text-clear-color 0abdc6 \
-    --text-caps-lock-color 0abdc6 \
-	--grace 2 \
-	--fade-in 0.2
+bindsym $mod+Escape exec swaylock
 
 ### Idle configuration
 # Lock after 300 seconds (5 minutes), turn off screen after 3600 seconds (60 minutes)
 # Turn screen back on when resumed
 # lock screen before sleep.
-exec swayidle \
-    timeout 300 'swaylock' \
-    timeout 3600 'swaymsg "output * dpms off"' \
-    resume 'swaymsg "output * dpms on"' \
-    before-sleep 'swaylock'
+exec ~/.local/bin/swayidle
 
 # External Config Includes
 include /etc/sway/config.d/*
