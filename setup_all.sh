@@ -272,9 +272,20 @@ if ((action.id == "org.corectrl.helper.init" ||
     }
 fi
 
+echo "Installing gamemode"
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload gamemode || {
+    echo "failed to install gamemode"
+    exit 1
+}
+
+systemctl --user enable gamemoded.service || {
+    echo "failed to enable gamemoded"
+    exit 1
+}
+
 echo "Installing obs"
 yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload obs-studio wlrobs-hg || {
-    echo "failed to install git flow"
+    echo "failed to install obs"
     exit 1
 }
 
