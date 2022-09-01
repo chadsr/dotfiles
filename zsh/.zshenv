@@ -100,3 +100,4 @@ export MPD_PASS=GimmeMusicPls
 #    Other     #
 ################
 export PATH=$PATH:/opt/brother/scanner/brscan5
+export AMDGPU_TARGETS="gfx1030"
