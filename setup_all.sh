@@ -71,7 +71,7 @@ if [ "$1" == "laptop" ]; then
     }
 
     echo "Copying laptop system configuration"
-    sudo rsync -av "$SYSTEM_CONFIG"/laptop / || {
+    sudo rsync -ruav "$SYSTEM_CONFIG"/laptop/* / || {
         echo "failed copying laptop configuration"
         exit 1
     }
@@ -83,7 +83,7 @@ elif [ "$1" == "workstation" ]; then
         exit 1
     }
 
-    sudo rsync -av "$SYSTEM_CONFIG"/workstation / || {
+    sudo rsync -ruav "$SYSTEM_CONFIG"/workstation/* / || {
         echo "failed copying workstation configuration"
         exit 1
     }
@@ -178,18 +178,18 @@ cd "$BASE_PATH" || {
 }
 
 echo "Copying common system configuration"
-sudo rsync -av "$SYSTEM_CONFIG"/common/* /
+sudo rsync -ruav "$SYSTEM_CONFIG"/common/* /
 
 echo "Adding user to audio group"
 sudo groupadd audio
 sudo usermod -a -G audio "$USER"
 
 echo "Copying themes from git repo to dotfiles locations"
-rsync -av "$GIT_SUBMODULES"/punk_theme/Ultimate-PUNK-Cyan-Cursor "$BASE_PATH"/sway/.icons || {
+rsync -ruav "$GIT_SUBMODULES"/punk_theme/Ultimate-PUNK-Cyan-Cursor "$BASE_PATH"/sway/.icons || {
     echo "failed copying Ultimate-PUNK-Cyan-Cursor to sway"
     exit 1
 }
-rsync -av "$GIT_SUBMODULES"/punk_theme/Ultimate-Punk-Suru++ "$BASE_PATH"/sway/.icons || {
+rsync -ruav "$GIT_SUBMODULES"/punk_theme/Ultimate-Punk-Suru++ "$BASE_PATH"/sway/.icons || {
     echo "failed copying Ultimate-Punk-Suru++ to sway"
     exit 1
 }
@@ -199,7 +199,7 @@ unzip -o "$GIT_SUBMODULES"/Cyberpunk-Neon/gtk/materia-cyberpunk-neon.zip -d "$BA
     exit 1
 }
 
-rsync -av "$GIT_SUBMODULES"/sweet-theme "$BASE_PATH"/sway/.themes || {
+rsync -ruav "$GIT_SUBMODULES"/sweet-theme "$BASE_PATH"/sway/.themes || {
     echo "failed copying sweet-theme to sway"
     exit 1
 }
@@ -234,7 +234,7 @@ systemctl --user enable batsignal.service && systemctl --user start batsignal.se
 }
 
 echo "Checking for Sway dependencies to install"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sway libnotify wlr-sunclock-git xsettingsd kanshi helvum pipewire-pulse pipewire-alsa wireplumber pulseaudio-alsa alsa-tools xdg-desktop-portal wlsunset libpipewire02 xdg-desktop-portal-wlr pavucontrol qt5-base qt5-wayland wayland-protocols pipewire wdisplays gdk-pixbuf2 ranger shotwell rbw rofi-rbw light waybar libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome nerd-fonts-hack ttf-hack python python-requests networkmanager-dmenu-git azote slurp grim swappy wl-clipboard wf-recorder grimshot swaylock-effects-git mako gammastep gtk-engines alacritty alacritty-colorscheme udiskie wayvnc ansiweather qgnomeplatform-qt5 qgnomeplatform-qt6 || {
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sway libnotify wlr-sunclock-git xsettingsd kanshi helvum pipewire-pulse pipewire-alsa wireplumber pulseaudio-alsa alsa-tools xdg-desktop-portal wlsunset libpipewire02 xdg-desktop-portal-wlr pavucontrol qt5-base qt5-wayland wayland-protocols pipewire wdisplays gdk-pixbuf2 ranger shotwell rbw rofi-rbw light waybar-hyprland-git libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome nerd-fonts-hack ttf-hack python python-requests networkmanager-dmenu-git azote slurp grim swappy wl-clipboard wf-recorder grimshot swaylock-effects-git mako gammastep gtk-engines alacritty alacritty-colorscheme udiskie wayvnc ansiweather qgnomeplatform-qt5 qgnomeplatform-qt6 || {
     echo "failed to install Sway dependencies"
     exit 1
 }
@@ -374,7 +374,7 @@ stow -v sway || {
     exit 1
 }
 
-stow -v hyprland || {
+stow -v hypr || {
     echo "Failed to stow Hyprland config"
     exit 1
 }
