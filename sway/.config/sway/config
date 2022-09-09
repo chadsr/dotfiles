@@ -29,6 +29,7 @@ exec_always {
     gsettings set $gnome-schema font-name 'Hack 10'
     gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 600
     gsettings set org.gnome.mutter.wayland xwayland-grab-access-rules "['Remmina', 'VirtualBox Machine']"
+    gsettings set org.gnome.desktop.interface gtk-enable-primary-paste false
 }
 
 ### Theming
