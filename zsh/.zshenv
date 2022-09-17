@@ -32,6 +32,17 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 export GO111MODULE=on
 
 ############
+#   Vim    #
+############
+
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+    export EDITOR='vim'
+else
+    export EDITOR='nvim'
+fi
+
+############
 # Electron #
 ############
 
@@ -60,15 +71,19 @@ export MANPATH="$NPM_PACKAGES/share/man:${MAN_PATH}"
 NODE_PATH=$(npm root -g)
 export NODE_PATH=${NODE_PATH}
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+
 ################
 # Android/Java #
 ################
 
 export _JAVA_AWT_WM_NONREPARENTING=1
 export JAVA_HOME=/usr/lib/jvm/default
-export ANDROID_HOME=$HOME/Android/Sdk
+export ANDROID_HOME=$HOME/Android
 export ANDROID_USER_HOME=$HOME/.android
-export ANDROID_SDK_ROOT=$HOME/Android/Sdk
+export ANDROID_SDK_ROOT=/opt/android-sdk
 export ANDROID_EMULATOR_HOME=$ANDROID_USER_HOME
 
 export PATH=$PATH:$ANDROID_HOME/tools
@@ -77,24 +92,15 @@ export PATH=$PATH:$ANDROID_HOME/platform-toolsexport ANDROID_USER_HOME=$HOME/.an
 #################
 #  GPG for SSH  #
 #################
-TTY=$(tty)
-export GPG_TTY=${TTY}
+GPG_TTY=$(tty)
+export GPG_TTY
+
+# If it's a zsh terminal session, use curses for pinentry over the default GUI
+export PINENTRY_USER_DATA="curses"
 
 GPGCONF=$(gpgconf --list-dirs agent-ssh-socket)
 export SSH_AUTH_SOCK=${GPGCONF}
 gpgconf --launch gpg-agent
-
-#################
-#  MPD Hackery  #
-#################
-#if nmcli --mode tabular --terse --fields TYPE,NAME connection show --active | grep -q vpn:tun.ross.ch; then
-#    export MPD_HOST=10.19.49.5
-#else
-#    export MPD_HOST=nas.lan
-#fi
-
-# If you have access to my LAN, congratulations, you're probably trusted enough to play with my local MPD server so here's the password
-export MPD_PASS=GimmeMusicPls
 
 ################
 #    Other     #

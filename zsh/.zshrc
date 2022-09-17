@@ -71,25 +71,6 @@ source $ZSH/oh-my-zsh.sh
 
 source $HOME/.aliases
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
-
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='vim'
-else
-    export EDITOR='nvim'
-fi
-
-# If it's a zsh terminal session, use curses for pinentry over the default GUI
-GPG_TTY=$(tty)
-export GPG_TTY
-export PINENTRY_USER_DATA="curses"
-
-# Use vscodium when code is run
-alias code='codium'
-
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"

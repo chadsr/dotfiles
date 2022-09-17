@@ -1,6 +1,9 @@
-#alias VirtualBox="env QT_QPA_PLATFORM=xcb VirtualBox"
-#alias virtualbox="env QT_QPA_PLATFORM=xcb virtualbox"
+alias VirtualBox="env QT_QPA_PLATFORM=xcb VirtualBox"
+alias virtualbox="env QT_QPA_PLATFORM=xcb virtualbox"
 alias vim="nvim"
 alias vi="nvim"
+
+# Use vscodium when code is run
+alias code='codium'
 
 alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
