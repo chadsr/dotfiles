@@ -92,15 +92,12 @@ export PATH=$PATH:$ANDROID_HOME/platform-toolsexport ANDROID_USER_HOME=$HOME/.an
 #################
 #  GPG for SSH  #
 #################
-GPG_TTY=$(tty)
-export GPG_TTY
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent
 
 # If it's a zsh terminal session, use curses for pinentry over the default GUI
 export PINENTRY_USER_DATA="curses"
-
-GPGCONF=$(gpgconf --list-dirs agent-ssh-socket)
-export SSH_AUTH_SOCK=${GPGCONF}
-gpgconf --launch gpg-agent
 
 ################
 #    Other     #
