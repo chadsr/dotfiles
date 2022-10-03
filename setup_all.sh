@@ -245,6 +245,12 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload hypr
     exit 1
 }
 
+echo "Installing ULauncher"
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload ulauncher || {
+    echo "failed to install ulauncher dependencies"
+    exit 1
+}
+
 echo "Installing corectrl"
 yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload corectrl || {
     echo "failed to install corectrl dependencies"
@@ -379,6 +385,11 @@ stow -v hypr || {
     exit 1
 }
 
+stow -v ulauncher || {
+    echo "Failed to stow ULauncher config"
+    exit 1
+}
+
 stow -v git || {
     echo "Failed to stow Git config"
     exit 1
@@ -392,6 +403,12 @@ stow -v vim || {
 echo "Reloading Systemd manager congfiguration"
 systemctl --user daemon-reload && sudo systemctl daemon-reload || {
     echo "failed to daemon-reload"
+    exit 1
+}
+
+echo "Enabling ULauncher service"
+systemctl --user enable ulauncher.service && systemctl --user start ulauncher.service || {
+    echo "failed to enable ulauncher.service"
     exit 1
 }
 

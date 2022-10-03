@@ -1,0 +1,30 @@
+{
+    "com.github.melianmiko.ulauncher-nmcli": {
+        "id": "com.github.melianmiko.ulauncher-nmcli",
+        "url": "https://github.com/melianmiko/ulauncher-nmcli",
+        "updated_at": "2022-09-29T11:01:59.183114",
+        "last_commit": "fe967c947748616df602c9d022fec6d68a6b2cf2",
+        "last_commit_time": "2022-05-01T12:20:38"
+    },
+    "com.github.ulauncher.ulauncher-emoji": {
+        "id": "com.github.ulauncher.ulauncher-emoji",
+        "url": "https://github.com/Ulauncher/ulauncher-emoji",
+        "updated_at": "2022-09-29T12:33:14.839613",
+        "last_commit": "4c6af50d1c9a24d5aad2c597634ff0c634972a5c",
+        "last_commit_time": "2021-08-08T19:19:59"
+    },
+    "com.github.tchar.ulauncher-albert-calculate-anything": {
+        "id": "com.github.tchar.ulauncher-albert-calculate-anything",
+        "url": "https://github.com/tchar/ulauncher-albert-calculate-anything",
+        "updated_at": "2022-09-29T12:34:36.694744",
+        "last_commit": "ee0903174c8b87cd1f7c3b6c1acef10702547507",
+        "last_commit_time": "2021-08-12T06:39:56"
+    },
+    "com.github.rdnetto.ulauncher-sway": {
+        "id": "com.github.rdnetto.ulauncher-sway",
+        "url": "https://github.com/rdnetto/ulauncher-sway",
+        "updated_at": "2022-09-29T12:36:23.181290",
+        "last_commit": "9fc141f01959fb5086518699229af97d920ca865",
+        "last_commit_time": "2021-07-22T12:29:13"
+    }
+}

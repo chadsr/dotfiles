@@ -1,0 +1,22 @@
+{
+    "292639ec-688d-4385-9024-e607b5392c8f": {
+        "id": "292639ec-688d-4385-9024-e607b5392c8f",
+        "name": "Stack Overflow",
+        "keyword": "so",
+        "cmd": "https://stackoverflow.com/search?q=%s",
+        "icon": "/usr/share/ulauncher/media/stackoverflow-icon.svg",
+        "is_default_search": true,
+        "run_without_argument": false,
+        "added": 1664441901.21237
+    },
+    "bb1272be-92f4-416f-b56e-cda129e46cb1": {
+        "id": "bb1272be-92f4-416f-b56e-cda129e46cb1",
+        "name": "Wikipedia",
+        "keyword": "wiki",
+        "cmd": "https://wikiless.org/wiki/%s",
+        "icon": "/usr/share/ulauncher/media/wikipedia-icon.png",
+        "is_default_search": true,
+        "run_without_argument": false,
+        "added": 1664441901.2123828
+    }
+}

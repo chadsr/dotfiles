@@ -22,3 +22,6 @@ url = git@github.com:EliverLara/Sweet.git
 [submodule ".git_submodules/alacritty-theme"]
 path = .git_submodules/alacritty-theme
 url = git@github.com:eendroroy/alacritty-theme.git
+[submodule "ulauncher/.config/ulauncher/user-themes/TokyoNight"]
+	path = ulauncher/.config/ulauncher/user-themes/TokyoNight
+	url = https://github.com/chadsr/TokyoNight-Ulauncher-Theme
