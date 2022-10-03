@@ -246,7 +246,7 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload hypr
 }
 
 echo "Installing ULauncher"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload ulauncher || {
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload ulauncher python-pint || {
     echo "failed to install ulauncher dependencies"
     exit 1
 }
