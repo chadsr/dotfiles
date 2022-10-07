@@ -246,7 +246,7 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload hypr
 }
 
 echo "Installing ULauncher"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload ulauncher python-pint || {
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload ulauncher python-pint python-pytz || {
     echo "failed to install ulauncher dependencies"
     exit 1
 }
@@ -390,6 +390,11 @@ stow -v ulauncher || {
     exit 1
 }
 
+stow -v gammastep || {
+    echo "Failed to stow gammastep config"
+    exit 1
+}
+
 stow -v git || {
     echo "Failed to stow Git config"
     exit 1
@@ -400,7 +405,7 @@ stow -v vim || {
     exit 1
 }
 
-echo "Reloading Systemd manager congfiguration"
+echo "Reloading Systemd manager user congfiguration"
 systemctl --user daemon-reload && sudo systemctl daemon-reload || {
     echo "failed to daemon-reload"
     exit 1
@@ -413,7 +418,19 @@ systemctl --user enable ulauncher.service && systemctl --user start ulauncher.se
 }
 
 echo "Enabling Gammastep service"
-systemctl --user enable gammastep.service && systemctl --user start gammastep.service || {
-    echo "failed to enable gammastep.service"
+systemctl --user enable gammastep-wayland.service && systemctl --user start gammastep-wayland.service || {
+    echo "failed to enable gammastep-wayland.service"
+    exit 1
+}
+
+echo "Enabling swayidle service"
+systemctl --user enable swayidle.service && systemctl --user start swayidle.service || {
+    echo "failed to enable swayidle.service"
+    exit 1
+}
+
+echo "Enabling mako service"
+systemctl --user enable mako.service && systemctl --user start mako.service || {
+    echo "failed to enable mako.service"
     exit 1
 }
