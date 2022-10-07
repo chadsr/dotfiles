@@ -9,7 +9,6 @@
 
 # Autostarts
     exec xsettingsd
-    exec mako
     exec dex -a -s :~/.config/autostart/ # Launch desktop entries
     exec wlr-sunclock \
         --margins "5,5,5,5" \
@@ -256,12 +255,8 @@ bindsym XF86AudioPrev exec playerctl previous
 #
 bindsym $mod+Escape exec swaylock
 
-### Idle configuration
-# Lock after 300 seconds (5 minutes), turn off screen after 3600 seconds (60 minutes)
-# Turn screen back on when resumed
-# lock screen before sleep.
-exec ~/.local/bin/swayidle
-
 # External Config Includes
 include /etc/sway/config.d/*
 include ~/.config/sway/$(hostname)/*
+
+exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
