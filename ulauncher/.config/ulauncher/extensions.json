@@ -26,5 +26,12 @@
         "updated_at": "2022-09-29T12:36:23.181290",
         "last_commit": "9fc141f01959fb5086518699229af97d920ca865",
         "last_commit_time": "2021-07-22T12:29:13"
+    },
+    "com.github.ulauncher.ulauncher-hash": {
+        "id": "com.github.ulauncher.ulauncher-hash",
+        "url": "https://github.com/Ulauncher/ulauncher-hash",
+        "updated_at": "2022-10-06T19:18:57.650314",
+        "last_commit": "237dbb3610ff04df993c3223b12df42cb7df221f",
+        "last_commit_time": "2022-09-04T14:29:55"
     }
 }
