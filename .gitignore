@@ -20,3 +20,4 @@ gpg/.local
 !gpg/.local/bin/dynamic-pinentry
 vim/.config/nvim/pack
 .vscode/
+ulauncher/.config/ulauncher/ext_preferences/
