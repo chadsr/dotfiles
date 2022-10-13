@@ -30,8 +30,22 @@
     "com.github.ulauncher.ulauncher-hash": {
         "id": "com.github.ulauncher.ulauncher-hash",
         "url": "https://github.com/Ulauncher/ulauncher-hash",
-        "updated_at": "2022-10-06T19:18:57.650314",
+        "updated_at": "2022-11-15T22:47:44.433500",
         "last_commit": "237dbb3610ff04df993c3223b12df42cb7df221f",
         "last_commit_time": "2022-09-04T14:29:55"
+    },
+    "com.github.eckhoff42.ulauncher-bluetooth-quick-connect": {
+        "id": "com.github.eckhoff42.ulauncher-bluetooth-quick-connect",
+        "url": "https://github.com/Eckhoff42/Ulauncher-Bluetooth-quick-connect",
+        "updated_at": "2022-10-13T21:44:28.473801",
+        "last_commit": "2cb1d85cdfa870888e3eeda733b63467b0966ad1",
+        "last_commit_time": "2022-05-10T15:18:43"
+    },
+    "com.github.iboyperson.ulauncher-system": {
+        "id": "com.github.iboyperson.ulauncher-system",
+        "url": "https://github.com/iboyperson/ulauncher-system",
+        "updated_at": "2022-10-13T21:46:12.088936",
+        "last_commit": "667613bf7bb6b4affa4f2121b58589477cd89829",
+        "last_commit_time": "2021-11-08T18:16:55"
     }
 }
