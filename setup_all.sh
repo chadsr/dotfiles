@@ -234,7 +234,7 @@ systemctl --user enable batsignal.service && systemctl --user start batsignal.se
 }
 
 echo "Checking for Sway dependencies to install"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sway libnotify wlr-sunclock-git xsettingsd kanshi helvum pipewire-pulse pipewire-alsa wireplumber pulseaudio-alsa alsa-tools xdg-desktop-portal wlsunset xdg-desktop-portal-wlr pavucontrol qt5-base qt5-wayland wayland-protocols pipewire wdisplays gdk-pixbuf2 ranger shotwell rbw rofi-rbw light waybar libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome ttf-hack python python-requests networkmanager-dmenu-git azote slurp grim swappy wl-clipboard wf-recorder grimshot swaylock-effects-git mako gammastep gtk-engines alacritty alacritty-colorscheme udiskie wayvnc ansiweather gnome-keyring qgnomeplatform-qt5 qgnomeplatform-qt6 || {
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sway libnotify wlr-sunclock-git xsettingsd kanshi helvum pipewire-pulse pipewire-alsa wireplumber alsa-tools xdg-desktop-portal wlsunset xdg-desktop-portal-wlr pavucontrol qt5-base qt5-wayland wayland-protocols pipewire wdisplays gdk-pixbuf2 ranger shotwell rbw rofi-rbw light waybar libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome ttf-hack python python-requests networkmanager-dmenu-git azote slurp grim swappy wl-clipboard wf-recorder grimshot swaylock-effects-git mako gammastep gtk-engines alacritty alacritty-colorscheme udiskie wayvnc ansiweather gnome-keyring qgnomeplatform-qt5 qgnomeplatform-qt6 || {
     echo "failed to install Sway dependencies"
     exit 1
 }
@@ -317,8 +317,13 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sola
 }
 
 echo "Installing Rust toolchain"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload rustup sccache || {
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload rustup rust-analyzer sccache || {
     echo "failed to install Rust dependencies"
+    exit 1
+}
+
+rustup component add clippy rustfmt || {
+    echo "failed to install Rust components"
     exit 1
 }
 
