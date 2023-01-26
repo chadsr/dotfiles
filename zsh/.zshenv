@@ -31,6 +31,12 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 # Enable Go modules by default
 export GO111MODULE=on
 
+################################
+# Rust Environment Variables #
+################################
+CARGO_BIN=$HOME/.cargo/bin
+export PATH=$CARGO_BIN:$PATH
+
 ############
 #   Vim    #
 ############
