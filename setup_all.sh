@@ -316,6 +316,12 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sola
     exit 1
 }
 
+echo "Installing Rust toolchain"
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload rustup sccache || {
+    echo "failed to install Rust dependencies"
+    exit 1
+}
+
 echo "Installing VSCodium"
 yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload vscodium-bin vscodium-bin-features vscodium-bin-marketplace || {
     echo "failed to install VSCodium Dependencies"
@@ -402,6 +408,11 @@ stow -v git || {
 
 stow -v vim || {
     echo "Failed to stow Vim config"
+    exit 1
+}
+
+stow -v rust || {
+    echo "Failed to stow Rust config"
     exit 1
 }
 
