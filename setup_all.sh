@@ -327,6 +327,12 @@ rustup component add clippy rustfmt || {
     exit 1
 }
 
+echo "Installing node.js"
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload nodejs npm nvm || {
+    echo "failed to install node.js Dependencies"
+    exit 1
+}
+
 echo "Installing VSCodium"
 yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload vscodium-bin vscodium-bin-features vscodium-bin-marketplace || {
     echo "failed to install VSCodium Dependencies"
