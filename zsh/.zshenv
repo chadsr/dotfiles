@@ -66,13 +66,8 @@ export PATH=$PATH:$GEM_HOME/ruby/2.6.0/bin
 # Node.js Environment Variables #
 #################################
 
-NPM_PACKAGES="${HOME}/.npm-packages:${HOME}/.nvm/versions/node/v10.19.0/bin"
-export PATH="$NPM_PACKAGES/bin:$PATH"
-
-# Unset manpath so we can inherit from /etc/manpath via the `manpath` command
-unset MANPATH # delete if you already modified MANPATH elsewhere in your config
-MAN_PATH=$(manpath)
-export MANPATH="$NPM_PACKAGES/share/man:${MAN_PATH}"
+NPM_CONFIG_PREFIX=~/.npm-global
+export PATH=$NPM_CONFIG_PREFIX/bin:$PATH
 
 NODE_PATH=$(npm root -g)
 export NODE_PATH=${NODE_PATH}
