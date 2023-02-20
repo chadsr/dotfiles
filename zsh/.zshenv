@@ -24,7 +24,7 @@ export PATH=$PATH:/opt/android-sdk/emulator
 ################################
 # Golang Environment Variables #
 ################################
-export GOPATH=$HOME/.go
+export GOPATH=$HOME/go
 export GOROOT=/usr/lib/go
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
