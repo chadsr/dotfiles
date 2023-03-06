@@ -78,7 +78,7 @@ if [ "$1" == "laptop" ]; then
 
 elif [ "$1" == "workstation" ]; then
     echo "Installing Radeon/Mesa/Vulkan drivers"
-    yay -S --noconfirm --needed --noredownload mesa lib32-mesa xf86-video-amdgpu vulkan-radeon lib32-vulkan-radeon libva-mesa-driver lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau || {
+    yay -S --noconfirm --needed --noredownload mesa lib32-mesa xf86-video-amdgpu vulkan-radeon lib32-vulkan-radeon libva-mesa-driver lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau libva-utils || {
         echo "failed to install Radeon/Mesa/Vulkan drivers"
         exit 1
     }
@@ -365,7 +365,6 @@ if [ -f "${gnome_ssh}" ]; then
         echo Hidden=true
     ) >"$HOME"/.config/autostart/gnome-keyring-ssh.desktop || {
         echo "Failed to disable GNOME Keyring SSH agent"
-        exit 1
     }
 fi
 
