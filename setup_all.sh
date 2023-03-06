@@ -426,6 +426,11 @@ stow -v rust || {
     exit 1
 }
 
+stow -v vscodium || {
+    echo "Failed to stow VSCodium config"
+    exit 1
+}
+
 echo "Reloading Systemd manager user congfiguration"
 systemctl --user daemon-reload && sudo systemctl daemon-reload || {
     echo "failed to daemon-reload"
