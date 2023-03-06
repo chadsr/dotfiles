@@ -105,3 +105,4 @@ export PINENTRY_USER_DATA="curses"
 ################
 export PATH=$PATH:/opt/brother/scanner/brscan5
 export AMDGPU_TARGETS="gfx1030"
+export CARGO_NET_GIT_FETCH_WITH_CLI=true
