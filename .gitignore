@@ -22,3 +22,5 @@ gpg/.local
 vim/.config/nvim/pack
 .vscode/
 ulauncher/.config/ulauncher/ext_preferences/
+rust/.cargo/*
+!rust/.cargo/config
