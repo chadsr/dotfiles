@@ -56,7 +56,7 @@ window:
 
   startup_mode: Windowed
 
-  opacity: 0.8
+  opacity: 0.9
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -146,44 +146,51 @@ debug.persistent_logging: false
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
 
-# Cyberpunk-Neon colours
 colors:
-  # COLORSCHEME: cyber_punk_neon.yaml
-  # Default colors
+  # Default colours
   primary:
     background: '0x000b1e'
     foreground: '0x0abdc6'
 
-  # Colors the cursor will use if `custom_cursor_colors` is true
+  # Colors that should be used to draw the terminal cursor. If these are unset,
+  # the cursor colour will be the inverse of the cell colour.
+  # cursor:
+  #   text: '0x2e2e2d'
+  #   # text: '0x000000'
+  #   cursor: '0xffffff'
+
+  # Normal colors
   normal:
-    black: '0x123e7c'
-    red: '0xff0000'
-    green: '0xd300c4'
-    yellow: '0xf57800'
-    blue: '0x123e7c'
+    black:   '0x123e7c'
+    red:     '0xff0000'
+    green:   '0xd300c4'
+    yellow:  '0xf57800'
+    blue:    '0x123e7c'
     magenta: '0x711c91'
-    cyan: '0x0abdc6'
-    white: '0xd7d7d5'
+    cyan:    '0x0abdc6'
+    white:   '0xd7d7d5'
 
   # Bright colors
   bright:
-    black: '0x1c61c2'
-    red: '0xff0000'
-    green: '0xd300c4'
-    yellow: '0xf57800'
-    blue: '0x00ff00'
+    black:   '0x1c61c2'
+    red:     '0xff0000'
+    green:   '0xd300c4'
+    yellow:  '0xf57800'
+    blue:    '0x00ff00'
     magenta: '0x711c91'
-    cyan: '0x0abdc6'
-    white: '0xd7d7d5'
+    cyan:    '0x0abdc6'
+    white:   '0xd7d7d5'
+
+  # dim colors
   dim:
-    black: '0x232323'
-    red: '0x74423f'
-    green: '0x5e6547'
-    yellow: '0x8b7653'
-    blue: '0x556b79'
-    magenta: '0x6e4962'
-    cyan: '0x5c8482'
-    white: '0x828282'
+    black:   '0x1c61c2'
+    red:     '0xff0000'
+    green:   '0xd300c4'
+    yellow:  '0xf57800'
+    blue:    '0x123e7c'
+    magenta: '0x711c91'
+    cyan:    '0x0abdc6'
+    white:   '0xd7d7d5'
   indexed_colors: []
   cursor:
     text: '0x000b1e'

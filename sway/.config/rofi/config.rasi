@@ -1,6 +1,14 @@
 configuration {
   	modi: "window,run,ssh";
     font: "hack 10";
+    ! "Color scheme for normal row" Set from: File
+    rofi.color-normal:                   #091833, #0abdc6, #0d244d, #ea00d9, #091833
+    rofi.color-urgent:                   #091833, #0abdc6, #0d244d, #ea00d9, #091833
+    rofi.color-active:                   #091833, #0abdc6, #0d244d, #ea00d9, #091833
+    ! "Color scheme window" Set from: File
+    rofi.color-window:                   #091833, #ea00d9, #ea00d9
+    ! "Separator style (none, dash, solid)" Set from: File
+    rofi.separator-style:                solid
 /*	location: 0;*/
 /*	yoffset: 0;*/
 /*	xoffset: 0;*/
@@ -145,4 +153,3 @@ configuration {
       sorting-method:    "name";
   }
 }
-@theme "/usr/share/rofi/themes/lb.rasi"
