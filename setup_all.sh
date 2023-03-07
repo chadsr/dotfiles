@@ -216,7 +216,7 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload zsh 
 }
 
 echo "Checking for general utilities dependencies to install"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload gvfs gvfs-smb nautilus nautilus-share smartmontools batsignal blueman bluez bluez-utils || {
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload gvfs gvfs-smb thunar thunar-shares-plugin smartmontools batsignal blueman bluez bluez-utils || {
     echo "failed to install utilities dependencies"
     exit 1
 }
