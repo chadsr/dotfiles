@@ -2,6 +2,7 @@ sway/.themes/*
 !sway/.themes/.gitkeep
 sway/.config/gtk-3.0/bookmarks
 sway/.icons/*
+!sway/.icons/default
 !sway/.icons/.gitkeep
 sway/.config/waybar/modules/waybar-crypto/crypto/crypto.ini
 sway/.config/pulse/*
