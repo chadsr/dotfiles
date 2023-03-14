@@ -333,6 +333,12 @@ yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload node
     exit 1
 }
 
+echo "Installing Conda"
+yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload micromamba-bin conda-zsh-completion || {
+    echo "failed to install node.js Dependencies"
+    exit 1
+}
+
 echo "Installing VSCodium"
 yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload vscodium-bin vscodium-bin-features vscodium-bin-marketplace || {
     echo "failed to install VSCodium Dependencies"
