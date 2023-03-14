@@ -18,6 +18,13 @@ prompt_exit() {
 
 prompt_exit "This script will remove/change existing system settings"
 
+yay_install() {
+    yay -S --noconfirm --needed --noredownload "${1}" || {
+        echo "failed to install: ${1}"
+        exit 1
+    }
+}
+
 echo "Updating package databases"
 yay -Syy || {
     echo "failed to update package databases"
@@ -41,16 +48,10 @@ git submodule foreach --recursive git fetch --progress || {
 
 if [ "$1" == "laptop" ]; then
     echo "Checking if mesa is installed"
-    yay -S --noconfirm --needed --noredownload mesa lib32-mesa xf86-video-intel vulkan-intel || {
-        echo "failed to install TLP packages"
-        exit 1
-    }
+    yay_install mesa lib32-mesa xf86-video-intel vulkan-intel
 
     echo "Checking if TLP is installed"
-    yay -S --noconfirm --needed --noredownload tlp tpacpi-bat acpi_call || {
-        echo "failed to install TLP packages"
-        exit 1
-    }
+    yay_install tlp tpacpi-bat acpi_call 
 
     echo "Enable TLP service"
     sudo systemctl enable tlp || {
@@ -59,10 +60,7 @@ if [ "$1" == "laptop" ]; then
     }
 
     echo "Checking if python-validity is installed"
-    yay -S --noconfirm --needed --noredownload python-validity-git || {
-        echo "failed to install python-validity"
-        exit 1
-    }
+    yay_install python-validity-git
 
     echo "Enable fprintd resume/suspend services"
     sudo systemctl enable open-fprintd-resume open-fprintd-suspend || {
@@ -78,10 +76,7 @@ if [ "$1" == "laptop" ]; then
 
 elif [ "$1" == "workstation" ]; then
     echo "Installing Radeon/Mesa/Vulkan drivers"
-    yay -S --noconfirm --needed --noredownload mesa lib32-mesa xf86-video-amdgpu vulkan-radeon lib32-vulkan-radeon libva-mesa-driver lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau libva-utils || {
-        echo "failed to install Radeon/Mesa/Vulkan drivers"
-        exit 1
-    }
+    yay_install mesa lib32-mesa xf86-video-amdgpu vulkan-radeon lib32-vulkan-radeon libva-mesa-driver lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau libva-utils
 
     sudo rsync -ruav "$SYSTEM_CONFIG"/workstation/* / || {
         echo "failed copying workstation configuration"
@@ -89,10 +84,7 @@ elif [ "$1" == "workstation" ]; then
     }
 
     echo "Installing liquidctl"
-    yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload liquidctl || {
-        echo "failed to install liquidctl dependencies"
-        exit 1
-    }
+    yay_install liquidctl
 
     stow -v liquidctl || {
         echo "failed to stow liquidctl"
@@ -205,21 +197,15 @@ rsync -ruav "$GIT_SUBMODULES"/sweet-theme "$BASE_PATH"/sway/.themes || {
 }
 
 echo "Checking for old dependencies to remove"
-yay -R --noconfirm swaylock-blur pipewire-media-session pipewire-pulseaudio pipewire-pulseaudio-git pulseaudio-equalizer pulseaudio-lirc pulseaudio-zeroconf pulseaudio pulseaudio-bluetooth redshift-wayland-git
+yay -R --noconfirm swaylock-blur pipewire-media-session pipewire-pulseaudio pipewire-pulseaudio-git pulseaudio-equalizer pulseaudio-lirc pulseaudio-zeroconf pulseaudio pulseaudio-bluetooth redshift-wayland-git >/dev/null 2>&1
 
 echo "Checking for ZSH dependencies to install"
 nohup sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" >/dev/null 2>&1 & # This will fail if already installed, so don"t bother checking
 
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload zsh thefuck ttf-meslo-nerd-font-powerlevel10k || {
-    echo "failed to install ZSH config dependencies"
-    exit 1
-}
+yay_install zsh thefuck ttf-meslo-nerd-font-powerlevel10k
 
 echo "Checking for general utilities dependencies to install"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload gvfs gvfs-smb thunar thunar-shares-plugin smartmontools batsignal blueman bluez bluez-utils || {
-    echo "failed to install utilities dependencies"
-    exit 1
-}
+yay_install gvfs gvfs-smb thunar thunar-shares-plugin smartmontools batsignal blueman bluez bluez-utils
 
 echo "Enabling smartd service"
 sudo systemctl enable smartd.service && sudo systemctl start smartd.service || {
@@ -234,28 +220,16 @@ systemctl --user enable batsignal.service && systemctl --user start batsignal.se
 }
 
 echo "Checking for Sway dependencies to install"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload sway libnotify wlr-sunclock-git xsettingsd kanshi helvum pipewire-pulse pipewire-alsa wireplumber alsa-tools xdg-desktop-portal wlsunset xdg-desktop-portal-wlr pavucontrol qt5-base qt5-wayland wayland-protocols pipewire wdisplays gdk-pixbuf2 ranger shotwell rbw rofi-rbw light waybar libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome ttf-hack python python-requests networkmanager-dmenu-git azote slurp grim swappy wl-clipboard wf-recorder grimshot swaylock-effects-git mako gammastep gtk-engines alacritty alacritty-colorscheme udiskie wayvnc ansiweather gnome-keyring qgnomeplatform-qt5 qgnomeplatform-qt6 || {
-    echo "failed to install Sway dependencies"
-    exit 1
-}
+yay_install sway libnotify wlr-sunclock-git xsettingsd kanshi helvum pipewire-pulse pipewire-alsa wireplumber alsa-tools xdg-desktop-portal wlsunset xdg-desktop-portal-wlr pavucontrol qt5-base qt5-wayland wayland-protocols pipewire wdisplays gdk-pixbuf2 ranger shotwell rbw rofi-rbw light waybar libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome ttf-hack python python-requests networkmanager-dmenu-git azote slurp grim swappy wl-clipboard wf-recorder grimshot swaylock-effects-git mako gammastep gtk-engines alacritty alacritty-colorscheme udiskie wayvnc ansiweather gnome-keyring qgnomeplatform-qt5 qgnomeplatform-qt6
 
 echo "Installing Hyprland"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload hyprland || {
-    echo "failed to install hyprland dependencies"
-    exit 1
-}
+yay_install hyprland
 
 echo "Installing ULauncher"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload ulauncher python-pint python-pytz || {
-    echo "failed to install ulauncher dependencies"
-    exit 1
-}
+yay_install ulauncher python-pint python-pytz
 
 echo "Installing corectrl"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload corectrl || {
-    echo "failed to install corectrl dependencies"
-    exit 1
-}
+yay_install corectrl
 
 corectrl_rules=/etc/polkit-1/rules.d/90-corectrl.rules
 
@@ -279,10 +253,7 @@ if ((action.id == "org.corectrl.helper.init" ||
 fi
 
 echo "Installing gamemode"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload gamemode || {
-    echo "failed to install gamemode"
-    exit 1
-}
+yay_install gamemode
 
 systemctl --user enable gamemoded.service || {
     echo "failed to enable gamemoded"
@@ -290,37 +261,22 @@ systemctl --user enable gamemoded.service || {
 }
 
 echo "Installing obs"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload obs-studio wlrobs-hg || {
-    echo "failed to install obs"
-    exit 1
-}
+yay_install obs-studio wlrobs-hg
 
 echo "Removing vim"
 yay -R --noconfirm vim
 
 echo "Installing  neovim"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload neovim python-pynvim neovim-symlinks || {
-    echo "failed to install neovim"
-    exit 1
-}
+yay_install neovim python-pynvim neovim-symlinks
 
 echo "Installing git flow"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload gitflow-avh || {
-    echo "failed to install git flow"
-    exit 1
-}
+yay_install gitflow-avh
 
 echo "Installing Solaar"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload solaar || {
-    echo "failed to install solaar Dependencies"
-    exit 1
-}
+yay_install solaar
 
 echo "Installing Rust toolchain"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload rustup rust-analyzer sccache || {
-    echo "failed to install Rust dependencies"
-    exit 1
-}
+yay_install rustup rust-analyzer sccache
 
 rustup component add clippy rustfmt || {
     echo "failed to install Rust components"
@@ -328,28 +284,16 @@ rustup component add clippy rustfmt || {
 }
 
 echo "Installing node.js"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload nodejs npm nvm || {
-    echo "failed to install node.js Dependencies"
-    exit 1
-}
+yay_install nodejs npm nvm
 
 echo "Installing Conda"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload micromamba-bin conda-zsh-completion || {
-    echo "failed to install node.js Dependencies"
-    exit 1
-}
+yay_install micromamba-bin conda-zsh-completion
 
 echo "Installing VSCodium"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload vscodium-bin vscodium-bin-features vscodium-bin-marketplace || {
-    echo "failed to install VSCodium Dependencies"
-    exit 1
-}
+yay_install vscodium-bin vscodium-bin-features vscodium-bin-marketplace
 
 echo "Installing Thunderbird dependencies"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload thunderbird birdtray || {
-    echo "failed to install Thunderbird dependencies"
-    exit 1
-}
+yay_install thunderbird birdtray
 
 echo "Enabling pcscd.socket"
 sudo systemctl enable pcscd.socket && sudo systemctl start pcscd.socket || {
@@ -358,10 +302,7 @@ sudo systemctl enable pcscd.socket && sudo systemctl start pcscd.socket || {
 }
 
 echo "Installing GPG / YubiKey dependencies"
-yay -S --noconfirm --needed --combinedupgrade --batchinstall --noredownload gnupg pcsclite ccid hopenpgp-tools yubikey-agent yubikey-personalization yubikey-manager || {
-    echo "failed to install GPG / YubiKey dependencies"
-    exit 1
-}
+yay_install gnupg pcsclite ccid hopenpgp-tools yubikey-agent yubikey-personalization yubikey-manager
 
 gnome_ssh=/etc/xdg/autostart/gnome-keyring-ssh.desktop
 if [ -f "${gnome_ssh}" ]; then
