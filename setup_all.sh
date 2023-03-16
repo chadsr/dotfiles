@@ -51,7 +51,7 @@ if [ "$1" == "laptop" ]; then
     yay_install mesa lib32-mesa xf86-video-intel vulkan-intel
 
     echo "Checking if TLP is installed"
-    yay_install tlp tpacpi-bat acpi_call 
+    yay_install tlp tpacpi-bat acpi_call
 
     echo "Enable TLP service"
     sudo systemctl enable tlp || {
@@ -405,5 +405,11 @@ systemctl --user enable swayidle.service && systemctl --user start swayidle.serv
 echo "Enabling mako service"
 systemctl --user enable mako.service && systemctl --user start mako.service || {
     echo "failed to enable mako.service"
+    exit 1
+}
+
+echo "Enabling kanshi service"
+systemctl --user enable kanshi.service && systemctl --user start kanshi.service || {
+    echo "failed to enable kanshi.service"
     exit 1
 }

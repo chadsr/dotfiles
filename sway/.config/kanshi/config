@@ -1,0 +1,14 @@
+profile {
+    output 'LG Electronics LG HDR 4K 107NTZNDV669' mode 3840x2160 position 0,0 transform 270
+    output 'LG Electronics LG HDR 4K 107NTQDDV668' mode 3840x2160 position 2160,512
+    output eDP-1 disable
+}
+
+profile {
+    output 'LG Electronics LG HDR 4K 107NTQDDV668' mode 3840x2160 position 0,0
+    output eDP-1 mode 1920x1080 position 2160,768 
+}
+
+profile {
+    output eDP-1 mode 1920x1080 position 0,0 
+}
