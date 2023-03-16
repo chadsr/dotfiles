@@ -8,16 +8,16 @@
 # Read `man 5 sway` for a complete reference.
 
 # Autostarts
-    exec xsettingsd
-    exec dex -a -s :~/.config/autostart/ # Launch desktop entries
-    exec wlr-sunclock \
-        --margins "5,5,5,5" \
-        --width 200 \
-        --layer bottom \
-        --anchors tr \
-        --border-width 0 \
-        --colour-ocean "#0abdc6" \
-        --colour-land "#bb00cc"
+exec xsettingsd
+exec dex -a -s :~/.config/autostart/ # Launch desktop entries
+exec wlr-sunclock \
+    --margins "5,5,5,5" \
+    --width 200 \
+    --layer bottom \
+    --anchors tr \
+    --border-width 0 \
+    --colour-ocean "#0abdc6" \
+    --colour-land "#bb00cc"
 
 set $gnome-schema org.gnome.desktop.interface
 
