@@ -413,3 +413,9 @@ systemctl --user enable kanshi.service && systemctl --user start kanshi.service 
     echo "failed to enable kanshi.service"
     exit 1
 }
+
+echo "Enable lingering for current user"
+loginctl enable-linger ${USER} || {
+    echo "failed to enabling lingering"
+    exit 1
+}
