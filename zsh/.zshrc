@@ -71,7 +71,7 @@ source $ZSH/oh-my-zsh.sh
 
 source $HOME/.aliases
 
-source /usr/bin/virtualenvwrapper.sh
+#source /usr/bin/virtualenvwrapper.sh
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
