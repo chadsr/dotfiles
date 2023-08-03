@@ -197,7 +197,7 @@ rsync -ruav "$GIT_SUBMODULES"/sweet-theme "$BASE_PATH"/sway/.themes || {
 }
 
 echo "Checking for old dependencies to remove"
-yay -R --noconfirm swaylock-blur pipewire-media-session pipewire-pulseaudio pipewire-pulseaudio-git pulseaudio-equalizer pulseaudio-lirc pulseaudio-zeroconf pulseaudio pulseaudio-bluetooth redshift-wayland-git >/dev/null 2>&1
+yay -R --noconfirm swaylock-blur pipewire-media-session pipewire-pulseaudio pipewire-pulseaudio-git pulseaudio-equalizer pulseaudio-lirc pulseaudio-zeroconf pulseaudio pulseaudio-bluetooth redshift-wayland-git birdtray >/dev/null 2>&1
 
 echo "Checking for ZSH dependencies to install"
 nohup sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" >/dev/null 2>&1 & # This will fail if already installed, so don"t bother checking
@@ -220,7 +220,7 @@ systemctl --user enable batsignal.service && systemctl --user start batsignal.se
 }
 
 echo "Checking for Sway dependencies to install"
-yay_install sway libnotify wlr-sunclock-git xsettingsd kanshi helvum pipewire-pulse pipewire-alsa wireplumber alsa-tools xdg-desktop-portal wlsunset xdg-desktop-portal-wlr pavucontrol qt5-base qt5-wayland wayland-protocols pipewire wdisplays gdk-pixbuf2 ranger shotwell rbw rofi-rbw light waybar libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome ttf-hack python python-requests networkmanager-dmenu-git azote slurp grim swappy wl-clipboard wf-recorder grimshot swaylock-effects-git mako gammastep gtk-engines alacritty alacritty-colorscheme udiskie wayvnc ansiweather gnome-keyring qgnomeplatform-qt5 qgnomeplatform-qt6
+yay_install sway libnotify wlr-sunclock-git xsettingsd kanshi helvum pipewire-pulse pipewire-alsa wireplumber alsa-tools xdg-desktop-portal wlsunset xdg-desktop-portal-wlr pavucontrol qt5-base qt5-wayland wayland-protocols pipewire wdisplays gdk-pixbuf2 ranger shotwell rbw rofi-rbw light waybar libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome ttf-hack python python-requests networkmanager-dmenu-git azote slurp grim swappy wl-clipboard wf-recorder grimshot swaylock-effects-git mako gammastep gtk-engines alacritty alacritty-colorscheme udiskie wayvnc ansiweather gnome-keyring qgnomeplatform-qt5 qgnomeplatform-qt6 cava
 
 echo "Installing Hyprland"
 yay_install hyprland
@@ -293,7 +293,7 @@ echo "Installing VSCodium"
 yay_install vscodium-bin vscodium-bin-features vscodium-bin-marketplace
 
 echo "Installing Thunderbird dependencies"
-yay_install thunderbird birdtray
+yay_install thunderbird
 
 echo "Enabling pcscd.socket"
 sudo systemctl enable pcscd.socket && sudo systemctl start pcscd.socket || {
