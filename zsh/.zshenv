@@ -8,6 +8,7 @@ export VISUAL=/usr/bin/nvim
 
 # XDG
 XDG_SCREENSHOTS_DIR=$HOME/Pictures/screenshots
+XDG_CONFIG_HOME=$HOME/.config
 
 # Add any local binaries to PATH
 export PATH=$PATH:$HOME/.local/bin
@@ -84,7 +85,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 export JAVA_HOME=/usr/lib/jvm/default
 export ANDROID_HOME=$HOME/Android
 export ANDROID_USER_HOME=$HOME/.android
-export ANDROID_SDK_ROOT=/opt/android-sdk
+export ANDROID_SDK_ROOT=$HOME/Android/Sdk
 export ANDROID_EMULATOR_HOME=$ANDROID_USER_HOME
 
 export PATH=$PATH:$ANDROID_HOME/tools
