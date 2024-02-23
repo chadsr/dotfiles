@@ -1,6 +1,4 @@
-"debug.persistent_logging" = false
-"debug.render_timer" = false
-enable_experimental_conpty_backend = false
+
 live_config_reload = true
 
 [colors]
@@ -620,12 +618,6 @@ hide_when_typing = true
 [[mouse.bindings]]
 action = "PasteSelection"
 mouse = "Middle"
-
-[mouse.double_click]
-threshold = 300
-
-[mouse.triple_click]
-threshold = 300
 
 [scrolling]
 history = 10000
