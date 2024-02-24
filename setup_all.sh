@@ -205,7 +205,7 @@ nohup sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/in
 yay_install zsh thefuck ttf-meslo-nerd-font-powerlevel10k
 
 echo "Checking for general utilities dependencies to install"
-yay_install gvfs gvfs-smb thunar thunar-shares-plugin smartmontools batsignal blueman bluez bluez-utils
+yay_install gvfs gvfs-smb thunar thunar-shares-plugin smartmontools batsignal blueman bluez bluez-utils bluez-obex bluetuith
 
 echo "Enabling smartd service"
 sudo systemctl enable smartd.service && sudo systemctl start smartd.service || {
