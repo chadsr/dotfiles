@@ -73,12 +73,12 @@ gr = grep -Ii
 la = "!git config -l | grep alias | cut -c 7-"
 [credential]
 	helper = cache timeout=14400
+[gpg]
+	program = /usr/bin/gpg2
+[init]
+	defaultBranch = main
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[gpg]
-	program = /usr/bin/gpg2
-[init]
-	defaultBranch = main
