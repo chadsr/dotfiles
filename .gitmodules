@@ -1,18 +1,3 @@
-[submodule "zsh/.oh-my-zsh/themes/powerlevel10k"]
-path = zsh/.oh-my-zsh/themes/powerlevel10k
-url = git@github.com:romkatv/powerlevel10k.git
-[submodule "sway/.config/waybar/modules/crypto"]
-path = sway/.config/waybar/modules/crypto
-url = https://github.com/Chadsr/waybar-crypto
-[submodule ".git_submodules/Cyberpunk-Neon"]
-path = .git_submodules/Cyberpunk-Neon
-url = git@github.com:Roboron3042/Cyberpunk-Neon.git
-[submodule ".git_submodules/liquidctl"]
-path = .git_submodules/liquidctl
-url = git@github.com:liquidctl/liquidctl.git
-[submodule "ulauncher/.config/ulauncher/user-themes/TokyoNight"]
-	path = ulauncher/.config/ulauncher/user-themes/TokyoNight
-	url = https://github.com/chadsr/TokyoNight-Ulauncher-Theme
 [submodule ".git_submodules/alacritty-theme"]
 	path = .git_submodules/alacritty-theme
 	url = git@github.com:alacritty/alacritty-theme.git
@@ -21,3 +6,31 @@ url = git@github.com:liquidctl/liquidctl.git
 	path = .git_submodules/sweet-theme
 	url = git@github.com:EliverLara/Sweet.git
 	branch = nova
+[submodule "zsh/.oh-my-zsh/themes/powerlevel10k"]
+	path = zsh/.oh-my-zsh/themes/powerlevel10k
+	url = git@github.com:romkatv/powerlevel10k.git
+	branch = master
+[submodule ".git_submodules/sweet-icons"]
+	path = .git_submodules/sweet-icons
+	url = git@github.com:EliverLara/Sweet-folders.git
+	branch = master
+[submodule "ulauncher/.config/ulauncher/user-themes/TokyoNight"]
+	path = ulauncher/.config/ulauncher/user-themes/TokyoNight
+	url = git@github.com:chadsr/TokyoNight-Ulauncher-Theme.git
+	branch = master
+[submodule ".git_submodules/liquidctl"]
+	path = .git_submodules/liquidctl
+	url = git@github.com:liquidctl/liquidctl.git
+	branch = main
+[submodule ".git_submodules/cyberpunk-theme"]
+	path = .git_submodules/cyberpunk-theme
+	url = git@github.com:Roboron3042/Cyberpunk-Neon.git
+	branch = master
+[submodule "sway/.config/waybar/modules/crypto"]
+	path = sway/.config/waybar/modules/crypto
+	url = git@github.com:chadsr/waybar-crypto.git
+	branch = master
+[submodule ".git_submodules/hackneyed-cursor"]
+	path = .git_submodules/hackneyed-cursor
+	url = git@gitlab.com:Enthymeme/hackneyed-x11-cursors.git
+	branch = master

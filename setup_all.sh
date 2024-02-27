@@ -25,6 +25,20 @@ yay_install() {
     }
 }
 
+rsync_copy() {
+    rsync -ruav "${1}" "${2}" || {
+        echo "failed to copy with rsync: ${1} to ${2}"
+        exit 1
+    }
+}
+
+symlink() {
+    ln -s -f "${1}" "${2}" || {
+        echo "failed to symlink: ${1} to ${2}"
+        exit 1
+    }
+}
+
 echo "Updating package databases"
 yay -Syy || {
     echo "failed to update package databases"
@@ -36,13 +50,8 @@ stow -t ~/ stow || {
     exit 1
 }
 
-git submodule update --progress -f --init --recursive || {
+git submodule update --progress -f --init --recursive --remote || {
     echo "failed to update git submodules"
-    exit 1
-}
-
-git submodule foreach --recursive git fetch --progress || {
-    echo "failed to fetch git submodule updates"
     exit 1
 }
 
@@ -69,22 +78,18 @@ if [ "$1" == "laptop" ]; then
     }
 
     echo "Copying laptop system configuration"
-    sudo rsync -ruav "$SYSTEM_CONFIG"/laptop/* / || {
-        echo "failed copying laptop configuration"
-        exit 1
-    }
+    sudo rsync_copy "$SYSTEM_CONFIG"/laptop/* /
 
 elif [ "$1" == "workstation" ]; then
     echo "Installing Radeon/Mesa/Vulkan drivers"
     yay_install mesa lib32-mesa xf86-video-amdgpu vulkan-radeon lib32-vulkan-radeon libva-mesa-driver lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau libva-utils
 
-    sudo rsync -ruav "$SYSTEM_CONFIG"/workstation/* / || {
-        echo "failed copying workstation configuration"
-        exit 1
-    }
+    sudo rsync_copy "$SYSTEM_CONFIG"/workstation/* /
 
     echo "Installing liquidctl"
     yay_install liquidctl
+
+    symlink "$GIT_SUBMODULES"/liquidctl/extra/yoda.py "$BASE_PATH"/liquidctl/.local/bin/yoda
 
     stow -v liquidctl || {
         echo "failed to stow liquidctl"
@@ -115,86 +120,34 @@ else
     exit 1
 fi
 
-cd "$GIT_SUBMODULES"/punk_theme || {
-    echo "failed to cd to ${GIT_SUBMODULES}/punk_theme"
-    exit 1
-}
-git checkout --force origin/Ultimate-Punk-Complete-Desktop || {
-    echo "failed to checkout updates"
-    exit 1
-}
-
-cd "$GIT_SUBMODULES"/Cyberpunk-Neon || {
-    echo "failed to cd to ${GIT_SUBMODULES}/Cyberpunk-Neon"
-    exit 1
-}
-git checkout --force origin/master || {
-    echo "failed to checkout updates"
-    exit 1
-}
-
-cd "$GIT_SUBMODULES"/alacritty-theme || {
-    echo "failed to cd to ${GIT_SUBMODULES}/alacritty-theme"
-    exit 1
-}
-git checkout --force origin/master || {
-    echo "failed to checkout updates"
-    exit 1
-}
-ln -s -f "$GIT_SUBMODULES"/alacritty-theme/themes "$BASE_PATH"/sway/.config/alacritty/colors || {
-    echo "failed to symlink alacritty themes"
-    exit 1
-}
-
-cd "$BASE_PATH"/sway/.config/waybar/modules/crypto || {
-    echo "failed to cd to ${BASE_PATH}/sway/.config/waybar/modules/crypto"
-    exit 1
-}
-git checkout --force origin/master || {
-    echo "failed to checkout updates"
-    exit 1
-}
-
-cd "$BASE_PATH"/zsh/.oh-my-zsh/themes/powerlevel10k || {
-    echo "failed to cd to ${BASE_PATH}/zsh/.oh-my-zsh/themes/powerlevel10k"
-    exit 1
-}
-git checkout --force origin/master || {
-    echo "failed to checkout updates"
-    exit 1
-}
-
-cd "$BASE_PATH" || {
-    echo "failed to cd back to ${BASE_PATH}"
-    exit 1
-}
-
 echo "Copying common system configuration"
-sudo rsync -ruav "$SYSTEM_CONFIG"/common/* /
+sudo rsync_copy "$SYSTEM_CONFIG"/common/* /
 
 echo "Adding user to audio group"
 sudo groupadd audio
 sudo usermod -a -G audio "$USER"
 
 echo "Copying themes from git repo to dotfiles locations"
-rsync -ruav "$GIT_SUBMODULES"/punk_theme/Ultimate-PUNK-Cyan-Cursor "$BASE_PATH"/sway/.icons || {
-    echo "failed copying Ultimate-PUNK-Cyan-Cursor to sway"
-    exit 1
-}
-rsync -ruav "$GIT_SUBMODULES"/punk_theme/Ultimate-Punk-Suru++ "$BASE_PATH"/sway/.icons || {
-    echo "failed copying Ultimate-Punk-Suru++ to sway"
+
+symlink "$GIT_SUBMODULES"/alacritty-theme/themes "$BASE_PATH"/sway/.config/alacritty/colors
+
+symlink "$GIT_SUBMODULES"/hackneyed-cursor "$BASE_PATH"/sway/.icons/hackneyed-cursor
+
+symlink "$GIT_SUBMODULES"/sweet-icons/Sweet-Purple "$BASE_PATH"/sway/.icons/sweet-purple
+
+rm -rf "$BASE_PATH"/sway/.themes/materia-cyberpunk-neon || {
+    echo "failed to remove old theme"
     exit 1
 }
 
-unzip -o "$GIT_SUBMODULES"/Cyberpunk-Neon/gtk/materia-cyberpunk-neon.zip -d "$BASE_PATH"/sway/.themes || {
+unzip -o "$GIT_SUBMODULES"/cyberpunk-theme/gtk/materia-cyberpunk-neon.zip -d "$BASE_PATH"/sway/.themes || {
     echo "failed copying Cyberpunk-Neon theme to sway"
     exit 1
 }
 
-rsync -ruav "$GIT_SUBMODULES"/sweet-theme "$BASE_PATH"/sway/.themes || {
-    echo "failed copying sweet-theme to sway"
-    exit 1
-}
+symlink "$GIT_SUBMODULES"/sweet-icons "$BASE_PATH"/sway/.icons/sweet-icons
+
+symlink "$GIT_SUBMODULES"/sweet-theme "$BASE_PATH"/sway/.themes/sweet-theme
 
 echo "Checking for old dependencies to remove"
 yay -R --noconfirm swaylock-blur pipewire-media-session pipewire-pulseaudio pipewire-pulseaudio-git pulseaudio-equalizer pulseaudio-lirc pulseaudio-zeroconf pulseaudio pulseaudio-bluetooth redshift-wayland-git birdtray >/dev/null 2>&1
@@ -269,10 +222,7 @@ yay -R --noconfirm vim
 echo "Installing  neovim"
 yay_install neovim python-pynvim neovim-symlinks
 
-echo "Installing git flow"
-yay_install gitflow-avh
-
-echo "Installing Solaar"
+echo "Installing Solaar (Logitech manager)"
 yay_install solaar
 
 echo "Installing Rust toolchain"

@@ -2,7 +2,6 @@ sway/.themes/*
 !sway/.themes/.gitkeep
 sway/.config/gtk-3.0/bookmarks
 sway/.icons/*
-!sway/.icons/default
 !sway/.icons/.gitkeep
 sway/.config/waybar/modules/waybar-crypto/crypto/crypto.ini
 sway/.config/pulse/*
@@ -28,3 +27,4 @@ vim/.config/nvim/pack
 ulauncher/.config/ulauncher/ext_preferences/
 rust/.cargo/*
 !rust/.cargo/config
+liquidctl/.local/bin/yoda
