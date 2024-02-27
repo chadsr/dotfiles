@@ -27,4 +27,5 @@ vim/.config/nvim/pack
 ulauncher/.config/ulauncher/ext_preferences/
 rust/.cargo/*
 !rust/.cargo/config
+!liquidctl/.local/bin/.gitkeep
 liquidctl/.local/bin/yoda
