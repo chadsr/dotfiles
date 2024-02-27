@@ -129,7 +129,7 @@ sudo usermod -a -G audio "$USER"
 
 echo "Copying themes from git repo to dotfiles locations"
 
-symlink "$GIT_SUBMODULES"/alacritty-theme/themes "$BASE_PATH"/sway/.config/alacritty/colors
+symlink "$GIT_SUBMODULES"/alacritty-theme/themes "$BASE_PATH"/alacritty/.config/alacritty/colors
 
 symlink "$GIT_SUBMODULES"/hackneyed-cursor "$BASE_PATH"/sway/.icons/hackneyed-cursor
 
@@ -333,6 +333,10 @@ stow -v logseq || {
     exit 1
 }
 
+stow -v alacritty || {
+    echo "Failed to stow Alacritty config"
+    exit 1
+}
 
 echo "Reloading Systemd manager user congfiguration"
 systemctl --user daemon-reload && sudo systemctl daemon-reload || {
