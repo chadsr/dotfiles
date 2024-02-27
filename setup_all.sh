@@ -66,6 +66,9 @@ git submodule update --progress --init --force --recursive --remote || {
     exit 1
 }
 
+echo "Installing build dependencies"
+yay_install inkscape xorg-xcursorgen
+
 if [ "$1" == "laptop" ]; then
     echo "Checking if mesa is installed"
     yay_install mesa lib32-mesa xf86-video-intel vulkan-intel
@@ -140,9 +143,21 @@ sudo usermod -a -G audio "$USER"
 
 echo "Copying themes from git repo to dotfiles locations"
 
-symlink "$GIT_SUBMODULES"/alacritty-theme/themes "$BASE_PATH"/alacritty/.config/alacritty/colors
+cd "$GIT_SUBMODULES"/hackneyed-cursor
+make clean && make distclean && make -O DARK_THEME=1 dist || {
+    echo "failed to make hackneyed cursor"
+    exit 1
+}
 
-symlink "$GIT_SUBMODULES"/hackneyed-cursor "$BASE_PATH"/sway/.icons/hackneyed-cursor
+symlink "$GIT_SUBMODULES"/hackneyed-cursor/Hackneyed-Dark "$BASE_PATH"/sway/.icons/hackneyed-dark
+
+make clean || {
+    echo "failed to clean hackneyed make files"
+    exit 1
+}
+cd "$BASE_PATH"
+
+symlink "$GIT_SUBMODULES"/alacritty-theme/themes "$BASE_PATH"/alacritty/.config/alacritty/colors
 
 symlink "$GIT_SUBMODULES"/sweet-icons/Sweet-Purple "$BASE_PATH"/sway/.icons/sweet-purple
 
