@@ -361,6 +361,11 @@ stow -v alacritty || {
     exit 1
 }
 
+stow -v cava || {
+    echo "Failed to stow Cava config"
+    exit 1
+}
+
 echo "Reloading Systemd manager user congfiguration"
 systemctl --user daemon-reload && sudo systemctl daemon-reload || {
     echo "failed to daemon-reload"

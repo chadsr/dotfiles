@@ -13,6 +13,7 @@
         "sway/mode"
     ],
     "modules-center": [
+        "cava",
         "cpu",
         "memory",
         "temperature",
@@ -25,8 +26,7 @@
         "network#vpn",
         "backlight",
         "pulseaudio",
-        "battery",
-        "battery#bat1"
+        "battery"
     ],
     "sway/workspaces": {
         "disable-scroll": true,
@@ -78,7 +78,7 @@
         "tooltip": true
     },
     "temperature": {
-        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
         "critical-threshold": 80,
         "format-critical": "{temperatureC}°C ",
         "format": "{temperatureC}°C "
@@ -194,6 +194,12 @@
         "server": "mpd.lan",
         "password": "GimmeMusicPls"
     },
+    "cava": {
+        "cava_config": "$XDG_CONFIG_HOME/cava/cava.conf",
+        "framerate": 30,
+        "bars": 16,
+        "method": "pulse"
+    },
     "custom/weather": {
         "format": "{}",
         "interval": 18000,
@@ -215,37 +221,5 @@
         "exec-if": "exit 0", // always run; consider advanced run conditions
         "on-click": "alacritty -e 'sudo yay -Syu'; pkill -SIGRTMIN+8 waybar", // update system
         "signal": 8
-    },
-    "custom/battery0": {
-        "interval": 5,
-        "tooltip": false,
-        "format": "{percentage}% {}{icon}",
-        "format-icons": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
-        ],
-        "return-type": "json",
-        "exec": "$HOME/.config/waybar/modules/battery/battery_0"
-    },
-    "custom/battery1": {
-        "interval": 5,
-        "tooltip": false,
-        "format": "{percentage}% {}{icon}",
-        "format-icons": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
-        ],
-        "return-type": "json",
-        "exec": "$HOME/.config/waybar/modules/battery/battery_1"
     }
 }
