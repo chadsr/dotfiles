@@ -32,8 +32,19 @@ rsync_copy() {
     }
 }
 
+rmrf() {
+    rm -rf "${1}" || {
+        echo "failed to recursively remove ${1}"
+        exit 1
+    }
+}
+
 symlink() {
-    ln -s -f "${1}" "${2}" || {
+    rmrf "${2}" || {
+        echo "failed to remove old symlink: ${2}"
+        exit 1
+    }
+    ln -s "${1}" "${2}" || {
         echo "failed to symlink: ${1} to ${2}"
         exit 1
     }
@@ -50,7 +61,7 @@ stow -t ~/ stow || {
     exit 1
 }
 
-git submodule update --progress -f --init --recursive --remote || {
+git submodule update --progress --init --force --recursive --remote || {
     echo "failed to update git submodules"
     exit 1
 }
@@ -135,19 +146,15 @@ symlink "$GIT_SUBMODULES"/hackneyed-cursor "$BASE_PATH"/sway/.icons/hackneyed-cu
 
 symlink "$GIT_SUBMODULES"/sweet-icons/Sweet-Purple "$BASE_PATH"/sway/.icons/sweet-purple
 
-rm -rf "$BASE_PATH"/sway/.themes/materia-cyberpunk-neon || {
-    echo "failed to remove old theme"
-    exit 1
-}
+symlink "$GIT_SUBMODULES"/sweet-icons "$BASE_PATH"/sway/.icons/sweet-icons
 
+symlink "$GIT_SUBMODULES"/sweet-theme "$BASE_PATH"/sway/.themes/sweet-theme
+
+rmrf "$BASE_PATH"/sway/.themes/materia-cyberpunk-neon
 unzip -o "$GIT_SUBMODULES"/cyberpunk-theme/gtk/materia-cyberpunk-neon.zip -d "$BASE_PATH"/sway/.themes || {
     echo "failed copying Cyberpunk-Neon theme to sway"
     exit 1
 }
-
-symlink "$GIT_SUBMODULES"/sweet-icons "$BASE_PATH"/sway/.icons/sweet-icons
-
-symlink "$GIT_SUBMODULES"/sweet-theme "$BASE_PATH"/sway/.themes/sweet-theme
 
 echo "Checking for old dependencies to remove"
 yay -R --noconfirm swaylock-blur pipewire-media-session pipewire-pulseaudio pipewire-pulseaudio-git pulseaudio-equalizer pulseaudio-lirc pulseaudio-zeroconf pulseaudio pulseaudio-bluetooth redshift-wayland-git birdtray >/dev/null 2>&1
