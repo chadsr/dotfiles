@@ -1,9 +1,0 @@
-[Unit]
-Description=CPU Performance Mode
-
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/cpupower frequency-set -g performance
-
-[Install]
-WantedBy=multi-user.target

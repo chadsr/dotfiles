@@ -1,9 +1,3 @@
-[submodule ".git_submodules/punk_theme"]
-path = .git_submodules/punk_theme
-url = git@github.com:rtlewis88/rtl88-Themes.git
-[submodule ".git_submodules/waybar-modules"]
-path = .git_submodules/waybar-modules
-url = git@github.com:sl424/waybar.git
 [submodule "zsh/.oh-my-zsh/themes/powerlevel10k"]
 path = zsh/.oh-my-zsh/themes/powerlevel10k
 url = git@github.com:romkatv/powerlevel10k.git
@@ -16,12 +10,14 @@ url = git@github.com:Roboron3042/Cyberpunk-Neon.git
 [submodule ".git_submodules/liquidctl"]
 path = .git_submodules/liquidctl
 url = git@github.com:liquidctl/liquidctl.git
-[submodule ".git_submodules/sweet-theme"]
-path = .git_submodules/sweet-theme
-url = git@github.com:EliverLara/Sweet.git
-[submodule ".git_submodules/alacritty-theme"]
-path = .git_submodules/alacritty-theme
-url = git@github.com:eendroroy/alacritty-theme.git
 [submodule "ulauncher/.config/ulauncher/user-themes/TokyoNight"]
 	path = ulauncher/.config/ulauncher/user-themes/TokyoNight
 	url = https://github.com/chadsr/TokyoNight-Ulauncher-Theme
+[submodule ".git_submodules/alacritty-theme"]
+	path = .git_submodules/alacritty-theme
+	url = git@github.com:alacritty/alacritty-theme.git
+	branch = master
+[submodule ".git_submodules/sweet-theme"]
+	path = .git_submodules/sweet-theme
+	url = git@github.com:EliverLara/Sweet.git
+	branch = nova
