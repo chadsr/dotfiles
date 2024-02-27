@@ -245,6 +245,9 @@ yay -R --noconfirm vim
 echo "Installing  neovim"
 yay_install neovim python-pynvim neovim-symlinks
 
+echo "Installing qbitorrent"
+yay_install qbittorrent 
+
 echo "Installing Solaar (Logitech manager)"
 yay_install solaar
 
