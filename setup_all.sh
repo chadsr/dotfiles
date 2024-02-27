@@ -155,6 +155,7 @@ make clean || {
     echo "failed to clean hackneyed make files"
     exit 1
 }
+rm -f  *.tar.bz2
 cd "$BASE_PATH"
 
 symlink "$GIT_SUBMODULES"/alacritty-theme/themes "$BASE_PATH"/alacritty/.config/alacritty/colors
