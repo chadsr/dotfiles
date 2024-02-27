@@ -173,7 +173,7 @@ systemctl --user enable batsignal.service && systemctl --user start batsignal.se
 }
 
 echo "Checking for Sway dependencies to install"
-yay_install sway libnotify wlr-sunclock-git xsettingsd kanshi helvum pipewire-pulse pipewire-alsa wireplumber alsa-tools xdg-desktop-portal wlsunset xdg-desktop-portal-wlr pavucontrol qt5-base qt5-wayland wayland-protocols pipewire wdisplays gdk-pixbuf2 ranger shotwell rbw rofi-rbw light waybar libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome ttf-hack python python-requests networkmanager-dmenu-git azote slurp grim swappy wl-clipboard wf-recorder grimshot swaylock-effects-git mako gammastep gtk-engines alacritty alacritty-colorscheme udiskie wayvnc ansiweather gnome-keyring qgnomeplatform-qt5 qgnomeplatform-qt6 cava
+yay_install sway libnotify wlr-sunclock-git xsettingsd kanshi helvum pipewire-pulse pipewire-alsa wireplumber alsa-tools wlsunset xdg-desktop-portal xdg-desktop-portal-wlr pavucontrol wayland-protocols pipewire wdisplays ranger shotwell rbw rofi-rbw light waybar libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome ttf-hack python python-requests networkmanager-dmenu-git azote slurp grim swappy wl-clipboard wf-recorder grimshot swaylock-effects-git mako gammastep alacritty alacritty-colorscheme udiskie wayvnc ansiweather gnome-keyring cava
 
 echo "Installing Hyprland"
 yay_install hyprland
