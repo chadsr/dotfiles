@@ -22,18 +22,6 @@ prompt_exit() {
     esac
 }
 
-prompt_confirm() {
-    read -rp "$1 (Y/n)" answer
-    case ${answer:0:1} in
-    n | N)
-        return 1
-        ;;
-    *)
-        return 0
-        ;;
-    esac
-}
-
 prompt_exit "This script will remove/change existing system settings."
 
 yay_install() {
@@ -288,9 +276,9 @@ elif [[ "$1" == "workstation" ]]; then
     # https://wiki.archlinux.org/title/AMDGPU#Boot_parameter
     boot_parameter=$(printf 'amdgpu.ppfeaturemask=0x%x\n' "$(($(cat /sys/module/amdgpu/parameters/ppfeaturemask) | 0x4000))")
 
-    prompt_confirm "Add AMDGPU Boot parameter?"
-    edit_boot=$?
-    if [[ $edit_boot == 0 ]]; then
+    read -p "Add AMDGPU Boot parameter? (y/N)?" -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
         echo "System reports appropriate mask of: ${boot_parameter}"
         echo "Add this flag manually to the options key in: /efi/loader/entries/@latest.conf"
         prompt_exit "Flag added manually?"
