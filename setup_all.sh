@@ -442,7 +442,7 @@ echo "Installing VSCodium"
 yay_install vscodium-bin vscodium-bin-features vscodium-bin-marketplace
 
 echo "Installing Thunderbird dependencies"
-yay_install thunderbird
+yay_install thunderbird birdtray
 
 echo "Installing Logseq dependencies"
 yay_install logseq
