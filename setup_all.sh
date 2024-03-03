@@ -448,7 +448,7 @@ echo "Installing Thunderbird dependencies"
 yay_install thunderbird birdtray
 
 echo "Installing Video Editing dependencies"
-yay_install gyroflow
+yay_install gyroflow-bin
 
 echo "Installing Logseq dependencies"
 yay_install logseq
