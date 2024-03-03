@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
 BASE_PATH=$PWD
+DATA_PATH="$BASE_PATH"/data
 SYSTEM_CONFIG="$BASE_PATH"/system
 GIT_SUBMODULES="$BASE_PATH"/.git_submodules
-GPG_KEY=2B7340DB13C85766
+GPG_PRIMARY_KEY=0x2B7340DB13C85766
+GPG_ENCRYPTION_SUBKEY=0x79C70BBE4865D828
 
 set -euo pipefail
 trap 'echo "Error!"' ERR INT
@@ -55,8 +57,16 @@ symlink() {
     }
 }
 
-gpg_decrypt() {
-    gpg --default-key "$GPG_KEY" -a -d -o "${2}" "${1}"
+gpg_decrypt_file() {
+    gpg -v --local-user "$GPG_ENCRYPTION_SUBKEY" --armor --decrypt --output "${2}" "${1}"
+}
+
+gpg_list_dir() {
+    gpgtar -v --list-archive --gpg-args "--local-user ${GPG_ENCRYPTION_SUBKEY}" "${1}"
+}
+
+gpg_decrypt_dir() {
+    gpgtar -v --gpg-args "--local-user ${GPG_ENCRYPTION_SUBKEY}" --decrypt --directory "${2}" "${1}"
 }
 
 echo "Updating package databases & packages"
@@ -101,6 +111,11 @@ stow -v sway || {
 
 stow -v hypr || {
     echo "Failed to stow Hyprland config"
+    exit 1
+}
+
+stow -v bemenu || {
+    echo "Failed to stow bemenu config"
     exit 1
 }
 
@@ -149,6 +164,11 @@ stow -v cava || {
     exit 1
 }
 
+stow -v corectrl || {
+    echo "failed to stow corectrl"
+    exit 1
+}
+
 stow -v tidal-hifi || {
     echo "Failed to stow tidal-hifi config"
     exit 1
@@ -183,14 +203,16 @@ gpg --import "$BASE_PATH"/data/gpg/2B7340DB13C85766.asc || {
     exit 1
 }
 
-gpg --tofu-policy good 0x2B7340DB13C85766 || {
+gpg --tofu-policy good "$GPG_PRIMARY_KEY" || {
     echo "failed to set gpg tofu policy"
     exit 1
 }
 
 echo "Decrypting ./data files"
-gpg_decrypt "$BASE_PATH"/data/ssh/config.asc.gpg "$BASE_PATH"/ssh/.ssh/config
-gpg_decrypt "$BASE_PATH"/data/tidal-hifi/config.json.asc.gpg "$BASE_PATH"/tidal-hifi/.config/tidal-hifi/config.json
+gpg_decrypt_file "$DATA_PATH"/ssh/config.asc.gpg "$BASE_PATH"/ssh/.ssh/config
+gpg_decrypt_file "$DATA_PATH"/tidal-hifi/config.json.asc.gpg "$BASE_PATH"/tidal-hifi/.config/tidal-hifi/config.json
+gpg_list_dir "$DATA_PATH"/corectrl/profiles.gpgtar
+gpg_decrypt_dir "$DATA_PATH"/corectrl/profiles.gpgtar "$BASE_PATH"
 
 stow -v ssh || {
     echo "Failed to stow ssh config"
@@ -254,11 +276,6 @@ elif [ "$1" == "workstation" ]; then
         exit 1
     }
 
-    stow -v corectrl || {
-        echo "failed to stow corectrl"
-        exit 1
-    }
-
     systemctl --user daemon-reload || {
         echo "failed to daemon-reload"
         exit 1
@@ -274,7 +291,7 @@ elif [ "$1" == "workstation" ]; then
         exit 1
     }
 else
-    echo "$0: first argument must be <laptop|workstation>"
+    echo "$0: first argument must be <laptop | workstation >"
     exit 1
 fi
 

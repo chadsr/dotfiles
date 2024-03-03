@@ -33,3 +33,4 @@ ssh/.ssh/*
 !ssh/.ssh/.gitkeep
 tidal-hifi/.config/tidal-hifi/*
 !tidal-hifi/.config/tidal-hifi/.gitkeep
+corectrl/.config/corectrl/profiles/*
