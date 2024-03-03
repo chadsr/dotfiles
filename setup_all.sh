@@ -548,6 +548,17 @@ systemctl --user start kanshi.service || {
     exit 1
 }
 
+echo "Enabling corectrl service"
+systemctl --user enable corectrl.service || {
+    echo "failed to enable corectrl.service"
+    exit 1
+}
+
+systemctl --user start corectrl.service || {
+    echo "failed to start corectrl.service"
+    exit 1
+}
+
 echo "Enable lingering for current user"
 loginctl enable-linger "${USER}" || {
     echo "failed to enabling lingering"
