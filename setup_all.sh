@@ -453,8 +453,8 @@ yay_install miniconda3 conda-zsh-completion micromamba-bin
 echo "Installing VSCodium"
 yay_install vscodium-bin vscodium-bin-features vscodium-bin-marketplace
 
-echo "Installing Thunderbird dependencies"
-yay_install thunderbird birdtray
+echo "Installing Betterbird dependencies"
+yay_install betterbird-bin
 
 echo "Installing Video Editing dependencies"
 yay_install gyroflow-bin
