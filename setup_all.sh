@@ -245,6 +245,9 @@ if [ "$1" == "laptop" ]; then
     echo "Installing Intel/Vulkan Drivers"
     yay_install xf86-video-intel vulkan-intel
 
+    echo "Installing ONNXRuntime"
+    yay_install onnxruntime-opt python-onnxruntime-opt
+
     echo "Checking if TLP is installed"
     yay_install tlp tpacpi-bat acpi_call
 
@@ -266,6 +269,9 @@ if [ "$1" == "laptop" ]; then
 elif [ "$1" == "workstation" ]; then
     echo "Installing Radeon/Vulkan/ROCM drivers"
     yay_install xf86-video-amdgpu vulkan-radeon lib32-vulkan-radeon rocm-core rocm-opencl-runtime comgr hipblas rccl
+
+    echo "Installing ROCM ONNXRuntime"
+    yay_install onnxruntime-opt-rocm python-onnxruntime-opt-rocm
 
     rcopy "$SYSTEM_CONFIG"/workstation/* /
 
@@ -364,7 +370,7 @@ echo "Checking for general utilities dependencies to install"
 yay_install gvfs gvfs-smb thunar thunar-shares-plugin smartmontools batsignal blueman bluez bluez-utils bluez-obex bluetuith
 
 echo "Checking for Sway dependencies to install"
-yay_install sway libnotify wlr-sunclock-git xsettingsd kanshi helvum pipewire-pulse pipewire-alsa wireplumber alsa-tools wlsunset xdg-desktop-portal xdg-desktop-portal-wlr pavucontrol wayland-protocols pipewire wdisplays ranger shotwell rbw light waybar libappindicator-gtk2 libappindicator-gtk3 dex otf-font-awesome ttf-hack python python-requests networkmanager-dmenu-git azote slurp grim swappy wl-clipboard wf-recorder grimshot swaylock-effects-git mako gammastep alacritty alacritty-colorscheme udiskie wayvnc ansiweather gnome-keyring cava iniparser fftw bemenu-wayland pinentry-bemenu
+yay_install sway libnotify wlr-sunclock-git xsettingsd kanshi helvum pipewire-pulse pipewire-alsa wireplumber alsa-tools wlsunset xdg-desktop-portal xdg-desktop-portal-wlr pavucontrol wayland-protocols pipewire wdisplays ranger shotwell rbw light waybar libappindicator-gtk2 libappindicator-gtk3 dex otf-font-awesome ttf-hack azote slurp grim swappy wl-clipboard wf-recorder grimshot swaylock-effects-git mako gammastep alacritty alacritty-colorscheme udiskie wayvnc ansiweather gnome-keyring cava iniparser fftw bemenu-wayland pinentry-bemenu
 
 echo "Installing Hyprland"
 yay_install hyprland
@@ -418,6 +424,9 @@ yay_install solaar
 
 echo "Installing TIDAL-HiFi"
 yay_install tidal-hifi-git
+
+echo "Installing Python dependencies"
+yay_install python python-requests
 
 echo "Installing Go toolchain"
 yay_install go
