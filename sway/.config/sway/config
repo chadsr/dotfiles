@@ -78,19 +78,8 @@ output * bg $HOME/.config/sway/background.png fill
     # kill focused window
     bindsym $mod+Shift+q kill
 
-    # # start rofi run menu
+    # # start run menu
     bindsym $mod+x exec $menu
-
-    # # start rofi filebrowser menu
-    # bindsym $mod+d exec $menu -show filebrowser
-
-    # # start rofi ssh menu
-    # bindsym $mod+s exec $menu -show ssh
-
-    # # start rofi window switcher
-    # bindsym $mod+w exec $menu -show window
-
-    # bindsym $mod+b exec rofi-rbw
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
