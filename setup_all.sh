@@ -11,7 +11,7 @@ set -euo pipefail
 trap 'echo "Error!"' ERR INT
 
 prompt_exit() {
-    read -rp "$1 Continue (y/N)? " answer
+    read -rp "$1 Continue or Abort? (y/N)" answer
     case ${answer:0:1} in
     y | Y)
         return
@@ -22,7 +22,19 @@ prompt_exit() {
     esac
 }
 
-prompt_exit "This script will remove/change existing system settings"
+prompt_confirm() {
+    read -rp "$1 (Y/n)" answer
+    case ${answer:0:1} in
+    n | N)
+        return 1
+        ;;
+    *)
+        return 0
+        ;;
+    esac
+}
+
+prompt_exit "This script will remove/change existing system settings."
 
 yay_install() {
     yay -S --noconfirm --needed --noredownload "${@}" || {
@@ -237,7 +249,7 @@ git submodule foreach --recursive git reset --hard || {
 echo "Installing Mesa/Vulkan Drivers"
 yay_install mesa lib32-mesa mesa-vdpau lib32-mesa-vdpau libva-mesa-driver lib32-libva-mesa-driver libva-utils opencl-rusticl-mesa
 
-if [ "$1" == "laptop" ]; then
+if [[ "$1" == "laptop" ]]; then
     echo "Copying laptop system configuration"
 
     rcopy "$SYSTEM_CONFIG"/laptop/* /
@@ -266,12 +278,23 @@ if [ "$1" == "laptop" ]; then
         exit 1
     }
 
-elif [ "$1" == "workstation" ]; then
+elif [[ "$1" == "workstation" ]]; then
     echo "Installing Radeon/Vulkan/ROCM drivers"
     yay_install xf86-video-amdgpu vulkan-radeon lib32-vulkan-radeon rocm-core rocm-opencl-runtime comgr hipblas rccl
 
     echo "Installing ROCM ONNXRuntime"
     yay_install onnxruntime-opt-rocm python-onnxruntime-opt-rocm
+
+    # https://wiki.archlinux.org/title/AMDGPU#Boot_parameter
+    boot_parameter=$(printf 'amdgpu.ppfeaturemask=0x%x\n' "$(($(cat /sys/module/amdgpu/parameters/ppfeaturemask) | 0x4000))")
+
+    prompt_confirm "Add AMDGPU Boot parameter?"
+    edit_boot=$?
+    if [[ $edit_boot == 0 ]]; then
+        echo "System reports appropriate mask of: ${boot_parameter}"
+        echo "Add this flag manually to the options key in: /efi/loader/entries/@latest.conf"
+        prompt_exit "Flag added manually?"
+    fi
 
     rcopy "$SYSTEM_CONFIG"/workstation/* /
 
