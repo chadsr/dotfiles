@@ -234,13 +234,16 @@ git submodule foreach --recursive git reset --hard || {
     exit 1
 }
 
+echo "Installing Mesa/Vulkan Drivers"
+yay_install mesa lib32-mesa mesa-vdpau lib32-mesa-vdpau libva-mesa-driver lib32-libva-mesa-driver libva-utils opencl-rusticl-mesa
+
 if [ "$1" == "laptop" ]; then
     echo "Copying laptop system configuration"
 
     rcopy "$SYSTEM_CONFIG"/laptop/* /
 
-    echo "Checking if mesa is installed"
-    yay_install mesa lib32-mesa xf86-video-intel vulkan-intel
+    echo "Installing Intel/Vulkan Drivers"
+    yay_install xf86-video-intel vulkan-intel
 
     echo "Checking if TLP is installed"
     yay_install tlp tpacpi-bat acpi_call
@@ -261,8 +264,8 @@ if [ "$1" == "laptop" ]; then
     }
 
 elif [ "$1" == "workstation" ]; then
-    echo "Installing Radeon/Mesa/Vulkan drivers"
-    yay_install mesa lib32-mesa xf86-video-amdgpu vulkan-radeon lib32-vulkan-radeon libva-mesa-driver lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau libva-utils
+    echo "Installing Radeon/Vulkan/ROCM drivers"
+    yay_install xf86-video-amdgpu vulkan-radeon lib32-vulkan-radeon rocm-core rocm-opencl-runtime comgr hipblas rccl
 
     rcopy "$SYSTEM_CONFIG"/workstation/* /
 
@@ -443,6 +446,9 @@ yay_install vscodium-bin vscodium-bin-features vscodium-bin-marketplace
 
 echo "Installing Thunderbird dependencies"
 yay_install thunderbird birdtray
+
+echo "Installing Video Editing dependencies"
+yay_install gyroflow
 
 echo "Installing Logseq dependencies"
 yay_install logseq
