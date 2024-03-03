@@ -29,3 +29,5 @@ rust/.cargo/*
 !rust/.cargo/config
 !liquidctl/.local/bin/.gitkeep
 liquidctl/.local/bin/yoda
+ssh/.ssh/*
+!ssh/.ssh/.gitkeep
