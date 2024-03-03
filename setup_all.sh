@@ -457,7 +457,7 @@ echo "Installing Betterbird dependencies"
 yay_install betterbird-bin
 
 echo "Installing Video Editing dependencies"
-yay_install gyroflow-bin
+yay_install gyroflow-bin kdenlive
 
 echo "Installing Logseq dependencies"
 yay_install logseq
