@@ -3,6 +3,7 @@
 BASE_PATH=$PWD
 SYSTEM_CONFIG="$BASE_PATH"/system
 GIT_SUBMODULES="$BASE_PATH"/.git_submodules
+GPG_KEY=2B7340DB13C85766
 
 set -euo pipefail
 trap 'echo "Error!"' ERR INT
@@ -52,6 +53,10 @@ symlink() {
         echo "failed to symlink: ${1} to ${2}"
         exit 1
     }
+}
+
+gpg_decrypt() {
+    gpg --default-key "$GPG_KEY" -a -d -o "${2}" "${1}"
 }
 
 echo "Updating package databases & packages"
@@ -144,6 +149,11 @@ stow -v cava || {
     exit 1
 }
 
+stow -v tidal-hifi || {
+    echo "Failed to stow tidal-hifi config"
+    exit 1
+}
+
 echo "Setting up GPG/SSH"
 
 echo "Enabling pcscd.socket"
@@ -178,8 +188,9 @@ gpg --tofu-policy good 0x2B7340DB13C85766 || {
     exit 1
 }
 
-echo "Decrypting SSH config"
-gpg --default-key 2B7340DB13C85766 -a -d -o "$BASE_PATH"/ssh/.ssh/config "$BASE_PATH"/data/ssh/config.asc.gpg
+echo "Decrypting ./data files"
+gpg_decrypt "$BASE_PATH"/data/ssh/config.asc.gpg "$BASE_PATH"/ssh/.ssh/config
+gpg_decrypt "$BASE_PATH"/data/tidal-hifi/config.json.asc.gpg "$BASE_PATH"/tidal-hifi/.config/tidal-hifi/config.json
 
 stow -v ssh || {
     echo "Failed to stow ssh config"
@@ -333,7 +344,7 @@ echo "Checking for general utilities dependencies to install"
 yay_install gvfs gvfs-smb thunar thunar-shares-plugin smartmontools batsignal blueman bluez bluez-utils bluez-obex bluetuith
 
 echo "Checking for Sway dependencies to install"
-yay_install sway libnotify wlr-sunclock-git xsettingsd kanshi helvum pipewire-pulse pipewire-alsa wireplumber alsa-tools wlsunset xdg-desktop-portal xdg-desktop-portal-wlr pavucontrol wayland-protocols pipewire wdisplays ranger shotwell rbw rofi-rbw light waybar libappindicator-gtk2 libappindicator-gtk3 dex rofi otf-font-awesome ttf-hack python python-requests networkmanager-dmenu-git azote slurp grim swappy wl-clipboard wf-recorder grimshot swaylock-effects-git mako gammastep alacritty alacritty-colorscheme udiskie wayvnc ansiweather gnome-keyring cava iniparser fftw
+yay_install sway libnotify wlr-sunclock-git xsettingsd kanshi helvum pipewire-pulse pipewire-alsa wireplumber alsa-tools wlsunset xdg-desktop-portal xdg-desktop-portal-wlr pavucontrol wayland-protocols pipewire wdisplays ranger shotwell rbw light waybar libappindicator-gtk2 libappindicator-gtk3 dex otf-font-awesome ttf-hack python python-requests networkmanager-dmenu-git azote slurp grim swappy wl-clipboard wf-recorder grimshot swaylock-effects-git mako gammastep alacritty alacritty-colorscheme udiskie wayvnc ansiweather gnome-keyring cava iniparser fftw bemenu-wayland pinentry-bemenu
 
 echo "Installing Hyprland"
 yay_install hyprland
@@ -384,6 +395,9 @@ yay_install qbittorrent
 
 echo "Installing Solaar (Logitech manager)"
 yay_install solaar
+
+echo "Installing TIDAL-HiFi"
+yay_install tidal-hifi-git
 
 echo "Installing Go toolchain"
 yay_install go

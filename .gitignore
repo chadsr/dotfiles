@@ -31,3 +31,5 @@ rust/.cargo/*
 liquidctl/.local/bin/yoda
 ssh/.ssh/*
 !ssh/.ssh/.gitkeep
+tidal-hifi/.config/tidal-hifi/*
+!tidal-hifi/.config/tidal-hifi/.gitkeep
