@@ -438,8 +438,8 @@ rustup component add clippy rustfmt || {
 echo "Installing node.js toolchain"
 yay_install nodejs npm nvm
 
-echo "Installing Conda"
-yay_install micromamba-bin conda-zsh-completion
+echo "Installing Conda/Micromamba"
+yay_install miniconda3 conda-zsh-completion micromamba-bin
 
 echo "Installing VSCodium"
 yay_install vscodium-bin vscodium-bin-features vscodium-bin-marketplace
