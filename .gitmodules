@@ -34,3 +34,6 @@
 	path = .git_submodules/hackneyed-cursor
 	url = git@gitlab.com:Enthymeme/hackneyed-x11-cursors.git
 	branch = master
+[submodule ".git_submodules/ohmyzsh"]
+	path = .git_submodules/ohmyzsh
+	url = git@github.com:ohmyzsh/ohmyzsh.git
