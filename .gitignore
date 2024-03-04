@@ -14,14 +14,14 @@ sway/.config/gtk-4.0/bookmarks
 sway/.config/gtk-4.0/servers
 sway/.config/waybar/modules/crypto/crypto.ini
 sway/.config/alacritty/colors
+sway/.local/share
 nerd-fonts-complete
 gpg/.gnupg
-!gpg/.gnupg/gpg-agent.conf
 !gpg/.gnupg/gpg.conf
 !gpg/.gnupg/scdaemon.conf
 !gpg/.gnupg/sshcontrol
 gpg/.local
-!gpg/.local/bin/dynamic-pinentry
+!gpg/.local/bin/pinentry-auto
 vim/.config/nvim/pack
 .vscode/
 ulauncher/.config/ulauncher/ext_preferences/
