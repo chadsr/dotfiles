@@ -19,7 +19,7 @@ exec wlr-sunclock \
     --colour-land "#6100FF"
 
 exec_always swaybg -i "$HOME"/.config/sway/background.png -m fill
-exec_always import_gsettings
+exec_always "$HOME"/.local/bin/gsettings-set-sway
 
 exec_always {
     gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 600
