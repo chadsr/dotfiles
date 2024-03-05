@@ -12,5 +12,5 @@ group-by=summary
 max-icon-size=48
 
 [urgency=high]
-background-color=#d300c4
+background-color=#6100FF
 ignore-timeout=1

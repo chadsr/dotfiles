@@ -11,21 +11,17 @@
 exec xsettingsd
 exec dex -a -s :~/.config/autostart/ # Launch desktop entries
 exec wlr-sunclock \
-    --margins "5,5,5,5" \
     --width 200 \
     --layer bottom \
     --anchors tr \
     --border-width 0 \
     --colour-ocean "#0abdc6" \
-    --colour-land "#bb00cc"
+    --colour-land "#6100FF"
 
-set $gnome-schema org.gnome.desktop.interface
+exec_always swaybg -i "$HOME"/.config/sway/background.png -m fill
+exec_always import_gsettings
 
 exec_always {
-    gsettings set $gnome-schema gtk-theme 'materia-cyberpunk-neon'
-    gsettings set $gnome-schema icon-theme 'Ultimate-Punk-Suru++'
-    gsettings set $gnome-schema cursor-theme 'Ultimate-PUNK-Cyan-Cursor'
-    gsettings set $gnome-schema font-name 'Hack 10'
     gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 600
     gsettings set org.gnome.mutter.wayland xwayland-grab-access-rules "['Remmina', 'VirtualBox Machine']"
     gsettings set org.gnome.desktop.interface gtk-enable-primary-paste false
@@ -40,7 +36,7 @@ default_border pixel 1
 # class          border    bg        text      indicator child_border
 client.focused   #0abdc6   #0abdc6   #123e7c   #000000aa #0abdc6
 client.unfocused #0abdc6aa #000000aa #0abdc6aa #000000aa #000000aa
-client.urgent    #d300c4   #d300c4   #123e7c   #d300c4   #d300c4
+client.urgent    #6100FF   #6100FF   #123e7c   #6100FF   #6100FF
 
 ### Variables
 
@@ -58,9 +54,6 @@ set $term alacritty
 
 # Ulauncher menu
 set $menu ulauncher-toggle
-
-# Background wallpaper
-output * bg $HOME/.config/sway/background.png fill
 
 ### Output configuration (swaymsg -t get_outputs)
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0

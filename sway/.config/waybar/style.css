@@ -8,7 +8,7 @@
 
 window#waybar {
     background: rgba(43, 48, 59, 0.5);
-    color:  #0abdc6;
+    color: #0abdc6;
     transition-property: background, background-color;
     transition-duration: .5s;
     border-bottom: 1px solid rgba(43, 48, 59, 0.5);
@@ -60,7 +60,7 @@ window#waybar.chromium {
 } */
 
 #workspaces button.urgent {
-    background-color: #d300c4;
+    background-color: #6100FF;
 }
 
 #mode {
@@ -68,10 +68,23 @@ window#waybar.chromium {
     border-bottom: 1px solid rgba(43, 48, 59, 0.5);
 }
 
-#clock, #battery, #cpu, #memory, #temperature, #backlight, #network, #pulseaudio, #custom-media, #tray, #mode, #idle_inhibitor, #custom-weather, #custom-crypto {
+#clock,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#custom-weather,
+#custom-crypto {
     padding: 0 10px;
     margin: 0;
-    color:  #0abdc6;
+    color: #0abdc6;
 }
 
 /* #clock {
@@ -95,7 +108,7 @@ window#waybar.chromium {
 }
 
 #battery.critical:not(.charging) {
-    background-color: #ff0000;
+    background-color: #6100FF;
     color: #123e7c;
     animation-name: blink;
     animation-duration: 0.5s;
@@ -105,7 +118,7 @@ window#waybar.chromium {
 }
 
 label:focus {
-    background-color: #d300c4;
+    background-color: #6100FF;
 }
 
 /*#cpu {
@@ -156,6 +169,7 @@ label:focus {
     font-family: cryptocoins, monospace;
     /* background: linear-gradient(90deg, #fca09a, #fcccd3, #ffcc9d, #98ddad, #81d7ec, #a0aaed); */
 }
+
 /* 
 #custom-vlc {
     background: #ffa000;
@@ -166,7 +180,7 @@ label:focus {
 } */
 
 #temperature.critical {
-    background: #ff0000;
+    background: #6100FF;
 }
 
 /* #tray {
@@ -188,7 +202,7 @@ label:focus {
 }
 
 /* #mpd.disconnected {
-    background: #ff0000;
+    background: #6100FF;
 } */
 
 /* #mpd.stopped {

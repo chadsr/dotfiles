@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+# Sets GTK values with gsettings, from GTK settings.ini
+# https://github.com/swaywm/sway/wiki/GTK-3-settings-on-Wayland#setting-values-in-gsettings
+
+set -euo pipefail
+trap 'echo "Error!"' ERR INT
+
+gnome_schema="org.gnome.desktop.interface"
+
+config="${XDG_CONFIG_HOME:-$HOME/.config}/gtk-3.0/settings.ini"
+if [ ! -f "$config" ]; then exit 1; fi
+
+gtk_theme="$(grep 'gtk-theme-name' "$config" | sed 's/.*\s*=\s*//')"
+icon_theme="$(grep 'gtk-icon-theme-name' "$config" | sed 's/.*\s*=\s*//')"
+cursor_theme="$(grep 'gtk-cursor-theme-name' "$config" | sed 's/.*\s*=\s*//')"
+cursor_size="$(grep 'gtk-cursor-theme-size' "$config" | sed 's/.*\s*=\s*//')"
+font_name="$(grep 'gtk-font-name' "$config" | sed 's/.*\s*=\s*//')"
+font_antialiasing="$(grep 'gtk-xft-antialias' "$config" | sed 's/.*\s*=\s*//')"
+font_hinting="$(grep 'gtk-xft-hinting' "$config" | sed 's/.*\s*=\s*//')"
+toolbar_style="$(grep 'gtk-toolbar-style' "$config" | sed 's/.*\s*=\s*//')"
+toolbar_icons_size="$(grep 'gtk-toolbar-icon-size' "$config" | sed 's/.*\s*=\s*//')"
+
+# gsettings list-keys org.gnome.desktop.interface
+gsettings set "$gnome_schema" gtk-theme "$gtk_theme"
+gsettings set "$gnome_schema" icon-theme "$icon_theme"
+gsettings set "$gnome_schema" cursor-theme "$cursor_theme"
+gsettings set "$gnome_schema" cursor-size "$cursor_size"
+gsettings set "$gnome_schema" font-name "$font_name"
+gsettings set "$gnome_schema" font-antialiasing "$font_antialiasing"
+gsettings set "$gnome_schema" font-hinting "$font_hinting"
+gsettings set "$gnome_schema" toolbar-style "$toolbar_style"
+gsettings set "$gnome_schema" toolbar-icons-size "$toolbar_icons_size"
