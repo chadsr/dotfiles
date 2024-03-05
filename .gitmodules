@@ -37,3 +37,9 @@
 [submodule ".git_submodules/ohmyzsh"]
 	path = .git_submodules/ohmyzsh
 	url = git@github.com:ohmyzsh/ohmyzsh.git
+[submodule ".git_submodules/candy-icons"]
+	path = .git_submodules/candy-icons
+	url = git@github.com:EliverLara/candy-icons.git
+[submodule ".git_submodules/buuf-nestort-icons"]
+	path = .git_submodules/buuf-nestort-icons
+	url = https://git.disroot.org/eudaimon/buuf-nestort.git
