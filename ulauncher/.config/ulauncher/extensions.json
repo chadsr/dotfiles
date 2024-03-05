@@ -2,50 +2,50 @@
     "com.github.melianmiko.ulauncher-nmcli": {
         "id": "com.github.melianmiko.ulauncher-nmcli",
         "url": "https://github.com/melianmiko/ulauncher-nmcli",
-        "updated_at": "2022-09-29T11:01:59.183114",
+        "updated_at": "2024-03-04T04:15:34.520955",
         "last_commit": "fe967c947748616df602c9d022fec6d68a6b2cf2",
         "last_commit_time": "2022-05-01T12:20:38"
     },
     "com.github.ulauncher.ulauncher-emoji": {
         "id": "com.github.ulauncher.ulauncher-emoji",
         "url": "https://github.com/Ulauncher/ulauncher-emoji",
-        "updated_at": "2022-09-29T12:33:14.839613",
-        "last_commit": "4c6af50d1c9a24d5aad2c597634ff0c634972a5c",
-        "last_commit_time": "2021-08-08T19:19:59"
+        "updated_at": "2024-03-04T04:15:39.871102",
+        "last_commit": "827cfe5e1d2f89f742f811f981759787b0654fa9",
+        "last_commit_time": "2023-11-04T18:37:13"
     },
     "com.github.tchar.ulauncher-albert-calculate-anything": {
         "id": "com.github.tchar.ulauncher-albert-calculate-anything",
         "url": "https://github.com/tchar/ulauncher-albert-calculate-anything",
-        "updated_at": "2022-09-29T12:34:36.694744",
+        "updated_at": "2024-03-04T04:15:41.639865",
         "last_commit": "ee0903174c8b87cd1f7c3b6c1acef10702547507",
         "last_commit_time": "2021-08-12T06:39:56"
     },
     "com.github.rdnetto.ulauncher-sway": {
         "id": "com.github.rdnetto.ulauncher-sway",
         "url": "https://github.com/rdnetto/ulauncher-sway",
-        "updated_at": "2022-09-29T12:36:23.181290",
+        "updated_at": "2024-03-04T04:15:42.758422",
         "last_commit": "9fc141f01959fb5086518699229af97d920ca865",
         "last_commit_time": "2021-07-22T12:29:13"
     },
     "com.github.ulauncher.ulauncher-hash": {
         "id": "com.github.ulauncher.ulauncher-hash",
         "url": "https://github.com/Ulauncher/ulauncher-hash",
-        "updated_at": "2022-11-15T22:47:44.433500",
+        "updated_at": "2024-03-04T04:15:43.844095",
         "last_commit": "237dbb3610ff04df993c3223b12df42cb7df221f",
         "last_commit_time": "2022-09-04T14:29:55"
     },
     "com.github.eckhoff42.ulauncher-bluetooth-quick-connect": {
         "id": "com.github.eckhoff42.ulauncher-bluetooth-quick-connect",
         "url": "https://github.com/Eckhoff42/Ulauncher-Bluetooth-quick-connect",
-        "updated_at": "2022-10-13T21:44:28.473801",
+        "updated_at": "2024-03-04T04:15:44.837302",
         "last_commit": "2cb1d85cdfa870888e3eeda733b63467b0966ad1",
         "last_commit_time": "2022-05-10T15:18:43"
     },
     "com.github.iboyperson.ulauncher-system": {
         "id": "com.github.iboyperson.ulauncher-system",
         "url": "https://github.com/iboyperson/ulauncher-system",
-        "updated_at": "2022-10-13T21:46:12.088936",
-        "last_commit": "667613bf7bb6b4affa4f2121b58589477cd89829",
-        "last_commit_time": "2021-11-08T18:16:55"
+        "updated_at": "2024-03-04T04:15:46.157859",
+        "last_commit": "7dedd992709fa2297735cddf852404144d4da47c",
+        "last_commit_time": "2023-11-14T16:53:20"
     }
 }
