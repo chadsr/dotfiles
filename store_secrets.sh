@@ -16,7 +16,11 @@ gpg_encrypt_dir() {
 
 gpg --import ./data/gpg/2B7340DB13C85766.asc
 
+# Files
 gpg_encrypt_file ~/.ssh/config ./data/ssh/config.asc.gpg
 gpg_encrypt_file ~/.config/mimeapps.list ./data/xdg/mimeapps.list.asc.gpg
 gpg_encrypt_file ~/.config/tidal-hifi/config.json ./data/tidal-hifi/config.json.asc.gpg
+gpg_encrypt_file ~/.config/gallery-dl/config.json ./data/gallery-dl/config.json.asc.gpg
+
+# Directories
 gpg_encrypt_dir ./corectrl/.config/corectrl/profiles ./data/corectrl/profiles.gpgtar

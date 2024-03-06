@@ -172,6 +172,8 @@ echo "Decrypting ./data files"
 gpg_decrypt_file "$DATA_PATH"/ssh/config.asc.gpg "$BASE_PATH"/ssh/.ssh/config
 gpg_decrypt_file "$DATA_PATH"/xdg/mimeapps.list.asc.gpg "$BASE_PATH"/sway/.config/mimeapps.list
 gpg_decrypt_file "$DATA_PATH"/tidal-hifi/config.json.asc.gpg "$BASE_PATH"/tidal-hifi/.config/tidal-hifi/config.json
+gpg_decrypt_file "$DATA_PATH"/gallery-dl/config.json.asc.gpg "$BASE_PATH"/gallery-dl/.config/gallery-dl/config.json
+
 gpg_list_dir "$DATA_PATH"/corectrl/profiles.gpgtar
 gpg_decrypt_dir "$DATA_PATH"/corectrl/profiles.gpgtar "$BASE_PATH"
 
@@ -268,7 +270,12 @@ stow -v mpv || {
 }
 
 stow -v freetube || {
-    echo "Failed to stow mpv config"
+    echo "Failed to stow freetube config"
+    exit 1
+}
+
+stow -v gallery-dl || {
+    echo "Failed to stow gallery-dl config"
     exit 1
 }
 
@@ -466,7 +473,7 @@ echo "Installing Bluetooth dependencies"
 yay_install bluez bluez-utils bluez-obex bluetuith-bin
 
 echo "Checking for general utilities dependencies to install"
-yay_install gvfs gvfs-smb thunar thunar-volman thunar-shares-plugin tumbler mpv smartmontools batsignal mimeo htop udiskie pavucontrol wdisplays ranger shotwell rbw light mako alacritty gnome-keyring cava iniparser fftw bemenu-wayland pinentry-bemenu libnotify kanshi helvum xdg-desktop-portal xdg-desktop-portal-wlr wayland-protocols dex gammastep geoclue lxappearance otf-font-awesome ttf-hack dust okular
+yay_install gvfs gvfs-smb thunar thunar-volman thunar-shares-plugin tumbler mpv smartmontools batsignal mimeo htop udiskie pavucontrol wdisplays ranger shotwell rbw light mako alacritty gnome-keyring cava iniparser fftw bemenu-wayland pinentry-bemenu libnotify kanshi helvum xdg-desktop-portal xdg-desktop-portal-wlr wayland-protocols dex gammastep geoclue lxappearance otf-font-awesome ttf-hack dust okular gallery-dl-git
 
 echo "Checking for Sway dependencies to install"
 yay_install sway swayidle swaybg wlr-sunclock-git waybar azote slurp grim swappy wl-clipboard wf-recorder grimshot swaylock-effects-git wayvnc ansiweather

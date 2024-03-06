@@ -37,3 +37,5 @@ tidal-hifi/.config/tidal-hifi/*
 corectrl/.config/corectrl/profiles/*
 freetube/.config/FreeTube/*
 !freetube/.config/FreeTube/settings.db
+gallery-dl/.config/gallery-dl/*
+!gallery-dl/.config/gallery-dl/.gitkeep
