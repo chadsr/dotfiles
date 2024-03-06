@@ -262,6 +262,11 @@ stow -v tidal-hifi || {
     exit 1
 }
 
+stow -v mpv || {
+    echo "Failed to stow mpv config"
+    exit 1
+}
+
 echo "Installing Mesa/Vulkan Drivers"
 yay_install mesa lib32-mesa mesa-vdpau lib32-mesa-vdpau libva-mesa-driver lib32-libva-mesa-driver libva-utils opencl-rusticl-mesa
 
