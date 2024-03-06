@@ -626,6 +626,16 @@ systemctl --user start ulauncher.service || {
     exit 1
 }
 
+systemctl --user enable geoclue-agent.service || {
+    echo "failed to enable geoclue service"
+    exit 1
+}
+
+systemctl --user start geoclue-agent.service || {
+    echo "failed to start geoclue service"
+    exit 1
+}
+
 echo "Enabling Gammastep service"
 systemctl --user enable gammastep-wayland.service || {
     echo "failed to enable gammastep-wayland.service"
