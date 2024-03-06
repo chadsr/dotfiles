@@ -543,7 +543,7 @@ echo "Installing Video Editing dependencies"
 yay_install gyroflow-bin kdenlive
 
 echo "Installing Logseq dependencies"
-yay_install logseq
+yay_install logseq-desktop-bin
 
 echo "Installing Nextcloud dependencies"
 yay_install nextcloud-client
