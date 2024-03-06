@@ -35,3 +35,5 @@ ssh/.ssh/*
 tidal-hifi/.config/tidal-hifi/*
 !tidal-hifi/.config/tidal-hifi/.gitkeep
 corectrl/.config/corectrl/profiles/*
+freetube/.config/FreeTube/*
+!freetube/.config/FreeTube/settings.db
