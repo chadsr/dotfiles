@@ -466,7 +466,7 @@ echo "Installing Bluetooth dependencies"
 yay_install bluez bluez-utils bluez-obex bluetuith-bin
 
 echo "Checking for general utilities dependencies to install"
-yay_install gvfs gvfs-smb thunar thunar-volman thunar-shares-plugin mpv smartmontools batsignal mimeo htop udiskie pavucontrol wdisplays ranger shotwell rbw light mako alacritty gnome-keyring cava iniparser fftw bemenu-wayland pinentry-bemenu libnotify kanshi helvum xdg-desktop-portal xdg-desktop-portal-wlr wayland-protocols dex gammastep lxappearance otf-font-awesome ttf-hack dust okular
+yay_install gvfs gvfs-smb thunar thunar-volman thunar-shares-plugin mpv smartmontools batsignal mimeo htop udiskie pavucontrol wdisplays ranger shotwell rbw light mako alacritty gnome-keyring cava iniparser fftw bemenu-wayland pinentry-bemenu libnotify kanshi helvum xdg-desktop-portal xdg-desktop-portal-wlr wayland-protocols dex gammastep geoclue lxappearance otf-font-awesome ttf-hack dust okular
 
 echo "Checking for Sway dependencies to install"
 yay_install sway swayidle swaybg wlr-sunclock-git waybar azote slurp grim swappy wl-clipboard wf-recorder grimshot swaylock-effects-git wayvnc ansiweather
@@ -514,6 +514,9 @@ yay -R --noconfirm vim || {
 
 echo "Installing  neovim"
 yay_install neovim python-pynvim neovim-symlinks
+
+echo "Installing PlatformIO"
+yay_install platformio-core platformio-core-udev
 
 echo "Installing qbitorrent"
 yay_install qbittorrent
@@ -683,3 +686,6 @@ loginctl enable-linger "${USER}" || {
     echo "failed to enabling lingering"
     exit 1
 }
+
+echo "Reloading udev rules"
+sudo udevadm control --reload-rules && sudo udevadm trigger
