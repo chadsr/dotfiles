@@ -1,4 +1,4 @@
-gtk-theme-name="sweet-theme"
+gtk-theme-name="materia-cyberpunk-neon"
 gtk-icon-theme-name="buuf-nestort-icons"
 gtk-font-name="Hack 10"
 gtk-cursor-theme-name="hackneyed-dark"
@@ -11,6 +11,6 @@ gtk-enable-event-sounds=1
 gtk-enable-input-feedback-sounds=0
 gtk-xft-antialias=1
 gtk-xft-hinting=1
-gtk-xft-hintstyle="hintslight"
+gtk-xft-hintstyle="hintnone"
 gtk-xft-rgba="rgba"
 gtk-modules="canberra-gtk-module:gail:atk-bridge"

@@ -22,6 +22,7 @@ gpg_encrypt_file ~/.config/mimeapps.list ./data/xdg/mimeapps.list.asc.gpg
 gpg_encrypt_file ~/.config/tidal-hifi/config.json ./data/tidal-hifi/config.json.asc.gpg
 gpg_encrypt_file ~/.config/gallery-dl/config.json ./data/gallery-dl/config.json.asc.gpg
 gpg_encrypt_file ~/.config/waybar/modules/crypto/config.ini ./data/waybar/crypto/config.ini.asc.gpg
+gpg_encrypt_file ~/.config/gtk-3.0/bookmarks ./data/gtk/bookmarks.asc.gpg
 
 # Directories
 gpg_encrypt_dir ~/.config/corectrl/profiles ./data/corectrl/profiles.gpgtar
