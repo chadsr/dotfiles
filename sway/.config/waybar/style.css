@@ -60,6 +60,7 @@ window#waybar.chromium {
 } */
 
 #workspaces button.urgent {
+    color: #0abdc6;
     background-color: #6100FF;
 }
 
