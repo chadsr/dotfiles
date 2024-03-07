@@ -4,7 +4,7 @@
 
 # Set default editor
 export EDITOR=/usr/bin/nvim
-export VISUAL=/usr/bin/nvim
+export VISUAL=/usr/bin/codium
 
 # XDG
 XDG_SCREENSHOTS_DIR=$HOME/Pictures/screenshots
