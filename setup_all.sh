@@ -107,6 +107,7 @@ mkdir -p ~/.config/environment.d
 mkdir -p ~/.config/pulseaudio-ctl
 mkdir -p ~/.config/tidal-hifi
 mkdir -p ~/.config/ulauncher
+mkdir -p ~/.config/corectrl/profiles
 mkdir -p ~/.themes
 mkdir -p ~/.icons
 mkdir -p ~/.cargo
@@ -220,7 +221,8 @@ gpg_decrypt_file "$DATA_PATH"/ssh/config.asc.gpg "$BASE_PATH"/ssh/.ssh/config
 gpg_decrypt_file "$DATA_PATH"/xdg/mimeapps.list.asc.gpg "$BASE_PATH"/sway/.config/mimeapps.list
 gpg_decrypt_file "$DATA_PATH"/tidal-hifi/config.json.asc.gpg "$BASE_PATH"/tidal-hifi/.config/tidal-hifi/config.json
 gpg_decrypt_file "$DATA_PATH"/gallery-dl/config.json.asc.gpg "$BASE_PATH"/gallery-dl/.config/gallery-dl/config.json
-# gpg_decrypt_file "$DATA_PATH"/waybar/crypto/config.ini.asc.gpg "$BASE_PATH"/sway/.config/waybar/modules/crypto/config.ini
+gpg_decrypt_file "$DATA_PATH"/waybar/crypto/config.ini.asc.gpg "$BASE_PATH"/sway/.config/waybar/modules/crypto/config.ini
+gpg_decrypt_file "$DATA_PATH"/gtk/bookmarks.asc.gpg "$BASE_PATH"/gtk/.config/gtk-3.0/bookmarks
 
 gpg_list_dir "$DATA_PATH"/corectrl/profiles.gpgtar
 gpg_decrypt_dir "$DATA_PATH"/corectrl/profiles.gpgtar "$BASE_PATH"
