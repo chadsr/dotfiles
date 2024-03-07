@@ -1,0 +1,11 @@
+[Unit]
+Description=XSETTINGS-protocol daemon
+BindsTo=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/xsettingsd
+ExecReload=kill -HUP $MAINPID
+Slice=session.slice
+
+[Install]
+WantedBy=graphical-session.target
