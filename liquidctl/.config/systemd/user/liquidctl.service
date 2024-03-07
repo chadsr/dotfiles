@@ -10,4 +10,4 @@ ExecStart=liquidctl set logo color off
 ExecStart=liquidctl set ring color water-cooler --speed slowest 000000 6100FF
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target
