@@ -7,8 +7,14 @@ GIT_SUBMODULES="$BASE_PATH"/.git_submodules
 GPG_PRIMARY_KEY=0x2B7340DB13C85766
 GPG_ENCRYPTION_SUBKEY=0x79C70BBE4865D828
 
+exit_setup() {
+    rv=$?
+    echo "Exiting setup..."
+    exit $rv
+}
+
 set -euo pipefail
-trap 'echo "Error!"' ERR INT
+trap 'exit_setup' ERR INT
 
 prompt_exit() {
     read -rp "$1 Continue or Abort? (y/N)" answer
@@ -58,14 +64,16 @@ symlink() {
 gpg_ssh_agent() {
     unset SSH_AGENT_PID
     if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
-        export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+        SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+        export SSH_AUTH_SOCK
     fi
-    export GPG_TTY=$(tty)
+    GPG_TTY=$(tty)
+    export GPG_TTY
     gpg-connect-agent updatestartuptty /bye >/dev/null
 }
 
 gpg_decrypt_file() {
-    gpg -v --local-user "$GPG_ENCRYPTION_SUBKEY" --armor --decrypt --output "${2}" "${1}"
+    gpg -v --local-user "$GPG_ENCRYPTION_SUBKEY" --armor --decrypt --yes --output "${2}" "${1}"
 }
 
 gpg_list_dir() {
@@ -73,7 +81,7 @@ gpg_list_dir() {
 }
 
 gpg_decrypt_dir() {
-    gpgtar -v --gpg-args "--local-user ${GPG_ENCRYPTION_SUBKEY}" --decrypt --directory "${2}" "${1}"
+    gpgtar -v --gpg-args "--local-user ${GPG_ENCRYPTION_SUBKEY}" --decrypt --yes --directory "${2}" "${1}"
 }
 
 stow -t ~/ stow || {
@@ -81,19 +89,41 @@ stow -t ~/ stow || {
     exit 1
 }
 
+echo "Removing broken symlinks in ${HOME}/.config"
+find ~/.config/ -xtype l -print -delete || {
+    echo "Failed to remove broken symlinks"
+    exit 1
+}
+
 echo "Setting up user directory configs"
+
+# Parent dirs that should not be symlinks from stow-ing
+mkdir -p ~/.local/share
+mkdir -p ~/.local/bin
+mkdir -p ~/.config/pulse
+mkdir -p ~/.config/nvim
+mkdir -p ~/.config/systemd/user
+mkdir -p ~/.config/environment.d
+mkdir -p ~/.config/pulseaudio-ctl
+mkdir -p ~/.config/tidal-hifi
+mkdir -p ~/.config/ulauncher
+mkdir -p ~/.themes
+mkdir -p ~/.icons
+mkdir -p ~/.cargo
+mkdir -p ~/.oh-my-zsh
+mkdir -p ~/.config/VSCodium/User/globalStorage/zokugun.sync-settings
+
+# Remove existing dirs/files that will cause conflicts
 rm -f ~/.config/mimeapps.list
 rm -f ~/.gtkrc-2.0
 rm -rf ~/.config/gtk-3.0
 rm -rf ~/.config/gtk-4.0
+rm -f ~/.zshrc
+rm -f ~/.zshenv
+rm -f ~/.bashrc
 
 stow -v bash || {
     echo "Failed to stow Bash config"
-    exit 1
-}
-
-stow -v zsh || {
-    echo "Failed to stow ZSH config"
     exit 1
 }
 
@@ -112,11 +142,6 @@ stow -v git || {
     exit 1
 }
 
-stow -v gpg || {
-    echo "Failed to stow GPG config"
-    exit 1
-}
-
 echo "Updating package databases & packages"
 yay -Syu || {
     echo "failed to update package databases"
@@ -128,6 +153,28 @@ yay_install git curl wget make stow gnupg pcsclite ccid inkscape xorg-xcursorgen
 
 rustup default stable || {
     echo "failed to setup rust stable toolchain"
+    exit 1
+}
+
+echo "Checking for ZSH dependencies to install"
+yay_install zsh thefuck ttf-meslo-nerd-font-powerlevel10k
+
+read -p "Do you need to install ohmyzsh? ($GIT_SUBMODULES/ohmyzsh/tools/install.sh) (y/N)?" -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    read -r -p "Press enter once the the installation is finished... [enter]"
+fi
+
+stow -v zsh || {
+    echo "Failed to stow ZSH config"
+    exit 1
+}
+
+# Create ~/.gnupg
+gpg --list-keys
+
+stow -v gpg || {
+    echo "Failed to stow GPG config"
     exit 1
 }
 
@@ -173,6 +220,7 @@ gpg_decrypt_file "$DATA_PATH"/ssh/config.asc.gpg "$BASE_PATH"/ssh/.ssh/config
 gpg_decrypt_file "$DATA_PATH"/xdg/mimeapps.list.asc.gpg "$BASE_PATH"/sway/.config/mimeapps.list
 gpg_decrypt_file "$DATA_PATH"/tidal-hifi/config.json.asc.gpg "$BASE_PATH"/tidal-hifi/.config/tidal-hifi/config.json
 gpg_decrypt_file "$DATA_PATH"/gallery-dl/config.json.asc.gpg "$BASE_PATH"/gallery-dl/.config/gallery-dl/config.json
+# gpg_decrypt_file "$DATA_PATH"/waybar/crypto/config.ini.asc.gpg "$BASE_PATH"/sway/.config/waybar/modules/crypto/config.ini
 
 gpg_list_dir "$DATA_PATH"/corectrl/profiles.gpgtar
 gpg_decrypt_dir "$DATA_PATH"/corectrl/profiles.gpgtar "$BASE_PATH"
@@ -183,6 +231,10 @@ stow -v ssh || {
 }
 
 gpg_ssh_agent
+
+# Check if certain submodules get updated, so we don't build them uneccessarily
+hackneyed_updated=false
+hackneyed_hash_old=$(git -C "$GIT_SUBMODULES"/hackneyed-cursor rev-parse --short HEAD)
 
 git submodule update --progress --init --force --recursive --remote || {
     echo "failed to update git submodules"
@@ -198,6 +250,12 @@ git submodule foreach --recursive git reset --hard || {
     echo "failed to reset git submodules"
     exit 1
 }
+
+hackneyed_hash_new=$(git -C "$GIT_SUBMODULES"/hackneyed-cursor rev-parse --short HEAD)
+if [[ "$hackneyed_hash_old" != "$hackneyed_hash_new" ]]; then
+    hackneyed_updated=true
+    echo "hackneyed-cursor has been updated"
+fi
 
 stow -v sway || {
     echo "Failed to stow Sway config"
@@ -246,6 +304,16 @@ stow -v logseq || {
 
 stow -v alacritty || {
     echo "Failed to stow Alacritty config"
+    exit 1
+}
+
+stow -v ranger || {
+    echo "Failed to stow ranger config"
+    exit 1
+}
+
+stow -v gtk || {
+    echo "Failed to stow gtk config"
     exit 1
 }
 
@@ -373,48 +441,56 @@ sudo usermod -a -G audio "$USER"
 
 echo "Copying themes from git repo to dotfiles locations"
 
-cd "$GIT_SUBMODULES"/hackneyed-cursor || {
-    echo "failed to cd to hackneyed-cursor"
-    exit 1
-}
+# If Hackneyed Dark build does not exist, then build it
+if [[ ! -d "$BASE_PATH"/gtk/.icons/hackneyed-dark ]] || [[ $hackneyed_updated == true ]]; then
+    echo "Building hackneyed cursor"
 
-make clean distclean || {
-    echo "failed to clean hackneyed cursor"
-    exit 1
-}
+    cd "$GIT_SUBMODULES"/hackneyed-cursor || {
+        echo "failed to cd to hackneyed-cursor"
+        exit 1
+    }
 
-make -O DARK_THEME=1 dist || {
-    echo "failed to make hackneyed cursor"
-    exit 1
-}
+    make clean distclean || {
+        echo "failed to clean hackneyed cursor"
+        exit 1
+    }
 
-symlink "$GIT_SUBMODULES"/hackneyed-cursor/Hackneyed-Dark "$BASE_PATH"/sway/.icons/hackneyed-dark
+    make -O DARK_THEME=1 dist || {
+        echo "failed to make hackneyed cursor"
+        exit 1
+    }
 
-make clean || {
-    echo "failed to clean hackneyed make files"
-    exit 1
-}
-rm -f ./*.tar.bz2
-cd "$BASE_PATH" || {
-    echo "failed to cd to ${BASE_PATH}"
-    exit 1
-}
+    rmrf "$BASE_PATH"/gtk/.icons/hackneyed-dark
+    cp -rv "$GIT_SUBMODULES"/hackneyed-cursor/Hackneyed-Dark "$BASE_PATH"/gtk/.icons/hackneyed-dark # cp instead of ln because the build dir will get reset by git
+
+    make clean || {
+        echo "failed to clean hackneyed make files"
+        exit 1
+    }
+    rm -f ./*.tar.bz2
+    cd "$BASE_PATH" || {
+        echo "failed to cd to ${BASE_PATH}"
+        exit 1
+    }
+else
+    echo "Skipping hackneyed cursor build"
+fi
 
 symlink "$GIT_SUBMODULES"/alacritty-theme/themes "$BASE_PATH"/alacritty/.config/alacritty/colors
 
-symlink "$GIT_SUBMODULES"/sweet-icons/Sweet-Purple "$BASE_PATH"/sway/.icons/sweet-purple
+symlink "$GIT_SUBMODULES"/sweet-icons/Sweet-Purple "$BASE_PATH"/gtk/.icons/sweet-purple
 
-symlink "$GIT_SUBMODULES"/sweet-icons "$BASE_PATH"/sway/.icons/sweet-icons
+symlink "$GIT_SUBMODULES"/sweet-icons "$BASE_PATH"/gtk/.icons/sweet-icons
 
-symlink "$GIT_SUBMODULES"/sweet-theme "$BASE_PATH"/sway/.themes/sweet-theme
+symlink "$GIT_SUBMODULES"/sweet-theme "$BASE_PATH"/gtk/.themes/sweet-theme
 
-symlink "$GIT_SUBMODULES"/candy-icons "$BASE_PATH"/sway/.icons/candy-icons
+symlink "$GIT_SUBMODULES"/candy-icons "$BASE_PATH"/gtk/.icons/candy-icons
 
-symlink "$GIT_SUBMODULES"/buuf-nestort-icons "$BASE_PATH"/sway/.icons/buuf-nestort-icons
+symlink "$GIT_SUBMODULES"/buuf-nestort-icons "$BASE_PATH"/gtk/.icons/buuf-nestort-icons
 
-rmrf "$BASE_PATH"/sway/.themes/materia-cyberpunk-neon
-unzip -o "$GIT_SUBMODULES"/cyberpunk-theme/gtk/materia-cyberpunk-neon.zip -d "$BASE_PATH"/sway/.themes || {
-    echo "failed copying Cyberpunk-Neon theme to sway"
+rmrf "$BASE_PATH"/gtk/.themes/materia-cyberpunk-neon
+unzip -o "$GIT_SUBMODULES"/cyberpunk-theme/gtk/materia-cyberpunk-neon.zip -d "$BASE_PATH"/gtk/.themes || {
+    echo "failed copying Cyberpunk-Neon theme"
     exit 1
 }
 
@@ -422,13 +498,6 @@ echo "Checking for old dependencies to remove"
 yay -R --noconfirm swaylock swaylock-blur pipewire-media-session pipewire-pulseaudio pipewire-pulseaudio-git pulseaudio-equalizer pulseaudio-lirc pulseaudio-zeroconf pulseaudio pulseaudio-bluetooth redshift-wayland-git birdtray alacritty-colorscheme ly || {
     echo "no old dependencies found"
 }
-
-echo "Checking for ZSH dependencies to install"
-"$GIT_SUBMODULES"/ohmyzsh/tools/install.sh || {
-    echo "failed to install oh-my-zsh"
-}
-
-yay_install zsh thefuck ttf-meslo-nerd-font-powerlevel10k
 
 echo "Installing Python dependencies"
 yay_install python python-requests
@@ -456,7 +525,7 @@ echo "Installing QT Dependencies"
 yay_install qt5-wayland qt6-wayland qtkeychain-qt5 qtkeychain-qt6 qgnomeplatform-qt5 qgnomeplatform-qt6
 
 echo "Installing GTK Dependencies"
-yay_install libappindicator-gtk2 libappindicator-gtk3 xsettingsd
+yay_install libappindicator-gtk2 libappindicator-gtk3 xsettingsd-git
 
 echo "Installing greetd Greeter"
 yay_install greetd greetd-regreet
@@ -540,8 +609,8 @@ yay_install tidal-hifi-git
 echo "Installing Brave"
 yay_install brave-bin
 
-echo "Installing Conda/Micromamba"
-yay_install miniconda3 conda-zsh-completion micromamba-bin
+# echo "Installing Conda/Micromamba"
+# yay_install miniconda3 conda-zsh-completion micromamba-bin
 
 echo "Installing VSCodium"
 yay_install vscodium-bin vscodium-bin-features vscodium-bin-marketplace
@@ -603,6 +672,17 @@ systemctl --user daemon-reload || {
 
 systemctl --user restart wireplumber pipewire pipewire-pulse.service pipewire-pulse.socket || {
     echo "failed to restart pipewire"
+    exit 1
+}
+
+echo "Enabling xsettingsd service"
+systemctl --user enable xsettingsd.service || {
+    echo "failed to enable xsettingsd service"
+    exit 1
+}
+
+systemctl --user start xsettingsd.service || {
+    echo "failed to start xsettingsd service"
     exit 1
 }
 
@@ -699,6 +779,7 @@ systemctl --user start corectrl.service || {
 }
 
 echo "Enable lingering for current user"
+# Prevents user systemd units from getting killed
 loginctl enable-linger "${USER}" || {
     echo "failed to enabling lingering"
     exit 1
