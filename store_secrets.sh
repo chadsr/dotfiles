@@ -7,11 +7,11 @@ set -euo pipefail
 trap 'echo "Error!"' ERR INT
 
 gpg_encrypt_file() {
-    gpg -v --local-user "$GPG_SIGNING_KEY" --recipient "$RECIPIENT_GPG_ENCRYPTION_KEY" --armor --sign --output "${2}" --encrypt "${1}"
+    gpg -v --local-user "$GPG_SIGNING_KEY" --recipient "$RECIPIENT_GPG_ENCRYPTION_KEY" --armor --sign --output "${2}" --yes --encrypt "${1}"
 }
 
 gpg_encrypt_dir() {
-    gpgtar -v --gpg-args "--local-user ${GPG_SIGNING_KEY} --recipient ${RECIPIENT_GPG_ENCRYPTION_KEY}" --sign --output "${2}" --encrypt "${1}"
+    gpgtar -v --gpg-args "--local-user ${GPG_SIGNING_KEY} --recipient ${RECIPIENT_GPG_ENCRYPTION_KEY}" --sign --output "${2}" --yes --encrypt "${1}"
 }
 
 gpg --import ./data/gpg/2B7340DB13C85766.asc
