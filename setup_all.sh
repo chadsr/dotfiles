@@ -217,24 +217,6 @@ gpg --tofu-policy good "$GPG_PRIMARY_KEY" || {
     exit 1
 }
 
-echo "Decrypting ./data files"
-gpg_decrypt_file "$DATA_PATH"/ssh/config.asc.gpg "$BASE_PATH"/ssh/.ssh/config
-gpg_decrypt_file "$DATA_PATH"/xdg/mimeapps.list.asc.gpg "$BASE_PATH"/xdg/.config/mimeapps.list
-gpg_decrypt_file "$DATA_PATH"/tidal-hifi/config.json.asc.gpg "$BASE_PATH"/tidal-hifi/.config/tidal-hifi/config.json
-gpg_decrypt_file "$DATA_PATH"/gallery-dl/config.json.asc.gpg "$BASE_PATH"/gallery-dl/.config/gallery-dl/config.json
-gpg_decrypt_file "$DATA_PATH"/waybar/crypto/config.ini.asc.gpg "$BASE_PATH"/sway/.config/waybar/modules/crypto/config.ini
-gpg_decrypt_file "$DATA_PATH"/gtk/bookmarks.asc.gpg "$BASE_PATH"/gtk/.config/gtk-3.0/bookmarks
-
-gpg_list_dir "$DATA_PATH"/corectrl/profiles.gpgtar
-gpg_decrypt_dir "$DATA_PATH"/corectrl/profiles.gpgtar "$BASE_PATH"
-
-stow -v ssh || {
-    echo "Failed to stow ssh config"
-    exit 1
-}
-
-gpg_ssh_agent
-
 # Check if certain submodules get updated, so we don't build them uneccessarily
 hackneyed_updated=false
 hackneyed_hash_old=$(git -C "$GIT_SUBMODULES"/hackneyed-cursor rev-parse --short HEAD)
@@ -259,6 +241,24 @@ if [[ "$hackneyed_hash_old" != "$hackneyed_hash_new" ]]; then
     hackneyed_updated=true
     echo "hackneyed-cursor has been updated"
 fi
+
+echo "Decrypting ./data files"
+gpg_decrypt_file "$DATA_PATH"/ssh/config.asc.gpg "$BASE_PATH"/ssh/.ssh/config
+gpg_decrypt_file "$DATA_PATH"/xdg/mimeapps.list.asc.gpg "$BASE_PATH"/xdg/.config/mimeapps.list
+gpg_decrypt_file "$DATA_PATH"/tidal-hifi/config.json.asc.gpg "$BASE_PATH"/tidal-hifi/.config/tidal-hifi/config.json
+gpg_decrypt_file "$DATA_PATH"/gallery-dl/config.json.asc.gpg "$BASE_PATH"/gallery-dl/.config/gallery-dl/config.json
+gpg_decrypt_file "$DATA_PATH"/waybar/crypto/config.ini.asc.gpg "$BASE_PATH"/sway/.config/waybar/modules/crypto/config.ini
+gpg_decrypt_file "$DATA_PATH"/gtk/bookmarks.asc.gpg "$BASE_PATH"/gtk/.config/gtk-3.0/bookmarks
+
+gpg_list_dir "$DATA_PATH"/corectrl/profiles.gpgtar
+gpg_decrypt_dir "$DATA_PATH"/corectrl/profiles.gpgtar "$BASE_PATH"
+
+stow -v ssh || {
+    echo "Failed to stow ssh config"
+    exit 1
+}
+
+gpg_ssh_agent
 
 stow -v sway || {
     echo "Failed to stow Sway config"
