@@ -355,6 +355,11 @@ stow -v bat || {
     exit 1
 }
 
+stow -v nextcloud || {
+    echo "Failed to stow nextcloud config"
+    exit 1
+}
+
 echo "Installing Mesa/Vulkan Drivers"
 yay_install mesa lib32-mesa mesa-vdpau lib32-mesa-vdpau libva-mesa-driver lib32-libva-mesa-driver libva-utils opencl-rusticl-mesa
 
@@ -552,7 +557,7 @@ echo "Installing Bluetooth dependencies"
 yay_install bluez bluez-utils bluez-obex bluetuith-bin
 
 echo "Checking for general utilities dependencies to install"
-yay_install gvfs gvfs-smb thunar thunar-volman thunar-shares-plugin tumbler mpv smartmontools batsignal mimeo htop udiskie pavucontrol wdisplays ranger shotwell rbw light mako alacritty gnome-keyring cava iniparser fftw bemenu-wayland pinentry-bemenu libnotify kanshi helvum xdg-desktop-portal xdg-desktop-portal-wlr wayland-protocols dex gammastep geoclue lxappearance otf-font-awesome ttf-hack dust okular gallery-dl-git bat
+yay_install gvfs gvfs-smb thunar thunar-volman thunar-shares-plugin tumbler mpv smartmontools batsignal mimeo htop udiskie pavucontrol wdisplays ranger shotwell rbw light mako alacritty gnome-keyring cava iniparser fftw bemenu-wayland pinentry-bemenu libnotify kanshi helvum xdg-desktop-portal xdg-desktop-portal-wlr wayland-protocols dex gammastep geoclue lxappearance otf-font-awesome ttf-hack dust okular gallery-dl-git bat nextcloud-client
 
 bat cache --build || {
     echo "failed to build bat cache"
@@ -790,6 +795,17 @@ systemctl --user enable corectrl.service || {
 
 systemctl --user start corectrl.service || {
     echo "failed to start corectrl.service"
+    exit 1
+}
+
+echo "Enabling nextcloud client service"
+systemctl --user enable nextcloud-client.service || {
+    echo "failed to enable nextcloud-client.service"
+    exit 1
+}
+
+systemctl --user start nextcloud-client.service || {
+    echo "failed to start nextcloud-client.service"
     exit 1
 }
 
