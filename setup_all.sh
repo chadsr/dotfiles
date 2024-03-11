@@ -108,6 +108,7 @@ mkdir -p ~/.config/pulseaudio-ctl
 mkdir -p ~/.config/tidal-hifi
 mkdir -p ~/.config/ulauncher
 mkdir -p ~/.config/corectrl/profiles
+mkdir -p ~/.config/bat/themes
 mkdir -p ~/.themes
 mkdir -p ~/.icons
 mkdir -p ~/.cargo
@@ -349,6 +350,11 @@ stow -v gallery-dl || {
     exit 1
 }
 
+stow -v bat || {
+    echo "Failed to stow bat config"
+    exit 1
+}
+
 echo "Installing Mesa/Vulkan Drivers"
 yay_install mesa lib32-mesa mesa-vdpau lib32-mesa-vdpau libva-mesa-driver lib32-libva-mesa-driver libva-utils opencl-rusticl-mesa
 
@@ -490,6 +496,8 @@ symlink "$GIT_SUBMODULES"/candy-icons "$BASE_PATH"/gtk/.icons/candy-icons
 
 symlink "$GIT_SUBMODULES"/buuf-nestort-icons "$BASE_PATH"/gtk/.icons/buuf-nestort-icons
 
+symlink "$GIT_SUBMODULES"/catppuccin-bat/themes/Catppuccin\ Mocha.tmTheme "$BASE_PATH"/bat/.config/bat/themes/Catppuccin-Mocha.tmTheme
+
 rmrf "$BASE_PATH"/gtk/.themes/materia-cyberpunk-neon
 unzip -o "$GIT_SUBMODULES"/cyberpunk-theme/gtk/materia-cyberpunk-neon.zip -d "$BASE_PATH"/gtk/.themes || {
     echo "failed copying Cyberpunk-Neon theme"
@@ -544,7 +552,12 @@ echo "Installing Bluetooth dependencies"
 yay_install bluez bluez-utils bluez-obex bluetuith-bin
 
 echo "Checking for general utilities dependencies to install"
-yay_install gvfs gvfs-smb thunar thunar-volman thunar-shares-plugin tumbler mpv smartmontools batsignal mimeo htop udiskie pavucontrol wdisplays ranger shotwell rbw light mako alacritty gnome-keyring cava iniparser fftw bemenu-wayland pinentry-bemenu libnotify kanshi helvum xdg-desktop-portal xdg-desktop-portal-wlr wayland-protocols dex gammastep geoclue lxappearance otf-font-awesome ttf-hack dust okular gallery-dl-git
+yay_install gvfs gvfs-smb thunar thunar-volman thunar-shares-plugin tumbler mpv smartmontools batsignal mimeo htop udiskie pavucontrol wdisplays ranger shotwell rbw light mako alacritty gnome-keyring cava iniparser fftw bemenu-wayland pinentry-bemenu libnotify kanshi helvum xdg-desktop-portal xdg-desktop-portal-wlr wayland-protocols dex gammastep geoclue lxappearance otf-font-awesome ttf-hack dust okular gallery-dl-git bat
+
+bat cache --build || {
+    echo "failed to build bat cache"
+    exit 1
+}
 
 echo "Checking for Sway dependencies to install"
 yay_install sway swayidle swaybg wlr-sunclock-git waybar azote slurp grim swappy wl-clipboard wf-recorder grimshot swaylock-effects-git wayvnc ansiweather

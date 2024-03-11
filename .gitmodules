@@ -43,3 +43,6 @@
 [submodule ".git_submodules/buuf-nestort-icons"]
 	path = .git_submodules/buuf-nestort-icons
 	url = https://git.disroot.org/eudaimon/buuf-nestort.git
+[submodule ".git_submodules/catppuccin-bat"]
+	path = .git_submodules/catppuccin-bat
+	url = git@github.com:catppuccin/bat.git
