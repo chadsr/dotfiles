@@ -219,7 +219,7 @@ gpg --tofu-policy good "$GPG_PRIMARY_KEY" || {
 
 echo "Decrypting ./data files"
 gpg_decrypt_file "$DATA_PATH"/ssh/config.asc.gpg "$BASE_PATH"/ssh/.ssh/config
-gpg_decrypt_file "$DATA_PATH"/xdg/mimeapps.list.asc.gpg "$BASE_PATH"/sway/.config/mimeapps.list
+gpg_decrypt_file "$DATA_PATH"/xdg/mimeapps.list.asc.gpg "$BASE_PATH"/xdg/.config/mimeapps.list
 gpg_decrypt_file "$DATA_PATH"/tidal-hifi/config.json.asc.gpg "$BASE_PATH"/tidal-hifi/.config/tidal-hifi/config.json
 gpg_decrypt_file "$DATA_PATH"/gallery-dl/config.json.asc.gpg "$BASE_PATH"/gallery-dl/.config/gallery-dl/config.json
 gpg_decrypt_file "$DATA_PATH"/waybar/crypto/config.ini.asc.gpg "$BASE_PATH"/sway/.config/waybar/modules/crypto/config.ini
@@ -267,6 +267,11 @@ stow -v sway || {
 
 stow -v hyprland || {
     echo "Failed to stow Hyprland config"
+    exit 1
+}
+
+stow -v xdg || {
+    echo "Failed to stow xdg config"
     exit 1
 }
 

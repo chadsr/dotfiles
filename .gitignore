@@ -7,7 +7,7 @@ gtk/.config/gtk-3.0/bookmarks
 gtk/.config/gtk-4.0/bookmarks
 sway/.config/waybar/modules/crypto/crypto.ini
 sway/.config/alacritty/colors
-sway/.config/mimeapps.list
+xdg/.config/mimeapps.list
 liquidctl/.local/bin/yoda
 ssh/.ssh/*
 !ssh/.ssh/.gitkeep
