@@ -7,6 +7,9 @@ GIT_SUBMODULES="$BASE_PATH"/.git_submodules
 GPG_PRIMARY_KEY=0x2B7340DB13C85766
 GPG_ENCRYPTION_SUBKEY=0x79C70BBE4865D828
 
+laptop_name="laptop"
+desktop_name="workstation"
+
 exit_setup() {
     rv=$?
     echo "Exiting setup..."
@@ -16,6 +19,12 @@ exit_setup() {
 set -euo pipefail
 trap 'exit_setup' ERR INT
 
+script_name=$(basename "$0")
+
+help() {
+    printf "Sets up system packages and configurations.\n\nUsage: %s <laptop|workstaton>\n" "$script_name"
+}
+
 prompt_exit() {
     read -rp "$1 Continue or Abort? (y/N)" answer
     case ${answer:0:1} in
@@ -23,13 +32,18 @@ prompt_exit() {
         return
         ;;
     *)
-        exit 0
+        exit_setup
         ;;
     esac
 }
 
-if [ $# -eq 0 ]; then
-    echo >&2 "First argument must be <laptop | workstation >"
+if [ "$#" -ne 1 ]; then
+    help
+    exit 0
+fi
+
+if [[ "$1" != "$laptop_name" ]] && [[ "$1" != "$desktop_name" ]]; then
+    help
     exit 1
 fi
 
@@ -250,9 +264,6 @@ gpg_decrypt_file "$DATA_PATH"/gallery-dl/config.json.asc.gpg "$BASE_PATH"/galler
 gpg_decrypt_file "$DATA_PATH"/waybar/crypto/config.ini.asc.gpg "$BASE_PATH"/sway/.config/waybar/modules/crypto/config.ini
 gpg_decrypt_file "$DATA_PATH"/gtk/bookmarks.asc.gpg "$BASE_PATH"/gtk/.config/gtk-3.0/bookmarks
 
-gpg_list_dir "$DATA_PATH"/corectrl/profiles.gpgtar
-gpg_decrypt_dir "$DATA_PATH"/corectrl/profiles.gpgtar "$BASE_PATH"
-
 stow -v ssh || {
     echo "Failed to stow ssh config"
     exit 1
@@ -368,8 +379,11 @@ stow -v nextcloud || {
 echo "Installing Mesa/Vulkan Drivers"
 yay_install mesa lib32-mesa mesa-vdpau lib32-mesa-vdpau libva-mesa-driver lib32-libva-mesa-driver libva-utils opencl-rusticl-mesa
 
-if [[ "$1" == "laptop" ]]; then
+if [[ "$1" == "$laptop_name" ]]; then
     echo "Copying laptop system configuration"
+
+    gpg_list_dir "$DATA_PATH"/corectrl/laptop_profiles.gpgtar
+    gpg_decrypt_dir "$DATA_PATH"/corectrl/laptop_profiles.gpgtar "$BASE_PATH"
 
     sudo rsync --chown=root:root --open-noatime --progress -ruav "$SYSTEM_CONFIG"/laptop/* /
 
@@ -397,7 +411,7 @@ if [[ "$1" == "laptop" ]]; then
         exit 1
     }
 
-elif [[ "$1" == "workstation" ]]; then
+elif [[ "$1" == "$desktop_name" ]]; then
     echo "Installing Radeon/Vulkan/ROCM drivers"
     yay_install xf86-video-amdgpu vulkan-radeon lib32-vulkan-radeon rocm-core rocm-opencl-runtime comgr hipblas rccl
 
@@ -413,6 +427,9 @@ elif [[ "$1" == "workstation" ]]; then
         sudo vi /etc/default/grub
         sudo grub-mkconfig -o /boot/grub/grub.cfg
     fi
+
+    gpg_list_dir "$DATA_PATH"/corectrl/workstation_profiles.gpgtar
+    gpg_decrypt_dir "$DATA_PATH"/corectrl/workstation_profiles.gpgtar "$BASE_PATH"
 
     sudo rsync --chown=root:root --open-noatime --progress -ruav "$SYSTEM_CONFIG"/workstation/* /
 
@@ -444,8 +461,6 @@ elif [[ "$1" == "workstation" ]]; then
     sudo rm -f /usr/lib/firewalld/services/alvr.xml
     echo "Installing ALVR"
     yay_install alvr-git
-else
-    exit 1
 fi
 
 echo "Copying common system configuration"
