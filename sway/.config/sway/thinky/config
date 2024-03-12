@@ -1,7 +1,7 @@
-# Thinkpad T480s Specific Configuration, loaded on hostname "thinky"
+# Specific Configuration, loaded on hostname "thinky"
 
 #
-# Thinkpad Brightness controls using light
+# Display brightness controls using light
 #
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set 5%+
