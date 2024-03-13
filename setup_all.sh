@@ -189,7 +189,7 @@ yay -Syu || {
 }
 
 declare -a old_pkgs=(
-    swaylock swaylock-blur pipewire-media-session pipewire-pulseaudio pipewire-pulseaudio-git pulseaudio-equalizer pulseaudio-lirc pulseaudio-zeroconf pulseaudio pulseaudio-bluetooth redshift-wayland-git birdtray alacritty-colorscheme ly vscodium-bin vscodium-bin-features vscodium-bin-marketplace
+    swaylock swaylock-blur pipewire-media-session pipewire-pulseaudio pipewire-pulseaudio-git pulseaudio-equalizer pulseaudio-lirc pulseaudio-zeroconf pulseaudio pulseaudio-bluetooth redshift-wayland-git birdtray alacritty-colorscheme ly vscodium-bin vscodium-bin-features vscodium-bin-marketplace thunar-shares-plugin
 )
 echo "Checking for old packages to remove"
 for old_pkg in "${old_pkgs[@]}"; do
@@ -635,7 +635,7 @@ echo "Installing Bluetooth dependencies"
 yay_install bluez bluez-utils bluez-obex bluetuith-git
 
 echo "Checking for general utilities dependencies to install"
-yay_install gvfs gvfs-smb thunar thunar-volman thunar-shares-plugin tumbler mpv smartmontools batsignal mimeo htop udiskie pavucontrol wdisplays ranger shotwell rbw light mako alacritty gnome-keyring cava iniparser fftw bemenu-wayland pinentry-bemenu libnotify kanshi helvum xdg-desktop-portal xdg-desktop-portal-wlr wayland-protocols dex gammastep geoclue lxappearance otf-font-awesome ttf-hack dust okular gallery-dl-git bat nextcloud-client opensnitch hopenpgp-tools ddrescue nmap
+yay_install gvfs gvfs-smb thunar thunar-volman thunar-archive-plugin thunar-media-tags-plugin tumbler mpv smartmontools batsignal mimeo htop udiskie pavucontrol wdisplays ranger shotwell rbw light mako alacritty gnome-keyring cava iniparser fftw bemenu-wayland pinentry-bemenu libnotify kanshi helvum xdg-desktop-portal xdg-desktop-portal-wlr wayland-protocols dex gammastep geoclue lxappearance otf-font-awesome ttf-hack dust okular gallery-dl-git bat nextcloud-client opensnitch hopenpgp-tools ddrescue nmap
 
 bat cache --build || {
     echo "failed to build bat cache"
