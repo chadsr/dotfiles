@@ -130,6 +130,31 @@ rustup default stable || {
     exit 1
 }
 
+# Check if certain submodules get updated, so we don't build them uneccessarily
+hackneyed_updated=false
+hackneyed_hash_old=$(git -C "$git_submodule_path"/hackneyed-cursor rev-parse --short HEAD)
+
+git submodule update --progress --init --force --recursive --remote || {
+    echo "failed to update git submodules"
+    exit 1
+}
+
+git submodule foreach --recursive git clean -xfd || {
+    echo "failed to clean git submodules"
+    exit 1
+}
+
+git submodule foreach --recursive git reset --hard || {
+    echo "failed to reset git submodules"
+    exit 1
+}
+
+hackneyed_hash_new=$(git -C "$git_submodule_path"/hackneyed-cursor rev-parse --short HEAD)
+if [[ "$hackneyed_hash_old" != "$hackneyed_hash_new" ]]; then
+    hackneyed_updated=true
+    echo "hackneyed-cursor has been updated"
+fi
+
 stow -t ~/ stow || {
     echo "failed to stow stow"
     exit 1
@@ -264,31 +289,6 @@ gpg --tofu-policy good "$gpg_primary_key" || {
     echo "failed to set gpg tofu policy"
     exit 1
 }
-
-# Check if certain submodules get updated, so we don't build them uneccessarily
-hackneyed_updated=false
-hackneyed_hash_old=$(git -C "$git_submodule_path"/hackneyed-cursor rev-parse --short HEAD)
-
-git submodule update --progress --init --force --recursive --remote || {
-    echo "failed to update git submodules"
-    exit 1
-}
-
-git submodule foreach --recursive git clean -xfd || {
-    echo "failed to clean git submodules"
-    exit 1
-}
-
-git submodule foreach --recursive git reset --hard || {
-    echo "failed to reset git submodules"
-    exit 1
-}
-
-hackneyed_hash_new=$(git -C "$git_submodule_path"/hackneyed-cursor rev-parse --short HEAD)
-if [[ "$hackneyed_hash_old" != "$hackneyed_hash_new" ]]; then
-    hackneyed_updated=true
-    echo "hackneyed-cursor has been updated"
-fi
 
 echo "Decrypting ./data files"
 gpg_decrypt_file "$data_path"/ssh/config.asc.gpg "$base_path"/ssh/.ssh/config
