@@ -255,6 +255,11 @@ cp -f "$base_path"/data/ssh/yk.pub ~/.ssh || {
     exit 1
 }
 
+chmod 600 ~/.ssh/yk.pub || {
+    echo "failed to change permissions on ssh pubkey"
+    exit 1
+}
+
 systemctl --user restart gpg-agent || {
     echo "failed to restart GPG agent service"
     exit 1
