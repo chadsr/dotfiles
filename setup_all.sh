@@ -166,6 +166,7 @@ mkdir -p ~/.icons
 mkdir -p ~/.cargo
 mkdir -p ~/.oh-my-zsh
 mkdir -p ~/.config/VSCodium/User/globalStorage/zokugun.sync-settings
+mkdir -p ~/.ssh
 
 # Remove existing dirs/files that will cause conflicts
 rm -f ~/.config/mimeapps.list
@@ -275,14 +276,6 @@ gpg --tofu-policy good "$gpg_primary_key" || {
     exit 1
 }
 
-echo "Decrypting ./data files"
-gpg_decrypt_file "$data_path"/ssh/config.asc.gpg "$base_path"/ssh/.ssh/config
-gpg_decrypt_file "$data_path"/xdg/mimeapps.list.asc.gpg "$base_path"/xdg/.config/mimeapps.list
-gpg_decrypt_file "$data_path"/tidal-hifi/config.json.asc.gpg "$base_path"/tidal-hifi/.config/tidal-hifi/config.json
-gpg_decrypt_file "$data_path"/gallery-dl/config.json.asc.gpg "$base_path"/gallery-dl/.config/gallery-dl/config.json
-gpg_decrypt_file "$data_path"/waybar/crypto/config.ini.asc.gpg "$base_path"/sway/.config/waybar/modules/crypto/config.ini
-gpg_decrypt_file "$data_path"/gtk/bookmarks.asc.gpg "$base_path"/gtk/.config/gtk-3.0/bookmarks
-
 stow -v ssh || {
     echo "Failed to stow ssh config"
     exit 1
@@ -314,6 +307,14 @@ if [[ "$hackneyed_hash_old" != "$hackneyed_hash_new" ]]; then
     hackneyed_updated=true
     echo "hackneyed-cursor has been updated"
 fi
+
+echo "Decrypting ./data files"
+gpg_decrypt_file "$data_path"/ssh/config.asc.gpg "$base_path"/ssh/.ssh/config
+gpg_decrypt_file "$data_path"/xdg/mimeapps.list.asc.gpg "$base_path"/xdg/.config/mimeapps.list
+gpg_decrypt_file "$data_path"/tidal-hifi/config.json.asc.gpg "$base_path"/tidal-hifi/.config/tidal-hifi/config.json
+gpg_decrypt_file "$data_path"/gallery-dl/config.json.asc.gpg "$base_path"/gallery-dl/.config/gallery-dl/config.json
+gpg_decrypt_file "$data_path"/waybar/crypto/config.ini.asc.gpg "$base_path"/sway/.config/waybar/modules/crypto/config.ini
+gpg_decrypt_file "$data_path"/gtk/bookmarks.asc.gpg "$base_path"/gtk/.config/gtk-3.0/bookmarks
 
 stow -v sway || {
     echo "Failed to stow Sway config"
