@@ -591,17 +591,10 @@ echo "Installing node.js toolchain"
 yay_install nodejs npm electron nvm-git
 
 nvm_init_script="source /usr/share/nvm/init-nvm.sh"
-if [[ $(line_exists "$nvm_init_script" ~/.bashrc) == 1 ]]; then
-    echo "Adding NVM init script to ~/.bashrc"
-    echo 'source /usr/share/nvm/init-nvm.sh' >>~/.bashrc
-fi
-
 if [[ $(line_exists "$nvm_init_script" ~/.zshrc) == 1 ]]; then
     echo "Adding NVM init script to ~/.zshrc"
     echo 'source /usr/share/nvm/init-nvm.sh' >>~/.zshrc
 fi
-
-source ~/.bashrc
 
 nvm install lts/* || {
     echo "failed to install Node LTS"

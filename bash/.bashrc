@@ -17,6 +17,3 @@ if [ -t 0 ]; then
     # TTY, so set USER_TTY for pinentry-auto to pickup
     export PINENTRY_USER_DATA=USE_TTY=1
 fi
-
-# NVM Init
-source /usr/share/nvm/init-nvm.sh
