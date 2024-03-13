@@ -122,6 +122,12 @@ line_exists() {
     esac
 }
 
+echo "Updating package databases & packages"
+yay -Syu || {
+    echo "failed to update package databases"
+    exit 1
+}
+
 echo "Installing script dependencies"
 yay_install git curl wget make stow gnupg pcsclite ccid inkscape xorg-xcursorgen wayland nano rustup sccache pkg-config meson ninja
 
@@ -129,31 +135,6 @@ rustup default stable || {
     echo "failed to setup rust stable toolchain"
     exit 1
 }
-
-# Check if certain submodules get updated, so we don't build them uneccessarily
-hackneyed_updated=false
-hackneyed_hash_old=$(git -C "$git_submodule_path"/hackneyed-cursor rev-parse --short HEAD)
-
-git submodule update --progress --init --force --recursive --remote || {
-    echo "failed to update git submodules"
-    exit 1
-}
-
-git submodule foreach --recursive git clean -xfd || {
-    echo "failed to clean git submodules"
-    exit 1
-}
-
-git submodule foreach --recursive git reset --hard || {
-    echo "failed to reset git submodules"
-    exit 1
-}
-
-hackneyed_hash_new=$(git -C "$git_submodule_path"/hackneyed-cursor rev-parse --short HEAD)
-if [[ "$hackneyed_hash_old" != "$hackneyed_hash_new" ]]; then
-    hackneyed_updated=true
-    echo "hackneyed-cursor has been updated"
-fi
 
 stow -t ~/ stow || {
     echo "failed to stow stow"
@@ -212,12 +193,6 @@ stow -v systemd || {
 
 stow -v git || {
     echo "Failed to stow Git config"
-    exit 1
-}
-
-echo "Updating package databases & packages"
-yay -Syu || {
-    echo "failed to update package databases"
     exit 1
 }
 
@@ -304,6 +279,31 @@ stow -v ssh || {
 }
 
 gpg_ssh_agent
+
+# Check if certain submodules get updated, so we don't build them uneccessarily
+hackneyed_updated=false
+hackneyed_hash_old=$(git -C "$git_submodule_path"/hackneyed-cursor rev-parse --short HEAD)
+
+git submodule update --progress --init --force --recursive --remote || {
+    echo "failed to update git submodules"
+    exit 1
+}
+
+git submodule foreach --recursive git clean -xfd || {
+    echo "failed to clean git submodules"
+    exit 1
+}
+
+git submodule foreach --recursive git reset --hard || {
+    echo "failed to reset git submodules"
+    exit 1
+}
+
+hackneyed_hash_new=$(git -C "$git_submodule_path"/hackneyed-cursor rev-parse --short HEAD)
+if [[ "$hackneyed_hash_old" != "$hackneyed_hash_new" ]]; then
+    hackneyed_updated=true
+    echo "hackneyed-cursor has been updated"
+fi
 
 stow -v sway || {
     echo "Failed to stow Sway config"
