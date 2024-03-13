@@ -181,6 +181,11 @@ stow -v bash || {
     exit 1
 }
 
+source ~/.bashrc || {
+    echo "failed to source .bashrc"
+    exit 1
+}
+
 stow -v yay || {
     echo "Failed to stow yay config"
     exit 1
