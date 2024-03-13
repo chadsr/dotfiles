@@ -122,6 +122,14 @@ line_exists() {
     esac
 }
 
+echo "Installing script dependencies"
+yay_install git curl wget make stow gnupg pcsclite ccid inkscape xorg-xcursorgen wayland nano rustup sccache pkg-config meson ninja
+
+rustup default stable || {
+    echo "failed to setup rust stable toolchain"
+    exit 1
+}
+
 stow -t ~/ stow || {
     echo "failed to stow stow"
     exit 1
@@ -197,14 +205,6 @@ for old_pkg in "${old_pkgs[@]}"; do
         :
     }
 done
-
-echo "Installing script dependencies"
-yay_install git curl wget make stow gnupg pcsclite ccid inkscape xorg-xcursorgen wayland nano rustup sccache pkg-config meson ninja
-
-rustup default stable || {
-    echo "failed to setup rust stable toolchain"
-    exit 1
-}
 
 echo "Checking for ZSH dependencies to install"
 yay_install zsh thefuck ttf-meslo-nerd-font-powerlevel10k
