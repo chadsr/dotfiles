@@ -439,7 +439,7 @@ if [[ "$current_hostname" == "$laptop_hostname" ]]; then
     yay_install onnxruntime-opt python-onnxruntime-opt
 
     echo "Checking if TLP is installed"
-    yay_install tlp tpacpi-bat acpi_call
+    yay_install tlp acpi_call
 
     echo "Enable TLP service"
     sudo systemctl enable tlp || {
@@ -453,6 +453,21 @@ if [[ "$current_hostname" == "$laptop_hostname" ]]; then
     echo "Enable fprintd resume/suspend services"
     sudo systemctl enable open-fprintd-resume open-fprintd-suspend || {
         echo "failed to enable fprintd resume/suspend services"
+        exit 1
+    }
+
+    sudo systemctl enable python3-validity.service || {
+        echo "failed to enable python3-validity.service"
+        exit 1
+    }
+
+    sudo systemctl start python3-validity.service || {
+        echo "failed to starth python3-validity.service"
+        exit 1
+    }
+
+    yay_install brightnessctl || {
+        echo "failed to install brightnessctl"
         exit 1
     }
 
@@ -601,6 +616,8 @@ if [[ $(line_exists "$nvm_init_script" ~/.zshrc) == 1 ]]; then
     echo "Adding NVM init script to ~/.zshrc"
     echo 'source /usr/share/nvm/init-nvm.sh' >>~/.zshrc
 fi
+
+source /usr/share/nvm/init-nvm.sh
 
 nvm install lts/* || {
     echo "failed to install Node LTS"
