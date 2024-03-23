@@ -80,6 +80,11 @@ symlink() {
     }
 }
 
+systemd_user_enable_start() {
+    systemctl --user enable "${1}"/"${2}"
+    systemctl --user start "${2}"
+}
+
 gpg_ssh_agent() {
     unset SSH_AGENT_PID
     if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
@@ -124,7 +129,7 @@ line_exists() {
 
 echo "Updating package databases & packages"
 yay -Syu || {
-    echo "failed to update package databases"
+    echo "failehd to update package databases"
     exit 1
 }
 
@@ -192,18 +197,13 @@ stow -v yay || {
     exit 1
 }
 
-stow -v systemd || {
-    echo "Failed to stow systemd user config"
-    exit 1
-}
-
 stow -v git || {
     echo "Failed to stow Git config"
     exit 1
 }
 
 declare -a old_pkgs=(
-    swaylock swaylock-blur pipewire-media-session pipewire-pulseaudio pipewire-pulseaudio-git pulseaudio-equalizer pulseaudio-lirc pulseaudio-zeroconf pulseaudio pulseaudio-bluetooth redshift-wayland-git birdtray alacritty-colorscheme ly vscodium-bin vscodium-bin-features vscodium-bin-marketplace thunar-shares-plugin
+    vim swaylock swaylock-blur pipewire-media-session pipewire-pulseaudio pipewire-pulseaudio-git pulseaudio-equalizer pulseaudio-lirc pulseaudio-zeroconf pulseaudio pulseaudio-bluetooth redshift-wayland-git birdtray alacritty-colorscheme ly vscodium-bin vscodium-bin-features vscodium-bin-marketplace thunar-shares-plugin
 )
 echo "Checking for old packages to remove"
 for old_pkg in "${old_pkgs[@]}"; do
@@ -509,15 +509,8 @@ elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
         exit 1
     }
 
-    systemctl --user enable liquidctl || {
-        echo "failed to enable liquidctl user systemd unit"
-        exit 1
-    }
-
-    systemctl --user enable yoda || {
-        echo "failed to enable yoda user systemd unit"
-        exit 1
-    }
+    systemd_user_enable_start "$base_path"/liquidctl/.config/systemd/user liquidctl.service
+    systemd_user_enable_start "$base_path"/liquidctl/.config/systemd/user yoda.service
 
     sudo rm -f /usr/lib/firewalld/services/alvr.xml
     echo "Installing ALVR"
@@ -703,11 +696,6 @@ yay_install gamemode
 echo "Installing obs"
 yay_install obs-studio libobs-dev libwayland-dev wlrobs-hg
 
-echo "Removing vim"
-yay -R --noconfirm vim || {
-    echo "vim not installed, skipping removal"
-}
-
 echo "Installing neovim"
 yay_install neovim python-pynvim neovim-symlinks tinyxxd
 
@@ -792,119 +780,18 @@ systemctl --user restart wireplumber pipewire pipewire-pulse.service pipewire-pu
     exit 1
 }
 
-echo "Enabling xsettingsd service"
-systemctl --user enable xsettingsd.service || {
-    echo "failed to enable xsettingsd service"
-    exit 1
-}
+systemd_user_enable_start /usr/lib/systemd/user gamemoded.service
+systemd_user_enable_start /usr/lib/systemd/user batsignal.service
+systemd_user_enable_start /usr/lib/systemd/user ulauncher.service
+systemd_user_enable_start /usr/lib/systemd/user mako.service
 
-systemctl --user start xsettingsd.service || {
-    echo "failed to start xsettingsd service"
-    exit 1
-}
-
-systemctl --user enable gamemoded.service || {
-    echo "failed to enable gamemoded"
-    exit 1
-}
-
-echo "Enabling batsignal service"
-systemctl --user enable batsignal.service || {
-    echo "failed to enable batsignal service"
-    exit 1
-}
-
-systemctl --user start batsignal.service || {
-    echo "failed to start batsignal service"
-    exit 1
-}
-
-echo "Enabling ULauncher service"
-systemctl --user enable ulauncher.service || {
-    echo "failed to enable ulauncher.service"
-    exit 1
-}
-
-systemctl --user start ulauncher.service || {
-    echo "failed to start ulauncher.service"
-    exit 1
-}
-
-systemctl --user enable geoclue-agent.service || {
-    echo "failed to enable geoclue service"
-    exit 1
-}
-
-systemctl --user start geoclue-agent.service || {
-    echo "failed to start geoclue service"
-    exit 1
-}
-
-echo "Enabling Gammastep service"
-systemctl --user enable gammastep-wayland.service || {
-    echo "failed to enable gammastep-wayland.service"
-    exit 1
-}
-
-systemctl --user start gammastep-wayland.service || {
-    echo "failed to start gammastep-wayland.service"
-    exit 1
-}
-
-echo "Enabling swayidle service"
-systemctl --user enable swayidle.service || {
-    echo "failed to enable swayidle.service"
-    exit 1
-}
-
-systemctl --user start swayidle.service || {
-    echo "failed to start swayidle.service"
-    exit 1
-}
-
-echo "Enabling mako service"
-systemctl --user enable mako.service || {
-    echo "failed to enable mako.service"
-    exit 1
-}
-
-systemctl --user start mako.service || {
-    echo "failed to start mako.service"
-    exit 1
-}
-
-echo "Enabling kanshi service"
-systemctl --user enable kanshi.service || {
-    echo "failed to enable kanshi.service"
-    exit 1
-}
-
-systemctl --user start kanshi.service || {
-    echo "failed to start kanshi.service"
-    exit 1
-}
-
-echo "Enabling corectrl service"
-systemctl --user enable corectrl.service || {
-    echo "failed to enable corectrl.service"
-    exit 1
-}
-
-systemctl --user start corectrl.service || {
-    echo "failed to start corectrl.service"
-    exit 1
-}
-
-echo "Enabling nextcloud client service"
-systemctl --user enable nextcloud-client.service || {
-    echo "failed to enable nextcloud-client.service"
-    exit 1
-}
-
-systemctl --user start nextcloud-client.service || {
-    echo "failed to start nextcloud-client.service"
-    exit 1
-}
+systemd_user_enable_start "$base_path"/gtk/.config/systemd/user xsettingsd.service
+systemd_user_enable_start "$base_path"/gammastep/.config/systemd/user geoclue-agent.service
+systemd_user_enable_start "$base_path"/gammastep/.config/systemd/user gammastep-wayland.service
+systemd_user_enable_start "$base_path"/sway/.config/systemd/user swayidle.service
+systemd_user_enable_start "$base_path"/sway/.config/systemd/user kanshi.service
+systemd_user_enable_start "$base_path"/corectrl/.config/systemd/user corectrl.service
+systemd_user_enable_start "$base_path"/nextcloud/.config/systemd/user nextcloud-client.service
 
 echo "Enable lingering for current user"
 # Prevents user systemd units from getting killed
