@@ -1,5 +1,6 @@
 [Unit]
 Description=Gammastep needs to get a (geo)clue
+After=network.target
 
 [Service]
 Type=simple
