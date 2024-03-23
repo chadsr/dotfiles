@@ -219,6 +219,7 @@ read -p "Do you need to install ohmyzsh? (${git_submodule_path}/ohmyzsh/tools/in
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     read -r -p "Press enter once the the installation is finished... [enter]"
+    rm -f ~/.zshrc
 fi
 
 stow -v zsh || {
