@@ -788,6 +788,7 @@ systemd_user_enable_start /usr/lib/systemd/user mako.service
 systemd_user_enable_start "$base_path"/gtk/.config/systemd/user xsettingsd.service
 systemd_user_enable_start "$base_path"/gammastep/.config/systemd/user geoclue-agent.service
 systemd_user_enable_start "$base_path"/gammastep/.config/systemd/user gammastep-wayland.service
+systemd_user_enable_start "$base_path"/sway/.config/systemd/user sway-session.target
 systemd_user_enable_start "$base_path"/sway/.config/systemd/user swayidle.service
 systemd_user_enable_start "$base_path"/sway/.config/systemd/user kanshi.service
 systemd_user_enable_start "$base_path"/corectrl/.config/systemd/user corectrl.service
