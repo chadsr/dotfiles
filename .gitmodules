@@ -46,3 +46,6 @@ url = https://git.disroot.org/eudaimon/buuf-nestort.git
 [submodule ".git_submodules/catppuccin-bat"]
 path = .git_submodules/catppuccin-bat
 url = https://github.com/catppuccin/bat.git
+[submodule ".git_submodules/rofi-network-manager"]
+	path = .git_submodules/rofi-network-manager
+	url = https://github.com/P3rf/rofi-network-manager.git

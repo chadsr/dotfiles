@@ -224,11 +224,6 @@ if [[ ! -d ~/.oh-my-zsh ]]; then
     fi
 fi
 
-stow -v zsh || {
-    echo "Failed to stow ZSH config"
-    exit 1
-}
-
 # Create ~/.gnupg
 gpg --list-keys
 
@@ -318,6 +313,13 @@ gpg_decrypt_file "$data_path"/tidal-hifi/config.json.asc.gpg "$base_path"/tidal-
 gpg_decrypt_file "$data_path"/gallery-dl/config.json.asc.gpg "$base_path"/gallery-dl/.config/gallery-dl/config.json
 gpg_decrypt_file "$data_path"/waybar/crypto/config.ini.asc.gpg "$base_path"/sway/.config/waybar/modules/crypto/config.ini
 gpg_decrypt_file "$data_path"/gtk/bookmarks.asc.gpg "$base_path"/gtk/.config/gtk-3.0/bookmarks
+
+symlink "$git_submodule_path"/rofi-network-manager/rofi-network-manager.sh "$base_path"/rofi/.local/bin/rofi-network-manager
+
+stow -v zsh || {
+    echo "Failed to stow ZSH config"
+    exit 1
+}
 
 stow -v sway || {
     echo "Failed to stow Sway config"
@@ -416,6 +418,11 @@ stow -v gallery-dl || {
 
 stow -v bat || {
     echo "Failed to stow bat config"
+    exit 1
+}
+
+stow -v rofi || {
+    echo "Failed to stow rofi config"
     exit 1
 }
 

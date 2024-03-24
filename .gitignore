@@ -22,3 +22,4 @@ vscodium/*
 !vscodium/.config/VSCodium/User/globalStorage/zokugun.sync-settings/settings.yml
 bat/.config/bat/themes/*
 !bat/.config/bat/themes/.gitkeep
+rofi/.local/bin/rofi-network-manager

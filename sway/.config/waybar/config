@@ -22,7 +22,6 @@
     ],
     "modules-right": [
         "network",
-        "network#wired",
         "network#vpn",
         "backlight",
         "pulseaudio",
@@ -60,7 +59,7 @@
     },
     "tray": {
         "icon-size": 16,
-        "spacing": 10
+        "spacing": 8
     },
     "clock": {
         "interval": 60,
@@ -129,24 +128,17 @@
     },
     "network": {
         "interval": 5,
-        "interface": "wlp61s0",
-        "format-wifi": "{ipaddr} ({essid} {signalStrength}%) ",
+        "interface": "wlan0",
+        "format-wifi": "{essid} {signalStrength}% ",
         "tooltip-format": "WiFi → {ifname} → {ipaddr}/{cidr}",
-        "on-click": "networkmanager_dmenu -normal-window"
-    },
-    "network#wired": {
-        "interval": 5,
-        "interface": "enp0s31f6",
-        "format-ethernet": "{ipaddr} ",
-        "tooltip-format": "Ethernet → {ifname} → {ipaddr}/{cidr}",
-        "on-click": "networkmanager_dmenu -normal-window"
+        "on-click": "rofi-network-manager"
     },
     "network#vpn": {
         "interval": 5,
-        "interface": "tun.ross.ch",
+        "interface": "wg0",
         "format": "VPN:{ipaddr} ",
         "tooltip-format": "VPN → {ifname} → {ipaddr}/{cidr}",
-        "on-click": "networkmanager_dmenu -normal-window"
+        "on-click": "rofi-network-manager"
     },
     "pulseaudio": {
         "scroll-step": 1,
@@ -166,33 +158,6 @@
             ]
         },
         "on-click": "pavucontrol"
-    },
-    "mpd": {
-        "format": " {stateIcon} {artist}|{title}",
-        "format-disconnected": " Disconnected",
-        "format-stopped": " {stateIcon} Stopped",
-        "interval": 10,
-        "consume-icons": {
-            "on": " " // Icon shows only when "consume" is on
-        },
-        "random-icons": {
-            "off": "<span color=\"#f53c3c\"></span> ", // Icon grayed out when "random" is off
-            "on": " "
-        },
-        "repeat-icons": {
-            "on": " "
-        },
-        "single-icons": {
-            "on": "1 "
-        },
-        "state-icons": {
-            "paused": "",
-            "playing": ""
-        },
-        "tooltip-format": "MPD (connected)",
-        "tooltip-format-disconnected": "MPD (disconnected)",
-        "server": "mpd.lan",
-        "password": "GimmeMusicPls"
     },
     "cava": {
         "cava_config": "$XDG_CONFIG_HOME/cava/cava.conf",
