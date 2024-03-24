@@ -439,6 +439,11 @@ if [[ "$current_hostname" == "$laptop_hostname" ]]; then
     echo "Installing ONNXRuntime"
     yay_install onnxruntime-opt python-onnxruntime-opt
 
+    yay_install brightnessctl || {
+        echo "failed to install brightnessctl"
+        exit 1
+    }
+
     echo "Checking if python-validity is installed"
     yay_install python-validity-git
 
@@ -458,10 +463,13 @@ if [[ "$current_hostname" == "$laptop_hostname" ]]; then
         exit 1
     }
 
-    yay_install brightnessctl || {
-        echo "failed to install brightnessctl"
-        exit 1
-    }
+    pam_rule="auth      sufficient      pam_fprintd.so max_tries=5 timeout=10"
+    read -p "Add PAM fprintd rules? (${pam_rule}) (y/N)?" -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        sudo vi /etc/pam.d/sudo
+        sudo vi /etc/pam.d/system-local-login
+    fi
 
 elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
     echo "Installing Radeon/Vulkan/ROCM drivers"
