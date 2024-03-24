@@ -129,16 +129,18 @@
     "network": {
         "interval": 5,
         "interface": "wlan0",
-        "format-wifi": "{essid} {signalStrength}% ",
+        "format-disconnected": "",
+        "format-wifi": "{essid} {signalStrength}% ↑{bandwidthUpBits} ↓{bandwidthDownBits} ",
         "tooltip-format": "WiFi → {ifname} → {ipaddr}/{cidr}",
-        "on-click": "rofi-network-manager"
+        "on-click": "$HOME/.local/bin/rofi-network-manager"
     },
     "network#vpn": {
         "interval": 5,
         "interface": "wg0",
-        "format": "VPN:{ipaddr} ",
+        "format": "{ifname} ↑{bandwidthUpBits} ↓{bandwidthDownBits} ",
+        "format-disconnected": "",
         "tooltip-format": "VPN → {ifname} → {ipaddr}/{cidr}",
-        "on-click": "rofi-network-manager"
+        "on-click": "$HOME/.local/bin/rofi-network-manager"
     },
     "pulseaudio": {
         "scroll-step": 1,
