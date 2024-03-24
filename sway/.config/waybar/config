@@ -129,7 +129,7 @@
     "network": {
         "interval": 5,
         "interface": "wlan0",
-        "format-disconnected": "",
+        "format-disconnected": "",
         "format-wifi": "{essid} {signalStrength}% ↑{bandwidthUpBits} ↓{bandwidthDownBits} ",
         "tooltip-format": "WiFi → {ifname} → {ipaddr}/{cidr}",
         "on-click": "$HOME/.local/bin/rofi-network-manager"
