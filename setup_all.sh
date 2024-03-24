@@ -203,7 +203,7 @@ stow -v git || {
 }
 
 declare -a old_pkgs=(
-    vim swaylock swaylock-blur pipewire-media-session pipewire-pulseaudio pipewire-pulseaudio-git pulseaudio-equalizer pulseaudio-lirc pulseaudio-zeroconf pulseaudio pulseaudio-bluetooth redshift-wayland-git birdtray alacritty-colorscheme ly vscodium-bin vscodium-bin-features vscodium-bin-marketplace thunar-shares-plugin
+    vi vim swaylock swaylock-blur pipewire-media-session pipewire-pulseaudio pipewire-pulseaudio-git pulseaudio-equalizer pulseaudio-lirc pulseaudio-zeroconf pulseaudio pulseaudio-bluetooth redshift-wayland-git birdtray alacritty-colorscheme ly vscodium-bin vscodium-bin-features vscodium-bin-marketplace thunar-shares-plugin
 )
 echo "Checking for old packages to remove"
 for old_pkg in "${old_pkgs[@]}"; do
@@ -438,15 +438,6 @@ if [[ "$current_hostname" == "$laptop_hostname" ]]; then
 
     echo "Installing ONNXRuntime"
     yay_install onnxruntime-opt python-onnxruntime-opt
-
-    echo "Checking if TLP is installed"
-    yay_install tlp acpi_call
-
-    echo "Enable TLP service"
-    sudo systemctl enable tlp || {
-        echo "failed to enable TLP service"
-        exit 1
-    }
 
     echo "Checking if python-validity is installed"
     yay_install python-validity-git
