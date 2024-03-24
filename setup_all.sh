@@ -127,6 +127,13 @@ line_exists() {
     esac
 }
 
+stow_config() {
+    stow -v "$1" || {
+        echo "Failed to stow ${1} config"
+        exit 1
+    }
+}
+
 echo "Updating package databases & packages"
 yay -Syu || {
     echo "failehd to update package databases"
@@ -173,6 +180,9 @@ mkdir -p ~/.oh-my-zsh
 mkdir -p ~/.config/VSCodium/User/globalStorage/zokugun.sync-settings
 mkdir -p ~/.ssh
 
+# Create ~/.gnupg
+gpg --list-keys
+
 # Remove existing dirs/files that will cause conflicts
 rm -f ~/.config/mimeapps.list
 rm -f ~/.gtkrc-2.0
@@ -182,23 +192,22 @@ rm -f ~/.zshrc
 rm -f ~/.zshenv
 rm -f ~/.bashrc
 
-stow -v bash || {
-    echo "Failed to stow Bash config"
-    exit 1
-}
+declare -a stow_dirs_setup=(
+    bash
+    git
+    gpg
+    ssh
+    yay
+    rust
+)
+
+echo "Stowing setup configs"
+for stow_dir in "${stow_dirs_setup[@]}"; do
+    stow_config "$stow_dir"
+done
 
 source ~/.bashrc || {
     echo "failed to source .bashrc"
-    exit 1
-}
-
-stow -v yay || {
-    echo "Failed to stow yay config"
-    exit 1
-}
-
-stow -v git || {
-    echo "Failed to stow Git config"
     exit 1
 }
 
@@ -211,26 +220,6 @@ for old_pkg in "${old_pkgs[@]}"; do
         :
     }
 done
-
-echo "Checking for ZSH dependencies to install"
-yay_install zsh thefuck ttf-meslo-nerd-font-powerlevel10k
-
-if [[ ! -d ~/.oh-my-zsh ]]; then
-    read -p "Do you need to install ohmyzsh? (${git_submodule_path}/ohmyzsh/tools/install.sh) (y/N)?" -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        read -r -p "Press enter once the the installation is finished... [enter]"
-        rm -f ~/.zshrc
-    fi
-fi
-
-# Create ~/.gnupg
-gpg --list-keys
-
-stow -v gpg || {
-    echo "Failed to stow GPG config"
-    exit 1
-}
 
 # gpg-agent.conf doesn't support ENVs so replace variable here
 envsubst <"$data_path"/gpg/gpg-agent.conf >"$base_path"/gpg/.gnupg/gpg-agent.conf
@@ -274,11 +263,6 @@ gpg --tofu-policy good "$gpg_primary_key" || {
     exit 1
 }
 
-stow -v ssh || {
-    echo "Failed to stow ssh config"
-    exit 1
-}
-
 gpg_ssh_agent
 
 # Check if certain submodules get updated, so we don't build them uneccessarily
@@ -316,120 +300,104 @@ gpg_decrypt_file "$data_path"/gtk/bookmarks.asc.gpg "$base_path"/gtk/.config/gtk
 
 symlink "$git_submodule_path"/rofi-network-manager/rofi-network-manager.sh "$base_path"/rofi/.local/bin/rofi-network-manager
 
-stow -v zsh || {
-    echo "Failed to stow ZSH config"
+echo "Checking for ZSH dependencies to install"
+yay_install zsh thefuck ttf-meslo-nerd-font-powerlevel10k
+
+if [[ ! -d ~/.oh-my-zsh ]]; then
+    read -p "Do you need to install ohmyzsh? (${git_submodule_path}/ohmyzsh/tools/install.sh) (y/N)?" -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        read -r -p "Press enter once the the installation is finished... [enter]"
+        rm -f ~/.zshrc
+    fi
+fi
+
+echo "Copying themes from git repo to dotfiles locations"
+
+# If Hackneyed Dark build does not exist, then build it
+if [[ ! -d "$base_path"/gtk/.icons/hackneyed-dark ]] || [[ $hackneyed_updated == true ]]; then
+    echo "Building hackneyed cursor"
+
+    cd "$git_submodule_path"/hackneyed-cursor || {
+        echo "failed to cd to hackneyed-cursor"
+        exit 1
+    }
+
+    make clean distclean || {
+        echo "failed to clean hackneyed cursor"
+        exit 1
+    }
+
+    make -O DARK_THEME=1 dist || {
+        echo "failed to make hackneyed cursor"
+        exit 1
+    }
+
+    rmrf "$base_path"/gtk/.icons/hackneyed-dark
+    cp -rv "$git_submodule_path"/hackneyed-cursor/Hackneyed-Dark "$base_path"/gtk/.icons/hackneyed-dark # cp instead of ln because the build dir will get reset by git
+
+    make clean || {
+        echo "failed to clean hackneyed make files"
+        exit 1
+    }
+    rm -f ./*.tar.bz2
+    cd "$base_path" || {
+        echo "failed to cd to ${base_path}"
+        exit 1
+    }
+else
+    echo "Skipping hackneyed cursor build"
+fi
+
+symlink "$git_submodule_path"/alacritty-theme/themes "$base_path"/alacritty/.config/alacritty/colors
+
+symlink "$git_submodule_path"/sweet-icons/Sweet-Purple "$base_path"/gtk/.icons/sweet-purple
+
+symlink "$git_submodule_path"/sweet-icons "$base_path"/gtk/.icons/sweet-icons
+
+symlink "$git_submodule_path"/sweet-theme "$base_path"/gtk/.themes/sweet-theme
+
+symlink "$git_submodule_path"/candy-icons "$base_path"/gtk/.icons/candy-icons
+
+symlink "$git_submodule_path"/buuf-nestort-icons "$base_path"/gtk/.icons/buuf-nestort-icons
+
+symlink "$git_submodule_path"/catppuccin-bat/themes/Catppuccin\ Mocha.tmTheme "$base_path"/bat/.config/bat/themes/Catppuccin-Mocha.tmTheme
+
+rmrf "$base_path"/gtk/.themes/materia-cyberpunk-neon
+unzip -o "$git_submodule_path"/cyberpunk-theme/gtk/materia-cyberpunk-neon.zip -d "$base_path"/gtk/.themes || {
+    echo "failed copying Cyberpunk-Neon theme"
     exit 1
 }
 
-stow -v sway || {
-    echo "Failed to stow Sway config"
-    exit 1
-}
+declare -a stow_dirs_general=(
+    zsh
+    sway
+    hyprland
+    xdg
+    bemenu
+    ulauncher
+    gammastep
+    nvim
+    vscodium
+    logseq
+    alacritty
+    ranger
+    gtk
+    cava
+    corectrl
+    tidal-hifi
+    mpv
+    freetube
+    gallery-dl
+    bat
+    rofi
+    nextcloud
+)
 
-stow -v hyprland || {
-    echo "Failed to stow Hyprland config"
-    exit 1
-}
-
-stow -v xdg || {
-    echo "Failed to stow xdg config"
-    exit 1
-}
-
-stow -v bemenu || {
-    echo "Failed to stow bemenu config"
-    exit 1
-}
-
-stow -v ulauncher || {
-    echo "Failed to stow ULauncher config"
-    exit 1
-}
-
-stow -v gammastep || {
-    echo "Failed to stow gammastep config"
-    exit 1
-}
-
-stow -v vim || {
-    echo "Failed to stow Vim config"
-    exit 1
-}
-
-stow -v rust || {
-    echo "Failed to stow Rust config"
-    exit 1
-}
-
-stow -v vscodium || {
-    echo "Failed to stow VSCodium config"
-    exit 1
-}
-
-stow -v logseq || {
-    echo "Failed to stow Logseq config"
-    exit 1
-}
-
-stow -v alacritty || {
-    echo "Failed to stow Alacritty config"
-    exit 1
-}
-
-stow -v ranger || {
-    echo "Failed to stow ranger config"
-    exit 1
-}
-
-stow -v gtk || {
-    echo "Failed to stow gtk config"
-    exit 1
-}
-
-stow -v cava || {
-    echo "Failed to stow Cava config"
-    exit 1
-}
-
-stow -v corectrl || {
-    echo "failed to stow corectrl"
-    exit 1
-}
-
-stow -v tidal-hifi || {
-    echo "Failed to stow tidal-hifi config"
-    exit 1
-}
-
-stow -v mpv || {
-    echo "Failed to stow mpv config"
-    exit 1
-}
-
-stow -v freetube || {
-    echo "Failed to stow freetube config"
-    exit 1
-}
-
-stow -v gallery-dl || {
-    echo "Failed to stow gallery-dl config"
-    exit 1
-}
-
-stow -v bat || {
-    echo "Failed to stow bat config"
-    exit 1
-}
-
-stow -v rofi || {
-    echo "Failed to stow rofi config"
-    exit 1
-}
-
-stow -v nextcloud || {
-    echo "Failed to stow nextcloud config"
-    exit 1
-}
+echo "Stowing general configs"
+for stow_dir in "${stow_dirs_general[@]}"; do
+    stow_config "$stow_dir"
+done
 
 echo "Installing Mesa/Vulkan Drivers"
 yay_install mesa lib32-mesa mesa-vdpau lib32-mesa-vdpau libva-mesa-driver lib32-libva-mesa-driver libva-utils opencl-rusticl-mesa
@@ -507,10 +475,18 @@ elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
 
     symlink "$git_submodule_path"/liquidctl/extra/yoda.py "$base_path"/liquidctl/.local/bin/yoda
 
-    stow -v liquidctl || {
-        echo "failed to stow liquidctl"
-        exit 1
-    }
+    sudo rm -f /usr/lib/firewalld/services/alvr.xml
+    echo "Installing ALVR"
+    yay_install alvr-git
+
+    declare -a stow_dirs_desktop=(
+        liquidctl
+    )
+
+    echo "Stowing ${desktop_hostname} configs"
+    for stow_dir in "${stow_dirs_desktop[@]}"; do
+        stow_config "$stow_dir"
+    done
 
     systemctl --user daemon-reload || {
         echo "failed to daemon-reload"
@@ -519,10 +495,6 @@ elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
 
     systemd_user_enable_start "$base_path"/liquidctl/.config/systemd/user liquidctl.service
     systemd_user_enable_start "$base_path"/liquidctl/.config/systemd/user yoda.service
-
-    sudo rm -f /usr/lib/firewalld/services/alvr.xml
-    echo "Installing ALVR"
-    yay_install alvr-git
 fi
 
 echo "Copying common system configuration"
@@ -533,63 +505,6 @@ sudo groupadd audio || {
     echo "audio group already exists"
 }
 sudo usermod -a -G audio "$USER"
-
-echo "Copying themes from git repo to dotfiles locations"
-
-# If Hackneyed Dark build does not exist, then build it
-if [[ ! -d "$base_path"/gtk/.icons/hackneyed-dark ]] || [[ $hackneyed_updated == true ]]; then
-    echo "Building hackneyed cursor"
-
-    cd "$git_submodule_path"/hackneyed-cursor || {
-        echo "failed to cd to hackneyed-cursor"
-        exit 1
-    }
-
-    make clean distclean || {
-        echo "failed to clean hackneyed cursor"
-        exit 1
-    }
-
-    make -O DARK_THEME=1 dist || {
-        echo "failed to make hackneyed cursor"
-        exit 1
-    }
-
-    rmrf "$base_path"/gtk/.icons/hackneyed-dark
-    cp -rv "$git_submodule_path"/hackneyed-cursor/Hackneyed-Dark "$base_path"/gtk/.icons/hackneyed-dark # cp instead of ln because the build dir will get reset by git
-
-    make clean || {
-        echo "failed to clean hackneyed make files"
-        exit 1
-    }
-    rm -f ./*.tar.bz2
-    cd "$base_path" || {
-        echo "failed to cd to ${base_path}"
-        exit 1
-    }
-else
-    echo "Skipping hackneyed cursor build"
-fi
-
-symlink "$git_submodule_path"/alacritty-theme/themes "$base_path"/alacritty/.config/alacritty/colors
-
-symlink "$git_submodule_path"/sweet-icons/Sweet-Purple "$base_path"/gtk/.icons/sweet-purple
-
-symlink "$git_submodule_path"/sweet-icons "$base_path"/gtk/.icons/sweet-icons
-
-symlink "$git_submodule_path"/sweet-theme "$base_path"/gtk/.themes/sweet-theme
-
-symlink "$git_submodule_path"/candy-icons "$base_path"/gtk/.icons/candy-icons
-
-symlink "$git_submodule_path"/buuf-nestort-icons "$base_path"/gtk/.icons/buuf-nestort-icons
-
-symlink "$git_submodule_path"/catppuccin-bat/themes/Catppuccin\ Mocha.tmTheme "$base_path"/bat/.config/bat/themes/Catppuccin-Mocha.tmTheme
-
-rmrf "$base_path"/gtk/.themes/materia-cyberpunk-neon
-unzip -o "$git_submodule_path"/cyberpunk-theme/gtk/materia-cyberpunk-neon.zip -d "$base_path"/gtk/.themes || {
-    echo "failed copying Cyberpunk-Neon theme"
-    exit 1
-}
 
 echo "Installing Python dependencies"
 yay_install python python-requests
