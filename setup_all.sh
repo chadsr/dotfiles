@@ -215,11 +215,13 @@ done
 echo "Checking for ZSH dependencies to install"
 yay_install zsh thefuck ttf-meslo-nerd-font-powerlevel10k
 
-read -p "Do you need to install ohmyzsh? (${git_submodule_path}/ohmyzsh/tools/install.sh) (y/N)?" -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    read -r -p "Press enter once the the installation is finished... [enter]"
-    rm -f ~/.zshrc
+if [[ ! -d ~/.oh-my-zsh ]]; then
+    read -p "Do you need to install ohmyzsh? (${git_submodule_path}/ohmyzsh/tools/install.sh) (y/N)?" -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        read -r -p "Press enter once the the installation is finished... [enter]"
+        rm -f ~/.zshrc
+    fi
 fi
 
 stow -v zsh || {
