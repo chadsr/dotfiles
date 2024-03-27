@@ -212,7 +212,7 @@ source ~/.bashrc || {
 }
 
 declare -a old_pkgs=(
-    vi vim swaylock swaylock-blur pipewire-media-session pipewire-pulseaudio pipewire-pulseaudio-git pulseaudio-equalizer pulseaudio-lirc pulseaudio-zeroconf pulseaudio pulseaudio-bluetooth redshift-wayland-git birdtray alacritty-colorscheme ly vscodium-bin vscodium-bin-features vscodium-bin-marketplace thunar-shares-plugin
+    vi vim swaylock swaylock-blur pipewire-media-session pipewire-pulseaudio pipewire-pulseaudio-git pulseaudio-equalizer pulseaudio-lirc pulseaudio-zeroconf pulseaudio pulseaudio-bluetooth redshift-wayland-git birdtray alacritty-colorscheme ly vscodium-bin vscodium-bin-features vscodium-bin-marketplace thunar-shares-plugin brightnessctl
 )
 echo "Checking for old packages to remove"
 for old_pkg in "${old_pkgs[@]}"; do
@@ -430,8 +430,8 @@ if [[ "$current_hostname" == "$laptop_hostname" ]]; then
     echo "Installing ONNXRuntime"
     yay_install onnxruntime-opt python-onnxruntime-opt
 
-    yay_install brightnessctl || {
-        echo "failed to install brightnessctl"
+    yay_install light || {
+        echo "failed to install light"
         exit 1
     }
 
@@ -581,7 +581,7 @@ sudo systemctl enable greetd || {
 }
 
 echo "Installing Pipewire dependencies"
-yay_install pipewire pipewire-pulse pipewire-alsa wireplumber alsa-tools
+yay_install pipewire pipewire-pulse pipewire-alsa wireplumber alsa-tools pamixer playerctl
 
 echo "Installing Bluetooth dependencies"
 yay_install bluez bluez-utils bluez-obex bluetuith-git
@@ -595,7 +595,7 @@ bat cache --build || {
 }
 
 echo "Checking for Sway dependencies to install"
-yay_install sway swayidle swaybg wlr-sunclock-git waybar azote slurp grim swappy wl-clipboard wf-recorder grimshot swaylock-effects-git wayvnc ansiweather
+yay_install sway swayidle swaybg wlr-sunclock-git waybar azote slurp grim swappy wl-clipboard wf-recorder grimshot swaylock-effects-git wayvnc ansiweather avzio
 
 echo "Installing Hyprland"
 yay_install hyprland
