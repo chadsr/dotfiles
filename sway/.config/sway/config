@@ -8,7 +8,6 @@
 # Read `man 5 sway` for a complete reference.
 
 # Autostarts
-exec xsettingsd
 exec dex -a -s :~/.config/autostart/ # Launch desktop entries
 exec wlr-sunclock \
     --width 200 \
@@ -228,8 +227,6 @@ bindsym XF86AudioRaiseVolume exec volumectl -u up
 bindsym XF86AudioLowerVolume exec volumectl -u down
 bindsym XF86AudioMute exec volumectl toggle-mute
 bindsym XF86AudioMicMute exec volumectl -m toggle-mute
-
-exec "avizo-service"
 
 #
 # Swaylock

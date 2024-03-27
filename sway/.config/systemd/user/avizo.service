@@ -1,0 +1,11 @@
+[Unit]
+Description=Avizo Multimedia Notification Service
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+ExecStart=/usr/bin/avizo-service
+[Install]
+WantedBy=sway-session.target

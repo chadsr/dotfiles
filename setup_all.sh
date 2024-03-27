@@ -728,6 +728,7 @@ systemd_user_enable_start "$base_path"/gammastep/.config/systemd/user gammastep-
 systemd_user_enable_start "$base_path"/sway/.config/systemd/user sway-session.target
 systemd_user_enable_start "$base_path"/sway/.config/systemd/user swayidle.service
 systemd_user_enable_start "$base_path"/sway/.config/systemd/user kanshi.service
+systemd_user_enable_start "$base_path"/sway/.config/systemd/user avizo.service
 systemd_user_enable_start "$base_path"/corectrl/.config/systemd/user corectrl.service
 systemd_user_enable_start "$base_path"/nextcloud/.config/systemd/user nextcloud-client.service
 
