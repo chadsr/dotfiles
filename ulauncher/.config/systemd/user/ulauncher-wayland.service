@@ -7,6 +7,7 @@ Type=simple
 Restart=always
 RestartSec=1
 ExecStart=/usr/bin/ulauncher --hide-window
+Environment="GDK_BACKEND=x11"
 
 [Install]
 WantedBy=graphical-session.target
