@@ -221,6 +221,18 @@ for old_pkg in "${old_pkgs[@]}"; do
     }
 done
 
+declare -a old_files=(
+    /etc/environment.d/qt5.conf
+    /etc/environment.d/java.conf
+)
+echo "Checking for old files to remove"
+for old_file in "${old_files[@]}"; do
+    sudo rm -vf "$old_file" || {
+        echo "failed to remove ${old_file}"
+        exit 1
+    }
+done
+
 # gpg-agent.conf doesn't support ENVs so replace variable here
 envsubst <"$data_path"/gpg/gpg-agent.conf >"$base_path"/gpg/.gnupg/gpg-agent.conf
 
