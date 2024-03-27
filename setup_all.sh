@@ -707,9 +707,9 @@ systemctl --user restart wireplumber pipewire pipewire-pulse.service pipewire-pu
 
 systemd_user_enable_start /usr/lib/systemd/user gamemoded.service
 systemd_user_enable_start /usr/lib/systemd/user batsignal.service
-systemd_user_enable_start /usr/lib/systemd/user ulauncher.service
 systemd_user_enable_start /usr/lib/systemd/user mako.service
 
+systemd_user_enable_start "$base_path"/ulauncher/.config/systemd/user ulauncher-wayland.service
 systemd_user_enable_start "$base_path"/gtk/.config/systemd/user xsettingsd.service
 systemd_user_enable_start "$base_path"/gammastep/.config/systemd/user geoclue-agent.service
 systemd_user_enable_start "$base_path"/gammastep/.config/systemd/user gammastep-wayland.service
