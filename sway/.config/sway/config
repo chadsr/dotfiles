@@ -53,6 +53,7 @@ set $term alacritty
 
 # Ulauncher menu
 set $menu ulauncher-toggle
+for_window [class="ulauncher"] titlebar hide border none floating enabled
 
 ### Output configuration (swaymsg -t get_outputs)
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
