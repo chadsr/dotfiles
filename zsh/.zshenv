@@ -81,7 +81,6 @@ export NVM_DIR="$HOME/.nvm"
 # Android/Java #
 ################
 
-export _JAVA_AWT_WM_NONREPARENTING=1
 export JAVA_HOME=/usr/lib/jvm/default
 export ANDROID_HOME=$HOME/Android
 export ANDROID_USER_HOME=$HOME/.android
