@@ -6,4 +6,4 @@ alias cat="bat"
 
 # Use vscodium when code is run
 alias code='codium'
-alias c='code .'
+alias c='code . && exit'
