@@ -392,6 +392,8 @@ declare -a stow_dirs_general=(
     bat
     rofi
     nextcloud
+    qt
+    java
 )
 
 echo "Stowing general configs"
