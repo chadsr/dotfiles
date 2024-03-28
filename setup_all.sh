@@ -80,7 +80,14 @@ symlink() {
     }
 }
 
+systemd_enable_start() {
+    echo "Enabling/Starting Systemd Unit ${2}"
+    sudo systemctl enable "${1}"/"${2}"
+    sudo systemctl start "${2}"
+}
+
 systemd_user_enable_start() {
+    echo "Enabling/Starting Systemd User Unit ${2}"
     systemctl --user enable "${1}"/"${2}"
     systemctl --user start "${2}"
 }
@@ -238,17 +245,9 @@ envsubst <"$data_path"/gpg/gpg-agent.conf >"$base_path"/gpg/.gnupg/gpg-agent.con
 
 echo "Setting up GPG/SSH"
 
-echo "Enabling pcscd.socket"
-sudo systemctl enable pcscd.socket || {
-    echo "failed to enable pcscd.socket"
-    exit 1
-}
-
-echo "Starting pcscd.socket"
-sudo systemctl start pcscd.socket || {
-    echo "failed to start pcscd.socket"
-    exit 1
-}
+systemd_enable_start /usr/lib/systemd/system pcscd.socket
+systemd_enable_start /usr/lib/systemd/system pcscd.service
+systemd_enable_start /usr/lib/systemd/system smartd.service
 
 cp -f "$base_path"/data/ssh/yk.pub ~/.ssh || {
     echo "failed to copy ssh pubkey"
@@ -438,21 +437,9 @@ if [[ "$current_hostname" == "$laptop_hostname" ]]; then
     echo "Checking if python-validity is installed"
     yay_install python-validity-git
 
-    echo "Enable fprintd resume/suspend services"
-    sudo systemctl enable open-fprintd-resume open-fprintd-suspend || {
-        echo "failed to enable fprintd resume/suspend services"
-        exit 1
-    }
-
-    sudo systemctl enable python3-validity.service || {
-        echo "failed to enable python3-validity.service"
-        exit 1
-    }
-
-    sudo systemctl start python3-validity.service || {
-        echo "failed to starth python3-validity.service"
-        exit 1
-    }
+    systemd_enable_start /usr/lib/systemd/system open-fprintd-resume.service
+    systemd_enable_start /usr/lib/systemd/system open-fprintd-suspend.service
+    systemd_enable_start /usr/lib/systemd/system python3-validity.service
 
     pam_rule="auth      sufficient      pam_fprintd.so max_tries=5 timeout=10"
     read -p "Add PAM fprintd rules? (${pam_rule}) (y/N)?" -n 1 -r
@@ -575,16 +562,15 @@ yay_install libappindicator-gtk2 libappindicator-gtk3 xsettingsd-git
 echo "Installing greetd Greeter"
 yay_install greetd greetd-regreet
 
-sudo systemctl enable greetd || {
-    echo "failed to enable greetd systemd unit"
-    exit 1
-}
+systemd_enable_start /usr/lib/systemd/system greetd.service
 
 echo "Installing Pipewire dependencies"
 yay_install pipewire pipewire-pulse pipewire-alsa wireplumber alsa-tools pamixer playerctl
 
 echo "Installing Bluetooth dependencies"
 yay_install bluez bluez-utils bluez-obex bluetuith-git
+
+systemd_enable_start /usr/lib/systemd/system bluetooth.service
 
 echo "Checking for general utilities dependencies to install"
 yay_install gvfs gvfs-smb thunar thunar-volman thunar-archive-plugin thunar-media-tags-plugin tumbler mpv smartmontools batsignal mimeo htop udiskie pavucontrol wdisplays ranger shotwell rbw light mako alacritty gnome-keyring cava iniparser fftw libnotify kanshi helvum xdg-desktop-portal xdg-desktop-portal-wlr wayland-protocols dex gammastep geoclue lxappearance otf-font-awesome ttf-hack dust okular gallery-dl-git bat nextcloud-client opensnitch hopenpgp-tools ddrescue nmap nm-connection-editor gnome-disk-utility fwupd rofi
@@ -683,27 +669,6 @@ sudo systemctl disable gcr-ssh-agent.socket || {
 
 sudo systemctl disable gcr-ssh-agent.service || {
     :
-}
-
-echo "Enabling smartd service"
-sudo systemctl enable smartd.service || {
-    echo "failed to enable smartd service"
-    exit 1
-}
-
-sudo sudo systemctl start smartd.service || {
-    echo "failed to start smartd service"
-    exit 1
-}
-
-sudo systemctl enable bluetooth.service || {
-    echo "failed to enable bluetoorh service"
-    exit 1
-}
-
-sudo systemctl start bluetooth.service || {
-    echo "failed to start bluetoorh service"
-    exit 1
 }
 
 echo "Reloading Systemd user daemon"
