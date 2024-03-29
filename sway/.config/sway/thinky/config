@@ -1,5 +1,10 @@
 # Specific Configuration, loaded on hostname "thinky"
 
+output eDP-1 {
+    mode 1920x1080@59.997Hz
+    render_bit_depth 8
+}
+
 #
 # Display brightness controls using light
 #
