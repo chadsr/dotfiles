@@ -575,7 +575,7 @@ yay_install bluez bluez-utils bluez-obex bluetuith-git
 systemd_enable_start /usr/lib/systemd/system bluetooth.service
 
 echo "Checking for general utilities dependencies to install"
-yay_install gvfs gvfs-smb thunar thunar-volman thunar-archive-plugin thunar-media-tags-plugin tumbler mpv smartmontools batsignal mimeo htop udiskie pavucontrol wdisplays ranger shotwell rbw light mako alacritty gnome-keyring cava iniparser fftw libnotify kanshi helvum xdg-desktop-portal xdg-desktop-portal-wlr wayland-protocols dex gammastep geoclue lxappearance otf-font-awesome ttf-hack dust okular gallery-dl-git bat nextcloud-client opensnitch hopenpgp-tools ddrescue nmap nm-connection-editor gnome-disk-utility fwupd rofi
+yay_install gvfs gvfs-smb thunar thunar-volman thunar-archive-plugin thunar-media-tags-plugin tumbler mpv smartmontools batsignal mimeo htop udiskie pavucontrol wdisplays ranger shotwell rbw light mako alacritty gnome-keyring cava iniparser fftw libnotify kanshi helvum xdg-desktop-portal xdg-desktop-portal-wlr wayland-protocols dex gammastep geoclue lxappearance otf-font-awesome ttf-hack dust okular gallery-dl-git bat nextcloud-client opensnitch hopenpgp-tools ddrescue nmap nm-connection-editor gnome-disk-utility fwupd rofi wl-clipboard cliphist wf-recorder
 
 bat cache --build || {
     echo "failed to build bat cache"
@@ -583,7 +583,7 @@ bat cache --build || {
 }
 
 echo "Checking for Sway dependencies to install"
-yay_install sway swayidle swaybg wlr-sunclock-git waybar azote slurp grim swappy wl-clipboard wf-recorder grimshot swaylock-effects-git wayvnc ansiweather avzio
+yay_install sway swayidle swaybg wlr-sunclock-git waybar azote slurp grim swappy grimshot swaylock-effects-git wayvnc ansiweather avzio
 
 echo "Installing Hyprland"
 yay_install hyprland
