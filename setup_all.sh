@@ -198,6 +198,7 @@ rm -rf ~/.config/gtk-4.0
 rm -f ~/.zshrc
 rm -f ~/.zshenv
 rm -f ~/.bashrc
+rm -f ~/.config/Thunar/uca.xml
 
 declare -a stow_dirs_setup=(
     bash
@@ -405,6 +406,7 @@ declare -a stow_dirs_general=(
     nextcloud
     qt
     java
+    thunar
 )
 
 echo "Stowing general configs"

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+<action>
+	<icon>utilities-terminal</icon>
+	<name>Open Terminal</name>
+	<submenu></submenu>
+	<unique-id>1709513457399657-1</unique-id>
+	<command>/usr/bin/alacritty --working-directory %f</command>
+	<description>Open Terminal in this directory</description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+</actions>
