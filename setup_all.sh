@@ -457,15 +457,10 @@ elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
     echo "Installing ROCM ONNXRuntime"
     yay_install onnxruntime-opt-rocm python-onnxruntime-opt-rocm
 
+    # Update amdgpu boot parameter
     # https://wiki.archlinux.org/title/AMDGPU#Boot_parameter
     boot_parameter=$(printf 'amdgpu.ppfeaturemask=0x%x\n' "$(($(cat /sys/module/amdgpu/parameters/ppfeaturemask) | 0x4000))")
-
-    read -p "Add AMDGPU Boot parameter? (${boot_parameter}) (y/N)?" -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        sudo vi /etc/default/grub
-        sudo grub-mkconfig -o /boot/grub/grub.cfg
-    fi
+    echo "$boot_parameter" >"$base_path"/system/shifty/etc/cmdline.d/amdgpu.conf
 
     gpg_list_dir "$data_path"/corectrl/"$desktop_hostname"_profiles.gpgtar
     gpg_decrypt_dir "$data_path"/corectrl/"$desktop_hostname"_profiles.gpgtar "$base_path"/corectrl/.config/corectrl
