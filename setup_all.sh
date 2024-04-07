@@ -659,6 +659,9 @@ yay_install steam-native-runtime steamtinkerlaunch-git
 echo "Installing YubiKey dependencies"
 yay_install yubikey-personalization yubikey-manager yubikey-manager-qt
 
+echo "Installing Jellyfin player dependencies"
+yay_install jellyfin-media-player-git jellyfin-mpv-shim
+
 echo "Disabling GNOME Keyring SSH Agent"
 
 sudo systemctl disable gcr-ssh-agent.socket || {
