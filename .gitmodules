@@ -70,3 +70,6 @@
     path = .git_submodules/catppuccin-swaync
     url = https://github.com/catppuccin/swaync.git
     branch = main
+[submodule ".git_submodules/swaylock-corrupter"]
+	path = .git_submodules/swaylock-corrupter
+	url = https://github.com/aur-packaging/swaylock-corrupter.git

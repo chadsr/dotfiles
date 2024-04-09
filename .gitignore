@@ -27,3 +27,4 @@ rofi/.local/bin/rofi-network-manager
 fonts/.local/share/fonts/cryptocoins.ttf
 helix/.config/helix/themes/*
 !helix/.config/helix/themes/.gitkeep
+sway/.local/bin/swaylock-corrupter
