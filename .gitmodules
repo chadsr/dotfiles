@@ -1,51 +1,72 @@
 [submodule ".git_submodules/alacritty-theme"]
-path = .git_submodules/alacritty-theme
-url = https://github.com/alacritty/alacritty-theme.git
-branch = master
+    path = .git_submodules/alacritty-theme
+    url = https://github.com/alacritty/alacritty-theme.git
+    branch = master
 [submodule ".git_submodules/sweet-theme"]
-path = .git_submodules/sweet-theme
-url = https://github.com/EliverLara/Sweet.git
-branch = nova
-[submodule "zsh/.oh-my-zsh/themes/powerlevel10k"]
-path = zsh/.oh-my-zsh/themes/powerlevel10k
-url = https://github.com/romkatv/powerlevel10k.git
-branch = master
-[submodule ".git_submodules/sweet-icons"]
-path = .git_submodules/sweet-icons
-url = https://github.com/EliverLara/Sweet-folders.git
-branch = master
-[submodule "ulauncher/.config/ulauncher/user-themes/TokyoNight"]
-path = ulauncher/.config/ulauncher/user-themes/TokyoNight
-url = https://github.com/chadsr/TokyoNight-Ulauncher-Theme.git
-branch = master
-[submodule ".git_submodules/liquidctl"]
-path = .git_submodules/liquidctl
-url = https://github.com/liquidctl/liquidctl.git
-branch = main
-[submodule ".git_submodules/cyberpunk-theme"]
-path = .git_submodules/cyberpunk-theme
-url = https://github.com/Roboron3042/Cyberpunk-Neon.git
-branch = master
-[submodule "sway/.config/waybar/modules/crypto"]
-path = sway/.config/waybar/modules/crypto
-url = https://github.com/chadsr/waybar-crypto.git
-branch = master
-[submodule ".git_submodules/hackneyed-cursor"]
-path = .git_submodules/hackneyed-cursor
-url = https://gitlab.com/Enthymeme/hackneyed-x11-cursors.git
-branch = master
+    path = .git_submodules/sweet-theme
+    url = https://github.com/EliverLara/Sweet.git
+    branch = nova
 [submodule ".git_submodules/ohmyzsh"]
-path = .git_submodules/ohmyzsh
-url = https://github.com/ohmyzsh/ohmyzsh.git
+    path = .git_submodules/ohmyzsh
+    url = https://github.com/ohmyzsh/ohmyzsh.git
+    branch = master
+[submodule "zsh/.oh-my-zsh/themes/powerlevel10k"]
+    path = omz/.oh-my-zsh/themes/powerlevel10k
+    url = https://github.com/romkatv/powerlevel10k.git
+    branch = master
+[submodule ".git_submodules/sweet-icons"]
+    path = .git_submodules/sweet-icons
+    url = https://github.com/EliverLara/Sweet-folders.git
+    branch = master
+[submodule "ulauncher/.config/ulauncher/user-themes/TokyoNight"]
+    path = ulauncher/.config/ulauncher/user-themes/TokyoNight
+    url = https://github.com/chadsr/TokyoNight-Ulauncher-Theme.git
+    branch = master
+[submodule ".git_submodules/liquidctl"]
+    path = .git_submodules/liquidctl
+    url = https://github.com/liquidctl/liquidctl.git
+    branch = main
+[submodule ".git_submodules/cyberpunk-theme"]
+    path = .git_submodules/cyberpunk-theme
+    url = https://github.com/Roboron3042/Cyberpunk-Neon.git
+    branch = master
+[submodule "sway/.config/waybar/modules/crypto"]
+    path = .git_submodules/waybar-crypto
+    url = https://github.com/chadsr/waybar-crypto.git
+    branch = master
+[submodule ".git_submodules/hackneyed-cursor"]
+    path = .git_submodules/hackneyed-cursor
+    url = https://gitlab.com/Enthymeme/hackneyed-x11-cursors.git
+    branch = master
 [submodule ".git_submodules/candy-icons"]
-path = .git_submodules/candy-icons
-url = https://github.com/EliverLara/candy-icons.git
+    path = .git_submodules/candy-icons
+    url = https://github.com/EliverLara/candy-icons.git
+    branch = master
 [submodule ".git_submodules/buuf-nestort-icons"]
-path = .git_submodules/buuf-nestort-icons
-url = https://git.disroot.org/eudaimon/buuf-nestort.git
+    path = .git_submodules/buuf-nestort-icons
+    url = https://git.disroot.org/eudaimon/buuf-nestort.git
+    branch = master
 [submodule ".git_submodules/catppuccin-bat"]
-path = .git_submodules/catppuccin-bat
-url = https://github.com/catppuccin/bat.git
+    path = .git_submodules/catppuccin-bat
+    url = https://github.com/catppuccin/bat.git
+    branch = main
 [submodule ".git_submodules/rofi-network-manager"]
-	path = .git_submodules/rofi-network-manager
-	url = https://github.com/P3rf/rofi-network-manager.git
+    path = .git_submodules/rofi-network-manager
+    url = https://github.com/P3rf/rofi-network-manager.git
+    branch = master
+[submodule ".git_submodules/cryptocoins-icons"]
+    path = .git_submodules/cryptocoins-icons
+    url = https://github.com/chadsr/cryptocoins.git
+    branch = master
+[submodule "omz/.oh-my-zsh/themes/powerlevel10k"]
+    path = omz/.oh-my-zsh/themes/powerlevel10k
+    url = https://github.com/romkatv/powerlevel10k.git
+    branch = master
+[submodule ".git_submodules/catppuccin-helix"]
+    path = .git_submodules/catppuccin-helix
+    url = https://github.com/catppuccin/helix.git
+    branch = main
+[submodule ".git_submodules/catppuccin-swaync"]
+    path = .git_submodules/catppuccin-swaync
+    url = https://github.com/catppuccin/swaync.git
+    branch = main

@@ -5,8 +5,9 @@ gtk/.icons/*
 !gtk/.icons/.gitkeep
 gtk/.config/gtk-3.0/bookmarks
 gtk/.config/gtk-4.0/bookmarks
-sway/.config/waybar/modules/crypto/crypto.ini
-sway/.config/alacritty/colors
+waybar/.config/waybar/modules/crypto/*
+!waybar/.config/waybar/modules/crypto/.gitkeep
+alacritty/.config/alacritty/colors
 xdg/.config/mimeapps.list
 liquidctl/.local/bin/yoda
 ssh/.ssh/*
@@ -23,3 +24,6 @@ vscodium/*
 bat/.config/bat/themes/*
 !bat/.config/bat/themes/.gitkeep
 rofi/.local/bin/rofi-network-manager
+fonts/.local/share/fonts/cryptocoins.ttf
+helix/.config/helix/themes/*
+!helix/.config/helix/themes/.gitkeep
