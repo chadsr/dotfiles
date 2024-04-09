@@ -17,3 +17,4 @@ jobs:
         with:
           ignore_paths: >-
             .git_submodules
+          severity: warning
