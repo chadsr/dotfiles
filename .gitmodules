@@ -73,3 +73,6 @@
 [submodule ".git_submodules/swaylock-corrupter"]
 	path = .git_submodules/swaylock-corrupter
 	url = https://github.com/aur-packaging/swaylock-corrupter.git
+[submodule ".git_submodules/catppuccin-mpv"]
+	path = .git_submodules/catppuccin-mpv
+	url = https://github.com/catppuccin/mpv.git
