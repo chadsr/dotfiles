@@ -12,6 +12,17 @@ laptop_hostname="thinky"
 desktop_hostname="shifty"
 current_hostname=$(hostname)
 
+tmp_path=/tmp/setup-"$current_hostname"
+
+package_manager=/usr/bin/yay
+pkglist_system_path=/etc/pkglist.txt
+
+# bare minimum packages needed by this script in order to bootstrap
+declare -a script_pkgs=(
+    gnupg
+    neovim
+)
+
 exit_setup() {
     rv=$?
     printf "\n\nExiting setup...\n"
@@ -31,10 +42,10 @@ prompt_exit() {
     read -rp "$1 Continue or Abort? (y/N)" answer
     case ${answer:0:1} in
     y | Y)
-        return
+        return 0
         ;;
     *)
-        exit_setup
+        exit_setup 0
         ;;
     esac
 }
@@ -54,65 +65,174 @@ fi
 
 prompt_exit "This script will remove/change existing system settings."
 
-yay_install() {
-    yay -S --noconfirm --needed --noredownload "${@}" || {
+install_packages() {
+    "$package_manager" -S --noconfirm --needed --noredownload -- "${@}" || {
         echo "failed to install:"
         echo "${@}"
-        exit 1
+        return 1
     }
+}
+
+remove_package() {
+    if "$package_manager" -Qi "$1" >/dev/null; then
+        "$package_manager" -R --noconfirm -- "$1" >/dev/null || {
+            :
+        }
+    fi
 }
 
 rmrf() {
     rm -rf "${1}" || {
         echo "failed to recursively remove ${1}"
-        exit 1
+        return 1
     }
 }
 
 symlink() {
-    rmrf "${2}" || {
-        echo "failed to remove old symlink: ${2}"
-        exit 1
-    }
-    ln -s "${1}" "${2}" || {
+    if [[ -e "${2}" ]]; then
+        if [[ ! -L "${2}" ]]; then
+            echo "${2} already exists and is an irregular type. Check manually whether this is safe to replace with ${1}."
+            return 1
+        fi
+
+        echo "Removing existing symlink at ${2}"
+        rmrf "${2}" || {
+            echo "failed to remove old symlink: ${2}"
+            return 1
+        }
+    fi
+
+    # Stow only supports relative symlinks
+    ln -rs "${1}" "${2}" || {
         echo "failed to symlink: ${1} to ${2}"
-        exit 1
+        return 1
+    }
+}
+
+rsync_system_config() {
+    system_config_full_path="$system_config_path"/"${1}"
+
+    if [[ ! -d "$system_config_full_path" ]]; then
+        echo "The provided path '${system_config_full_path}' does not exist!"
+        return 1
+    fi
+
+    sudo rsync --chown=root:root --open-noatime --progress -ruacv -- "${system_config_full_path}"/* / || {
+        echo "failed to rsync system config from ${system_config_full_path} to root filesystem"
+        return 1
     }
 }
 
 systemd_enable_start() {
-    echo "Enabling/Starting Systemd Unit ${2}"
-    sudo systemctl enable "${1}"/"${2}"
-    sudo systemctl start "${2}"
+    unit_path="${1}"
+    unit_name=$(basename "${1}")
+
+    if ! (systemctl -q is-enabled -- "${unit_name}"); then
+        echo "Enabling Systemd Unit ${unit_name}"
+        sudo systemctl enable -- "${unit_path}" || {
+            echo "failed to enable systemd unit ${unit_name}"
+            return 1
+        }
+    fi
+    if ! (systemctl -q is-active "${unit_name}"); then
+        echo "Starting Systemd Unit ${unit_name}"
+        sudo systemctl start -- "${unit_name}" || {
+            echo "failed to start systemd unit ${unit_name}"
+            return 1
+        }
+    fi
 }
 
 systemd_user_enable_start() {
-    echo "Enabling/Starting Systemd User Unit ${2}"
-    systemctl --user enable "${1}"/"${2}"
-    systemctl --user start "${2}"
+    unit_path="${1}"
+    unit_name=$(basename "${1}")
+
+    if ! (systemctl --user -q is-enabled -- "${unit_name}"); then
+        echo "Enabling Systemd User Unit ${unit_name}"
+        systemctl --user enable -- "${unit_path}" || {
+            echo "failed to enable systemd user unit ${unit_name}"
+            return 1
+        }
+    fi
+    if ! (systemctl --user -q is-active -- "${unit_name}"); then
+        echo "Starting Systemd User Unit ${unit_name}"
+        systemctl --user start -- "${unit_name}" || {
+            echo "failed to start systemd user unit ${unit_name}"
+            return 1
+        }
+    fi
 }
 
 gpg_ssh_agent() {
+    systemctl --user restart gpg-agent
     unset SSH_AGENT_PID
     if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
         SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
         export SSH_AUTH_SOCK
     fi
-    GPG_TTY=$(tty)
+    GPG_TTY="${TTY:-"$(tty)"}"
     export GPG_TTY
     gpg-connect-agent updatestartuptty /bye >/dev/null
 }
 
+is_binary() {
+    LC_MESSAGES=C grep -Hm1 '^' <"${1-$REPLY}" | grep -q '^Binary'
+}
+
+diff_files() {
+    if [[ ! -f "$1" ]]; then
+        echo "file ${1} does not exist"
+        return 1
+    fi
+    if [[ ! -f "$2" ]]; then
+        echo "file ${2} does not exist"
+        return 1
+    fi
+
+    if (cmp -s "$1" "$2"); then
+        # If they are identical, then return
+        return 0
+    else
+        if is_binary "{$1}" || is_binary "${2}"; then
+            echo "File is binary. Skipping interactive diff"
+            return 0
+        fi
+        vimdiff -d "$1" "$2" || {
+            echo "vimdiff on ${1} <-> ${2}' exited with error"
+            return 1
+        }
+    fi
+}
+
+# gpg is used directly throughout this setup process
+# to handle the non-deterministic nature of gpg encryption, checks/diffs are performed to prevent unwanted changes going un-noticed
 gpg_decrypt_file() {
-    gpg -v --local-user "$gpg_encryption_subkey" --armor --decrypt --yes --output "${2}" "${1}"
-}
+    if [[ ! -f "$1" ]]; then
+        echo "input file ${1} does not exist"
+        return 1
+    fi
 
-gpg_list_dir() {
-    gpgtar -v --list-archive --gpg-args "--local-user ${gpg_encryption_subkey}" "${1}"
-}
+    input_file_path="${1}"
+    output_file_path="${2}"
+    output_filename=$(basename "${output_file_path}")
+    tmp_output_file_path="${tmp_path}/${output_filename}"
 
-gpg_decrypt_dir() {
-    gpgtar -v --gpg-args "--local-user ${gpg_encryption_subkey}" --decrypt --yes --directory "${2}" "${1}"
+    echo "Decrypting ${input_file_path} to ${tmp_output_file_path}"
+
+    gpg --local-user "${gpg_encryption_subkey}" --armor --decrypt --yes --output "${tmp_output_file_path}" "${input_file_path}" || {
+        echo "failed to decrypt file ${input_file_path} to ${tmp_output_file_path}"
+        return 1
+    }
+
+    # if the file to replace already exists, perform a diff to check for changes
+    if [[ -f "$output_file_path" ]]; then
+        diff_files "$output_file_path" "$tmp_output_file_path"
+    fi
+
+    cp -f "$tmp_output_file_path" "$output_file_path" || {
+        echo "failed to copy '${tmp_output_file_path}' to '${output_file_path}'"
+        return 1
+    }
 }
 
 line_exists() {
@@ -134,6 +254,86 @@ line_exists() {
     esac
 }
 
+string_exists() {
+    case $(
+        grep -Fq "${1}" "${2}" >/dev/null
+        echo $?
+    ) in
+    0)
+        # Found
+        return 0
+        ;;
+    1)
+        # Not found
+        return 1
+        ;;
+    *)
+        exit 1
+        ;;
+    esac
+}
+
+add_group_user() {
+    sudo groupadd "${1}" || {
+        :
+    }
+
+    sudo usermod -a -G "${1}" "$(whoami)" || {
+        echo "Failed to add $(whoami) to group ${1}"
+        exit 1
+    }
+}
+
+set_default_kernel() {
+    efi_loader_conf_path=/efi/loader/loader.conf
+    kernel_suffix="${1}".conf
+
+    case $(
+        sudo grep -G -- '^default.*'"${kernel_suffix}"'$' "${efi_loader_conf_path}" >/dev/null
+        echo $?
+    ) in
+    0)
+        echo "Linux ${kernel_suffix} kernel already default"
+        ;;
+    1)
+        read -p "Make Linux ${kernel_suffix} kernel default (y/N)?" -n 1 -r
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            case $(
+                sudo grep -G -- '^default.*\*$' "${efi_loader_conf_path}" >/dev/null
+                echo $?
+            ) in
+            0) ;;
+            1)
+                echo "Expected default kernel to be a wildcard (ending with *) in ${efi_loader_conf_path}"
+                exit 1
+                ;;
+            *)
+                echo "Failed to check for wildcard suffix in ${efi_loader_conf_path}"
+                exit 1
+                ;;
+            esac
+            sudo sed -i '/^default/s/$/'"${kernel_suffix}"'/' "${efi_loader_conf_path}"
+        fi
+        echo "Linux ${kernel_suffix} kernel set to default"
+        ;;
+    *)
+        echo "Failed to check ${efi_loader_conf_path} for ${kernel_suffix} kernel"
+        exit 1
+        ;;
+    esac
+}
+
+rm_if_not_stowed() {
+    if [[ -L "${1}" ]]; then
+        symlink_path=$(readlink -f "${1}")
+        if [[ $symlink_path == *"${base_path}"* ]]; then
+            return 0
+        fi
+    fi
+
+    rm -rfv "${1}"
+}
+
 stow_config() {
     stow -v "$1" || {
         echo "Failed to stow ${1} config"
@@ -141,22 +341,140 @@ stow_config() {
     }
 }
 
+mkdir -p "$tmp_path"
+
 echo "Updating package databases & packages"
-yay -Syu || {
-    echo "failehd to update package databases"
+"$package_manager" -Syu || {
+    echo "failed to update package databases"
     exit 1
 }
 
-echo "Installing script dependencies"
-yay_install git curl wget make stow gnupg pcsclite ccid inkscape xorg-xcursorgen wayland nano rustup sccache pkg-config meson ninja bemenu-wayland pinentry-bemenu
+# Install the bare minimum packages for this script to work
+install_packages "${script_pkgs[@]}"
+
+echo "Setting up GPG/SSH"
+gpg --list-keys >/dev/null
+
+# gpg-agent.conf doesn't support ENVs so replace variable here
+envsubst <"$data_path"/gpg/gpg-agent.conf >"$base_path"/gpg/.gnupg/gpg-agent.conf
+
+systemd_user_enable_start "$base_path"/gpg/.config/systemd/user/gnupghome.service
+systemd_user_enable_start "$base_path"/gpg/.config/systemd/user/ssh-auth-sock.service
+systemd_user_enable_start /usr/lib/systemd/user/gpg-agent.service
+
+gpg_ssh_agent
+
+# If our primary GPG key is not yet imported, do that and
+if [[ ! $(gpg --list-keys "$gpg_primary_key") ]]; then
+    gpg --import "$data_path"/gpg/2B7340DB13C85766.asc || {
+        echo "failed to import GPG pubkey"
+        exit 1
+    }
+
+    gpg --tofu-policy good "$gpg_primary_key" || {
+        echo "failed to set gpg tofu policy"
+        exit 1
+    }
+fi
+
+pkglist_remove_path="$data_path"/pkgs/remove.txt
+
+echo "Decrypting data"
+declare -a decrypt_data_paths_tuples=(
+    "${data_path}/corectrl/${current_hostname}__global_.ccpro.asc.gpg ${base_path}/corectrl/.config/corectrl/profiles/_global_.ccpro"
+    "${data_path}/corectrl/${current_hostname}_steam.sh.ccpro.asc.gpg ${base_path}/corectrl/.config/corectrl/profiles/_steam.sh.ccpro"
+    "${data_path}/corectrl/${current_hostname}_codium.ccpro.asc.gpg ${base_path}/corectrl/.config/corectrl/profiles/codium.ccpro"
+    "${data_path}/gallery-dl/config.json.asc.gpg ${base_path}/gallery-dl/.config/gallery-dl/config.json"
+    "${data_path}/gtk/bookmarks.asc.gpg ${base_path}/gtk/.config/gtk-3.0/bookmarks"
+    "${data_path}/khal/config.asc.gpg ${base_path}/khal/.config/khal/config"
+    "${data_path}/pkgs/remove.txt.asc.gpg ${pkglist_remove_path}"
+    "${data_path}/ssh/config.asc.gpg ${base_path}/ssh/.ssh/config"
+    "${data_path}/tidal-hifi/config.json.asc.gpg ${base_path}/tidal-hifi/.config/tidal-hifi/config.json"
+    "${data_path}/vdirsyncer/config.asc.gpg ${base_path}/khal/.config/vdirsyncer/config"
+    "${data_path}/waybar/crypto/config.ini.asc.gpg ${base_path}/waybar/.config/waybar/modules/crypto/config.ini"
+    "${data_path}/xdg/mimeapps.list.asc.gpg ${base_path}/xdg/.config/mimeapps.list"
+)
+for decrypt_data_paths_tuple in "${decrypt_data_paths_tuples[@]}"; do
+    read -ra decrypt_data_paths <<<"$decrypt_data_paths_tuple"
+    gpg_decrypt_file "${decrypt_data_paths[0]}" "${decrypt_data_paths[1]}"
+done
+
+# check for packages to be removed
+declare -a old_pkgs=()
+readarray -t old_pkgs <"$pkglist_remove_path"
+echo "Checking for old packages to remove"
+for old_pkg in "${old_pkgs[@]}"; do
+    remove_package "$old_pkg"
+done
+
+# check for packages to be installed
+pkglist_path="$data_path"/pkgs/"$current_hostname".txt
+
+# If pkglist_system_path exists, it takes precedence over the backup
+if [[ -f $pkglist_system_path ]]; then
+    # make sure pkglist_system_path is symlinked to pkglist_path_current
+    # if pkglist_path exists and is not symlinked to pkglist_system_path, then remove it
+    if [[ -f $pkglist_path ]]; then
+        pkglist_link_path=$(readlink -f "$pkglist_path")
+        if [[ ! "$pkglist_link_path" == "$pkglist_system_path" ]]; then
+            echo "removing ${pkglist_path} because it's not a symlink to ${pkglist_system_path}"
+            rm -f "$pkglist_path"
+        fi
+    fi
+
+    ln -fs "$pkglist_system_path" "$pkglist_path"
+else
+    # restore from backup
+    gpg_decrypt_file "$data_path/pkgs/$current_hostname.txt.asc.gpg" "$pkglist_path"
+fi
+
+declare -a pkgs=()
+readarray -t pkgs <"$pkglist_path"
+install_packages "${pkgs[@]}"
+
+# Add user to groups needed by various packages
+declare -a user_groups=(
+    audio
+    gamemode
+    plugdev
+    ssh_login
+)
+for user_group in "${user_groups[@]}"; do
+    echo "Adding user to group ${user_group}"
+    add_group_user "$user_group"
+done
+
+declare -a systemd_units=(
+    /usr/lib/systemd/system/bluetooth.service
+    /usr/lib/systemd/system/greetd.service
+    /usr/lib/systemd/system/pcscd.socket
+    /usr/lib/systemd/system/power-profiles-daemon.service
+    /usr/lib/systemd/system/smartd.service
+)
+for systemd_unit in "${systemd_units[@]}"; do
+    systemd_enable_start "${systemd_unit}"
+done
+
+echo "Disabling GNOME Keyring SSH Agent (If it exists)"
+sudo systemctl disable gcr-ssh-agent.socket || {
+    :
+}
+sudo systemctl disable gcr-ssh-agent.service || {
+    :
+}
 
 rustup default stable || {
     echo "failed to setup rust stable toolchain"
     exit 1
 }
 
-stow -t ~/ stow || {
-    echo "failed to stow stow"
+rustup update || {
+    echo "failed to update Rust toolchain"
+    exit 1
+}
+
+rustup component add clippy rustfmt || {
+    echo "failed to install Rust components"
     exit 1
 }
 
@@ -165,69 +483,6 @@ find ~/.config/ -xtype l -print -delete || {
     echo "Failed to remove broken symlinks"
     exit 1
 }
-
-echo "Setting up user directory configs"
-
-# Parent dirs that should not be symlinks from stow-ing
-mkdir -p ~/.local/share
-mkdir -p ~/.local/bin
-mkdir -p ~/.config/pulse
-mkdir -p ~/.config/nvim
-mkdir -p ~/.config/systemd/user
-mkdir -p ~/.config/environment.d
-mkdir -p ~/.config/pulseaudio-ctl
-mkdir -p ~/.config/tidal-hifi
-mkdir -p ~/.config/ulauncher
-mkdir -p ~/.config/corectrl/profiles
-mkdir -p ~/.config/bat/themes
-mkdir -p ~/.themes
-mkdir -p ~/.icons
-mkdir -p ~/.cargo
-mkdir -p ~/.oh-my-zsh
-mkdir -p ~/.config/VSCodium/User/globalStorage/zokugun.sync-settings
-mkdir -p ~/.ssh
-
-# Create ~/.gnupg
-gpg --list-keys
-
-# Remove existing dirs/files that will cause conflicts
-rm -f ~/.config/mimeapps.list
-rm -f ~/.gtkrc-2.0
-rm -rf ~/.config/gtk-3.0
-rm -rf ~/.config/gtk-4.0
-rm -f ~/.zshrc
-rm -f ~/.zshenv
-rm -f ~/.bashrc
-rm -f ~/.config/Thunar/uca.xml
-
-declare -a stow_dirs_setup=(
-    bash
-    git
-    gpg
-    ssh
-    yay
-    rust
-)
-
-echo "Stowing setup configs"
-for stow_dir in "${stow_dirs_setup[@]}"; do
-    stow_config "$stow_dir"
-done
-
-source ~/.bashrc || {
-    echo "failed to source .bashrc"
-    exit 1
-}
-
-declare -a old_pkgs=(
-    vi vim swaylock swaylock-blur pipewire-media-session pipewire-pulseaudio pipewire-pulseaudio-git pulseaudio-equalizer pulseaudio-lirc pulseaudio-zeroconf pulseaudio pulseaudio-bluetooth redshift-wayland-git birdtray alacritty-colorscheme ly vscodium-bin vscodium-bin-features vscodium-bin-marketplace thunar-shares-plugin brightnessctl
-)
-echo "Checking for old packages to remove"
-for old_pkg in "${old_pkgs[@]}"; do
-    yay -R --noconfirm "$old_pkg" || {
-        :
-    }
-done
 
 declare -a old_files=(
     /etc/environment.d/qt5.conf
@@ -241,46 +496,186 @@ for old_file in "${old_files[@]}"; do
     }
 done
 
-# gpg-agent.conf doesn't support ENVs so replace variable here
-envsubst <"$data_path"/gpg/gpg-agent.conf >"$base_path"/gpg/.gnupg/gpg-agent.conf
+echo "Setting up user directory configs"
 
-echo "Setting up GPG/SSH"
+# Parent dirs that should not be symlinks from stow-ing
+declare -a mk_dirs=(
+    ~/.cargo
+    ~/.config/bat/themes
+    ~/.config/corectrl/profiles
+    ~/.config/environment.d
+    ~/.config/khal
+    ~/.config/nvim
+    ~/.config/pulse
+    ~/.config/pulseaudio-ctl
+    ~/.config/systemd/user
+    ~/.config/Thunar
+    ~/.config/tidal-hifi
+    ~/.config/VSCodium/User/globalStorage/zokugun.sync-settings
+    ~/.config/xfce4/xfconf/xfce-perchannel-xml
+    ~/.icons
+    ~/.local/bin
+    ~/.local/share/fonts
+    ~/.ssh
+    ~/.themes
+    ~/.vscode-oss
+    ~/Pictures/Screenshots
+)
+for mk_dir in "${mk_dirs[@]}"; do
+    mkdir -p "${mk_dir}"
+done
 
-systemd_enable_start /usr/lib/systemd/system pcscd.socket
-systemd_enable_start /usr/lib/systemd/system pcscd.service
+declare -a conflict_paths=(
+    ~/.bashrc
+    ~/.config/gtk-3.0
+    ~/.config/gtk-3.0
+    ~/.config/gtk-4.0
+    ~/.config/mimeapps.list
+    ~/.config/Thunar/uca.xml
+    ~/.config/xfce4/xfconf/xfce-perchannel-xml/thunar.xml
+    ~/.gnupg/common.conf
+    ~/.gtkrc-2.0
+    ~/.vscode-oss/argv.json
+    ~/.zshenv
+    ~/.zshrc
+)
+echo "Checking for files/directories that will conflict with stow"
+for conflict_path in "${conflict_paths[@]}"; do
+    rm_if_not_stowed "${conflict_path}"
+done
 
-cp -f "$base_path"/data/ssh/yk.pub ~/.ssh || {
-    echo "failed to copy ssh pubkey"
+declare -a stow_dirs_setup=(
+    stow
+    bash
+    git
+    gpg
+    rust
+    ssh
+    yay
+    zsh
+)
+
+echo "Stowing setup configs"
+for stow_dir in "${stow_dirs_setup[@]}"; do
+    stow_config "$stow_dir"
+done
+
+# shellcheck disable=SC1090
+source ~/.bashrc || {
+    echo "failed to source .bashrc"
     exit 1
 }
 
-chmod 600 ~/.ssh/yk.pub || {
-    echo "failed to change permissions on ssh pubkey"
+sudo update-smart-drivedb
+
+corectrl_rules_path=/etc/polkit-1/rules.d/90-corectrl.rules
+if ! sudo test -f "${corectrl_rules_path}"; then
+    echo "Setting up polkit for Corectrl"
+
+    envsubst <"$data_path"/corectrl/90-corectrl.rules | sudo tee ${corectrl_rules_path} || {
+        echo "Failed to setup polkit for Corectrl"
+        exit 1
+    }
+fi
+
+# https://espanso.org/docs/install/linux/#adding-the-required-capabilities
+sudo setcap "cap_dac_override+p" "$(which espanso)" || {
+    echo "failed to setcap for espanso"
     exit 1
 }
 
-systemctl --user restart gpg-agent || {
-    echo "failed to restart GPG agent service"
-    exit 1
-}
+# For some unknown reason some apps (VSCode) seem to have this path hard-coded and refused to listen for env-vars
+if [[ ! -e /usr/lib/ssh/ssh-askpass ]]; then
+    echo "Symlinking ssh-askpass from Seahorse"
+    sudo ln -s /usr/lib/seahorse/ssh-askpass /usr/lib/ssh/ssh-askpass | {
+        echo "Failed to symlink ssh-askpass"
+        exit 1
+    }
+fi
 
-gpg --import "$base_path"/data/gpg/2B7340DB13C85766.asc || {
-    echo "failed to import GPG pubkey"
-    exit 1
-}
+if [[ "$current_hostname" == "$laptop_hostname" ]]; then
+    pam_rule="auth      sufficient      pam_fprintd.so max_tries=5 timeout=10"
+    read -p "Add PAM fprintd rules? (${pam_rule}) (y/N)?" -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        sudo vi /etc/pam.d/sudo
+        sudo vi /etc/pam.d/system-local-login
+    fi
 
-gpg --tofu-policy good "$gpg_primary_key" || {
-    echo "failed to set gpg tofu policy"
-    exit 1
-}
+    declare -a systemd_units_laptop=(
+        /usr/lib/systemd/system/open-fprintd-resume.service
+        /usr/lib/systemd/system/open-fprintd-suspend.service
+        /usr/lib/systemd/system/python3-validity.service
+    )
+    for systemd_unit in "${systemd_units_laptop[@]}"; do
+        systemd_enable_start "${systemd_unit}"
+    done
 
-gpg_ssh_agent
+    echo "Copying laptop system configuration"
+    rsync_system_config "$laptop_hostname"/
+elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
+    declare -a stow_dirs_desktop=(
+        liquidctl
+    )
+
+    echo "Stowing ${desktop_hostname} configs"
+    for stow_dir in "${stow_dirs_desktop[@]}"; do
+        stow_config "$stow_dir"
+    done
+
+    set_default_kernel zen
+
+    # Update amdgpu boot parameter
+    # https://wiki.archlinux.org/title/AMDGPU#Boot_parameter
+    amdgpu_key="amdgpu.ppfeaturemask"
+    cmd_line_file_path=/etc/kernel/cmdline
+    amdgpu_boot_parameter=$(printf '%s=0x%x\n' "$amdgpu_key" "$(($(cat /sys/module/amdgpu/parameters/ppfeaturemask) | 0x4000))")
+    if sudo test -f "$cmd_line_file_path"; then
+        if ! string_exists "$amdgpu_key" "$cmd_line_file_path"; then
+            echo "Appending boot parameter '$amdgpu_boot_parameter' to $cmd_line_file_path"
+            echo " $amdgpu_boot_parameter" | sudo tee -a "$cmd_line_file_path" >/dev/null
+            sudo reinstall-kernels | {
+                echo "failed to re-install kernels"
+                exit 1
+            }
+        else
+            echo "${amdgpu_key} already exists in ${cmd_line_file_path}. skipping."
+        fi
+    else
+        echo "${cmd_line_file_path} does not exist!"
+        exit 1
+    fi
+
+    symlink "$git_submodule_path"/liquidctl/extra/yoda.py ./liquidctl/.local/bin/yoda
+
+    systemctl --user daemon-reload || {
+        echo "failed to daemon-reload"
+        exit 1
+    }
+
+    declare -a systemd_user_units_desktop=(
+        "$base_path"/liquidctl/.config/systemd/user/liquidctl.service
+        "$base_path"/liquidctl/.config/systemd/user/yoda.service
+    )
+    for systemd_user_unit in "${systemd_user_units_desktop[@]}"; do
+        systemd_user_enable_start "${systemd_user_unit}"
+    done
+
+    echo "Copying desktop system configuration"
+    rsync_system_config "$desktop_hostname"/
+fi
+
+echo "Copying common system configuration"
+rsync_system_config common/
 
 # Check if certain submodules get updated, so we don't build them uneccessarily
 hackneyed_updated=false
 hackneyed_hash_old=$(git -C "$git_submodule_path"/hackneyed-cursor rev-parse --short HEAD)
 
-git submodule update --progress --init --force --recursive --remote || {
+swaync_cp_updated=false
+swaync_cp_hash_old=$(git -C "$git_submodule_path"/catppuccin-swaync rev-parse --short HEAD)
+
+git submodule update --init --recursive --remote --progress || {
     echo "failed to update git submodules"
     exit 1
 }
@@ -301,18 +696,11 @@ if [[ "$hackneyed_hash_old" != "$hackneyed_hash_new" ]]; then
     echo "hackneyed-cursor has been updated"
 fi
 
-echo "Decrypting ./data files"
-gpg_decrypt_file "$data_path"/ssh/config.asc.gpg "$base_path"/ssh/.ssh/config
-gpg_decrypt_file "$data_path"/xdg/mimeapps.list.asc.gpg "$base_path"/xdg/.config/mimeapps.list
-gpg_decrypt_file "$data_path"/tidal-hifi/config.json.asc.gpg "$base_path"/tidal-hifi/.config/tidal-hifi/config.json
-gpg_decrypt_file "$data_path"/gallery-dl/config.json.asc.gpg "$base_path"/gallery-dl/.config/gallery-dl/config.json
-gpg_decrypt_file "$data_path"/waybar/crypto/config.ini.asc.gpg "$base_path"/sway/.config/waybar/modules/crypto/config.ini
-gpg_decrypt_file "$data_path"/gtk/bookmarks.asc.gpg "$base_path"/gtk/.config/gtk-3.0/bookmarks
-
-symlink "$git_submodule_path"/rofi-network-manager/rofi-network-manager.sh "$base_path"/rofi/.local/bin/rofi-network-manager
-
-echo "Checking for ZSH dependencies to install"
-yay_install zsh thefuck ttf-meslo-nerd-font-powerlevel10k
+swaync_cp_hash_new=$(git -C "$git_submodule_path"/catppuccin-swaync rev-parse --short HEAD)
+if [[ "$swaync_cp_hash_old" != "$swaync_cp_hash_new" ]]; then
+    swaync_cp_updated=true
+    echo "catppuccin-swaync has been updated"
+fi
 
 if [[ ! -d ~/.oh-my-zsh ]]; then
     read -p "Do you need to install ohmyzsh? (${git_submodule_path}/ohmyzsh/tools/install.sh) (y/N)?" -n 1 -r
@@ -360,52 +748,81 @@ else
     echo "Skipping hackneyed cursor build"
 fi
 
-symlink "$git_submodule_path"/alacritty-theme/themes "$base_path"/alacritty/.config/alacritty/colors
+if [[ $swaync_cp_updated == true ]]; then
+    cd "$git_submodule_path"/catppuccin-swaync
+    npm i --no-package-lock || {
+        echo "Failed to install catppuccin-swaync node dependencies"
+        exit 1
+    }
+    npm run build || {
+        echo "Failed to build catppuccin-swaync styles"
+        exit 1
+    }
+    cd "$base_path"
+fi
 
-symlink "$git_submodule_path"/sweet-icons/Sweet-Purple "$base_path"/gtk/.icons/sweet-purple
+declare -a symlink_paths_tuples=(
+    "${git_submodule_path}/alacritty-theme/themes ${base_path}/alacritty/.config/alacritty/colors"
+    "${git_submodule_path}/buuf-nestort-icons ${base_path}/gtk/.icons/buuf-nestort-icons"
+    "${git_submodule_path}/candy-icons ${base_path}/gtk/.icons/candy-icons"
+    # "${git_submodule_path}/catppuccin-bat/themes/Catppuccin\ Mocha.tmTheme ${base_path}/bat/.config/bat/themes/Catppuccin-Mocha.tmTheme" # TODO: re-enable due to spacing
+    "${git_submodule_path}/catppuccin-helix/themes/default/catppuccin_mocha.toml ${base_path}/helix/.config/helix/themes/catppuccin_mocha.toml"
+    "${git_submodule_path}/cryptocoins-icons/webfont/cryptocoins.ttf ${base_path}/fonts/.local/share/fonts/cryptocoins.ttf"
+    "${git_submodule_path}/rofi-network-manager/rofi-network-manager.sh ${base_path}/rofi/.local/bin/rofi-network-manager"
+    "${git_submodule_path}/swaylock-corrupter/swaylock-corrupter ${base_path}/sway/.local/bin/swaylock-corrupter"
+    "${git_submodule_path}/sweet-icons ${base_path}/gtk/.icons/sweet-icons"
+    "${git_submodule_path}/sweet-icons/Sweet-Purple ${base_path}/gtk/.icons/sweet-purple"
+    "${git_submodule_path}/sweet-theme ${base_path}/gtk/.themes/sweet-theme"
+    "${git_submodule_path}/waybar-crypto/waybar_crypto.py ${base_path}/waybar/.config/waybar/modules/crypto/waybar_crypto"
+    # "${git_submodule_path}/catppuccin-swaync/dist/mocha.css ${base_path}/sway/.config/swaync/mocha.css"
+)
+for symlink_paths_tuple in "${symlink_paths_tuples[@]}"; do
+    read -ra symlink_paths <<<"$symlink_paths_tuple"
+    symlink "${symlink_paths[0]}" "${symlink_paths[1]}"
+done
 
-symlink "$git_submodule_path"/sweet-icons "$base_path"/gtk/.icons/sweet-icons
-
-symlink "$git_submodule_path"/sweet-theme "$base_path"/gtk/.themes/sweet-theme
-
-symlink "$git_submodule_path"/candy-icons "$base_path"/gtk/.icons/candy-icons
-
-symlink "$git_submodule_path"/buuf-nestort-icons "$base_path"/gtk/.icons/buuf-nestort-icons
-
-symlink "$git_submodule_path"/catppuccin-bat/themes/Catppuccin\ Mocha.tmTheme "$base_path"/bat/.config/bat/themes/Catppuccin-Mocha.tmTheme
-
-rmrf "$base_path"/gtk/.themes/materia-cyberpunk-neon
-unzip -o "$git_submodule_path"/cyberpunk-theme/gtk/materia-cyberpunk-neon.zip -d "$base_path"/gtk/.themes || {
+unzip -q -u -o "$git_submodule_path"/cyberpunk-theme/gtk/materia-cyberpunk-neon.zip -d "$base_path"/gtk/.themes || {
     echo "failed copying Cyberpunk-Neon theme"
     exit 1
 }
 
 declare -a stow_dirs_general=(
-    zsh
-    sway
-    hyprland
-    xdg
-    bemenu
-    ulauncher
-    gammastep
-    nvim
-    vscodium
-    logseq
     alacritty
-    ranger
-    gtk
+    bat
+    bemenu
     cava
     corectrl
-    tidal-hifi
-    mpv
+    electron
+    espanso
+    fonts
     freetube
+    fuzzel
     gallery-dl
-    bat
-    rofi
-    nextcloud
-    qt
+    gamemode
+    gammastep
+    gtk
+    helix
+    hyprland
     java
+    khal
+    logseq
+    mpv
+    nextcloud
+    nvim
+    omz
+    qt
+    ranger
+    rofi
+    sway
+    systemd
     thunar
+    tidal-hifi
+    ulauncher
+    vscodium
+    waybar
+    xdg
+    yt-dlp
+    yubikey
 )
 
 echo "Stowing general configs"
@@ -413,124 +830,13 @@ for stow_dir in "${stow_dirs_general[@]}"; do
     stow_config "$stow_dir"
 done
 
-echo "Installing Mesa/Vulkan Drivers"
-yay_install mesa lib32-mesa mesa-vdpau lib32-mesa-vdpau libva-mesa-driver lib32-libva-mesa-driver libva-utils opencl-rusticl-mesa
-
-if [[ "$current_hostname" == "$laptop_hostname" ]]; then
-    echo "Copying laptop system configuration"
-
-    gpg_list_dir "$data_path"/corectrl/"$laptop_hostname"_profiles.gpgtar
-    gpg_decrypt_dir "$data_path"/corectrl/"$laptop_hostname"_profiles.gpgtar "$base_path"/corectrl/.config/corectrl
-
-    sudo rsync --chown=root:root --open-noatime --progress -ruav "$system_config_path"/"$laptop_hostname"/* /
-
-    echo "Installing Intel/Vulkan Drivers"
-    yay_install xf86-video-intel vulkan-intel
-
-    echo "Installing ONNXRuntime"
-    yay_install onnxruntime-opt python-onnxruntime-opt
-
-    yay_install light || {
-        echo "failed to install light"
-        exit 1
-    }
-
-    echo "Checking if python-validity is installed"
-    yay_install python-validity-git
-
-    systemd_enable_start /usr/lib/systemd/system open-fprintd-resume.service
-    systemd_enable_start /usr/lib/systemd/system open-fprintd-suspend.service
-    systemd_enable_start /usr/lib/systemd/system python3-validity.service
-
-    pam_rule="auth      sufficient      pam_fprintd.so max_tries=5 timeout=10"
-    read -p "Add PAM fprintd rules? (${pam_rule}) (y/N)?" -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        sudo vi /etc/pam.d/sudo
-        sudo vi /etc/pam.d/system-local-login
-    fi
-
-elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
-    echo "Installing Radeon/Vulkan/ROCM drivers"
-    yay_install xf86-video-amdgpu vulkan-radeon lib32-vulkan-radeon rocm-core rocm-opencl-runtime comgr hipblas rccl
-
-    echo "Installing ROCM ONNXRuntime"
-    yay_install onnxruntime-opt-rocm python-onnxruntime-opt-rocm
-
-    # Update amdgpu boot parameter
-    # https://wiki.archlinux.org/title/AMDGPU#Boot_parameter
-    boot_parameter=$(printf 'amdgpu.ppfeaturemask=0x%x\n' "$(($(cat /sys/module/amdgpu/parameters/ppfeaturemask) | 0x4000))")
-    echo "$boot_parameter" >"$base_path"/system/shifty/etc/cmdline.d/amdgpu.conf
-
-    gpg_list_dir "$data_path"/corectrl/"$desktop_hostname"_profiles.gpgtar
-    gpg_decrypt_dir "$data_path"/corectrl/"$desktop_hostname"_profiles.gpgtar "$base_path"/corectrl/.config/corectrl
-
-    sudo rsync --chown=root:root --open-noatime --progress -ruav "$system_config_path"/"$desktop_hostname"/* /
-
-    echo "Installing liquidctl"
-    yay_install liquidctl
-
-    symlink "$git_submodule_path"/liquidctl/extra/yoda.py "$base_path"/liquidctl/.local/bin/yoda
-
-    sudo rm -f /usr/lib/firewalld/services/alvr.xml
-    echo "Installing ALVR"
-    yay_install alvr-git
-
-    declare -a stow_dirs_desktop=(
-        liquidctl
-    )
-
-    echo "Stowing ${desktop_hostname} configs"
-    for stow_dir in "${stow_dirs_desktop[@]}"; do
-        stow_config "$stow_dir"
-    done
-
-    systemctl --user daemon-reload || {
-        echo "failed to daemon-reload"
-        exit 1
-    }
-
-    systemd_user_enable_start "$base_path"/liquidctl/.config/systemd/user liquidctl.service
-    systemd_user_enable_start "$base_path"/liquidctl/.config/systemd/user yoda.service
-fi
-
-echo "Copying common system configuration"
-sudo rsync --chown=root:root --open-noatime --progress -ruav "$system_config_path"/common/* /
-
-echo "Adding user to audio group"
-sudo groupadd audio || {
-    echo "audio group already exists"
-}
-sudo usermod -a -G audio "$USER"
-
-echo "Installing Python dependencies"
-yay_install python python-requests
-
-echo "Installing Go toolchain"
-yay_install go
-
-echo "Installing Rust toolchain"
-yay_install rustup rust-analyzer sccache
-
-rustup update || {
-    echo "failed to update Rust toolchain"
-    exit 1
-}
-
-rustup component add clippy rustfmt || {
-    echo "failed to install Rust components"
-    exit 1
-}
-
-echo "Installing node.js toolchain"
-yay_install nodejs npm electron nvm-git
-
 nvm_init_script="source /usr/share/nvm/init-nvm.sh"
-if [[ $(line_exists "$nvm_init_script" ~/.zshrc) == 1 ]]; then
+if ! line_exists "$nvm_init_script" ~/.zshrc; then
     echo "Adding NVM init script to ~/.zshrc"
     echo 'source /usr/share/nvm/init-nvm.sh' >>~/.zshrc
 fi
 
+# shellcheck disable=SC1091
 source /usr/share/nvm/init-nvm.sh
 
 nvm install lts/* || {
@@ -543,167 +849,59 @@ nvm alias default lts/* || {
     exit 1
 }
 
-echo "Installing Java dependencies"
-yay_install jdk-openjdk || {
-    echo "Failed to install Java dependencies"
-    exit 1
-}
-
-echo "Installing QT Dependencies"
-yay_install qt5-wayland qt6-wayland qtkeychain-qt5 qtkeychain-qt6 qgnomeplatform-qt5 qgnomeplatform-qt6
-
-echo "Installing GTK Dependencies"
-yay_install libappindicator-gtk2 libappindicator-gtk3 xsettingsd-git
-
-echo "Installing greetd Greeter"
-yay_install greetd greetd-regreet
-
-systemd_enable_start /usr/lib/systemd/system greetd.service
-
-echo "Installing Pipewire dependencies"
-yay_install pipewire pipewire-pulse pipewire-alsa wireplumber alsa-tools pamixer playerctl
-
-echo "Installing Bluetooth dependencies"
-yay_install bluez bluez-utils bluez-obex bluetuith-git
-
-systemd_enable_start /usr/lib/systemd/system bluetooth.service
-
-echo "Checking for general utilities dependencies to install"
-yay_install gvfs gvfs-smb thunar thunar-volman thunar-archive-plugin thunar-media-tags-plugin tumbler mpv smartmontools batsignal mimeo htop udiskie pavucontrol wdisplays ranger shotwell rbw light mako alacritty gnome-firmware gnome-keyring cava iniparser fftw libnotify kanshi helvum xdg-desktop-portal xdg-desktop-portal-wlr wayland-protocols dex gammastep geoclue lxappearance otf-font-awesome ttf-hack dust okular gallery-dl-git bat nextcloud-client opensnitch hopenpgp-tools ddrescue nmap nm-connection-editor gnome-disk-utility fwupd rofi wl-clipboard cliphist wf-recorder nvme-cli
-
-systemd_enable_start /usr/lib/systemd/system smartd.service
-
 bat cache --build || {
     echo "failed to build bat cache"
     exit 1
 }
 
-echo "Checking for Sway dependencies to install"
-yay_install sway swayidle swaybg wlr-sunclock-git waybar azote slurp grim swappy grimshot swaylock-effects-git wayvnc ansiweather avzio
-
-echo "Installing Hyprland"
-yay_install hyprland
-
-echo "Installing ULauncher"
-yay_install ulauncher python-pint python-pytz
-
-echo "Installing corectrl"
-yay_install corectrl
-
-corectrl_rules=/etc/polkit-1/rules.d/90-corectrl.rules
-
-if [ ! -f ${corectrl_rules} ]; then
-    echo "Setting up polkit for Corectrl"
-    (
-        echo 'polkit.addRule(function(action, subject) {
-if ((action.id == "org.corectrl.helper.init" ||
-    action.id == "org.corectrl.helperkiller.init") &&
-    subject.local == true &&
-    subject.active == true &&
-    subject.isInGroup("'"${USER}"'")) {
-        return polkit.Result.YES;
-    }
-});
-    '
-    ) | sudo tee ${corectrl_rules} || {
-        echo "Failed to setup polkit for Corectrl"
-        exit 1
-    }
-fi
-
-echo "Installing gamemode"
-yay_install gamemode
-
-echo "Installing obs"
-yay_install obs-studio libobs-dev libwayland-dev wlrobs-hg
-
-echo "Installing neovim"
-yay_install neovim python-pynvim neovim-symlinks tinyxxd
-
-echo "Installing PlatformIO"
-yay_install platformio-core platformio-core-udev
-
-echo "Installing qbitorrent"
-yay_install qbittorrent
-
-echo "Installing freetube"
-yay_install freetube-git
-
-echo "Installing Solaar (Logitech manager)"
-yay_install solaar
-
-echo "Installing TIDAL-HiFi"
-yay_install tidal-hifi-git
-
-echo "Installing Conda tooling"
-yay_install rattler-build
-
-echo "Installing VSCodium"
-yay_install vscodium-git-wayland-hook vscodium-git vscodium-git-features vscodium-git-marketplace
-
-echo "Installing Betterbird dependencies"
-yay_install betterbird-bin
-
-echo "Installing Video Editing dependencies"
-yay_install gyroflow-git kdenlive
-
-echo "Installing Logseq dependencies"
-yay_install logseq-desktop-git
-
-echo "Installing Nextcloud dependencies"
-yay_install nextcloud-client
-
-echo "Installing Steam dependencies"
-yay_install steam-native-runtime steamtinkerlaunch-git
-
-echo "Installing YubiKey dependencies"
-yay_install yubikey-personalization yubikey-manager yubikey-manager-qt
-
-echo "Installing Jellyfin player dependencies"
-yay_install jellyfin-media-player-git jellyfin-mpv-shim
-
-echo "Disabling GNOME Keyring SSH Agent"
-
-sudo systemctl disable gcr-ssh-agent.socket || {
-    :
-}
-
-sudo systemctl disable gcr-ssh-agent.service || {
-    :
-}
-
-echo "Reloading Systemd user daemon"
+echo "Enabling/Starting Systemd User Units"
 systemctl --user daemon-reload || {
-    echo "failed to userspace daemon-reload"
+    echo "failed to userspace systemd daemon-reload"
     exit 1
 }
 
-systemctl --user restart wireplumber pipewire pipewire-pulse.service pipewire-pulse.socket || {
-    echo "failed to restart pipewire"
-    exit 1
-}
+declare -a systemd_user_units=(
+    "$base_path"/corectrl/.config/systemd/user/corectrl.service
+    "$base_path"/espanso/.config/systemd/user/espanso.service
+    "$base_path"/gammastep/.config/systemd/user/gammastep-wayland.service
+    "$base_path"/gammastep/.config/systemd/user/geoclue-agent.service
+    "$base_path"/gtk/.config/systemd/user/xsettingsd.service
+    "$base_path"/khal/.config/systemd/user/vdirsyncer-sync.service
+    "$base_path"/khal/.config/systemd/user/vdirsyncer-sync.timer
+    "$base_path"/nextcloud/.config/systemd/user/nextcloud-client.service
+    "$base_path"/sway/.config/systemd/user/avizo.service
+    "$base_path"/sway/.config/systemd/user/kanshi.service
+    "$base_path"/sway/.config/systemd/user/swayidle.service
+    "$base_path"/sway/.config/systemd/user/wlr-sunclock.service
+    "$base_path"/systemd/.config/systemd/user/enable-linger.service
+    /usr/lib/systemd/user/batsignal.service
+    /usr/lib/systemd/user/gnome-keyring-daemon.service
+    /usr/lib/systemd/user/gnome-keyring-daemon.socket
+    /usr/lib/systemd/user/pipewire-pulse.service
+    /usr/lib/systemd/user/pipewire-pulse.socket
+    /usr/lib/systemd/user/pipewire.service
+    /usr/lib/systemd/user/swaync.service
+    /usr/lib/systemd/user/wireplumber.service
+    /usr/lib/systemd/user/yubikey-touch-detector.service
+    /usr/lib/systemd/user/yubikey-touch-detector.socket
+)
+for systemd_user_unit in "${systemd_user_units[@]}"; do
+    systemd_user_enable_start "${systemd_user_unit}"
+done
 
-systemd_user_enable_start /usr/lib/systemd/user gamemoded.service
-systemd_user_enable_start /usr/lib/systemd/user batsignal.service
-systemd_user_enable_start /usr/lib/systemd/user mako.service
-
-systemd_user_enable_start "$base_path"/ulauncher/.config/systemd/user ulauncher-wayland.service
-systemd_user_enable_start "$base_path"/gtk/.config/systemd/user xsettingsd.service
-systemd_user_enable_start "$base_path"/gammastep/.config/systemd/user geoclue-agent.service
-systemd_user_enable_start "$base_path"/gammastep/.config/systemd/user gammastep-wayland.service
-systemd_user_enable_start "$base_path"/sway/.config/systemd/user sway-session.target
-systemd_user_enable_start "$base_path"/sway/.config/systemd/user swayidle.service
-systemd_user_enable_start "$base_path"/sway/.config/systemd/user kanshi.service
-systemd_user_enable_start "$base_path"/sway/.config/systemd/user avizo.service
-systemd_user_enable_start "$base_path"/corectrl/.config/systemd/user corectrl.service
-systemd_user_enable_start "$base_path"/nextcloud/.config/systemd/user nextcloud-client.service
-
-echo "Enable lingering for current user"
-# Prevents user systemd units from getting killed
-loginctl enable-linger "${USER}" || {
-    echo "failed to enabling lingering"
+echo "Reloading fonts"
+fc-cache || {
+    echo "Failed to reload fonts"
     exit 1
 }
 
 echo "Reloading udev rules"
-sudo udevadm control --reload-rules && sudo udevadm trigger
+sudo udevadm control --reload-rules || {
+    echo "Failed to reload udev rules"
+    exit 1
+}
+
+sudo udevadm trigger || {
+    echo "Failed to trigger udev rules"
+    exit 1
+}
