@@ -6,6 +6,8 @@
 # shellcheck disable=SC1090,SC1091
 source <(systemctl --user show-environment | sed 's/ //g; s/^/export /')
 
+export BEMENU_OPTS="-n -m -1 --nb #000b1ecc --tb #000b1ecc --tf #ea00d9ff --nf #0abdc6ff"
+
 ############
 #   GPG    #
 ############
