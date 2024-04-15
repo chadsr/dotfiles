@@ -1,0 +1,264 @@
+@define-color dark-blue #000b1e;
+/* #000b1ecc */
+@define-color dark-blue-transparent rgba(0, 11, 30, 0.8);
+@define-color blue #091833;
+@define-color light-blue #133e7c;
+@define-color light-alt #0b2956;
+@define-color cyan #0abdc6;
+@define-color pink #ea00d9;
+@define-color purple #711c91;
+@define-color purple-alt #321959;
+@define-color red #ff0000;
+@define-color orange #f57800;
+@define-color white #d7d7d5;
+@define-color yellow #ffff00;
+@define-color green #00ff00;
+@define-color focused @cyan;
+@define-color urgent @pink;
+@define-color critical @red;
+
+* {
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+window#waybar {
+    font-size: 12px;
+    font-family: "Hack Nerd Font Mono";
+    background: @dark-blue-transparent;
+    color: @cyan;
+}
+
+.modules-left label.module,
+.modules-center label.module,
+.modules-right label.module {
+    padding: 0 8px;
+}
+
+tooltip {
+    background: @dark-blue-transparent;
+    border: 1px solid @cyan;
+}
+
+tooltip label {
+    color: @cyan;
+}
+
+#workspaces button {
+    color: @blue;
+    padding: 0 8px;
+    background: @purple;
+}
+
+#workspaces button.focused {
+    color: @focused;
+}
+
+#workspaces button.urgent {
+    background: @urgent;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces button:hover {
+    box-shadow: inherit;
+    text-shadow: inherit;
+}
+
+#mode {
+    color: @cyan;
+    padding: 0 8px;
+    background: @purple;
+}
+
+#idle_inhibitor {
+    font-size: 20px;
+    min-width: 16px;
+    background: @purple;
+    color: @blue;
+}
+
+#idle_inhibitor.activated {
+    color: @focused;
+}
+
+#custom-left-spacer-workspaces,
+#custom-right-spacer-workspaces {
+    color: @purple;
+    font-size: 20px;
+    padding: 0;
+}
+
+#custom-right-spacer-workspaces {
+    background: @purple-alt;
+}
+
+#custom-right-spacer-tray {
+    font-size: 20px;
+    padding: 0;
+    color: @purple-alt;
+}
+
+#custom-left-spacer-audio {
+    font-size: 20px;
+    color: @blue;
+    padding: 0;
+}
+
+#custom-left-spacer-organisation {
+    font-size: 20px;
+    color: @purple-alt;
+    padding: 0;
+}
+
+#custom-right-spacer-organisation {
+    font-size: 20px;
+    color: @purple-alt;
+    background: @blue;
+    padding: 0;
+}
+
+#custom-right-spacer-hardware {
+    font-size: 20px;
+    padding: 0;
+    color: @blue;
+    background: @light-blue;
+}
+
+#tray {
+    padding: 0 4px;
+}
+
+#tray>.passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray>.active {
+    -gtk-icon-effect: highlight;
+}
+
+#tray>.needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: @urgent;
+}
+
+#privacy {
+    padding: 0px;
+}
+
+#privacy-item.screenshare,
+#privacy-item.audio-in {
+    padding: 0 8px;
+}
+
+#clock,
+#custom-calendar,
+#cava,
+#tray {
+    background: @purple-alt;
+}
+
+#custom-weather,
+#custom-crypto {
+    background: @blue;
+}
+
+#custom-crypto {
+    font-family: cryptocoins, monospace;
+}
+
+#custom-right-spacer-information {
+    color: @blue;
+    padding: 0;
+    font-size: 20px;
+}
+
+#pulseaudio,
+#memory,
+#cpu,
+#temperature,
+#disk,
+#power-profiles-daemon {
+    background: @blue;
+}
+
+#memory {
+    color: @orange;
+}
+
+#cpu {
+    color: @pink;
+}
+
+#temperature {
+    color: @green;
+}
+
+#temperature.gpu {
+    color: @red;
+}
+
+#temperature.critical,
+#temperature.gpu.critical {
+    background: @critical;
+    color: @blue;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#disk {
+    color: @yellow;
+}
+
+#power-profiles-daemon.balanced {
+    color: @white;
+}
+
+#power-profiles-daemon.performance {
+    color: @pink;
+}
+
+#power-profiles-daemon.power-saver {
+    color: @green;
+}
+
+#custom-yay {
+    color: @yellow;
+}
+
+#network,
+#bluetooth,
+#backlight,
+#battery,
+#battery.bat1,
+#custom-swaync {
+    background: @light-blue;
+}
+
+#custom-swaync {
+    color: @yellow;
+}
+
+#bluetooth,
+#network {
+    color: @dark-blue;
+}
+
+#battery.charging {
+    color: @green;
+}
+
+#battery.critical:not(.charging) {
+    background: @critical;
+    color: @blue;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}

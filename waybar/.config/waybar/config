@@ -1,0 +1,457 @@
+// -*- mode: json -*-
+{
+    "layer": "top", // Waybar at top layer
+    "position": "top",
+    "height": 20, // Waybar height (to be removed for auto height)
+    // Choose the order of the modules
+    "modules-left": [
+        "group/workspaces",
+        "custom/right-spacer-workspaces",
+        "group/tray",
+        "custom/right-spacer-tray",
+    ],
+    "modules-center": [
+        "custom/left-spacer-organisation",
+        "group/organisation",
+        "custom/right-spacer-organisation",
+        "group/information",
+        "custom/right-spacer-information"
+    ],
+    "modules-right": [
+        "custom/left-spacer-audio",
+        "pulseaudio",
+        "group/hardware",
+        "custom/right-spacer-hardware",
+        "group/network",
+        "backlight",
+        "battery",
+        "battery#bat1",
+        "custom/swaync"
+    ],
+    "custom/right-spacer-workspaces": {
+        "format": "",
+        "tooltip": false
+    },
+    "custom/right-spacer-tray": {
+        "format": "▓▒░",
+        "tooltip": false
+    },
+    "custom/left-spacer-organisation": {
+        "format": "░▒▓",
+        "tooltip": false
+    },
+    "custom/right-spacer-organisation": {
+        "format": "",
+        "tooltip": false
+    },
+    "custom/right-spacer-information": {
+        "format": "▓▒░",
+        "tooltip": false
+    },
+    "custom/left-spacer-audio": {
+        "format": "░▒▓",
+        "tooltip": false
+    },
+    "custom/right-spacer-hardware": {
+        "format": "",
+        "tooltip": false
+    },
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{name} {icon}",
+        "format-icons": {
+            "urgent": "",
+            "focused": "",
+            "default": ""
+        }
+    },
+    "wlr/workspaces": {
+        "format": "{name} {icon}",
+        "on-click": "activate",
+        "all-outputs": true,
+        "format-icons": {
+            "urgent": "",
+            "active": "",
+            "default": ""
+        }
+    },
+    "sway/mode": {
+        "format": " <span style=\"italic\">{}</span>"
+    },
+    "idle_inhibitor": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "group/workspaces": {
+        "orientation": "horizontal",
+        "children-class": "group-workspaces",
+        "modules": [
+            "sway/workspaces",
+            "wlr/workspaces",
+            "sway/mode",
+            "idle_inhibitor"
+        ]
+    },
+    "tray": {
+        "icon-size": 16,
+        "spacing": 8,
+        "show-passive-items": true
+    },
+    "group/tray": {
+        "orientation": "horizontal",
+        "children-class": "group-tray",
+        "modules": [
+            "tray",
+            "custom/yay",
+            "privacy",
+            "gamemode",
+            "custom/yubikey",
+            "mpris",
+            "cava"
+        ]
+    },
+    "clock": {
+        "format": "{:%H:%M} ",
+        "format-alt": "{:%A, %B %d, %Y}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode": "month",
+            "mode-mon-col": 2,
+            "weeks-pos": "right",
+            "on-scroll": 3,
+            "format": {
+                "months": "<span color='#0abdc6'><b>{}</b></span>",
+                "days": "<span color='#123e7c'><b>{}</b></span>",
+                "weeks": "<span color='#8800ff'><b>W{}</b></span>",
+                "weekdays": "<span color='#8800ff'><b>{}</b></span>",
+                "today": "<span color='#0abdc6'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions": {
+            "on-click-right": "mode",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
+    },
+    "custom/calendar": {
+        "format": "{}",
+        "tooltip": true,
+        "interval": 300,
+        "format-icons": {
+            "default": ""
+        },
+        "exec": "$HOME/.config/waybar/modules/khal/waybar-khal.py",
+        "return-type": "json"
+    },
+    "group/organisation": {
+        "orientation": "horizontal",
+        "children-class": "group-organisation",
+        "modules": [
+            "clock",
+            "custom/calendar"
+        ]
+    },
+    "group/information": {
+        "orientation": "horizontal",
+        "children-class": "group-organisation",
+        "modules": [
+            "custom/weather",
+            "custom/crypto"
+        ]
+    },
+    "sway/window": {
+        "format": "{}",
+        "max-length": 128,
+        "all-outputs": true,
+        "offscreen-css": true,
+        "offscreen-css-text": "(inactive)"
+    },
+    "temperature": {
+        "interval": 5,
+        "format": "{temperatureC}°C ",
+        "tooltip-format": "CPU Temperature: {temperatureC}°C",
+        "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+        "critical-threshold": 85
+    },
+    "temperature#gpu": {
+        "interval": 5,
+        "format": "{temperatureC}°C ",
+        "tooltip-format": "GPU Temperature: {temperatureC}°C",
+        "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
+        "critical-threshold": 85
+    },
+    "cpu": {
+        "format": "{usage}% ",
+        "interval": 5,
+        "tooltip": true
+    },
+    "memory": {
+        "format": "{}% ",
+        "interval": 10,
+        "tooltip": true
+    },
+    "disk": {
+        "interval": 600,
+        "format": "{percentage_used}% 󰋊",
+        "path": "/"
+    },
+    "power-profiles-daemon": {
+        "format": "{icon} {profile}",
+        "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+        "tooltip": true,
+        "format-icons": {
+            "default": "",
+            "performance": "",
+            "balanced": "",
+            "power-saver": ""
+        }
+    },
+    "group/hardware": {
+        "orientation": "horizontal",
+        "children-class": "group-hardware",
+        "modules": [
+            "temperature",
+            "temperature#gpu",
+            "cpu",
+            "memory",
+            "disk",
+            "power-profiles-daemon"
+        ],
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "hardware",
+            "transition-left-to-right": true
+        }
+    },
+    "custom/weather": {
+        "format": "{} °C",
+        "tooltip": true,
+        "interval": 3600,
+        "exec": "wttrbar",
+        "return-type": "json"
+    },
+    "custom/crypto": {
+        "format": "{}",
+        "interval": 600,
+        "return-type": "json",
+        "exec": "$HOME/.config/waybar/modules/crypto/waybar_crypto",
+        "exec-if": "ping pro-api.coinmarketcap.com -c1"
+    },
+    "backlight": {
+        "format": "{percent}% {icon}",
+        "format-icons": [
+            "",
+            ""
+        ],
+        "on-click": "wdisplays"
+    },
+    "battery": {
+        "bat": "BAT0",
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
+    },
+    "battery#bat1": {
+        "bat": "BAT1",
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
+    },
+    "network": {
+        "interval": 5,
+        "interface": "wlan0",
+        "format-icons": [
+            ""
+        ],
+        "format-disconnected": "{icon}",
+        "format-wifi": "{essid} {signalStrength}% ↑{bandwidthUpBits} ↓{bandwidthDownBits} {icon}",
+        "tooltip-format": "WiFi → {ifname} → {ipaddr}/{cidr}",
+        "on-click": "$HOME/.local/bin/rofi-network-manager"
+    },
+    "bluetooth": {
+        "format": " {status}",
+        "format-connected": " {device_alias}",
+        "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+        // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+        "on-click": "alacritty -e bluetuith"
+    },
+    "pulseaudio": {
+        "scroll-step": 1,
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon}",
+        "format-muted": "",
+        "format-icons": {
+            "headphones": "",
+            "handsfree": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": [
+                "",
+                ""
+            ]
+        },
+        "on-click": "pavucontrol"
+    },
+    "cava": {
+        "cava_config": "$XDG_CONFIG_HOME/cava/cava.conf",
+        "framerate": 30,
+        "autosens": 1,
+        "sensitivity": 100,
+        "bars": 14,
+        "lower_cutoff_freq": 50,
+        "higher_cutoff_freq": 10000,
+        "method": "pipewire",
+        "source": "auto",
+        "stereo": true,
+        "reverse": false,
+        "bar_delimiter": 0,
+        "monstercat": false,
+        "waves": false,
+        "noise_reduction": 0.77,
+        "input_delay": 4,
+        "format-icons": [
+            "▁",
+            "▂",
+            "▃",
+            "▄",
+            "▅",
+            "▆",
+            "▇",
+            "█"
+        ],
+        "actions": {
+            "on-click-right": "mode"
+        }
+    },
+    "gamemode": {
+        "format": "{glyph}",
+        "format-alt": "{glyph} {count}",
+        "glyph": "",
+        "hide-not-running": true,
+        "use-icon": true,
+        "icon-name": "input-gaming-symbolic",
+        "icon-spacing": 4,
+        "icon-size": 20,
+        "tooltip": true,
+        "tooltip-format": "Games running: {count}"
+    },
+    "privacy": {
+        "icon-spacing": 4,
+        "icon-size": 18,
+        "transition-duration": 250,
+        "format-icons": {
+            "screenshare": "🕵️",
+            "audio-in": "👂"
+        },
+        "modules": [
+            {
+                "type": "screenshare",
+                "tooltip": true,
+                "tooltip-icon-size": 24
+            },
+            {
+                "type": "audio-in",
+                "tooltip": true,
+                "tooltip-icon-size": 24
+            }
+        ]
+    },
+    "group/network": {
+        "orientation": "horizontal",
+        "children-class": "group-network",
+        "modules": [
+            "bluetooth",
+            "network"
+        ],
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "network",
+            "transition-left-to-right": true
+        }
+    },
+    "mpris": {
+        "format": "{player_icon} {dynamic}",
+        "format-paused": "{player_icon} <i>{dynamic}</i> {status_icon}",
+        "interval": 5,
+        "player-icons": {
+            "default": "🎵"
+        },
+        "status-icons": {
+            "paused": "⏸"
+        },
+        "ignored-players": [
+            "firefox",
+            "chromium",
+            "brave"
+        ]
+    },
+    "custom/yay": {
+        "format": "{} 📦",
+        "tooltip": false,
+        "interval": 3600, // every hour
+        "exec": "checkupdates | wc -l", // # of updates
+        "exec-if": "exit 0", // always run; consider advanced run conditions
+        "on-click": "checkupdates | wc -l",
+        "signal": 8
+    },
+    "custom/swaync": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "<span foreground='#8800ff'><sup></sup></span>",
+            "none": "",
+            "dnd-notification": "<span foreground='#8800ff'><sup></sup></span>",
+            "dnd-none": "",
+            "inhibited-notification": "<span foreground='#8800ff'><sup></sup></span>",
+            "inhibited-none": "",
+            "dnd-inhibited-notification": "<span foreground='#8800ff'><sup></sup> </span>",
+            "dnd-inhibited-none": ""
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    },
+    "custom/yubikey": {
+        "interval": "2",
+        "exec": "$HOME/.config/waybar/modules/yubikey/waybar_yubikey",
+        "return-type": "json"
+    }
+}
