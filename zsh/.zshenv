@@ -2,71 +2,69 @@
 # General Environment Variables #
 #################################
 
-# Set default editor
-export EDITOR=/usr/bin/nvim
-export VISUAL=/usr/bin/nvim
+# Export env vars from systemd user units
+# shellcheck disable=SC1090,SC1091
+source <(systemctl --user show-environment | sed 's/ //g; s/^/export /')
 
-# XDG
-XDG_SCREENSHOTS_DIR=$HOME/Pictures/screenshots
-XDG_CONFIG_HOME=$HOME/.config
+############
+#   GPG    #
+############
+export GNUPGHOME="$HOME/.gnupg"
+export GPG_TTY="${TTY:-"$(tty)"}"
+gpg-connect-agent updatestartuptty /bye >/dev/null
+SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+export SSH_AUTH_SOCK
 
-# Add any local binaries to PATH
-export PATH=$PATH:$HOME/.local/bin
+if [[ -z ${WAYLAND_DISPLAY+x} ]]; then
+    # Not got a display
+    export PINENTRY_USER_DATA=USE_TTY=1
+else
+    export PINENTRY_USER_DATA=USE_TTY=0
+fi
 
-# Conda
-export PATH=$PATH:/opt/anaconda/bin
-export PATH=$PATH:/opt/miniconda3/bin
-export CONDA_AUTO_ACTIVATE_BASE=false
-
-# Android
-export PATH=$PATH:/opt/android-sdk/platform-tools
-export PATH=$PATH:/opt/android-sdk/emulator
-
-################################
-# Golang Environment Variables #
-################################
+############
+#  Golang  #
+############
 export GOPATH=$HOME/go
 export GOROOT=/usr/lib/go
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-
-# Enable Go modules by default
 export GO111MODULE=on
 
-################################
-# Rust Environment Variables #
-################################
+############
+#   Rust   #
+############
 CARGO_BIN=$HOME/.cargo/bin
 export PATH=$CARGO_BIN:$PATH
+
+################
+# Android/Java #
+################
+export JAVA_HOME=/usr/lib/jvm/default
+export ANDROID_HOME=$HOME/Android
+export ANDROID_USER_HOME=$HOME/.android
+export ANDROID_SDK_ROOT=$HOME/Android/Sdk
+export ANDROID_EMULATOR_HOME=$ANDROID_USER_HOME
+export ANDROID_USER_HOME=$HOME/.android
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/emulator
 
 ############
 #   Vim    #
 ############
+export EDITOR=/usr/bin/nvim
+export VISUAL=/usr/bin/nvim
 
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='vim'
-else
-    export EDITOR='nvim'
+# Preferred editor for remote sessions
+if [[ ! -z "${SSH_CONNECTION+x}" ]]; then
+    if [[ ! -n "${SSH_CONNECTION}" ]]; then
+        export EDITOR='vim'
+    fi
 fi
 
-############
-# Electron #
-############
-
-# Fixes moving files to trash in electron apps
-export ELECTRON_TRASH=gio
-
-##############################
-# Ruby Environment Variables #
-##############################
-
-export GEM_HOME=$HOME/.gem
-export PATH=$PATH:$GEM_HOME/ruby/2.6.0/bin
-
-#################################
-# Node.js Environment Variables #
-#################################
-
+#######$#####
+#  Node.js  #
+#############
 NPM_CONFIG_PREFIX=~/.npm-global
 export PATH=$NPM_CONFIG_PREFIX/bin:$PATH
 
@@ -74,35 +72,34 @@ NODE_PATH=$(npm root -g)
 export NODE_PATH=${NODE_PATH}
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+# shellcheck disable=SC1091
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+# shellcheck disable=SC1091
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
-################
-# Android/Java #
-################
+##############
+#  Electron  #
+##############
 
-export JAVA_HOME=/usr/lib/jvm/default
-export ANDROID_HOME=$HOME/Android
-export ANDROID_USER_HOME=$HOME/.android
-export ANDROID_SDK_ROOT=$HOME/Android/Sdk
-export ANDROID_EMULATOR_HOME=$ANDROID_USER_HOME
+# Fixes moving files to trash in electron apps
+export ELECTRON_TRASH=gio
 
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/platform-toolsexport ANDROID_USER_HOME=$HOME/.android
+############
+#  Conda   #
+############
+export PATH=$PATH:/opt/anaconda/bin
+export PATH=$PATH:/opt/miniconda3/bin
+export CONDA_AUTO_ACTIVATE_BASE=false
 
-#################
-#  GPG for SSH  #
-#################
-export GPG_TTY="$(tty)"
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-gpgconf --launch gpg-agent
+##########
+#  Ruby  #
+##########
 
-# If it's a zsh terminal session, use curses for pinentry over the default GUI
-export PINENTRY_USER_DATA="curses"
+export GEM_HOME=$HOME/.gem
+# export PATH=$PATH:$GEM_HOME/ruby/2.6.0/bin
 
 ################
 #    Other     #
 ################
 export PATH=$PATH:/opt/brother/scanner/brscan5
 export AMDGPU_TARGETS="gfx1030"
-export CARGO_NET_GIT_FETCH_WITH_CLI=true

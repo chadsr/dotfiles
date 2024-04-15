@@ -4,7 +4,10 @@ alias vim='nvim'
 alias vi='nvim'
 alias cat='bat'
 alias catcp='f() { cat "$1" | wl-copy };f'
+alias hx='helix'
+alias calculator='kalker'
+alias calc='calculator'
 
 # Use vscodium when code is run
-alias code='codium'
+alias code='f() { codium --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform=wayland --unity-launch "$1" }; f'
 alias c='code . && exit'

@@ -4,6 +4,7 @@
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+    # shellcheck disable=SC1091
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
@@ -69,25 +70,11 @@ eval "$(thefuck --alias)"
 # You can use whatever you want as an alias, like for Mondays:
 eval "$(thefuck --alias fuck)"
 
+# shellcheck disable=SC1091
 source $ZSH/oh-my-zsh.sh
 
+# shellcheck disable=SC1091
 source $HOME/.aliases
-
-# Set GPG SSH Agent
-unset SSH_AGENT_PID
-if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
-    SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-    export SSH_AUTH_SOCK
-fi
-GPG_TTY=$(tty)
-export GPG_TTY
-gpg-connect-agent updatestartuptty /bye >/dev/null
-
-# If stdin is a tty
-if [ -t 0 ]; then
-	# TTY, so set USER_TTY for pinentry-auto to pickup
-	export PINENTRY_USER_DATA=USE_TTY=1
-fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
