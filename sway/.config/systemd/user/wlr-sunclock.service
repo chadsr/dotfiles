@@ -11,8 +11,8 @@ ExecStart=/usr/bin/wlr-sunclock \
 --layer bottom \
 --anchors tr \
 --border-width 0 \
---colour-ocean "#0abdc6" \
---colour-land "#8800ff"
+--colour-ocean "#000b1ecc" \
+--colour-land "#0abdc6ff"
 
 [Install]
 WantedBy=sway-session.target
