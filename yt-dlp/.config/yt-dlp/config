@@ -1,0 +1,17 @@
+--output ~/Downloads/yt-dlp/%(title)s.%(ext)s
+--check-formats
+--prefer-free-formats
+--format-sort "res,fps,size,tbr,codec"
+--remux-video mp4
+--embed-subs
+--sub-format best
+--sub-langs "en.*"
+--embed-thumbnail
+--embed-metadata
+--audio-quality 0
+--audio-format best
+--embed-chapters
+--windows-filenames
+--cookies-from-browser firefox
+--concurrent-fragments 4
+--fragment-retries infinite
