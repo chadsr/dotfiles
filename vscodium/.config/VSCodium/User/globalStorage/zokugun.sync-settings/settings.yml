@@ -1,7 +1,3 @@
-# current machine's name, optional; it can be used to filter settings or in the commit message
-hostname: ""
-# more details at https://github.com/zokugun/vscode-sync-settings/blob/master/docs/hostname.md
-
 # selected profile, required
 profile: main
 # repository to sync the settings with, required
@@ -10,6 +6,8 @@ repository:
   type: git
   url: git@github.com:chadsr/vscode-settings.git
   branch: main
-# # how to run commands before and after events at https://github.com/zokugun/vscode-sync-settings/blob/master/docs/hooks.md
-# hooks:
-#   post-upload: osascript -e 'display notification "The settings have been uploaded"'
+
+# how to run commands before and after events at https://github.com/zokugun/vscode-sync-settings/blob/master/docs/hooks.md
+hooks:
+  post-upload: notify-send -a VSCodium -u low -t 10000 "VSCodium settings have been uploaded"
+  post-download: notify-send -a VSCodium -u low -t 10000 "VSCodium settings have been downloaded"
