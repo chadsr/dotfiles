@@ -1,23 +1,11 @@
-font=Hack
-
 daemonize
 
-clock
-timestr=%R
-datestr=%a, %e of %B
+font=hack nerd font mono
+font-size=14
 
-screenshots
-
-fade-in=0.2
-grace=2
-
-indicator
-indicator-radius=240
+indicator-radius=64
 indicator-thickness=20
 indicator-caps-lock
-
-effect-pixelate=20
-effect-vignette=0.5:0.5
 
 key-hl-color=0abdc6
 
@@ -49,5 +37,4 @@ text-wrong-color=ee2e2400
 bs-hl-color=ee2e24FF
 caps-lock-key-hl-color=ffd204FF
 caps-lock-bs-hl-color=ee2e24FF
-disable-caps-lock-text
 text-caps-lock-color=0abdc6

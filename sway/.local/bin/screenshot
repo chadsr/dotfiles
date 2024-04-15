@@ -1,3 +1,6 @@
-#!/bin/sh
+#!/bin/bash
+
+# shellcheck disable=SC1090
+source <(systemctl --user show-environment | sed 's/ //g; s/^/export /')
 
 grimshot --notify save screen

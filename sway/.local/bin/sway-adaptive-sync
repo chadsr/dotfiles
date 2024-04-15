@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Enables/Disables adaptive_sync
+case "$1" in
+'on')
+    swaymsg "output * adaptive_sync on"
+    ;;
+'off')
+    swaymsg "output * adaptive_sync off"
+    ;;
+*)
+    echo '<on|off>'
+    exit 1
+    ;;
+esac

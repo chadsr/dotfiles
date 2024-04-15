@@ -1,8 +1,8 @@
 #anchor=
-font=Hack 10
-background-color=#091833
-text-color=#0abdc6
-border-color=#ea00d9
+font=hack nerd font mono 10
+background-color=           #091833
+text-color=                 #0abdc6
+border-color=               #ea00d9
 default-timeout=5000
 border-size=2
 border-radius=2
@@ -12,5 +12,5 @@ group-by=summary
 max-icon-size=48
 
 [urgency=high]
-background-color=#6100FF
+background-color= #8800ff
 ignore-timeout=1

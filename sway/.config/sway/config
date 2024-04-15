@@ -1,29 +1,41 @@
-#  __                         ___             __ _              __  
-# / _\_      ____ _ _   _    / __\___  _ __  / _(_) __ _     _  \ \ 
-# \ \\ \ /\ / / _` | | | |  / /  / _ \| '_ \| |_| |/ _` |   (_)  | |
-# _\ \\ V  V / (_| | |_| | / /__| (_) | | | |  _| | (_| |    _   | |
-# \__/ \_/\_/ \__,_|\__, | \____/\___/|_| |_|_| |_|\__, |   (_)  | |
-#                   |___/                          |___/        /_/ 
+#
+#                       *********     *******
+#                    **************************
+#                  ******** *******************
+#                  *****   *******************
+#                     ***** *******************
+#              **** ******* ***  **********
+#            ***** ******  ***      *******
+#                        ****   **********
+#                     *****  *********   ***
+#                 ***************** *********
+#               **************     *********                *******   **           **     **    ***    **
+#            *****                                         ***   ***  ***    *    ***    ****    *** ****
+#           ****               **                          *******     *** ****  ***    ******    ******
+#          ***  ************************                      ******    ** *********   *** ***     ***
+#         ***********************************              **     **    ***** *****    ********     **
+#    ********************************************          *********     ***   ***    ***    **     **
+#    *********************************************
+#    *********************************************
+#       **************************************
+#            ****************************
+#                 *******************
+#                      ********
 
 # Read `man 5 sway` for a complete reference.
 
+exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
+
 # Autostarts
 exec dex -a -s :~/.config/autostart/ # Launch desktop entries
-exec wlr-sunclock \
-    --width 200 \
-    --layer bottom \
-    --anchors tr \
-    --border-width 0 \
-    --colour-ocean "#0abdc6" \
-    --colour-land "#6100FF"
 
 exec_always swaybg -i "$HOME"/.config/sway/background.png -m fill
 exec_always "$HOME"/.local/bin/gsettings-gtk
 
 exec_always {
     gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 600
-    gsettings set org.gnome.mutter.wayland xwayland-grab-access-rules "['Remmina', 'VirtualBox Machine']"
     gsettings set org.gnome.desktop.interface gtk-enable-primary-paste false
+    gsettings set org.gnome.mutter.wayland xwayland-grab-access-rules "['Remmina', 'VirtualBox Machine']"
 }
 
 ### Theming
@@ -32,32 +44,42 @@ exec_always {
 # Windows:
 #
 default_border pixel 1
-# class          border    bg        text      indicator child_border
-client.focused   #0abdc6   #0abdc6   #123e7c   #000000aa #0abdc6
-client.unfocused #0abdc6aa #000000aa #0abdc6aa #000000aa #000000aa
-client.urgent    #6100FF   #6100FF   #123e7c   #6100FF   #6100FF
+default_floating_border pixel 1
+smart_borders 1
+
+# class                 border    bg        text      indicator child_border
+client.focused          #0abdc6   #000b1ecc #0abdc6   #0abdc6   #0abdc6 
+client.focused_inactive	#000b1ecc #000b1ecc #0abdc6   #000b1ecc #000b1ecc
+client.unfocused		#000b1ecc #000b1ecc #0abdc6   #000b1ecc #000b1ecc
+client.urgent           #ea00d9   #ea00d9   #000b1ecc #ea00d9   #ea00d9
+client.placeholder      #000b1e   #000b1ecc #0abdc6   #000b1ecc #000b1ecc
 
 ### Variables
 
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
 
-# Home row direction keys, like vim
-set $left h
-set $down j
-set $up k
-set $right l
+set $left a
+set $down s
+set $up w
+set $right d
 
 # Terminal Emulator
 set $term alacritty
 
-# Ulauncher menu
-set $menu ulauncher-toggle
-for_window [class="ulauncher"] titlebar hide border none floating enabled
+set $menu fuzzel
 
-### Output configuration (swaymsg -t get_outputs)
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
 
+bar {
+    swaybar_command waybar
+}
+
+# Toggle control center
+bindsym $mod+Shift+n exec swaync-client -t -sw
 
 ### Input configuration (swaymsg -t get_inputs)
 
@@ -65,116 +87,114 @@ for_window [class="ulauncher"] titlebar hide border none floating enabled
 #
 # Basics:
 #
-    # start a terminal
-    bindsym $mod+Return exec $term
+# start a terminal
+bindsym $mod+Return exec $term
 
-    # kill focused window
-    bindsym $mod+Shift+q kill
+# kill focused window
+bindsym $mod+Shift+q kill
 
-    # # start run menu
-    bindsym $mod+x exec $menu
+# # start run menu
+bindsym $mod+x exec $menu
 
-    # Drag floating windows by holding down $mod and left mouse button.
-    # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
-    floating_modifier $mod normal
+# Drag floating windows by holding down $mod and left mouse button.
+# Resize them with right mouse button + $mod.
+# Despite the name, also works for non-floating windows.
+# Change normal to inverse to use left mouse button for resizing and right
+# mouse button for dragging.
+floating_modifier $mod normal
 
-    # reload the configuration file
-    bindsym $mod+Shift+r reload
+# reload the configuration file
+bindsym $mod+Shift+r reload
 
-    # exit sway (logs you out of your wayland session)
-    bindsym $mod+Shift+Escape exit
+# exit sway (logs you out of your wayland session)
+bindsym $mod+Shift+Escape exit
 #
 # Moving around:
 #
-    # Move your focus around
-    bindsym $mod+$left focus left
-    bindsym $mod+$down focus down
-    bindsym $mod+$up focus up
-    bindsym $mod+$right focus right
-    # or use $mod+[up|down|left|right]
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
-    bindsym $mod+Right focus right
+# Move your focus around
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
 
-    # _move_ the focused window with the same, but add Shift
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
-    bindsym $mod+Shift+$right move right
-    # ditto, with arrow keys
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
+# _move_ the focused window with the same, but add Shift
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+# ditto, with arrow keys
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
 #
 # Workspaces:
 #
-    # switch to workspace
-    bindsym $mod+1 workspace 1
-    bindsym $mod+2 workspace 2
-    bindsym $mod+3 workspace 3
-    bindsym $mod+4 workspace 4
-    bindsym $mod+5 workspace 5
-    bindsym $mod+6 workspace 6
-    bindsym $mod+7 workspace 7
-    bindsym $mod+8 workspace 8
-    bindsym $mod+9 workspace 9
-    bindsym $mod+0 workspace 10
-    # move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace 1
-    bindsym $mod+Shift+2 move container to workspace 2
-    bindsym $mod+Shift+3 move container to workspace 3
-    bindsym $mod+Shift+4 move container to workspace 4
-    bindsym $mod+Shift+5 move container to workspace 5
-    bindsym $mod+Shift+6 move container to workspace 6
-    bindsym $mod+Shift+7 move container to workspace 7
-    bindsym $mod+Shift+8 move container to workspace 8
-    bindsym $mod+Shift+9 move container to workspace 9
-    bindsym $mod+Shift+0 move container to workspace 10
-    # Note: workspaces can have any name you want, not just numbers.
-    # We just use 1-10 as the default.
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+# Note: workspaces can have any name you want, not just numbers.
+# We just use 1-10 as the default.
 #
 # Layout stuff:
 #
-    # You can "split" the current object of your focus with
-    # $mod+h or $mod+v, for horizontal and vertical splits
-    # respectively.
-    unbindsym $mod+h
-    bindsym $mod+h splith
-    bindsym $mod+v splitv
+# You can "split" the current object of your focus with
+# $mod+h or $mod+v, for horizontal and vertical splits
+# respectively.
+bindsym $mod+h splith
+bindsym $mod+v splitv
 
-    # Switch the current container between different layout styles
-    bindsym $mod+equal layout stacking
-    bindsym $mod+t layout tabbed
-    bindsym $mod+slash layout toggle split
+# Switch the current container between different layout styles
+bindsym $mod+g layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+slash layout toggle split
 
-    # Make the current focus fullscreen
-    bindsym $mod+f fullscreen
+# Make the current focus fullscreen
+bindsym $mod+f fullscreen
 
-    # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
+# Toggle the current focus between tiling and floating mode
+bindsym $mod+Shift+space floating toggle
 
-    # Swap focus between the tiling area and the floating area
-    bindsym $mod+space focus mode_toggle
+# Swap focus between the tiling area and the floating area
+bindsym $mod+space focus mode_toggle
 
-    # move focus to the parent container
-    bindsym $mod+a focus parent
+# move focus to the parent container
+bindsym $mod+p focus parent
 #
 # Scratchpad:
 #
-    # Sway has a "scratchpad", which is a bag of holding for windows.
-    # You can send windows there and get them back later.
+# Sway has a "scratchpad", which is a bag of holding for windows.
+# You can send windows there and get them back later.
 
-    # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus move scratchpad
+# Move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
 
-    # Show the next scratchpad window or hide the focused scratchpad window.
-    # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
 #
 # Resizing containers:
 #
@@ -201,15 +221,6 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 #
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
-
-bar {
-    swaybar_command waybar
-}
-
-#
 # Screenshots
 #
 bindsym Ctrl+Print exec ~/.local/bin/screenshot-crop
@@ -232,10 +243,8 @@ bindsym XF86AudioMicMute exec volumectl -m toggle-mute
 #
 # Swaylock
 #
-bindsym $mod+Escape exec swaylock
+bindsym $mod+Escape exec ~/.local/bin/swaylock-corrupter
 
 # External Config Includes
 include /etc/sway/config.d/*
 include ~/.config/sway/$(hostname)/*
-
-exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"

@@ -1,0 +1,18 @@
+[Unit]
+Description=Wlr-Sunclock
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+ExecStart=/usr/bin/wlr-sunclock \
+--width 200 \
+--layer bottom \
+--anchors tr \
+--border-width 0 \
+--colour-ocean "#0abdc6" \
+--colour-land "#8800ff"
+
+[Install]
+WantedBy=sway-session.target
