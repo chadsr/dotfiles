@@ -1,3 +1,14 @@
 {
+  "gitbin": "git",
+  "gitflags": "",
+  "gpgbin": "gpg",
+  "gitclone": true,
+  "provides": true,
+  "pgpfetch": true,
+  "upgrademenu": true,
+  "cleanmenu": true,
+  "diffmenu": true,
+  "editmenu": true,
+  "sortby": "votes",
   "newinstallengine": true
 }
