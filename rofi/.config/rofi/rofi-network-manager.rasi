@@ -6,11 +6,11 @@ configuration {
 	me-accept-entry: [MousePrimary];
 }
 *{
-	font: "Hack 10";			//Font
+	font: "hack nerd font mono 10";			//Font
 	//Colors
 	foreground: #0abdc6; 				//Text
 	background: rgba(43, 48, 59, 0.9); 				//Background
-	accent: #6100FF; 					//Highlight
+	accent: #8800ff; 					//Highlight
 	foreground-selection: @background; 	//Selection_fg
 	background-selection: @foreground; 		//Selection_bg
 

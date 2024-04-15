@@ -1,6 +1,6 @@
 configuration {
   modi: "window,run,ssh";
-  font: "hack 10";
+  font: "hack nerd font mono 10";
   sort: true;
   sorting-method: "normal";
   matching: "normal";
