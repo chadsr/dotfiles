@@ -1,10 +1,6 @@
 
 live_config_reload = true
 
-[colors]
-draw_bold_text_with_bright_colors = true
-
-# Default colors
 [colors.primary]
 background = '#000b1e'
 foreground = '#0abdc6'
@@ -16,7 +12,7 @@ cursor = '#0abdc6'
 # Normal colors
 [colors.normal]
 black = '#123e7c'
-red = '#6100FF'
+red = '#ff0000'
 green = '#d300c4'
 yellow = '#f57800'
 blue = '#123e7c'
@@ -27,7 +23,7 @@ white = '#d7d7d5'
 # Bright colors
 [colors.bright]
 black = '#1c61c2'
-red = '#6100FF'
+red = '#ff0000'
 green = '#d300c4'
 yellow = '#f57800'
 blue = '#00ff00'
@@ -35,24 +31,57 @@ magenta = '#711c91'
 cyan = '#0abdc6'
 white = '#d7d7d5'
 
+[colors]
+draw_bold_text_with_bright_colors = true
+
 [cursor]
 style = "Block"
 unfocused_hollow = true
 
 [font]
-size = 10.0
+size = 11.0
 
 [font.glyph_offset]
 x = 0
 y = 0
 
 [font.normal]
-family = "hack"
+family = "hack nerd font mono"
 style = "Monospace"
 
 [font.offset]
 x = 0
 y = 0
+
+[mouse]
+hide_when_typing = true
+
+[[mouse.bindings]]
+action = "PasteSelection"
+mouse = "Middle"
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[selection]
+save_to_clipboard = false
+semantic_escape_chars = ",│`|:\"' ()[]{}<>"
+
+[window]
+decorations = "full"
+dynamic_padding = false
+dynamic_title = true
+opacity = 0.8
+startup_mode = "Windowed"
+
+[window.dimensions]
+columns = 0
+lines = 0
+
+[window.padding]
+x = 16
+y = 16
 
 [[keyboard.bindings]]
 action = "Paste"
@@ -604,33 +633,3 @@ chars = """
 
 """
 key = "NumpadEnter"
-
-[mouse]
-hide_when_typing = true
-
-[[mouse.bindings]]
-action = "PasteSelection"
-mouse = "Middle"
-
-[scrolling]
-history = 10000
-multiplier = 3
-
-[selection]
-save_to_clipboard = false
-semantic_escape_chars = ",│`|:\"' ()[]{}<>"
-
-[window]
-decorations = "full"
-dynamic_padding = false
-dynamic_title = true
-opacity = 0.9
-startup_mode = "Windowed"
-
-[window.dimensions]
-columns = 0
-lines = 0
-
-[window.padding]
-x = 2
-y = 2
