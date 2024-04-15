@@ -17,11 +17,11 @@ inside-caps-lock-color=009ddc00
 inside-ver-color=d9d8d800
 inside-wrong-color=ee2e2400
 
-ring-color=bb00cc
-ring-clear-color=bb00cc
-ring-caps-lock-color=bb00cc
-ring-ver-color=bb00cc
-ring-wrong-color=bb00cc
+ring-color=000b1ecc
+ring-clear-color=000b1ecc
+ring-caps-lock-color=000b1ecc
+ring-ver-color=000b1ecc
+ring-wrong-color=000b1ecc
 
 line-color=00000000
 line-clear-color=0abdc6
