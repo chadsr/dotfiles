@@ -10,4 +10,4 @@ case "${PINENTRY_USER_DATA-}" in
     ;;
 esac
 
-exec pinentry-bemenu "$@"
+exec pinentry-gnome3 "$@"
