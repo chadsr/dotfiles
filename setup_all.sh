@@ -812,7 +812,6 @@ declare -a stow_dirs_general=(
     gammastep
     gtk
     helix
-    hyprland
     java
     khal
     logseq
