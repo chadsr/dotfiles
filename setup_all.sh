@@ -466,6 +466,11 @@ if [[ ! $(gpg --list-keys "$gpg_primary_key") ]]; then
     }
 fi
 
+pass init "$gpg_primary_key" || {
+    echo "failed to init pass"
+    exit 1
+}
+
 pkglist_remove_path="$data_path"/pkgs/remove.txt
 
 echo "Decrypting data"
