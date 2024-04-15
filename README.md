@@ -1,25 +1,40 @@
 # dotfiles
 
-My dotfiles, managed with stow.
+[![Lint](https://github.com/chadsr/dotfiles/actions/workflows/lint.yml/badge.svg)](https://github.com/chadsr/dotfiles/actions/workflows/lint.yml)
+
+My dotfiles, managed with [`stow`](https://www.gnu.org/software/stow/).
 
 ## Setup
 
-```
-git clone git@github.com:Chadsr/dotfiles.git
-cd dotfiles
+```shell
+git clone git@github.com:chadsr/dotfiles.git && cd dotfiles/
 ```
 
 ## Usage
 
-Setup stow configs and also system configurations for the given system name:
+### Per-Directory
 
+```bash
+stow -t ~/ stow
+stow <FOLDER_NAME>
 ```
+
+### Scripts
+
+**Important:** *Don't run these scripts without modifications if your're not me, or haven't (yet) stolen my private keys.*
+
+#### Automated Setup
+
+`setup_all.sh` symlinks all stow directories to `$HOME`, sets up `gnupg` and installs system settings and other configurations. The script is designed to have a completely fresh Arch Linux system configured with minimal interaction.
+
+```bash
 ./setup_all.sh
 ```
 
-...or manually for local configs only:
+#### Backup
 
-```
-stow -t ~/ stow
-stow <FOLDER_NAME>
+ `store_secrets.sh` encrypts various configs and stores them as ASCII-Armoured `gpg` file outputs. `setup_all.sh` handles the decryption and checks (such as interactive diffs) for these files.
+
+```bash
+./store_secrets.sh
 ```
