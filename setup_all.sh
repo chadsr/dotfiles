@@ -355,6 +355,95 @@ install_packages "${script_pkgs[@]}"
 echo "Setting up GPG/SSH"
 gpg --list-keys >/dev/null
 
+echo "Removing broken symlinks in ${HOME}/.config"
+find ~/.config/ -xtype l -print -delete || {
+    echo "Failed to remove broken symlinks"
+    exit 1
+}
+
+declare -a old_files=(
+    /etc/environment.d/qt5.conf
+    /etc/environment.d/java.conf
+)
+echo "Checking for old files to remove"
+for old_file in "${old_files[@]}"; do
+    sudo rm -vf "$old_file" || {
+        echo "failed to remove ${old_file}"
+        exit 1
+    }
+done
+
+echo "Setting up user directory configs"
+
+# Parent dirs that should not be symlinks from stow-ing
+declare -a mk_dirs=(
+    ~/.cargo
+    ~/.config/bat/themes
+    ~/.config/corectrl/profiles
+    ~/.config/environment.d
+    ~/.config/khal
+    ~/.config/nvim
+    ~/.config/pulse
+    ~/.config/pulseaudio-ctl
+    ~/.config/systemd/user
+    ~/.config/Thunar
+    ~/.config/tidal-hifi
+    ~/.config/VSCodium/User/globalStorage/zokugun.sync-settings
+    ~/.config/xfce4/xfconf/xfce-perchannel-xml
+    ~/.gnupg
+    ~/.icons
+    ~/.local/bin
+    ~/.local/share/fonts
+    ~/.ssh
+    ~/.themes
+    ~/.vscode-oss
+    ~/Pictures/Screenshots
+)
+for mk_dir in "${mk_dirs[@]}"; do
+    mkdir -p "${mk_dir}"
+done
+
+declare -a conflict_paths=(
+    ~/.bashrc
+    ~/.config/gtk-3.0
+    ~/.config/gtk-3.0
+    ~/.config/gtk-4.0
+    ~/.config/mimeapps.list
+    ~/.config/Thunar/uca.xml
+    ~/.config/xfce4/xfconf/xfce-perchannel-xml/thunar.xml
+    ~/.gnupg/common.conf
+    ~/.gtkrc-2.0
+    ~/.vscode-oss/argv.json
+    ~/.zshenv
+    ~/.zshrc
+)
+echo "Checking for files/directories that will conflict with stow"
+for conflict_path in "${conflict_paths[@]}"; do
+    rm_if_not_stowed "${conflict_path}"
+done
+
+declare -a stow_dirs_setup=(
+    stow
+    bash
+    git
+    gpg
+    rust
+    ssh
+    yay
+    zsh
+)
+
+echo "Stowing setup configs"
+for stow_dir in "${stow_dirs_setup[@]}"; do
+    stow_config "$stow_dir"
+done
+
+# shellcheck disable=SC1090
+source ~/.bashrc || {
+    echo "failed to source .bashrc"
+    exit 1
+}
+
 # gpg-agent.conf doesn't support ENVs so replace variable here
 envsubst <"$data_path"/gpg/gpg-agent.conf >"$base_path"/gpg/.gnupg/gpg-agent.conf
 
@@ -475,94 +564,6 @@ rustup update || {
 
 rustup component add clippy rustfmt || {
     echo "failed to install Rust components"
-    exit 1
-}
-
-echo "Removing broken symlinks in ${HOME}/.config"
-find ~/.config/ -xtype l -print -delete || {
-    echo "Failed to remove broken symlinks"
-    exit 1
-}
-
-declare -a old_files=(
-    /etc/environment.d/qt5.conf
-    /etc/environment.d/java.conf
-)
-echo "Checking for old files to remove"
-for old_file in "${old_files[@]}"; do
-    sudo rm -vf "$old_file" || {
-        echo "failed to remove ${old_file}"
-        exit 1
-    }
-done
-
-echo "Setting up user directory configs"
-
-# Parent dirs that should not be symlinks from stow-ing
-declare -a mk_dirs=(
-    ~/.cargo
-    ~/.config/bat/themes
-    ~/.config/corectrl/profiles
-    ~/.config/environment.d
-    ~/.config/khal
-    ~/.config/nvim
-    ~/.config/pulse
-    ~/.config/pulseaudio-ctl
-    ~/.config/systemd/user
-    ~/.config/Thunar
-    ~/.config/tidal-hifi
-    ~/.config/VSCodium/User/globalStorage/zokugun.sync-settings
-    ~/.config/xfce4/xfconf/xfce-perchannel-xml
-    ~/.icons
-    ~/.local/bin
-    ~/.local/share/fonts
-    ~/.ssh
-    ~/.themes
-    ~/.vscode-oss
-    ~/Pictures/Screenshots
-)
-for mk_dir in "${mk_dirs[@]}"; do
-    mkdir -p "${mk_dir}"
-done
-
-declare -a conflict_paths=(
-    ~/.bashrc
-    ~/.config/gtk-3.0
-    ~/.config/gtk-3.0
-    ~/.config/gtk-4.0
-    ~/.config/mimeapps.list
-    ~/.config/Thunar/uca.xml
-    ~/.config/xfce4/xfconf/xfce-perchannel-xml/thunar.xml
-    ~/.gnupg/common.conf
-    ~/.gtkrc-2.0
-    ~/.vscode-oss/argv.json
-    ~/.zshenv
-    ~/.zshrc
-)
-echo "Checking for files/directories that will conflict with stow"
-for conflict_path in "${conflict_paths[@]}"; do
-    rm_if_not_stowed "${conflict_path}"
-done
-
-declare -a stow_dirs_setup=(
-    stow
-    bash
-    git
-    gpg
-    rust
-    ssh
-    yay
-    zsh
-)
-
-echo "Stowing setup configs"
-for stow_dir in "${stow_dirs_setup[@]}"; do
-    stow_config "$stow_dir"
-done
-
-# shellcheck disable=SC1090
-source ~/.bashrc || {
-    echo "failed to source .bashrc"
     exit 1
 }
 
