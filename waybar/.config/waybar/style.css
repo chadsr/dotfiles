@@ -17,6 +17,18 @@
 @define-color urgent @pink;
 @define-color critical @red;
 
+@keyframes urgent-animation {
+    50% {
+        background: @urgent;
+    }
+}
+
+@keyframes critical-animation {
+    50% {
+        background: @critical;
+    }
+}
+
 * {
     border: none;
     border-radius: 0;
@@ -58,7 +70,7 @@ tooltip label {
 }
 
 #workspaces button.urgent {
-    background: @urgent;
+    animation: urgent-animation 1s steps(3) infinite;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
@@ -127,6 +139,12 @@ tooltip label {
     background: @light-blue;
 }
 
+#custom-right-spacer-information {
+    color: @blue;
+    padding: 0;
+    font-size: 20px;
+}
+
 #tray {
     padding: 0 4px;
 }
@@ -141,7 +159,7 @@ tooltip label {
 
 #tray>.needs-attention {
     -gtk-icon-effect: highlight;
-    background-color: @urgent;
+    animation: urgent-animation 0.5s steps(10) infinite;
 }
 
 #privacy {
@@ -160,6 +178,12 @@ tooltip label {
     background: @purple-alt;
 }
 
+#custom-yubikey {
+    color: @yellow;
+    font-size: 20px;
+    animation: urgent-animation 0.5s steps(10) infinite;
+}
+
 #custom-weather,
 #custom-crypto {
     background: @blue;
@@ -167,12 +191,6 @@ tooltip label {
 
 #custom-crypto {
     font-family: cryptocoins, monospace;
-}
-
-#custom-right-spacer-information {
-    color: @blue;
-    padding: 0;
-    font-size: 20px;
 }
 
 #pulseaudio,
@@ -202,13 +220,8 @@ tooltip label {
 
 #temperature.critical,
 #temperature.gpu.critical {
-    background: @critical;
     color: @blue;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+    animation: critical-animation 0.5s steps(10) infinite;
 }
 
 #disk {
@@ -254,11 +267,6 @@ tooltip label {
 }
 
 #battery.critical:not(.charging) {
-    background: @critical;
     color: @blue;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+    animation: critical-animation 0.5s steps(10) infinite;
 }
