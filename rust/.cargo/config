@@ -1,2 +1,4 @@
 [build]
 rustc-wrapper = "sccache"
+[net]
+git-fetch-with-cli = true
