@@ -1,0 +1,9 @@
+[Unit]
+Description=Set SSH_AUTH_SOCK to GnuPG agent
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/bash -c 'systemctl --user set-environment SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)'
+
+[Install]
+WantedBy=default.target
