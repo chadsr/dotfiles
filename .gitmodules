@@ -71,8 +71,10 @@
     url = https://github.com/catppuccin/swaync.git
     branch = main
 [submodule ".git_submodules/swaylock-corrupter"]
-	path = .git_submodules/swaylock-corrupter
-	url = https://github.com/aur-packaging/swaylock-corrupter.git
+    path = .git_submodules/swaylock-corrupter
+    url = https://github.com/aur-packaging/swaylock-corrupter.git
+    branch = main
 [submodule ".git_submodules/catppuccin-mpv"]
-	path = .git_submodules/catppuccin-mpv
-	url = https://github.com/catppuccin/mpv.git
+    path = .git_submodules/catppuccin-mpv
+    url = https://github.com/catppuccin/mpv.git
+    branch = main
