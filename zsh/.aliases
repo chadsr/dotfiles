@@ -8,6 +8,22 @@ alias hx='helix'
 alias calculator='kalker'
 alias calc='calculator'
 
+# git
+alias gitcm='git cm'
+alias gitst='git st'
+alias gitstp='git stp'
+alias gitsts='git sts'
+alias gitadd='git add'
+alias gitrb='git rb'
+alias gitrba='git rba'
+alias gitrbc='git rbc'
+alias gitp='git po'
+alias gitfea='git fea'
+alias gitnbr='git cob'
+alias gitls='git ls'
+alias gitll='git ll'
+alias gitla='git la'
+
 # Use vscodium when code is run
 alias code='f() { codium --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform=wayland --unity-launch "$1" }; f'
 alias c='code . && exit'
