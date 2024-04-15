@@ -18,5 +18,5 @@ jobs:
               with:
                   ignore_paths: >-
                       ./.git_submodules
-                      ./zsh/.p10k.zsh
+                      ./omz/.p10k.zsh
                   severity: warning
