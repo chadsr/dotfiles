@@ -110,7 +110,7 @@ symlink() {
 }
 
 rsync_system_config() {
-    system_config_full_path="$system_config_path"/"${1}"
+    local system_config_full_path="$system_config_path"/"${1}"
 
     if [[ ! -d "$system_config_full_path" ]]; then
         echo "The provided path '${system_config_full_path}' does not exist!"
@@ -124,7 +124,8 @@ rsync_system_config() {
 }
 
 systemd_enable_start() {
-    unit_path="${1}"
+    local unit_path="${1}"
+    local unit_name
     unit_name=$(basename "${1}")
 
     if ! (systemctl -q is-enabled -- "${unit_name}"); then
@@ -144,7 +145,8 @@ systemd_enable_start() {
 }
 
 systemd_user_enable_start() {
-    unit_path="${1}"
+    local unit_path="${1}"
+    local unit_name
     unit_name=$(basename "${1}")
 
     if ! (systemctl --user -q is-enabled -- "${unit_name}"); then
@@ -212,10 +214,11 @@ gpg_decrypt_file() {
         return 1
     fi
 
-    input_file_path="${1}"
-    output_file_path="${2}"
+    local input_file_path="${1}"
+    local output_file_path="${2}"
+    local output_filename
     output_filename=$(basename "${output_file_path}")
-    tmp_output_file_path="${tmp_path}/${output_filename}"
+    local tmp_output_file_path="${tmp_path}/${output_filename}"
 
     echo "Decrypting ${input_file_path} to ${tmp_output_file_path}"
 
@@ -285,8 +288,8 @@ add_group_user() {
 }
 
 set_default_kernel() {
-    efi_loader_conf_path=/efi/loader/loader.conf
-    kernel_suffix="${1}".conf
+    local efi_loader_conf_path=/efi/loader/loader.conf
+    local kernel_suffix="${1}".conf
 
     case $(
         sudo grep -G -- '^default.*'"${kernel_suffix}"'$' "${efi_loader_conf_path}" >/dev/null
@@ -325,6 +328,7 @@ set_default_kernel() {
 
 rm_if_not_stowed() {
     if [[ -L "${1}" ]]; then
+        local symlink_path
         symlink_path=$(readlink -f "${1}")
         if [[ $symlink_path == *"${base_path}"* ]]; then
             return 0

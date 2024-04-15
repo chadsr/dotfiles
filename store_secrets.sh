@@ -58,10 +58,11 @@ gpg_encrypt_file() {
         return 1
     fi
 
-    input_file_path="$1"
-    output_file_path="$2"
+    local input_file_path="$1"
+    local output_file_path="$2"
+    local output_filename
     output_filename=$(basename "$output_file_path")
-    tmp_output_file_path="${tmp_path}/${output_filename}"
+    local tmp_output_file_path="${tmp_path}/${output_filename}"
 
     # if the file to replace already exists, perform a diff to check for changes
     if [[ -f "$output_file_path" ]]; then
