@@ -1,11 +1,10 @@
+.*.example
+.*.md
+.*\/tests\/.*
 .DS_Store
 .git
 .gitignore
+.gitkeep
 .stow-local-ignore
-.*.example
 ^/@.*
 README.*
-.gitkeep
-system/
-data/
-.*.md
