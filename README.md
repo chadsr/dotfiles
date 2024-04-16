@@ -4,6 +4,9 @@
 
 My dotfiles, managed with [`stow`](https://www.gnu.org/software/stow/).
 
+![SwayWM](.github/assets/sway.png)
+
+
 ## Setup
 
 ```shell
