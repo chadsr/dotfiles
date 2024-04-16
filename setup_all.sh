@@ -883,6 +883,7 @@ declare -a systemd_user_units=(
     "$base_path"/sway/.config/systemd/user/swayidle.service
     "$base_path"/sway/.config/systemd/user/wlr-sunclock.service
     "$base_path"/systemd/.config/systemd/user/enable-linger.service
+    "$base_path"/waybar/.config/systemd/user/setup-temps.service
     /usr/lib/systemd/user/batsignal.service
     /usr/lib/systemd/user/gnome-keyring-daemon.service
     /usr/lib/systemd/user/gnome-keyring-daemon.socket

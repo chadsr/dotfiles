@@ -1,0 +1,9 @@
+[Unit]
+Description=Symlink temperatures to /tmp
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/setup-temps.sh
+
+[Install]
+WantedBy=default.target
