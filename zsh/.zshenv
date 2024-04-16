@@ -11,11 +11,7 @@ export BEMENU_OPTS="-n -m -1 --nb #000b1ecc --tb #000b1ecc --tf #ea00d9ff --nf #
 ############
 #   GPG    #
 ############
-export GNUPGHOME="$HOME/.gnupg"
-export GPG_TTY="${TTY:-"$(tty)"}"
-gpg-connect-agent updatestartuptty /bye >/dev/null
-SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-export SSH_AUTH_SOCK
+export GPG_TTY=${TTY:-"$(tty)"}
 
 if [[ -z ${WAYLAND_DISPLAY+x} ]]; then
     # Not got a display
