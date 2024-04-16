@@ -3,8 +3,6 @@
 gpg_primary_key=0x2B7340DB13C85766
 gpg_encryption_subkey=0x79C70BBE4865D828
 
-base_path=$PWD
-data_path="$base_path"/data
 pkglist_system_path=/etc/pkglist.txt
 
 laptop_hostname="thinky"
@@ -22,7 +20,14 @@ exit_script() {
 set -euo pipefail
 trap 'exit_script' ERR INT
 
+update_paths() {
+    base_path=$PWD
+    data_path="$base_path"/data
+}
+
 script_name=$(basename "$0")
+update_paths
+
 help() {
     printf "Stores configuration secrets to \"%s\".\n\nUsage: %s <%s|%s>\n" "$data_path" "$script_name" "$laptop_hostname" "$desktop_hostname"
 }
@@ -103,6 +108,12 @@ if [[ "$current_hostname" != "$laptop_hostname" ]] && [[ "$current_hostname" != 
     fi
 else
     echo "Using current hostname \"${current_hostname}\" for configuration."
+fi
+
+if [[ -n ${DOTFILES+x} ]] && [[ "$base_path" != "$DOTFILES" ]]; then
+    echo "Changing directory to '${DOTFILES}'"
+    cd "$DOTFILES"
+    update_paths
 fi
 
 if [[ ! $(gpg --list-keys "$gpg_primary_key") ]]; then

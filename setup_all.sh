@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-base_path=$PWD
-data_path="$base_path"/data
-system_config_path="$base_path"/system
-git_submodule_path="$base_path"/.git_submodules
-
 gpg_primary_key=0x2B7340DB13C85766
 gpg_encryption_subkey=0x79C70BBE4865D828
 
@@ -50,6 +45,15 @@ prompt_exit() {
     esac
 }
 
+update_paths() {
+    base_path=$PWD
+    data_path="$base_path"/data
+    system_config_path="$base_path"/system
+    git_submodule_path="$base_path"/.git_submodules
+}
+
+update_paths
+
 if [[ "$current_hostname" != "$laptop_hostname" ]] && [[ "$current_hostname" != "$desktop_hostname" ]]; then
     if [[ "$1" != "$laptop_hostname" ]] && [[ "$1" != "$desktop_hostname" ]]; then
         echo "Unrecognised hostname! Please provide a valid one."
@@ -64,6 +68,12 @@ else
 fi
 
 prompt_exit "This script will remove/change existing system settings."
+
+if [[ -n ${DOTFILES+x} ]] && [[ "$base_path" != "$DOTFILES" ]]; then
+    echo "Changing directory to '${DOTFILES}'"
+    cd "$DOTFILES"
+    update_paths
+fi
 
 install_packages() {
     "$package_manager" -S --noconfirm --needed --noredownload -- "${@}" || {
