@@ -79,13 +79,6 @@ export NVM_DIR="$HOME/.nvm"
 # shellcheck disable=SC1091
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
-##############
-#  Electron  #
-##############
-
-# Fixes moving files to trash in electron apps
-export ELECTRON_TRASH=gio
-
 ############
 #  Conda   #
 ############

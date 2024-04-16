@@ -24,6 +24,6 @@ alias gitls='git ls'
 alias gitll='git ll'
 alias gitla='git la'
 
-# Use vscodium when code is run
-alias code='f() { codium --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform=wayland --unity-launch "$1" }; f'
+# vscodium
+alias code='codium'
 alias c='code . && exit'
