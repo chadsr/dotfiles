@@ -222,7 +222,7 @@ gpg_decrypt_file() {
 
     echo "Decrypting ${input_file_path} to ${tmp_output_file_path}"
 
-    gpg --local-user "${gpg_encryption_subkey}" --armor --decrypt --yes --output "${tmp_output_file_path}" "${input_file_path}" || {
+    gpg --quiet --no-verbose --local-user "${gpg_encryption_subkey}" --armor --decrypt --yes --output "${tmp_output_file_path}" "${input_file_path}" >/dev/null || {
         echo "failed to decrypt file ${input_file_path} to ${tmp_output_file_path}"
         return 1
     }
