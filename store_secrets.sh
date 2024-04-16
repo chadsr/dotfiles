@@ -37,19 +37,14 @@ diff_files() {
         return 1
     fi
 
-    if (cmp -s "$1" "$2"); then
-        # If they are identical, then return
+    if is_binary "{$1}" || is_binary "${2}"; then
+        echo "File is binary. Skipping interactive diff"
         return 0
-    else
-        if is_binary "{$1}" || is_binary "${2}"; then
-            echo "File is binary. Skipping interactive diff"
-            return 0
-        fi
-        vimdiff -d "$1" "$2" || {
-            echo "vimdiff on ${1} <-> ${2}' exited with error"
-            return 1
-        }
     fi
+    vimdiff -d "$1" "$2" || {
+        echo "vimdiff on ${1} <-> ${2}' exited with error"
+        return 1
+    }
 }
 
 gpg_encrypt_file() {
@@ -63,27 +58,38 @@ gpg_encrypt_file() {
     local output_filename
     output_filename=$(basename "$output_file_path")
     local tmp_output_file_path="${tmp_path}/${output_filename}"
+    local input_file_existing_equal=false
 
     # if the file to replace already exists, perform a diff to check for changes
     if [[ -f "$output_file_path" ]]; then
         tmp_output_file_path_current="$tmp_output_file_path".current
-        gpg --local-user "$gpg_encryption_subkey" --armor --decrypt --yes --output "$tmp_output_file_path_current" "$output_file_path" || {
+        gpg --quiet --no-verbose --local-user "$gpg_encryption_subkey" --armor --decrypt --yes --output "$tmp_output_file_path_current" "$output_file_path" >/dev/null || {
             echo "failed to decrypt file ${output_file_path} to ${tmp_output_file_path_current}"
             return 1
         }
 
-        diff_files "$tmp_output_file_path_current" "$input_file_path"
+        if (cmp -s "$tmp_output_file_path_current" "$input_file_path"); then
+            input_file_existing_equal=true
+        else
+            diff_files "$tmp_output_file_path_current" "$input_file_path"
+        fi
     fi
 
-    gpg -v --local-user "$gpg_encryption_subkey" --recipient "$gpg_encryption_subkey" --armor --sign --yes --output "$tmp_output_file_path" --encrypt "$input_file_path" || {
-        echo "failed to encrypt file ${input_file_path} to ${tmp_output_file_path}"
-        return 1
-    }
+    if [[ $input_file_existing_equal == true ]]; then
+        printf "%s <-> %s are equal. skipping encryption.\n" "$input_file_path" "$output_file_path"
+    else
+        gpg --quiet --no-verbose --local-user "$gpg_encryption_subkey" --recipient "$gpg_encryption_subkey" --armor --sign --yes --output "$tmp_output_file_path" --encrypt "$input_file_path" >/dev/null || {
+            echo "failed to encrypt file ${input_file_path} to ${tmp_output_file_path}"
+            return 1
+        }
 
-    cp -f "$tmp_output_file_path" "$output_file_path" || {
-        echo "failed to copy '${tmp_output_file_path}' to '${output_file_path}'"
-        return 1
-    }
+        cp -f "$tmp_output_file_path" "$output_file_path" || {
+            echo "failed to copy '${tmp_output_file_path}' to '${output_file_path}'"
+            return 1
+        }
+
+        printf "%s -> %s\n" "$input_file_path" "$output_file_path"
+    fi
 }
 
 if [[ "$current_hostname" != "$laptop_hostname" ]] && [[ "$current_hostname" != "$desktop_hostname" ]]; then
