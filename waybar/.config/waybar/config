@@ -2,7 +2,7 @@
 {
     "layer": "top", // Waybar at top layer
     "position": "top",
-    "height": 20, // Waybar height (to be removed for auto height)
+    "height": 24, // Waybar height (to be removed for auto height)
     // Choose the order of the modules
     "modules-left": [
         "group/workspaces",
@@ -175,14 +175,14 @@
         "interval": 5,
         "format": "{temperatureC}°C ",
         "tooltip-format": "CPU Temperature: {temperatureC}°C",
-        "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+        "hwmon-path": "/tmp/cpu_temperature",
         "critical-threshold": 85
     },
     "temperature#gpu": {
         "interval": 5,
         "format": "{temperatureC}°C ",
         "tooltip-format": "GPU Temperature: {temperatureC}°C",
-        "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
+        "hwmon-path": "/tmp/gpu_temperature",
         "critical-threshold": 85
     },
     "cpu": {
@@ -426,7 +426,7 @@
         "interval": 3600, // every hour
         "exec": "checkupdates | wc -l", // # of updates
         "exec-if": "exit 0", // always run; consider advanced run conditions
-        "on-click": "checkupdates | wc -l",
+        "on-click": "alacritty -e yay",
         "signal": 8
     },
     "custom/swaync": {
