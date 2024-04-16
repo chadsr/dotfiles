@@ -27,3 +27,6 @@ alias gitla='git la'
 # vscodium
 alias code='codium'
 alias c='code . && exit'
+
+alias dotfiles='cd $DOTFILES'
+alias dots='dotfiles'
