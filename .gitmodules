@@ -54,10 +54,6 @@
     path = .git_submodules/rofi-network-manager
     url = https://github.com/P3rf/rofi-network-manager.git
     branch = master
-[submodule ".git_submodules/cryptocoins-icons"]
-    path = .git_submodules/cryptocoins-icons
-    url = https://github.com/chadsr/cryptocoins.git
-    branch = master
 [submodule "omz/.oh-my-zsh/themes/powerlevel10k"]
     path = omz/.oh-my-zsh/themes/powerlevel10k
     url = https://github.com/romkatv/powerlevel10k.git
@@ -69,10 +65,6 @@
 [submodule ".git_submodules/catppuccin-swaync"]
     path = .git_submodules/catppuccin-swaync
     url = https://github.com/catppuccin/swaync.git
-    branch = main
-[submodule ".git_submodules/swaylock-corrupter"]
-    path = .git_submodules/swaylock-corrupter
-    url = https://github.com/chadsr/swaylock-corrupter.git
     branch = main
 [submodule ".git_submodules/catppuccin-mpv"]
     path = .git_submodules/catppuccin-mpv
