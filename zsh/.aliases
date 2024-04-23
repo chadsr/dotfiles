@@ -5,6 +5,7 @@ alias vi='nvim'
 alias cat='bat'
 alias catcp='f() { cat "$1" | wl-copy };f'
 alias hx='helix'
+alias h='hx .'
 alias calculator='kalker'
 alias calc='calculator'
 
@@ -23,6 +24,7 @@ alias gitnbr='git cob'
 alias gitls='git ls'
 alias gitll='git ll'
 alias gitla='git la'
+alias gitcl='git clone'
 
 # vscodium
 alias code='codium'
