@@ -32,6 +32,10 @@ help() {
     printf "Stores configuration secrets to \"%s\".\n\nUsage: %s <%s|%s>\n" "$data_path" "$script_name" "$laptop_hostname" "$desktop_hostname"
 }
 
+is_binary() {
+    LC_MESSAGES=C grep -Hm1 '^' <"${1-$REPLY}" | grep -q '^Binary'
+}
+
 diff_files() {
     if [[ ! -f "$1" ]]; then
         echo "file ${1} does not exist"
