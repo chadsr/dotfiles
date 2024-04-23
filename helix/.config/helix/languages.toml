@@ -1,0 +1,39 @@
+[[language]]
+name = "go"
+auto-format = true
+formatter = { command = "gofmt" }
+language-servers = [
+    { name = "golangci-lint-langserver", only-features = [
+        "diagnostics",
+    ] },
+    { name = "gopls", except-features = [
+        "diagnostics",
+    ] },
+]
+
+[[language]]
+name = "python"
+auto-format = true
+formatter = { command = "ruff", args = ["format", "-"] }
+language-servers = [
+    "ruff-lsp",
+    "pylsp",
+    { name = "pyright", except-features = [
+        "format",
+    ] },
+]
+
+[language-server.ruff-lsp]
+command = "ruff-lsp"
+
+[language.debugger]
+name = "debugpy"
+transport = "stdio"
+command = "python"
+args = ["-m", "debugpy.adapter"]
+
+[[language.debugger.templates]]
+name = "source"
+request = "launch"
+completion = [{ name = "entrypoint", completion = "filename", default = "." }]
+args = { mode = "debug", program = "{0}" }
