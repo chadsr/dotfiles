@@ -407,7 +407,8 @@ declare -a mk_dirs=(
     ~/.gnupg
     ~/.icons
     ~/.local/bin
-    ~/.local/share/fonts
+    ~/.local/share/fonts/OTF
+    ~/.local/share/fonts/TTF
     ~/.ssh
     ~/.themes
     ~/.vscode-oss
@@ -785,15 +786,14 @@ declare -a symlink_paths_tuples=(
     "${git_submodule_path}/alacritty-theme/themes ${base_path}/alacritty/.config/alacritty/colors"
     "${git_submodule_path}/buuf-nestort-icons ${base_path}/gtk/.icons/buuf-nestort-icons"
     "${git_submodule_path}/candy-icons ${base_path}/gtk/.icons/candy-icons"
-    # "${git_submodule_path}/catppuccin-bat/themes/Catppuccin\ Mocha.tmTheme ${base_path}/bat/.config/bat/themes/Catppuccin-Mocha.tmTheme" # TODO: re-enable due to spacing
     "${git_submodule_path}/catppuccin-helix/themes/default/catppuccin_mocha.toml ${base_path}/helix/.config/helix/themes/catppuccin_mocha.toml"
-    "${git_submodule_path}/cryptocoins-icons/webfont/cryptocoins.ttf ${base_path}/fonts/.local/share/fonts/cryptocoins.ttf"
     "${git_submodule_path}/rofi-network-manager/rofi-network-manager.sh ${base_path}/rofi/.local/bin/rofi-network-manager"
-    "${git_submodule_path}/swaylock-corrupter/swaylock-corrupter ${base_path}/sway/.local/bin/swaylock-corrupter"
     "${git_submodule_path}/sweet-icons ${base_path}/gtk/.icons/sweet-icons"
     "${git_submodule_path}/sweet-icons/Sweet-Purple ${base_path}/gtk/.icons/sweet-purple"
     "${git_submodule_path}/sweet-theme ${base_path}/gtk/.themes/sweet-theme"
+    "${git_submodule_path}/waybar-crypto/.submodules/cryptocoins/webfont/cryptocoins.ttf ${base_path}/waybar/.local/share/fonts/TTF/cryptocoins.ttf"
     "${git_submodule_path}/waybar-crypto/waybar_crypto.py ${base_path}/waybar/.config/waybar/modules/crypto/waybar_crypto"
+    # "${git_submodule_path}/catppuccin-bat/themes/Catppuccin\ Mocha.tmTheme ${base_path}/bat/.config/bat/themes/Catppuccin-Mocha.tmTheme" # TODO: re-enable due to spacing
     # "${git_submodule_path}/catppuccin-swaync/dist/mocha.css ${base_path}/sway/.config/swaync/mocha.css"
 )
 for symlink_paths_tuple in "${symlink_paths_tuples[@]}"; do
