@@ -2,7 +2,7 @@
 alacritty/.config/alacritty/colors
 bat/.config/bat/themes/*
 corectrl/.config/corectrl/profiles/*
-!corectrl/.config/corectrl/profiles/.gitkeep
+data/pkgs/*
 fonts/.local/share/fonts/cryptocoins.ttf
 freetube/.config/FreeTube/*
 gallery-dl/.config/gallery-dl/*
@@ -17,13 +17,15 @@ khal/.config/vdirsyncer/*
 liquidctl/.local/bin/yoda
 rofi/.local/bin/rofi-network-manager
 ssh/.ssh/*
-sway/.local/bin/swaylock-corrupter
 tidal-hifi/.config/tidal-hifi/*
 vscodium/.config/VSCodium/*
 vscodium/.vscode-oss/*
 waybar/.config/waybar/modules/crypto/*
+waybar/.local/share/fonts/TTF/*
 xdg/.config/mimeapps.list
 !bat/.config/bat/themes/.gitkeep
+!corectrl/.config/corectrl/profiles/.gitkeep
+!data/pkgs/*.asc.gpg
 !freetube/.config/FreeTube/settings.db
 !gallery-dl/.config/gallery-dl/.gitkeep
 !gtk/.icons/.gitkeep
@@ -36,5 +38,4 @@ xdg/.config/mimeapps.list
 !vscodium/.config/VSCodium/User/globalStorage/zokugun.sync-settings/settings.yml
 !vscodium/.vscode-oss/argv.json
 !waybar/.config/waybar/modules/crypto/.gitkeep
-data/pkgs/*
-!data/pkgs/*.asc.gpg
+!waybar/.local/share/fonts/TTF/.gitkeep
