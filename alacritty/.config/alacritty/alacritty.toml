@@ -80,8 +80,8 @@ columns = 0
 lines = 0
 
 [window.padding]
-x = 16
-y = 16
+x = 0
+y = 0
 
 [[keyboard.bindings]]
 action = "Paste"
