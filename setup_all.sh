@@ -192,11 +192,11 @@ is_binary() {
 }
 
 diff_files() {
-    if [[ ! -f "$1" ]]; then
+    if [[ ! -f "$1" ]] && [[ ! -L "$1" ]]; then
         echo "file ${1} does not exist"
         return 1
     fi
-    if [[ ! -f "$2" ]]; then
+    if [[ ! -f "$1" ]] && [[ ! -L "$1" ]]; then
         echo "file ${2} does not exist"
         return 1
     fi
@@ -219,7 +219,7 @@ diff_files() {
 # gpg is used directly throughout this setup process
 # to handle the non-deterministic nature of gpg encryption, checks/diffs are performed to prevent unwanted changes going un-noticed
 gpg_decrypt_file() {
-    if [[ ! -f "$1" ]]; then
+    if [[ ! -f "$1" ]] && [[ ! -L "$1" ]]; then
         echo "input file ${1} does not exist"
         return 1
     fi
@@ -555,6 +555,7 @@ done
 
 declare -a systemd_units=(
     /usr/lib/systemd/system/bluetooth.service
+    /usr/lib/systemd/system/clamav-freshclam-once.timer
     /usr/lib/systemd/system/greetd.service
     /usr/lib/systemd/system/pcscd.socket
     /usr/lib/systemd/system/power-profiles-daemon.service
@@ -791,7 +792,7 @@ declare -a symlink_paths_tuples=(
     "${git_submodule_path}/sweet-icons ${base_path}/gtk/.icons/sweet-icons"
     "${git_submodule_path}/sweet-icons/Sweet-Purple ${base_path}/gtk/.icons/sweet-purple"
     "${git_submodule_path}/sweet-theme ${base_path}/gtk/.themes/sweet-theme"
-    "${git_submodule_path}/waybar-crypto/.submodules/cryptocoins/webfont/cryptocoins.ttf ${base_path}/waybar/.local/share/fonts/TTF/cryptocoins.ttf"
+    "${git_submodule_path}/waybar-crypto/.submodules/cryptofont/fonts/cryptofont.ttf ${base_path}/waybar/.local/share/fonts/TTF/cryptofont.ttf"
     "${git_submodule_path}/waybar-crypto/waybar_crypto.py ${base_path}/waybar/.config/waybar/modules/crypto/waybar_crypto"
     # "${git_submodule_path}/catppuccin-bat/themes/Catppuccin\ Mocha.tmTheme ${base_path}/bat/.config/bat/themes/Catppuccin-Mocha.tmTheme" # TODO: re-enable due to spacing
     # "${git_submodule_path}/catppuccin-swaync/dist/mocha.css ${base_path}/sway/.config/swaync/mocha.css"

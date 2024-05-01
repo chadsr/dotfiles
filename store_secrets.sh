@@ -37,11 +37,11 @@ is_binary() {
 }
 
 diff_files() {
-    if [[ ! -f "$1" ]]; then
+    if [[ ! -f "$1" ]] && [[ ! -L "$1" ]]; then
         echo "file ${1} does not exist"
         return 1
     fi
-    if [[ ! -f "$2" ]]; then
+    if [[ ! -f "$1" ]] && [[ ! -L "$1" ]]; then
         echo "file ${2} does not exist"
         return 1
     fi
@@ -57,7 +57,7 @@ diff_files() {
 }
 
 gpg_encrypt_file() {
-    if [[ ! -f "$1" ]]; then
+    if [[ ! -f "$1" ]] && [[ ! -L "$1" ]]; then
         echo "input file ${1} does not exist"
         return 1
     fi
