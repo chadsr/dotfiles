@@ -8,7 +8,7 @@
         "group/workspaces",
         "custom/right-spacer-workspaces",
         "group/tray",
-        "custom/right-spacer-tray",
+        "custom/right-spacer-tray"
     ],
     "modules-center": [
         "custom/left-spacer-organisation",
@@ -102,12 +102,27 @@
         "spacing": 8,
         "show-passive-items": true
     },
+    "custom/yay": {
+        "format": "{} 📦",
+        "tooltip": false,
+        "interval": 600,
+        "exec": "yay -Qu  | wc -l",
+        "exec-if": "exit 0",
+        "on-click": "alacritty -t 'Updating Packages' -e yay; pkill -SIGRTMIN+8 waybar",
+        "signal": 8
+    },
+    "custom/yubikey": {
+        "interval": "2",
+        "exec": "$HOME/.config/waybar/modules/yubikey/waybar_yubikey",
+        "return-type": "json"
+    },
     "group/tray": {
         "orientation": "horizontal",
         "children-class": "group-tray",
         "modules": [
             "tray",
             "custom/yay",
+            "custom/dotfiles",
             "privacy",
             "gamemode",
             "custom/yubikey",
@@ -162,7 +177,12 @@
         "modules": [
             "custom/weather",
             "custom/crypto"
-        ]
+        ],
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "information",
+            "transition-left-to-right": true
+        }
     },
     "sway/window": {
         "format": "{}",
@@ -240,7 +260,8 @@
         "interval": 600,
         "return-type": "json",
         "exec": "$HOME/.config/waybar/modules/crypto/waybar_crypto",
-        "exec-if": "ping pro-api.coinmarketcap.com -c1"
+        "exec-if": "ping pro-api.coinmarketcap.com -c1",
+        "tooltip": false
     },
     "backlight": {
         "format": "{percent}% {icon}",
@@ -420,15 +441,6 @@
             "brave"
         ]
     },
-    "custom/yay": {
-        "format": "{} 📦",
-        "tooltip": false,
-        "interval": 3600, // every hour
-        "exec": "checkupdates | wc -l", // # of updates
-        "exec-if": "exit 0", // always run; consider advanced run conditions
-        "on-click": "alacritty -e yay",
-        "signal": 8
-    },
     "custom/swaync": {
         "tooltip": false,
         "format": "{icon}",
@@ -448,10 +460,5 @@
         "on-click": "swaync-client -t -sw",
         "on-click-right": "swaync-client -d -sw",
         "escape": true
-    },
-    "custom/yubikey": {
-        "interval": "2",
-        "exec": "$HOME/.config/waybar/modules/yubikey/waybar_yubikey",
-        "return-type": "json"
     }
 }
