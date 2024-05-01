@@ -60,7 +60,7 @@ if [[ ! -z "${SSH_CONNECTION+x}" ]]; then
     fi
 fi
 
-#######$#####
+#############
 #  Node.js  #
 #############
 NPM_CONFIG_PREFIX=~/.npm-global
@@ -74,6 +74,11 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 # shellcheck disable=SC1091
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+
+############
+#  Python  #
+############
+export PYDEVD_CONTAINER_RANDOM_ACCESS_MAX_ITEMS=1000
 
 ############
 #  Conda   #
