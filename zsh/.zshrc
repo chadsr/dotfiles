@@ -77,7 +77,7 @@ source $ZSH/oh-my-zsh.sh
 source $HOME/.aliases
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+([[ ! -f ~/.p10k.zsh ]] && [[ ! -L ~/.p10k.zsh ]]) || source ~/.p10k.zsh
 
 # NVM Init
 source /usr/share/nvm/init-nvm.sh
