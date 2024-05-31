@@ -8,9 +8,9 @@ Type=simple
 Restart=always
 RestartSec=1
 ExecStart=/usr/bin/swayidle -w \
-    timeout 300 'swaylock-corrupter' \
+    timeout 300 'swaylock-corrupt' \
     timeout 3600 'swaymsg "output * dpms off"' \
     resume 'swaymsg "output * dpms on"' \
-    before-sleep 'swaylock-corrupter'
+    before-sleep 'swaylock-corrupt'
 [Install]
 WantedBy=sway-session.target

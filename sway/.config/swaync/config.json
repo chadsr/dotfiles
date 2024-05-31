@@ -53,7 +53,7 @@
                 },
                 {
                     "label": "󰌾",
-                    "command": "swaylock-corrupter"
+                    "command": "swaylock-corrupt"
                 },
                 {
                     "label": "󰍃",

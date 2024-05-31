@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [[ $# -gt 0 ]] && [[ $1 == "--help" ]] || [[ $1 == "-h" ]]; then
+    swaylock --help |& sed -r 's/swaylock/swaylock-corrupter/g' | sed '/--image/d'
+else
+    displays=$(swaymsg -t get_outputs -p | grep "Output" | awk '{print $2}')
+    base_file="/tmp/sc"
+
+    args=""
+
+    for display in $displays; do
+        file=${base_file}${display}.png
+        grim -o "$display" "$file"
+        corrupter "$file" "$file"
+        args="$args -i ${display}:${file}"
+    done
+
+    swaylock $args "$@"
+fi

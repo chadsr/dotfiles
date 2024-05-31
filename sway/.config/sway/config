@@ -243,7 +243,7 @@ bindsym XF86AudioMicMute exec volumectl -m toggle-mute
 #
 # Swaylock
 #
-bindsym $mod+Escape exec ~/.local/bin/swaylock-corrupter
+bindsym $mod+Escape exec ~/.local/bin/swaylock-corrupt
 
 # External Config Includes
 include /etc/sway/config.d/*
