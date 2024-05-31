@@ -187,10 +187,6 @@ gpg_ssh_agent() {
     gpg-connect-agent updatestartuptty /bye >/dev/null
 }
 
-is_binary() {
-    LC_MESSAGES=C grep -Hm1 '^' <"${1-$REPLY}" | grep -q '^Binary'
-}
-
 diff_files() {
     if [[ ! -f "$1" ]] && [[ ! -L "$1" ]]; then
         echo "file ${1} does not exist"
@@ -205,10 +201,6 @@ diff_files() {
         # If they are identical, then return
         return 0
     else
-        if is_binary "{$1}" || is_binary "${2}"; then
-            echo "File is binary. Skipping interactive diff"
-            return 0
-        fi
         vimdiff -d "$1" "$2" || {
             echo "vimdiff on ${1} <-> ${2}' exited with error"
             return 1
@@ -500,7 +492,7 @@ declare -a decrypt_data_paths_tuples=(
     "${data_path}/ssh/config.asc.gpg ${base_path}/ssh/.ssh/config"
     "${data_path}/tidal-hifi/config.json.asc.gpg ${base_path}/tidal-hifi/.config/tidal-hifi/config.json"
     "${data_path}/vdirsyncer/config.asc.gpg ${base_path}/khal/.config/vdirsyncer/config"
-    "${data_path}/waybar/crypto/config.ini.asc.gpg ${base_path}/waybar/.config/waybar/modules/crypto/config.ini"
+    "${data_path}/waybar/waybar-crypto/config.ini.asc.gpg ${base_path}/waybar/.config/waybar-crypto/config.ini"
     "${data_path}/xdg/mimeapps.list.asc.gpg ${base_path}/xdg/.config/mimeapps.list"
 )
 for decrypt_data_paths_tuple in "${decrypt_data_paths_tuples[@]}"; do
@@ -793,7 +785,6 @@ declare -a symlink_paths_tuples=(
     "${git_submodule_path}/sweet-icons/Sweet-Purple ${base_path}/gtk/.icons/sweet-purple"
     "${git_submodule_path}/sweet-theme ${base_path}/gtk/.themes/sweet-theme"
     "${git_submodule_path}/waybar-crypto/.submodules/cryptofont/fonts/cryptofont.ttf ${base_path}/waybar/.local/share/fonts/TTF/cryptofont.ttf"
-    "${git_submodule_path}/waybar-crypto/waybar_crypto.py ${base_path}/waybar/.config/waybar/modules/crypto/waybar_crypto"
     # "${git_submodule_path}/catppuccin-bat/themes/Catppuccin\ Mocha.tmTheme ${base_path}/bat/.config/bat/themes/Catppuccin-Mocha.tmTheme" # TODO: re-enable due to spacing
     # "${git_submodule_path}/catppuccin-swaync/dist/mocha.css ${base_path}/sway/.config/swaync/mocha.css"
 )

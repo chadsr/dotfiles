@@ -32,10 +32,6 @@ help() {
     printf "Stores configuration secrets to \"%s\".\n\nUsage: %s <%s|%s>\n" "$data_path" "$script_name" "$laptop_hostname" "$desktop_hostname"
 }
 
-is_binary() {
-    LC_MESSAGES=C grep -Hm1 '^' <"${1-$REPLY}" | grep -q '^Binary'
-}
-
 diff_files() {
     if [[ ! -f "$1" ]] && [[ ! -L "$1" ]]; then
         echo "file ${1} does not exist"
@@ -46,10 +42,6 @@ diff_files() {
         return 1
     fi
 
-    if is_binary "{$1}" || is_binary "${2}"; then
-        echo "File is binary. Skipping interactive diff"
-        return 0
-    fi
     vimdiff -d "$1" "$2" || {
         echo "vimdiff on ${1} <-> ${2}' exited with error"
         return 1
@@ -136,7 +128,7 @@ gpg_encrypt_file ~/.config/khal/config "$data_path"/khal/config.asc.gpg
 gpg_encrypt_file ~/.config/mimeapps.list "$data_path"/xdg/mimeapps.list.asc.gpg
 gpg_encrypt_file ~/.config/tidal-hifi/config.json "$data_path"/tidal-hifi/config.json.asc.gpg
 gpg_encrypt_file ~/.config/vdirsyncer/config "$data_path"/vdirsyncer/config.asc.gpg
-gpg_encrypt_file ~/.config/waybar/modules/crypto/config.ini "$data_path"/waybar/crypto/config.ini.asc.gpg
+gpg_encrypt_file ~/.config/waybar-crypto/config.ini "$data_path"/waybar/waybar-crypto/config.ini.asc.gpg
 gpg_encrypt_file ~/.ssh/config "$data_path"/ssh/config.asc.gpg
 
 if [[ -f "$data_path"/pkgs/remove.txt ]]; then
@@ -146,5 +138,3 @@ fi
 if [[ -f "$pkglist_system_path" ]]; then
     gpg_encrypt_file "$pkglist_system_path" "$data_path"/pkgs/"$current_hostname".txt.asc.gpg
 fi
-
-rm -rf "$tmp_path"
