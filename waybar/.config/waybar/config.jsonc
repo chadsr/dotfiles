@@ -116,13 +116,24 @@
         "exec": "$HOME/.config/waybar/modules/yubikey/waybar_yubikey",
         "return-type": "json"
     },
+    // "custom/systemd": {
+    //     "format": "{icon} {}",
+    //     "format-icons": {
+    //         "ok": "✔",
+    //         "failure": "✘"
+    //     },
+    //     "tooltip": true,
+    //     "return-type": "json",
+    //     "interval": 60,
+    //     "exec": "$HOME/git/github.com/chadsr/waybar-systemd/waybar-systemd"
+    // },
     "group/tray": {
         "orientation": "horizontal",
         "children-class": "group-tray",
         "modules": [
             "tray",
             "custom/yay",
-            "custom/dotfiles",
+            // "custom/systemd",
             "privacy",
             "gamemode",
             "custom/yubikey",
@@ -177,12 +188,12 @@
         "modules": [
             "custom/weather",
             "custom/crypto"
-        ],
-        "drawer": {
-            "transition-duration": 500,
-            "children-class": "information",
-            "transition-left-to-right": true
-        }
+        ]
+        // "drawer": {
+        //     "transition-duration": 500,
+        //     "children-class": "information",
+        //     "transition-left-to-right": true
+        // }
     },
     "sway/window": {
         "format": "{}",
@@ -259,9 +270,9 @@
         "format": "{}",
         "interval": 600,
         "return-type": "json",
-        "exec": "$HOME/.config/waybar/modules/crypto/waybar_crypto",
+        "exec": "/usr/bin/waybar-crypto",
         "exec-if": "ping pro-api.coinmarketcap.com -c1",
-        "tooltip": false
+        "tooltip": true
     },
     "backlight": {
         "format": "{percent}% {icon}",

@@ -20,7 +20,7 @@ ssh/.ssh/*
 tidal-hifi/.config/tidal-hifi/*
 vscodium/.config/VSCodium/*
 vscodium/.vscode-oss/*
-waybar/.config/waybar/modules/crypto/*
+waybar/.config/waybar-crypto/config.ini
 waybar/.local/share/fonts/TTF/*
 xdg/.config/mimeapps.list
 !bat/.config/bat/themes/.gitkeep
