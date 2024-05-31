@@ -25,6 +25,7 @@ alias gitls='git ls'
 alias gitll='git ll'
 alias gitla='git la'
 alias gitcl='git clone'
+alias gitfixup='git rebase -i HEAD~2'
 
 # vscodium
 alias code='codium'
