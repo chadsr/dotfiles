@@ -94,6 +94,11 @@ export CONDA_AUTO_ACTIVATE_BASE=false
 export GEM_HOME=$HOME/.gem
 # export PATH=$PATH:$GEM_HOME/ruby/2.6.0/bin
 
+##########
+#  Perl  #
+##########
+export PATH=$PATH:/usr/bin/vendor_perl
+
 ################
 #    Other     #
 ################
