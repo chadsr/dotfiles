@@ -1,6 +1,6 @@
 {"_id":"allowDashAv1Formats","value":true}
 {"_id":"barColor","value":false}
-{"_id":"bounds","value":{"x":1320,"y":420,"width":1200,"height":800,"maximized":true,"fullScreen":false}}
+{"_id":"bounds","value":{"x":0,"y":0,"width":3440,"height":1389,"maximized":false,"fullScreen":false}}
 {"_id":"checkForBlogPosts","value":false}
 {"_id":"defaultQuality","value":"1080"}
 {"_id":"disableSmoothScrolling","value":true}
