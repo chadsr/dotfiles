@@ -485,6 +485,7 @@ declare -a decrypt_data_paths_tuples=(
     "${data_path}/corectrl/${current_hostname}__global_.ccpro.asc.gpg ${base_path}/corectrl/.config/corectrl/profiles/_global_.ccpro"
     "${data_path}/corectrl/${current_hostname}_steam.sh.ccpro.asc.gpg ${base_path}/corectrl/.config/corectrl/profiles/_steam.sh.ccpro"
     "${data_path}/corectrl/${current_hostname}_codium.ccpro.asc.gpg ${base_path}/corectrl/.config/corectrl/profiles/codium.ccpro"
+    "${data_path}/corectrl/${current_hostname}_gyroflow.ccpro.asc.gpg ${base_path}/corectrl/.config/corectrl/profiles/gyroflow.ccpro"
     "${data_path}/gallery-dl/config.json.asc.gpg ${base_path}/gallery-dl/.config/gallery-dl/config.json"
     "${data_path}/gtk/bookmarks.asc.gpg ${base_path}/gtk/.config/gtk-3.0/bookmarks"
     "${data_path}/khal/config.asc.gpg ${base_path}/khal/.config/khal/config"

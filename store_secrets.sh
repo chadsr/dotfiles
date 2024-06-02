@@ -122,6 +122,8 @@ mkdir -p "$tmp_path"
 gpg_encrypt_file ~/.config/corectrl/profiles/_global_.ccpro "$data_path"/corectrl/"$current_hostname"__global_.ccpro.asc.gpg
 gpg_encrypt_file ~/.config/corectrl/profiles/codium.ccpro "$data_path"/corectrl/"$current_hostname"_codium.ccpro.asc.gpg
 gpg_encrypt_file ~/.config/corectrl/profiles/steam.sh.ccpro "$data_path"/corectrl/"$current_hostname"_steam.sh.ccpro.asc.gpg
+gpg_encrypt_file ~/.config/corectrl/profiles/gyroflow.ccpro "$data_path"/corectrl/"$current_hostname"_gyroflow.ccpro.asc.gpg
+
 gpg_encrypt_file ~/.config/gallery-dl/config.json "$data_path"/gallery-dl/config.json.asc.gpg
 gpg_encrypt_file ~/.config/gtk-3.0/bookmarks "$data_path"/gtk/bookmarks.asc.gpg
 gpg_encrypt_file ~/.config/khal/config "$data_path"/khal/config.asc.gpg
