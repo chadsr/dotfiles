@@ -399,6 +399,7 @@ declare -a mk_dirs=(
     ~/.gnupg
     ~/.icons
     ~/.local/bin
+    ~/.local/share/applications
     ~/.local/share/fonts/OTF
     ~/.local/share/fonts/TTF
     ~/.ssh
