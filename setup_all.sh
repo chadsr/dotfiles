@@ -836,6 +836,7 @@ declare -a stow_dirs_general=(
     xdg
     yt-dlp
     yubikey
+    cura
 )
 
 echo "Stowing general configs"
