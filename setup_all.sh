@@ -539,6 +539,7 @@ declare -a user_groups=(
     gamemode
     plugdev
     ssh_login
+    docker
 )
 for user_group in "${user_groups[@]}"; do
     echo "Adding user to group ${user_group}"
