@@ -39,3 +39,4 @@ xdg/.config/mimeapps.list
 !vscodium/.vscode-oss/argv.json
 !waybar/.config/waybar/modules/crypto/.gitkeep
 !waybar/.local/share/fonts/TTF/.gitkeep
+cura/.config/cura/5.7/cura.cfg

@@ -123,7 +123,6 @@ gpg_encrypt_file ~/.config/corectrl/profiles/_global_.ccpro "$data_path"/corectr
 gpg_encrypt_file ~/.config/corectrl/profiles/codium.ccpro "$data_path"/corectrl/"$current_hostname"_codium.ccpro.asc.gpg
 gpg_encrypt_file ~/.config/corectrl/profiles/steam.sh.ccpro "$data_path"/corectrl/"$current_hostname"_steam.sh.ccpro.asc.gpg
 gpg_encrypt_file ~/.config/corectrl/profiles/gyroflow.ccpro "$data_path"/corectrl/"$current_hostname"_gyroflow.ccpro.asc.gpg
-
 gpg_encrypt_file ~/.config/gallery-dl/config.json "$data_path"/gallery-dl/config.json.asc.gpg
 gpg_encrypt_file ~/.config/gtk-3.0/bookmarks "$data_path"/gtk/bookmarks.asc.gpg
 gpg_encrypt_file ~/.config/khal/config "$data_path"/khal/config.asc.gpg
@@ -132,6 +131,7 @@ gpg_encrypt_file ~/.config/tidal-hifi/config.json "$data_path"/tidal-hifi/config
 gpg_encrypt_file ~/.config/vdirsyncer/config "$data_path"/vdirsyncer/config.asc.gpg
 gpg_encrypt_file ~/.config/waybar-crypto/config.ini "$data_path"/waybar/waybar-crypto/config.ini.asc.gpg
 gpg_encrypt_file ~/.ssh/config "$data_path"/ssh/config.asc.gpg
+gpg_encrypt_file ~/.config/cura/5.7/cura.cfg "$data_path"/cura/cura.cfg.asc.gpg
 
 if [[ -f "$data_path"/pkgs/remove.txt ]]; then
     gpg_encrypt_file "$data_path"/pkgs/remove.txt "$data_path"/pkgs/remove.txt.asc.gpg
