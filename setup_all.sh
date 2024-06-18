@@ -807,7 +807,9 @@ declare -a stow_dirs_general=(
     bat
     bemenu
     cava
+    continue
     corectrl
+    cura
     electron
     espanso
     fonts
@@ -838,7 +840,6 @@ declare -a stow_dirs_general=(
     xdg
     yt-dlp
     yubikey
-    cura
 )
 
 echo "Stowing general configs"
