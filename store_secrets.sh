@@ -118,25 +118,29 @@ fi
 
 mkdir -p "$tmp_path"
 
-# Shared Files
-gpg_encrypt_file ~/.config/corectrl/profiles/_global_.ccpro "$data_path"/corectrl/"$current_hostname"__global_.ccpro.asc.gpg
-gpg_encrypt_file ~/.config/corectrl/profiles/codium.ccpro "$data_path"/corectrl/"$current_hostname"_codium.ccpro.asc.gpg
-gpg_encrypt_file ~/.config/corectrl/profiles/steam.sh.ccpro "$data_path"/corectrl/"$current_hostname"_steam.sh.ccpro.asc.gpg
-gpg_encrypt_file ~/.config/corectrl/profiles/gyroflow.ccpro "$data_path"/corectrl/"$current_hostname"_gyroflow.ccpro.asc.gpg
-gpg_encrypt_file ~/.config/gallery-dl/config.json "$data_path"/gallery-dl/config.json.asc.gpg
-gpg_encrypt_file ~/.config/gtk-3.0/bookmarks "$data_path"/gtk/bookmarks.asc.gpg
-gpg_encrypt_file ~/.config/khal/config "$data_path"/khal/config.asc.gpg
-gpg_encrypt_file ~/.config/mimeapps.list "$data_path"/xdg/mimeapps.list.asc.gpg
-gpg_encrypt_file ~/.config/tidal-hifi/config.json "$data_path"/tidal-hifi/config.json.asc.gpg
-gpg_encrypt_file ~/.config/vdirsyncer/config "$data_path"/vdirsyncer/config.asc.gpg
-gpg_encrypt_file ~/.config/waybar-crypto/config.ini "$data_path"/waybar/waybar-crypto/config.ini.asc.gpg
-gpg_encrypt_file ~/.ssh/config "$data_path"/ssh/config.asc.gpg
-gpg_encrypt_file ~/.config/cura/5.7/cura.cfg "$data_path"/cura/cura.cfg.asc.gpg
+declare -a encrypt_data_paths_tuples=(
+    "${HOME}.config/corectrl/profiles/_global_.ccpro ${data_path}/corectrl/${current_hostname}__global_.ccpro.asc.gpg"
+    "${HOME}.config/corectrl/profiles/codium.ccpro ${data_path}/corectrl/${current_hostname}_codium.ccpro.asc.gpg"
+    "${HOME}.config/corectrl/profiles/steam.sh.ccpro ${data_path}/corectrl/${current_hostname}_steam.sh.ccpro.asc.gpg"
+    "${HOME}.config/corectrl/profiles/gyroflow.ccpro ${data_path}/corectrl/${current_hostname}_gyroflow.ccpro.asc.gpg"
+    "${HOME}.config/gallery-dl/config.json ${data_path}/gallery-dl/config.json.asc.gpg"
+    "${HOME}.config/gtk-3.0/bookmarks ${data_path}/gtk/bookmarks.asc.gpg"
+    "${HOME}.config/khal/config ${data_path}/khal/config.asc.gpg"
+    "${HOME}.config/mimeapps.list ${data_path}/xdg/mimeapps.list.asc.gpg"
+    "${HOME}.config/tidal-hifi/config.json ${data_path}/tidal-hifi/config.json.asc.gpg"
+    "${HOME}.config/vdirsyncer/config ${data_path}/vdirsyncer/config.asc.gpg"
+    "${HOME}.config/waybar-crypto/config.ini ${data_path}/waybar/waybar-crypto/config.ini.asc.gpg"
+    "${HOME}.ssh/config ${data_path}/ssh/config.asc.gpg"
+    "${HOME}/.config/cura/5.7/cura.cfg ${data_path}/cura/cura.cfg.asc.gpg"
+    "$data_path/pkgs/remove.txt ${data_path}/pkgs/remove.txt.asc.gpg"
+    "${pkglist_system_path} ${data_path}/pkgs/${current_hostname}.txt.asc.gpg"
+)
 
-if [[ -f "$data_path"/pkgs/remove.txt ]]; then
-    gpg_encrypt_file "$data_path"/pkgs/remove.txt "$data_path"/pkgs/remove.txt.asc.gpg
-fi
+for encrypt_data_paths_tuple in "${encrypt_data_paths_tuples[@]}"; do
+    read -ra encrypt_data_paths <<<"$encrypt_data_paths_tuple"
 
-if [[ -f "$pkglist_system_path" ]]; then
-    gpg_encrypt_file "$pkglist_system_path" "$data_path"/pkgs/"$current_hostname".txt.asc.gpg
-fi
+    if [[ -f "${encrypt_data_paths[0]}" ]]; then
+        echo "${encrypt_data_paths_tuple}"
+        gpg_encrypt_file "${encrypt_data_paths[0]}" "${encrypt_data_paths[1]}"
+    fi
+done
