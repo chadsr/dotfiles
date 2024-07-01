@@ -424,6 +424,7 @@ declare -a conflict_paths=(
     ~/.vscode-oss/argv.json
     ~/.zshenv
     ~/.zshrc
+    "${base_path}"/rofi/.local/bin/rofi-network-manager
 )
 echo "Checking for files/directories that will conflict with stow"
 for conflict_path in "${conflict_paths[@]}"; do
@@ -500,7 +501,10 @@ declare -a decrypt_data_paths_tuples=(
 )
 for decrypt_data_paths_tuple in "${decrypt_data_paths_tuples[@]}"; do
     read -ra decrypt_data_paths <<<"$decrypt_data_paths_tuple"
-    gpg_decrypt_file "${decrypt_data_paths[0]}" "${decrypt_data_paths[1]}"
+
+    if [[ -f "${decrypt_data_paths[0]}" ]]; then
+        gpg_decrypt_file "${decrypt_data_paths[0]}" "${decrypt_data_paths[1]}"
+    fi
 done
 
 # check for packages to be removed
@@ -844,27 +848,9 @@ declare -a stow_dirs_general=(
 
 echo "Stowing general configs"
 for stow_dir in "${stow_dirs_general[@]}"; do
+    echo "Stowing ${stow_dir}"
     stow_config "$stow_dir"
 done
-
-nvm_init_script="source /usr/share/nvm/init-nvm.sh"
-if ! line_exists "$nvm_init_script" ~/.zshrc; then
-    echo "Adding NVM init script to ~/.zshrc"
-    echo 'source /usr/share/nvm/init-nvm.sh' >>~/.zshrc
-fi
-
-# shellcheck disable=SC1091
-source /usr/share/nvm/init-nvm.sh
-
-nvm install lts/* || {
-    echo "failed to install Node LTS"
-    exit 1
-}
-
-nvm alias default lts/* || {
-    echo "failed to set node default version to LTS"
-    exit 1
-}
 
 bat cache --build || {
     echo "failed to build bat cache"
