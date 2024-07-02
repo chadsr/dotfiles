@@ -245,11 +245,12 @@ tooltip label {
 }
 
 #network,
-#bluetooth,
 #backlight,
 #battery,
 #battery.bat1,
-#custom-swaync {
+#custom-swaync,
+#network {
+    color: @yellow;
     background: @light-blue;
 }
 
@@ -257,9 +258,14 @@ tooltip label {
     color: @yellow;
 }
 
-#bluetooth,
-#network {
+#bluetooth.off,
+#network.disconnected,
+#network.vpn.disconnected {
     color: @dark-blue;
+}
+
+#network.vpn {
+    color: @green;
 }
 
 #battery.charging {
