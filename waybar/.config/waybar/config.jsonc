@@ -329,6 +329,17 @@
         "tooltip-format": "WiFi → {ifname} → {ipaddr}/{cidr}",
         "on-click": "$HOME/.local/bin/rofi-network-manager"
     },
+    "network#vpn": {
+        "interval": 5,
+        "interface": "wg0",
+        "format-icons": [
+            "\uf023"
+        ],
+        "format-disconnected": "{icon}",
+        "format": "VPN ↑{bandwidthUpBits} ↓{bandwidthDownBits} {icon}",
+        "tooltip-format": "VPN → {ifname} → {ipaddr}/{cidr}",
+        "on-click": "$HOME/.local/bin/rofi-network-manager"
+    },
     "bluetooth": {
         "format": " {status}",
         "format-connected": " {device_alias}",
@@ -428,7 +439,8 @@
         "children-class": "group-network",
         "modules": [
             "bluetooth",
-            "network"
+            "network",
+            "network#vpn"
         ],
         "drawer": {
             "transition-duration": 500,
