@@ -796,6 +796,7 @@ declare -a stow_dirs_general=(
     cura
     electron
     espanso
+    figma
     fonts
     freetube
     fuzzel

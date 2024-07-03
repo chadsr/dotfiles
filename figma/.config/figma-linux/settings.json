@@ -1,0 +1,58 @@
+{
+  "clientId": "69d97d6b-5c09-4d1e-bbc5-2c3bafc1da82",
+  "userId": "",
+  "authedUserIDs": [],
+  "app": {
+    "logLevel": 1,
+    "lastTimeClearLogFile": 1720016283014,
+    "enableColorSpaceSrgb": false,
+    "visibleNewProjectBtn": true,
+    "useZenity": false,
+    "disableThemes": false,
+    "panelHeight": 40,
+    "saveLastOpenedTabs": true,
+    "exportDir": "~/Pictures/Figma",
+    "commandSwitches": [
+      {
+        "switch": "enable-gpu-rasterization"
+      },
+      {
+        "switch": "enable-experimental-canvas-features"
+      },
+      {
+        "switch": "use-vulkan"
+      },
+      {
+        "switch": "enable-features",
+        "value": "UseOzonePlatform"
+      },
+      {
+        "switch": "ozone-platform",
+        "value": "wayland"
+      }
+    ],
+    "fontDirs": [
+      "/usr/share/fonts",
+      "/usr/local/share/fonts",
+      "/run/host/fonts",
+      "/run/host/user-fonts",
+      "~/.local/share/fonts"
+    ],
+    "recentlyClosedTabs": [],
+    "windowsState": {},
+    "lastOpenedTabs": {},
+    "featureFlags": {},
+    "savedExtensions": [],
+    "themeDropdownOpen": true,
+    "creatorsThemesDropdownOpen": false,
+    "useOldPreviewer": false,
+    "dontShowTutorialCreator": false
+  },
+  "theme": {
+    "currentTheme": "Catppuchin_Mocha"
+  },
+  "ui": {
+    "scalePanel": 1,
+    "scaleFigmaUI": 1
+  }
+}
