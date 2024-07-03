@@ -62,10 +62,6 @@
     path = .git_submodules/catppuccin-helix
     url = https://github.com/catppuccin/helix.git
     branch = main
-[submodule ".git_submodules/catppuccin-swaync"]
-    path = .git_submodules/catppuccin-swaync
-    url = https://github.com/catppuccin/swaync.git
-    branch = main
 [submodule ".git_submodules/catppuccin-mpv"]
     path = .git_submodules/catppuccin-mpv
     url = https://github.com/catppuccin/mpv.git
