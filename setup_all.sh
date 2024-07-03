@@ -424,7 +424,6 @@ declare -a conflict_paths=(
     ~/.vscode-oss/argv.json
     ~/.zshenv
     ~/.zshrc
-    "${base_path}"/rofi/.local/bin/rofi-network-manager
 )
 echo "Checking for files/directories that will conflict with stow"
 for conflict_path in "${conflict_paths[@]}"; do
@@ -694,9 +693,6 @@ rsync_system_config common/
 hackneyed_updated=false
 hackneyed_hash_old=$(git -C "$git_submodule_path"/hackneyed-cursor rev-parse --short HEAD)
 
-swaync_cp_updated=false
-swaync_cp_hash_old=$(git -C "$git_submodule_path"/catppuccin-swaync rev-parse --short HEAD)
-
 git submodule update --init --recursive --remote --progress || {
     echo "failed to update git submodules"
     exit 1
@@ -716,12 +712,6 @@ hackneyed_hash_new=$(git -C "$git_submodule_path"/hackneyed-cursor rev-parse --s
 if [[ "$hackneyed_hash_old" != "$hackneyed_hash_new" ]]; then
     hackneyed_updated=true
     echo "hackneyed-cursor has been updated"
-fi
-
-swaync_cp_hash_new=$(git -C "$git_submodule_path"/catppuccin-swaync rev-parse --short HEAD)
-if [[ "$swaync_cp_hash_old" != "$swaync_cp_hash_new" ]]; then
-    swaync_cp_updated=true
-    echo "catppuccin-swaync has been updated"
 fi
 
 if [[ ! -d ~/.oh-my-zsh ]]; then
@@ -770,18 +760,9 @@ else
     echo "Skipping hackneyed cursor build"
 fi
 
-if [[ $swaync_cp_updated == true ]]; then
-    cd "$git_submodule_path"/catppuccin-swaync
-    npm i --no-package-lock || {
-        echo "Failed to install catppuccin-swaync node dependencies"
-        exit 1
-    }
-    npm run build || {
-        echo "Failed to build catppuccin-swaync styles"
-        exit 1
-    }
-    cd "$base_path"
-fi
+rm -f "${base_path}/rofi/.local/bin/rofi-network-manager" || {
+    :
+}
 
 declare -a symlink_paths_tuples=(
     "${git_submodule_path}/alacritty-theme/themes ${base_path}/alacritty/.config/alacritty/colors"
@@ -793,8 +774,7 @@ declare -a symlink_paths_tuples=(
     "${git_submodule_path}/sweet-icons/Sweet-Purple ${base_path}/gtk/.icons/sweet-purple"
     "${git_submodule_path}/sweet-theme ${base_path}/gtk/.themes/sweet-theme"
     "${git_submodule_path}/waybar-crypto/.submodules/cryptofont/fonts/cryptofont.ttf ${base_path}/waybar/.local/share/fonts/TTF/cryptofont.ttf"
-    # "${git_submodule_path}/catppuccin-bat/themes/Catppuccin\ Mocha.tmTheme ${base_path}/bat/.config/bat/themes/Catppuccin-Mocha.tmTheme" # TODO: re-enable due to spacing
-    # "${git_submodule_path}/catppuccin-swaync/dist/mocha.css ${base_path}/sway/.config/swaync/mocha.css"
+    # "${git_submodule_path}/catppuccin-bat/themes/Catppuccin\ Mocha.tmTheme" "${base_path}/bat/.config/bat/themes/Catppuccin-Mocha.tmTheme"
 )
 for symlink_paths_tuple in "${symlink_paths_tuples[@]}"; do
     read -ra symlink_paths <<<"$symlink_paths_tuple"
