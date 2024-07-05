@@ -762,6 +762,12 @@ else
     echo "Skipping hackneyed cursor build"
 fi
 
+# Fix for spacing breaking the space delimited tuples
+mv "${git_submodule_path}"/catppuccin-bat/themes/Catppuccin\ Mocha.tmTheme "${git_submodule_path}"/catppuccin-bat/themes/Catppuccin-Mocha.tmTheme || {
+    echo "failed to move catppuccin-bat theme"
+    exit 1
+}
+
 declare -a symlink_paths_tuples=(
     "${git_submodule_path}/alacritty-theme/themes ${base_path}/alacritty/.config/alacritty/colors"
     "${git_submodule_path}/buuf-nestort-icons ${base_path}/gtk/.icons/buuf-nestort-icons"
@@ -771,7 +777,7 @@ declare -a symlink_paths_tuples=(
     "${git_submodule_path}/sweet-icons/Sweet-Purple ${base_path}/gtk/.icons/sweet-purple"
     "${git_submodule_path}/sweet-theme ${base_path}/gtk/.themes/sweet-theme"
     "${git_submodule_path}/waybar-crypto/.submodules/cryptofont/fonts/cryptofont.ttf ${base_path}/waybar/.local/share/fonts/TTF/cryptofont.ttf"
-    # "${git_submodule_path}/catppuccin-bat/themes/Catppuccin\ Mocha.tmTheme" "${base_path}/bat/.config/bat/themes/Catppuccin-Mocha.tmTheme"
+    "${git_submodule_path}/catppuccin-bat/themes/Catppuccin-Mocha.tmTheme ${base_path}/bat/.config/bat/themes/Catppuccin-Mocha.tmTheme"
 )
 for symlink_paths_tuple in "${symlink_paths_tuples[@]}"; do
     read -ra symlink_paths <<<"$symlink_paths_tuple"
