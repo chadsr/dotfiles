@@ -8,5 +8,5 @@ output eDP-1 {
 #
 # Display brightness controls using light
 #
-bindsym XF86MonBrightnessUp exec lightctl up
-bindsym XF86MonBrightnessDown exec lightctl down
+bindsym XF86MonBrightnessUp exec exec swayosd-client --brightness raise
+bindsym XF86MonBrightnessDown exec swayosd-client --brightness lower

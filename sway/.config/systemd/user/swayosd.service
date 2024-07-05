@@ -1,11 +1,11 @@
 [Unit]
-Description=Avizo Multimedia Notification Service
+Description=SwayOSD Multimedia Notification Service
 PartOf=graphical-session.target
 
 [Service]
 Type=simple
 Restart=always
 RestartSec=1
-ExecStart=/usr/bin/avizo-service
+ExecStart=/usr/bin/swayosd-server
 [Install]
 WantedBy=sway-session.target

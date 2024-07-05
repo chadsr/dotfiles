@@ -559,6 +559,7 @@ declare -a systemd_units=(
     /usr/lib/systemd/system/pcscd.socket
     /usr/lib/systemd/system/power-profiles-daemon.service
     /usr/lib/systemd/system/smartd.service
+    /usr/lib/systemd/system/swayosd-libinput-backend.service
 )
 for systemd_unit in "${systemd_units[@]}"; do
     systemd_enable_start "${systemd_unit}"
@@ -853,9 +854,9 @@ declare -a systemd_user_units=(
     "$base_path"/khal/.config/systemd/user/vdirsyncer-sync.service
     "$base_path"/khal/.config/systemd/user/vdirsyncer-sync.timer
     "$base_path"/nextcloud/.config/systemd/user/nextcloud-client.service
-    "$base_path"/sway/.config/systemd/user/avizo.service
     "$base_path"/sway/.config/systemd/user/kanshi.service
     "$base_path"/sway/.config/systemd/user/swayidle.service
+    "$base_path"/sway/.config/systemd/user/swayosd.service
     "$base_path"/sway/.config/systemd/user/wlr-sunclock.service
     "$base_path"/systemd/.config/systemd/user/enable-linger.service
     "$base_path"/waybar/.config/systemd/user/setup-temps.service
