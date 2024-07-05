@@ -484,19 +484,20 @@ pkglist_remove_path="$data_path"/pkgs/remove.txt
 echo "Decrypting data"
 declare -a decrypt_data_paths_tuples=(
     "${data_path}/corectrl/${current_hostname}__global_.ccpro.asc.gpg ${base_path}/corectrl/.config/corectrl/profiles/_global_.ccpro"
-    "${data_path}/corectrl/${current_hostname}_steam.sh.ccpro.asc.gpg ${base_path}/corectrl/.config/corectrl/profiles/_steam.sh.ccpro"
     "${data_path}/corectrl/${current_hostname}_codium.ccpro.asc.gpg ${base_path}/corectrl/.config/corectrl/profiles/codium.ccpro"
     "${data_path}/corectrl/${current_hostname}_gyroflow.ccpro.asc.gpg ${base_path}/corectrl/.config/corectrl/profiles/gyroflow.ccpro"
+    "${data_path}/corectrl/${current_hostname}_steam.sh.ccpro.asc.gpg ${base_path}/corectrl/.config/corectrl/profiles/_steam.sh.ccpro"
+    "${data_path}/cura/cura.cfg.asc.gpg ${base_path}/cura/.config/cura/5.7/cura.cfg"
     "${data_path}/gallery-dl/config.json.asc.gpg ${base_path}/gallery-dl/.config/gallery-dl/config.json"
     "${data_path}/gtk/bookmarks.asc.gpg ${base_path}/gtk/.config/gtk-3.0/bookmarks"
     "${data_path}/khal/config.asc.gpg ${base_path}/khal/.config/khal/config"
     "${data_path}/pkgs/remove.txt.asc.gpg ${pkglist_remove_path}"
+    "${data_path}/prusaslicer/PrusaSlicer.ini.asc.gpg ${base_path}/prusaslicer/.config/PrusaSlicer/PrusaSlicer.ini"
     "${data_path}/ssh/config.asc.gpg ${base_path}/ssh/.ssh/config"
     "${data_path}/tidal-hifi/config.json.asc.gpg ${base_path}/tidal-hifi/.config/tidal-hifi/config.json"
     "${data_path}/vdirsyncer/config.asc.gpg ${base_path}/khal/.config/vdirsyncer/config"
     "${data_path}/waybar/waybar-crypto/config.ini.asc.gpg ${base_path}/waybar/.config/waybar-crypto/config.ini"
     "${data_path}/xdg/mimeapps.list.asc.gpg ${base_path}/xdg/.config/mimeapps.list"
-    "${data_path}/cura/cura.cfg.asc.gpg ${base_path}/cura/.config/cura/5.7/cura.cfg"
 )
 for decrypt_data_paths_tuple in "${decrypt_data_paths_tuples[@]}"; do
     read -ra decrypt_data_paths <<<"$decrypt_data_paths_tuple"
@@ -813,6 +814,7 @@ declare -a stow_dirs_general=(
     nextcloud
     nvim
     omz
+    prusaslicer
     qt
     ranger
     rofi

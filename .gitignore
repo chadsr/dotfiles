@@ -42,3 +42,5 @@ xdg/.config/mimeapps.list
 cura/.config/cura/5.7/cura.cfg
 continue/.continue/*
 !continue/.continue/config.json
+prusaslicer/.config/PrusaSlicer/*
+!prusaslicer/.config/PrusaSlicer/.gitkeep

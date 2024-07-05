@@ -121,8 +121,8 @@ mkdir -p "$tmp_path"
 declare -a encrypt_data_paths_tuples=(
     "${HOME}.config/corectrl/profiles/_global_.ccpro ${data_path}/corectrl/${current_hostname}__global_.ccpro.asc.gpg"
     "${HOME}.config/corectrl/profiles/codium.ccpro ${data_path}/corectrl/${current_hostname}_codium.ccpro.asc.gpg"
-    "${HOME}.config/corectrl/profiles/steam.sh.ccpro ${data_path}/corectrl/${current_hostname}_steam.sh.ccpro.asc.gpg"
     "${HOME}.config/corectrl/profiles/gyroflow.ccpro ${data_path}/corectrl/${current_hostname}_gyroflow.ccpro.asc.gpg"
+    "${HOME}.config/corectrl/profiles/steam.sh.ccpro ${data_path}/corectrl/${current_hostname}_steam.sh.ccpro.asc.gpg"
     "${HOME}.config/gallery-dl/config.json ${data_path}/gallery-dl/config.json.asc.gpg"
     "${HOME}.config/gtk-3.0/bookmarks ${data_path}/gtk/bookmarks.asc.gpg"
     "${HOME}.config/khal/config ${data_path}/khal/config.asc.gpg"
@@ -132,8 +132,9 @@ declare -a encrypt_data_paths_tuples=(
     "${HOME}.config/waybar-crypto/config.ini ${data_path}/waybar/waybar-crypto/config.ini.asc.gpg"
     "${HOME}.ssh/config ${data_path}/ssh/config.asc.gpg"
     "${HOME}/.config/cura/5.7/cura.cfg ${data_path}/cura/cura.cfg.asc.gpg"
-    "$data_path/pkgs/remove.txt ${data_path}/pkgs/remove.txt.asc.gpg"
+    "${HOME}/.config/PrusaSlicer/PrusaSlicer.ini ${data_path}/prusaslicer/PrusaSlicer.ini.asc.gpg"
     "${pkglist_system_path} ${data_path}/pkgs/${current_hostname}.txt.asc.gpg"
+    "$data_path/pkgs/remove.txt ${data_path}/pkgs/remove.txt.asc.gpg"
 )
 
 for encrypt_data_paths_tuple in "${encrypt_data_paths_tuples[@]}"; do
