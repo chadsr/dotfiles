@@ -50,10 +50,6 @@
     path = .git_submodules/catppuccin-bat
     url = https://github.com/catppuccin/bat.git
     branch = main
-[submodule ".git_submodules/rofi-network-manager"]
-    path = .git_submodules/rofi-network-manager
-    url = https://github.com/P3rf/rofi-network-manager.git
-    branch = master
 [submodule "omz/.oh-my-zsh/themes/powerlevel10k"]
     path = omz/.oh-my-zsh/themes/powerlevel10k
     url = https://github.com/romkatv/powerlevel10k.git
