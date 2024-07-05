@@ -762,16 +762,11 @@ else
     echo "Skipping hackneyed cursor build"
 fi
 
-rm -f "${base_path}/rofi/.local/bin/rofi-network-manager" || {
-    :
-}
-
 declare -a symlink_paths_tuples=(
     "${git_submodule_path}/alacritty-theme/themes ${base_path}/alacritty/.config/alacritty/colors"
     "${git_submodule_path}/buuf-nestort-icons ${base_path}/gtk/.icons/buuf-nestort-icons"
     "${git_submodule_path}/candy-icons ${base_path}/gtk/.icons/candy-icons"
     "${git_submodule_path}/catppuccin-helix/themes/default/catppuccin_mocha.toml ${base_path}/helix/.config/helix/themes/catppuccin_mocha.toml"
-    "${git_submodule_path}/rofi-network-manager/rofi-network-manager.sh ${base_path}/rofi/.local/bin/rofi-network-manager"
     "${git_submodule_path}/sweet-icons ${base_path}/gtk/.icons/sweet-icons"
     "${git_submodule_path}/sweet-icons/Sweet-Purple ${base_path}/gtk/.icons/sweet-purple"
     "${git_submodule_path}/sweet-theme ${base_path}/gtk/.themes/sweet-theme"

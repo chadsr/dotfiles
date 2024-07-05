@@ -327,7 +327,7 @@
         "format-disconnected": "{icon}",
         "format-wifi": "{essid} {signalStrength}% ↑{bandwidthUpBits} ↓{bandwidthDownBits} {icon}",
         "tooltip-format": "WiFi → {ifname} → {ipaddr}/{cidr}",
-        "on-click": "$HOME/.local/bin/rofi-network-manager"
+        "on-click": "networkmanager_dmenu"
     },
     "network#vpn": {
         "interval": 5,
@@ -338,7 +338,7 @@
         "format-disconnected": "{icon}",
         "format": "VPN ↑{bandwidthUpBits} ↓{bandwidthDownBits} {icon}",
         "tooltip-format": "VPN → {ifname} → {ipaddr}/{cidr}",
-        "on-click": "$HOME/.local/bin/rofi-network-manager"
+        "on-click": "networkmanager_dmenu"
     },
     "bluetooth": {
         "format": " {status}",
