@@ -626,12 +626,25 @@ if [[ "$current_hostname" == "$laptop_hostname" ]]; then
     fi
 
     declare -a systemd_units_laptop=(
+        /usr/lib/systemd/system/acpid.service
         /usr/lib/systemd/system/open-fprintd-resume.service
         /usr/lib/systemd/system/open-fprintd-suspend.service
         /usr/lib/systemd/system/python3-validity.service
     )
     for systemd_unit in "${systemd_units_laptop[@]}"; do
         systemd_enable_start "${systemd_unit}"
+    done
+
+    systemctl --user daemon-reload || {
+        echo "failed to daemon-reload"
+        exit 1
+    }
+
+    declare -a systemd_user_units_laptop=(
+        "$base_path"/sway/.config/systemd/user/tablet-rotate.service
+    )
+    for systemd_user_unit in "${systemd_user_units_laptop[@]}"; do
+        systemd_user_enable_start "${systemd_user_unit}"
     done
 
     echo "Copying laptop system configuration"

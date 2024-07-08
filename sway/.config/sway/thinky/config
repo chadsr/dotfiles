@@ -1,12 +1,21 @@
 # Specific Configuration, loaded on hostname "thinky"
 
 output eDP-1 {
-    mode 1920x1080@59.997Hz
+    mode 3840x2160@60.000Hz
     render_bit_depth 8
+    scale 2
+}
+
+input 1386:21033:Wacom_Pen_and_multitouch_sensor_Finger {
+    events disabled
+}
+
+input 1386:21033:Wacom_Pen_and_multitouch_sensor_Pen {
+    map_to_output eDP-1
 }
 
 #
 # Display brightness controls using light
 #
-bindsym XF86MonBrightnessUp exec exec swayosd-client --brightness raise
-bindsym XF86MonBrightnessDown exec swayosd-client --brightness lower
+bindsym XF86MonBrightnessUp exec exec swayosd-client --brightness +5
+bindsym XF86MonBrightnessDown exec swayosd-client --brightness -5
