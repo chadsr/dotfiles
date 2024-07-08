@@ -1,12 +1,12 @@
 [Unit]
-Description=Rotate display when gyro changes
+Description=Rotate display when device enters tablet mode
 PartOf=graphical-session.target
 
 [Service]
 Type=simple
 Restart=always
 RestartSec=1
-ExecStart=%h/.local/bin/gyro-rotate
+ExecStart=%h/.local/bin/tablet-rotate
 
 [Install]
 WantedBy=sway-session.target
