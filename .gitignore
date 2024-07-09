@@ -44,3 +44,6 @@ continue/.continue/*
 !continue/.continue/config.json
 prusaslicer/.config/PrusaSlicer/*
 !prusaslicer/.config/PrusaSlicer/.gitkeep
+pass/.password-store/*
+!pass/.password-store/.gpg-id
+!pass/.password-store/*.gpg
