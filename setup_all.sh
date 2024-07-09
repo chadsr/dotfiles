@@ -629,7 +629,6 @@ if [[ "$current_hostname" == "$laptop_hostname" ]]; then
         /usr/lib/systemd/system/acpid.service
         /usr/lib/systemd/system/open-fprintd-resume.service
         /usr/lib/systemd/system/open-fprintd-suspend.service
-        /usr/lib/systemd/system/python3-validity.service
     )
     for systemd_unit in "${systemd_units_laptop[@]}"; do
         systemd_enable_start "${systemd_unit}"
