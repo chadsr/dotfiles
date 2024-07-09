@@ -33,3 +33,5 @@ gsettings set "$gnome_schema" font-antialiasing "rgba"
 gsettings set "$gnome_schema" font-hinting "slight"
 gsettings set "$gnome_schema" toolbar-style "both-horiz"
 gsettings set "$gnome_schema" toolbar-icons-size "small"
+gsettings set "$gnome_schema" color-scheme "prefer-dark"
+gsettings set "$gnome_schema" gtk-enable-primary-paste false
