@@ -32,12 +32,6 @@ exec dex -a -s :~/.config/autostart/ # Launch desktop entries
 exec_always swaybg -i "$HOME"/.config/sway/background.png -m fill
 exec_always "$HOME"/.local/bin/gsettings-gtk
 
-exec_always {
-    gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 600
-    gsettings set org.gnome.desktop.interface gtk-enable-primary-paste false
-    gsettings set org.gnome.mutter.wayland xwayland-grab-access-rules "['Remmina', 'VirtualBox Machine']"
-}
-
 ### Theming
 
 #
