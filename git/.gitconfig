@@ -31,6 +31,12 @@
 [url "https://gist.github.com/"]
 	insteadOf = gist:
 
+[url "https://gitlab.com/"]
+	insteadOf = gl:
+
+[url "https://codeberg.com/"]
+	insteadOf = cb:
+
 [tag]
 	forceSignAnnotated = true
 
@@ -79,5 +85,3 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[core]
-	askpass = /usr/lib/ssh/ssh-askpass
