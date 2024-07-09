@@ -791,11 +791,6 @@ for symlink_paths_tuple in "${symlink_paths_tuples[@]}"; do
     symlink "${symlink_paths[0]}" "${symlink_paths[1]}"
 done
 
-unzip -q -u -o "$git_submodule_path"/cyberpunk-theme/gtk/materia-cyberpunk-neon.zip -d "$base_path"/gtk/.themes || {
-    echo "failed copying Cyberpunk-Neon theme"
-    exit 1
-}
-
 declare -a stow_dirs_general=(
     alacritty
     bat
