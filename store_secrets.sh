@@ -119,18 +119,18 @@ fi
 mkdir -p "$tmp_path"
 
 declare -a encrypt_data_paths_tuples=(
-    "${HOME}.config/corectrl/profiles/_global_.ccpro ${data_path}/corectrl/${current_hostname}__global_.ccpro.asc.gpg"
-    "${HOME}.config/corectrl/profiles/codium.ccpro ${data_path}/corectrl/${current_hostname}_codium.ccpro.asc.gpg"
-    "${HOME}.config/corectrl/profiles/gyroflow.ccpro ${data_path}/corectrl/${current_hostname}_gyroflow.ccpro.asc.gpg"
-    "${HOME}.config/corectrl/profiles/steam.sh.ccpro ${data_path}/corectrl/${current_hostname}_steam.sh.ccpro.asc.gpg"
-    "${HOME}.config/gallery-dl/config.json ${data_path}/gallery-dl/config.json.asc.gpg"
-    "${HOME}.config/gtk-3.0/bookmarks ${data_path}/gtk/bookmarks.asc.gpg"
-    "${HOME}.config/khal/config ${data_path}/khal/config.asc.gpg"
-    "${HOME}.config/mimeapps.list ${data_path}/xdg/mimeapps.list.asc.gpg"
-    "${HOME}.config/tidal-hifi/config.json ${data_path}/tidal-hifi/config.json.asc.gpg"
-    "${HOME}.config/vdirsyncer/config ${data_path}/vdirsyncer/config.asc.gpg"
-    "${HOME}.config/waybar-crypto/config.ini ${data_path}/waybar/waybar-crypto/config.ini.asc.gpg"
-    "${HOME}.ssh/config ${data_path}/ssh/config.asc.gpg"
+    "${HOME}/.config/corectrl/profiles/_global_.ccpro ${data_path}/corectrl/${current_hostname}__global_.ccpro.asc.gpg"
+    "${HOME}/.config/corectrl/profiles/codium.ccpro ${data_path}/corectrl/${current_hostname}_codium.ccpro.asc.gpg"
+    "${HOME}/.config/corectrl/profiles/gyroflow.ccpro ${data_path}/corectrl/${current_hostname}_gyroflow.ccpro.asc.gpg"
+    "${HOME}/.config/corectrl/profiles/steam.sh.ccpro ${data_path}/corectrl/${current_hostname}_steam.sh.ccpro.asc.gpg"
+    "${HOME}/.config/gallery-dl/config.json ${data_path}/gallery-dl/config.json.asc.gpg"
+    "${HOME}/.config/gtk-3.0/bookmarks ${data_path}/gtk/bookmarks.asc.gpg"
+    "${HOME}/.config/khal/config ${data_path}/khal/config.asc.gpg"
+    "${HOME}/.config/mimeapps.list ${data_path}/xdg/mimeapps.list.asc.gpg"
+    "${HOME}/.config/tidal-hifi/config.json ${data_path}/tidal-hifi/config.json.asc.gpg"
+    "${HOME}/.config/vdirsyncer/config ${data_path}/vdirsyncer/config.asc.gpg"
+    "${HOME}/.config/waybar-crypto/config.ini ${data_path}/waybar/waybar-crypto/config.ini.asc.gpg"
+    "${HOME}/.ssh/config ${data_path}/ssh/config.asc.gpg"
     "${HOME}/.config/cura/5.7/cura.cfg ${data_path}/cura/cura.cfg.asc.gpg"
     "${HOME}/.config/PrusaSlicer/PrusaSlicer.ini ${data_path}/prusaslicer/PrusaSlicer.ini.asc.gpg"
     "${pkglist_system_path} ${data_path}/pkgs/${current_hostname}.txt.asc.gpg"
@@ -143,5 +143,7 @@ for encrypt_data_paths_tuple in "${encrypt_data_paths_tuples[@]}"; do
     if [[ -f "${encrypt_data_paths[0]}" ]]; then
         echo "${encrypt_data_paths_tuple}"
         gpg_encrypt_file "${encrypt_data_paths[0]}" "${encrypt_data_paths[1]}"
+    else
+        echo "No file found for ${encrypt_data_paths[0]}."
     fi
 done
