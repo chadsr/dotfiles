@@ -29,7 +29,7 @@ xdg/.config/mimeapps.list
 !freetube/.config/FreeTube/settings.db
 !gallery-dl/.config/gallery-dl/.gitkeep
 !gtk/.icons/.gitkeep
-!gtk/.themes/.gitkeep
+!gtk/.themes/sweet-theme/.gitkeep
 !helix/.config/helix/themes/.gitkeep
 !khal/.config/khal/.gitkeep
 !khal/.config/vdirsyncer/.gitkeep
@@ -47,3 +47,5 @@ prusaslicer/.config/PrusaSlicer/*
 pass/.password-store/*
 !pass/.password-store/.gpg-id
 !pass/.password-store/*.gpg
+qt/.config/Kvantum/*
+!qt/.config/Kvantum/kvantum.kvconfig
