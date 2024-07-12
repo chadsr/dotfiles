@@ -1,10 +1,11 @@
 {
   "clientId": "someID",
   "userId": "",
+  "authedUserIDs": [],
   "app": {
     "logLevel": 1,
-    "lastTimeClearLogFile": 1720560656736,
-    "enableColorSpaceSrgb": false,
+    "lastTimeClearLogFile": 1720777826211,
+    "enableColorSpaceSrgb": true,
     "visibleNewProjectBtn": true,
     "useZenity": false,
     "disableThemes": false,
@@ -35,7 +36,7 @@
       "/usr/local/share/fonts",
       "/run/host/fonts",
       "/run/host/user-fonts",
-      "~/.local/share/fonts"
+      "~/.local/share/fonts/TTF"
     ],
     "recentlyClosedTabs": [],
     "windowsState": {},
