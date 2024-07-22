@@ -788,6 +788,7 @@ declare -a symlink_paths_tuples=(
     "${git_submodule_path}/sweet-theme/gtk-2.0 ${base_path}/gtk/.themes/Sweet/gtk-2.0"
     "${git_submodule_path}/sweet-theme/gtk-3.0 ${base_path}/gtk/.themes/Sweet/gtk-3.0"
     "${git_submodule_path}/sweet-theme/gtk-4.0 ${base_path}/gtk/.themes/Sweet/gtk-4.0"
+    "${git_submodule_path}/sweet-theme/assets ${base_path}/gtk/.themes/Sweet/assets"
     "${git_submodule_path}/sweet-theme/kde/Kvantum/Sweet/Sweet.kvconfig ${base_path}/qt/.config/Kvantum/Sweet/Sweet.kvconfig"
     "${git_submodule_path}/sweet-theme/kde/Kvantum/Sweet/Sweet.svg ${base_path}/qt/.config/Kvantum/Sweet/Sweet.svg"
     "${git_submodule_path}/waybar-crypto/.submodules/cryptofont/fonts/cryptofont.ttf ${base_path}/waybar/.local/share/fonts/TTF/cryptofont.ttf"
