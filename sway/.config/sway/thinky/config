@@ -4,6 +4,7 @@ output eDP-1 {
     mode 3840x2160@60.000Hz
     render_bit_depth 8
     scale 2
+    color_profile icc /usr/share/color/icc/colord/LP140WF9.icc
 }
 
 input 1386:21033:Wacom_Pen_and_multitouch_sensor_Finger {

@@ -3,6 +3,7 @@
 output DP-2 {
     mode 3440x1440@143.975Hz
     render_bit_depth 10
+    color_profile icc /usr/share/color/icc/colord/S3422DWG.icc
 }
 
 exec nmcli radio wifi off
