@@ -18,10 +18,6 @@
     path = ulauncher/.config/ulauncher/user-themes/TokyoNight
     url = https://github.com/chadsr/TokyoNight-Ulauncher-Theme.git
     branch = master
-[submodule ".git_submodules/liquidctl"]
-    path = .git_submodules/liquidctl
-    url = https://github.com/liquidctl/liquidctl.git
-    branch = main
 [submodule "sway/.config/waybar/modules/crypto"]
     path = .git_submodules/waybar-crypto
     url = https://github.com/chadsr/waybar-crypto.git

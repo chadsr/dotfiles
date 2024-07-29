@@ -642,8 +642,8 @@ if [[ "$current_hostname" == "$laptop_hostname" ]]; then
     declare -a systemd_user_units_laptop=(
         "$base_path"/sway/.config/systemd/user/tablet-rotate.service
     )
-    for systemd_user_unit in "${systemd_user_units_laptop[@]}"; do
-        systemd_user_enable_start "${systemd_user_unit}"
+    for systemd_user_unit_laptop in "${systemd_user_units_laptop[@]}"; do
+        systemd_user_enable_start "${systemd_user_unit_laptop}"
     done
 
     echo "Copying laptop system configuration"
@@ -681,7 +681,13 @@ elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
         exit 1
     fi
 
-    symlink "$git_submodule_path"/liquidctl/extra/yoda.py ./liquidctl/.local/bin/yoda
+    declare -a systemd_units_desktop=(
+        "/usr/lib/systemd/system/coolercontrold.service"
+        "/usr/lib/systemd/system/coolercontrol-liqctld.service"
+    )
+    for systemd_unit_desktop in "${systemd_units_desktop[@]}"; do
+        systemd_enable_start "${systemd_unit_desktop}"
+    done
 
     systemctl --user daemon-reload || {
         echo "failed to daemon-reload"
@@ -690,10 +696,10 @@ elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
 
     declare -a systemd_user_units_desktop=(
         "$base_path"/liquidctl/.config/systemd/user/liquidctl.service
-        "$base_path"/liquidctl/.config/systemd/user/yoda.service
+        "$base_path"/coolercontrol/.config/systemd/user/coolercontrol.service
     )
-    for systemd_user_unit in "${systemd_user_units_desktop[@]}"; do
-        systemd_user_enable_start "${systemd_user_unit}"
+    for systemd_user_unit_desktop in "${systemd_user_units_desktop[@]}"; do
+        systemd_user_enable_start "${systemd_user_unit_desktop}"
     done
 
     echo "Copying desktop system configuration"
@@ -805,6 +811,7 @@ declare -a stow_dirs_general=(
     bemenu
     cava
     continue
+    coolercontrol
     corectrl
     cura
     electron
