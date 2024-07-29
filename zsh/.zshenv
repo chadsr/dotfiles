@@ -34,10 +34,9 @@ export GO111MODULE=on
 CARGO_BIN=$HOME/.cargo/bin
 export PATH=$CARGO_BIN:$PATH
 
-################
-# Android/Java #
-################
-export JAVA_HOME=/usr/lib/jvm/default
+###########
+# Android #
+###########
 export ANDROID_HOME=$HOME/Android
 export ANDROID_USER_HOME=$HOME/.android
 export ANDROID_SDK_ROOT=$HOME/Android/Sdk
