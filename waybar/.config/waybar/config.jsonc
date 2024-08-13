@@ -25,7 +25,6 @@
         "group/network",
         "backlight",
         "battery",
-        "battery#bat1",
         "custom/swaync"
     ],
     "custom/right-spacer-workspaces": {
@@ -284,24 +283,6 @@
     },
     "battery": {
         "bat": "BAT0",
-        "states": {
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
-        "format-icons": [
-            "",
-            "",
-            "",
-            "",
-            ""
-        ]
-    },
-    "battery#bat1": {
-        "bat": "BAT1",
         "states": {
             "warning": 30,
             "critical": 15
