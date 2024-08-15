@@ -560,7 +560,6 @@ declare -a systemd_units=(
     /usr/lib/systemd/system/clamav-freshclam-once.timer
     /usr/lib/systemd/system/greetd.service
     /usr/lib/systemd/system/pcscd.socket
-    /usr/lib/systemd/system/power-profiles-daemon.service
     /usr/lib/systemd/system/smartd.service
     /usr/lib/systemd/system/swayosd-libinput-backend.service
 )
@@ -618,7 +617,13 @@ if [[ ! -e /usr/lib/ssh/ssh-askpass ]]; then
     }
 fi
 
+echo "Copying common system configuration"
+rsync_system_config common/
+
 if [[ "$current_hostname" == "$laptop_hostname" ]]; then
+    echo "Copying laptop system configuration"
+    rsync_system_config "$laptop_hostname"/
+
     pam_rule="auth      sufficient      pam_fprintd.so max_tries=5 timeout=10"
     read -p "Add PAM fprintd rules? (${pam_rule}) (y/N)?" -n 1 -r
     echo
@@ -628,7 +633,9 @@ if [[ "$current_hostname" == "$laptop_hostname" ]]; then
     fi
 
     declare -a systemd_units_laptop=(
+        /usr/lib/systemd/system/tlp.service
         /usr/lib/systemd/system/acpid.service
+        /etc/systemd/system/powertop.service
     )
     for systemd_unit in "${systemd_units_laptop[@]}"; do
         systemd_enable_start "${systemd_unit}"
@@ -645,10 +652,10 @@ if [[ "$current_hostname" == "$laptop_hostname" ]]; then
     for systemd_user_unit_laptop in "${systemd_user_units_laptop[@]}"; do
         systemd_user_enable_start "${systemd_user_unit_laptop}"
     done
-
-    echo "Copying laptop system configuration"
-    rsync_system_config "$laptop_hostname"/
 elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
+    echo "Copying desktop system configuration"
+    rsync_system_config "$desktop_hostname"/
+
     declare -a stow_dirs_desktop=(
         liquidctl
     )
@@ -682,8 +689,9 @@ elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
     fi
 
     declare -a systemd_units_desktop=(
-        "/usr/lib/systemd/system/coolercontrold.service"
-        "/usr/lib/systemd/system/coolercontrol-liqctld.service"
+        /usr/lib/systemd/system/power-profiles-daemon.service
+        /usr/lib/systemd/system/coolercontrold.service
+        /usr/lib/systemd/system/coolercontrol-liqctld.service
     )
     for systemd_unit_desktop in "${systemd_units_desktop[@]}"; do
         systemd_enable_start "${systemd_unit_desktop}"
@@ -701,13 +709,7 @@ elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
     for systemd_user_unit_desktop in "${systemd_user_units_desktop[@]}"; do
         systemd_user_enable_start "${systemd_user_unit_desktop}"
     done
-
-    echo "Copying desktop system configuration"
-    rsync_system_config "$desktop_hostname"/
 fi
-
-echo "Copying common system configuration"
-rsync_system_config common/
 
 # Check if certain submodules get updated, so we don't build them uneccessarily
 hackneyed_updated=false
