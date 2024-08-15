@@ -26,5 +26,6 @@
   "allowAnonymousTelemetry": false,
   "embeddingsProvider": {
     "provider": "transformers.js"
-  }
+  },
+  "docs": []
 }
