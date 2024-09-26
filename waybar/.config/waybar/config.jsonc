@@ -92,6 +92,7 @@
         "modules": [
             "sway/workspaces",
             "wlr/workspaces",
+            "hyprland/workspaces",
             "sway/mode",
             "idle_inhibitor"
         ]

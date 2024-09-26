@@ -65,7 +65,7 @@ tooltip label {
     background: @purple;
 }
 
-#workspaces button.focused {
+#workspaces button.focused, #workspaces button.active {
     color: @focused;
 }
 
