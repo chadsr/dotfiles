@@ -1,3 +1,22 @@
+[core]
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only --features=interactive
+
+[delta]
+	navigate = true    # use n and N to move between diff sections
+	features = decorations
+	syntax-theme = Catppuccin-Mocha
+
+[delta "interactive"]
+	keep-plus-minus-markers = false
+
+[delta "decorations"]
+	commit-style = raw
+	file-style = omit
+	hunk-header-style = file line-number syntax
+
 [user]
 	name = Ross
 	email = git@ross.ch
@@ -10,14 +29,16 @@
 	ui = true
 
 [diff]
+	colorMoved = default
 	mnemonicprefix = true
+
+[merge]
+	conflictstyle = diff3
+	log = true
+	ff = false
 
 [pull]
 	ff = only
-
-[merge]
-	log = true
-	ff = false
 
 [push]
 	default = simple
@@ -74,12 +95,16 @@
 	f = "!git ls-files | grep -i"
 	gr = grep -Ii
 	la = "!git config -l | grep alias | cut -c 7-"
+
 [credential]
 	helper = cache timeout=14400
+
 [gpg]
 	program = /usr/bin/gpg2
+
 [init]
 	defaultBranch = main
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
