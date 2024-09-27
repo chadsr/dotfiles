@@ -16,3 +16,4 @@ ExecStart=/usr/bin/wlr-sunclock \
 
 [Install]
 WantedBy=sway-session.target
+WantedBy=hypr-session.target

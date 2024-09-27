@@ -9,3 +9,4 @@ RestartSec=1
 ExecStart=/usr/bin/kanshi
 [Install]
 WantedBy=sway-session.target
+WantedBy=hypr-session.target

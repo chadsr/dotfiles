@@ -9,3 +9,4 @@ RestartSec=1
 ExecStart=/usr/bin/swayosd-server
 [Install]
 WantedBy=sway-session.target
+WantedBy=hypr-session.target
