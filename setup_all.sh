@@ -804,16 +804,17 @@ mv "${git_submodule_path}"/catppuccin-bat/themes/Catppuccin\ Mocha.tmTheme "${gi
 declare -a symlink_paths_tuples=(
     "${git_submodule_path}/alacritty-theme/themes ${base_path}/alacritty/.config/alacritty/themes"
     "${git_submodule_path}/buuf-nestort-icons ${base_path}/gtk/.icons/buuf-nestort-icons"
+    "${git_submodule_path}/catppuccin-bat/themes/Catppuccin-Mocha.tmTheme ${base_path}/bat/.config/bat/themes/Catppuccin-Mocha.tmTheme"
     "${git_submodule_path}/catppuccin-helix/themes/default/catppuccin_mocha.toml ${base_path}/helix/.config/helix/themes/catppuccin_mocha.toml"
-    "${git_submodule_path}/sweet-theme/index.theme ${base_path}/gtk/.themes/Sweet/index.theme"
+    "${git_submodule_path}/catppuccin-hyprland/themes/mocha.conf ${base_path}/hyprland/.config/hypr/themes/colors.conf"
+    "${git_submodule_path}/sweet-theme/assets ${base_path}/gtk/.themes/Sweet/assets"
     "${git_submodule_path}/sweet-theme/gtk-2.0 ${base_path}/gtk/.themes/Sweet/gtk-2.0"
     "${git_submodule_path}/sweet-theme/gtk-3.0 ${base_path}/gtk/.themes/Sweet/gtk-3.0"
     "${git_submodule_path}/sweet-theme/gtk-4.0 ${base_path}/gtk/.themes/Sweet/gtk-4.0"
-    "${git_submodule_path}/sweet-theme/assets ${base_path}/gtk/.themes/Sweet/assets"
+    "${git_submodule_path}/sweet-theme/index.theme ${base_path}/gtk/.themes/Sweet/index.theme"
     "${git_submodule_path}/sweet-theme/kde/Kvantum/Sweet/Sweet.kvconfig ${base_path}/qt/.config/Kvantum/Sweet/Sweet.kvconfig"
     "${git_submodule_path}/sweet-theme/kde/Kvantum/Sweet/Sweet.svg ${base_path}/qt/.config/Kvantum/Sweet/Sweet.svg"
     "${git_submodule_path}/waybar-crypto/.submodules/cryptofont/fonts/cryptofont.ttf ${base_path}/waybar/.local/share/fonts/TTF/cryptofont.ttf"
-    "${git_submodule_path}/catppuccin-bat/themes/Catppuccin-Mocha.tmTheme ${base_path}/bat/.config/bat/themes/Catppuccin-Mocha.tmTheme"
 )
 for symlink_paths_tuple in "${symlink_paths_tuples[@]}"; do
     read -ra symlink_paths <<<"$symlink_paths_tuple"
@@ -881,12 +882,24 @@ systemctl --user daemon-reload || {
     exit 1
 }
 
+declare -a systemd_user_targets=(
+    "$base_path"/sway/.config/systemd/user/sway-session.target
+    "$base_path"/hyprland/.config/systemd/user/hypr-session.target
+)
+for systemd_user_target in "${systemd_user_targets[@]}"; do
+    systemctl --user link "${systemd_user_target}" || {
+        echo "failed to enable target ${systemd_user_target}"
+        exit 1
+    }
+done
+
 declare -a systemd_user_units=(
     "$base_path"/corectrl/.config/systemd/user/corectrl.service
     "$base_path"/espanso/.config/systemd/user/espanso.service
     "$base_path"/gammastep/.config/systemd/user/gammastep-wayland.service
     "$base_path"/gammastep/.config/systemd/user/geoclue-agent.service
     "$base_path"/gtk/.config/systemd/user/xsettingsd.service
+    "$base_path"/hyprland/.config/systemd/user/hypridle.service
     "$base_path"/khal/.config/systemd/user/vdirsyncer-sync.service
     "$base_path"/khal/.config/systemd/user/vdirsyncer-sync.timer
     "$base_path"/nextcloud/.config/systemd/user/nextcloud-client.service
@@ -897,6 +910,7 @@ declare -a systemd_user_units=(
     "$base_path"/systemd/.config/systemd/user/clipse.service
     "$base_path"/systemd/.config/systemd/user/enable-linger.service
     "$base_path"/waybar/.config/systemd/user/setup-temps.service
+    "$base_path"/waybar/.config/systemd/user/waybar.service
     /usr/lib/systemd/user/batsignal.service
     /usr/lib/systemd/user/gnome-keyring-daemon.socket
     /usr/lib/systemd/user/pipewire-pulse.service
