@@ -1,38 +1,7 @@
 
 live_config_reload = true
 
-[colors.primary]
-background = '#000b1e'
-foreground = '#0abdc6'
-
-[colors.cursor]
-text = '#000b1e'
-cursor = '#0abdc6'
-
-# Normal colors
-[colors.normal]
-black = '#123e7c'
-red = '#ff0000'
-green = '#d300c4'
-yellow = '#f57800'
-blue = '#123e7c'
-magenta = '#711c91'
-cyan = '#0abdc6'
-white = '#d7d7d5'
-
-# Bright colors
-[colors.bright]
-black = '#1c61c2'
-red = '#ff0000'
-green = '#d300c4'
-yellow = '#f57800'
-blue = '#00ff00'
-magenta = '#711c91'
-cyan = '#0abdc6'
-white = '#d7d7d5'
-
-[colors]
-draw_bold_text_with_bright_colors = true
+import = ["~/.config/alacritty/themes/cyber_punk_neon.toml"]
 
 [cursor]
 style = "Block"

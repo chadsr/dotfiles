@@ -1,5 +1,5 @@
 .vscode/
-alacritty/.config/alacritty/colors
+alacritty/.config/alacritty/themes
 bat/.config/bat/themes/*
 continue/.continue/*
 corectrl/.config/corectrl/profiles/*
