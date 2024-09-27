@@ -65,10 +65,22 @@
             "default": ""
         }
     },
-    "wlr/workspaces": {
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
         "format": "{name} {icon}",
         "on-click": "activate",
+        "format-icons": {
+            "urgent": "",
+            "active": "",
+            "default": ""
+        }
+    },
+    "wlr/workspaces": {
+        "disable-scroll": true,
         "all-outputs": true,
+        "format": "{name} {icon}",
+        "on-click": "activate",
         "format-icons": {
             "urgent": "",
             "active": "",
