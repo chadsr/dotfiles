@@ -559,6 +559,7 @@ declare -a systemd_units=(
     /usr/lib/systemd/system/bluetooth.service
     /usr/lib/systemd/system/clamav-freshclam-once.timer
     /usr/lib/systemd/system/ly.service
+    /usr/lib/systemd/system/ollama.service
     /usr/lib/systemd/system/pcscd.socket
     /usr/lib/systemd/system/smartd.service
     /usr/lib/systemd/system/swayosd-libinput-backend.service
@@ -591,6 +592,18 @@ rustup component add clippy rustfmt || {
 }
 
 sudo update-smart-drivedb
+
+declare -a ollama_models=(
+    llama3.2:latest
+    starcoder2:latest
+)
+for ollama_model in "${ollama_models[@]}"; do
+    echo "Pulling ${ollama_model}"
+    ollama pull "${ollama_model}" || {
+        echo "failed to install ${ollama_model}"
+        exit 1
+    }
+done
 
 corectrl_rules_path=/etc/polkit-1/rules.d/90-corectrl.rules
 if ! sudo test -f "${corectrl_rules_path}"; then
