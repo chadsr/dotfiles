@@ -1,7 +1,7 @@
 
 live_config_reload = true
 
-import = ["~/.config/alacritty/themes/cyber_punk_neon.toml"]
+import = ["~/.config/alacritty/themes/catppuccin_mocha.toml"]
 
 [cursor]
 style = "Block"
@@ -39,9 +39,9 @@ semantic_escape_chars = ",│`|:\"' ()[]{}<>"
 
 [window]
 decorations = "full"
-dynamic_padding = false
+dynamic_padding = true
 dynamic_title = true
-opacity = 0.8
+opacity = 0.5
 startup_mode = "Windowed"
 
 [window.dimensions]
