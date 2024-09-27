@@ -42,3 +42,6 @@
     path = .git_submodules/catppuccin-helix
     url = https://github.com/catppuccin/helix.git
     branch = main
+[submodule ".git_submodules/catppuccin-hyprland"]
+	path = .git_submodules/catppuccin-hyprland
+	url = https://github.com/catppuccin/hyprland.git
