@@ -40,7 +40,7 @@
 window#waybar {
     font-size: 12px;
     font-family: "Hack Nerd Font Mono";
-    background: @dark-blue-transparent;
+    background: none;
     color: @cyan;
 }
 
