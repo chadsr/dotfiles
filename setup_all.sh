@@ -558,7 +558,7 @@ done
 declare -a systemd_units=(
     /usr/lib/systemd/system/bluetooth.service
     /usr/lib/systemd/system/clamav-freshclam-once.timer
-    /usr/lib/systemd/system/greetd.service
+    /usr/lib/systemd/system/ly.service
     /usr/lib/systemd/system/pcscd.socket
     /usr/lib/systemd/system/smartd.service
     /usr/lib/systemd/system/swayosd-libinput-backend.service
@@ -789,7 +789,7 @@ mv "${git_submodule_path}"/catppuccin-bat/themes/Catppuccin\ Mocha.tmTheme "${gi
 }
 
 declare -a symlink_paths_tuples=(
-    "${git_submodule_path}/alacritty-theme/themes ${base_path}/alacritty/.config/alacritty/colors"
+    "${git_submodule_path}/alacritty-theme/themes ${base_path}/alacritty/.config/alacritty/themes"
     "${git_submodule_path}/buuf-nestort-icons ${base_path}/gtk/.icons/buuf-nestort-icons"
     "${git_submodule_path}/catppuccin-helix/themes/default/catppuccin_mocha.toml ${base_path}/helix/.config/helix/themes/catppuccin_mocha.toml"
     "${git_submodule_path}/sweet-theme/index.theme ${base_path}/gtk/.themes/Sweet/index.theme"
@@ -881,17 +881,15 @@ declare -a systemd_user_units=(
     "$base_path"/sway/.config/systemd/user/swayidle.service
     "$base_path"/sway/.config/systemd/user/swayosd.service
     "$base_path"/sway/.config/systemd/user/wlr-sunclock.service
+    "$base_path"/systemd/.config/systemd/user/clipse.service
     "$base_path"/systemd/.config/systemd/user/enable-linger.service
     "$base_path"/waybar/.config/systemd/user/setup-temps.service
     /usr/lib/systemd/user/batsignal.service
-    /usr/lib/systemd/user/gnome-keyring-daemon.service
     /usr/lib/systemd/user/gnome-keyring-daemon.socket
     /usr/lib/systemd/user/pipewire-pulse.service
-    /usr/lib/systemd/user/pipewire-pulse.socket
     /usr/lib/systemd/user/pipewire.service
     /usr/lib/systemd/user/swaync.service
     /usr/lib/systemd/user/wireplumber.service
-    /usr/lib/systemd/user/yubikey-touch-detector.service
     /usr/lib/systemd/user/yubikey-touch-detector.socket
 )
 for systemd_user_unit in "${systemd_user_units[@]}"; do
