@@ -1,11 +1,6 @@
 {
   "models": [
     {
-      "title": "Llama 3",
-      "provider": "ollama",
-      "model": "llama3"
-    },
-    {
       "title": "Ollama",
       "provider": "ollama",
       "model": "AUTODETECT"
@@ -19,9 +14,9 @@
     }
   ],
   "tabAutocompleteModel": {
-    "title": "Starcoder 15b",
+    "title": "Starcoder2",
     "provider": "ollama",
-    "model": "starcoder2:15b"
+    "model": "starcoder2"
   },
   "allowAnonymousTelemetry": false,
   "embeddingsProvider": {
