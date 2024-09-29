@@ -25,6 +25,7 @@
 # Read `man 5 sway` for a complete reference.
 
 exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
+exec swaymsg -t subscribe '["shutdown"]' && systemctl --user stop sway-session.target
 
 # Autostarts
 exec dex -a -s :~/.config/autostart/ # Launch desktop entries
@@ -42,11 +43,11 @@ default_floating_border pixel 1
 smart_borders 1
 
 # class                 border    bg        text      indicator child_border
-client.focused          #0abdc6   #000b1ecc #0abdc6   #0abdc6   #0abdc6 
-client.focused_inactive	#000b1ecc #000b1ecc #0abdc6   #000b1ecc #000b1ecc
-client.unfocused		#000b1ecc #000b1ecc #0abdc6   #000b1ecc #000b1ecc
-client.urgent           #ea00d9   #ea00d9   #000b1ecc #ea00d9   #ea00d9
-client.placeholder      #000b1e   #000b1ecc #0abdc6   #000b1ecc #000b1ecc
+client.focused           #0abdc6   #000b1ecc #0abdc6   #0abdc6   #0abdc6
+client.focused_inactive	 #000b1ecc #000b1ecc #0abdc6   #000b1ecc #000b1ecc
+client.unfocused		       #000b1ecc #000b1ecc #0abdc6   #000b1ecc #000b1ecc
+client.urgent            #ea00d9   #ea00d9   #000b1ecc #ea00d9   #ea00d9
+client.placeholder       #000b1e   #000b1ecc #0abdc6   #000b1ecc #000b1ecc
 
 ### Variables
 
@@ -62,15 +63,6 @@ set $right d
 set $term alacritty
 
 set $menu fuzzel
-
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
-
-bar {
-    swaybar_command waybar
-}
 
 # Toggle control center
 bindsym $mod+Shift+n exec swaync-client -t -sw
@@ -193,24 +185,24 @@ bindsym $mod+minus scratchpad show
 # Resizing containers:
 #
 mode "resize" {
-    # left will shrink the containers width
-    # right will grow the containers width
-    # up will shrink the containers height
-    # down will grow the containers height
-    bindsym $left resize shrink width 10 px or 10 ppt
-    bindsym $down resize grow height 10 px or 10 ppt
-    bindsym $up resize shrink height 10 px or 10 ppt
-    bindsym $right resize grow width 10 px or 10 ppt
+# left will shrink the containers width
+# right will grow the containers width
+# up will shrink the containers height
+# down will grow the containers height
+bindsym $left resize shrink width 10 px or 10 ppt
+bindsym $down resize grow height 10 px or 10 ppt
+bindsym $up resize shrink height 10 px or 10 ppt
+bindsym $right resize grow width 10 px or 10 ppt
 
-    # ditto, with arrow keys
-    bindsym Left resize shrink width 10 px or 10 ppt
-    bindsym Down resize grow height 10 px or 10 ppt
-    bindsym Up resize shrink height 10 px or 10 ppt
-    bindsym Right resize grow width 10 px or 10 ppt
+# ditto, with arrow keys
+bindsym Left resize shrink width 10 px or 10 ppt
+bindsym Down resize grow height 10 px or 10 ppt
+bindsym Up resize shrink height 10 px or 10 ppt
+bindsym Right resize grow width 10 px or 10 ppt
 
-    # return to default mode
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+# return to default mode
+bindsym Return mode "default"
+bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
 
@@ -229,7 +221,7 @@ bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-bindsym XF86AudioRaiseVolume exec swayosd-client --output-volume 5
+bindsym XF86AudioRaiseVolume exec swayosd-client --output-volume +5
 bindsym XF86AudioLowerVolume exec swayosd-client --output-volume -5
 bindsym XF86AudioMute exec swayosd-client --output-volume mute-toggle
 bindsym XF86AudioMicMute exec swayosd-client --input-volume mute-toggle
