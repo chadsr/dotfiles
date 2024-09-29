@@ -26,10 +26,6 @@
     path = .git_submodules/hackneyed-cursor
     url = https://gitlab.com/Enthymeme/hackneyed-x11-cursors.git
     branch = master
-[submodule ".git_submodules/buuf-nestort-icons"]
-    path = .git_submodules/buuf-nestort-icons
-    url = https://git.disroot.org/eudaimon/buuf-nestort.git
-    branch = master
 [submodule ".git_submodules/catppuccin-bat"]
     path = .git_submodules/catppuccin-bat
     url = https://github.com/catppuccin/bat.git
@@ -45,4 +41,8 @@
 [submodule ".git_submodules/catppuccin-hyprland"]
     path = .git_submodules/catppuccin-hyprland
     url = https://github.com/catppuccin/hyprland.git
+    branch = main
+[submodule ".git_submodules/catppuccin-waybar"]
+    path = .git_submodules/catppuccin-waybar
+    url = https://github.com/catppuccin/waybar.git
     branch = main
