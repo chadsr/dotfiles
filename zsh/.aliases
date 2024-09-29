@@ -8,6 +8,8 @@ alias hx='helix'
 alias h='hx .'
 alias calculator='kalker'
 alias calc='calculator'
+alias htop=btm
+alias top=btm
 
 # git
 alias gitcm='git cm'
