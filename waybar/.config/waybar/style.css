@@ -1,21 +1,12 @@
-@define-color dark-blue #000b1e;
-/* #000b1ecc */
-@define-color dark-blue-transparent rgba(0, 11, 30, 0.8);
-@define-color blue #091833;
-@define-color light-blue #133e7c;
-@define-color light-alt #0b2956;
-@define-color cyan #0abdc6;
-@define-color pink #ea00d9;
-@define-color purple #711c91;
-@define-color purple-alt #321959;
-@define-color red #ff0000;
-@define-color orange #f57800;
-@define-color white #d7d7d5;
-@define-color yellow #ffff00;
-@define-color green #00ff00;
-@define-color focused @cyan;
+@import "theme.css";
+
+@define-color focused @mauve;
 @define-color urgent @pink;
 @define-color critical @red;
+@define-color section-one @mantle;
+@define-color section-two @base;
+@define-color section-three @surface0;
+@define-color section-four @mantle;
 
 @keyframes urgent-animation {
     50% {
@@ -30,6 +21,8 @@
 }
 
 * {
+    font-family: "Hack Nerd Font Mono";
+    font-size: 12px;
     border: none;
     border-radius: 0;
     min-height: 0;
@@ -38,10 +31,8 @@
 }
 
 window#waybar {
-    font-size: 12px;
-    font-family: "Hack Nerd Font Mono";
-    background: none;
-    color: @cyan;
+    background: transparent;
+    color: @text;
 }
 
 .modules-left label.module,
@@ -51,22 +42,21 @@ window#waybar {
 }
 
 tooltip {
-    background: @dark-blue-transparent;
-    border: 1px solid @cyan;
+    background-color: shade(@base, 0.9);
+    border: 1px solid @crust;
 }
 
 tooltip label {
-    color: @cyan;
+    color: @text;
 }
 
 #workspaces button {
-    color: @blue;
     padding: 0 8px;
-    background: @purple;
 }
 
-#workspaces button.focused, #workspaces button.active {
-    color: @focused;
+#workspaces button.focused, #workspaces button:hover, #workspaces button.active {
+    background: @focused;
+    color: @section-one;
 }
 
 #workspaces button.urgent {
@@ -80,67 +70,68 @@ tooltip label {
 }
 
 #mode {
-    color: @cyan;
     padding: 0 8px;
-    background: @purple;
+    background: @section-one;
 }
 
 #idle_inhibitor {
     font-size: 20px;
     min-width: 16px;
-    background: @purple;
-    color: @blue;
 }
 
 #idle_inhibitor.activated {
     color: @focused;
 }
 
+#workspaces button, #idle_inhibitor {
+    background: @section-one;
+}
+
 #custom-left-spacer-workspaces,
 #custom-right-spacer-workspaces {
-    color: @purple;
     font-size: 20px;
     padding: 0;
 }
 
 #custom-right-spacer-workspaces {
-    background: @purple-alt;
+    color: @section-one;
+    background: @section-two;
 }
 
 #custom-right-spacer-tray {
     font-size: 20px;
     padding: 0;
-    color: @purple-alt;
+    color: @section-two;
 }
 
 #custom-left-spacer-audio {
     font-size: 20px;
-    color: @blue;
+    color: @section-three;
     padding: 0;
 }
 
 #custom-left-spacer-organisation {
     font-size: 20px;
-    color: @purple-alt;
+    color: @section-two;
     padding: 0;
 }
 
 #custom-right-spacer-organisation {
     font-size: 20px;
-    color: @purple-alt;
-    background: @blue;
+    color: @section-two;
+    background: @section-three;
     padding: 0;
 }
 
 #custom-right-spacer-hardware {
     font-size: 20px;
     padding: 0;
-    color: @blue;
-    background: @light-blue;
+    color: @section-three;
+    background: @section-four;
 }
 
 #custom-right-spacer-information {
-    color: @blue;
+    color: @section-three;
     padding: 0;
     font-size: 20px;
 }
@@ -174,19 +165,21 @@ tooltip label {
 #clock,
 #custom-calendar,
 #cava,
-#tray {
-    background: @purple-alt;
+#tray,
+#custom-yay {
+    color: @mauve;
+    background: @section-two;
 }
 
 #custom-yubikey {
-    color: @yellow;
     font-size: 20px;
     animation: urgent-animation 0.5s steps(10) infinite;
 }
 
 #custom-weather,
 #custom-crypto {
-    background: @blue;
+    color: @sapphire;
+    background: @section-three;
 }
 
 #custom-crypto {
@@ -199,7 +192,7 @@ tooltip label {
 #temperature,
 #disk,
 #power-profiles-daemon {
-    background: @blue;
+    background: @section-three;
 }
 
 #memory {
@@ -240,28 +233,21 @@ tooltip label {
     color: @green;
 }
 
-#custom-yay {
-    color: @yellow;
-}
-
 #network,
 #backlight,
 #battery,
 #battery.bat1,
 #custom-swaync,
 #network {
-    color: @yellow;
-    background: @light-blue;
+    background: @section-four;
 }
 
 #custom-swaync {
-    color: @yellow;
 }
 
 #bluetooth.off,
 #network.disconnected,
 #network.vpn.disconnected {
-    color: @dark-blue;
 }
 
 #network.vpn {
