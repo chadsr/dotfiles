@@ -6,10 +6,6 @@
     path = .git_submodules/sweet-theme
     url = https://github.com/EliverLara/Sweet.git
     branch = nova
-[submodule ".git_submodules/ohmyzsh"]
-    path = .git_submodules/ohmyzsh
-    url = https://github.com/ohmyzsh/ohmyzsh.git
-    branch = master
 [submodule "zsh/.oh-my-zsh/themes/powerlevel10k"]
     path = omz/.oh-my-zsh/themes/powerlevel10k
     url = https://github.com/romkatv/powerlevel10k.git
