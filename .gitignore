@@ -26,6 +26,7 @@ vscodium/.config/VSCodium/*
 vscodium/.vscode-oss/*
 waybar/.config/waybar-crypto/config.ini
 waybar/.local/share/fonts/TTF/*
+waybar/.config/waybar/theme.css
 xdg/.config/mimeapps.list
 !bat/.config/bat/themes/.gitkeep
 !continue/.continue/config.json
