@@ -16,7 +16,6 @@ gtk/.themes/Sweet/*
 helix/.config/helix/themes/*
 khal/.config/khal/*
 khal/.config/vdirsyncer/*
-liquidctl/.local/bin/yoda
 pass/.password-store/*
 prusaslicer/.config/PrusaSlicer/*
 qt/.config/Kvantum/Sweet/*
