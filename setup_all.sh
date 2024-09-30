@@ -830,6 +830,7 @@ declare -a stow_dirs_general=(
     coolercontrol
     corectrl
     cura
+    dunst
     electron
     espanso
     fonts
@@ -861,6 +862,7 @@ declare -a stow_dirs_general=(
     ulauncher
     vscodium
     waybar
+    wlogout
     xdg
     yt-dlp
     yubikey
@@ -896,6 +898,7 @@ done
 
 declare -a systemd_user_units=(
     "$base_path"/corectrl/.config/systemd/user/corectrl.service
+    "$base_path"/dunst/.config/systemd/user/dunst-wl.service
     "$base_path"/espanso/.config/systemd/user/espanso.service
     "$base_path"/gammastep/.config/systemd/user/gammastep-wayland.service
     "$base_path"/gammastep/.config/systemd/user/geoclue-agent.service
@@ -916,9 +919,9 @@ declare -a systemd_user_units=(
     /usr/lib/systemd/user/gnome-keyring-daemon.socket
     /usr/lib/systemd/user/pipewire-pulse.service
     /usr/lib/systemd/user/pipewire.service
-    /usr/lib/systemd/user/swaync.service
     /usr/lib/systemd/user/wireplumber.service
     /usr/lib/systemd/user/yubikey-touch-detector.socket
+    # /usr/lib/systemd/user/swaync.service
 )
 for systemd_user_unit in "${systemd_user_units[@]}"; do
     systemd_user_enable_start "${systemd_user_unit}"

@@ -44,3 +44,6 @@
     path = .git_submodules/catppuccin-waybar
     url = https://github.com/catppuccin/waybar.git
     branch = main
+[submodule ".git_submodules/catppuccin-dunst"]
+	path = .git_submodules/catppuccin-dunst
+	url = https://github.com/catppuccin/dunst.git
