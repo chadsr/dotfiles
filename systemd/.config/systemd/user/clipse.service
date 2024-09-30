@@ -1,6 +1,7 @@
 [Unit]
 Description=Clipse clipboard manager
 PartOf=graphical-session.target
+After=graphical-session.target
 
 [Service]
 Type=simple
