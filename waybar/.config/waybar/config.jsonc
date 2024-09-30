@@ -432,7 +432,7 @@
     "mpris": {
         "format": "{player_icon} {title} - {artist}",
         "format-paused": "{status_icon} <i>{title} - {artist}</i>",
-        "interval": 30,
+        "interval": 5,
         "player-icons": {
             "default": "🎵"
         },
