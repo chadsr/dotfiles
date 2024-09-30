@@ -6,6 +6,7 @@
     path = .git_submodules/sweet-theme
     url = https://github.com/EliverLara/Sweet.git
     branch = nova
+    ignore = dirty
 [submodule "zsh/.oh-my-zsh/themes/powerlevel10k"]
     path = omz/.oh-my-zsh/themes/powerlevel10k
     url = https://github.com/romkatv/powerlevel10k.git
@@ -26,6 +27,7 @@
     path = .git_submodules/catppuccin-bat
     url = https://github.com/catppuccin/bat.git
     branch = main
+    ignore = dirty
 [submodule "omz/.oh-my-zsh/themes/powerlevel10k"]
     path = omz/.oh-my-zsh/themes/powerlevel10k
     url = https://github.com/romkatv/powerlevel10k.git
