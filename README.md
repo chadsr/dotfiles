@@ -4,7 +4,7 @@
 
 My dotfiles, managed with [`stow`](https://www.gnu.org/software/stow/).
 
-![SwayWM](.github/assets/sway.png)
+![Hyprland](.github/assets/hypr.png)
 
 
 ## Setup
