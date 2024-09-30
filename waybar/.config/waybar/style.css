@@ -166,7 +166,9 @@ tooltip label {
 #custom-calendar,
 #cava,
 #tray,
-#custom-yay {
+#custom-yay,
+#mpris,
+#cava {
     color: @mauve;
     background: @section-two;
 }
