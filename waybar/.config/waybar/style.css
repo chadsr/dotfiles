@@ -240,7 +240,8 @@ tooltip label {
 #battery,
 #battery.bat1,
 #custom-swaync,
-#network {
+#network,
+#custom-logout {
     background: @section-four;
 }
 
