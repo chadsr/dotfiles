@@ -219,24 +219,28 @@
         "format": "{temperatureC}°C ",
         "tooltip-format": "CPU Temperature: {temperatureC}°C",
         "hwmon-path": "/tmp/cpu_temperature",
-        "critical-threshold": 85
+        "critical-threshold": 85,
+        "on-click": "coolercontrol"
     },
     "temperature#gpu": {
         "interval": 5,
         "format": "{temperatureC}°C ",
         "tooltip-format": "GPU Temperature: {temperatureC}°C",
         "hwmon-path": "/tmp/gpu_temperature",
-        "critical-threshold": 85
+        "critical-threshold": 85,
+        "on-click": "coolercontrol"
     },
     "cpu": {
         "format": "{usage}% ",
         "interval": 5,
-        "tooltip": true
+        "tooltip": true,
+        "on-click": "corectrl"
     },
     "memory": {
         "format": "{}% ",
         "interval": 10,
-        "tooltip": true
+        "tooltip": true,
+        "on-click": "corectrl"
     },
     "disk": {
         "interval": 600,
