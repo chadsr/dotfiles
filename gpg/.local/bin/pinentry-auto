@@ -1,5 +1,5 @@
 #!/bin/sh
-# Choose between pinentry-curses and pinentry-bemenu based on whether $PINENTRY_USER_DATA contains USE_TTY=1
+# Choose between pinentry-curses and pinentry-gtk based on whether $PINENTRY_USER_DATA contains USE_TTY=1
 
 set -Ceu
 
@@ -10,4 +10,4 @@ case "${PINENTRY_USER_DATA-}" in
     ;;
 esac
 
-exec pinentry-gnome3 "$@"
+exec pinentry-gtk "$@"
