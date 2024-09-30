@@ -3,7 +3,7 @@ Description=Enable linger for current user
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/bash -c 'loginctl enable-linger "${USER}"'
+ExecStart=/usr/bin/bash -c 'loginctl enable-linger'
 
 [Install]
 WantedBy=default.target
