@@ -853,6 +853,7 @@ declare -a stow_dirs_general=(
     prusaslicer
     qt
     ranger
+    scripts
     sway
     systemd
     thunar

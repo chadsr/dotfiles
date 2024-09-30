@@ -53,11 +53,11 @@
                 },
                 {
                     "label": "󰌾",
-                    "command": "swaylock-corrupt"
+                    "command": "screenlock"
                 },
                 {
                     "label": "󰍃",
-                    "command": "swaymsg exit"
+                    "command": "wlogout"
                 },
                 {
                     "label": "󰏥",
