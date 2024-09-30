@@ -57,7 +57,7 @@
                 },
                 {
                     "label": "󰍃",
-                    "command": "wlogout"
+                    "command": "delogout"
                 },
                 {
                     "label": "󰏥",
