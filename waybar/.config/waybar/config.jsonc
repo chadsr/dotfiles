@@ -200,12 +200,7 @@
         "modules": [
             "custom/weather",
             "custom/crypto"
-        ],
-        "drawer": {
-            "transition-duration": 500,
-            "children-class": "information",
-            "transition-left-to-right": true
-        }
+        ]
     },
     "sway/window": {
         "format": "{}",
