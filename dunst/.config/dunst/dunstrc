@@ -1,0 +1,32 @@
+[global]
+origin = top-right
+follow = mouse
+offset = 16x16
+width = 300
+height = 300
+sort = yes
+font = Hack Nerd Font 10
+frame_color = "#89b4fa"
+frame_width = 2
+separator_color= frame
+alignment = left
+vertical_alignment = center
+icon_positon = left
+min_icon_size = 128
+max_icon_size = 128
+gap_size = 8
+show_age_threshold = 60
+padding = 8
+
+[urgency_low]
+background = "#1e1e2e"
+foreground = "#cdd6f4"
+
+[urgency_normal]
+background = "#1e1e2e"
+foreground = "#cdd6f4"
+
+[urgency_critical]
+background = "#1e1e2e"
+foreground = "#cdd6f4"
+frame_color = "#fab387"
