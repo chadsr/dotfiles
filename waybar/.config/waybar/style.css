@@ -1,7 +1,7 @@
 @import "theme.css";
 
 @define-color focused @mauve;
-@define-color urgent @pink;
+@define-color urgent @mauve;
 @define-color critical @red;
 @define-color section-one @mantle;
 @define-color section-two @base;
@@ -10,12 +10,14 @@
 
 @keyframes urgent-animation {
     50% {
+        color: @text;
         background: @urgent;
     }
 }
 
 @keyframes critical-animation {
     50% {
+        color: @text;
         background: @critical;
     }
 }
