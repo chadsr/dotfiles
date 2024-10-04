@@ -454,9 +454,6 @@ source ~/.bashrc || {
     exit 1
 }
 
-# gpg-agent.conf doesn't support ENVs so replace variable here
-envsubst <"$data_path"/gpg/gpg-agent.conf >"$base_path"/gpg/.gnupg/gpg-agent.conf
-
 systemd_user_enable_start "$base_path"/gpg/.config/systemd/user/gnupghome.service
 systemd_user_enable_start "$base_path"/gpg/.config/systemd/user/ssh-auth-sock.service
 systemd_user_enable_start /usr/lib/systemd/user/gpg-agent.service
@@ -620,15 +617,6 @@ sudo setcap "cap_dac_override+p" "$(which espanso)" || {
     echo "failed to setcap for espanso"
     exit 1
 }
-
-# For some unknown reason some apps (VSCode) seem to have this path hard-coded and refused to listen for env-vars
-if [[ ! -e /usr/lib/ssh/ssh-askpass ]]; then
-    echo "Symlinking ssh-askpass from Seahorse"
-    sudo ln -s /usr/lib/seahorse/ssh-askpass /usr/lib/ssh/ssh-askpass | {
-        echo "Failed to symlink ssh-askpass"
-        exit 1
-    }
-fi
 
 echo "Copying common system configuration"
 rsync_system_config common/
@@ -826,11 +814,12 @@ declare -a stow_dirs_general=(
     bat
     bemenu
     cava
+    chromium
     continue
     coolercontrol
     corectrl
     cura
-    dunst
+    dunst3
     electron
     espanso
     fonts
@@ -856,6 +845,7 @@ declare -a stow_dirs_general=(
     ranger
     scripts
     sway
+    swww
     systemd
     thunar
     tidal-hifi
@@ -911,6 +901,8 @@ declare -a systemd_user_units=(
     "$base_path"/sway/.config/systemd/user/swayidle.service
     "$base_path"/sway/.config/systemd/user/swayosd.service
     "$base_path"/sway/.config/systemd/user/wlr-sunclock.service
+    "$base_path"/swww/.config/systemd/user/swww-daemon.service
+    "$base_path"/swww/.config/systemd/user/swww-random.service
     "$base_path"/systemd/.config/systemd/user/clipse.service
     "$base_path"/systemd/.config/systemd/user/enable-linger.service
     "$base_path"/waybar/.config/systemd/user/setup-temps.service
