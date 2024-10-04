@@ -13,13 +13,6 @@ export BEMENU_OPTS="-n -m -1 --nb #000b1ecc --tb #000b1ecc --tf #ea00d9ff --nf #
 ############
 export GPG_TTY=${TTY:-"$(tty)"}
 
-if [[ -z ${WAYLAND_DISPLAY+x} ]]; then
-    # Not got a display
-    export PINENTRY_USER_DATA=USE_TTY=1
-else
-    export PINENTRY_USER_DATA=USE_TTY=0
-fi
-
 ############
 #  Golang  #
 ############

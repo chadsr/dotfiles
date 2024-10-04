@@ -1,5 +1,6 @@
 [core]
 	pager = delta
+	askpass = wayprompt-ssh-askpass
 
 [interactive]
 	diffFilter = delta --color-only --features=interactive

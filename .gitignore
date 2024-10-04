@@ -8,7 +8,6 @@ data/pkgs/*
 fonts/.local/share/fonts/cryptocoins.ttf
 freetube/.config/FreeTube/*
 gallery-dl/.config/gallery-dl/*
-gpg/.gnupg/gpg-agent.conf
 gtk/.config/gtk-3.0/bookmarks
 gtk/.config/gtk-4.0/bookmarks
 gtk/.icons/*
