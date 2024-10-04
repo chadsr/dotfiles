@@ -1,0 +1,14 @@
+[Unit]
+Description=Swww wallpaper daemon
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+ExecStart=/usr/bin/swww-daemon
+
+[Install]
+WantedBy=sway-session.target
+WantedBy=hypr-session.target

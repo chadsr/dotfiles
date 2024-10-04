@@ -1,0 +1,14 @@
+[Unit]
+Description=Swww randomized wallpapers
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+ExecStart=%h/.local/bin/swww_random_multi ./Pictures/Backgrounds crop 300
+
+[Install]
+WantedBy=sway-session.target
+WantedBy=hypr-session.target

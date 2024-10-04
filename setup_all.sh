@@ -407,6 +407,7 @@ declare -a mk_dirs=(
     ~/.ssh
     ~/.themes
     ~/.vscode-oss
+    ~/Pictures/Backgrounds
     ~/Pictures/Screenshots
 )
 for mk_dir in "${mk_dirs[@]}"; do

@@ -13,10 +13,14 @@ if [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then
         keyword decoration:rounding 0"
 
         systemctl --user stop waybar.service
+        systemctl --user stop swww-random.service
+        systemctl --user stop hypridle.service
 
         exit
     else
         systemctl --user start waybar.service
+        systemctl --user start swww-random.service
+        systemctl --user start hypridle.service
     fi
 
     hyprctl reload
