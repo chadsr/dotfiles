@@ -32,7 +32,7 @@
 
 window#waybar {
     background: transparent;
-    color: @text;
+    color: @mauve;
 }
 
 .modules-left label.module,
@@ -47,10 +47,11 @@ tooltip {
 }
 
 tooltip label {
-    color: @text;
+    color: @mauve;
 }
 
 #workspaces button {
+    color: @mauve;
     padding: 0 8px;
 }
 
