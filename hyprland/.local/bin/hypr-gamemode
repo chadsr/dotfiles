@@ -15,12 +15,13 @@ if [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then
         systemctl --user stop waybar.service
         systemctl --user stop swww-random.service
         systemctl --user stop hypridle.service
-
+        systemctl --user stop gammastep-wayland.service
         exit
     else
         systemctl --user start waybar.service
         systemctl --user start swww-random.service
         systemctl --user start hypridle.service
+        systemctl --user start gammastep-wayland.service
     fi
 
     hyprctl reload
