@@ -115,14 +115,25 @@
         "spacing": 8,
         "show-passive-items": true
     },
-    "custom/yay": {
-        "format": "{} 📦",
-        "tooltip": false,
-        "interval": 600,
-        "exec": "yay -Qu  | wc -l",
-        "exec-if": "exit 0",
-        "on-click": "alacritty -t 'Updating Packages' -e yay; pkill -SIGRTMIN+8 waybar",
-        "signal": 8
+    // "custom/yay": {
+    //     "format": "{} 📦",
+    //     "tooltip": false,
+    //     "interval": 600,
+    //     "exec": "yay -Qu  | wc -l",
+    //     "exec-if": "exit 0",
+    //     "on-click": "alacritty -t 'Updating Packages' -e yay; pkill -SIGRTMIN+8 waybar",
+    //     "signal": 8
+    // },
+    "custom/updates": {
+        "format": "{} {icon}",
+        "return-type": "json",
+        "format-icons": {
+            "has-updates": "󱍷",
+            "updated": ""
+        },
+        "on-click": "alacritty -t 'Updating Packages' -e yay",
+        "exec-if": "which waybar-module-pacman-updates",
+        "exec": "waybar-module-pacman-updates --no-zero-output"
     },
     "custom/yubikey": {
         "interval": "2",
@@ -145,7 +156,8 @@
         "children-class": "group-tray",
         "modules": [
             "tray",
-            "custom/yay",
+            // "custom/yay",
+            "custom/updates",
             // "custom/systemd",
             "privacy",
             "gamemode",
