@@ -691,9 +691,10 @@ elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
     fi
 
     declare -a systemd_units_desktop=(
-        /usr/lib/systemd/system/power-profiles-daemon.service
-        /usr/lib/systemd/system/coolercontrold.service
         /usr/lib/systemd/system/coolercontrol-liqctld.service
+        /usr/lib/systemd/system/coolercontrold.service
+        /usr/lib/systemd/system/logid.service
+        /usr/lib/systemd/system/power-profiles-daemon.service
     )
     for systemd_unit_desktop in "${systemd_units_desktop[@]}"; do
         systemd_enable_start "${systemd_unit_desktop}"
