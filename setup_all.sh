@@ -821,7 +821,7 @@ declare -a stow_dirs_general=(
     coolercontrol
     corectrl
     cura
-    dunst3
+    dunst
     electron
     espanso
     fonts
