@@ -1,10 +1,10 @@
 [Unit]
-Description=Sync vdirsyncer with configured remotes (timer)
+Description=Sync vdirsyncer with configured remotes (oneshot)
 Wants=network-online.target
 After=network-online.target nss-lookup.target
 
 [Service]
-Type=simple
+Type=oneshot
 ExecStart=/usr/bin/vdirsyncer sync
 
 [Install]
