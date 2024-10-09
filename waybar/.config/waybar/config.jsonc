@@ -136,8 +136,7 @@
         "exec": "waybar-module-pacman-updates --no-zero-output"
     },
     "custom/yubikey": {
-        "interval": "2",
-        "exec": "$HOME/.config/waybar/modules/yubikey/waybar_yubikey",
+        "exec": "$HOME/.config/waybar/modules/yubikey/waybar-yubikey",
         "return-type": "json"
     },
     // "custom/systemd": {
@@ -194,7 +193,7 @@
         "format-icons": {
             "default": ""
         },
-        "exec": "$HOME/.config/waybar/modules/khal/waybar-khal.py",
+        "exec": "$HOME/.config/waybar/modules/khal/waybar-khal",
         "return-type": "json"
     },
     "group/organisation": {
