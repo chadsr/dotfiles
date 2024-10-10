@@ -833,6 +833,7 @@ declare -a stow_dirs_general=(
     helix
     hyprland
     java
+    kde
     khal
     logseq
     mangohud
