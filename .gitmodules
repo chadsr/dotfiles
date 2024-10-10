@@ -48,3 +48,7 @@
     path = .git_submodules/catppuccin-dunst
     url = https://github.com/catppuccin/dunst.git
     branch = main
+[submodule ".git_submodules/catppuccin-kvantum"]
+    path = .git_submodules/catppuccin-kvantum
+    url = https://github.com/catppuccin/Kvantum.git
+    branch = main

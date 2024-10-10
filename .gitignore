@@ -17,7 +17,7 @@ khal/.config/khal/*
 khal/.config/vdirsyncer/*
 pass/.password-store/*
 prusaslicer/.config/PrusaSlicer/*
-qt/.config/Kvantum/Sweet/*
+qt/.config/Kvantum/catppuccin-mocha-mauve
 ssh/.ssh/*
 tidal-hifi/.config/tidal-hifi/*
 vscodium/.config/VSCodium/*
@@ -40,7 +40,6 @@ xdg/.config/mimeapps.list
 !pass/.password-store/.gpg-id
 !pass/.password-store/*.gpg
 !prusaslicer/.config/PrusaSlicer/.gitkeep
-!qt/.config/Kvantum/Sweet/.gitkeep
 !ssh/.ssh/.gitkeep
 !tidal-hifi/.config/tidal-hifi/.gitkeep
 !vscodium/.config/VSCodium/User/globalStorage/zokugun.sync-settings/settings.yml

@@ -796,14 +796,13 @@ declare -a symlink_paths_tuples=(
     "${git_submodule_path}/catppuccin-bat/themes/Catppuccin-Mocha.tmTheme ${base_path}/bat/.config/bat/themes/Catppuccin-Mocha.tmTheme"
     "${git_submodule_path}/catppuccin-helix/themes/default/catppuccin_mocha.toml ${base_path}/helix/.config/helix/themes/catppuccin_mocha.toml"
     "${git_submodule_path}/catppuccin-hyprland/themes/mocha.conf ${base_path}/hyprland/.config/hypr/themes/colors.conf"
+    "${git_submodule_path}/catppuccin-kvantum/themes/catppuccin-mocha-mauve ${base_path}/qt/.config/Kvantum/catppuccin-mocha-mauve"
     "${git_submodule_path}/catppuccin-waybar/themes/mocha.css ${base_path}/waybar/.config/waybar/theme.css"
     "${git_submodule_path}/sweet-theme/assets ${base_path}/gtk/.themes/Sweet/assets"
     "${git_submodule_path}/sweet-theme/gtk-2.0 ${base_path}/gtk/.themes/Sweet/gtk-2.0"
     "${git_submodule_path}/sweet-theme/gtk-3.0 ${base_path}/gtk/.themes/Sweet/gtk-3.0"
     "${git_submodule_path}/sweet-theme/gtk-4.0 ${base_path}/gtk/.themes/Sweet/gtk-4.0"
     "${git_submodule_path}/sweet-theme/index.theme ${base_path}/gtk/.themes/Sweet/index.theme"
-    "${git_submodule_path}/sweet-theme/kde/Kvantum/Sweet/Sweet.kvconfig ${base_path}/qt/.config/Kvantum/Sweet/Sweet.kvconfig"
-    "${git_submodule_path}/sweet-theme/kde/Kvantum/Sweet/Sweet.svg ${base_path}/qt/.config/Kvantum/Sweet/Sweet.svg"
     "${git_submodule_path}/waybar-crypto/.submodules/cryptofont/fonts/cryptofont.ttf ${base_path}/waybar/.local/share/fonts/TTF/cryptofont.ttf"
 )
 for symlink_paths_tuple in "${symlink_paths_tuples[@]}"; do
