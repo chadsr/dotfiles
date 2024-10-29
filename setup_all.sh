@@ -486,7 +486,7 @@ declare -a decrypt_data_paths_tuples=(
     "${data_path}/corectrl/${current_hostname}__global_.ccpro.asc.gpg ${base_path}/corectrl/.config/corectrl/profiles/_global_.ccpro"
     "${data_path}/corectrl/${current_hostname}_codium.ccpro.asc.gpg ${base_path}/corectrl/.config/corectrl/profiles/codium.ccpro"
     "${data_path}/corectrl/${current_hostname}_gyroflow.ccpro.asc.gpg ${base_path}/corectrl/.config/corectrl/profiles/gyroflow.ccpro"
-    "${data_path}/corectrl/${current_hostname}_steam.sh.ccpro.asc.gpg ${base_path}/corectrl/.config/corectrl/profiles/_steam.sh.ccpro"
+    "${data_path}/corectrl/${current_hostname}_gamemoded.ccpro.asc.gpg ${base_path}/corectrl/.config/corectrl/profiles/gamemoded.ccpro"
     "${data_path}/cura/cura.cfg.asc.gpg ${base_path}/cura/.config/cura/5.7/cura.cfg"
     "${data_path}/gallery-dl/config.json.asc.gpg ${base_path}/gallery-dl/.config/gallery-dl/config.json"
     "${data_path}/gtk/bookmarks.asc.gpg ${base_path}/gtk/.config/gtk-3.0/bookmarks"
@@ -594,6 +594,7 @@ sudo update-smart-drivedb
 declare -a ollama_models=(
     llama3.2:latest
     starcoder2:latest
+    qwen2.5-coder:latest
 )
 for ollama_model in "${ollama_models[@]}"; do
     echo "Pulling ${ollama_model}"
