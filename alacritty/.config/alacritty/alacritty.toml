@@ -1,8 +1,4 @@
 
-live_config_reload = true
-
-import = ["~/.config/alacritty/themes/catppuccin_mocha.toml"]
-
 [cursor]
 style = "Block"
 unfocused_hollow = true
@@ -602,3 +598,9 @@ chars = """
 
 """
 key = "NumpadEnter"
+
+[general]
+
+live_config_reload = true
+
+import = ["~/.config/alacritty/themes/catppuccin_mocha.toml"]
