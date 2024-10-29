@@ -14,9 +14,9 @@
     }
   ],
   "tabAutocompleteModel": {
-    "title": "Starcoder2",
+    "title": "Quen2.5-Coder",
     "provider": "ollama",
-    "model": "starcoder2"
+    "model": "qwen2.5-coder"
   },
   "allowAnonymousTelemetry": false,
   "embeddingsProvider": {
