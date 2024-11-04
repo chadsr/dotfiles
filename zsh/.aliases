@@ -1,5 +1,7 @@
-alias VirtualBox='env QT_QPA_PLATFORM=xcb VirtualBox'
 alias virtualbox='env QT_QPA_PLATFORM=xcb virtualbox'
+alias emulator='env QT_QPA_PLATFORM=xcb emulator'
+alias android-studio='env QT_QPA_PLATFORM=xcb android-studio'
+
 alias vim='nvim'
 alias vi='nvim'
 alias cat='bat'

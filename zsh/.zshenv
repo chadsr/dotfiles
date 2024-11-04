@@ -32,12 +32,11 @@ export PATH=$CARGO_BIN:$PATH
 ###########
 export ANDROID_HOME=$HOME/Android
 export ANDROID_USER_HOME=$HOME/.android
-export ANDROID_SDK_ROOT=$HOME/Android/Sdk
-export ANDROID_EMULATOR_HOME=$ANDROID_USER_HOME
-export ANDROID_USER_HOME=$HOME/.android
-export PATH=$PATH:$ANDROID_SDK_ROOT/tools
-export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
-export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
+export CAPACITOR_ANDROID_STUDIO_PATH=$(whereis android-studio)
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/emulator
 
 ############
 #   Vim    #
