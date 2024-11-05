@@ -906,7 +906,6 @@ declare -a systemd_user_units=(
     "$base_path"/sway/.config/systemd/user/swayosd.service
     "$base_path"/sway/.config/systemd/user/wlr-sunclock.service
     "$base_path"/swww/.config/systemd/user/swww-daemon.service
-    "$base_path"/swww/.config/systemd/user/swww-random.service
     "$base_path"/systemd/.config/systemd/user/clipse.service
     "$base_path"/systemd/.config/systemd/user/enable-linger.service
     "$base_path"/waybar/.config/systemd/user/setup-temps.service
