@@ -384,6 +384,7 @@ echo "Setting up user directory configs"
 # Parent dirs that should not be symlinks from stow-ing
 declare -a mk_dirs=(
     ~/.cargo
+    ~/.continue
     ~/.config/bat/themes
     ~/.config/corectrl/profiles
     ~/.config/environment.d
