@@ -399,7 +399,6 @@ declare -a mk_dirs=(
     ~/.config/tidal-hifi
     ~/.config/VSCodium/User/globalStorage
     ~/.config/xfce4/xfconf/xfce-perchannel-xml
-    ~/.gnupg
     ~/.icons
     ~/.local/bin
     ~/.local/share/applications
@@ -433,6 +432,14 @@ echo "Checking for files/directories that will conflict with stow"
 for conflict_path in "${conflict_paths[@]}"; do
     rm_if_not_stowed "${conflict_path}"
 done
+
+echo "Appending custom pinentry script to gpg-agent.conf"
+# GNUPG is ridiculous and only allows env-vars in some of the options here, so we have to do this the convoluted way with a line append
+cp -v "$data_path"/gpg/gpg-agent.conf "$base_path"/gpg/.gnupg/gpg-agent.conf || {
+    echo "failed to copy gpg-agent.conf from data dir"
+    exit 1
+}
+echo "pinentry-program $HOME/.local/bin/pinentry-auto" | tee -a "$HOME"/.gnupg/gpg-agent.conf
 
 declare -a stow_dirs_setup=(
     stow
