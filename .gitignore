@@ -43,7 +43,7 @@ gpg/.gnupg/gpg-agent.conf
 !pass/.password-store/.gpg-id
 !pass/.password-store/*.gpg
 !prusaslicer/.config/PrusaSlicer/.gitkeep
-!ssh/.ssh/.gitkeep
+!ssh/.ssh/yk.pub
 !tidal-hifi/.config/tidal-hifi/.gitkeep
 !vscodium/.config/VSCodium/User/globalStorage/zokugun.sync-settings/settings.yml
 !vscodium/.vscode-oss/argv.json
