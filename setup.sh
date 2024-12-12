@@ -462,7 +462,7 @@ systemd_user_enable_start /usr/lib/systemd/user/gpg-agent.service
 
 gpg_ssh_agent
 
-# If our primary GPG key is not yet imported, do that and
+# If our primary GPG key is not yet imported, import it
 if [[ ! $(gpg --list-keys "$gpg_primary_key") ]]; then
     gpg --import "$data_path"/gpg/2B7340DB13C85766.asc || {
         echo "failed to import GPG pubkey"

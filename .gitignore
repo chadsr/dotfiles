@@ -26,6 +26,9 @@ waybar/.config/waybar-crypto/config.ini
 waybar/.local/share/fonts/TTF/*
 waybar/.config/waybar/theme.css
 xdg/.config/mimeapps.list
+hyprland/.config/hypr/themes/colors.conf
+.DS_Store
+gpg/.gnupg/gpg-agent.conf
 !bat/.config/bat/themes/.gitkeep
 !continue/.continue/config.json
 !corectrl/.config/corectrl/profiles/.gitkeep
@@ -46,4 +49,3 @@ xdg/.config/mimeapps.list
 !vscodium/.vscode-oss/argv.json
 !waybar/.config/waybar/modules/crypto/.gitkeep
 !waybar/.local/share/fonts/TTF/.gitkeep
-hyprland/.config/hypr/themes/colors.conf

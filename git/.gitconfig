@@ -1,6 +1,5 @@
 [core]
 	pager = delta
-	askpass = wayprompt-ssh-askpass
 
 [interactive]
 	diffFilter = delta --color-only --features=interactive
@@ -99,9 +98,6 @@
 
 [credential]
 	helper = cache timeout=14400
-
-[gpg]
-	program = /usr/bin/gpg2
 
 [init]
 	defaultBranch = main
