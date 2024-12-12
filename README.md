@@ -28,16 +28,16 @@ stow <FOLDER_NAME>
 
 #### Automated Setup
 
-`setup_all.sh` symlinks all stow directories to `$HOME`, sets up `gnupg` and installs system settings and other configurations. The script is designed to have a completely fresh Arch Linux system configured with minimal interaction.
+`setup.sh` symlinks all stow directories to `$HOME`, sets up `gnupg` and installs system settings and other configurations. The script is designed to have a completely fresh Arch Linux system configured with minimal interaction.
 
 ```bash
-./setup_all.sh
+./setup.sh
 ```
 
 #### Backup
 
- `store_secrets.sh` encrypts various configs and stores them as ASCII-Armoured `gpg` file outputs. `setup_all.sh` handles the decryption and checks (such as interactive diffs) for these files.
+ `store-secrets.sh` encrypts various configs and stores them as ASCII-Armoured `gpg` file outputs. `setup.sh` handles the decryption and checks (such as interactive diffs) for these files.
 
 ```bash
-./store_secrets.sh
+./store-secrets.sh
 ```
