@@ -8,6 +8,7 @@ data_path="$base_path"/data
 
 declare -a brew_pkgs=(
     bat
+    font-hack-nerd-font
     gnupg
     go
     helix
