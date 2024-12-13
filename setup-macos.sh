@@ -12,8 +12,11 @@ declare -a brew_pkgs=(
     go
     helix
     neovim
+    node
+    npm
     pinentry-mac
     python
+    ruby
     rust
     stow
     theseal/ssh-askpass/ssh-askpass
