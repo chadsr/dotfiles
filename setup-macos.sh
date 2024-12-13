@@ -108,6 +108,7 @@ declare -a stow_dirs_setup=(
     bash
     git
     gpg
+    ssh
     stow
     zsh
 )
@@ -135,6 +136,11 @@ for launch_agent_dir in "${launch_agents[@]}"; do
     }
     echo "Loaded $launch_agent_dir"
 done
+
+gpg-connect-agent reloadagent /bye || {
+    echo "failed to reload gpg-agent"
+    exit 1
+}
 
 # If our primary GPG key is not yet imported, import it
 if [[ ! $(gpg --list-keys "$gpg_primary_key") ]]; then
@@ -170,7 +176,6 @@ declare -a stow_dirs_general=(
     helix
     nvim
     rust
-    ssh
 )
 
 echo "Stowing general configs"
