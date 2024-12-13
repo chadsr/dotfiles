@@ -8,6 +8,13 @@
 CURRENT_TTY=$(tty)
 export GPG_TTY=$CURRENT_TTY
 
+##########
+#  Ruby  #
+##########
+export GEM_HOME=$HOME/.gem
+GEM_BIN=$(gem environment gemdir)/bin
+export PATH=$PATH:$GEM_BIN
+
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     LINUX_ASKPASS=$(which wayprompt-ssh-askpass)
     export SSH_ASKPASS=$LINUX_ASKPASS
@@ -85,13 +92,6 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     export CONDA_AUTO_ACTIVATE_BASE=false
 
     ##########
-    #  Ruby  #
-    ##########
-
-    export GEM_HOME=$HOME/.gem
-    # export PATH=$PATH:$GEM_HOME/ruby/2.6.0/bin
-
-    ##########
     #  Perl  #
     ##########
     export PATH=$PATH:/usr/bin/vendor_perl
@@ -109,4 +109,6 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 
     MAC_ASKPASS=$(which ssh-askpass)
     export SSH_ASKPASS=$MAC_ASKPASS
+
+    export PATH="$HOMEBREW_PREFIX/opt/ruby/bin:$PATH"
 fi
