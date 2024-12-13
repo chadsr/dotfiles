@@ -16,6 +16,7 @@ declare -a brew_pkgs=(
     python
     rust
     stow
+    theseal/ssh-askpass/ssh-askpass
     wget
     ykman
     yubikey-personalization

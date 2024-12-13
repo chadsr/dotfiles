@@ -9,6 +9,8 @@ CURRENT_TTY=$(tty)
 export GPG_TTY=$CURRENT_TTY
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    LINUX_ASKPASS=$(which wayprompt-ssh-askpass)
+    export SSH_ASKPASS=$LINUX_ASKPASS
 
     # Export env vars from systemd user units
     # shellcheck disable=SC1090,SC1091
@@ -35,7 +37,8 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     ###########
     export ANDROID_HOME=$HOME/Android
     export ANDROID_USER_HOME=$HOME/.android
-    export CAPACITOR_ANDROID_STUDIO_PATH=$(whereis android-studio)
+    ANDROID_STUDIO=$(which android-studio)
+    export CAPACITOR_ANDROID_STUDIO_PATH=$ANDROID_STUDIO
     export PATH=$PATH:$ANDROID_HOME/tools
     export PATH=$PATH:$ANDROID_HOME/tools/bin
     export PATH=$PATH:$ANDROID_HOME/platform-tools
@@ -103,4 +106,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     LOCAL_BIN=$HOME/.local/bin
     export PATH=$PATH:$LOCAL_BIN
+
+    MAC_ASKPASS=$(which ssh-askpass)
+    export SSH_ASKPASS=$MAC_ASKPASS
 fi
