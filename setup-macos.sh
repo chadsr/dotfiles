@@ -171,6 +171,7 @@ for decrypt_data_paths_tuple in "${decrypt_data_paths_tuples[@]}"; do
 done
 
 declare -a stow_dirs_general=(
+    alacritty
     bat
     continue
     helix
