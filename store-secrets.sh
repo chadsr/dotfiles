@@ -5,8 +5,6 @@ gpg_encryption_subkey=0x79C70BBE4865D828
 
 pkglist_system_path=/etc/pkglist.txt
 
-laptop_hostname="thinky"
-desktop_hostname="shifty"
 current_hostname=$(hostname)
 
 tmp_path=/tmp/secrets-"$current_hostname"
@@ -25,11 +23,10 @@ update_paths() {
     data_path="$base_path"/data
 }
 
-script_name=$(basename "$0")
 update_paths
 
 help() {
-    printf "Stores configuration secrets to \"%s\".\n\nUsage: %s <%s|%s>\n" "$data_path" "$script_name" "$laptop_hostname" "$desktop_hostname"
+    printf "Stores configuration secrets to \"%s\".\n" "$data_path"
 }
 
 diff_files() {
@@ -92,19 +89,6 @@ gpg_encrypt_file() {
         printf "%s -> %s\n" "$input_file_path" "$output_file_path"
     fi
 }
-
-if [[ "$current_hostname" != "$laptop_hostname" ]] && [[ "$current_hostname" != "$desktop_hostname" ]]; then
-    if [[ "$1" != "$laptop_hostname" ]] && [[ "$1" != "$desktop_hostname" ]]; then
-        echo "Unrecognised hostname! Please provide a valid one."
-        help
-        exit 1
-    else
-        echo "Unrecognised hostname. Falling back to provided parameter: \"${1}\"."
-        current_hostname="$1"
-    fi
-else
-    echo "Using current hostname \"${current_hostname}\" for configuration."
-fi
 
 if [[ -n ${DOTFILES+x} ]] && [[ "$base_path" != "$DOTFILES" ]]; then
     echo "Changing directory to '${DOTFILES}'"
