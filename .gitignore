@@ -27,6 +27,7 @@ waybar/.local/share/fonts/TTF/*
 waybar/.config/waybar/theme.css
 xdg/.config/mimeapps.list
 hyprland/.config/hypr/themes/colors.conf
+hyprland/.config/hypr/host.conf
 .DS_Store
 gpg/.gnupg/gpg-agent.conf
 !bat/.config/bat/themes/.gitkeep
