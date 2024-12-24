@@ -622,12 +622,6 @@ if ! sudo test -f "${corectrl_rules_path}"; then
     }
 fi
 
-# https://espanso.org/docs/install/linux/#adding-the-required-capabilities
-sudo setcap "cap_dac_override+p" "$(which espanso)" || {
-    echo "failed to setcap for espanso"
-    exit 1
-}
-
 echo "Copying common system configuration"
 rsync_system_config common/
 
