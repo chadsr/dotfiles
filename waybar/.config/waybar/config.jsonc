@@ -303,7 +303,7 @@
             "",
             ""
         ],
-        "on-click": "wdisplays"
+        "on-click": "nwg-displays"
     },
     "battery": {
         "bat": "BAT0",
