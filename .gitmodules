@@ -15,10 +15,6 @@
     path = ulauncher/.config/ulauncher/user-themes/TokyoNight
     url = https://github.com/chadsr/TokyoNight-Ulauncher-Theme.git
     branch = master
-[submodule "sway/.config/waybar/modules/crypto"]
-    path = .git_submodules/waybar-crypto
-    url = https://github.com/chadsr/waybar-crypto.git
-    branch = master
 [submodule ".git_submodules/hackneyed-cursor"]
     path = .git_submodules/hackneyed-cursor
     url = https://gitlab.com/Enthymeme/hackneyed-x11-cursors.git
