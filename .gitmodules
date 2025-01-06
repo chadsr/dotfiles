@@ -11,10 +11,6 @@
     path = omz/.oh-my-zsh/themes/powerlevel10k
     url = https://github.com/romkatv/powerlevel10k.git
     branch = master
-[submodule "ulauncher/.config/ulauncher/user-themes/TokyoNight"]
-    path = ulauncher/.config/ulauncher/user-themes/TokyoNight
-    url = https://github.com/chadsr/TokyoNight-Ulauncher-Theme.git
-    branch = master
 [submodule ".git_submodules/hackneyed-cursor"]
     path = .git_submodules/hackneyed-cursor
     url = https://gitlab.com/Enthymeme/hackneyed-x11-cursors.git
