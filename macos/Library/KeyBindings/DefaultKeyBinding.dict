@@ -1,0 +1,6 @@
+{
+  "^\UF702" = moveWordLeft:;
+  "^\UF703" = moveWordRight:;
+  "^$\UF702" = moveWordLeftAndModifySelection:;
+  "^$\UF703" = moveWordRightAndModifySelection:;
+}
