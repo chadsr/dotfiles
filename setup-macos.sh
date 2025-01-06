@@ -15,6 +15,7 @@ exit_setup() {
 
 set -euo pipefail
 trap 'exit_setup' ERR INT
+
 symlink() {
     if [[ -e "${2}" ]]; then
         if [[ ! -L "${2}" ]]; then
@@ -91,14 +92,14 @@ echo "Setting up GPG/SSH"
 gpg --list-keys >/dev/null
 
 declare -a mk_dirs=(
-    ~/.cargo
-    ~/.config
-    ~/.continue
-    ~/.local/bin
-    ~/.local/share
-    ~/.ssh
-    ~/Library/KeyBindings
-    ~/Library/LaunchAgents
+    ~/.cargo/
+    ~/.config/
+    ~/.continue/
+    ~/.local/bin/
+    ~/.local/share/
+    ~/.ssh/
+    ~/Library/KeyBindings/
+    ~/Library/LaunchAgents/
 )
 
 for mk_dir in "${mk_dirs[@]}"; do
@@ -122,7 +123,10 @@ rm_if_not_stowed() {
         fi
     fi
 
-    rm -rfv "${1}"
+    rm -rfv "${1}" || {
+        echo "failed to remove conflict path ${1}"
+        return 1
+    }
 }
 
 echo "Checking for files/directories that will conflict with stow"
@@ -130,29 +134,19 @@ for conflict_path in "${conflict_paths[@]}"; do
     rm_if_not_stowed "${conflict_path}"
 done
 
+echo "Setting up stow"
+stow -t ~/ stow || {
+    echo "failed to setup stow"
+    exit 1
+}
+
 echo "Appending custom pinentry script to gpg-agent.conf"
 # GNUPG is ridiculous and only allows env-vars in some of the options here, so we have to do this the convoluted way with a line append
 cp -v "$data_path"/gpg/gpg-agent.conf "$base_path"/gpg/.gnupg/gpg-agent.conf || {
     echo "failed to copy gpg-agent.conf from data dir"
     exit 1
 }
-echo "pinentry-program $HOME/.local/bin/pinentry-auto" | tee -a "$HOME"/.gnupg/gpg-agent.conf
-
-# Fix for spacing breaking the space delimited tuples
-mv "${git_submodule_path}"/catppuccin-bat/themes/Catppuccin\ Mocha.tmTheme "${git_submodule_path}"/catppuccin-bat/themes/Catppuccin-Mocha.tmTheme || {
-    echo "failed to move catppuccin-bat theme"
-    exit 1
-}
-
-declare -a symlink_paths_tuples=(
-    "${git_submodule_path}/alacritty-theme/themes ${base_path}/alacritty/.config/alacritty/themes"
-    "${git_submodule_path}/catppuccin-bat/themes/Catppuccin-Mocha.tmTheme ${base_path}/bat/.config/bat/themes/Catppuccin-Mocha.tmTheme"
-    "${git_submodule_path}/catppuccin-helix/themes/default/catppuccin_mocha.toml ${base_path}/helix/.config/helix/themes/catppuccin_mocha.toml"
-)
-for symlink_paths_tuple in "${symlink_paths_tuples[@]}"; do
-    read -ra symlink_paths <<<"$symlink_paths_tuple"
-    symlink "${symlink_paths[0]}" "${symlink_paths[1]}"
-done
+echo "pinentry-program $HOME/.local/bin/pinentry-auto" | tee -a "$base_path"/gpg/.gnupg/gpg-agent.conf
 
 stow_config() {
     stow -v "$1" || {
@@ -167,7 +161,6 @@ declare -a stow_dirs_setup=(
     gpg
     macos
     ssh
-    stow
     zsh
 )
 
@@ -223,12 +216,29 @@ for decrypt_data_paths_tuple in "${decrypt_data_paths_tuples[@]}"; do
     fi
 done
 
+# Fix for spacing breaking the space delimited tuples
+mv "${git_submodule_path}"/catppuccin-bat/themes/Catppuccin\ Mocha.tmTheme "${git_submodule_path}"/catppuccin-bat/themes/Catppuccin-Mocha.tmTheme || {
+    echo "failed to move catppuccin-bat theme"
+    exit 1
+}
+
+declare -a symlink_paths_tuples=(
+    "${git_submodule_path}/alacritty-theme/themes ${base_path}/alacritty/.config/alacritty/themes"
+    "${git_submodule_path}/catppuccin-bat/themes/Catppuccin-Mocha.tmTheme ${base_path}/bat/.config/bat/themes/Catppuccin-Mocha.tmTheme"
+    "${git_submodule_path}/catppuccin-helix/themes/default/catppuccin_mocha.toml ${base_path}/helix/.config/helix/themes/catppuccin_mocha.toml"
+)
+for symlink_paths_tuple in "${symlink_paths_tuples[@]}"; do
+    read -ra symlink_paths <<<"$symlink_paths_tuple"
+    symlink "${symlink_paths[0]}" "${symlink_paths[1]}"
+done
+
 declare -a stow_dirs_general=(
     alacritty
     bat
     continue
     helix
     nvim
+    omz
     rust
 )
 
@@ -236,3 +246,8 @@ echo "Stowing general configs"
 for stow_dir in "${stow_dirs_general[@]}"; do
     stow_config "$stow_dir"
 done
+
+defaults write com.apple.finder AppleShowAllFiles -boolean true || {
+    echo "failed to enable hidden files in Finder"
+    exit 1
+}

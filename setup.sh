@@ -337,7 +337,10 @@ rm_if_not_stowed() {
         fi
     fi
 
-    rm -rfv "${1}"
+    rm -rfv "${1}" || {
+        echo "failed to remove conflict path ${1}"
+        return 1
+    }
 }
 
 stow_config() {
@@ -379,36 +382,42 @@ for old_file in "${old_files[@]}"; do
     }
 done
 
+echo "Setting up stow"
+stow -t ~/ stow || {
+    echo "failed to setup stow"
+    exit 1
+}
+
 echo "Setting up user directory configs"
 
 # Parent dirs that should not be symlinks from stow-ing
 declare -a mk_dirs=(
-    ~/.cargo
-    ~/.continue
-    ~/.config/bat/themes
-    ~/.config/corectrl/profiles
-    ~/.config/environment.d
-    ~/.config/figma-linux
-    ~/.config/khal
-    ~/.config/Kvantum
-    ~/.config/nvim
-    ~/.config/pulse
-    ~/.config/pulseaudio-ctl
-    ~/.config/systemd/user
-    ~/.config/Thunar
-    ~/.config/tidal-hifi
-    ~/.config/VSCodium/User/globalStorage
-    ~/.config/xfce4/xfconf/xfce-perchannel-xml
-    ~/.icons
-    ~/.local/bin
-    ~/.local/share/applications
-    ~/.local/share/fonts/OTF
-    ~/.local/share/fonts/TTF
-    ~/.ssh
-    ~/.themes
-    ~/.vscode-oss
-    ~/Pictures/Backgrounds
-    ~/Pictures/Screenshots
+    ~/.cargo/
+    ~/.continue/
+    ~/.config/bat/themes/
+    ~/.config/corectrl/profiles/
+    ~/.config/environment.d/
+    ~/.config/figma-linux/
+    ~/.config/khal/
+    ~/.config/Kvantum/
+    ~/.config/nvim/
+    ~/.config/pulse/
+    ~/.config/pulseaudio-ctl/
+    ~/.config/systemd/user/
+    ~/.config/Thunar/
+    ~/.config/tidal-hifi/
+    ~/.config/VSCodium/User/globalStorage/
+    ~/.config/xfce4/xfconf/xfce-perchannel-xml/
+    ~/.icons/
+    ~/.local/bin/
+    ~/.local/share/applications/
+    ~/.local/share/fonts/OTF/
+    ~/.local/share/fonts/TTF/
+    ~/.ssh/
+    ~/.themes/
+    ~/.vscode-oss/
+    ~/Pictures/Backgrounds/
+    ~/Pictures/Screenshots/
 )
 for mk_dir in "${mk_dirs[@]}"; do
     mkdir -p "${mk_dir}"
@@ -439,10 +448,9 @@ cp -v "$data_path"/gpg/gpg-agent.conf "$base_path"/gpg/.gnupg/gpg-agent.conf || 
     echo "failed to copy gpg-agent.conf from data dir"
     exit 1
 }
-echo "pinentry-program $HOME/.local/bin/pinentry-auto" | tee -a "$HOME"/.gnupg/gpg-agent.conf
+echo "pinentry-program $HOME/.local/bin/pinentry-auto" | tee -a "$base_path"/gpg/.gnupg/gpg-agent.conf
 
 declare -a stow_dirs_setup=(
-    stow
     bash
     git
     gpg
