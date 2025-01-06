@@ -5,6 +5,43 @@ gpg_encryption_subkey=0x79C70BBE4865D828
 
 base_path=$PWD
 data_path="$base_path"/data
+git_submodule_path="$base_path"/.git_submodules
+
+exit_setup() {
+    rv=$?
+    printf "\n\nExiting setup...\n"
+    exit $rv
+}
+
+set -euo pipefail
+trap 'exit_setup' ERR INT
+symlink() {
+    if [[ -e "${2}" ]]; then
+        if [[ ! -L "${2}" ]]; then
+            echo "${2} already exists and is an irregular type. Check manually whether this is safe to replace with ${1}."
+            return 1
+        fi
+
+        echo "Removing existing symlink at ${2}"
+        rmrf "${2}" || {
+            echo "failed to remove old symlink: ${2}"
+            return 1
+        }
+    fi
+
+    # Stow only supports relative symlinks
+    ln -s "${1}" "${2}" || {
+        echo "failed to symlink: ${1} to ${2}"
+        return 1
+    }
+}
+
+rmrf() {
+    rm -rf "${1}" || {
+        echo "failed to recursively remove ${1}"
+        return 1
+    }
+}
 
 declare -a brew_pkgs=(
     bat
@@ -12,6 +49,7 @@ declare -a brew_pkgs=(
     gnupg
     go
     helix
+    mpv
     neovim
     node
     npm
@@ -34,7 +72,7 @@ brew install "${brew_pkgs[@]}" || {
     echo "failed to install brew packages"
 }
 
-git submodule update --init --remote --progress omz/.oh-my-zsh/themes/powerlevel10k || {
+git submodule update --init --recursive --remote --progress || {
     echo "failed to update git submodules"
     exit 1
 }
@@ -54,11 +92,13 @@ gpg --list-keys >/dev/null
 
 declare -a mk_dirs=(
     ~/.cargo
-    ~/.cargo
     ~/.config
     ~/.continue
     ~/.local/bin
+    ~/.local/share
     ~/.ssh
+    ~/Library/KeyBindings
+    ~/Library/LaunchAgents
 )
 
 for mk_dir in "${mk_dirs[@]}"; do
@@ -98,6 +138,22 @@ cp -v "$data_path"/gpg/gpg-agent.conf "$base_path"/gpg/.gnupg/gpg-agent.conf || 
 }
 echo "pinentry-program $HOME/.local/bin/pinentry-auto" | tee -a "$HOME"/.gnupg/gpg-agent.conf
 
+# Fix for spacing breaking the space delimited tuples
+mv "${git_submodule_path}"/catppuccin-bat/themes/Catppuccin\ Mocha.tmTheme "${git_submodule_path}"/catppuccin-bat/themes/Catppuccin-Mocha.tmTheme || {
+    echo "failed to move catppuccin-bat theme"
+    exit 1
+}
+
+declare -a symlink_paths_tuples=(
+    "${git_submodule_path}/alacritty-theme/themes ${base_path}/alacritty/.config/alacritty/themes"
+    "${git_submodule_path}/catppuccin-bat/themes/Catppuccin-Mocha.tmTheme ${base_path}/bat/.config/bat/themes/Catppuccin-Mocha.tmTheme"
+    "${git_submodule_path}/catppuccin-helix/themes/default/catppuccin_mocha.toml ${base_path}/helix/.config/helix/themes/catppuccin_mocha.toml"
+)
+for symlink_paths_tuple in "${symlink_paths_tuples[@]}"; do
+    read -ra symlink_paths <<<"$symlink_paths_tuple"
+    symlink "${symlink_paths[0]}" "${symlink_paths[1]}"
+done
+
 stow_config() {
     stow -v "$1" || {
         echo "Failed to stow ${1} config"
@@ -109,6 +165,7 @@ declare -a stow_dirs_setup=(
     bash
     git
     gpg
+    macos
     ssh
     stow
     zsh
@@ -118,11 +175,6 @@ echo "Stowing setup configs"
 for stow_dir in "${stow_dirs_setup[@]}"; do
     stow_config "$stow_dir"
 done
-
-rsync --progress -ruacv -- macos/* "$HOME"/ || {
-    echo "failed to rsync macos config"
-    return 1
-}
 
 declare -a launch_agents=(
     "$HOME"/Library/LaunchAgents/gnupg.gpg-agent.plist
