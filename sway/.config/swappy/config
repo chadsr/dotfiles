@@ -4,4 +4,4 @@ save_filename_format=crop-%Y%m%d-%H%M%S.png
 show_panel=false
 line_size=4
 text_size=14
-text_font=hack nerd font mono
+text_font=Hack Nerd Font Mono

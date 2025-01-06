@@ -11,8 +11,8 @@ x = 0
 y = 0
 
 [font.normal]
-family = "hack nerd font mono"
-style = "Monospace"
+family = "Hack Nerd Font Mono"
+style = "Regular"
 
 [font.offset]
 x = 0
