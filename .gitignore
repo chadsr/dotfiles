@@ -1,3 +1,4 @@
+.DS_Store
 .vscode/
 alacritty/.config/alacritty/themes
 bat/.config/bat/themes/*
@@ -8,11 +9,14 @@ data/pkgs/*
 fonts/.local/share/fonts/cryptocoins.ttf
 freetube/.config/FreeTube/*
 gallery-dl/.config/gallery-dl/*
+gpg/.gnupg/gpg-agent.conf
 gtk/.config/gtk-3.0/bookmarks
 gtk/.config/gtk-4.0/bookmarks
 gtk/.icons/*
 gtk/.themes/Sweet/*
 helix/.config/helix/themes/*
+hyprland/.config/hypr/host.conf
+hyprland/.config/hypr/themes/colors.conf
 khal/.config/khal/*
 khal/.config/vdirsyncer/*
 pass/.password-store/*
@@ -20,16 +24,10 @@ prusaslicer/.config/PrusaSlicer/*
 qt/.config/Kvantum/catppuccin-mocha-mauve
 ssh/.ssh/*
 tidal-hifi/.config/tidal-hifi/*
-vscodium/.config/VSCodium/*
-vscodium/.vscode-oss/*
 waybar/.config/waybar-crypto/config.ini
-waybar/.local/share/fonts/TTF/*
 waybar/.config/waybar/theme.css
+waybar/.local/share/fonts/TTF/*
 xdg/.config/mimeapps.list
-hyprland/.config/hypr/themes/colors.conf
-hyprland/.config/hypr/host.conf
-.DS_Store
-gpg/.gnupg/gpg-agent.conf
 !bat/.config/bat/themes/.gitkeep
 !continue/.continue/config.json
 !corectrl/.config/corectrl/profiles/.gitkeep
@@ -46,7 +44,5 @@ gpg/.gnupg/gpg-agent.conf
 !prusaslicer/.config/PrusaSlicer/.gitkeep
 !ssh/.ssh/yk.pub
 !tidal-hifi/.config/tidal-hifi/.gitkeep
-!vscodium/.config/VSCodium/User/globalStorage/zokugun.sync-settings/settings.yml
-!vscodium/.vscode-oss/argv.json
 !waybar/.config/waybar/modules/crypto/.gitkeep
 !waybar/.local/share/fonts/TTF/.gitkeep
