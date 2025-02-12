@@ -1,11 +1,24 @@
 {
   "models": [
     {
+      "title": "DeepSeek-R1 14B",
+      "provider": "ollama",
+      "model": "deepseek-r1:14b"
+    },
+    {
       "title": "Ollama",
       "provider": "ollama",
       "model": "AUTODETECT"
     }
   ],
+  "tabAutocompleteModel": {
+    "title": "Qwen2.5-Coder",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:latest"
+  },
+  "embeddingsProvider": {
+    "provider": "transformers.js"
+  },
   "customCommands": [
     {
       "name": "test",
@@ -13,13 +26,8 @@
       "description": "Write unit tests for highlighted code"
     }
   ],
-  "tabAutocompleteModel": {
-    "title": "Quen2.5-Coder",
-    "provider": "ollama",
-    "model": "qwen2.5-coder"
-  },
-  "embeddingsProvider": {
-    "provider": "transformers.js"
-  },
-  "docs": []
+  "docs": [],
+  "tabAutocompleteOptions": {
+    "debounceDelay": 2000
+  }
 }
