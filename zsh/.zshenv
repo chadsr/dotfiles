@@ -1,3 +1,11 @@
+#!/usr/bin/env bash
+# also sourced in .bash_env, so conform to bash syntax
+
+# remove duplicate entries from $PATH
+# zsh uses $path array along with $PATH
+# shellcheck disable=SC2034
+typeset -U PATH path
+
 #################################
 # General Environment Variables #
 #################################
@@ -6,18 +14,11 @@
 #   GPG    #
 ############
 CURRENT_TTY=$(tty)
-export GPG_TTY=$CURRENT_TTY
-
-##########
-#  Ruby  #
-##########
-export GEM_HOME=$HOME/.gem
-GEM_BIN=$(gem environment gemdir)/bin
-export PATH=$PATH:$GEM_BIN
+export GPG_TTY="$CURRENT_TTY"
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     LINUX_ASKPASS=$(which wayprompt-ssh-askpass)
-    export SSH_ASKPASS=$LINUX_ASKPASS
+    export SSH_ASKPASS="$LINUX_ASKPASS"
 
     # Export env vars from systemd user units
     # shellcheck disable=SC1090,SC1091
@@ -28,28 +29,28 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     ############
     #  Golang  #
     ############
-    export GOPATH=$HOME/go
+    export GOPATH="$HOME/go"
     export GOROOT=/usr/lib/go
-    export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+    export PATH="$GOPATH/bin:$GOROOT/bin:$PATH"
     export GO111MODULE=on
 
     ############
     #   Rust   #
     ############
     CARGO_BIN=$HOME/.cargo/bin
-    export PATH=$CARGO_BIN:$PATH
+    export PATH="$CARGO_BIN:$PATH"
 
     ###########
     # Android #
     ###########
-    export ANDROID_HOME=$HOME/Android
-    export ANDROID_USER_HOME=$HOME/.android
+    export ANDROID_HOME="$HOME/Android"
+    export ANDROID_USER_HOME="$HOME/.android"
     ANDROID_STUDIO=$(which android-studio)
-    export CAPACITOR_ANDROID_STUDIO_PATH=$ANDROID_STUDIO
-    export PATH=$PATH:$ANDROID_HOME/tools
-    export PATH=$PATH:$ANDROID_HOME/tools/bin
-    export PATH=$PATH:$ANDROID_HOME/platform-tools
-    export PATH=$PATH:$ANDROID_HOME/emulator
+    export CAPACITOR_ANDROID_STUDIO_PATH="$ANDROID_STUDIO"
+    export PATH="$ANDROID_HOME/tools:$PATH"
+    export PATH="$ANDROID_HOME/tools/bin:$PATH"
+    export PATH="$ANDROID_HOME/platform-tools:$PATH"
+    export PATH="$ANDROID_HOME/emulator:$PATH"
 
     ############
     #   Vim    #
@@ -68,16 +69,16 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     #  Node.js  #
     #############
     NPM_CONFIG_PREFIX=~/.npm-global
-    export PATH=$NPM_CONFIG_PREFIX/bin:$PATH
+    export PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
 
     NODE_PATH=$(npm root -g)
-    export NODE_PATH=${NODE_PATH}
+    export NODE_PATH="${NODE_PATH}"
 
-    export NVM_DIR="$HOME/.nvm"
-    # shellcheck disable=SC1091
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-    # shellcheck disable=SC1091
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+    # export NVM_DIR="$HOME/.nvm"
+    # # shellcheck disable=SC1091
+    # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+    # # shellcheck disable=SC1091
+    # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
     ############
     #  Python  #
@@ -87,28 +88,39 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     ############
     #  Conda   #
     ############
-    export PATH=$PATH:/opt/anaconda/bin
-    export PATH=$PATH:/opt/miniconda3/bin
+    export PATH="/opt/anaconda/bin:$PATH"
+    export PATH="/opt/miniconda3/bin:$PATH"
     export CONDA_AUTO_ACTIVATE_BASE=false
 
     ##########
     #  Perl  #
     ##########
-    export PATH=$PATH:/usr/bin/vendor_perl
-    export PATH=$PATH:/usr/bin/core_perl
+    export PATH="/usr/bin/vendor_perl:$PATH"
+    export PATH="/usr/bin/core_perl:$PATH"
 
     ################
     #    Other     #
     ################
-    export PATH=$PATH:/opt/brother/scanner/brscan5
+    export PATH="/opt/brother/scanner/brscan5:$PATH"
     export AMDGPU_TARGETS="gfx1030"
 
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-    LOCAL_BIN=$HOME/.local/bin
-    export PATH=$PATH:$LOCAL_BIN
+    # ignore global zsh configs, to prevent /etc/zprofile from calling path_helper and fucking up PATH order
+    unsetopt GLOBAL_RCS
+    source '/etc/zshrc' # still source /etc/zshrc for anything useful
+
+    LOCAL_BIN="$HOME/.local/bin"
+    export PATH="$LOCAL_BIN:$PATH"
 
     MAC_ASKPASS=$(which ssh-askpass)
-    export SSH_ASKPASS=$MAC_ASKPASS
+    export SSH_ASKPASS="$MAC_ASKPASS"
 
     export PATH="$HOMEBREW_PREFIX/opt/ruby/bin:$PATH"
 fi
+
+##########
+#  Ruby  #
+##########
+export GEM_HOME="$HOME/.gem"
+GEM_BIN=$(gem environment gemdir)/bin
+export PATH="$GEM_BIN:$PATH"
