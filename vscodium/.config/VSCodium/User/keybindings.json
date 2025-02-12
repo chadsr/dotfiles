@@ -1,0 +1,7 @@
+[
+    {
+        "key": "shift+ctrl+right",
+        "command": "editor.action.inlineSuggest.acceptNextLine",
+        "when": "inlineSuggestionVisible && !editorReadonly"
+    }
+]
