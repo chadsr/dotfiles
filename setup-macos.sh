@@ -209,7 +209,7 @@ declare -a decrypt_data_paths_tuples=(
 for decrypt_data_paths_tuple in "${decrypt_data_paths_tuples[@]}"; do
     read -ra decrypt_data_paths <<<"$decrypt_data_paths_tuple"
     if [[ -f "${decrypt_data_paths[0]}" ]]; then
-        gpg --quiet --no-verbose --local-user "${gpg_encryption_subkey}" --armor --decrypt --yes --output "${decrypt_data_paths[1]}" "${decrypt_data_paths[0]}"  >/dev/null || {
+        gpg --quiet --no-verbose --local-user "${gpg_encryption_subkey}" --armor --decrypt --yes --output "${decrypt_data_paths[1]}" "${decrypt_data_paths[0]}" >/dev/null || {
             echo "failed to decrypt file ${decrypt_data_paths[0]} to ${decrypt_data_paths[1]}"
             exit 1
         }
@@ -249,5 +249,15 @@ done
 
 defaults write com.apple.finder AppleShowAllFiles -boolean true || {
     echo "failed to enable hidden files in Finder"
+    exit 1
+}
+
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true || {
+    echo "failed to disable network DS_Store"
+    exit 1
+}
+
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true || {
+    echo "failed to disable USB DS_Store"
     exit 1
 }
