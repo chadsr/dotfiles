@@ -608,8 +608,7 @@ rustup component add clippy rustfmt || {
 sudo update-smart-drivedb
 
 declare -a ollama_models=(
-    llama3.2:latest
-    starcoder2:latest
+    deepseek-r1:14b
     qwen2.5-coder:latest
 )
 for ollama_model in "${ollama_models[@]}"; do
