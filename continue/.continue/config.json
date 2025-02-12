@@ -18,7 +18,6 @@
     "provider": "ollama",
     "model": "qwen2.5-coder"
   },
-  "allowAnonymousTelemetry": false,
   "embeddingsProvider": {
     "provider": "transformers.js"
   },
