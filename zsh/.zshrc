@@ -62,19 +62,18 @@ HIST_STAMPS="dd.mm.yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(gitfast node npm pip python sudo golang colorize cp systemd)
+plugins=(gitfast node npm pip python sudo golang colorize cp systemd direnv)
 
 # User configuration
-
-eval "$(thefuck --alias)"
-# You can use whatever you want as an alias, like for Mondays:
-eval "$(thefuck --alias fuck)"
 
 # shellcheck disable=SC1091
 source $ZSH/oh-my-zsh.sh
 
 # shellcheck disable=SC1091
 source $HOME/.aliases
+
+eval "$(thefuck --alias)"
+eval "$(thefuck --alias fuck)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 ([[ ! -f ~/.p10k.zsh ]] && [[ ! -L ~/.p10k.zsh ]]) || source ~/.p10k.zsh
