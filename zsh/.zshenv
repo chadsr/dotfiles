@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+# shellcheck shell=bash
 # also sourced in .bash_env, so conform to bash syntax
 
 # remove duplicate entries from $PATH

@@ -1,3 +1,5 @@
+# shellcheck shell=bash
+
 alias virtualbox='env QT_QPA_PLATFORM=xcb virtualbox'
 alias emulator='env QT_QPA_PLATFORM=xcb emulator'
 alias android-studio='env QT_QPA_PLATFORM=xcb android-studio'
