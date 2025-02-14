@@ -46,6 +46,7 @@ rmrf() {
 
 declare -a brew_pkgs=(
     bat
+    direnv
     font-hack-nerd-font
     gnupg
     go
@@ -58,6 +59,7 @@ declare -a brew_pkgs=(
     python
     ruby
     rust
+    stats
     stow
     theseal/ssh-askpass/ssh-askpass
     wget
