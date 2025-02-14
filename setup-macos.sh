@@ -49,6 +49,7 @@ declare -a brew_pkgs=(
     direnv
     font-hack-nerd-font
     freetube
+    ghostty
     gnupg
     go
     helix
@@ -226,7 +227,6 @@ mv "${git_submodule_path}"/catppuccin-bat/themes/Catppuccin\ Mocha.tmTheme "${gi
 }
 
 declare -a symlink_paths_tuples=(
-    "${git_submodule_path}/alacritty-theme/themes ${base_path}/alacritty/.config/alacritty/themes"
     "${git_submodule_path}/catppuccin-bat/themes/Catppuccin-Mocha.tmTheme ${base_path}/bat/.config/bat/themes/Catppuccin-Mocha.tmTheme"
     "${git_submodule_path}/catppuccin-helix/themes/default/catppuccin_mocha.toml ${base_path}/helix/.config/helix/themes/catppuccin_mocha.toml"
 )
@@ -236,10 +236,10 @@ for symlink_paths_tuple in "${symlink_paths_tuples[@]}"; do
 done
 
 declare -a stow_dirs_general=(
-    alacritty
     bat
     continue
     freetube
+    ghostty
     helix
     nvim
     omz

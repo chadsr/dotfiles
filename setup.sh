@@ -840,6 +840,7 @@ declare -a stow_dirs_general=(
     gallery-dl
     gamemode
     gammastep
+    ghostty
     gtk
     helix
     hyprland

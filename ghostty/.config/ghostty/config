@@ -1,0 +1,7 @@
+# https://ghostty.org/docs/config
+
+font-family = Hack Nerd Mono
+font-size = 12
+background-opacity = 0.5
+window-padding-x = 8
+window-padding-y = 8
