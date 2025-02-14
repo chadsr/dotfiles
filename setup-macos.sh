@@ -48,6 +48,7 @@ declare -a brew_pkgs=(
     bat
     direnv
     font-hack-nerd-font
+    freetube
     gnupg
     go
     helix
@@ -238,6 +239,7 @@ declare -a stow_dirs_general=(
     alacritty
     bat
     continue
+    freetube
     helix
     nvim
     omz
