@@ -858,6 +858,7 @@ declare -a stow_dirs_general=(
     qt
     ranger
     scripts
+    steam
     sway
     swww
     systemd
