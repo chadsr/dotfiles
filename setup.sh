@@ -424,6 +424,10 @@ for mk_dir in "${mk_dirs[@]}"; do
 done
 
 declare -a conflict_paths=(
+    ~/.bash_env
+    ~/.bash_login
+    ~/.bash_logout
+    ~/.bash_profile
     ~/.bashrc
     ~/.config/gtk-3.0
     ~/.config/gtk-3.0
@@ -434,6 +438,9 @@ declare -a conflict_paths=(
     ~/.gnupg/common.conf
     ~/.gtkrc-2.0
     ~/.vscode-oss/argv.json
+    ~/.zlogin
+    ~/.zlogout
+    ~/.zprofile
     ~/.zshenv
     ~/.zshrc
 )
