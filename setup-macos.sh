@@ -237,7 +237,7 @@ done
 
 declare -a stow_dirs_general=(
     bat
-    continue
+    continue-minimal
     freetube
     ghostty
     helix
@@ -265,3 +265,16 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true || {
     echo "failed to disable USB DS_Store"
     exit 1
 }
+
+declare -a ollama_models=(
+    deepseek-r1:latest
+    qwen2.5-coder:1.5b-base
+    nomic-embed-text:latest
+)
+
+for ollama_model in "${ollama_models[@]}"; do
+    ollama pull "${ollama_model}" || {
+        echo "failed to install ${ollama_model}"
+        exit 1
+    }
+done

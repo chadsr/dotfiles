@@ -614,18 +614,6 @@ rustup component add clippy rustfmt || {
 
 sudo update-smart-drivedb
 
-declare -a ollama_models=(
-    deepseek-r1:14b
-    qwen2.5-coder:latest
-)
-for ollama_model in "${ollama_models[@]}"; do
-    echo "Pulling ${ollama_model}"
-    ollama pull "${ollama_model}" || {
-        echo "failed to install ${ollama_model}"
-        exit 1
-    }
-done
-
 corectrl_rules_path=/etc/polkit-1/rules.d/90-corectrl.rules
 if ! sudo test -f "${corectrl_rules_path}"; then
     echo "Setting up polkit for Corectrl"
@@ -642,6 +630,15 @@ rsync_system_config common/
 if [[ "$current_hostname" == "$laptop_hostname" ]]; then
     echo "Copying laptop system configuration"
     rsync_system_config "$laptop_hostname"/
+
+    declare -a stow_dirs_laptop=(
+        continue-minimal
+    )
+
+    echo "Stowing ${laptop_hostname} configs"
+    for stow_dir in "${stow_dirs_laptop[@]}"; do
+        stow_config "$stow_dir"
+    done
 
     pam_rule="auth      sufficient      pam_fprintd.so max_tries=5 timeout=10"
     read -p "Add PAM fprintd rules? (${pam_rule}) (y/N)?" -n 1 -r
@@ -671,11 +668,25 @@ if [[ "$current_hostname" == "$laptop_hostname" ]]; then
     for systemd_user_unit_laptop in "${systemd_user_units_laptop[@]}"; do
         systemd_user_enable_start "${systemd_user_unit_laptop}"
     done
+
+    declare -a ollama_models=(
+        deepseek-r1:latest
+        qwen2.5-coder:1.5b-base
+        nomic-embed-text:latest
+    )
+
+    for ollama_model in "${ollama_models[@]}"; do
+        ollama pull "${ollama_model}" || {
+            echo "failed to install ${ollama_model}"
+            exit 1
+        }
+    done
 elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
     echo "Copying desktop system configuration"
     rsync_system_config "$desktop_hostname"/
 
     declare -a stow_dirs_desktop=(
+        continue
         liquidctl
     )
 
@@ -728,6 +739,19 @@ elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
     )
     for systemd_user_unit_desktop in "${systemd_user_units_desktop[@]}"; do
         systemd_user_enable_start "${systemd_user_unit_desktop}"
+    done
+
+    declare -a ollama_models=(
+        deepseek-r1:14b
+        qwen2.5-coder:latest
+        nomic-embed-text:latest
+    )
+
+    for ollama_model in "${ollama_models[@]}"; do
+        ollama pull "${ollama_model}" || {
+            echo "failed to install ${ollama_model}"
+            exit 1
+        }
     done
 fi
 
@@ -834,7 +858,6 @@ declare -a stow_dirs_general=(
     bemenu
     cava
     chromium
-    continue
     coolercontrol
     corectrl
     cura

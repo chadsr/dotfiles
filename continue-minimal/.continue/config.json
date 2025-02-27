@@ -1,0 +1,34 @@
+{
+  "models": [
+    {
+      "title": "DeepSeek-R1",
+      "provider": "ollama",
+      "model": "deepseek-r1:latest"
+    },
+    {
+      "title": "Ollama",
+      "provider": "ollama",
+      "model": "AUTODETECT"
+    }
+  ],
+  "tabAutocompleteModel": {
+    "title": "Qwen2.5-Coder 1.5B",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:1.5b-base"
+  },
+  "embeddingsProvider": {
+    "provider": "ollama",
+    "model": "nomic-embed-text:latest"
+  },
+  "customCommands": [
+    {
+      "name": "test",
+      "prompt": "{{{ input }}}\n\nWrite a comprehensive set of unit tests for the selected code. It should setup, run tests that check for correctness including important edge cases, and teardown. Ensure that the tests are complete and sophisticated. Give the tests just as chat output, don't edit any file.",
+      "description": "Write unit tests for highlighted code"
+    }
+  ],
+  "docs": [],
+  "tabAutocompleteOptions": {
+    "debounceDelay": 2000
+  }
+}
