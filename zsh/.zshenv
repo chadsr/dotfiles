@@ -74,6 +74,9 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     NODE_PATH=$(npm root -g)
     export NODE_PATH="${NODE_PATH}"
 
+    YARN_BIN_PATH=$(yarn global bin)
+    export PATH="$PATH:${YARN_BIN_PATH}"
+
     # export NVM_DIR="$HOME/.nvm"
     # # shellcheck disable=SC1091
     # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
