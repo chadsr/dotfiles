@@ -44,3 +44,7 @@
     path = .git_submodules/catppuccin-kvantum
     url = https://github.com/catppuccin/Kvantum.git
     branch = main
+[submodule ".git_submodules/cryptofont"]
+	path = .git_submodules/cryptofont
+	url = https://github.com/Cryptofonts/cryptofont.git
+    branch = master

@@ -6,7 +6,7 @@ continue/.continue/*
 corectrl/.config/corectrl/profiles/*
 cura/.config/cura/5.7/cura.cfg
 data/pkgs/*
-fonts/.local/share/fonts/cryptocoins.ttf
+fonts/.local/share/fonts/TTF/cryptofont.ttf
 freetube/.config/FreeTube/*
 gallery-dl/.config/gallery-dl/*
 gpg/.gnupg/gpg-agent.conf

@@ -846,7 +846,7 @@ declare -a symlink_paths_tuples=(
     "${git_submodule_path}/sweet-theme/gtk-3.0 ${base_path}/gtk/.themes/Sweet/gtk-3.0"
     "${git_submodule_path}/sweet-theme/gtk-4.0 ${base_path}/gtk/.themes/Sweet/gtk-4.0"
     "${git_submodule_path}/sweet-theme/index.theme ${base_path}/gtk/.themes/Sweet/index.theme"
-    "${git_submodule_path}/waybar-crypto/.submodules/cryptofont/fonts/cryptofont.ttf ${base_path}/waybar/.local/share/fonts/TTF/cryptofont.ttf"
+    "${git_submodule_path}/cryptofont/fonts/cryptofont.ttf ${base_path}/fonts/.local/share/fonts/TTF/cryptofont.ttf"
     "${base_path}/steam/.steam/steam/steam_dev.cfg ${HOME}/.steam/steam/steam_dev.cfg"
 )
 for symlink_paths_tuple in "${symlink_paths_tuples[@]}"; do
