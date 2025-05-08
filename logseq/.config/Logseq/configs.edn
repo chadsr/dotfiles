@@ -1,0 +1,1 @@
+{:window/native-titlebar? true, :git/disable-auto-commit? false, :git/commit-on-close? true, :git/auto-commit-seconds 3600, :spell-check true}

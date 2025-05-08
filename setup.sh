@@ -393,13 +393,13 @@ echo "Setting up user directory configs"
 # Parent dirs that should not be symlinks from stow-ing
 declare -a mk_dirs=(
     ~/.cargo/
-    ~/.continue/
     ~/.config/bat/themes/
     ~/.config/corectrl/profiles/
     ~/.config/environment.d/
     ~/.config/figma-linux/
     ~/.config/khal/
     ~/.config/Kvantum/
+    ~/.config/Logseq/
     ~/.config/nvim/
     ~/.config/pulse/
     ~/.config/pulseaudio-ctl/
@@ -408,11 +408,13 @@ declare -a mk_dirs=(
     ~/.config/tidal-hifi/
     ~/.config/VSCodium/User/globalStorage/
     ~/.config/xfce4/xfconf/xfce-perchannel-xml/
+    ~/.continue/
     ~/.icons/
     ~/.local/bin/
     ~/.local/share/applications/
     ~/.local/share/fonts/OTF/
     ~/.local/share/fonts/TTF/
+    ~/.logseq/config/
     ~/.ssh/
     ~/.themes/
     ~/.vscode-oss/

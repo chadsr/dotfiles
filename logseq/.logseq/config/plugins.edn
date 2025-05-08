@@ -1,0 +1,5 @@
+{:logseq-mark-map {:version "v0.4.6", :repo "vipzhicheng/logseq-plugin-mark-map", :effect false, :theme false}
+ :logseq-catppuccin {:version "v0.6.4", :repo "catppuccin/logseq", :effect false, :theme true}
+ :logseq-archive-webpage {:version "v0.2.0", :repo "patmigliaccio/logseq-archive-webpage", :effect true, :theme false}
+ :logseq-plugin-show-page-date {:version "v1.0.3", :repo "YU000jp/logseq-plugin-show-page-date", :effect true, :theme false}
+ :logseq-get-youtube-captions {:version "v1.3.0", :repo "briansunter/logseq-get-youtube-captions", :effect true, :theme false}}
