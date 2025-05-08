@@ -77,11 +77,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     YARN_BIN_PATH=$(yarn global bin)
     export PATH="$PATH:${YARN_BIN_PATH}"
 
-    # export NVM_DIR="$HOME/.nvm"
-    # # shellcheck disable=SC1091
-    # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-    # # shellcheck disable=SC1091
-    # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+    export NVM_DIR="$HOME/.nvm"
 
     ############
     #  Python  #
