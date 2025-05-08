@@ -933,10 +933,10 @@ for systemd_user_target in "${systemd_user_targets[@]}"; do
     }
 done
 
+    # "$base_path"/espanso/.config/systemd/user/espanso.service
 declare -a systemd_user_units=(
     "$base_path"/corectrl/.config/systemd/user/corectrl.service
     "$base_path"/dunst/.config/systemd/user/dunst-wl.service
-    "$base_path"/espanso/.config/systemd/user/espanso.service
     "$base_path"/gammastep/.config/systemd/user/gammastep-wayland.service
     "$base_path"/gammastep/.config/systemd/user/geoclue-agent.service
     "$base_path"/gtk/.config/systemd/user/xsettingsd.service
