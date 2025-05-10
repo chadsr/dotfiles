@@ -415,6 +415,7 @@ declare -a mk_dirs=(
     ~/.local/share/fonts/OTF/
     ~/.local/share/fonts/TTF/
     ~/.logseq/config/
+    ~/.nvm/alias/
     ~/.ssh/
     ~/.themes/
     ~/.vscode-oss/
@@ -885,6 +886,7 @@ declare -a stow_dirs_general=(
     mpv
     nextcloud
     nvim
+    nvm
     omz
     pass
     prusaslicer
