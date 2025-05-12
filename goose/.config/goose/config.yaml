@@ -1,12 +1,107 @@
-OLLAMA_HOST: localhost
-GOOSE_PROVIDER: ollama
 GOOSE_MODE: auto
 GOOSE_MODEL: qwen3:14b
+OLLAMA_HOST: localhost
+GOOSE_PROVIDER: ollama
 extensions:
+  bravesearch:
+    args:
+    - -y
+    - '@modelcontextprotocol/server-brave-search@latest'
+    bundled: null
+    cmd: npx
+    description: Retrieve web pages, news, and local business results via Brave API.
+    enabled: true
+    env_keys:
+    - BRAVE_API_KEY
+    envs: {}
+    name: Brave Search
+    timeout: 300
+    type: stdio
+  computercontroller:
+    bundled: true
+    display_name: Computer Controller
+    enabled: true
+    name: computercontroller
+    timeout: 300
+    type: builtin
+  context7:
+    args:
+    - -y
+    - '@upstash/context7-mcp@latest'
+    bundled: null
+    cmd: npx
+    description: Connects to Context7.com's documentation database to provide up-to-date library and framework documentation with intelligent project ranking and customizable token limits.
+    enabled: true
+    env_keys: []
+    envs: {}
+    name: context7
+    timeout: 300
+    type: stdio
   developer:
     bundled: true
-    display_name: Developer
+    display_name: Developer Tools
     enabled: true
     name: developer
     timeout: 300
     type: builtin
+  fetch:
+    args:
+    - mcp-server-fetch
+    bundled: null
+    cmd: uvx
+    description: Web content fetching and processing capabilities
+    enabled: true
+    env_keys: []
+    envs: {}
+    name: fetch
+    display_name: Fetch
+    timeout: 300
+    type: stdio
+  git:
+    args:
+    - mcp-server-git
+    bundled: null
+    cmd: uvx
+    description: Git version control system integration
+    enabled: true
+    env_keys: []
+    envs: {}
+    name: git
+    display_name: Git
+    timeout: 300
+    type: stdio
+  knowledgegraphmemory:
+    args:
+    - -y
+    - '@modelcontextprotocol/server-memory@latest'
+    bundled: null
+    cmd: npx
+    description: Graph-based memory system for persistent knowledge storage
+    enabled: true
+    env_keys: []
+    envs: {}
+    name: knowledgegraphmemory
+    display_name: Knowledge Graph Memory
+    timeout: 300
+    type: stdio
+  memory:
+    bundled: true
+    display_name: Memory
+    enabled: true
+    name: memory
+    timeout: 300
+    type: builtin
+  sequentialthinking:
+    args:
+    - -y
+    - '@modelcontextprotocol/server-sequential-thinking@latest'
+    bundled: null
+    cmd: npx
+    description: Provides a sequential thinking framework for complex reasoning tasks, incorporating semantic analysis, contradiction detection, and adaptive complexity estimation to enable structured, reflective problem-solving.
+    enabled: true
+    env_keys: []
+    envs: {}
+    name: sequentialthinking
+    display_name: Sequential Thinking
+    timeout: 300
+    type: stdio
