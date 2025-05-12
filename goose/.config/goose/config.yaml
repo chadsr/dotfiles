@@ -1,0 +1,12 @@
+OLLAMA_HOST: localhost
+GOOSE_PROVIDER: ollama
+GOOSE_MODE: auto
+GOOSE_MODEL: qwen3:14b
+extensions:
+  developer:
+    bundled: true
+    display_name: Developer
+    enabled: true
+    name: developer
+    timeout: 300
+    type: builtin

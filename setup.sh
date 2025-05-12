@@ -748,6 +748,7 @@ elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
         deepseek-r1:14b
         qwen2.5-coder:latest
         nomic-embed-text:latest
+        qwen3:14b
     )
 
     for ollama_model in "${ollama_models[@]}"; do
@@ -875,6 +876,7 @@ declare -a stow_dirs_general=(
     gamemode
     gammastep
     ghostty
+    goose
     gtk
     helix
     hyprland
