@@ -1,12 +1,12 @@
 GOOSE_MODE: auto
-GOOSE_MODEL: qwen3:14b
-OLLAMA_HOST: localhost
 GOOSE_PROVIDER: ollama
+OLLAMA_HOST: localhost
+GOOSE_CLI_MIN_PRIORITY: 0.0
 extensions:
   bravesearch:
     args:
     - -y
-    - '@modelcontextprotocol/server-brave-search@latest'
+    - '@modelcontextprotocol/server-brave-search'
     bundled: null
     cmd: npx
     description: Retrieve web pages, news, and local business results via Brave API.
@@ -14,7 +14,7 @@ extensions:
     env_keys:
     - BRAVE_API_KEY
     envs: {}
-    name: Brave Search
+    name: bravesearch
     timeout: 300
     type: stdio
   computercontroller:
@@ -27,7 +27,7 @@ extensions:
   context7:
     args:
     - -y
-    - '@upstash/context7-mcp@latest'
+    - '@upstash/context7-mcp'
     bundled: null
     cmd: npx
     description: Connects to Context7.com's documentation database to provide up-to-date library and framework documentation with intelligent project ranking and customizable token limits.
@@ -54,7 +54,6 @@ extensions:
     env_keys: []
     envs: {}
     name: fetch
-    display_name: Fetch
     timeout: 300
     type: stdio
   git:
@@ -67,13 +66,12 @@ extensions:
     env_keys: []
     envs: {}
     name: git
-    display_name: Git
     timeout: 300
     type: stdio
   knowledgegraphmemory:
     args:
     - -y
-    - '@modelcontextprotocol/server-memory@latest'
+    - '@modelcontextprotocol/server-memory'
     bundled: null
     cmd: npx
     description: Graph-based memory system for persistent knowledge storage
@@ -81,7 +79,6 @@ extensions:
     env_keys: []
     envs: {}
     name: knowledgegraphmemory
-    display_name: Knowledge Graph Memory
     timeout: 300
     type: stdio
   memory:
@@ -91,17 +88,42 @@ extensions:
     name: memory
     timeout: 300
     type: builtin
-  sequentialthinking:
+  pandoc:
     args:
-    - -y
-    - '@modelcontextprotocol/server-sequential-thinking@latest'
+    - mcp-pandoc
     bundled: null
-    cmd: npx
-    description: Provides a sequential thinking framework for complex reasoning tasks, incorporating semantic analysis, contradiction detection, and adaptive complexity estimation to enable structured, reflective problem-solving.
+    cmd: uvx
+    description: Document format conversion using Pandoc, enabling transformation of content between PDF, HTML, Markdown, .docx, .rst, .epuc, .latex, and more.
     enabled: true
     env_keys: []
     envs: {}
-    name: sequentialthinking
-    display_name: Sequential Thinking
+    name: pandoc
     timeout: 300
     type: stdio
+  sequentialthinking:
+    args:
+    - -y
+    - '@modelcontextprotocol/server-sequential-thinking'
+    bundled: null
+    cmd: npx
+    description: Provides a sequential thinking framework for complex reasoning tasks, incorporating semantic analysis, contradiction detection, and adaptive complexity estimation to enable structured, reflective problem-solving.
+    enabled: false
+    env_keys: []
+    envs: {}
+    name: sequentialthinking
+    timeout: 300
+    type: stdio
+  vscode:
+    args:
+    - -y
+    - vscode-mcp-server
+    bundled: null
+    cmd: npx
+    description: VSCode MCP Server
+    enabled: true
+    env_keys: []
+    envs: {}
+    name: vscode
+    timeout: 300
+    type: stdio
+GOOSE_MODEL: qwen3:14b

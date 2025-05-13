@@ -1,0 +1,14 @@
+user:
+  always_allow:
+    - memory__remember_memory
+    - context7__get-library-docs
+    - sequentialthinking__sequentialthinking
+    - git__git_add
+    - developer__text_editor
+    - vscode__open_file
+  ask_before:
+    - developer__shell
+    - vscode__open_project
+    - vscode__execute_shell_command
+    - git__git_commit
+  never_allow: []
