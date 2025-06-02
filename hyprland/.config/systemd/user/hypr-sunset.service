@@ -9,6 +9,7 @@ ConditionEnvironment=WAYLAND_DISPLAY
 [Service]
 Type=simple
 ExecStart=/usr/bin/hyprsunset
+ExecStop=/usr/bin/hyprctl hyprsunset identity
 Slice=session.slice
 Restart=on-failure
 
