@@ -1,5 +1,5 @@
 GOOSE_MODE: auto
-GOOSE_PROVIDER: ollama
+ANTHROPIC_HOST: https://api.anthropic.com
 OLLAMA_HOST: localhost
 GOOSE_CLI_MIN_PRIORITY: 0.0
 extensions:
@@ -10,7 +10,7 @@ extensions:
     bundled: null
     cmd: npx
     description: Retrieve web pages, news, and local business results via Brave API.
-    enabled: true
+    enabled: false
     env_keys:
     - BRAVE_API_KEY
     envs: {}
@@ -75,7 +75,7 @@ extensions:
     bundled: null
     cmd: npx
     description: Graph-based memory system for persistent knowledge storage
-    enabled: true
+    enabled: false
     env_keys: []
     envs: {}
     name: knowledgegraphmemory
@@ -94,7 +94,7 @@ extensions:
     bundled: null
     cmd: uvx
     description: Document format conversion using Pandoc, enabling transformation of content between PDF, HTML, Markdown, .docx, .rst, .epuc, .latex, and more.
-    enabled: true
+    enabled: false
     env_keys: []
     envs: {}
     name: pandoc
@@ -113,6 +113,20 @@ extensions:
     name: sequentialthinking
     timeout: 300
     type: stdio
+  tavily-search:
+    args:
+    - -y
+    - tavily-mcp
+    bundled: null
+    cmd: npx
+    description: Integrates with Tavily API to provide real-time web search and content extraction capabilities for research, aggregation, and fact-checking tasks.
+    enabled: true
+    env_keys:
+    - TAVILY_API_KEY
+    envs: {}
+    name: tavily-search
+    timeout: 300
+    type: stdio
   vscode:
     args:
     - -y
@@ -126,4 +140,7 @@ extensions:
     name: vscode
     timeout: 300
     type: stdio
+GOOSE_PROVIDER: ollama
 GOOSE_MODEL: qwen3:14b
+GOOSE_PLANNER_PROVIDER: ollama
+GOOSE_PLANNER_MODEL: michaelneale/deepseek-r1-goose:latest
