@@ -937,14 +937,13 @@ for systemd_user_target in "${systemd_user_targets[@]}"; do
     }
 done
 
-    # "$base_path"/espanso/.config/systemd/user/espanso.service
 declare -a systemd_user_units=(
     "$base_path"/corectrl/.config/systemd/user/corectrl.service
     "$base_path"/dunst/.config/systemd/user/dunst-wl.service
-    "$base_path"/gammastep/.config/systemd/user/gammastep-wayland.service
-    "$base_path"/gammastep/.config/systemd/user/geoclue-agent.service
     "$base_path"/gtk/.config/systemd/user/xsettingsd.service
+    "$base_path"/hyprland/.config/systemd/user/hypr-sunset.service
     "$base_path"/hyprland/.config/systemd/user/hypridle.service
+    "$base_path"/hyprland/.config/systemd/user/hypr-sunsetr.service
     "$base_path"/khal/.config/systemd/user/vdirsyncer-sync.service
     "$base_path"/khal/.config/systemd/user/vdirsyncer-sync.timer
     "$base_path"/nextcloud/.config/systemd/user/nextcloud-client.service
@@ -964,6 +963,9 @@ declare -a systemd_user_units=(
     /usr/lib/systemd/user/wireplumber.service
     /usr/lib/systemd/user/yubikey-touch-detector.socket
     # /usr/lib/systemd/user/swaync.service
+    # "$base_path"/espanso/.config/systemd/user/espanso.service
+    # "$base_path"/gammastep/.config/systemd/user/gammastep-wayland.service
+    # "$base_path"/gammastep/.config/systemd/user/geoclue-agent.service
 )
 for systemd_user_unit in "${systemd_user_units[@]}"; do
     systemd_user_enable_start "${systemd_user_unit}"

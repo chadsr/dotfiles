@@ -1,0 +1,16 @@
+#[Sunsetr configuration]
+start_hyprsunset = true          # Set true if you're not using hyprsunset.service
+startup_transition = false       # Enable smooth transition when sunsetr starts
+startup_transition_duration = 10 # Duration of startup transition in seconds (10-60)
+sunset = "20:00:00"              # Time to transition to night mode (HH:MM:SS)
+sunrise = "06:00:00"             # Time to transition to day mode (HH:MM:SS)
+night_temp = 3300                # Color temperature after sunset (1000-20000) Kelvin
+day_temp = 6500                  # Color temperature during day (1000-20000) Kelvin
+night_gamma = 90                 # Gamma percentage for night (0-100%)
+day_gamma = 100                  # Gamma percentage for day (0-100%)
+transition_duration = 45         # Transition duration in minutes (5-120)
+update_interval = 60             # Update frequency during transitions in seconds (10-300)
+transition_mode = "finish_by"    # Transition timing mode:
+                                 # "finish_by" - transition completes at sunset/sunrise time
+                                 # "start_at" - transition starts at sunset/sunrise time
+                                 # "center" - transition is centered on sunset/sunrise time
