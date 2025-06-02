@@ -3,7 +3,7 @@
 if [ "$XDG_CURRENT_DESKTOP" = "Sway" ]; then
     swaymsg exit
 elif [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then
-    hyprctl dispatch exit
+    hyprctl dispatch exit 0
 else
     logout
 fi
