@@ -1,6 +1,6 @@
 {
     "label" : "lock",
-    "action" : "~/.config/hypr/scripts/lock.sh",
+    "action" : "~/.local/bin/screenlock",
     "text" : "Lock",
     "keybind" : "l"
 }
@@ -18,7 +18,7 @@
 }
 {
     "label" : "logout",
-    "action" : "hyprctl dispatch exit 0",
+    "action" : "~/.local/bin/delogout",
     "text" : "Logout",
     "keybind" : "e"
 }
