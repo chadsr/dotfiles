@@ -525,7 +525,7 @@ declare -a decrypt_data_paths_tuples=(
     "${data_path}/vdirsyncer/config.asc.gpg ${base_path}/khal/.config/vdirsyncer/config"
     "${data_path}/waybar/waybar-crypto/config.ini.asc.gpg ${base_path}/waybar/.config/waybar-crypto/config.ini"
     "${data_path}/xdg/mimeapps.list.asc.gpg ${base_path}/xdg/.config/mimeapps.list"
-    "${data_path}/radicle/keys/radicle.asc.gpg ${base_path}/radicle/.radicle/radicle"
+    "${data_path}/radicle/keys/radicle.asc.gpg ${base_path}/radicle/.radicle/keys/radicle"
 )
 for decrypt_data_paths_tuple in "${decrypt_data_paths_tuples[@]}"; do
     read -ra decrypt_data_paths <<<"$decrypt_data_paths_tuple"
