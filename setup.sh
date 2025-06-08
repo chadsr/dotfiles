@@ -5,17 +5,23 @@ gpg_encryption_subkey=0x79C70BBE4865D828
 
 laptop_hostname="thinky"
 desktop_hostname="shifty"
-current_hostname=$(hostname)
+current_hostname=${HOSTNAME}
 
 tmp_path=/tmp/setup-"$current_hostname"
 
 package_manager=/usr/bin/yay
 pkglist_system_path=/etc/pkglist.txt
+diff_command="nvim -d"
 
 # bare minimum packages needed by this script in order to bootstrap
 declare -a script_pkgs=(
+    ccid
     gnupg
     neovim
+    pass
+    pcsclite
+    stow
+    systemd-ukify
 )
 
 exit_setup() {
@@ -201,8 +207,8 @@ diff_files() {
         # If they are identical, then return
         return 0
     else
-        vimdiff -d "$1" "$2" || {
-            echo "vimdiff on ${1} <-> ${2}' exited with error"
+        ${diff_command} "$1" "$2" || {
+            echo "${diff_command} on ${1} <-> ${2}' exited with error"
             return 1
         }
     fi
@@ -290,7 +296,7 @@ add_group_user() {
 }
 
 set_default_kernel() {
-    local efi_loader_conf_path=/efi/loader/loader.conf
+    local efi_loader_conf_path=/boot/loader/loader.conf
     local kernel_suffix="${1}".conf
 
     case $(
@@ -363,6 +369,7 @@ install_packages "${script_pkgs[@]}"
 
 echo "Setting up GPG/SSH"
 gpg --list-keys >/dev/null
+systemd_enable_start /usr/lib/systemd/system/pcscd.socket
 
 echo "Removing broken symlinks in ${HOME}/.config"
 find ~/.config/ -xtype l -print -delete || {
@@ -586,7 +593,6 @@ declare -a systemd_units=(
     /usr/lib/systemd/system/clamav-freshclam-once.timer
     /usr/lib/systemd/system/ly.service
     /usr/lib/systemd/system/ollama.service
-    /usr/lib/systemd/system/pcscd.socket
     /usr/lib/systemd/system/smartd.service
     /usr/lib/systemd/system/swayosd-libinput-backend.service
 )
@@ -628,6 +634,20 @@ if ! sudo test -f "${corectrl_rules_path}"; then
         exit 1
     }
 fi
+
+hyprpm update || {
+    echo "failed to update hyprpm"
+    exit 1
+}
+
+hyprpm add https://github.com/hyprwm/hyprland-plugins || {
+    echo "hyprland plugins already installed"
+}
+
+hyprpm enable hyprexpo || {
+    echo "failed to enable hyprexpo"
+    exit 1
+}
 
 echo "Copying common system configuration"
 rsync_system_config common/
@@ -687,6 +707,23 @@ if [[ "$current_hostname" == "$laptop_hostname" ]]; then
         }
     done
 elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
+    # Update amdgpu boot parameter
+    # https://wiki.archlinux.org/title/AMDGPU#Boot_parameter
+    amdgpu_key="amdgpu.ppfeaturemask"
+    cmd_line_file_path=${base_path}/system/${desktop_hostname}/etc/cmdline.d/amdgpu_ppfeaturemask.conf
+    amdgpu_boot_parameter=$(printf '%s=0x%x\n' "$amdgpu_key" "$(($(cat /sys/module/amdgpu/parameters/ppfeaturemask) | 0x4000))")
+    if sudo test -f "$cmd_line_file_path"; then
+        if ! string_exists "$amdgpu_boot_parameter" "$cmd_line_file_path"; then
+            echo "Appending boot parameter '$amdgpu_boot_parameter' to $cmd_line_file_path"
+            echo " $amdgpu_boot_parameter" | sudo tee "$cmd_line_file_path" >/dev/null
+        else
+            echo "${amdgpu_key} already exists in ${cmd_line_file_path}. skipping."
+        fi
+    else
+        echo "${cmd_line_file_path} does not exist!"
+        exit 1
+    fi
+
     echo "Copying desktop system configuration"
     rsync_system_config "$desktop_hostname"/
 
@@ -700,32 +737,12 @@ elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
         stow_config "$stow_dir"
     done
 
-    set_default_kernel zen
-
-    # Update amdgpu boot parameter
-    # https://wiki.archlinux.org/title/AMDGPU#Boot_parameter
-    amdgpu_key="amdgpu.ppfeaturemask"
-    cmd_line_file_path=/etc/kernel/cmdline
-    amdgpu_boot_parameter=$(printf '%s=0x%x\n' "$amdgpu_key" "$(($(cat /sys/module/amdgpu/parameters/ppfeaturemask) | 0x4000))")
-    if sudo test -f "$cmd_line_file_path"; then
-        if ! string_exists "$amdgpu_key" "$cmd_line_file_path"; then
-            echo "Appending boot parameter '$amdgpu_boot_parameter' to $cmd_line_file_path"
-            echo " $amdgpu_boot_parameter" | sudo tee -a "$cmd_line_file_path" >/dev/null
-            sudo reinstall-kernels | {
-                echo "failed to re-install kernels"
-                exit 1
-            }
-        else
-            echo "${amdgpu_key} already exists in ${cmd_line_file_path}. skipping."
-        fi
-    else
-        echo "${cmd_line_file_path} does not exist!"
-        exit 1
-    fi
+    # TODO: Re-enable once decision on kernel builder is made
+    # set_default_kernel zen
 
     declare -a systemd_units_desktop=(
-        /usr/lib/systemd/system/coolercontrol-liqctld.service
         /usr/lib/systemd/system/coolercontrold.service
+        /usr/lib/systemd/system/coolercontrol-liqctld.service
         /usr/lib/systemd/system/logid.service
         /usr/lib/systemd/system/power-profiles-daemon.service
     )
@@ -923,6 +940,11 @@ bat cache --build || {
     exit 1
 }
 
+vdirsyncer discover || {
+    echo "failed to setup vdirsyncer mailbox"
+    exit 1
+}
+
 echo "Enabling/Starting Systemd User Units"
 systemctl --user daemon-reload || {
     echo "failed to userspace systemd daemon-reload"
@@ -945,8 +967,8 @@ declare -a systemd_user_units=(
     "$base_path"/dunst/.config/systemd/user/dunst-wl.service
     "$base_path"/gtk/.config/systemd/user/xsettingsd.service
     "$base_path"/hyprland/.config/systemd/user/hypr-sunset.service
-    "$base_path"/hyprland/.config/systemd/user/hypridle.service
     "$base_path"/hyprland/.config/systemd/user/hypr-sunsetr.service
+    "$base_path"/hyprland/.config/systemd/user/hypridle.service
     "$base_path"/khal/.config/systemd/user/vdirsyncer-sync.service
     "$base_path"/khal/.config/systemd/user/vdirsyncer-sync.timer
     "$base_path"/nextcloud/.config/systemd/user/nextcloud-client.service
