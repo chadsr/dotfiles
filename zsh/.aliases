@@ -6,6 +6,7 @@ alias android-studio='env QT_QPA_PLATFORM=xcb android-studio'
 
 alias vim='nvim'
 alias vi='nvim'
+alias vimdiff='nvim -d'
 alias cat='bat'
 # shellcheck disable=SC2142
 alias catcp='f() { cat "$1" | wl-copy };f'
