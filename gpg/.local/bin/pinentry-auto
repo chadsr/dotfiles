@@ -8,6 +8,7 @@ _exists() {
 
 if [ -n "${DISPLAY-}" ]; then
     _exists pinentry-dmenu && pe=$(which pinentry-dmenu)
+    _exists pinentry-rofi && pe=$(which pinentry-rofi)
     _exists pinentry-wayprompt && pe=$(which pinentry-wayprompt)
 else
     _exists pinentry-tty && pe=$(which pinentry-tty)
