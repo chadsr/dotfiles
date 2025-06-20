@@ -1,0 +1,18 @@
+@import "catppuccin-mocha"
+configuration {
+  modi: "window,run,ssh";
+  font: "hack nerd font mono 10";
+  sort: true;
+  sorting-method: "normal";
+  matching: "normal";
+  tokenize: true;
+  timeout {
+    action: "kb-cancel";
+    delay:  0;
+  }
+  filebrowser {
+    directories-first: true;
+    sorting-method:    "name";
+  }
+}
+@theme "catppuccin-default"

@@ -48,3 +48,7 @@
 	path = .git_submodules/cryptofont
 	url = https://github.com/Cryptofonts/cryptofont.git
     branch = master
+[submodule ".git_submodules/catppuccin-rofi"]
+	path = .git_submodules/catppuccin-rofi
+	url = https://github.com/catppuccin/rofi.git
+    branch = main

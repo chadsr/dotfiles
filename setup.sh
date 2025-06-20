@@ -856,19 +856,21 @@ mv "${git_submodule_path}"/catppuccin-bat/themes/Catppuccin\ Mocha.tmTheme "${gi
 }
 
 declare -a symlink_paths_tuples=(
+    "${base_path}/steam/.steam/steam/steam_dev.cfg ${HOME}/.steam/steam/steam_dev.cfg"
     "${git_submodule_path}/alacritty-theme/themes ${base_path}/alacritty/.config/alacritty/themes"
     "${git_submodule_path}/catppuccin-bat/themes/Catppuccin-Mocha.tmTheme ${base_path}/bat/.config/bat/themes/Catppuccin-Mocha.tmTheme"
     "${git_submodule_path}/catppuccin-helix/themes/default/catppuccin_mocha.toml ${base_path}/helix/.config/helix/themes/catppuccin_mocha.toml"
     "${git_submodule_path}/catppuccin-hyprland/themes/mocha.conf ${base_path}/hyprland/.config/hypr/themes/colors.conf"
     "${git_submodule_path}/catppuccin-kvantum/themes/catppuccin-mocha-mauve ${base_path}/qt/.config/Kvantum/catppuccin-mocha-mauve"
     "${git_submodule_path}/catppuccin-waybar/themes/mocha.css ${base_path}/waybar/.config/waybar/theme.css"
+    "${git_submodule_path}/catppuccin-rofi/catppuccin-default.rasi ${base_path}/rofi/.config/rofi/catppuccin-default.rasi"
+    "${git_submodule_path}/catppuccin-rofi/themes/catppuccin-mocha.rasi ${base_path}/rofi/.config/rofi/catppuccin-mocha.rasi"
+    "${git_submodule_path}/cryptofont/fonts/cryptofont.ttf ${base_path}/fonts/.local/share/fonts/TTF/cryptofont.ttf"
     "${git_submodule_path}/sweet-theme/assets ${base_path}/gtk/.themes/Sweet/assets"
     "${git_submodule_path}/sweet-theme/gtk-2.0 ${base_path}/gtk/.themes/Sweet/gtk-2.0"
     "${git_submodule_path}/sweet-theme/gtk-3.0 ${base_path}/gtk/.themes/Sweet/gtk-3.0"
     "${git_submodule_path}/sweet-theme/gtk-4.0 ${base_path}/gtk/.themes/Sweet/gtk-4.0"
     "${git_submodule_path}/sweet-theme/index.theme ${base_path}/gtk/.themes/Sweet/index.theme"
-    "${git_submodule_path}/cryptofont/fonts/cryptofont.ttf ${base_path}/fonts/.local/share/fonts/TTF/cryptofont.ttf"
-    "${base_path}/steam/.steam/steam/steam_dev.cfg ${HOME}/.steam/steam/steam_dev.cfg"
 )
 for symlink_paths_tuple in "${symlink_paths_tuples[@]}"; do
     read -ra symlink_paths <<<"$symlink_paths_tuple"
@@ -914,6 +916,7 @@ declare -a stow_dirs_general=(
     qt
     radicle
     ranger
+    rofi
     scripts
     sway
     swww

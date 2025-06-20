@@ -29,6 +29,8 @@ waybar/.config/waybar/theme.css
 waybar/.local/share/fonts/TTF/*
 xdg/.config/mimeapps.list
 radicle/.radicle/keys/radicle
+rofi/.config/rofi/catppuccin-mocha.rasi
+rofi/.config/rofi/catppuccin-default.rasi
 !bat/.config/bat/themes/.gitkeep
 !continue/.continue/config.json
 !corectrl/.config/corectrl/profiles/.gitkeep
