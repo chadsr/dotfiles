@@ -20,11 +20,11 @@ else
     export GPG_TTY=$TTY
 fi
 
-AGENT_SSH_SOCKET=$(gpgconf --list-dirs agent-ssh-socket)
-export SSH_AUTH_SOCK=AGENT_SSH_SOCKET
-gpg-connect-agent updatestartuptty /bye >/dev/null
-
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    AGENT_SSH_SOCKET=$(gpgconf --list-dirs agent-ssh-socket)
+    export SSH_AUTH_SOCK=AGENT_SSH_SOCKET
+    gpg-connect-agent updatestartuptty /bye >/dev/null
+
     LINUX_ASKPASS=$(which wayprompt-ssh-askpass)
     export SSH_ASKPASS="$LINUX_ASKPASS"
 
