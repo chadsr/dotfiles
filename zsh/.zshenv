@@ -13,8 +13,16 @@ typeset -U PATH path
 ############
 #   GPG    #
 ############
-CURRENT_TTY=$(tty)
-export GPG_TTY="$CURRENT_TTY"
+if [ -z ${TTY+x} ]; then
+    DEFAULT_TTY=$(tty)
+    export GPG_TTY=$DEFAULT_TTY
+else
+    export GPG_TTY=$TTY
+fi
+
+AGENT_SSH_SOCKET=$(gpgconf --list-dirs agent-ssh-socket)
+export SSH_AUTH_SOCK=AGENT_SSH_SOCKET
+gpg-connect-agent updatestartuptty /bye >/dev/null
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     LINUX_ASKPASS=$(which wayprompt-ssh-askpass)
