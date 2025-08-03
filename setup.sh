@@ -410,7 +410,6 @@ declare -a mk_dirs=(
     ~/.config/nvim/
     ~/.config/pulse/
     ~/.config/pulseaudio-ctl/
-    ~/.config/sunsetr/geo.toml
     ~/.config/systemd/user/
     ~/.config/Thunar/
     ~/.config/tidal-hifi/
@@ -460,6 +459,13 @@ echo "Checking for files/directories that will conflict with stow"
 for conflict_path in "${conflict_paths[@]}"; do
     rm_if_not_stowed "${conflict_path}"
 done
+
+if ! [ -e "$HOME/.config/sunsetr/geo.toml" ]; then
+    touch "$HOME/.config/sunsetr/geo.toml" || {
+        echo "failed to create sunsetr geo.toml"
+        exit 1
+    }
+fi
 
 echo "Appending custom pinentry script to gpg-agent.conf"
 # GNUPG is ridiculous and only allows env-vars in some of the options here, so we have to do this the convoluted way with a line append
