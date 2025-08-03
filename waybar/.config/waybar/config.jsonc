@@ -129,11 +129,10 @@
         "return-type": "json",
         "format-icons": {
             "has-updates": "󱍷",
-            "updated": ""
+            "updated": "󰂪"
         },
-        "on-click": "alacritty -t 'Updating Packages' -e yay",
         "exec-if": "which waybar-module-pacman-updates",
-        "exec": "waybar-module-pacman-updates --no-zero-output"
+        "exec": "waybar-module-pacman-updates --no-zero-output --interval-seconds 60 --network-interval-seconds 300"
     },
     "custom/yubikey": {
         "exec": "$HOME/.config/waybar/modules/yubikey/waybar-yubikey",

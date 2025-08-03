@@ -410,6 +410,7 @@ declare -a mk_dirs=(
     ~/.config/nvim/
     ~/.config/pulse/
     ~/.config/pulseaudio-ctl/
+    ~/.config/sunsetr/geo.toml
     ~/.config/systemd/user/
     ~/.config/Thunar/
     ~/.config/tidal-hifi/
