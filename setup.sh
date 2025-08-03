@@ -133,7 +133,7 @@ rsync_system_config() {
         return 1
     fi
 
-    sudo rsync --chown=root:root --open-noatime --progress -ruacv -- "${system_config_full_path}"/* / || {
+    sudo rsync --chown=root:root --open-noatime --exclude='.gitkeep' --progress -ruacv -- "${system_config_full_path}"/* / || {
         echo "failed to rsync system config from ${system_config_full_path} to root filesystem"
         return 1
     }
