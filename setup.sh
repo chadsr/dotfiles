@@ -698,6 +698,7 @@ if [[ "$current_hostname" == "$laptop_hostname" ]]; then
         deepseek-r1:latest
         qwen2.5-coder:1.5b-base
         nomic-embed-text:latest
+        qwen3:14b
     )
 
     for ollama_model in "${ollama_models[@]}"; do
