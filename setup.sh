@@ -889,7 +889,6 @@ done
 
 declare -a stow_dirs_general=(
     alacritty
-    android
     bat
     bemenu
     cava
