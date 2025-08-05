@@ -1,5 +1,6 @@
 [core]
 	pager = delta
+	symlinks = true
 
 [interactive]
 	diffFilter = delta --color-only --features=interactive
