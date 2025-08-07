@@ -31,7 +31,6 @@ waybar/.local/share/fonts/TTF/*
 xdg/.config/mimeapps.list
 radicle/.radicle/keys/radicle
 rofi/.config/rofi/catppuccin-mocha.rasi
-rofi/.config/rofi/catppuccin-default.rasi
 system/shifty/boot/loader/entries/*
 !system/shifty/boot/loader/entries/.gitkeep
 !bat/.config/bat/themes/.gitkeep

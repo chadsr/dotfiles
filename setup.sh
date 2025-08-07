@@ -872,7 +872,6 @@ declare -a symlink_paths_tuples=(
     "${git_submodule_path}/catppuccin-hyprland/themes/mocha.conf ${base_path}/hyprland/.config/hypr/themes/colors.conf"
     "${git_submodule_path}/catppuccin-kvantum/themes/catppuccin-mocha-mauve ${base_path}/qt/.config/Kvantum/catppuccin-mocha-mauve"
     "${git_submodule_path}/catppuccin-waybar/themes/mocha.css ${base_path}/waybar/.config/waybar/theme.css"
-    "${git_submodule_path}/catppuccin-rofi/catppuccin-default.rasi ${base_path}/rofi/.config/rofi/catppuccin-default.rasi"
     "${git_submodule_path}/catppuccin-rofi/themes/catppuccin-mocha.rasi ${base_path}/rofi/.config/rofi/catppuccin-mocha.rasi"
     "${git_submodule_path}/cryptofont/fonts/cryptofont.ttf ${base_path}/fonts/.local/share/fonts/TTF/cryptofont.ttf"
     "${git_submodule_path}/sweet-theme/assets ${base_path}/gtk/.themes/Sweet/assets"
@@ -885,6 +884,16 @@ for symlink_paths_tuple in "${symlink_paths_tuples[@]}"; do
     read -ra symlink_paths <<<"$symlink_paths_tuple"
     symlink "${symlink_paths[0]}" "${symlink_paths[1]}"
 done
+
+cp "${git_submodule_path}/catppuccin-rofi/catppuccin-default.rasi" "${base_path}/rofi/.config/rofi/catppuccin-default.rasi" || {
+    echo "failed to copy catppuccin-default.rasi"
+    exit 1
+}
+
+sed -i 's/\/\/ @import "catppuccin-mocha"/@import "catppuccin-mocha"/' "${base_path}/rofi/.config/rofi/catppuccin-default.rasi" || {
+    echo "failed to activate rofi catppuccin mocha theme"
+    exit 1
+}
 
 declare -a stow_dirs_general=(
     alacritty
