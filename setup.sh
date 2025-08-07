@@ -753,7 +753,6 @@ elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
     declare -a systemd_units_desktop=(
         /usr/lib/systemd/system/coolercontrold.service
         /usr/lib/systemd/system/coolercontrol-liqctld.service
-        /usr/lib/systemd/system/logid.service
         /usr/lib/systemd/system/power-profiles-daemon.service
     )
     for systemd_unit_desktop in "${systemd_units_desktop[@]}"; do
@@ -927,6 +926,7 @@ declare -a stow_dirs_general=(
     ranger
     rofi
     scripts
+    solaar
     sway
     swww
     systemd
@@ -984,6 +984,7 @@ declare -a systemd_user_units=(
     "$base_path"/khal/.config/systemd/user/vdirsyncer-sync.service
     "$base_path"/khal/.config/systemd/user/vdirsyncer-sync.timer
     "$base_path"/nextcloud/.config/systemd/user/nextcloud-client.service
+    "$base_path"/solaar/.config/systemd/user/solaar.service
     "$base_path"/sway/.config/systemd/user/kanshi.service
     "$base_path"/sway/.config/systemd/user/swayidle.service
     "$base_path"/sway/.config/systemd/user/swayosd.service
@@ -999,10 +1000,10 @@ declare -a systemd_user_units=(
     /usr/lib/systemd/user/pipewire.service
     /usr/lib/systemd/user/wireplumber.service
     /usr/lib/systemd/user/yubikey-touch-detector.socket
-    # /usr/lib/systemd/user/swaync.service
     # "$base_path"/espanso/.config/systemd/user/espanso.service
     # "$base_path"/gammastep/.config/systemd/user/gammastep-wayland.service
     # "$base_path"/gammastep/.config/systemd/user/geoclue-agent.service
+    # /usr/lib/systemd/user/swaync.service
 )
 for systemd_user_unit in "${systemd_user_units[@]}"; do
     systemd_user_enable_start "${systemd_user_unit}"
