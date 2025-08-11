@@ -6,7 +6,7 @@
     m-key-leds, mr-key-led, multiplatform, gesture2-gestures, gesture2-divert, gesture2-params, sidetone, equalizer, adc_power_management]
   _battery: 4096
   _modelId: B02340820000
-  _sensitive: {dpi: true, hires-smooth-invert: false, hires-smooth-resolution: true, scroll-ratchet: true, thumb-scroll-mode: true}
+  _sensitive: {divert-keys: false, dpi: true, hires-smooth-invert: false, hires-smooth-resolution: true, scroll-ratchet: true, thumb-scroll-mode: true}
   _serial: 0728019F
   _unitId: 0728019F
   _wpid: '4082'
@@ -21,7 +21,7 @@
   smart-shift: 30
   thumb-scroll-invert: false
   thumb-scroll-mode: true
-- _NAME: MX Ergo
+- _NAME: 'MX Ergo Multi-Device Trackball '
   _absent: [hi-res-scroll, hires-smooth-invert, hires-smooth-resolution, hires-scroll-mode, scroll-ratchet, smart-shift, thumb-scroll-invert, thumb-scroll-mode,
     onboard_profiles, report_rate, report_rate_extended, dpi, dpi_extended, backlight, backlight_level, backlight_duration_hands_out, backlight_duration_hands_in,
     backlight_duration_powered, backlight-timed, led_control, led_zone_, rgb_control, rgb_zone_, brightness_control, per-key-lighting, fn-swap, disable-keyboard-keys,
