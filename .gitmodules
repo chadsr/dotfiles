@@ -52,3 +52,7 @@
 	path = .git_submodules/catppuccin-rofi
 	url = https://github.com/catppuccin/rofi.git
     branch = main
+[submodule ".git_submodules/catppuccin-btop"]
+	path = .git_submodules/catppuccin-btop
+	url = https://github.com/catppuccin/btop.git
+    branch = main

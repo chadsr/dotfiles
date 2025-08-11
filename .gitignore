@@ -32,6 +32,7 @@ xdg/.config/mimeapps.list
 radicle/.radicle/keys/radicle
 rofi/.config/rofi/catppuccin-mocha.rasi
 system/shifty/boot/loader/entries/*
+btop/.config/btop/themes/*
 !system/shifty/boot/loader/entries/.gitkeep
 !bat/.config/bat/themes/.gitkeep
 !continue/.continue/config.json
@@ -51,3 +52,4 @@ system/shifty/boot/loader/entries/*
 !tidal-hifi/.config/tidal-hifi/.gitkeep
 !waybar/.config/waybar/modules/crypto/.gitkeep
 !waybar/.local/share/fonts/TTF/.gitkeep
+!btop/.config/btop/themes/.gitkeep
