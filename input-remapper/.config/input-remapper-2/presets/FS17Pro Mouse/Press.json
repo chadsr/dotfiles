@@ -1,0 +1,15 @@
+[
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 48,
+                "origin_hash": "31b5f5328385271f3ea79ca39b8ff2c8"
+            }
+        ],
+        "target_uinput": "mouse",
+        "output_symbol": "BTN_LEFT",
+        "name": "Press",
+        "mapping_type": "key_macro"
+    }
+]
