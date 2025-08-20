@@ -1,7 +1,9 @@
 {"_id":"allowDashAv1Formats","value":true}
+{"_id":"backendPreference","value":"local"}
 {"_id":"barColor","value":false}
-{"_id":"bounds","value":{"x":0,"y":0,"width":1720,"height":1440,"maximized":true,"fullScreen":false}}
+{"_id":"bounds","value":{"x":0,"y":0,"width":1720,"height":1416,"maximized":true,"fullScreen":false}}
 {"_id":"checkForBlogPosts","value":false}
+{"_id":"defaultInvidiousInstance","value":"https://https://yewtu.be"}
 {"_id":"defaultQuality","value":"1080"}
 {"_id":"disableSmoothScrolling","value":true}
 {"_id":"externalPlayer","value":"mpv"}
