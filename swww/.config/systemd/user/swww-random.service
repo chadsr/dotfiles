@@ -7,7 +7,7 @@ After=graphical-session.target
 Type=simple
 Restart=always
 RestartSec=1
-ExecStart=%h/.local/bin/swww_random_multi ./Pictures/Backgrounds crop 300
+ExecStart=%h/.local/bin/swww_random_multi %h/Pictures/Backgrounds crop 300
 
 [Install]
 WantedBy=sway-session.target
