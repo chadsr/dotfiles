@@ -49,7 +49,7 @@ INTERVAL=$3
 DISPLAY_LIST=$(swww query | grep -Po "^[^:]+")
 
 while true; do
-    find -L "$PICTURE_DIR" -type f |
+    find -L "$PICTURE_DIR" -type f \( -name '*.jpg' -o -name '*.JPG' -o -name '*.png' -o -name '*.PNG' \) |
         while read -r img; do
             echo "$RANDOM:$img"
         done |
