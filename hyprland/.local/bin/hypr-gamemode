@@ -17,6 +17,7 @@ if [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then
         systemctl --user stop hypridle.service
         systemctl --user stop hypr-sunset.service
         systemctl --user stop hypr-sunsetr.service
+        systemctl --user stop wlr-sunclock.service
         exit
     else
         systemctl --user start waybar.service
@@ -24,6 +25,7 @@ if [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then
         systemctl --user start hypridle.service
         systemctl --user start hypr-sunset.service
         systemctl --user start hypr-sunsetr.service
+        systemctl --user start wlr-sunclock.service
     fi
 
     hyprctl reload
