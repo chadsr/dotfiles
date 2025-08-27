@@ -3,7 +3,6 @@
 alacritty/.config/alacritty/themes
 bat/.config/bat/themes/*
 continue/.continue/*
-corectrl/.config/corectrl/profiles/*
 cura/.config/cura/5.7/cura.cfg
 data/pkgs/*
 fonts/.local/share/fonts/TTF/cryptofont.ttf
@@ -36,7 +35,6 @@ btop/.config/btop/themes/*
 !system/shifty/boot/loader/entries/.gitkeep
 !bat/.config/bat/themes/.gitkeep
 !continue/.continue/config.json
-!corectrl/.config/corectrl/profiles/.gitkeep
 !data/pkgs/*.asc.gpg
 !freetube/.config/FreeTube/settings.db
 !gallery-dl/.config/gallery-dl/.gitkeep

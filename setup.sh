@@ -401,7 +401,6 @@ echo "Setting up user directory configs"
 declare -a mk_dirs=(
     ~/.cargo/
     ~/.config/bat/themes/
-    ~/.config/corectrl/profiles/
     ~/.config/environment.d/
     ~/.config/figma-linux/
     ~/.config/khal/
@@ -524,10 +523,6 @@ pkglist_remove_path="$data_path"/pkgs/remove.txt
 
 echo "Decrypting data"
 declare -a decrypt_data_paths_tuples=(
-    "${data_path}/corectrl/${current_hostname}__global_.ccpro.asc.gpg ${base_path}/corectrl/.config/corectrl/profiles/_global_.ccpro"
-    "${data_path}/corectrl/${current_hostname}_codium.ccpro.asc.gpg ${base_path}/corectrl/.config/corectrl/profiles/codium.ccpro"
-    "${data_path}/corectrl/${current_hostname}_gamemoded.ccpro.asc.gpg ${base_path}/corectrl/.config/corectrl/profiles/gamemoded.ccpro"
-    "${data_path}/corectrl/${current_hostname}_gyroflow.ccpro.asc.gpg ${base_path}/corectrl/.config/corectrl/profiles/gyroflow.ccpro"
     "${data_path}/cura/cura.cfg.asc.gpg ${base_path}/cura/.config/cura/5.7/cura.cfg"
     "${data_path}/gallery-dl/config.json.asc.gpg ${base_path}/gallery-dl/.config/gallery-dl/config.json"
     "${data_path}/gtk/bookmarks.asc.gpg ${base_path}/gtk/.config/gtk-3.0/bookmarks"
@@ -634,16 +629,6 @@ rustup component add clippy rustfmt || {
 }
 
 sudo update-smart-drivedb
-
-corectrl_rules_path=/etc/polkit-1/rules.d/90-corectrl.rules
-if ! sudo test -f "${corectrl_rules_path}"; then
-    echo "Setting up polkit for Corectrl"
-
-    envsubst <"$data_path"/corectrl/90-corectrl.rules | sudo tee ${corectrl_rules_path} || {
-        echo "Failed to setup polkit for Corectrl"
-        exit 1
-    }
-fi
 
 hyprpm update || {
     echo "failed to update hyprpm"
@@ -752,8 +737,9 @@ elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
     # set_default_kernel zen
 
     declare -a systemd_units_desktop=(
-        /usr/lib/systemd/system/coolercontrold.service
         /usr/lib/systemd/system/coolercontrol-liqctld.service
+        /usr/lib/systemd/system/coolercontrold.service
+        /usr/lib/systemd/system/lactd.service
         /usr/lib/systemd/system/power-profiles-daemon.service
     )
     for systemd_unit_desktop in "${systemd_units_desktop[@]}"; do
@@ -906,7 +892,6 @@ declare -a stow_dirs_general=(
     chromium
     clipse
     coolercontrol
-    corectrl
     cura
     dunst
     electron
@@ -926,6 +911,7 @@ declare -a stow_dirs_general=(
     java
     kde
     khal
+    lact
     logseq
     mangohud
     mpv
@@ -989,7 +975,6 @@ for systemd_user_target in "${systemd_user_targets[@]}"; do
 done
 
 declare -a systemd_user_units=(
-    "$base_path"/corectrl/.config/systemd/user/corectrl.service
     "$base_path"/dunst/.config/systemd/user/dunst-wl.service
     "$base_path"/gtk/.config/systemd/user/xsettingsd.service
     "$base_path"/hyprland/.config/systemd/user/hypr-sunset.service

@@ -234,19 +234,19 @@
         "tooltip-format": "GPU Temperature: {temperatureC}°C",
         "hwmon-path": "/tmp/gpu_temperature",
         "critical-threshold": 85,
-        "on-click": "coolercontrol"
+        "on-click": "lact"
     },
     "cpu": {
         "format": "{usage}% ",
         "interval": 5,
         "tooltip": true,
-        "on-click": "corectrl"
+        "on-click": "coolercontrol"
     },
     "memory": {
         "format": "{}% ",
         "interval": 10,
         "tooltip": true,
-        "on-click": "corectrl"
+        "on-click": "coolercontrol"
     },
     "disk": {
         "interval": 600,
