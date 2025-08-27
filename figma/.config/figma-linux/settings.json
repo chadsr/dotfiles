@@ -1,10 +1,12 @@
 {
   "clientId": "someID",
   "userId": "",
-  "authedUserIDs": [],
+  "authedUserIDs": [
+    "909037475001805614"
+  ],
   "app": {
     "logLevel": 1,
-    "lastTimeClearLogFile": 1750759338309,
+    "lastTimeClearLogFile": 1751633965980,
     "enableColorSpaceSrgb": true,
     "visibleNewProjectBtn": true,
     "useZenity": false,

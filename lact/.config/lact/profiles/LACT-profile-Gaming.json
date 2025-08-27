@@ -1,1 +1,14 @@
-{"gpus":{"1002:7550-1043:061A-0000:2c:00.0":{"fan_control_enabled":false,"pmfw_options":{"zero_rpm":false},"power_cap":325.0,"performance_level":"auto","max_memory_clock":1375,"gpu_clock_offsets":{"0":400},"voltage_offset":-100}},"rule":{"type":"gamemode","filter":null}}
+{
+    "gpus": {
+        "1002:7550-1043:061A-0000:2c:00.0": {
+            "fan_control_enabled": false,
+            "pmfw_options": { "zero_rpm": false },
+            "power_cap": 325.0,
+            "performance_level": "auto",
+            "max_memory_clock": 1375,
+            "gpu_clock_offsets": { "0": 400 },
+            "voltage_offset": -100
+        }
+    },
+    "rule": { "type": "gamemode", "filter": null }
+}

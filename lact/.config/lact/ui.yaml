@@ -1,16 +1,16 @@
-selected_gpu: '1002:7550-1043:061A-0000:2c:00.0'
+selected_gpu: "1002:7550-1043:061A-0000:2c:00.0"
 plots_time_period: 60
 plots_per_row: 2
 gpus:
-  '1002:7550-1043:061A-0000:2c:00.0':
+  "1002:7550-1043:061A-0000:2c:00.0":
     plots:
-    - - !Temperature edge
-      - !Temperature junction
-      - !Temperature mem
-    - - GpuClock
-      - GpuTargetClock
-      - VramClock
-    - - FanRpm
-      - FanPwm
-    - - PowerAverage
-      - PowerCap
+      - - !Temperature edge
+        - !Temperature junction
+        - !Temperature mem
+      - - GpuClock
+        - GpuTargetClock
+        - VramClock
+      - - FanRpm
+        - FanPwm
+      - - PowerAverage
+        - PowerCap

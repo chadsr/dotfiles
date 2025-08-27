@@ -1,4 +1,4 @@
-@import "theme.css";
+@import 'theme.css';
 
 @define-color focused @mauve;
 @define-color urgent @mauve;
@@ -23,7 +23,7 @@
 }
 
 * {
-    font-family: "Hack Nerd Font Mono";
+    font-family: 'Hack Nerd Font Mono';
     font-size: 12px;
     border: none;
     border-radius: 0;
@@ -57,7 +57,9 @@ tooltip label {
     padding: 0 8px;
 }
 
-#workspaces button.focused, #workspaces button:hover, #workspaces button.active {
+#workspaces button.focused,
+#workspaces button:hover,
+#workspaces button.active {
     background: @focused;
     color: @section-one;
 }
@@ -86,7 +88,8 @@ tooltip label {
     color: @focused;
 }
 
-#workspaces button, #idle_inhibitor {
+#workspaces button,
+#idle_inhibitor {
     background: @section-one;
 }
 
@@ -143,15 +146,15 @@ tooltip label {
     padding: 0 4px;
 }
 
-#tray>.passive {
+#tray > .passive {
     -gtk-icon-effect: dim;
 }
 
-#tray>.active {
+#tray > .active {
     -gtk-icon-effect: highlight;
 }
 
-#tray>.needs-attention {
+#tray > .needs-attention {
     -gtk-icon-effect: highlight;
     animation: urgent-animation 0.5s steps(10) infinite;
 }

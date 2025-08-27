@@ -1,1 +1,10 @@
-{"gpus":{"1002:7550-1043:061A-0000:2c:00.0":{"fan_control_enabled":false,"pmfw_options":{"zero_rpm":false},"power_cap":317.0,"performance_level":"auto"}}}
+{
+    "gpus": {
+        "1002:7550-1043:061A-0000:2c:00.0": {
+            "fan_control_enabled": false,
+            "pmfw_options": { "zero_rpm": false },
+            "power_cap": 317.0,
+            "performance_level": "auto"
+        }
+    }
+}

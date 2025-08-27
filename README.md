@@ -6,7 +6,6 @@ My dotfiles, managed with [`stow`](https://www.gnu.org/software/stow/).
 
 ![Hyprland](.github/assets/hypr.png)
 
-
 ## Setup
 
 ```shell
