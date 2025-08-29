@@ -529,6 +529,8 @@ declare -a decrypt_data_paths_tuples=(
     "${data_path}/khal/config.asc.gpg ${base_path}/khal/.config/khal/config"
     "${data_path}/pkgs/remove.txt.asc.gpg ${pkglist_remove_path}"
     "${data_path}/prusaslicer/PrusaSlicer.ini.asc.gpg ${base_path}/prusaslicer/.config/PrusaSlicer/PrusaSlicer.ini"
+    "${data_path}/qbittorrent/categories.json.asc ${base_path}/qbittorrent/.config/qBittorrent/categories.json"
+    "${data_path}/qbittorrent/qBittorrent.conf.asc ${base_path}/qbittorrent/.config/qBittorrent/qBittorrent.conf"
     "${data_path}/radicle/keys/radicle.asc.gpg ${base_path}/radicle/.radicle/keys/radicle"
     "${data_path}/ssh/config.asc.gpg ${base_path}/ssh/.ssh/config"
     "${data_path}/system/${current_hostname}/boot/loader/entries/arch-zen.asc.conf ${base_path}/system/${current_hostname}/boot/loader/entries/arch-zen.conf"
@@ -536,7 +538,6 @@ declare -a decrypt_data_paths_tuples=(
     "${data_path}/vdirsyncer/config.asc.gpg ${base_path}/khal/.config/vdirsyncer/config"
     "${data_path}/waybar/waybar-crypto/config.ini.asc.gpg ${base_path}/waybar/.config/waybar-crypto/config.ini"
     "${data_path}/xdg/mimeapps.list.asc.gpg ${base_path}/xdg/.config/mimeapps.list"
-
 )
 for decrypt_data_paths_tuple in "${decrypt_data_paths_tuples[@]}"; do
     read -ra decrypt_data_paths <<<"$decrypt_data_paths_tuple"
@@ -921,6 +922,7 @@ declare -a stow_dirs_general=(
     omz
     pass
     prusaslicer
+    qbittorrent
     qt
     radicle
     ranger

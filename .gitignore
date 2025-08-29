@@ -32,6 +32,8 @@ radicle/.radicle/keys/radicle
 rofi/.config/rofi/catppuccin-mocha.rasi
 system/shifty/boot/loader/entries/*
 btop/.config/btop/themes/*
+qbittorrent/.config/qBittorrent/*
+!qbittorrent/.config/qBittorrent/.gitkeep
 !system/shifty/boot/loader/entries/.gitkeep
 !bat/.config/bat/themes/.gitkeep
 !continue/.continue/config.json

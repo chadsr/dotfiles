@@ -109,6 +109,8 @@ declare -a encrypt_data_paths_tuples=(
     "${HOME}/.config/khal/config ${data_path}/khal/config.asc.gpg"
     "${HOME}/.config/mimeapps.list ${data_path}/xdg/mimeapps.list.asc.gpg"
     "${HOME}/.config/PrusaSlicer/PrusaSlicer.ini ${data_path}/prusaslicer/PrusaSlicer.ini.asc.gpg"
+    "${HOME}/.config/qBittorrent/qBittorrent.conf ${data_path}/qbittorrent/categories.json.asc"
+    "${HOME}/.config/qBittorrent/qBittorrent.conf ${data_path}/qbittorrent/qBittorrent.conf.asc"
     "${HOME}/.config/tidal-hifi/config.json ${data_path}/tidal-hifi/config.json.asc.gpg"
     "${HOME}/.config/vdirsyncer/config ${data_path}/vdirsyncer/config.asc.gpg"
     "${HOME}/.config/waybar-crypto/config.ini ${data_path}/waybar/waybar-crypto/config.ini.asc.gpg"
