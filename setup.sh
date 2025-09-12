@@ -459,8 +459,8 @@ for conflict_path in "${conflict_paths[@]}"; do
     rm_if_not_stowed "${conflict_path}"
 done
 
-if ! [ -e "$HOME/.config/sunsetr/geo.toml" ]; then
-    touch "$HOME/.config/sunsetr/geo.toml" || {
+if ! [ -e "$base_path/hyprland/.config/sunsetr/geo.toml" ]; then
+    touch "$base_path/hyprland/.config/sunsetr/geo.toml" || {
         echo "failed to create sunsetr geo.toml"
         exit 1
     }
