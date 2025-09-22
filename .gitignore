@@ -14,7 +14,7 @@ gtk/.config/gtk-4.0/bookmarks
 gtk/.icons/*
 gtk/.themes/Sweet/*
 helix/.config/helix/themes/*
-hyprland/.config/hypr/host.conf
+hyprland/.config/hypr/hostname.conf
 hyprland/.config/hypr/themes/colors.conf
 hyprland/.config/sunsetr/geo.toml
 khal/.config/khal/*
