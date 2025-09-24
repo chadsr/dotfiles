@@ -583,10 +583,11 @@ install_packages "${pkgs[@]}"
 # Add user to groups needed by various packages
 declare -a user_groups=(
     audio
+    docker
     gamemode
     plugdev
     ssh_login
-    docker
+    uucp
 )
 for user_group in "${user_groups[@]}"; do
     echo "Adding user to group ${user_group}"
