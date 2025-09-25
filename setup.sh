@@ -885,8 +885,18 @@ sed -i 's/\/\/ @import "catppuccin-mocha"/@import "catppuccin-mocha"/' "${base_p
     exit 1
 }
 
+latest_android_config_dir=$(find ~/.config/Google -mindepth 1 -maxdepth 1 -type d -exec stat -c "%Y %n" {} \; | sort -nr | head -n 1 | cut -d' ' -f2-)
+if [ -n "$latest_android_config_dir" ]; then
+    # copy the contents of the latest android studio config to dotfiles
+    cp -r --update=none "$latest_android_config_dir" ./android/.config/Google/ || {
+        echo "failed to copy latest android studio configuration files from ${latest_android_config_dir}"
+        exit 1
+    }
+fi
+
 declare -a stow_dirs_general=(
     alacritty
+    android
     bat
     bemenu
     btop
