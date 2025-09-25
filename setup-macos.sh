@@ -269,7 +269,6 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true || {
 }
 
 declare -a ollama_models=(
-    deepseek-r1:latest
     qwen2.5-coder:1.5b-base
     nomic-embed-text:latest
 )
