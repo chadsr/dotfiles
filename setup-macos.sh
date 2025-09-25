@@ -236,6 +236,7 @@ for symlink_paths_tuple in "${symlink_paths_tuples[@]}"; do
 done
 
 declare -a stow_dirs_general=(
+    android
     bat
     continue-minimal
     freetube
