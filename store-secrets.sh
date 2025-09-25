@@ -103,6 +103,7 @@ fi
 mkdir -p "$tmp_path"
 
 declare -a encrypt_data_paths_tuples=(
+    "${HOME}/.android/keystores/keystore-rossch ${data_path}/android/keystores/keystore-rossch.asc.gpg"
     "${HOME}/.config/cura/5.7/cura.cfg ${data_path}/cura/cura.cfg.asc.gpg"
     "${HOME}/.config/gallery-dl/config.json ${data_path}/gallery-dl/config.json.asc.gpg"
     "${HOME}/.config/gtk-3.0/bookmarks ${data_path}/gtk/bookmarks.asc.gpg"
@@ -119,6 +120,7 @@ declare -a encrypt_data_paths_tuples=(
     "${pkglist_system_path} ${data_path}/pkgs/${current_hostname}.txt.asc.gpg"
     "$base_path/system/${current_hostname}/boot/loader/entries/arch-zen.conf ${data_path}/system/${current_hostname}/boot/loader/entries/arch-zen.asc.conf"
     "$data_path/pkgs/remove.txt ${data_path}/pkgs/remove.txt.asc.gpg"
+
 )
 
 for encrypt_data_paths_tuple in "${encrypt_data_paths_tuples[@]}"; do

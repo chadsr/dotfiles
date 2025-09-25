@@ -209,6 +209,7 @@ fi
 echo "Decrypting data"
 declare -a decrypt_data_paths_tuples=(
     "${data_path}/ssh/config.asc.gpg ${base_path}/ssh/.ssh/config"
+    "${data_path}/android/keystores/keystore-rossch.asc.gpg ${base_path}/android/.android/keystores/keystore-rossch"
 )
 
 for decrypt_data_paths_tuple in "${decrypt_data_paths_tuples[@]}"; do

@@ -523,6 +523,7 @@ pkglist_remove_path="$data_path"/pkgs/remove.txt
 
 echo "Decrypting data"
 declare -a decrypt_data_paths_tuples=(
+    "${data_path}/android/keystores/keystore-rossch.asc.gpg ${base_path}/android/.android/keystores/keystore-rossch"
     "${data_path}/cura/cura.cfg.asc.gpg ${base_path}/cura/.config/cura/5.7/cura.cfg"
     "${data_path}/gallery-dl/config.json.asc.gpg ${base_path}/gallery-dl/.config/gallery-dl/config.json"
     "${data_path}/gtk/bookmarks.asc.gpg ${base_path}/gtk/.config/gtk-3.0/bookmarks"

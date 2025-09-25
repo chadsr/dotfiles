@@ -42,6 +42,8 @@ android/.config/Google/**/*.txt
 android/.config/Google/**/*.db
 android/.config/Google/**/*.jdk
 android/.config/Google/**/*.lock
+android/.android/keystores/*
+!android/.android/keystores/.gitkeep
 !android/.config/Google/**/disabled_plugins.txt
 !android/.config/Google/**/options/linux/keymap.xml
 !android/.config/Google/**/options/colors.scheme.xml
