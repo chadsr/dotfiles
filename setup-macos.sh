@@ -47,6 +47,7 @@ rmrf() {
 declare -a brew_pkgs=(
     bat
     direnv
+    dua-cli
     font-hack-nerd-font
     freetube
     ghostty
