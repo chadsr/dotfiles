@@ -888,10 +888,14 @@ sed -i 's/\/\/ @import "catppuccin-mocha"/@import "catppuccin-mocha"/' "${base_p
 latest_android_config_dir=$(find ~/.config/Google -mindepth 1 -maxdepth 1 -type d -exec stat -c "%Y %n" {} \; | sort -nr | head -n 1 | cut -d' ' -f2-)
 if [ -n "$latest_android_config_dir" ]; then
     # copy the contents of the latest android studio config to dotfiles
-    cp -r --update=none "$latest_android_config_dir" ./android/.config/Google/ || {
+    find "$latest_android_config_dir" -maxdepth 3 -name "*.txt" -o -name "*.xml" -exec cp -r --parents --update=none {} ./android/ \; || {
         echo "failed to copy latest android studio configuration files from ${latest_android_config_dir}"
         exit 1
     }
+
+    # copy the absolute path-ed files to the stow directory, and remove abs dir
+    cp -r --update=none "./android/home/${USER}/.config/Google" ./android/.config
+    rm -rf ./android/home/
 fi
 
 declare -a stow_dirs_general=(
