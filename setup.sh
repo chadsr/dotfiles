@@ -496,8 +496,8 @@ source ~/.bashrc || {
 }
 
 systemd_user_enable_start "$base_path"/gpg/.config/systemd/user/gnupghome.service
-systemd_user_enable_start "$base_path"/gpg/.config/systemd/user/ssh-auth-sock.service
 systemd_user_enable_start /usr/lib/systemd/user/gpg-agent.service
+systemd_user_enable_start "$base_path"/gpg/.config/systemd/user/ssh-auth-sock.service
 
 gpg_ssh_agent
 
