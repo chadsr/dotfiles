@@ -932,6 +932,7 @@ declare -a stow_dirs_general=(
     logseq
     mangohud
     mpv
+    networkmanager
     nextcloud
     nvim
     nvm
