@@ -1,6 +1,5 @@
 #[Sunsetr configuration]
 backend = "auto"
-start_hyprsunset = false          # Set true if you're not using hyprsunset.service
 startup_transition = false       # Enable smooth transition when sunsetr starts
 startup_transition_duration = 10 # Duration of startup transition in seconds (10-60)
 sunset = "20:00:00"              # Time to transition to night mode (HH:MM:SS)

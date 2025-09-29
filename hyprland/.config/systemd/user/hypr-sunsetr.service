@@ -2,7 +2,7 @@
 Description=Sunsetr - Automatic color temperature adjustment for Hyprland
 PartOf=graphical-session.target
 Requires=graphical-session.target
-After=graphical-session.target hypr-sunset.service
+After=graphical-session.target
 
 [Service]
 Type=simple
