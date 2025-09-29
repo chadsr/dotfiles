@@ -996,7 +996,6 @@ done
 declare -a systemd_user_units=(
     "$base_path"/dunst/.config/systemd/user/dunst-wl.service
     "$base_path"/gtk/.config/systemd/user/xsettingsd.service
-    "$base_path"/hyprland/.config/systemd/user/hypr-sunset.service
     "$base_path"/hyprland/.config/systemd/user/hypr-sunsetr.service
     "$base_path"/hyprland/.config/systemd/user/hypridle.service
     "$base_path"/khal/.config/systemd/user/vdirsyncer-sync.service
