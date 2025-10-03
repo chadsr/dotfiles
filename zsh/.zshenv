@@ -21,20 +21,12 @@ else
 fi
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    timeout 1 ssh-add -l &>/dev/null
-    ssh_agent_running=$?
-    if [[ "$ssh_agent_running" == 0 ]]; then
-        AGENT_SSH_SOCKET=$(gpgconf --list-dirs agent-ssh-socket)
-        export SSH_AUTH_SOCK=AGENT_SSH_SOCKET
-        gpg-connect-agent updatestartuptty /bye >/dev/null
+    AGENT_SSH_SOCKET=$(gpgconf --list-dirs agent-ssh-socket)
+    export SSH_AUTH_SOCK=AGENT_SSH_SOCKET
+    gpg-connect-agent updatestartuptty /bye >/dev/null
 
-        LINUX_ASKPASS=$(which wayprompt-ssh-askpass)
-        export SSH_ASKPASS="$LINUX_ASKPASS"
-    else
-        echo "GPG SSH Agent is not running! Restarting agent..."
-        systemctl --user restart gpg-agent.service
-        systemctl --user restart ssh-auth-sock.service
-    fi
+    LINUX_ASKPASS=$(which wayprompt-ssh-askpass)
+    export SSH_ASKPASS="$LINUX_ASKPASS"
 
     # Export env vars from systemd user units
     # shellcheck disable=SC1090,SC1091
