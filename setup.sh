@@ -740,7 +740,6 @@ elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
     # set_default_kernel zen
 
     declare -a systemd_units_desktop=(
-        /usr/lib/systemd/system/coolercontrol-liqctld.service
         /usr/lib/systemd/system/coolercontrold.service
         /usr/lib/systemd/system/lactd.service
         /usr/lib/systemd/system/power-profiles-daemon.service
