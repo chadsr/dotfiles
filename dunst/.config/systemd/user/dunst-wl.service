@@ -2,12 +2,14 @@
 Description=Dunst notification daemon
 PartOf=graphical-session.target
 After=graphical-session.target
+Before=dunst.service
+Conflicts=dunst.service
 
 [Service]
-Type=simple
-Restart=always
-RestartSec=1
+Type=dbus
+BusName=org.freedesktop.Notifications
 ExecStart=/usr/bin/dunst
+Slice=session.slice
 
 [Install]
 WantedBy=sway-session.target
