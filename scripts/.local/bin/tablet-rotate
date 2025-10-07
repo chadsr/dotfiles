@@ -1,0 +1,41 @@
+#!/bin/env bash
+
+# Rotates the display 90deg when in tablet mode
+
+if [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then
+    monitors_json=$(hyprctl -j monitors)
+    display=$(echo "$monitors_json" | jq '. | map(select(.focused == true)) | .[0].name' -r)
+    width=$(echo "$monitors_json" | jq '. | map(select(.focused == true)) | .[0].width' -r)
+    height=$(echo "$monitors_json" | jq '. | map(select(.focused == true)) | .[0].height' -r)
+    refresh_rate=$(echo "$monitors_json" | jq '. | map(select(.focused == true)) | .[0].refreshRate' -r)
+    scale=$(echo "$monitors_json" | jq '. | map(select(.focused == true)) | .[0].scale' -r)
+    x_pos=$(echo "$monitors_json" | jq '. | map(select(.focused == true)) | .[0].x' -r)
+    y_pos=$(echo "$monitors_json" | jq '. | map(select(.focused == true)) | .[0].y' -r)
+    position="${x_pos}x${y_pos}"
+    resolution="${width}x${height}@${refresh_rate}"
+
+    tablet_mode_command="hyprctl keyword monitor $display, $resolution, $position, $scale, transform, 3 && hyprctl keyword device[wacom-pen-and-multitouch-sensor-pen]:transform 3"
+    laptop_mode_command="hyprctl keyword monitor $display, $resolution, $position, $scale, transform, 0 && hyprctl keyword device[wacom-pen-and-multitouch-sensor-pen]:transform 0"
+elif [ "$XDG_CURRENT_DESKTOP" = "Sway" ]; then
+    display=$(swaymsg -t get_outputs --raw | jq '. | map(select(.focused == true)) | .[0].name' -r)
+    tablet_mode_command="swaymsg output $display transform 90"
+    laptop_mode_command="swaymsg output $display transform 0"
+else
+    echo "Unsupported desktop environment"
+    exit 1
+fi
+
+tablet_mode=false
+acpi_listen | while IFS= read -r line; do
+    if [[ "$line" = "video/tabletmode TBLT 0000008A 00000001" && $tablet_mode == false ]]; then
+        tablet_mode=true
+        notify-send "Tablet Mode"
+        eval "$tablet_mode_command"
+        gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled true
+    elif [[ "$line" = "video/tabletmode TBLT 0000008A 00000000" && $tablet_mode == true ]]; then
+        tablet_mode=false
+        notify-send "Laptop Mode"
+        eval "$laptop_mode_command"
+        gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled false
+    fi
+done

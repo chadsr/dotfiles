@@ -11,3 +11,4 @@ ExecStart=%h/.local/bin/tablet-rotate
 
 [Install]
 WantedBy=sway-session.target
+WantedBy=hypr-session.target

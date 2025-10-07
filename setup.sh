@@ -686,7 +686,7 @@ if [[ "$current_hostname" == "$laptop_hostname" ]]; then
     }
 
     declare -a systemd_user_units_laptop=(
-        "$base_path"/sway/.config/systemd/user/tablet-rotate.service
+        "$base_path"/scripts/.config/systemd/user/tablet-rotate.service
     )
     for systemd_user_unit_laptop in "${systemd_user_units_laptop[@]}"; do
         systemd_user_enable_start "${systemd_user_unit_laptop}"
