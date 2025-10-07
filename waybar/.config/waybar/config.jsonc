@@ -115,15 +115,6 @@
         "spacing": 8,
         "show-passive-items": true
     },
-    // "custom/yay": {
-    //     "format": "{} 📦",
-    //     "tooltip": false,
-    //     "interval": 600,
-    //     "exec": "yay -Qu  | wc -l",
-    //     "exec-if": "exit 0",
-    //     "on-click": "alacritty -t 'Updating Packages' -e yay; pkill -SIGRTMIN+8 waybar",
-    //     "signal": 8
-    // },
     "custom/updates": {
         "format": "{} {icon}",
         "return-type": "json",
@@ -138,25 +129,20 @@
         "exec": "$HOME/.config/waybar/modules/yubikey/waybar-yubikey",
         "return-type": "json"
     },
-    // "custom/systemd": {
-    //     "format": "{icon} {}",
-    //     "format-icons": {
-    //         "ok": "✔",
-    //         "failure": "✘"
-    //     },
-    //     "tooltip": true,
-    //     "return-type": "json",
-    //     "interval": 60,
-    //     "exec": "$HOME/git/github.com/chadsr/waybar-systemd/waybar-systemd"
-    // },
+    "systemd-failed-units": {
+        "hide-on-ok": true,
+        "format": " {nr_failed_system}  {nr_failed_user} ",
+        "system": true,
+        "user": true,
+        "on-click": "alacritty -e systemctl-tui"
+    },
     "group/tray": {
         "orientation": "horizontal",
         "children-class": "group-tray",
         "modules": [
             "tray",
-            // "custom/yay",
             "custom/updates",
-            // "custom/systemd",
+            "systemd-failed-units",
             "privacy",
             "gamemode",
             "custom/yubikey"
