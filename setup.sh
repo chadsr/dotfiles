@@ -401,6 +401,7 @@ echo "Setting up user directory configs"
 declare -a mk_dirs=(
     ~/.cargo/
     ~/.config/bat/themes/
+    ~/.config/clipse/
     ~/.config/environment.d/
     ~/.config/figma-linux/
     ~/.config/khal/
