@@ -1,9 +1,11 @@
 #!/usr/bin/env zsh
 
+# shellcheck shell=bash
+
 # User configuration
 
 # shellcheck source=.aliases
-source $HOME/.aliases
+source "$HOME"/.aliases
 
 eval "$(thefuck --alias)"
 eval "$(thefuck --alias fuck)"
