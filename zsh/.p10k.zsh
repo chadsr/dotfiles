@@ -38,7 +38,7 @@
     vcs                     # git status
     # =========================[ Line #2 ]=========================
     newline                 # \n
-    # prompt_char           # prompt symbol
+    prompt_char           # prompt symbol
   )
 
   # The list of segments shown on the right. Fill it with less important segments.
@@ -97,7 +97,6 @@
     midnight_commander      # midnight commander shell (https://midnight-commander.org/)
     nix_shell               # nix shell (https://nixos.org/nixos/nix-pills/developing-with-nix-shell.html)
     chezmoi_shell           # chezmoi shell (https://www.chezmoi.io/)
-    vi_mode                 # vi mode (you don't need this if you've enabled prompt_char)
     # vpn_ip                # virtual private network indicator
     # load                  # CPU load
     # disk_usage            # disk usage
@@ -110,7 +109,7 @@
     # cpu_arch              # CPU architecture
     time                    # current time
     # =========================[ Line #2 ]=========================
-    newline
+    newline                 # \n
     # ip                    # ip address and bandwidth usage for a specified network interface
     # public_ip             # public IP address
     # proxy                 # system-wide http/https/ftp proxy
@@ -252,6 +251,7 @@
     .perl-version
     .php-version
     .tool-versions
+    .mise.toml
     .shorten_folder_marker
     .svn
     .terraform
@@ -756,14 +756,14 @@
   typeset -g POWERLEVEL9K_RANGER_BACKGROUND=0
   # Custom icon.
   # typeset -g POWERLEVEL9K_RANGER_VISUAL_IDENTIFIER_EXPANSION='⭐'
-  
+
   ####################[ yazi: yazi shell (https://github.com/sxyazi/yazi) ]#####################
   # Yazi shell color.
   typeset -g POWERLEVEL9K_YAZI_FOREGROUND=3
   typeset -g POWERLEVEL9K_YAZI_BACKGROUND=0
   # Custom icon.
   # typeset -g POWERLEVEL9K_YAZI_VISUAL_IDENTIFIER_EXPANSION='⭐'
-  
+
   ######################[ nnn: nnn shell (https://github.com/jarun/nnn) ]#######################
   # Nnn shell color.
   typeset -g POWERLEVEL9K_NNN_FOREGROUND=0
@@ -1329,51 +1329,6 @@
   # Custom icon.
   # typeset -g POWERLEVEL9K_HASKELL_STACK_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
-  ################[ terraform: terraform workspace (https://www.terraform.io) ]#################
-  # Don't show terraform workspace if it's literally "default".
-  typeset -g POWERLEVEL9K_TERRAFORM_SHOW_DEFAULT=false
-  # POWERLEVEL9K_TERRAFORM_CLASSES is an array with even number of elements. The first element
-  # in each pair defines a pattern against which the current terraform workspace gets matched.
-  # More specifically, it's P9K_CONTENT prior to the application of context expansion (see below)
-  # that gets matched. If you unset all POWERLEVEL9K_TERRAFORM_*CONTENT_EXPANSION parameters,
-  # you'll see this value in your prompt. The second element of each pair in
-  # POWERLEVEL9K_TERRAFORM_CLASSES defines the workspace class. Patterns are tried in order. The
-  # first match wins.
-  #
-  # For example, given these settings:
-  #
-  #   typeset -g POWERLEVEL9K_TERRAFORM_CLASSES=(
-  #     '*prod*'  PROD
-  #     '*test*'  TEST
-  #     '*'       OTHER)
-  #
-  # If your current terraform workspace is "project_test", its class is TEST because "project_test"
-  # doesn't match the pattern '*prod*' but does match '*test*'.
-  #
-  # You can define different colors, icons and content expansions for different classes:
-  #
-  #   typeset -g POWERLEVEL9K_TERRAFORM_TEST_FOREGROUND=2
-  #   typeset -g POWERLEVEL9K_TERRAFORM_TEST_BACKGROUND=0
-  #   typeset -g POWERLEVEL9K_TERRAFORM_TEST_VISUAL_IDENTIFIER_EXPANSION='⭐'
-  #   typeset -g POWERLEVEL9K_TERRAFORM_TEST_CONTENT_EXPANSION='> ${P9K_CONTENT} <'
-  typeset -g POWERLEVEL9K_TERRAFORM_CLASSES=(
-      # '*prod*'  PROD    # These values are examples that are unlikely
-      # '*test*'  TEST    # to match your needs. Customize them as needed.
-      '*'         OTHER)
-  typeset -g POWERLEVEL9K_TERRAFORM_OTHER_FOREGROUND=4
-  typeset -g POWERLEVEL9K_TERRAFORM_OTHER_BACKGROUND=0
-  # typeset -g POWERLEVEL9K_TERRAFORM_OTHER_VISUAL_IDENTIFIER_EXPANSION='⭐'
-
-  #############[ terraform_version: terraform version (https://www.terraform.io) ]##############
-  # Terraform version color.
-  typeset -g POWERLEVEL9K_TERRAFORM_VERSION_FOREGROUND=4
-  typeset -g POWERLEVEL9K_TERRAFORM_VERSION_BACKGROUND=0
-  # Custom icon.
-  # typeset -g POWERLEVEL9K_TERRAFORM_VERSION_VISUAL_IDENTIFIER_EXPANSION='⭐'
-
-  ################[ terraform_version: It shows active terraform version (https://www.terraform.io) ]#################
-  typeset -g POWERLEVEL9K_TERRAFORM_VERSION_SHOW_ON_COMMAND='terraform|tf'
-
   #############[ kubecontext: current kubernetes context (https://kubernetes.io/) ]#############
   # Show kubecontext only when the command you are typing invokes one of these tools.
   # Tip: Remove the next line to always show kubecontext.
@@ -1461,7 +1416,46 @@
   POWERLEVEL9K_KUBECONTEXT_DEFAULT_CONTENT_EXPANSION+='${${:-/$P9K_KUBECONTEXT_NAMESPACE}:#/default}'
 
   # Custom prefix.
-  # typeset -g POWERLEVEL9K_KUBECONTEXT_PREFIX='at '
+  # typeset -g POWERLEVEL9K_KUBECONTEXT_PREFIX='%fat '
+
+  ################[ terraform: terraform workspace (https://www.terraform.io) ]#################
+  # Don't show terraform workspace if it's literally "default".
+  typeset -g POWERLEVEL9K_TERRAFORM_SHOW_DEFAULT=false
+  # POWERLEVEL9K_TERRAFORM_CLASSES is an array with even number of elements. The first element
+  # in each pair defines a pattern against which the current terraform workspace gets matched.
+  # More specifically, it's P9K_CONTENT prior to the application of context expansion (see below)
+  # that gets matched. If you unset all POWERLEVEL9K_TERRAFORM_*CONTENT_EXPANSION parameters,
+  # you'll see this value in your prompt. The second element of each pair in
+  # POWERLEVEL9K_TERRAFORM_CLASSES defines the workspace class. Patterns are tried in order. The
+  # first match wins.
+  #
+  # For example, given these settings:
+  #
+  #   typeset -g POWERLEVEL9K_TERRAFORM_CLASSES=(
+  #     '*prod*'  PROD
+  #     '*test*'  TEST
+  #     '*'       OTHER)
+  #
+  # If your current terraform workspace is "project_test", its class is TEST because "project_test"
+  # doesn't match the pattern '*prod*' but does match '*test*'.
+  #
+  # You can define different colors, icons and content expansions for different classes:
+  #
+  #   typeset -g POWERLEVEL9K_TERRAFORM_TEST_FOREGROUND=2
+  #   typeset -g POWERLEVEL9K_TERRAFORM_TEST_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  #   typeset -g POWERLEVEL9K_TERRAFORM_TEST_CONTENT_EXPANSION='> ${P9K_CONTENT} <'
+  typeset -g POWERLEVEL9K_TERRAFORM_CLASSES=(
+      # '*prod*'  PROD    # These values are examples that are unlikely
+      # '*test*'  TEST    # to match your needs. Customize them as needed.
+      '*'         OTHER)
+  typeset -g POWERLEVEL9K_TERRAFORM_OTHER_FOREGROUND=4
+  # typeset -g POWERLEVEL9K_TERRAFORM_OTHER_VISUAL_IDENTIFIER_EXPANSION='⭐'
+
+  #############[ terraform_version: terraform version (https://www.terraform.io) ]##############
+  # Terraform version color.
+  typeset -g POWERLEVEL9K_TERRAFORM_VERSION_FOREGROUND=4
+  # Custom icon.
+  # typeset -g POWERLEVEL9K_TERRAFORM_VERSION_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
   #[ aws: aws profile (https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html) ]#
   # Show aws only when the command you are typing invokes one of these tools.
@@ -1777,7 +1771,7 @@
   #
   # Type `p10k help segment` for documentation and a more sophisticated example.
   function prompt_example() {
-    p10k segment -b 1 -f 3 -i '⭐' -t 'hello, %n'
+    p10k segment -f 2 -i '*' -t 'hello, %n'
   }
 
   # User-defined prompt segments may optionally provide an instant_prompt_* function. Its job
@@ -1819,7 +1813,7 @@
   #              it incompatible with your zsh configuration files.
   #   - quiet:   Enable instant prompt and don't print warnings when detecting console output
   #              during zsh initialization. Choose this if you've read and understood
-  #              https://github.com/romkatv/powerlevel10k/blob/master/README.md#instant-prompt.
+  #              https://github.com/romkatv/powerlevel10k#instant-prompt.
   #   - verbose: Enable instant prompt and print a warning when detecting console output during
   #              zsh initialization. Choose this if you've never tried instant prompt, haven't
   #              seen the warning, or if you are unsure what this all means.
