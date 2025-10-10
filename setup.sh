@@ -946,6 +946,7 @@ declare -a stow_dirs_general=(
     rofi
     scripts
     solaar
+    starship
     sway
     swww
     systemd
