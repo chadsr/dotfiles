@@ -62,12 +62,17 @@ declare -a brew_pkgs=(
     python
     ruby
     rust
+    starship
     stats
     stow
     theseal/ssh-askpass/ssh-askpass
     wget
     ykman
     yubikey-personalization
+    zsh-autocomplete
+    zsh-autosuggestions
+    zsh-completions
+    zsh-syntax-highlighting
 )
 
 brew update || {
