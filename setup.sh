@@ -802,15 +802,6 @@ if [[ "$hackneyed_hash_old" != "$hackneyed_hash_new" ]]; then
     echo "hackneyed-cursor has been updated"
 fi
 
-if [[ ! -d ~/.oh-my-zsh ]]; then
-    read -p "Do you need to install ohmyzsh? (${git_submodule_path}/ohmyzsh/tools/install.sh) (y/N)?" -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        read -r -p "Press enter once the the installation is finished... [enter]"
-        rm -f ~/.zshrc
-    fi
-fi
-
 echo "Copying themes from git repo to dotfiles locations"
 
 # If Hackneyed Dark build does not exist, then build it
@@ -936,7 +927,6 @@ declare -a stow_dirs_general=(
     nextcloud
     nvim
     nvm
-    omz
     pass
     prusaslicer
     qbittorrent

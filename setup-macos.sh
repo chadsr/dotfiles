@@ -250,7 +250,6 @@ declare -a stow_dirs_general=(
     ghostty
     helix
     nvim
-    omz
     rust
 )
 
