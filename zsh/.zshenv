@@ -10,6 +10,8 @@ typeset -U PATH path
 # General Environment Variables #
 #################################
 
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
+
 ############
 #   GPG    #
 ############
