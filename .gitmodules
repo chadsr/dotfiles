@@ -7,10 +7,6 @@
     url = https://github.com/EliverLara/Sweet.git
     branch = nova
     ignore = dirty
-[submodule "zsh/.oh-my-zsh/themes/powerlevel10k"]
-    path = omz/.oh-my-zsh/themes/powerlevel10k
-    url = https://github.com/romkatv/powerlevel10k.git
-    branch = master
 [submodule ".git_submodules/hackneyed-cursor"]
     path = .git_submodules/hackneyed-cursor
     url = https://gitlab.com/Enthymeme/hackneyed-x11-cursors.git
@@ -20,10 +16,6 @@
     url = https://github.com/catppuccin/bat.git
     branch = main
     ignore = dirty
-[submodule "omz/.oh-my-zsh/themes/powerlevel10k"]
-    path = omz/.oh-my-zsh/themes/powerlevel10k
-    url = https://github.com/romkatv/powerlevel10k.git
-    branch = master
 [submodule ".git_submodules/catppuccin-helix"]
     path = .git_submodules/catppuccin-helix
     url = https://github.com/catppuccin/helix.git
