@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 
 if [ -f "$HOME/.zshenv" ]; then
-    # shellcheck disable=SC1090
+    # shellcheck source=../zsh/.zshenv
     source "$HOME/.zshenv"
 fi

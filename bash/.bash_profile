@@ -1,3 +1,4 @@
 # shellcheck shell=bash
 
-[[ -f $HOME/.bashrc ]] && . "$HOME/.bashrc"
+# shellcheck source=.bashrc
+case "$-" in *i*) if [ -r ~/.bashrc ]; then . ~/.bashrc; fi ;; esac
