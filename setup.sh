@@ -587,6 +587,7 @@ declare -a user_groups=(
     audio
     docker
     gamemode
+    games
     plugdev
     ssh_login
     uucp
