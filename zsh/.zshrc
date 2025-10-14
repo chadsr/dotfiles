@@ -32,6 +32,10 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     [ -s "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && \. "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 fi
 
+# preserve back/forward words with Ctrl + <-/->
+bindkey "^[[1;5D" backward-word
+bindkey "^[[1;5C" forward-word
+
 if [[ $(command -v starship) ]]; then
     eval "$(starship init zsh)"
 else
