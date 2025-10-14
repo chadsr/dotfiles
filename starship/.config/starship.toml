@@ -186,6 +186,14 @@ time_format = "%R"
 style = "bg:base fg:sapphire"
 format = '[  $time ]($style)'
 
+[cmd_duration]
+show_milliseconds = true
+format = " in $duration "
+style = "bg:base fg:sapphire"
+disabled = false
+show_notifications = true
+min_time_to_notify = 45000
+
 [line_break]
 disabled = false
 
@@ -197,14 +205,6 @@ vimcmd_symbol = '[❮](bold fg:green)'
 vimcmd_replace_one_symbol = '[❮](bold fg:lavender)'
 vimcmd_replace_symbol = '[❮](bold fg:lavender)'
 vimcmd_visual_symbol = '[❮](bold fg:yellow)'
-
-[cmd_duration]
-show_milliseconds = true
-format = " in $duration "
-style = "bg:lavender"
-disabled = false
-show_notifications = true
-min_time_to_notify = 45000
 
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"
