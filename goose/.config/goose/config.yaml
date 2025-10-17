@@ -1,146 +1,193 @@
-GOOSE_MODE: auto
-ANTHROPIC_HOST: https://api.anthropic.com
-OLLAMA_HOST: localhost
-GOOSE_CLI_MIN_PRIORITY: 0.0
+GOOSE_PROVIDER: anthropic
 extensions:
   bravesearch:
-    args:
-    - -y
-    - '@modelcontextprotocol/server-brave-search'
-    bundled: null
-    cmd: npx
-    description: Retrieve web pages, news, and local business results via Brave API.
     enabled: false
-    env_keys:
-    - BRAVE_API_KEY
-    envs: {}
+    type: stdio
     name: bravesearch
-    timeout: 300
-    type: stdio
-  computercontroller:
-    bundled: true
-    display_name: Computer Controller
-    enabled: true
-    name: computercontroller
-    timeout: 300
-    type: builtin
-  context7:
-    args:
-    - -y
-    - '@upstash/context7-mcp'
-    bundled: null
+    description: Retrieve web pages, news, and local business results via Brave API.
     cmd: npx
-    description: Connects to Context7.com's documentation database to provide up-to-date library and framework documentation with intelligent project ranking and customizable token limits.
-    enabled: true
-    env_keys: []
-    envs: {}
-    name: context7
-    timeout: 300
-    type: stdio
-  developer:
-    bundled: true
-    display_name: Developer Tools
-    enabled: true
-    name: developer
-    timeout: 300
-    type: builtin
-  fetch:
     args:
-    - mcp-server-fetch
-    bundled: null
-    cmd: uvx
-    description: Web content fetching and processing capabilities
-    enabled: true
-    env_keys: []
+      - -y
+      - "@modelcontextprotocol/server-brave-search"
     envs: {}
-    name: fetch
-    timeout: 300
-    type: stdio
-  git:
-    args:
-    - mcp-server-git
-    bundled: null
-    cmd: uvx
-    description: Git version control system integration
-    enabled: true
-    env_keys: []
-    envs: {}
-    name: git
-    timeout: 300
-    type: stdio
-  knowledgegraphmemory:
-    args:
-    - -y
-    - '@modelcontextprotocol/server-memory'
-    bundled: null
-    cmd: npx
-    description: Graph-based memory system for persistent knowledge storage
-    enabled: false
-    env_keys: []
-    envs: {}
-    name: knowledgegraphmemory
-    timeout: 300
-    type: stdio
-  memory:
-    bundled: true
-    display_name: Memory
-    enabled: true
-    name: memory
-    timeout: 300
-    type: builtin
-  pandoc:
-    args:
-    - mcp-pandoc
-    bundled: null
-    cmd: uvx
-    description: Document format conversion using Pandoc, enabling transformation of content between PDF, HTML, Markdown, .docx, .rst, .epuc, .latex, and more.
-    enabled: false
-    env_keys: []
-    envs: {}
-    name: pandoc
-    timeout: 300
-    type: stdio
-  sequentialthinking:
-    args:
-    - -y
-    - '@modelcontextprotocol/server-sequential-thinking'
-    bundled: null
-    cmd: npx
-    description: Provides a sequential thinking framework for complex reasoning tasks, incorporating semantic analysis, contradiction detection, and adaptive complexity estimation to enable structured, reflective problem-solving.
-    enabled: false
-    env_keys: []
-    envs: {}
-    name: sequentialthinking
-    timeout: 300
-    type: stdio
-  tavily-search:
-    args:
-    - -y
-    - tavily-mcp
-    bundled: null
-    cmd: npx
-    description: Integrates with Tavily API to provide real-time web search and content extraction capabilities for research, aggregation, and fact-checking tasks.
-    enabled: true
     env_keys:
-    - TAVILY_API_KEY
-    envs: {}
-    name: tavily-search
+      - BRAVE_API_KEY
     timeout: 300
-    type: stdio
-  vscode:
-    args:
-    - -y
-    - vscode-mcp-server
     bundled: null
-    cmd: npx
-    description: VSCode MCP Server
+    available_tools: []
+  fetch:
     enabled: true
-    env_keys: []
-    envs: {}
-    name: vscode
-    timeout: 300
     type: stdio
-GOOSE_PROVIDER: ollama
-GOOSE_MODEL: qwen3:14b
-GOOSE_PLANNER_PROVIDER: ollama
-GOOSE_PLANNER_MODEL: michaelneale/deepseek-r1-goose:latest
+    name: fetch
+    description: Web content fetching and processing capabilities
+    cmd: uvx
+    args:
+      - mcp-server-fetch
+    envs: {}
+    env_keys: []
+    timeout: 300
+    bundled: null
+    available_tools: []
+  todo:
+    enabled: false
+    type: platform
+    name: todo
+    description: Enable a todo list for Goose so it can keep track of what it is doing
+    bundled: true
+    available_tools: []
+  tavily-search:
+    enabled: true
+    type: stdio
+    name: tavily-search
+    description: Integrates with Tavily API to provide real-time web search and content extraction capabilities for research, aggregation, and fact-checking tasks.
+    cmd: npx
+    args:
+      - -y
+      - tavily-mcp
+    envs: {}
+    env_keys:
+      - TAVILY_API_KEY
+    timeout: 300
+    bundled: null
+    available_tools: []
+  knowledgegraphmemory:
+    enabled: false
+    type: stdio
+    name: knowledgegraphmemory
+    description: Graph-based memory system for persistent knowledge storage
+    cmd: npx
+    args:
+      - -y
+      - "@modelcontextprotocol/server-memory"
+    envs: {}
+    env_keys: []
+    timeout: 300
+    bundled: null
+    available_tools: []
+  memory:
+    enabled: true
+    type: builtin
+    name: memory
+    description: Tools to save and retrieve durable memories
+    display_name: Memory
+    timeout: 300
+    bundled: true
+    available_tools: []
+  chrome-devtools-mcp:
+    enabled: true
+    type: stdio
+    name: chrome-devtools-mcp
+    description: Control and inspect a live Chrome browser
+    cmd: npx
+    args:
+      - -y
+      - chrome-devtools-mcp@latest
+      - --executablePath=/usr/bin/chromium
+      - --isolated=true
+    envs: {}
+    env_keys: []
+    timeout: 300
+    bundled: null
+    available_tools: []
+  context7:
+    enabled: true
+    type: stdio
+    name: context7
+    description: Connects to Context7.com's documentation database to provide up-to-date library and framework documentation with intelligent project ranking and customizable token limits.
+    cmd: npx
+    args:
+      - -y
+      - "@upstash/context7-mcp"
+    envs: {}
+    env_keys: []
+    timeout: 300
+    bundled: null
+    available_tools: []
+  sequentialthinking:
+    enabled: false
+    type: stdio
+    name: sequentialthinking
+    description: Provides a sequential thinking framework for complex reasoning tasks, incorporating semantic analysis, contradiction detection, and adaptive complexity estimation to enable structured, reflective problem-solving.
+    cmd: npx
+    args:
+      - -y
+      - "@modelcontextprotocol/server-sequential-thinking"
+    envs: {}
+    env_keys: []
+    timeout: 300
+    bundled: null
+    available_tools: []
+  computercontroller:
+    enabled: true
+    type: builtin
+    name: computercontroller
+    description: ""
+    display_name: Computer Controller
+    timeout: 300
+    bundled: true
+    available_tools: []
+  git:
+    enabled: false
+    type: stdio
+    name: git
+    description: Git version control system integration
+    cmd: uvx
+    args:
+      - mcp-server-git
+    envs: {}
+    env_keys: []
+    timeout: 300
+    bundled: null
+    available_tools: []
+  autovisualiser:
+    enabled: false
+    type: builtin
+    name: autovisualiser
+    description: Data visualisation and UI generation tools
+    display_name: Auto Visualiser
+    timeout: 300
+    bundled: true
+    available_tools: []
+  developer:
+    enabled: true
+    type: builtin
+    name: developer
+    description: ""
+    display_name: Developer Tools
+    timeout: 300
+    bundled: true
+    available_tools: []
+  vscode:
+    enabled: true
+    type: stdio
+    name: vscode
+    description: VSCode MCP Server
+    cmd: npx
+    args:
+      - -y
+      - vscode-mcp-server
+    envs: {}
+    env_keys: []
+    timeout: 300
+    bundled: null
+    available_tools: []
+  pandoc:
+    enabled: false
+    type: stdio
+    name: pandoc
+    description: Document format conversion using Pandoc, enabling transformation of content between PDF, HTML, Markdown, .docx, .rst, .epuc, .latex, and more.
+    cmd: uvx
+    args:
+      - mcp-pandoc
+    envs: {}
+    env_keys: []
+    timeout: 300
+    bundled: null
+    available_tools: []
+ANTHROPIC_HOST: https://api.anthropic.com
+GOOSE_ENABLE_ROUTER: "true"
+GOOSE_MODE: auto
+GOOSE_MODEL: claude-sonnet-4-5
+OLLAMA_HOST: localhost
+GOOSE_SCHEDULER_TYPE: legacy
+GOOSE_CLI_MIN_PRIORITY: 0.0

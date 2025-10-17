@@ -13,6 +13,8 @@ gtk/.config/gtk-3.0/bookmarks
 gtk/.config/gtk-4.0/bookmarks
 gtk/.icons/*
 gtk/.themes/Sweet/*
+goose/.config/goose/secrets.yaml
+goose/.config/goose/history.txt
 helix/.config/helix/themes/*
 hyprland/.config/hypr/hostname.conf
 hyprland/.config/hypr/themes/colors.conf

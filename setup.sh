@@ -404,6 +404,7 @@ declare -a mk_dirs=(
     ~/.config/clipse/
     ~/.config/environment.d/
     ~/.config/figma-linux/
+    ~/.config/goose/
     ~/.config/khal/
     ~/.config/Kvantum/
     ~/.config/Logseq/
