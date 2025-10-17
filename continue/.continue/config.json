@@ -1,14 +1,14 @@
 {
   "models": [
     {
+      "title": "GPT-OSS 20B",
+      "provider": "ollama",
+      "model": "gpt-oss:20b"
+    },
+    {
       "title": "Qwen2.5 Coder",
       "provider": "ollama",
       "model": "qwen2.5-coder:latest"
-    },
-    {
-      "title": "DeepSeek-R1 14B",
-      "provider": "ollama",
-      "model": "deepseek-r1:14b"
     },
     {
       "title": "Ollama",
