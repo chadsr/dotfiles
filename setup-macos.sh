@@ -251,6 +251,7 @@ declare -a stow_dirs_general=(
     helix
     nvim
     rust
+    starship
 )
 
 echo "Stowing general configs"
