@@ -5,6 +5,8 @@
     <mask>*.xml</mask>
     <mask>*.jsp</mask>
     <mask>*.properties</mask>
+    <mask>*.kts</mask>
+    <mask>*.kt</mask>
     <mask>*.java</mask>
   </component>
 </application>

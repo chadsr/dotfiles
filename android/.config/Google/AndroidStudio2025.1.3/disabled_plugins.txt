@@ -1,2 +1,0 @@
-com.google.tools.ij.aiplugin
-com.google.urlassistant

@@ -1,5 +1,0 @@
-<application>
-  <component name="com.github.continuedev.continueintellijextension.services.ContinueExtensionSettings">
-    <option name="shownWelcomeDialog" value="true" />
-  </component>
-</application>
