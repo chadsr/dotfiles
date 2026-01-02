@@ -1,13 +1,12 @@
 [Unit]
-Description=Clipse clipboard manager
+Description=Clipse listener
 PartOf=graphical-session.target
 After=graphical-session.target
 
 [Service]
-Type=simple
-Restart=always
-RestartSec=1
-ExecStart=/usr/bin/clipse -listen-shell
+RemainAfterExit=true
+Type=oneshot
+ExecStart=/usr/bin/clipse -listen
 
 [Install]
 WantedBy=sway-session.target
