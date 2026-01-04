@@ -32,9 +32,16 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     [ -s "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && \. "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 fi
 
+# preserve delete key
+bindkey "\\e[3~" delete-char
+
 # preserve back/forward words with Ctrl + <-/->
 bindkey "^[[1;5D" backward-word
 bindkey "^[[1;5C" forward-word
+
+# preserve home/end functionality for lines
+bindkey "^[[H" beginning-of-line
+bindkey "^[[F" end-of-line
 
 if [[ $(command -v starship) ]]; then
     eval "$(starship init zsh)"
