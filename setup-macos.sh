@@ -49,7 +49,6 @@ declare -a brew_pkgs=(
     direnv
     dua-cli
     font-hack-nerd-font
-    freetube
     ghostty
     gnupg
     go
@@ -60,7 +59,6 @@ declare -a brew_pkgs=(
     npm
     pinentry-mac
     python
-    ruby
     rust
     starship
     stats
