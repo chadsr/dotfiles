@@ -914,6 +914,7 @@ declare -a stow_dirs_general=(
     gammastep
     ghostty
     goose
+    gpu-screen-recorder
     gtk
     helix
     hyprland
@@ -987,6 +988,7 @@ for systemd_user_target in "${systemd_user_targets[@]}"; do
 done
 
 declare -a systemd_user_units=(
+    "$base_path"/clipse/.config/systemd/user/clipse.service
     "$base_path"/dunst/.config/systemd/user/dunst-wl.service
     "$base_path"/gtk/.config/systemd/user/xsettingsd.service
     "$base_path"/hyprland/.config/systemd/user/hypr-sunsetr.service
@@ -1001,12 +1003,12 @@ declare -a systemd_user_units=(
     "$base_path"/sway/.config/systemd/user/wlr-sunclock.service
     "$base_path"/swww/.config/systemd/user/swww-daemon.service
     "$base_path"/swww/.config/systemd/user/swww-random.service
-    "$base_path"/clipse/.config/systemd/user/clipse.service
     "$base_path"/systemd/.config/systemd/user/enable-linger.service
     "$base_path"/waybar/.config/systemd/user/setup-temps.service
     "$base_path"/waybar/.config/systemd/user/waybar.service
     /usr/lib/systemd/user/batsignal.service
     /usr/lib/systemd/user/gnome-keyring-daemon.socket
+    /usr/lib/systemd/user/gpu-screen-recorder-ui.service
     /usr/lib/systemd/user/pipewire-pulse.service
     /usr/lib/systemd/user/pipewire.service
     /usr/lib/systemd/user/wireplumber.service
