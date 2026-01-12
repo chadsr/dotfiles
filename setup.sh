@@ -601,11 +601,11 @@ done
 declare -a systemd_units=(
     /usr/lib/systemd/system/bluetooth.service
     /usr/lib/systemd/system/clamav-freshclam-once.timer
-    /usr/lib/systemd/system/input-remapper.service
     /usr/lib/systemd/system/ly@tty1.service
     /usr/lib/systemd/system/ollama.service
     /usr/lib/systemd/system/smartd.service
     /usr/lib/systemd/system/swayosd-libinput-backend.service
+    # /usr/lib/systemd/system/input-remapper.service
 )
 for systemd_unit in "${systemd_units[@]}"; do
     systemd_enable_start "${systemd_unit}"
