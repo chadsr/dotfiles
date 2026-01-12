@@ -1,5 +1,5 @@
 OPENAI_HOST: https://api.openai.com
-GOOSE_MODEL: gpt-5
+GOOSE_MODEL: gpt-5-codex
 GOOSE_MODE: auto
 GOOSE_PROVIDER: openai
 ANTHROPIC_HOST: https://api.anthropic.com
