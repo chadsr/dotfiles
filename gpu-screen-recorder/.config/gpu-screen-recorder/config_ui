@@ -34,7 +34,7 @@ record.record_options.video_width 1920
 record.record_options.webcam_flip_horizontally false
 record.record_options.webcam_height 30
 record.record_options.webcam_source
-record.record_options.webcam_video_format
+record.record_options.webcam_video_format auto
 record.record_options.webcam_width 30
 record.record_options.webcam_x 0
 record.record_options.webcam_y 0
@@ -129,7 +129,7 @@ streaming.record_options.video_width 1920
 streaming.record_options.webcam_flip_horizontally false
 streaming.record_options.webcam_height 30
 streaming.record_options.webcam_source
-streaming.record_options.webcam_video_format
+streaming.record_options.webcam_video_format auto
 streaming.record_options.webcam_width 30
 streaming.record_options.webcam_x 0
 streaming.record_options.webcam_y 0
