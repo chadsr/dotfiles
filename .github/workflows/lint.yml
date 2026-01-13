@@ -5,18 +5,15 @@ on:
     pull_request:
 
 name: "Lint"
-permissions: {}
+permissions:
+    contents: read
 
 jobs:
-    shellcheck:
+    lint:
         name: Shellcheck
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v6
-            - name: Run ShellCheck
-              uses: ludeeus/action-shellcheck@master
+            - uses: j178/prek-action@v1
               with:
-                  ignore_paths: >-
-                      ./.git_submodules
-                      ./zsh/.p10k.zsh
-                  severity: warning
+                  extra-args: "--all-files"
