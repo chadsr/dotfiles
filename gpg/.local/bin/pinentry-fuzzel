@@ -3,7 +3,7 @@
 # Initital handshake
 echo "OK"
 
-while read cmd rest; do
+while read -r cmd rest; do
     case "$cmd" in
     GETPIN | getpin)
         password=$(printf "" | $(which fuzzel) --prompt-only "${rest}" --password --dmenu)

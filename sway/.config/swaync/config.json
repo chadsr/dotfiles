@@ -1,77 +1,77 @@
 {
-    "$schema": "/etc/xdg/swaync/configSchema.json",
-    "positionX": "right",
-    "positionY": "top",
-    "notification-icon-size": 64,
-    "notification-body-image-height": 100,
-    "notification-body-image-width": 200,
-    "timeout": 5,
-    "timeout-low": 2,
-    "timeout-critical": 0,
-    "fit-to-screen": true,
-    "control-center-width": 500,
-    "notification-window-width": 500,
-    "keyboard-shortcuts": true,
-    "image-visibility": "when-available",
-    "transition-time": 200,
-    "hide-on-clear": false,
-    "hide-on-action": true,
-    "script-fail-notify": true,
-    "widgets": [
-        "title",
-        "dnd",
-        "backlight",
-        "notifications",
-        "mpris",
-        "buttons-grid"
-    ],
-    "widget-config": {
-        "title": {
-            "text": "Notifications",
-            "clear-all-button": true,
-            "button-text": "󰆴 Clear All"
+  "$schema": "/etc/xdg/swaync/configSchema.json",
+  "control-center-width": 500,
+  "fit-to-screen": true,
+  "hide-on-action": true,
+  "hide-on-clear": false,
+  "image-visibility": "when-available",
+  "keyboard-shortcuts": true,
+  "notification-body-image-height": 100,
+  "notification-body-image-width": 200,
+  "notification-icon-size": 64,
+  "notification-window-width": 500,
+  "positionX": "right",
+  "positionY": "top",
+  "script-fail-notify": true,
+  "timeout": 5,
+  "timeout-critical": 0,
+  "timeout-low": 2,
+  "transition-time": 200,
+  "widget-config": {
+    "backlight": {
+      "label": "\udb80\udcdf"
+    },
+    "buttons-grid": {
+      "actions": [
+        {
+          "command": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+          "label": "\udb81\udd7e"
         },
-        "dnd": {
-            "text": "Do Not Disturb"
+        {
+          "command": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+          "label": "\udb80\udf6c"
         },
-        "mpris": {
-            "image-size": 128,
-            "image-radius": 4
+        {
+          "command": "screenlock",
+          "label": "\udb80\udf3e"
         },
-        "backlight": {
-            "label": "󰃟"
+        {
+          "command": "delogout",
+          "label": "\udb80\udf43"
         },
-        "buttons-grid": {
-            "actions": [
-                {
-                    "label": "󰕾",
-                    "command": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
-                },
-                {
-                    "label": "󰍬",
-                    "command": "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
-                },
-                {
-                    "label": "󰌾",
-                    "command": "screenlock"
-                },
-                {
-                    "label": "󰍃",
-                    "command": "delogout"
-                },
-                {
-                    "label": "󰏥",
-                    "command": "systemctl suspend"
-                },
-                {
-                    "label": "󰜉",
-                    "command": "systemctl reboot"
-                },
-                {
-                    "label": "󰐥",
-                    "command": "systemctl poweroff"
-                }
-            ]
+        {
+          "command": "systemctl suspend",
+          "label": "\udb80\udfe5"
+        },
+        {
+          "command": "systemctl reboot",
+          "label": "\udb81\udf09"
+        },
+        {
+          "command": "systemctl poweroff",
+          "label": "\udb81\udc25"
         }
+      ]
+    },
+    "dnd": {
+      "text": "Do Not Disturb"
+    },
+    "mpris": {
+      "image-radius": 4,
+      "image-size": 128
+    },
+    "title": {
+      "button-text": "\udb80\uddb4 Clear All",
+      "clear-all-button": true,
+      "text": "Notifications"
     }
+  },
+  "widgets": [
+    "title",
+    "dnd",
+    "backlight",
+    "notifications",
+    "mpris",
+    "buttons-grid"
+  ]
 }

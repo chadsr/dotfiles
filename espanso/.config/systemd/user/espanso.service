@@ -2,7 +2,7 @@
 Description=espanso
 
 [Service]
-ExecStart=/usr/bin/espanso launcher 
+ExecStart=/usr/bin/espanso launcher
 Restart=on-failure
 RestartSec=3
 

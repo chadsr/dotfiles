@@ -1,19 +1,5 @@
 {
-  "clientId": "someID",
-  "userId": "",
-  "authedUserIDs": [
-    "909037475001805614"
-  ],
   "app": {
-    "logLevel": 1,
-    "lastTimeClearLogFile": 1751633965980,
-    "enableColorSpaceSrgb": true,
-    "visibleNewProjectBtn": true,
-    "useZenity": false,
-    "disableThemes": false,
-    "panelHeight": 40,
-    "saveLastOpenedTabs": true,
-    "exportDir": "~/Pictures/Figma",
     "commandSwitches": [
       {
         "switch": "enable-gpu-rasterization"
@@ -33,6 +19,25 @@
         "value": "wayland"
       }
     ],
+    "creatorsThemesDropdownOpen": false,
+    "disableThemes": false,
+    "dontShowTutorialCreator": false,
+    "enableColorSpaceSrgb": true,
+    "exportDir": "~/Pictures/Figma",
+    "featureFlags": {
+      "desktop_extension_registry": true,
+      "desktop_icon_tl_v1": true,
+      "desktop_multi_updates": true,
+      "desktop_new_icons_v1": true,
+      "desktop_new_rev_icon_v2": true,
+      "desktop_piper_selected_slides_pdf": true,
+      "desktop_push_notifs_win": true,
+      "desktop_shell_allow_focus": true,
+      "desktop_staging_factory_icon": true,
+      "desktop_unified_index_v3_dev": true,
+      "desktop_unified_index_v3_rollout": true,
+      "piper_pptx_export": true
+    },
     "fontDirs": [
       "/usr/share/fonts",
       "/usr/local/share/fonts",
@@ -40,34 +45,29 @@
       "/run/host/user-fonts",
       "~/.local/share/fonts/TTF"
     ],
-    "recentlyClosedTabs": [],
-    "windowsState": {},
     "lastOpenedTabs": {},
-    "featureFlags": {
-      "desktop_push_notifs_win": true,
-      "desktop_extension_registry": true,
-      "desktop_shell_allow_focus": true,
-      "desktop_multi_updates": true,
-      "piper_pptx_export": true,
-      "desktop_piper_selected_slides_pdf": true,
-      "desktop_unified_index_v3_dev": true,
-      "desktop_unified_index_v3_rollout": true,
-      "desktop_staging_factory_icon": true,
-      "desktop_icon_tl_v1": true,
-      "desktop_new_icons_v1": true,
-      "desktop_new_rev_icon_v2": true
-    },
+    "lastTimeClearLogFile": 1751633965980,
+    "logLevel": 1,
+    "panelHeight": 40,
+    "recentlyClosedTabs": [],
+    "saveLastOpenedTabs": true,
     "savedExtensions": [],
     "themeDropdownOpen": true,
-    "creatorsThemesDropdownOpen": false,
     "useOldPreviewer": false,
-    "dontShowTutorialCreator": false
+    "useZenity": false,
+    "visibleNewProjectBtn": true,
+    "windowsState": {}
   },
+  "authedUserIDs": [
+    "909037475001805614"
+  ],
+  "clientId": "someID",
   "theme": {
     "currentTheme": "Catppuchin_Mocha"
   },
   "ui": {
-    "scalePanel": 1,
-    "scaleFigmaUI": 1
-  }
+    "scaleFigmaUI": 1,
+    "scalePanel": 1
+  },
+  "userId": ""
 }

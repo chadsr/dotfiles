@@ -86,7 +86,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     export PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
 
     NODE_PATH=$(npm root -g)
-    export NODE_PATH="${NODE_PATH}"
+    export NODE_PATH
 
     YARN_BIN_PATH=$(yarn global bin)
     export PATH="$PATH:${YARN_BIN_PATH}"
@@ -120,6 +120,8 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     # ignore global zsh configs, to prevent /etc/zprofile from calling path_helper and fucking up PATH order
     unsetopt GLOBAL_RCS
+
+    # shellcheck disable=SC1091
     source '/etc/zshrc' # still source /etc/zshrc for anything useful
 
     LOCAL_BIN="$HOME/.local/bin"

@@ -1,6 +1,6 @@
 {
-    "version": "2.1.1",
-    "autoload": {
-        "FS17Pro Mouse": "Press"
-    }
+  "autoload": {
+    "FS17Pro Mouse": "Press"
+  },
+  "version": "2.1.1"
 }

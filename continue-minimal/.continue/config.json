@@ -1,33 +1,33 @@
 {
-  "models": [
-    {
-      "title": "DeepSeek-R1",
-      "provider": "ollama",
-      "model": "deepseek-r1:latest"
-    },
-    {
-      "title": "Ollama",
-      "provider": "ollama",
-      "model": "AUTODETECT"
-    }
-  ],
-  "tabAutocompleteModel": {
-    "title": "Qwen2.5-Coder 1.5B",
-    "provider": "ollama",
-    "model": "qwen2.5-coder:1.5b-base"
-  },
-  "embeddingsProvider": {
-    "provider": "ollama",
-    "model": "nomic-embed-text:latest"
-  },
   "customCommands": [
     {
+      "description": "Write unit tests for highlighted code",
       "name": "test",
-      "prompt": "{{{ input }}}\n\nWrite a comprehensive set of unit tests for the selected code. It should setup, run tests that check for correctness including important edge cases, and teardown. Ensure that the tests are complete and sophisticated. Give the tests just as chat output, don't edit any file.",
-      "description": "Write unit tests for highlighted code"
+      "prompt": "{{{ input }}}\n\nWrite a comprehensive set of unit tests for the selected code. It should setup, run tests that check for correctness including important edge cases, and teardown. Ensure that the tests are complete and sophisticated. Give the tests just as chat output, don't edit any file."
     }
   ],
   "docs": [],
+  "embeddingsProvider": {
+    "model": "nomic-embed-text:latest",
+    "provider": "ollama"
+  },
+  "models": [
+    {
+      "model": "deepseek-r1:latest",
+      "provider": "ollama",
+      "title": "DeepSeek-R1"
+    },
+    {
+      "model": "AUTODETECT",
+      "provider": "ollama",
+      "title": "Ollama"
+    }
+  ],
+  "tabAutocompleteModel": {
+    "model": "qwen2.5-coder:1.5b-base",
+    "provider": "ollama",
+    "title": "Qwen2.5-Coder 1.5B"
+  },
   "tabAutocompleteOptions": {
     "debounceDelay": 2000
   }

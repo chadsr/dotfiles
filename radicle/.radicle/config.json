@@ -1,52 +1,52 @@
 {
-  "publicExplorer": "https://app.radicle.xyz/nodes/$host/$rid$path",
-  "preferredSeeds": [
-    "z6MkrLMMsiPWUcNPHcRajuMi9mDfYckSoJyPwwnknocNYPm7@seed.radicle.garden:8776",
-    "z6Mkmqogy2qEM2ummccUthFEaaHvyYmYBYh3dbe9W4ebScxo@ash.radicle.garden:8776"
-  ],
-  "web": {
-    "pinned": {
-      "repositories": []
-    }
-  },
   "cli": {
     "hints": true
   },
   "node": {
     "alias": "chadsr",
-    "listen": [],
-    "peers": {
-      "type": "dynamic"
-    },
     "connect": [],
     "externalAddresses": [],
-    "network": "main",
-    "log": "INFO",
-    "relay": "auto",
     "limits": {
-      "routingMaxSize": 1000,
-      "routingMaxAge": 604800,
-      "gossipMaxAge": 1209600,
-      "fetchConcurrency": 1,
-      "maxOpenFiles": 4096,
-      "rate": {
-        "inbound": {
-          "fillRate": 5.0,
-          "capacity": 1024
-        },
-        "outbound": {
-          "fillRate": 10.0,
-          "capacity": 2048
-        }
-      },
       "connection": {
         "inbound": 128,
         "outbound": 16
-      }
+      },
+      "fetchConcurrency": 1,
+      "gossipMaxAge": 1209600,
+      "maxOpenFiles": 4096,
+      "rate": {
+        "inbound": {
+          "capacity": 1024,
+          "fillRate": 5.0
+        },
+        "outbound": {
+          "capacity": 2048,
+          "fillRate": 10.0
+        }
+      },
+      "routingMaxAge": 604800,
+      "routingMaxSize": 1000
     },
-    "workers": 8,
+    "listen": [],
+    "log": "INFO",
+    "network": "main",
+    "peers": {
+      "type": "dynamic"
+    },
+    "relay": "auto",
     "seedingPolicy": {
       "default": "block"
+    },
+    "workers": 8
+  },
+  "preferredSeeds": [
+    "z6MkrLMMsiPWUcNPHcRajuMi9mDfYckSoJyPwwnknocNYPm7@seed.radicle.garden:8776",
+    "z6Mkmqogy2qEM2ummccUthFEaaHvyYmYBYh3dbe9W4ebScxo@ash.radicle.garden:8776"
+  ],
+  "publicExplorer": "https://app.radicle.xyz/nodes/$host/$rid$path",
+  "web": {
+    "pinned": {
+      "repositories": []
     }
   }
 }

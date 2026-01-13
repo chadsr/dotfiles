@@ -1,38 +1,38 @@
 {
-  "models": [
-    {
-      "title": "GPT-OSS 20B",
-      "provider": "ollama",
-      "model": "gpt-oss:20b"
-    },
-    {
-      "title": "Qwen2.5 Coder",
-      "provider": "ollama",
-      "model": "qwen2.5-coder:latest"
-    },
-    {
-      "title": "Ollama",
-      "provider": "ollama",
-      "model": "AUTODETECT"
-    }
-  ],
-  "tabAutocompleteModel": {
-    "title": "Qwen2.5-Coder",
-    "provider": "ollama",
-    "model": "qwen2.5-coder:latest"
-  },
-  "embeddingsProvider": {
-    "provider": "ollama",
-    "model": "nomic-embed-text:latest"
-  },
   "customCommands": [
     {
+      "description": "Write unit tests for highlighted code",
       "name": "test",
-      "prompt": "{{{ input }}}\n\nWrite a comprehensive set of unit tests for the selected code. It should setup, run tests that check for correctness including important edge cases, and teardown. Ensure that the tests are complete and sophisticated. Give the tests just as chat output, don't edit any file.",
-      "description": "Write unit tests for highlighted code"
+      "prompt": "{{{ input }}}\n\nWrite a comprehensive set of unit tests for the selected code. It should setup, run tests that check for correctness including important edge cases, and teardown. Ensure that the tests are complete and sophisticated. Give the tests just as chat output, don't edit any file."
     }
   ],
   "docs": [],
+  "embeddingsProvider": {
+    "model": "nomic-embed-text:latest",
+    "provider": "ollama"
+  },
+  "models": [
+    {
+      "model": "gpt-oss:20b",
+      "provider": "ollama",
+      "title": "GPT-OSS 20B"
+    },
+    {
+      "model": "qwen2.5-coder:latest",
+      "provider": "ollama",
+      "title": "Qwen2.5 Coder"
+    },
+    {
+      "model": "AUTODETECT",
+      "provider": "ollama",
+      "title": "Ollama"
+    }
+  ],
+  "tabAutocompleteModel": {
+    "model": "qwen2.5-coder:latest",
+    "provider": "ollama",
+    "title": "Qwen2.5-Coder"
+  },
   "tabAutocompleteOptions": {
     "debounceDelay": 2000
   }

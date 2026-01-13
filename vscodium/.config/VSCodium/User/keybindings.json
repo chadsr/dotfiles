@@ -1,7 +1,7 @@
 [
-    {
-        "key": "shift+ctrl+right",
-        "command": "editor.action.inlineSuggest.acceptNextLine",
-        "when": "inlineSuggestionVisible && !editorReadonly"
-    }
+  {
+    "command": "editor.action.inlineSuggest.acceptNextLine",
+    "key": "shift+ctrl+right",
+    "when": "inlineSuggestionVisible && !editorReadonly"
+  }
 ]

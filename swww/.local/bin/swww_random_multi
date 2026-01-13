@@ -17,7 +17,7 @@ fi
 PIDFILE=~/.local/state/swww-randomize-pidfile.txt
 if [ -e "${PIDFILE}" ]; then
     OLD_PID="$(<${PIDFILE})"
-    if [ "X" != "X${OLD_PID}" ] && [ -e "/proc/${OLD_PID}" ]; then
+    if [ "" != "${OLD_PID}" ] && [ -e "/proc/${OLD_PID}" ]; then
         OLD_NAME="$(</proc/"${OLD_PID}"/comm)"
         THIS_NAME="$(</proc/${BASHPID}/comm)"
         if [ "${OLD_NAME}" = "${THIS_NAME}" ]; then
@@ -63,7 +63,7 @@ while true; do
             # Set a different image for each display
             for disp in $DISPLAY_LIST; do
                 # if there is no image try to get one
-                if [ "X" = "X${img}" ]; then
+                if [ "" = "${img}" ]; then
                     if read -r img; then
                         true
                     else # if there are no more images, refresh the list

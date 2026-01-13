@@ -15,5 +15,5 @@ else
         args="$args -i ${display}:${file}"
     done
 
-    swaylock $args "$@"
+    swaylock "$args" "$@"
 fi
