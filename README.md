@@ -1,6 +1,6 @@
 # dotfiles
 
-[![Lint](https://github.com/chadsr/dotfiles/actions/workflows/lint.yml/badge.svg)](https://github.com/chadsr/dotfiles/actions/workflows/lint.yml)
+[![CI](https://github.com/chadsr/dotfiles/actions/workflows/ci.yml/badge.svg)](https://github.com/chadsr/dotfiles/actions/workflows/ci.yml)
 
 My dotfiles, managed with [`stow`](https://www.gnu.org/software/stow/).
 

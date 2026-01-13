@@ -4,7 +4,7 @@ on:
             - main
     pull_request:
 
-name: "Lint"
+name: CI
 permissions:
     contents: read
 
