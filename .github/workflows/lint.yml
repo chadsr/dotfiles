@@ -10,7 +10,7 @@ permissions:
 
 jobs:
     lint:
-        name: Shellcheck
+        name: Lint (pre-commit)
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v6
