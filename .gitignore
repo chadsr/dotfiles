@@ -3,7 +3,7 @@
 alacritty/.config/alacritty/themes
 bat/.config/bat/themes/*
 continue/.continue/*
-cura/.config/cura/5.7/cura.cfg
+cura/.config/cura/5.11/cura.cfg
 data/pkgs/*
 fonts/.local/share/fonts/TTF/cryptofont.ttf
 freetube/.config/FreeTube/*

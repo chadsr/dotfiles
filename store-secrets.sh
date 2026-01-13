@@ -104,7 +104,7 @@ mkdir -p "$tmp_path"
 
 declare -a encrypt_data_paths_tuples=(
     "${HOME}/.android/keystores/keystore-rossch ${data_path}/android/keystores/keystore-rossch.asc.gpg"
-    "${HOME}/.config/cura/5.7/cura.cfg ${data_path}/cura/cura.cfg.asc.gpg"
+    "${HOME}/.config/cura/5.11/cura.cfg ${data_path}/cura/cura.cfg.asc.gpg"
     "${HOME}/.config/gallery-dl/config.json ${data_path}/gallery-dl/config.json.asc.gpg"
     "${HOME}/.config/gtk-3.0/bookmarks ${data_path}/gtk/bookmarks.asc.gpg"
     "${HOME}/.config/khal/config ${data_path}/khal/config.asc.gpg"
