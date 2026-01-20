@@ -267,7 +267,7 @@
         "interval": 600,
         "return-type": "json",
         "exec": "/usr/bin/waybar-crypto",
-        "exec-if": "ping pro-api.coinmarketcap.com -c2",
+        "exec-if": "timeout 1 bash -c 'exec 3<>/dev/tcp/pro-api.coinmarketcap.com/443'",
         "tooltip": true
     },
     "backlight": {
