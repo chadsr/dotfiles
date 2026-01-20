@@ -77,17 +77,6 @@
             "default": ""
         }
     },
-    "wlr/workspaces": {
-        "disable-scroll": true,
-        "all-outputs": true,
-        "format": "{name} {icon}",
-        "on-click": "activate",
-        "format-icons": {
-            "urgent": "",
-            "active": "",
-            "default": ""
-        }
-    },
     "sway/mode": {
         "format": " <span style=\"italic\">{}</span>"
     },
@@ -104,7 +93,6 @@
         "children-class": "group-workspaces",
         "modules": [
             "sway/workspaces",
-            "wlr/workspaces",
             "hyprland/workspaces",
             "sway/mode",
             "idle_inhibitor"
