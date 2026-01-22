@@ -18,6 +18,7 @@ record.record_options.codec auto
 record.record_options.color_range limited
 record.record_options.fps 60
 record.record_options.framerate_mode auto
+record.record_options.low_power_mode false
 record.record_options.merge_audio_tracks true
 record.record_options.overclock false
 record.record_options.record_area_height 1080
@@ -52,6 +53,7 @@ replay.record_options.codec auto
 replay.record_options.color_range limited
 replay.record_options.fps 60
 replay.record_options.framerate_mode auto
+replay.record_options.low_power_mode false
 replay.record_options.merge_audio_tracks true
 replay.record_options.overclock false
 replay.record_options.record_area_height 0
@@ -96,9 +98,9 @@ screenshot.save_screenshot_in_game_folder false
 screenshot.save_screenshot_to_clipboard false
 screenshot.save_screenshot_to_disk true
 screenshot.show_notifications true
-screenshot.take_screenshot_hotkey 102 0
-screenshot.take_screenshot_region_hotkey 102 4
-screenshot.take_screenshot_window_hotkey 102 1
+screenshot.take_screenshot_hotkey 0 0
+screenshot.take_screenshot_region_hotkey 0 0
+screenshot.take_screenshot_window_hotkey 0 0
 screenshot.use_led_indicator false
 streaming.custom.container flv
 streaming.custom.key
@@ -113,6 +115,7 @@ streaming.record_options.codec auto
 streaming.record_options.color_range limited
 streaming.record_options.fps 60
 streaming.record_options.framerate_mode auto
+streaming.record_options.low_power_mode false
 streaming.record_options.merge_audio_tracks true
 streaming.record_options.overclock false
 streaming.record_options.record_area_height 1080
