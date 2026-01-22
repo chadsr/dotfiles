@@ -88,9 +88,6 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     NODE_PATH=$(npm root -g)
     export NODE_PATH
 
-    YARN_BIN_PATH=$(yarn global bin)
-    export PATH="$PATH:${YARN_BIN_PATH}"
-
     export NVM_DIR="$HOME/.nvm"
 
     ############
