@@ -921,6 +921,7 @@ declare -a stow_dirs_general=(
     hyprland
     input-remapper
     java
+    kanshi
     kde
     khal
     lact
@@ -994,11 +995,11 @@ declare -a systemd_user_units=(
     "$base_path"/gtk/.config/systemd/user/xsettingsd.service
     "$base_path"/hyprland/.config/systemd/user/hypr-sunsetr.service
     "$base_path"/hyprland/.config/systemd/user/hypridle.service
+    "$base_path"/kanshi/.config/systemd/user/kanshi.service
     "$base_path"/khal/.config/systemd/user/vdirsyncer-sync.service
     "$base_path"/khal/.config/systemd/user/vdirsyncer-sync.timer
     "$base_path"/nextcloud/.config/systemd/user/nextcloud-client.service
     "$base_path"/solaar/.config/systemd/user/solaar.service
-    "$base_path"/sway/.config/systemd/user/kanshi.service
     "$base_path"/sway/.config/systemd/user/swayidle.service
     "$base_path"/sway/.config/systemd/user/swayosd.service
     "$base_path"/sway/.config/systemd/user/wlr-sunclock.service
