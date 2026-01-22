@@ -405,6 +405,7 @@ declare -a mk_dirs=(
     ~/.config/environment.d/
     ~/.config/figma-linux/
     ~/.config/goose/
+    ~/.config/gpu-screen-recorder
     ~/.config/khal/
     ~/.config/Kvantum/
     ~/.config/Logseq/
