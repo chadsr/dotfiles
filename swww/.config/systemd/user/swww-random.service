@@ -1,7 +1,7 @@
 [Unit]
 Description=Swww randomized wallpapers
 PartOf=graphical-session.target
-After=graphical-session.target,swww-daemon.service
+After=graphical-session.target swww-daemon.service
 Requires=swww-daemon.service
 
 [Service]
