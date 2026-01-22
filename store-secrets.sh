@@ -119,6 +119,7 @@ declare -a encrypt_data_paths_tuples=(
     "${HOME}/.ssh/config ${data_path}/ssh/config.asc.gpg"
     "${pkglist_system_path} ${data_path}/pkgs/${current_hostname}.txt.asc.gpg"
     "$base_path/system/${current_hostname}/boot/loader/entries/arch-zen.conf ${data_path}/system/${current_hostname}/boot/loader/entries/arch-zen.asc.conf"
+    "$base_path/system/${current_hostname}/boot/loader/entries/arch-cachyos.conf ${data_path}/system/${current_hostname}/boot/loader/entries/arch-cachyos.asc.conf"
     "$data_path/pkgs/remove.txt ${data_path}/pkgs/remove.txt.asc.gpg"
 
 )
