@@ -1,0 +1,15 @@
+[Unit]
+Description=AWWW randomized wallpapers
+PartOf=graphical-session.target
+After=graphical-session.target awww-daemon.service
+Requires=awww-daemon.service
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+ExecStart=%h/.local/bin/awww_random_multi %h/Pictures/Backgrounds crop wave 300
+
+[Install]
+WantedBy=sway-session.target
+WantedBy=hypr-session.target

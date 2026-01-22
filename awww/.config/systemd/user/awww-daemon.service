@@ -1,5 +1,5 @@
 [Unit]
-Description=Swww wallpaper daemon
+Description=AWWW wallpaper daemon
 PartOf=graphical-session.target
 After=graphical-session.target
 
@@ -7,7 +7,7 @@ After=graphical-session.target
 Type=simple
 Restart=always
 RestartSec=1
-ExecStart=/usr/bin/swww-daemon
+ExecStart=/usr/bin/awww-daemon
 
 [Install]
 WantedBy=sway-session.target

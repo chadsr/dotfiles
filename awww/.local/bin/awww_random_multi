@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 # This script will randomly go through the files of a directory,
 # setting a different random wallpaper for each display
 # at regular intervals
@@ -7,14 +9,14 @@
 # NOTE: this script is in bash (not posix shell), because the RANDOM variable
 # we use is not defined in posix
 
-if [[ $# -lt 3 ]] || [[ ! -d $1 ]]; then
+if [[ $# -lt 4 ]] || [[ ! -d $1 ]]; then
     echo "Usage:
-    $0 <dir containing images> <no|crop|fit> <interval in seconds>"
+    $0 <dir containing images> <no|crop|fit> <transition> <interval in seconds>"
     exit 1
 fi
 
-# Make sure only 1 instance of swww_randomize
-PIDFILE=~/.local/state/swww-randomize-pidfile.txt
+# Make sure only 1 instance of awww_randomize
+PIDFILE=~/.local/state/awww-randomize-pidfile.txt
 if [ -e "${PIDFILE}" ]; then
     OLD_PID="$(<${PIDFILE})"
     if [ "" != "${OLD_PID}" ] && [ -e "/proc/${OLD_PID}" ]; then
@@ -32,8 +34,8 @@ fi
 echo "${BASHPID}" >${PIDFILE}
 
 # Edit below to control the images transition
-export SWWW_TRANSITION_FPS=60
-export SWWW_TRANSITION_STEP=2
+export AWWW_TRANSITION_FPS=60
+export AWWW_TRANSITION_STEP=2
 
 PICTURE_DIR=$1
 
@@ -50,7 +52,13 @@ TRANSITION_TYPE=$3
 # This controls (in seconds) when to switch to the next image
 INTERVAL=$4
 
-DISPLAY_LIST=$(swww query | grep -Po "^[^:]+")
+# Trim leading spaces and an optional leading colon, then cut at the next colon.
+mapfile -t DISPLAY_LIST < <(awww query | sed -E 's/^\s*:?\s*//; s/:.*$//' | sed -E 's/^\s+|\s+$//g' | awk 'NF')
+
+if [ "${#DISPLAY_LIST[@]}" -eq 0 ]; then
+    echo "No displays found!"
+    exit 1
+fi
 
 while true; do
     find -L "$PICTURE_DIR" -type f \( -name '*.jpg' -o -name '*.JPG' -o -name '*.png' -o -name '*.PNG' \) |
@@ -58,10 +66,10 @@ while true; do
             echo "$RANDOM:$img"
         done |
         sort -n | cut -d':' -f2- |
-        tee ~/.local/state/swww-randomize-list.txt |
+        tee ~/.local/state/awww-randomize-list.txt |
         while read -r img; do
             # Set a different image for each display
-            for disp in $DISPLAY_LIST; do
+            for disp in "${DISPLAY_LIST[@]}"; do
                 # if there is no image try to get one
                 if [ "" = "${img}" ]; then
                     if read -r img; then
@@ -71,7 +79,7 @@ while true; do
                         break 2
                     fi
                 fi
-                swww img --resize="$RESIZE_TYPE" --transition-type="$TRANSITION_TYPE" --outputs "$disp" "$img"
+                awww img --resize="$RESIZE_TYPE" --transition-type="$TRANSITION_TYPE" --outputs "$disp" "$img"
                 # make sure each image is only used once
                 img=""
 
