@@ -2,6 +2,7 @@
 
 font-family = Hack Nerd Mono
 font-size = 12
-background-opacity = 0.25
+background-opacity = 0.5
 window-padding-x = 8
 window-padding-y = 8
+confirm-close-surface = false
