@@ -48,3 +48,7 @@
 	path = .git_submodules/catppuccin-btop
 	url = https://github.com/catppuccin/btop.git
     branch = main
+[submodule ".git_submodules/candy-icons"]
+	path = .git_submodules/candy-icons
+	url = https://github.com/EliverLara/candy-icons.git
+    branch = master
