@@ -1003,7 +1003,6 @@ declare -a systemd_user_units=(
     "$base_path"/khal/.config/systemd/user/vdirsyncer-sync.service
     "$base_path"/khal/.config/systemd/user/vdirsyncer-sync.timer
     "$base_path"/nextcloud/.config/systemd/user/nextcloud-client.service
-    "$base_path"/solaar/.config/systemd/user/solaar.service
     "$base_path"/sway/.config/systemd/user/swayidle.service
     "$base_path"/sway/.config/systemd/user/swayosd.service
     "$base_path"/systemd/.config/systemd/user/enable-linger.service
@@ -1016,6 +1015,7 @@ declare -a systemd_user_units=(
     /usr/lib/systemd/user/pipewire.service
     /usr/lib/systemd/user/wireplumber.service
     /usr/lib/systemd/user/yubikey-touch-detector.socket
+    # "$base_path"/solaar/.config/systemd/user/solaar.service
     # /usr/lib/systemd/user/batsignal.service
     # "$base_path"/espanso/.config/systemd/user/espanso.service
     # "$base_path"/gammastep/.config/systemd/user/gammastep-wayland.service
