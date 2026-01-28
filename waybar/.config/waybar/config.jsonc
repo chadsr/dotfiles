@@ -101,7 +101,13 @@
     "tray": {
         "icon-size": 16,
         "spacing": 8,
-        "show-passive-items": true
+        "show-passive-items": true,
+        "icons": {
+            "Nextcloud": "nextcloud",
+            "steam": "steam",
+            "Evolution Tray": "evolution",
+            "qBittorrent": "qbittorrent"
+        }
     },
     "custom/updates": {
         "format": "{} {icon}",
@@ -122,7 +128,7 @@
         "format": " {nr_failed_system}  {nr_failed_user} ",
         "system": true,
         "user": true,
-        "on-click": "alacritty -e systemctl-tui"
+        "on-click": "ghostty -e systemctl-tui"
     },
     "group/tray": {
         "orientation": "horizontal",
@@ -327,7 +333,7 @@
         "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
         "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
         "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
-        "on-click": "alacritty -e bluetuith"
+        "on-click": "ghostty -e bluetuith"
     },
     "pulseaudio": {
         "scroll-step": 1,
