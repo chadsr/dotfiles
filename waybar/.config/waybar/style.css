@@ -1,4 +1,4 @@
-@import 'theme.css';
+@import "theme.css";
 
 @define-color focused @mauve;
 @define-color urgent @mauve;
@@ -9,163 +9,163 @@
 @define-color section-four @mantle;
 
 @keyframes urgent-animation {
-    50% {
-        color: @text;
-        background: @urgent;
-    }
+  50% {
+    color: @text;
+    background: @urgent;
+  }
 }
 
 @keyframes critical-animation {
-    50% {
-        color: @text;
-        background: @critical;
-    }
+  50% {
+    color: @text;
+    background: @critical;
+  }
 }
 
 * {
-    font-family: 'Hack Nerd Font Mono';
-    font-size: 12px;
-    border: none;
-    border-radius: 0;
-    min-height: 0;
-    margin: 0;
-    padding: 0;
+  font-family: "Hack Nerd Font Mono";
+  font-size: 1rem;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
 }
 
 window#waybar {
-    background: transparent;
-    color: @mauve;
+  background: transparent;
+  color: @mauve;
 }
 
 .modules-left label.module,
 .modules-center label.module,
 .modules-right label.module {
-    padding: 0 8px;
+  padding: 0 8px;
 }
 
 tooltip {
-    background-color: shade(@base, 0.9);
-    border: 1px solid @crust;
+  background-color: shade(@base, 0.9);
+  border: 1px solid @crust;
 }
 
 tooltip label {
-    color: @mauve;
+  color: @mauve;
 }
 
 #workspaces button {
-    color: @mauve;
-    padding: 0 8px;
+  color: @mauve;
+  padding: 0 8px;
 }
 
 #workspaces button.focused,
 #workspaces button:hover,
 #workspaces button.active {
-    background: @focused;
-    color: @section-one;
+  background: @focused;
+  color: @section-one;
 }
 
 #workspaces button.urgent {
-    animation: urgent-animation 1s steps(3) infinite;
+  animation: urgent-animation 1s steps(3) infinite;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button:hover {
-    box-shadow: inherit;
-    text-shadow: inherit;
+  box-shadow: inherit;
+  text-shadow: inherit;
 }
 
 #mode {
-    padding: 0 8px;
-    background: @section-one;
+  padding: 0 8px;
+  background: @section-one;
 }
 
 #idle_inhibitor {
-    font-size: 20px;
-    min-width: 16px;
+  font-size: 20px;
+  min-width: 16px;
 }
 
 #idle_inhibitor.activated {
-    color: @focused;
+  color: @focused;
 }
 
 #workspaces button,
 #idle_inhibitor {
-    background: @section-one;
+  background: @section-one;
 }
 
 #custom-left-spacer-workspaces,
 #custom-right-spacer-workspaces {
-    font-size: 20px;
-    padding: 0;
+  font-size: 20px;
+  padding: 0;
 }
 
 #custom-right-spacer-workspaces {
-    color: @section-one;
-    background: @section-two;
+  color: @section-one;
+  background: @section-two;
 }
 
 #custom-right-spacer-tray {
-    font-size: 20px;
-    padding: 0;
-    color: @section-two;
+  font-size: 20px;
+  padding: 0;
+  color: @section-two;
 }
 
 #custom-left-spacer-audio {
-    font-size: 20px;
-    color: @section-three;
-    padding: 0;
+  font-size: 20px;
+  color: @section-three;
+  padding: 0;
 }
 
 #custom-left-spacer-organisation {
-    font-size: 20px;
-    color: @section-two;
-    padding: 0;
+  font-size: 20px;
+  color: @section-two;
+  padding: 0;
 }
 
 #custom-right-spacer-organisation {
-    font-size: 20px;
-    color: @section-two;
-    background: @section-three;
-    padding: 0;
+  font-size: 20px;
+  color: @section-two;
+  background: @section-three;
+  padding: 0;
 }
 
 #custom-right-spacer-hardware {
-    font-size: 20px;
-    padding: 0;
-    color: @section-three;
-    background: @section-four;
+  font-size: 20px;
+  padding: 0;
+  color: @section-three;
+  background: @section-four;
 }
 
 #custom-right-spacer-information {
-    color: @section-three;
-    padding: 0;
-    font-size: 20px;
+  color: @section-three;
+  padding: 0;
+  font-size: 20px;
 }
 
 #tray {
-    padding: 0 4px;
+  padding: 0 4px;
 }
 
 #tray > .passive {
-    -gtk-icon-effect: dim;
+  -gtk-icon-effect: dim;
 }
 
 #tray > .active {
-    -gtk-icon-effect: highlight;
+  -gtk-icon-effect: highlight;
 }
 
 #tray > .needs-attention {
-    -gtk-icon-effect: highlight;
-    animation: urgent-animation 0.5s steps(10) infinite;
+  -gtk-icon-effect: highlight;
+  animation: urgent-animation 0.5s steps(10) infinite;
 }
 
 #privacy {
-    padding: 0px;
+  padding: 0px;
 }
 
 #privacy-item.screenshare,
 #privacy-item.audio-in {
-    padding: 0 8px;
+  padding: 0 8px;
 }
 
 #clock,
@@ -175,23 +175,23 @@ tooltip label {
 #custom-yay,
 #mpris,
 #cava {
-    color: @mauve;
-    background: @section-two;
+  color: @mauve;
+  background: @section-two;
 }
 
 #custom-yubikey {
-    font-size: 20px;
-    animation: urgent-animation 0.5s steps(10) infinite;
+  font-size: 20px;
+  animation: urgent-animation 0.5s steps(10) infinite;
 }
 
 #custom-weather,
 #custom-crypto {
-    color: @sapphire;
-    background: @section-three;
+  color: @sapphire;
+  background: @section-three;
 }
 
 #custom-crypto {
-    font-family: cryptofont, monospace;
+  font-family: cryptofont, monospace;
 }
 
 #pulseaudio,
@@ -200,45 +200,45 @@ tooltip label {
 #temperature,
 #disk,
 #power-profiles-daemon {
-    background: @section-three;
+  background: @section-three;
 }
 
 #memory {
-    color: @orange;
+  color: @orange;
 }
 
 #cpu {
-    color: @pink;
+  color: @pink;
 }
 
 #temperature {
-    color: @green;
+  color: @green;
 }
 
 #temperature.gpu {
-    color: @red;
+  color: @red;
 }
 
 #temperature.critical,
 #temperature.gpu.critical {
-    color: @blue;
-    animation: critical-animation 0.5s steps(10) infinite;
+  color: @blue;
+  animation: critical-animation 0.5s steps(10) infinite;
 }
 
 #disk {
-    color: @yellow;
+  color: @yellow;
 }
 
 #power-profiles-daemon.balanced {
-    color: @white;
+  color: @white;
 }
 
 #power-profiles-daemon.performance {
-    color: @pink;
+  color: @pink;
 }
 
 #power-profiles-daemon.power-saver {
-    color: @green;
+  color: @green;
 }
 
 #network,
@@ -248,7 +248,7 @@ tooltip label {
 #custom-swaync,
 #network,
 #custom-logout {
-    background: @section-four;
+  background: @section-four;
 }
 
 #custom-swaync {
@@ -260,14 +260,14 @@ tooltip label {
 }
 
 #network.vpn {
-    color: @green;
+  color: @green;
 }
 
 #battery.charging {
-    color: @green;
+  color: @green;
 }
 
 #battery.critical:not(.charging) {
-    color: @blue;
-    animation: critical-animation 0.5s steps(10) infinite;
+  color: @blue;
+  animation: critical-animation 0.5s steps(10) infinite;
 }
