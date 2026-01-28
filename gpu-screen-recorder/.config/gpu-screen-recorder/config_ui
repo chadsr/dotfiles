@@ -2,7 +2,7 @@ main.config_file_version 2
 main.hotkeys_enable_option enable_hotkeys
 main.joystick_hotkeys_enable_option disable_hotkeys
 main.notification_speed normal
-main.show_hide_hotkey 26 16
+main.show_hide_hotkey 22 16
 main.software_encoding_warning_shown false
 main.tint_color amd
 main.wayland_warning_shown true
@@ -32,16 +32,21 @@ record.record_options.video_bitrate 40000
 record.record_options.video_height 1080
 record.record_options.video_quality very_high
 record.record_options.video_width 1920
+record.record_options.webcam_camera_fps 0
+record.record_options.webcam_camera_height 0
+record.record_options.webcam_camera_width 0
 record.record_options.webcam_flip_horizontally false
 record.record_options.webcam_height 30
 record.record_options.webcam_source
-record.record_options.webcam_video_format auto
+record.record_options.webcam_video_format
 record.record_options.webcam_width 30
 record.record_options.webcam_x 0
 record.record_options.webcam_y 0
 record.save_directory Videos/Recordings
 record.save_video_in_game_folder false
 record.start_stop_hotkey 94 16
+record.start_stop_region_hotkey 94 4
+record.start_stop_window_hotkey 94 1
 replay.container mp4
 replay.record_options.advanced_view false
 replay.record_options.application_audio_invert false
@@ -67,6 +72,9 @@ replay.record_options.video_bitrate 40000
 replay.record_options.video_height 0
 replay.record_options.video_quality custom
 replay.record_options.video_width 0
+replay.record_options.webcam_camera_fps 0
+replay.record_options.webcam_camera_height 0
+replay.record_options.webcam_camera_width 0
 replay.record_options.webcam_flip_horizontally false
 replay.record_options.webcam_height 30
 replay.record_options.webcam_source
@@ -105,6 +113,8 @@ screenshot.use_led_indicator false
 streaming.custom.container flv
 streaming.custom.key
 streaming.custom.url
+streaming.kick.key
+streaming.kick.url
 streaming.record_options.advanced_view false
 streaming.record_options.application_audio_invert false
 streaming.record_options.audio_codec opus
@@ -129,6 +139,9 @@ streaming.record_options.video_bitrate 8000
 streaming.record_options.video_height 1080
 streaming.record_options.video_quality custom
 streaming.record_options.video_width 1920
+streaming.record_options.webcam_camera_fps 0
+streaming.record_options.webcam_camera_height 0
+streaming.record_options.webcam_camera_width 0
 streaming.record_options.webcam_flip_horizontally false
 streaming.record_options.webcam_height 30
 streaming.record_options.webcam_source
