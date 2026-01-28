@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# https://raw.githubusercontent.com/maximbaz/dotfiles/master/.local/bin/waybar-yubikey
+# https://raw.githubusercontent.com/maximbaz/dotfiles/main/modules/linux/bin/waybar-yubikey
 # ISC License
 
-# Copyright (c) 2017-2021, Maxim Baz
+# Copyright (c) 2017-2026, Maxim Baz
 
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
