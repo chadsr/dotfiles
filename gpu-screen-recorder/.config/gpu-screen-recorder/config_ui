@@ -1,8 +1,9 @@
 main.config_file_version 2
 main.hotkeys_enable_option enable_hotkeys
 main.joystick_hotkeys_enable_option disable_hotkeys
+main.language
 main.notification_speed normal
-main.show_hide_hotkey 22 16
+main.show_hide_hotkey 18 80
 main.software_encoding_warning_shown false
 main.tint_color amd
 main.wayland_warning_shown true
@@ -38,7 +39,7 @@ record.record_options.webcam_camera_width 0
 record.record_options.webcam_flip_horizontally false
 record.record_options.webcam_height 30
 record.record_options.webcam_source
-record.record_options.webcam_video_format
+record.record_options.webcam_video_format auto
 record.record_options.webcam_width 30
 record.record_options.webcam_x 0
 record.record_options.webcam_y 0
