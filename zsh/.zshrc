@@ -7,20 +7,7 @@
 # shellcheck source=.aliases
 source "$HOME"/.aliases
 
-eval "$(thefuck --alias)"
-eval "$(thefuck --alias fuck)"
-
-# NVM Init
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    [ -s /usr/share/nvm/init-nvm.sh ] && \. /usr/share/nvm/init-nvm.sh
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-    [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"                                       # This loads nvm
-    [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
-
-    # fixes GPG smart card availability
-    gpg --card-status >/dev/null
-fi
-
+# ZSH Plugins
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     [ -s /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && \. /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     [ -s /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh ] && \. /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
@@ -30,6 +17,13 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     [ -s "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && \. "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
     [ -s "$HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh" ] && \. "$HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
     [ -s "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && \. "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+    # OPT + <-/->
+    bindkey "^[^[[C" forward-word
+    bindkey "^[^[[D" backward-word
+
+    # fixes GPG smart card availability
+    gpg --card-status >/dev/null
 fi
 
 # preserve delete key
@@ -42,6 +36,17 @@ bindkey "^[[1;5C" forward-word
 # preserve home/end functionality for lines
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
+
+eval "$(thefuck --alias)"
+eval "$(thefuck --alias fuck)"
+
+# NVM Init
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    [ -s /usr/share/nvm/init-nvm.sh ] && \. /usr/share/nvm/init-nvm.sh
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"                                       # This loads nvm
+    [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
+fi
 
 if [[ $(command -v starship) ]]; then
     eval "$(starship init zsh)"
