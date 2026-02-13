@@ -1008,7 +1008,7 @@ declare -a systemd_user_units=(
     "$base_path"/systemd/.config/systemd/user/enable-linger.service
     "$base_path"/systemd/.config/systemd/user/wlr-sunclock.service
     "$base_path"/waybar/.config/systemd/user/setup-temps.service
-    "$base_path"/waybar/.config/systemd/user/waybar.service
+    /usr/lib/systemd/user/app-com.mitchellh.ghostty.service
     /usr/lib/systemd/user/gnome-keyring-daemon.socket
     /usr/lib/systemd/user/gpu-screen-recorder-ui.service
     /usr/lib/systemd/user/pipewire-pulse.service
