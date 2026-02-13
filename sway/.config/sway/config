@@ -60,7 +60,7 @@ set $up w
 set $right d
 
 # Terminal Emulator
-set $term alacritty
+set $term ghostty +new-window
 
 set $menu fuzzel
 
