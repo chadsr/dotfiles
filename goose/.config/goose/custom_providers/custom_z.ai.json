@@ -1,0 +1,22 @@
+{
+  "api_key_env": "CUSTOM_Z.AI_API_KEY",
+  "base_url": "https://api.z.ai/api/anthropic",
+  "description": "Custom Z.ai provider",
+  "display_name": "Z.ai",
+  "engine": "anthropic",
+  "headers": null,
+  "models": [
+    {
+      "context_limit": 128000,
+      "currency": null,
+      "input_token_cost": null,
+      "name": "GLM-4.7",
+      "output_token_cost": null,
+      "supports_cache_control": null
+    }
+  ],
+  "name": "custom_z.ai",
+  "requires_auth": true,
+  "supports_streaming": true,
+  "timeout_seconds": null
+}

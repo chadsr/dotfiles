@@ -1,12 +1,12 @@
-OPENAI_HOST: https://api.openai.com
-GOOSE_MODEL: gpt-5
-GOOSE_MODE: auto
-GOOSE_PROVIDER: openai
 ANTHROPIC_HOST: https://api.anthropic.com
-OPENAI_BASE_PATH: v1/chat/completions
-OLLAMA_HOST: localhost
 GOOSE_DISABLE_KEYRING: ""
+GOOSE_MODE: auto
+GOOSE_MODEL: glm-5
+GOOSE_PROVIDER: custom_z.ai
 GOOSE_TELEMETRY_ENABLED: false
+OLLAMA_HOST: localhost
+OPENAI_BASE_PATH: v1/chat/completions
+OPENAI_HOST: https://api.openai.com
 extensions:
   memory:
     enabled: true
@@ -232,4 +232,16 @@ extensions:
     description: Create and manage custom Goose apps through chat. Apps are HTML/CSS/JavaScript and run in sandboxed windows.
     display_name: Apps
     bundled: true
+    available_tools: []
+  debugmcp:
+    enabled: true
+    type: streamable_http
+    name: debugmcp
+    description: DebugMCP - Multi-language debugging support
+    uri: http://localhost:3001/sse
+    envs: {}
+    env_keys: []
+    headers: {}
+    timeout: 300
+    bundled: null
     available_tools: []
