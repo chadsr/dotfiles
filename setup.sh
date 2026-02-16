@@ -858,7 +858,6 @@ declare -a symlink_paths_tuples=(
     "${git_submodule_path}/catppuccin-helix/themes/default/catppuccin_mocha.toml ${base_path}/helix/.config/helix/themes/catppuccin_mocha.toml"
     "${git_submodule_path}/catppuccin-hyprland/themes/mocha.conf ${base_path}/hyprland/.config/hypr/themes/colors.conf"
     "${git_submodule_path}/catppuccin-kvantum/themes/catppuccin-mocha-mauve ${base_path}/qt/.config/Kvantum/catppuccin-mocha-mauve"
-    "${git_submodule_path}/catppuccin-rofi/themes/catppuccin-mocha.rasi ${base_path}/rofi/.config/rofi/catppuccin-mocha.rasi"
     "${git_submodule_path}/catppuccin-waybar/themes/mocha.css ${base_path}/waybar/.config/waybar/theme.css"
     "${git_submodule_path}/cryptofont/fonts/cryptofont.ttf ${base_path}/fonts/.local/share/fonts/TTF/cryptofont.ttf"
     "${git_submodule_path}/sweet-theme/assets ${base_path}/gtk/.themes/Sweet/assets"
@@ -872,27 +871,19 @@ for symlink_paths_tuple in "${symlink_paths_tuples[@]}"; do
     symlink "${symlink_paths[0]}" "${symlink_paths[1]}"
 done
 
-cp "${git_submodule_path}/catppuccin-rofi/catppuccin-default.rasi" "${base_path}/rofi/.config/rofi/catppuccin-default.rasi" || {
-    echo "failed to copy catppuccin-default.rasi"
-    exit 1
-}
-
-sed -i 's/\/\/ @import "catppuccin-mocha"/@import "catppuccin-mocha"/' "${base_path}/rofi/.config/rofi/catppuccin-default.rasi" || {
-    echo "failed to activate rofi catppuccin mocha theme"
-    exit 1
-}
-
 latest_android_config_dir=$(find ~/.config/Google -mindepth 1 -maxdepth 1 -type d -exec stat -c "%Y %n" {} \; | sort -nr | head -n 1 | cut -d' ' -f2-)
 if [ -n "$latest_android_config_dir" ]; then
     # copy the contents of the latest android studio config to dotfiles
-    find "$latest_android_config_dir" -maxdepth 3 -type f \( -iname \*.xml -o -iname \*.txt \) -exec cp -r --parents --update=none {} ./android/ \; || {
+    find "$latest_android_config_dir"/options -maxdepth 3 -type f -iname \*.xml -exec cp -r --parents --update=none {} ./android/ \; || {
         echo "failed to copy latest android studio configuration files from ${latest_android_config_dir}"
         exit 1
     }
 
-    # copy the absolute path-ed files to the stow directory, and remove abs dir
-    cp -r --update=none "./android/home/${USER}/.config/Google" ./android/.config
-    rm -rf ./android/home/
+    if [ -d "./android/home" ]; then
+        # copy the absolute path-ed files to the stow directory, and remove abs dir
+        cp -r --update=none "./android/home/${USER}/.config/Google" ./android/.config
+        rmrf ./android/home/
+    fi
 fi
 
 declare -a stow_dirs_general=(
@@ -941,11 +932,11 @@ declare -a stow_dirs_general=(
     qt
     radicle
     ranger
-    rofi
     scripts
     solaar
     starship
     sway
+    swaync
     systemd
     thunar
     tidal-hifi
