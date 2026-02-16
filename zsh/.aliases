@@ -45,6 +45,8 @@ alias c='code . && exit'
 alias dotfiles='cd $DOTFILES'
 alias dots='dotfiles'
 
+alias gooses='env GOOSE_EDITOR_API_KEY=$(pass show GOOSE_EDITOR_API_KEY) goose session'
+
 alias ua-drop-caches='sudo paccache -rk3; yay -Sc --aur --noconfirm'
 alias update-mirrors='export TMPFILE="$(mktemp)"; \
     sudo true; \
