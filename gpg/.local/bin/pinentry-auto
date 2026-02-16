@@ -8,7 +8,6 @@ _exists() {
 
 if [ -n "${DISPLAY-}" ]; then
     _exists pinentry-gtk && pe=$(which pinentry-gtk)
-    _exists pinentry-rofi && pe=$(which pinentry-rofi)
     _exists pinentry-fuzzel && pe=$(which pinentry-fuzzel)
 else
     _exists pinentry-tty && pe=$(which pinentry-tty)
