@@ -61,8 +61,6 @@
   "widgets": [
     "title",
     "dnd",
-    "backlight",
-    "volume",
     "notifications",
     "buttons-grid"
   ]
