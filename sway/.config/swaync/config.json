@@ -1,14 +1,14 @@
 {
   "$schema": "/etc/xdg/swaync/configSchema.json",
-  "control-center-width": 500,
+  "control-center-width": 320,
   "fit-to-screen": true,
   "hide-on-action": true,
-  "hide-on-clear": false,
+  "hide-on-clear": true,
   "image-visibility": "when-available",
   "keyboard-shortcuts": true,
+  "layer-shell-cover-screen": true,
   "notification-body-image-height": 100,
   "notification-body-image-width": 200,
-  "notification-icon-size": 64,
   "notification-window-width": 500,
   "positionX": "right",
   "positionY": "top",
@@ -23,14 +23,6 @@
     },
     "buttons-grid": {
       "actions": [
-        {
-          "command": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
-          "label": "\udb81\udd7e"
-        },
-        {
-          "command": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
-          "label": "\udb80\udf6c"
-        },
         {
           "command": "screenlock",
           "label": "\udb80\udf3e"
@@ -51,27 +43,27 @@
           "command": "systemctl poweroff",
           "label": "\udb81\udc25"
         }
-      ]
+      ],
+      "buttons-per-row": 5
     },
     "dnd": {
       "text": "Do Not Disturb"
-    },
-    "mpris": {
-      "image-radius": 4,
-      "image-size": 128
     },
     "title": {
       "button-text": "\udb80\uddb4 Clear All",
       "clear-all-button": true,
       "text": "Notifications"
+    },
+    "volume": {
+      "label": "\uf028"
     }
   },
   "widgets": [
     "title",
     "dnd",
     "backlight",
+    "volume",
     "notifications",
-    "mpris",
     "buttons-grid"
   ]
 }

@@ -995,7 +995,6 @@ declare -a systemd_user_units=(
     "$base_path"/awww/.config/systemd/user/awww-daemon.service
     "$base_path"/awww/.config/systemd/user/awww-random.service
     "$base_path"/clipse/.config/systemd/user/clipse.service
-    "$base_path"/dunst/.config/systemd/user/dunst-wl.service
     "$base_path"/gtk/.config/systemd/user/xsettingsd.service
     "$base_path"/hyprland/.config/systemd/user/hypr-sunsetr.service
     "$base_path"/hyprland/.config/systemd/user/hypridle.service
@@ -1013,14 +1012,15 @@ declare -a systemd_user_units=(
     /usr/lib/systemd/user/gpu-screen-recorder-ui.service
     /usr/lib/systemd/user/pipewire-pulse.service
     /usr/lib/systemd/user/pipewire.service
+    /usr/lib/systemd/user/swaync.service
     /usr/lib/systemd/user/wireplumber.service
     /usr/lib/systemd/user/yubikey-touch-detector.socket
-    # "$base_path"/solaar/.config/systemd/user/solaar.service
-    # /usr/lib/systemd/user/batsignal.service
+    # "$base_path"/dunst/.config/systemd/user/dunst-wl.service
     # "$base_path"/espanso/.config/systemd/user/espanso.service
     # "$base_path"/gammastep/.config/systemd/user/gammastep-wayland.service
     # "$base_path"/gammastep/.config/systemd/user/geoclue-agent.service
-    # /usr/lib/systemd/user/swaync.service
+    # "$base_path"/solaar/.config/systemd/user/solaar.service
+    # /usr/lib/systemd/user/batsignal.service
 )
 for systemd_user_unit in "${systemd_user_units[@]}"; do
     systemd_user_enable_start "${systemd_user_unit}"
