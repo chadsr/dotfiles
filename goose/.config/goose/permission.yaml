@@ -1,18 +1,18 @@
 user:
   always_allow:
-  - memory__remember_memory
-  - context7__get-library-docs
-  - sequentialthinking__sequentialthinking
-  - git__git_add
-  - developer__text_editor
-  - vscode__open_file
-  - developer__analyze
-  - vscode__open_project
+    - memory__remember_memory
+    - context7__get-library-docs
+    - sequentialthinking__sequentialthinking
+    - developer__text_editor
+    - developer__analyze
+    - execute
+    - get_function_details
+    - delegate
+    - load
   ask_before:
-  - developer__shell
-  - developer__image_processor
-  - git__git_commit
-  - computercontroller__computer_control
-  - computercontroller__web_scrape
-  - vscode__execute_shell_command
-  never_allow: []
+    - developer__shell
+    - developer__image_processor
+    - computercontroller__computer_control
+    - computercontroller__web_scrape
+  never_allow:
+    - developer__screen_capture

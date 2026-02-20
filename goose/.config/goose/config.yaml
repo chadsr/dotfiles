@@ -1,6 +1,6 @@
 ANTHROPIC_HOST: https://api.anthropic.com
 GOOSE_DISABLE_KEYRING: ""
-GOOSE_MODE: auto
+GOOSE_MODE: smart_approve
 GOOSE_MODEL: glm-5
 GOOSE_PROVIDER: custom_z.ai
 GOOSE_TELEMETRY_ENABLED: false
@@ -85,20 +85,6 @@ extensions:
     timeout: 300
     bundled: null
     available_tools: []
-  vscode:
-    enabled: false
-    type: stdio
-    name: vscode
-    description: VSCode MCP Server
-    cmd: npx
-    args:
-      - -y
-      - vscode-mcp-server
-    envs: {}
-    env_keys: []
-    timeout: 300
-    bundled: null
-    available_tools: []
   computercontroller:
     enabled: true
     type: builtin
@@ -132,34 +118,8 @@ extensions:
     timeout: 300
     bundled: true
     available_tools: []
-  git:
-    enabled: false
-    type: stdio
-    name: git
-    description: Git version control system integration
-    cmd: uvx
-    args:
-      - mcp-server-git
-    envs: {}
-    env_keys: []
-    timeout: 300
-    bundled: null
-    available_tools: []
-  fetch:
-    enabled: false
-    type: stdio
-    name: fetch
-    description: Web content fetching and processing capabilities
-    cmd: uvx
-    args:
-      - mcp-server-fetch
-    envs: {}
-    env_keys: []
-    timeout: 300
-    bundled: null
-    available_tools: []
   todo:
-    enabled: false
+    enabled: true
     type: platform
     name: todo
     description: Enable a todo list for goose so it can keep track of what it is doing
@@ -194,7 +154,7 @@ extensions:
     bundled: null
     available_tools: []
   chatrecall:
-    enabled: false
+    enabled: true
     type: platform
     name: chatrecall
     description: Search past conversations and load session summaries for contextual memory
@@ -210,19 +170,11 @@ extensions:
     bundled: true
     available_tools: []
   code_execution:
-    enabled: false
+    enabled: true
     type: platform
     name: code_execution
     description: Goose will make extension calls through code execution, saving tokens
     display_name: Code Mode
-    bundled: true
-    available_tools: []
-  skills:
-    enabled: false
-    type: platform
-    name: skills
-    description: Load and use skills from relevant directories
-    display_name: Skills
     bundled: true
     available_tools: []
   apps:
@@ -234,7 +186,7 @@ extensions:
     bundled: true
     available_tools: []
   debugmcp:
-    enabled: true
+    enabled: false
     type: streamable_http
     name: debugmcp
     description: DebugMCP - Multi-language debugging support
@@ -244,4 +196,29 @@ extensions:
     headers: {}
     timeout: 300
     bundled: null
+    available_tools: []
+  tom:
+    enabled: false
+    type: platform
+    name: tom
+    description: Inject custom context into every turn via GOOSE_MOIM_MESSAGE_TEXT and GOOSE_MOIM_MESSAGE_FILE environment variables
+    display_name: Top Of Mind
+    bundled: true
+    available_tools: []
+  summon:
+    enabled: true
+    type: platform
+    name: summon
+    description: Load knowledge and delegate tasks to subagents
+    display_name: Summon
+    bundled: true
+    available_tools: []
+  tutorial:
+    enabled: false
+    type: builtin
+    name: tutorial
+    description: Access interactive tutorials and guides
+    display_name: Tutorial
+    timeout: 300
+    bundled: true
     available_tools: []
