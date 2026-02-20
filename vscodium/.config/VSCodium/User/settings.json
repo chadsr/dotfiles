@@ -1,0 +1,214 @@
+{
+  "[aur-pkgbuild]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[css]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": "explicit"
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[dockercompose]": {
+    "editor.defaultFormatter": "docker.docker"
+  },
+  "[dockerfile]": {
+    "editor.defaultFormatter": "docker.docker"
+  },
+  "[esphome]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[gitconfig]": {
+    "editor.semanticHighlighting.enabled": true
+  },
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[html]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": "explicit"
+    },
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[hyprlang]": {
+    "editor.defaultFormatter": "ewen-lbh.vscode-hyprls"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.quickSuggestions": {
+      "strings": true
+    },
+    "editor.suggest.insertMode": "replace"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
+  "[scss]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": "explicit"
+    }
+  },
+  "[shellscript]": {
+    "editor.defaultFormatter": "mads-hartmann.bash-ide-vscode",
+    "files.eol": "\n"
+  },
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
+  },
+  "[toml]": {
+    "editor.defaultFormatter": "tamasfe.even-better-toml"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[xml]": {
+    "editor.autoClosingBrackets": "never",
+    "editor.defaultFormatter": "redhat.vscode-xml",
+    "files.trimFinalNewlines": true
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "bashIde.enableSourceErrorDiagnostics": true,
+  "cSpell.language": "en-GB",
+  "cSpell.userWords": [],
+  "continue.enableQuickActions": true,
+  "continue.enableTabAutocomplete": true,
+  "continue.pauseTabAutocompleteOnBattery": true,
+  "coverage-gutters.showGutterCoverage": false,
+  "coverage-gutters.showRulerCoverage": true,
+  "coverage-gutters.watchOnActivate": true,
+  "css.validate": false,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "docker.extension.enableComposeLanguageServer": false,
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.fontFamily": "Hack Nerd Font Mono",
+  "editor.fontSize": 14,
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.linkedEditing": true,
+  "editor.minimap.enabled": false,
+  "editor.smoothScrolling": true,
+  "editor.unicodeHighlight.ambiguousCharacters": false,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "files.associations": {
+    "*.list": "properties",
+    "*.rules": "javascript",
+    "*.unit": "systemd-conf",
+    ".base.floracle.yaml": "esphome",
+    ".gitmodules": "gitconfig",
+    "config": "properties"
+  },
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 2000,
+  "git.blame.statusBarItem.enabled": false,
+  "git.confirmSync": false,
+  "git.enableCommitSigning": true,
+  "git.replaceTagsWhenPull": true,
+  "git.useIntegratedAskPass": false,
+  "githubPullRequests.pullBranch": "never",
+  "gitlens.telemetry.enabled": false,
+  "go.toolsManagement.autoUpdate": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "jupyter.enableExtendedPythonKernelCompletions": true,
+  "jupyter.experiments.enabled": false,
+  "latex-workshop.latex.tools": [
+    {
+      "args": [
+        "-xelatex",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "%DOC%"
+      ],
+      "command": "latexmk",
+      "name": "latexmk"
+    }
+  ],
+  "launch": {
+    "compounds": [],
+    "configurations": [
+      {
+        "name": "Launch Chrome against localhost",
+        "port": 9222,
+        "request": "launch",
+        "runtimeArgs": [
+          "--new-window",
+          "--remote-debugging-port=9222",
+          "--disable-background-networking"
+        ],
+        "runtimeExecutable": "/usr/bin/chromium",
+        "type": "chrome",
+        "url": "http://localhost:5173",
+        "webRoot": "${workspaceFolder}"
+      }
+    ],
+    "version": "0.2.0"
+  },
+  "less.validate": false,
+  "makefile.configureOnOpen": false,
+  "prettier.requireConfig": true,
+  "prettier.tabWidth": 4,
+  "python.analysis.diagnosticMode": "workspace",
+  "python.analysis.languageServerMode": "full",
+  "python.analysis.regenerateStdLibIndices": true,
+  "python.analysis.typeEvaluation.deprecateTypingAliases": true,
+  "python.analysis.typeEvaluation.enableReachabilityAnalysis": true,
+  "python.analysis.typeEvaluation.strictDictionaryInference": true,
+  "python.analysis.typeEvaluation.strictListInference": true,
+  "python.analysis.typeEvaluation.strictSetInference": true,
+  "python.experiments.enabled": false,
+  "python.terminal.activateEnvInCurrentTerminal": true,
+  "python.testing.pytestArgs": [
+    "--capture=tee-sys",
+    "--log-cli-level=INFO"
+  ],
+  "redhat.telemetry.enabled": false,
+  "scss.validate": false,
+  "security.workspace.trust.untrustedFiles": "open",
+  "stylelint.validate": [
+    "css",
+    "scss"
+  ],
+  "svelte.enable-ts-plugin": true,
+  "telemetry.telemetryLevel": "off",
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.gpuAcceleration": "off",
+  "terminal.integrated.initialHint": false,
+  "terminal.integrated.smoothScrolling": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "update.showReleaseNotes": false,
+  "versionlens.suggestions.showSuggestionsStats": false,
+  "window.titleBarStyle": "custom",
+  "workbench.colorCustomizations": {
+    "terminal.background": "#00000000"
+  },
+  "workbench.colorTheme": "Catppuccin Mocha",
+  "workbench.editor.enablePreview": false,
+  "workbench.editorAssociations": {
+    "*.svg": "default"
+  },
+  "workbench.iconTheme": "catppuccin-mocha",
+  "workbench.list.smoothScrolling": true,
+  "workbench.panel.defaultLocation": "right",
+  "workbench.secondarySideBar.defaultVisibility": "hidden",
+  "workbench.settings.applyToAllProfiles": [
+    "latex-workshop.bibtex-fields.sort.enabled"
+  ],
+  "workbench.startupEditor": "none",
+  "yaml.schemas": {
+    "file:///home/marvin/.vscode-oss/extensions/continue.continue-1.2.16-linux-x64/config-yaml-schema.json": [
+      ".continue/**/*.yaml"
+    ]
+  }
+}
