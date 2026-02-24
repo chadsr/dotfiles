@@ -10,7 +10,7 @@
       "context_limit": 128000,
       "currency": null,
       "input_token_cost": null,
-      "name": "GLM-4.7",
+      "name": "GLM-5",
       "output_token_cost": null,
       "supports_cache_control": null
     }

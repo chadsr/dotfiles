@@ -51,6 +51,7 @@ extensions:
       - chrome-devtools-mcp@latest
       - --executablePath=/usr/bin/chromium
       - --isolated=true
+      - --no-usage-statistics
     envs: {}
     env_keys: []
     timeout: 300
