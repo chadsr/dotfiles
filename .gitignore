@@ -17,6 +17,7 @@ goose/.config/goose/mcp-apps-cache
 goose/.config/goose/secrets.yaml
 goose/.config/goose/history.txt
 goose/.config/goose/mcp-hermit
+goose/.config/goose/*.bak
 goose/.config/goose/.mcp-hermit*
 goose/.config/goose/tunnel.lock
 helix/.config/helix/themes/*
