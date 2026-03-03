@@ -9,7 +9,7 @@ current_hostname=${HOSTNAME}
 
 tmp_path=/tmp/setup-"$current_hostname"
 
-package_manager=/usr/bin/yay
+package_manager=/usr/bin/paru
 pkglist_system_path=/etc/pkglist.txt
 diff_command="nvim -d"
 
@@ -376,18 +376,6 @@ find ~/.config/ -xtype l -print -delete || {
     echo "Failed to remove broken symlinks"
     exit 1
 }
-
-declare -a old_files=(
-    /etc/environment.d/qt5.conf
-    /etc/environment.d/java.conf
-)
-echo "Checking for old files to remove"
-for old_file in "${old_files[@]}"; do
-    sudo rm -vf "$old_file" || {
-        echo "failed to remove ${old_file}"
-        exit 1
-    }
-done
 
 echo "Setting up stow"
 stow -t ~/ stow || {
