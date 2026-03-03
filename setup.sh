@@ -903,6 +903,7 @@ declare -a stow_dirs_general=(
     hyprland
     input-remapper
     java
+    jellyfin
     kanshi
     kde
     khal
