@@ -26,20 +26,6 @@ extensions:
     timeout: 300
     bundled: true
     available_tools: []
-  sequentialthinking:
-    enabled: false
-    type: stdio
-    name: sequentialthinking
-    description: Provides a sequential thinking framework for complex reasoning tasks, incorporating semantic analysis, contradiction detection, and adaptive complexity estimation to enable structured, reflective problem-solving.
-    cmd: npx
-    args:
-      - -y
-      - "@modelcontextprotocol/server-sequential-thinking"
-    envs: {}
-    env_keys: []
-    timeout: 300
-    bundled: null
-    available_tools: []
   chrome-devtools-mcp:
     enabled: false
     type: stdio
@@ -140,20 +126,6 @@ extensions:
     timeout: 300
     bundled: null
     available_tools: []
-  knowledgegraphmemory:
-    enabled: false
-    type: stdio
-    name: knowledgegraphmemory
-    description: Graph-based memory system for persistent knowledge storage
-    cmd: npx
-    args:
-      - -y
-      - "@modelcontextprotocol/server-memory"
-    envs: {}
-    env_keys: []
-    timeout: 300
-    bundled: null
-    available_tools: []
   chatrecall:
     enabled: true
     type: platform
@@ -222,4 +194,32 @@ extensions:
     display_name: Tutorial
     timeout: 300
     bundled: true
+    available_tools: []
+  gitmcp:
+    enabled: false
+    type: stdio
+    name: Git MCP
+    description: Git MCP server for up-to-date docs and project insights
+    cmd: npx
+    args:
+      - -y
+      - mcp-remote
+      - https://gitmcp.io/docs
+    envs: {}
+    env_keys: []
+    timeout: 300
+    bundled: null
+    available_tools: []
+  beads:
+    enabled: false
+    type: stdio
+    name: Beads
+    description: Git-backed issue tracker for AI agent task management
+    cmd: uvx
+    args:
+      - beads-mcp
+    envs: {}
+    env_keys: []
+    timeout: 300
+    bundled: null
     available_tools: []
