@@ -31,7 +31,7 @@ symlink() {
     fi
 
     # Stow only supports relative symlinks
-    ln -s "${1}" "${2}" || {
+    ln -rs "${1}" "${2}" || {
         echo "failed to symlink: ${1} to ${2}"
         return 1
     }
