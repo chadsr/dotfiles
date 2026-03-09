@@ -361,7 +361,6 @@ mkdir -p "$tmp_path"
 echo "Updating package databases & packages"
 "$package_manager" -Syu || {
     echo "failed to update package databases"
-    exit 1
 }
 
 # Install the bare minimum packages for this script to work
@@ -372,7 +371,7 @@ gpg --list-keys >/dev/null
 systemd_enable_start /usr/lib/systemd/system/pcscd.socket
 
 echo "Removing broken symlinks in ${HOME}/.config"
-find ~/.config/ -xtype l -print -delete || {
+find ~/.config/ -xtype l ! -name "SingletonCookie" ! -name "SingletonLock" -print -delete || {
     echo "Failed to remove broken symlinks"
     exit 1
 }
@@ -397,6 +396,7 @@ declare -a mk_dirs=(
     ~/.config/khal/
     ~/.config/Kvantum/
     ~/.config/Logseq/
+    ~/.config/Nextcloud/
     ~/.config/nvim/
     ~/.config/pulse/
     ~/.config/pulseaudio-ctl/
@@ -519,14 +519,15 @@ declare -a decrypt_data_paths_tuples=(
     "${data_path}/gallery-dl/config.json.asc.gpg ${base_path}/gallery-dl/.config/gallery-dl/config.json"
     "${data_path}/gtk/bookmarks.asc.gpg ${base_path}/gtk/.config/gtk-3.0/bookmarks"
     "${data_path}/khal/config.asc.gpg ${base_path}/khal/.config/khal/config"
+    "${data_path}/nextcloud/nextcloud.cfg.asc.gpg ${base_path}/nextcloud/.config/Nextcloud/nextcloud.cfg"
     "${data_path}/pkgs/remove.txt.asc.gpg ${pkglist_remove_path}"
     "${data_path}/prusaslicer/PrusaSlicer.ini.asc.gpg ${base_path}/prusaslicer/.config/PrusaSlicer/PrusaSlicer.ini"
     "${data_path}/qbittorrent/categories.json.asc ${base_path}/qbittorrent/.config/qBittorrent/categories.json"
     "${data_path}/qbittorrent/qBittorrent.conf.asc ${base_path}/qbittorrent/.config/qBittorrent/qBittorrent.conf"
     "${data_path}/radicle/keys/radicle.asc.gpg ${base_path}/radicle/.radicle/keys/radicle"
     "${data_path}/ssh/config.asc.gpg ${base_path}/ssh/.ssh/config"
-    "${data_path}/system/${current_hostname}/boot/loader/entries/arch-zen.asc.conf ${base_path}/system/${current_hostname}/boot/loader/entries/arch-zen.conf"
     "${data_path}/system/${current_hostname}/boot/loader/entries/arch-cachyos.asc.conf ${base_path}/system/${current_hostname}/boot/loader/entries/arch-cachyos.conf"
+    "${data_path}/system/${current_hostname}/boot/loader/entries/arch-zen.asc.conf ${base_path}/system/${current_hostname}/boot/loader/entries/arch-zen.conf"
     "${data_path}/tidal-hifi/config.json.asc.gpg ${base_path}/tidal-hifi/.config/tidal-hifi/config.json"
     "${data_path}/vdirsyncer/config.asc.gpg ${base_path}/khal/.config/vdirsyncer/config"
     "${data_path}/waybar/waybar-crypto/config.ini.asc.gpg ${base_path}/waybar/.config/waybar-crypto/config.ini"
@@ -686,10 +687,8 @@ if [[ "$current_hostname" == "$laptop_hostname" ]]; then
     done
 
     declare -a ollama_models=(
-        deepseek-r1:latest
         qwen2.5-coder:1.5b-base
         nomic-embed-text:latest
-        qwen3:14b
     )
 
     for ollama_model in "${ollama_models[@]}"; do
@@ -755,10 +754,8 @@ elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
     done
 
     declare -a ollama_models=(
-        deepseek-r1:14b
         qwen2.5-coder:latest
         nomic-embed-text:latest
-        qwen3:14b
     )
 
     for ollama_model in "${ollama_models[@]}"; do
@@ -853,6 +850,7 @@ declare -a symlink_paths_tuples=(
     "${git_submodule_path}/sweet-theme/gtk-3.0 ${base_path}/gtk/.themes/Sweet/gtk-3.0"
     "${git_submodule_path}/sweet-theme/gtk-4.0 ${base_path}/gtk/.themes/Sweet/gtk-4.0"
     "${git_submodule_path}/sweet-theme/index.theme ${base_path}/gtk/.themes/Sweet/index.theme"
+    "${git_submodule_path}/sweet-theme/kde/Kvantum/Sweet ${base_path}/qt/.config/Kvantum/Sweet"
 )
 for symlink_paths_tuple in "${symlink_paths_tuples[@]}"; do
     read -ra symlink_paths <<<"$symlink_paths_tuple"
