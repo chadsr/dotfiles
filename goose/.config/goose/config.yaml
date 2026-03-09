@@ -21,9 +21,9 @@ extensions:
     enabled: true
     type: builtin
     name: developer
-    description: ""
-    display_name: Developer Tools
-    timeout: 300
+    description: Write and edit files, and execute shell commands
+    display_name: Developer
+    timeout: null
     bundled: true
     available_tools: []
   chrome-devtools-mcp:
@@ -222,4 +222,12 @@ extensions:
     env_keys: []
     timeout: 300
     bundled: null
+    available_tools: []
+  analyze:
+    enabled: true
+    type: platform
+    name: analyze
+    description: "Analyze code structure with tree-sitter: directory overviews, file details, symbol call graphs"
+    display_name: Analyze
+    bundled: true
     available_tools: []

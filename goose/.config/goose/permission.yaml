@@ -11,6 +11,11 @@ user:
     - delegate
     - load
     - list_functions
+    - analyze
+    - shell
+    - edit
+    - tree
+    - write
   ask_before:
     - developer__shell
     - developer__image_processor
