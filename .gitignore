@@ -21,6 +21,7 @@ goose/.config/goose/*.bak
 goose/.config/goose/.mcp-hermit*
 goose/.config/goose/tunnel.lock
 helix/.config/helix/themes/*
+nextcloud/.config/Nextcloud/nextcloud.cfg
 hyprland/.config/hypr/hostname.conf
 hyprland/.config/hypr/themes/colors.conf
 hyprland/.config/sunsetr/geo.toml
@@ -29,6 +30,7 @@ khal/.config/vdirsyncer/*
 pass/.password-store/*
 prusaslicer/.config/PrusaSlicer/*
 qt/.config/Kvantum/catppuccin-mocha-mauve
+qt/.config/Kvantum/Sweet
 ssh/.ssh/*
 tidal-hifi/.config/tidal-hifi/*
 waybar/.config/waybar-crypto/config.ini
