@@ -1,3 +1,9 @@
+[KDE]
+WidgetStyle=kvantum
+
+[UiSettings]
+ColorScheme=Sweet
+
 [Icons]
 Theme=candy-icons
 
