@@ -1,9 +1,13 @@
 {
   "api_key_env": "CUSTOM_Z.AI_API_KEY",
+  "base_path": null,
   "base_url": "https://api.z.ai/api/anthropic",
+  "catalog_provider_id": null,
   "description": "Custom Z.ai provider",
   "display_name": "Z.ai",
+  "dynamic_models": null,
   "engine": "anthropic",
+  "env_vars": null,
   "headers": null,
   "models": [
     {

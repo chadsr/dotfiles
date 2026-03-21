@@ -231,3 +231,11 @@ extensions:
     display_name: Analyze
     bundled: true
     available_tools: []
+  summarize:
+    enabled: false
+    type: platform
+    name: summarize
+    description: Load files/directories and get an LLM summary in a single call
+    display_name: Summarize
+    bundled: true
+    available_tools: []
