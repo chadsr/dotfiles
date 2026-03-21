@@ -163,7 +163,7 @@ extensions:
     type: streamable_http
     name: debugmcp
     description: DebugMCP - Multi-language debugging support
-    uri: http://localhost:3001/sse
+    uri: http://localhost:3001/mcp
     envs: {}
     env_keys: []
     headers: {}
