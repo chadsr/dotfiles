@@ -1,0 +1,77 @@
+{
+  "$schema": "https://charm.land/crush.json",
+  "lsp": {
+    "basedpyright": {
+      "args": [
+        "--stdio"
+      ],
+      "command": "basedpyright-langserver",
+      "disabled": false,
+      "filetypes": [
+        "py"
+      ],
+      "root_markers": [
+        "pyrightconfig.json",
+        "pyproject.toml"
+      ]
+    },
+    "go": {
+      "command": "gopls",
+      "disabled": false
+    },
+    "ruff": {
+      "args": [
+        "server"
+      ],
+      "command": "ruff",
+      "disabled": false,
+      "filetypes": [
+        "py"
+      ],
+      "root_markers": [
+        "pyproject.toml"
+      ]
+    },
+    "typescript": {
+      "args": [
+        "--stdio"
+      ],
+      "command": "typescript-language-server",
+      "disabled": false,
+      "filetypes": [
+        "ts"
+      ],
+      "root_markers": [
+        "package.json"
+      ]
+    }
+  },
+  "mcp": {
+    "chrome-devtools-mcp": {
+      "args": [
+        "-y",
+        "chrome-devtools-mcp@latest",
+        "--executablePath=/usr/bin/chromium",
+        "--isolated=true",
+        "--no-usage-statistics"
+      ],
+      "command": "npx",
+      "disabled": false,
+      "type": "stdio"
+    },
+    "debugmcp": {
+      "disabled": false,
+      "timeout": 120,
+      "type": "http",
+      "url": "http://localhost:3001/mcp"
+    }
+  },
+  "options": {
+    "debug": false,
+    "debug_lsp": false,
+    "initialize_as": "AGENTS.md",
+    "tui": {
+      "transparent": true
+    }
+  }
+}

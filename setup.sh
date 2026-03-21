@@ -883,6 +883,7 @@ declare -a stow_dirs_general=(
     chromium
     clipse
     coolercontrol
+    crush
     cura
     dunst
     electron
