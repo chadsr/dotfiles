@@ -914,6 +914,7 @@ declare -a stow_dirs_general=(
     nextcloud
     nvim
     nvm
+    opencode
     paru
     pass
     prusaslicer
