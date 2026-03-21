@@ -207,7 +207,7 @@
   ],
   "workbench.startupEditor": "none",
   "yaml.schemas": {
-    "file:///home/marvin/.vscode-oss/extensions/continue.continue-1.2.16-linux-x64/config-yaml-schema.json": [
+    "file:///home/marvin/.vscode-oss/extensions/continue.continue-1.2.17-linux-x64/config-yaml-schema.json": [
       ".continue/**/*.yaml"
     ]
   }
