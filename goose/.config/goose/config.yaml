@@ -7,6 +7,8 @@ GOOSE_TELEMETRY_ENABLED: false
 OLLAMA_HOST: localhost
 OPENAI_BASE_PATH: v1/chat/completions
 OPENAI_HOST: https://api.openai.com
+SECURITY_PROMPT_ENABLED: true
+SECURITY_COMMAND_CLASSIFIER_ENABLED: false
 extensions:
   memory:
     enabled: true
