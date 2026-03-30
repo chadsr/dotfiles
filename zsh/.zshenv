@@ -16,6 +16,9 @@ export SAVEHIST=10000
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
+# forgecode
+export FORGE_TRACKER=false
+
 ############
 #   GPG    #
 ############

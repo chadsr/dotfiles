@@ -9,7 +9,7 @@ current_hostname=${HOSTNAME}
 
 tmp_path=/tmp/setup-"$current_hostname"
 
-package_manager=/usr/bin/paru
+package_manager=/usr/bin/yay
 pkglist_system_path=/etc/pkglist.txt
 diff_command="nvim -d"
 
@@ -361,6 +361,7 @@ mkdir -p "$tmp_path"
 echo "Updating package databases & packages"
 "$package_manager" -Syu || {
     echo "failed to update package databases"
+    exit 1
 }
 
 # Install the bare minimum packages for this script to work
@@ -889,6 +890,7 @@ declare -a stow_dirs_general=(
     electron
     espanso
     fonts
+    forge
     freetube
     fuzzel
     gallery-dl

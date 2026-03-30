@@ -1,0 +1,42 @@
+max_search_lines = 1000
+max_search_result_bytes = 10240
+max_fetch_chars = 50000
+max_stdout_prefix_lines = 100
+max_stdout_suffix_lines = 100
+max_stdout_line_chars = 500
+max_line_chars = 2000
+max_read_lines = 2000
+max_file_read_batch_size = 50
+max_file_size_bytes = 104857600
+max_image_size_bytes = 262144
+tool_timeout_secs = 300
+auto_open_dump = false
+max_conversations = 100
+max_sem_search_results = 100
+sem_search_top_k = 10
+services_url = "https://api.forgecode.dev/"
+max_extensions = 15
+max_parallel_file_reads = 64
+model_cache_ttl_secs = 604800
+top_p = 0.8
+top_k = 30
+max_tokens = 20480
+max_tool_failure_per_turn = 3
+max_requests_per_turn = 100
+restricted = false
+tool_supported = true
+
+[session]
+provider_id = "zai_coding"
+
+[updates]
+frequency = "daily"
+auto_update = false
+
+[compact]
+retention_window = 6
+eviction_window = 0.2
+max_tokens = 2000
+token_threshold = 100000
+message_threshold = 200
+on_turn_end = false
