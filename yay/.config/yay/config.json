@@ -1,5 +1,6 @@
 {
   "cleanmenu": true,
+  "devel": true,
   "diffmenu": true,
   "editmenu": true,
   "gitbin": "git",
@@ -9,6 +10,7 @@
   "newinstallengine": true,
   "pgpfetch": true,
   "provides": true,
+  "review": true,
   "sortby": "votes",
   "upgrademenu": true
 }
