@@ -1,10 +1,10 @@
 smart_approve:
   always_allow: []
   ask_before:
-    - edit
-    - execute
-    - shell
-    - write
+  - edit
+  - execute
+  - shell
+  - write
   never_allow: []
 user:
   always_allow:

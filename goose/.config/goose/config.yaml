@@ -1,7 +1,7 @@
 ANTHROPIC_HOST: https://api.anthropic.com
-GOOSE_DISABLE_KEYRING: ""
+GOOSE_DISABLE_KEYRING: ''
 GOOSE_MODE: smart_approve
-GOOSE_MODEL: glm-5
+GOOSE_MODEL: glm-5.1
 GOOSE_PROVIDER: custom_z.ai
 GOOSE_TELEMETRY_ENABLED: false
 OLLAMA_HOST: localhost
@@ -35,11 +35,11 @@ extensions:
     description: Control and inspect a live Chrome browser
     cmd: npx
     args:
-      - -y
-      - chrome-devtools-mcp@latest
-      - --executablePath=/usr/bin/chromium
-      - --isolated=true
-      - --no-usage-statistics
+    - -y
+    - chrome-devtools-mcp@latest
+    - --executablePath=/usr/bin/chromium
+    - --isolated=true
+    - --no-usage-statistics
     envs: {}
     env_keys: []
     timeout: 300
@@ -52,11 +52,11 @@ extensions:
     description: Retrieve web pages, news, and local business results via Brave API.
     cmd: npx
     args:
-      - -y
-      - "@modelcontextprotocol/server-brave-search"
+    - -y
+    - '@modelcontextprotocol/server-brave-search'
     envs: {}
     env_keys:
-      - BRAVE_API_KEY
+    - BRAVE_API_KEY
     timeout: 300
     bundled: null
     available_tools: []
@@ -67,8 +67,8 @@ extensions:
     description: Connects to Context7.com's documentation database to provide up-to-date library and framework documentation with intelligent project ranking and customizable token limits.
     cmd: npx
     args:
-      - -y
-      - "@upstash/context7-mcp"
+    - -y
+    - '@upstash/context7-mcp'
     envs: {}
     env_keys: []
     timeout: 300
@@ -78,7 +78,7 @@ extensions:
     enabled: true
     type: builtin
     name: computercontroller
-    description: ""
+    description: ''
     display_name: Computer Controller
     timeout: 300
     bundled: true
@@ -90,11 +90,11 @@ extensions:
     description: Integrates with Tavily API to provide real-time web search and content extraction capabilities for research, aggregation, and fact-checking tasks.
     cmd: npx
     args:
-      - -y
-      - tavily-mcp
+    - -y
+    - tavily-mcp
     envs: {}
     env_keys:
-      - TAVILY_API_KEY
+    - TAVILY_API_KEY
     timeout: 300
     bundled: null
     available_tools: []
@@ -122,7 +122,7 @@ extensions:
     description: Document format conversion using Pandoc, enabling transformation of content between PDF, HTML, Markdown, .docx, .rst, .epuc, .latex, and more.
     cmd: uvx
     args:
-      - mcp-pandoc
+    - mcp-pandoc
     envs: {}
     env_keys: []
     timeout: 300
@@ -204,9 +204,9 @@ extensions:
     description: Git MCP server for up-to-date docs and project insights
     cmd: npx
     args:
-      - -y
-      - mcp-remote
-      - https://gitmcp.io/docs
+    - -y
+    - mcp-remote
+    - https://gitmcp.io/docs
     envs: {}
     env_keys: []
     timeout: 300
@@ -219,7 +219,7 @@ extensions:
     description: Git-backed issue tracker for AI agent task management
     cmd: uvx
     args:
-      - beads-mcp
+    - beads-mcp
     envs: {}
     env_keys: []
     timeout: 300
@@ -229,7 +229,7 @@ extensions:
     enabled: true
     type: platform
     name: analyze
-    description: "Analyze code structure with tree-sitter: directory overviews, file details, symbol call graphs"
+    description: 'Analyze code structure with tree-sitter: directory overviews, file details, symbol call graphs'
     display_name: Analyze
     bundled: true
     available_tools: []
