@@ -530,7 +530,7 @@ declare -a decrypt_data_paths_tuples=(
     "${data_path}/system/${current_hostname}/boot/loader/entries/arch-cachyos.asc.conf ${base_path}/system/${current_hostname}/boot/loader/entries/arch-cachyos.conf"
     "${data_path}/system/${current_hostname}/boot/loader/entries/arch-zen.asc.conf ${base_path}/system/${current_hostname}/boot/loader/entries/arch-zen.conf"
     "${data_path}/tidal-hifi/config.json.asc.gpg ${base_path}/tidal-hifi/.config/tidal-hifi/config.json"
-    "${data_path}/vdirsyncer/config.asc.gpg ${base_path}/khal/.config/vdirsyncer/config"
+    "${data_path}/vdirsyncer/config.asc.gpg ${base_path}/vdirsyncer/.config/vdirsyncer/config"
     "${data_path}/waybar/waybar-crypto/config.ini.asc.gpg ${base_path}/waybar/.config/waybar-crypto/config.ini"
     "${data_path}/xdg/mimeapps.list.asc.gpg ${base_path}/xdg/.config/mimeapps.list"
 )
@@ -933,6 +933,7 @@ declare -a stow_dirs_general=(
     thunar
     tidal-hifi
     ulauncher
+    vdirsyncer
     vscodium
     waybar
     wlogout

@@ -26,7 +26,7 @@ hyprland/.config/hypr/hostname.conf
 hyprland/.config/hypr/themes/colors.conf
 hyprland/.config/sunsetr/geo.toml
 khal/.config/khal/*
-khal/.config/vdirsyncer/*
+vdirsyncer/.config/vdirsyncer/*
 pass/.password-store/*
 prusaslicer/.config/PrusaSlicer/*
 qt/.config/Kvantum/catppuccin-mocha-mauve
@@ -82,7 +82,7 @@ android/.android/keystores/*
 !gtk/.themes/Sweet/.gitkeep
 !helix/.config/helix/themes/.gitkeep
 !khal/.config/khal/.gitkeep
-!khal/.config/vdirsyncer/.gitkeep
+!vdirsyncer/.config/vdirsyncer/.gitkeep
 !pass/.password-store/.gpg-id
 !pass/.password-store/*.gpg
 !prusaslicer/.config/PrusaSlicer/.gitkeep
