@@ -1,0 +1,10 @@
+"$schema" = "https://forgecode.dev/schema.json"
+
+services_url = "http://localhost:1234"
+
+[session]
+provider_id = "zai_coding"
+model_id = "glm-5.1"
+
+[updates]
+auto_update = false

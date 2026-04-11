@@ -18,6 +18,7 @@ export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 # forgecode
 export FORGE_TRACKER=false
+export FORGE_CONFIG="$XDG_CONFIG_HOME/forge"
 
 ############
 #   GPG    #

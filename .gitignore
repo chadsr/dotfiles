@@ -40,6 +40,7 @@ xdg/.config/mimeapps.list
 radicle/.radicle/keys/radicle
 rofi/.config/rofi/catppuccin-mocha.rasi
 system/shifty/boot/loader/entries/*
+forge/.config/forge/*
 btop/.config/btop/themes/*
 qbittorrent/.config/qBittorrent/*
 android/.config/Google/**/migration/*
@@ -90,3 +91,6 @@ android/.android/keystores/*
 !waybar/.config/waybar/modules/crypto/.gitkeep
 !waybar/.local/share/fonts/TTF/.gitkeep
 !btop/.config/btop/themes/.gitkeep
+!forge/.config/forge/.config.json
+!forge/.config/forge/.mcp.json
+!forge/.config/forge/.forge.toml
