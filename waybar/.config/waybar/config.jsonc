@@ -169,11 +169,15 @@
         "format": "{}",
         "tooltip": true,
         "interval": 300,
-        "format-icons": {
-            "default": ""
-        },
         "exec": "$HOME/.config/waybar/modules/khal/waybar-khal",
         "return-type": "json"
+    },
+    "custom/todo": {
+        "exec": "$HOME/.config/waybar/modules/todo/waybar-todo",
+        "return-type": "json",
+        "format": "📝 {}",
+        "interval": 300,
+        "tooltip": true
     },
     "group/organisation": {
         "orientation": "horizontal",
@@ -181,6 +185,7 @@
         "modules": [
             "clock",
             "custom/calendar",
+            "custom/todo",
             "mpris",
             "cava"
         ]

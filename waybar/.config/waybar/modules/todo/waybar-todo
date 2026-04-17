@@ -1,0 +1,19 @@
+#!/bin/sh
+# Waybar module: shows count of due/overdue tasks, tooltip lists them sorted by due date
+
+tasks=$(todo --porcelain list 2>/dev/null)
+
+printf '%s' "$tasks" | jq -c '{
+    text: ([.[] | select(.due != null and .completed == false)] | length | tostring),
+    tooltip: (
+        [.[] | select(.due != null and .completed == false)]
+        | sort_by(.due)
+        | map(
+            .due as $epoch
+            | ($epoch | strftime("%b %d")) as $date
+            | (if $epoch <= now then "!!" else "  " end) as $flag
+            | "\($flag) \($date)  \(.summary)"
+        )
+        | join("\n")
+    )
+}'

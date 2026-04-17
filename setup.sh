@@ -935,6 +935,7 @@ declare -a stow_dirs_general=(
     systemd
     thunar
     tidal-hifi
+    todoman
     ulauncher
     vdirsyncer
     vscodium
