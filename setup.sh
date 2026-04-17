@@ -581,6 +581,8 @@ declare -a user_groups=(
     docker
     gamemode
     games
+    kvm
+    libvirt
     plugdev
     ssh_login
     uucp
@@ -593,6 +595,7 @@ done
 declare -a systemd_units=(
     /usr/lib/systemd/system/bluetooth.service
     /usr/lib/systemd/system/clamav-freshclam-once.timer
+    /usr/lib/systemd/system/libvirtd.service
     /usr/lib/systemd/system/ly@tty1.service
     /usr/lib/systemd/system/ollama.service
     /usr/lib/systemd/system/smartd.service
