@@ -166,18 +166,22 @@
         }
     },
     "custom/calendar": {
-        "format": "{}",
+        "format": "🗓️ {}",
         "tooltip": true,
         "interval": 300,
         "exec": "$HOME/.config/waybar/modules/khal/waybar-khal",
-        "return-type": "json"
+        "return-type": "json",
+        "hide-empty-text": true,
+        "on-click-right": "vdirsyncer sync"
     },
     "custom/todo": {
         "exec": "$HOME/.config/waybar/modules/todo/waybar-todo",
         "return-type": "json",
         "format": "📝 {}",
         "interval": 300,
-        "tooltip": true
+        "tooltip": true,
+        "hide-empty-text": true,
+        "on-click-right": "vdirsyncer sync"
     },
     "group/organisation": {
         "orientation": "horizontal",
