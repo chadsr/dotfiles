@@ -9,7 +9,7 @@ current_hostname=${HOSTNAME}
 
 tmp_path=/tmp/setup-"$current_hostname"
 
-package_manager=/usr/bin/yay
+package_manager=/usr/bin/paru
 pkglist_system_path=/etc/pkglist.txt
 diff_command="nvim -d"
 
