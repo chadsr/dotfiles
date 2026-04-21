@@ -987,8 +987,8 @@ declare -a systemd_user_units=(
     "$base_path"/hyprland/.config/systemd/user/hypr-sunsetr.service
     "$base_path"/hyprland/.config/systemd/user/hypridle.service
     "$base_path"/kanshi/.config/systemd/user/kanshi.service
-    "$base_path"/khal/.config/systemd/user/vdirsyncer-sync.service
-    "$base_path"/khal/.config/systemd/user/vdirsyncer-sync.timer
+    "$base_path"/vdirsyncer/.config/systemd/user/vdirsyncer-sync.service
+    "$base_path"/vdirsyncer/.config/systemd/user/vdirsyncer-sync.timer
     "$base_path"/nextcloud/.config/systemd/user/nextcloud-client.service
     "$base_path"/sway/.config/systemd/user/swayidle.service
     "$base_path"/sway/.config/systemd/user/swayosd.service
