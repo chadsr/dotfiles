@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import json
 import subprocess
+from gi.repository import GLib  # requires python-gobject
 
 data = {}
 output = subprocess.check_output(
@@ -10,7 +11,9 @@ lines = output.split("\n")
 new_lines = []
 for line in lines:
     if len(line) and line[0].isalpha():
-        line = "\n<b>" + line + "</b>"
+        line = "\n<b>" + GLib.markup_escape_text(line) + "</b>"
+    else:
+        line = GLib.markup_escape_text(line)
     new_lines.append(line)
 output = "\n".join(new_lines).strip()
 if "Today" in output:
