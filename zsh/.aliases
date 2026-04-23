@@ -47,11 +47,11 @@ alias dots='dotfiles'
 
 alias gooses='env GOOSE_EDITOR_API_KEY=$(pass show GOOSE_EDITOR_API_KEY) goose session'
 
-alias ua-drop-caches='sudo paccache -rk3; yay -Sc --aur --noconfirm'
+alias ua-drop-caches='sudo paccache -rk3; paru -Sc --aur --noconfirm'
 alias update-mirrors='export TMPFILE="$(mktemp)"; \
     sudo true; \
     rate-mirrors --save=$TMPFILE arch --max-delay=21600 \
       && sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup \
       && sudo mv $TMPFILE /etc/pacman.d/mirrorlist \
       && ua-drop-caches \
-      && yay -Syyu --noconfirm'
+      && paru -Syyu --noconfirm'
