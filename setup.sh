@@ -470,6 +470,7 @@ declare -a stow_dirs_setup=(
     bash
     git
     gpg
+    paru
     rust
     ssh
     yay
@@ -920,7 +921,6 @@ declare -a stow_dirs_general=(
     nvim
     nvm
     opencode
-    paru
     pass
     prusaslicer
     qbittorrent
