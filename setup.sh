@@ -913,6 +913,7 @@ declare -a stow_dirs_general=(
     kde
     khal
     lact
+    librewolf
     logseq
     mangohud
     mpv
