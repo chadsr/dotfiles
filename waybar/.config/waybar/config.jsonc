@@ -439,9 +439,11 @@
             "paused": "⏸"
         },
         "ignored-players": [
-            "firefox",
+            "brave",
             "chromium",
-            "brave"
+            "cromite",
+            "firefox",
+            "librewolf"
         ]
     },
     // "custom/logout": {
