@@ -108,19 +108,19 @@ hl.config({ plugin = {
 -- █▀ █▀█ █░█ █▀█ █▀▀ █▀▀
 -- ▄█ █▄█ █▄█ █▀▄ █▄▄ ██▄
 
-local config_dir = os.getenv("HOME") .. "/.config/hypr"
+require("animations")
+require("keybindings")
+require("windowrules")
+require("themes/common")        -- shared theme settings
+require("themes/theme")         -- theme specific settings
+require("userprefs")
+require("monitors")
+require("permissions")
+-- require("themes/colors")     -- wallbash color override
+-- local config_dir = debug.getinfo(1, "S").source:match("^@(.*/)")
+-- local colors_f = io.open(config_dir .. "/themes/colors.lua", "r")
+-- if colors_f then colors_f:close(); dofile(config_dir .. "/themes/colors.lua") end
 
-dofile(config_dir .. "/animations.lua")
-dofile(config_dir .. "/keybindings.lua")
-dofile(config_dir .. "/windowrules.lua")
-dofile(config_dir .. "/themes/common.lua")        -- shared theme settings
-dofile(config_dir .. "/themes/theme.lua")         -- theme specific settings
--- dofile(config_dir .. "/themes/colors.lua")      -- wallbash color override
-local colors_f = io.open(config_dir .. "/themes/colors.lua", "r")
-if colors_f then colors_f:close(); dofile(config_dir .. "/themes/colors.lua") end
-dofile(config_dir .. "/userprefs.lua")
-dofile(config_dir .. "/monitors.lua")
-dofile(config_dir .. "/permissions.lua")
 -- load hostname-specific config
 local hostname = io.popen("hostname"):read("*l")
 local profile = config_dir .. "/profiles/" .. hostname .. ".lua"
