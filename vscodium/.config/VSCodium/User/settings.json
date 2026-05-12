@@ -45,6 +45,15 @@
     },
     "editor.suggest.insertMode": "replace"
   },
+  "[lua]": {
+    "editor.defaultFormatter": "JohnnyMorganz.stylua",
+    "editor.quickSuggestions": {
+      "comments": "inline",
+      "other": "on",
+      "strings": "on"
+    },
+    "editor.semanticHighlighting.enabled": true
+  },
   "[markdown]": {
     "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
   },
