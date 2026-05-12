@@ -137,7 +137,6 @@ require("keybindings")
 require("windowrules")
 require("themes/common") -- shared theme settings
 require("themes/theme") -- theme specific settings
-require("userprefs")
 require("monitors")
 require("permissions")
 -- require("themes/colors")     -- wallbash color override

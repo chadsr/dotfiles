@@ -33,6 +33,9 @@ hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser)) -- launch web browser
 hl.bind(mainMod .. " + X", hl.dsp.exec_cmd(menu)) -- launch menu
 hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(term .. " --class=com.example.clipse -e clipse")) -- launch clipse
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("swaync-client -t -sw")) -- show/hide swaync
+hl.bind(mainMod .. " + Period", hl.dsp.exec_cmd("emote")) -- launch emoji selector
+hl.bind("CTRL + ALT_L + V", hl.dsp.submap("passthrough"))
+hl.bind("CTRL + ALT_L + V", hl.dsp.submap("reset"), { submap = "passthrough" })
 
 -- Audio control
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("swayosd-client --output-volume mute-toggle"), { locked = true }) -- toggle audio mute
@@ -51,6 +54,8 @@ hl.bind(mainMod .. " + SHIFT + G", hl.dsp.exec_cmd("hypr-gamemode"))
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("swayosd-client --brightness +5"), { locked = true, repeating = true }) -- increase brightness
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("swayosd-client --brightness -5"), { locked = true, repeating = true }) -- decrease brightness
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("sunsetr preset day")) -- toggle between day preset and default config
+hl.bind(mainMod .. " + ALT + XF86MonBrightnessDown", hl.dsp.exec_cmd("hyprshade on blue-light-filter")) -- enable blue light filter
+hl.bind(mainMod .. " + ALT + XF86MonBrightnessUp", hl.dsp.exec_cmd("hyprshade off")) -- disable blue light filter
 
 -- Move between grouped windows
 hl.bind(mainMod .. " + CTRL + H", hl.dsp.group.prev())
