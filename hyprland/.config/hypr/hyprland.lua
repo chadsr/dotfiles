@@ -65,7 +65,6 @@ hl.gesture({ fingers = 3, direction = "left", action = "workspace", arg = "-1" }
 -- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/
 
 hl.config({ dwindle = {
-    pseudotile = true,
     preserve_split = true,
 }})
 
