@@ -365,7 +365,14 @@
     },
     "cava": {
         "cava_config": "$XDG_CONFIG_HOME/cava/cava.conf",
-        "bars": 8,
+        "method": "pipewire",
+        "hide_on_silence": true,
+        "sleep_timer": 5,
+        "autosens": 1,
+        "data_format": "ascii",
+        "sensitivity": 1,
+        "noise_reduction": 0,
+        "bars": 16,
         "bar_delimiter": 0,
         "format-icons": [
             "▁",
