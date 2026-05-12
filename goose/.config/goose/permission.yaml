@@ -1,8 +1,9 @@
 smart_approve:
   always_allow: []
   ask_before:
-  - edit
   - execute
+  - edit
+  - execute_typescript
   - shell
   - write
   never_allow: []
@@ -24,6 +25,7 @@ user:
   - edit
   - tree
   - write
+  - execute_typescript
   ask_before:
   - developer__shell
   - developer__image_processor
