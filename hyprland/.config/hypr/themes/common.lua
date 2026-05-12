@@ -6,4 +6,4 @@ hl.config({ decoration = {
     blur = {
         special = true,
     },
-}})
+} })

@@ -25,4 +25,4 @@ hl.monitor({
 
 hl.config({ misc = {
     vrr = 2,
-}})
+} })
