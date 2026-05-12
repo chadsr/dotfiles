@@ -23,6 +23,8 @@ goose/.config/goose/.mcp-hermit*
 goose/.config/goose/tunnel.lock
 goose/.config/goose/tls
 helix/.config/helix/themes/*
+cava/.config/cava/shaders
+cava/.config/cava/themes
 nextcloud/.config/Nextcloud/nextcloud.cfg
 hyprland/.config/hypr/hostname.conf
 hyprland/.config/hypr/themes/colors.conf
