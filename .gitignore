@@ -21,6 +21,7 @@ goose/.config/goose/mcp-hermit
 goose/.config/goose/*.bak
 goose/.config/goose/.mcp-hermit*
 goose/.config/goose/tunnel.lock
+goose/.config/goose/tls
 helix/.config/helix/themes/*
 nextcloud/.config/Nextcloud/nextcloud.cfg
 hyprland/.config/hypr/hostname.conf
