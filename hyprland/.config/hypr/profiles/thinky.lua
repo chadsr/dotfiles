@@ -1,5 +1,6 @@
+hl.env("GDK_SCALE", 1)
+
 hl.monitor({ output = "eDP-1", mode = "2560x1440@60.0", position = "0x0", scale = 1.25 })
-os.setenv("GDK_SCALE", "1")
 
 hl.config({ device = { name = "wacom-pen-and-multitouch-sensor-pen", output = "eDP-1" } })
 

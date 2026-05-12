@@ -18,10 +18,10 @@ end)
 
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
 
-os.setenv("XDG_CURRENT_DESKTOP", "Hyprland")
-os.setenv("XDG_SESSION_DESKTOP", "Hyprland")
-os.setenv("XDG_SESSION_TYPE", "wayland")
-os.setenv("GRIMBLAST_EDITOR", "swappy -f")
+hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
+hl.env("XDG_SESSION_DESKTOP", "Hyprland")
+hl.env("XDG_SESSION_TYPE", "wayland")
+hl.env("GRIMBLAST_EDITOR", "swappy -f")
 
 hl.config({ ecosystem = {
     enforce_permissions = true,
@@ -101,9 +101,14 @@ hl.config({ plugin = {
         bg_col = "rgb(111111)",
         workspace_method = "center current", -- [center/first] [workspace] e.g. first 1 or center m+1
         gesture_distance = 300,               -- how far is the "max" for the gesture
-        ["hyprexpo-gesture"] = "3, vertical , expo",
     },
 }})
+
+hl.gesture({
+  fingers = 3,
+  direction = "up",
+  action = function() hl.plugin.hyprexpo.expo("toggle") end -- Triggers the HyprExpo overview
+})
 
 -- █▀ █▀█ █░█ █▀█ █▀▀ █▀▀
 -- ▄█ █▄█ █▄█ █▀▄ █▄▄ ██▄
@@ -117,7 +122,7 @@ require("userprefs")
 require("monitors")
 require("permissions")
 -- require("themes/colors")     -- wallbash color override
--- local config_dir = debug.getinfo(1, "S").source:match("^@(.*/)")
+local config_dir = debug.getinfo(1, "S").source:match("^@(.*/)")
 -- local colors_f = io.open(config_dir .. "/themes/colors.lua", "r")
 -- if colors_f then colors_f:close(); dofile(config_dir .. "/themes/colors.lua") end
 

@@ -1,1 +1,1 @@
-os.setenv("GDK_SCALE", "1")
+hl.env("GDK_SCALE", 1)
