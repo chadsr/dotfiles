@@ -21,7 +21,7 @@ hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen()) -- toggle the window betw
 hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd("hyprlock")) -- launch lock screen
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.window.close())
 hl.bind(mainMod .. " + grave", function()
-	hl.plugin.hyprexpo.expo("toggle")
+    hl.plugin.hyprexpo.expo("toggle")
 end)
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("hyprpicker -a"), { description = "Color Picker" }) -- Pick color (Hex) >> clipboard#
 hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("hyprctl reload && systemctl --user restart waybar"))
@@ -40,8 +40,16 @@ hl.bind("CTRL + ALT_L + V", hl.dsp.submap("reset"), { submap = "passthrough" })
 -- Audio control
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("swayosd-client --output-volume mute-toggle"), { locked = true }) -- toggle audio mute
 hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("swayosd-client --input-volume mute-toggle"), { locked = true }) -- toggle microphone mute
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("swayosd-client --output-volume -5"), { locked = true, repeating = true }) -- decrease volume
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("swayosd-client --output-volume +5"), { locked = true, repeating = true }) -- increase volume
+hl.bind(
+    "XF86AudioLowerVolume",
+    hl.dsp.exec_cmd("swayosd-client --output-volume -5"),
+    { locked = true, repeating = true }
+) -- decrease volume
+hl.bind(
+    "XF86AudioRaiseVolume",
+    hl.dsp.exec_cmd("swayosd-client --output-volume +5"),
+    { locked = true, repeating = true }
+) -- increase volume
 
 -- Media control
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true }) -- toggle between media play and pause
@@ -111,26 +119,25 @@ hl.bind(mainMod .. " + SHIFT + 9", hl.dsp.window.move({ workspace = 9 }))
 hl.bind(mainMod .. " + SHIFT + 0", hl.dsp.window.move({ workspace = 10 }))
 
 -- Move active window around current workspace with mainMod + SHIFT [←→↑↓]
-local moveactivewindow = 'grep -q "true" <<< $(hyprctl activewindow -j | jq -r .floating) && hyprctl dispatch moveactive'
 hl.bind(
-	mainMod .. " + SHIFT + Left",
-	hl.dsp.exec_cmd(moveactivewindow .. " -30 0 || hyprctl dispatch movewindow l"),
-	{ repeating = true, description = "Move activewindow to the left" }
+    mainMod .. " + SHIFT + Left",
+    hl.dsp.window.move({ direction = "l" }),
+    { repeating = true, description = "Move activewindow to the left" }
 )
 hl.bind(
-	mainMod .. " + SHIFT + Right",
-	hl.dsp.exec_cmd(moveactivewindow .. " 30 0 || hyprctl dispatch movewindow r"),
-	{ repeating = true, description = "Move activewindow to the right" }
+    mainMod .. " + SHIFT + Right",
+    hl.dsp.window.move({ direction = "r" }),
+    { repeating = true, description = "Move activewindow to the right" }
 )
 hl.bind(
-	mainMod .. " + SHIFT + Up",
-	hl.dsp.exec_cmd(moveactivewindow .. " 0 -30 || hyprctl dispatch movewindow u"),
-	{ repeating = true, description = "Move activewindow up" }
+    mainMod .. " + SHIFT + Up",
+    hl.dsp.window.move({ direction = "u" }),
+    { repeating = true, description = "Move activewindow up" }
 )
 hl.bind(
-	mainMod .. " + SHIFT + Down",
-	hl.dsp.exec_cmd(moveactivewindow .. " 0 30 || hyprctl dispatch movewindow d"),
-	{ repeating = true, description = "Move activewindow down" }
+    mainMod .. " + SHIFT + Down",
+    hl.dsp.window.move({ direction = "d" }),
+    { repeating = true, description = "Move activewindow down" }
 )
 
 -- Scroll through existing workspaces
