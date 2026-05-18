@@ -1,5 +1,16 @@
 {
   "mcpServers": {
+    "brave-search": {
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "BRAVE_API_KEY",
+        "docker.io/mcp/brave-search"
+      ],
+      "command": "docker"
+    },
     "chrome-devtools-mcp": {
       "args": [
         "-y",
