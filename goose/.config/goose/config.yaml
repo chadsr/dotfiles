@@ -50,10 +50,14 @@ extensions:
     type: stdio
     name: bravesearch
     description: Retrieve web pages, news, and local business results via Brave API.
-    cmd: npx
+    cmd: docker
     args:
-    - -y
-    - '@modelcontextprotocol/server-brave-search'
+    - run
+    - -i
+    - --rm
+    - -e
+    - BRAVE_API_KEY
+    - docker.io/mcp/brave-search
     envs: {}
     env_keys:
     - BRAVE_API_KEY
@@ -170,6 +174,7 @@ extensions:
     env_keys: []
     headers: {}
     timeout: 300
+    socket: null
     bundled: null
     available_tools: []
   tom:

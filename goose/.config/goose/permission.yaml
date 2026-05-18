@@ -1,12 +1,3 @@
-smart_approve:
-  always_allow: []
-  ask_before:
-  - execute
-  - edit
-  - execute_typescript
-  - shell
-  - write
-  never_allow: []
 user:
   always_allow:
   - memory__remember_memory
@@ -35,3 +26,12 @@ user:
   - vscode__execute_shell_command
   never_allow:
   - developer__screen_capture
+smart_approve:
+  always_allow: []
+  ask_before:
+  - execute
+  - edit
+  - execute_typescript
+  - shell
+  - write
+  never_allow: []
