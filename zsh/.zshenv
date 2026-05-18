@@ -116,6 +116,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     #    Other     #
     ################
     export PATH="/opt/brother/scanner/brscan5:$PATH"
+    export PATH="$HOME/.local/bin:$PATH"
     export AMDGPU_TARGETS="gfx1030"
 
 elif [[ "$OSTYPE" == "darwin"* ]]; then
@@ -124,9 +125,6 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 
     # shellcheck disable=SC1091
     source '/etc/zshrc' # still source /etc/zshrc for anything useful
-
-    LOCAL_BIN="$HOME/.local/bin"
-    export PATH="$LOCAL_BIN:$PATH"
 
     MAC_ASKPASS=$(which ssh-askpass)
     export SSH_ASKPASS="$MAC_ASKPASS"
