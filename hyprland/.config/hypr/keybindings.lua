@@ -20,9 +20,9 @@ hl.bind(mainMod .. " + G", hl.dsp.group.toggle()) -- toggle the window between f
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen()) -- toggle the window between focus and fullscreen
 hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd("hyprlock")) -- launch lock screen
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.window.close())
-hl.bind(mainMod .. " + grave", function()
-	hl.plugin.hyprexpo.expo("toggle")
-end)
+-- hl.bind(mainMod .. " + grave", function()
+-- 	hl.plugin.hyprexpo.expo("toggle")
+-- end)
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("hyprpicker -a"), { description = "Color Picker" }) -- Pick color (Hex) >> clipboard#
 hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("hyprctl reload && systemctl --user restart waybar"))
 

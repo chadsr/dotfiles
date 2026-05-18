@@ -109,25 +109,25 @@ hl.config({
 	},
 })
 
-hl.config({
-	plugin = {
-		hyprexpo = {
-			columns = 3,
-			gap_size = 5,
-			bg_col = "rgb(111111)",
-			workspace_method = "center current", -- [center/first] [workspace] e.g. first 1 or center m+1
-			gesture_distance = 300, -- how far is the "max" for the gesture
-		},
-	},
-})
+-- hl.config({
+-- 	plugin = {
+-- 		hyprexpo = {
+-- 			columns = 3,
+-- 			gap_size = 5,
+-- 			bg_col = "rgb(111111)",
+-- 			workspace_method = "center current", -- [center/first] [workspace] e.g. first 1 or center m+1
+-- 			gesture_distance = 300, -- how far is the "max" for the gesture
+-- 		},
+-- 	},
+-- })
 
-hl.gesture({
-	fingers = 3,
-	direction = "up",
-	action = function()
-		hl.plugin.hyprexpo.expo("toggle")
-	end, -- Triggers the HyprExpo overview
-})
+-- hl.gesture({
+-- 	fingers = 3,
+-- 	direction = "up",
+-- 	action = function()
+-- 		hl.plugin.hyprexpo.expo("toggle")
+-- 	end, -- Triggers the HyprExpo overview
+-- })
 
 -- █▀ █▀█ █░█ █▀█ █▀▀ █▀▀
 -- ▄█ █▄█ █▄█ █▀▄ █▄▄ ██▄
