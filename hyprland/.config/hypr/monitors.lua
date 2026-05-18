@@ -9,6 +9,7 @@ hl.monitor({
 	mode = "3440x1440@143.97Hz",
 	position = "0x0",
 	scale = 1,
+	icc = "/usr/share/color/icc/colord/S3422DWG.icc",
 })
 hl.monitor({
 	output = "desc:Dell Inc. DELL U2415 XKV0P0414WMU",
