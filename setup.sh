@@ -646,6 +646,11 @@ hyprpm enable hyprexpo || {
     exit 1
 }
 
+hyprpm enable hyprfocus || {
+    echo "failed to enable hyprfocus"
+    exit 1
+}
+
 echo "Copying common system configuration"
 rsync_system_config common/
 
