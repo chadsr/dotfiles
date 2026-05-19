@@ -1,16 +1,12 @@
 #!/usr/bin/env sh
 
 if [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then
-    HYPRGAMEMODE=$(hyprctl getoption animations:enabled | awk 'NR==1{print $2}')
+    HYPRGAMEMODE=$(hyprctl -j getoption animations:enabled | python3 -c "import sys,json; print('1' if json.load(sys.stdin)['bool'] else '0')")
     if [ "$HYPRGAMEMODE" = 1 ]; then
         hyprctl --batch "\
-        keyword animations:enabled 0;\
-        keyword decoration:drop_shadow 0;\
-        keyword decoration:blur:enabled 0;\
-        keyword general:gaps_in 0;\
-        keyword general:gaps_out 0;\
-        keyword general:border_size 1;\
-        keyword decoration:rounding 0"
+        eval 'hl.config({ animations = { enabled = false } })';\
+        eval 'hl.config({ decoration = { drop_shadow = false, rounding = 0, blur = { enabled = false } } })';\
+        eval 'hl.config({ general = { gaps_in = 0, gaps_out = 0, border_size = 1 } })'"
 
         systemctl --user stop waybar.service
         systemctl --user stop awww-random.service
