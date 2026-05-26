@@ -1,8 +1,6 @@
 ANTHROPIC_HOST: https://api.anthropic.com
 GOOSE_DISABLE_KEYRING: ''
 GOOSE_MODE: smart_approve
-GOOSE_MODEL: glm-5.1
-GOOSE_PROVIDER: custom_z.ai
 GOOSE_TELEMETRY_ENABLED: false
 OLLAMA_HOST: localhost
 OPENAI_BASE_PATH: v1/chat/completions
@@ -262,3 +260,22 @@ extensions:
     display_name: Skills
     bundled: true
     available_tools: []
+  instantdomainsearch:
+    enabled: false
+    type: streamable_http
+    name: Instant Domain Search
+    description: ''
+    uri: https://api.instantdomainsearch.com/mcp/streamable-http
+    envs: {}
+    env_keys: []
+    headers: {}
+    timeout: 300
+    socket: null
+    bundled: null
+    available_tools: []
+providers:
+  custom_z.ai:
+    enabled: true
+    model: glm-5.1
+    configured: true
+active_provider: custom_z.ai
