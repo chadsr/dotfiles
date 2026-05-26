@@ -7,4 +7,5 @@ provider_id = "zai_coding"
 model_id = "glm-5.1"
 
 [updates]
+frequency = "never"
 auto_update = false
