@@ -921,6 +921,7 @@ declare -a stow_dirs_general=(
     librewolf
     logseq
     mangohud
+    mcp
     mpv
     networkmanager
     nextcloud
