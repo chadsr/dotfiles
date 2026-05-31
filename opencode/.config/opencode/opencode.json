@@ -1,7 +1,17 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "autoupdate": false,
-  "lsp": true,
+  "lsp": {
+    "basedpyright": {
+      "command": [
+        "basedpyright-langserver",
+        "--stdio"
+      ],
+      "extensions": [
+        ".py"
+      ]
+    }
+  },
   "model": "zai-coding-plan/glm-5.1",
   "plugin": [
     "superpowers@git+https://github.com/obra/superpowers.git"
