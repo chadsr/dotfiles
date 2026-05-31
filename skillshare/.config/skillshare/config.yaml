@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/runkids/skillshare/main/schemas/config.schema.json
+sources:
+  skills: ~/.config/skillshare/skills
+  agents: ~/.config/skillshare/agents
+mode: symlink
+targets:
+  cline:
+    skills:
+      path: ~/.cline/skills
+  continue:
+    skills:
+      path: ~/.continue/skills
+  crush:
+    skills:
+      path: ~/.config/crush/skills
+  forgecode:
+    skills:
+      path: ~/.config/forge/skills
+  goose:
+    skills:
+      path: ~/.config/goose/skills
+  opencode:
+    skills:
+      path: ~/.config/opencode/skills
+  universal:
+    skills:
+      path: ~/.agents/skills
+ignore:
+  - '**/.DS_Store'
+  - '**/.git/**'
+audit:
+  block_threshold: CRITICAL

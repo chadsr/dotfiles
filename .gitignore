@@ -22,6 +22,9 @@ goose/.config/goose/*.bak
 goose/.config/goose/.mcp-hermit*
 goose/.config/goose/tunnel.lock
 goose/.config/goose/tls
+goose/.config/goose/skills
+opencode/.config/opencode/skills
+cline/.cline/skills
 helix/.config/helix/themes/*
 cava/.config/cava/shaders
 cava/.config/cava/themes

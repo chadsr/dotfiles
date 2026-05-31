@@ -935,6 +935,7 @@ declare -a stow_dirs_general=(
     radicle
     ranger
     scripts
+    skillshare
     solaar
     starship
     sway
