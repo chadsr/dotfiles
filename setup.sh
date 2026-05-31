@@ -970,6 +970,15 @@ vdirsyncer discover || {
     exit 1
 }
 
+skillshare init || {
+    echo "failed to init skillshare. Is it already initialized?"
+}
+
+skillshare --sync || {
+    echo "failed to sync skillshare"
+    exit 1
+}
+
 echo "Enabling/Starting Systemd User Units"
 systemctl --user daemon-reload || {
     echo "failed to userspace systemd daemon-reload"
