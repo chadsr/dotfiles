@@ -128,6 +128,7 @@ hl.bind(mainMod .. " + R", hl.dsp.window.resize(), { mouse = true })
 
 -- Move/Switch to special workspace (scratchpad)
 hl.bind(mainMod .. " + ALT + S", hl.dsp.window.move({ workspace = "special", follow = false }))
+hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special", follow = true }))
 hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special())
 
 -- Toggle focused window split
