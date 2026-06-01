@@ -1,5 +1,13 @@
-local active_gradient = { colors = { "rgba(ca9ee6ff)", "rgba(f2d5cfff)" }, angle = 45 }
-local inactive_gradient = { colors = { "rgba(b4befecc)", "rgba(6c7086cc)" }, angle = 45 }
+local colors = require("themes.catppuccin-mocha")
+local active_gradient = {
+	colors = {
+		"rgba(" .. colors.mauveAlpha .. "ff)",
+		"rgba(" .. colors.lavenderAlpha .. "ff)",
+		"rgba(" .. colors.sapphireAlpha .. "ff)",
+	},
+	angle = 45,
+}
+local inactive_gradient = { colors = { "rgba(" .. colors.mauveAlpha .. "80)" }, angle = 45 }
 
 hl.config({
 	general = {
@@ -36,7 +44,7 @@ hl.config({
 			passes = 3,
 			new_optimizations = true,
 			ignore_opacity = true,
-			xray = false,
+			xray = true,
 		},
 	},
 })

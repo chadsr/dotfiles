@@ -143,10 +143,7 @@ require("themes/common") -- shared theme settings
 require("themes/theme") -- theme specific settings
 require("monitors")
 require("permissions")
--- require("themes/colors")     -- wallbash color override
 local config_dir = debug.getinfo(1, "S").source:match("^@(.*/)")
--- local colors_f = io.open(config_dir .. "/themes/colors.lua", "r")
--- if colors_f then colors_f:close(); dofile(config_dir .. "/themes/colors.lua") end
 
 -- load hostname-specific config
 local hostname = io.popen("hostname"):read("*l")

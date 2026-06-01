@@ -30,7 +30,7 @@ cava/.config/cava/shaders
 cava/.config/cava/themes
 nextcloud/.config/Nextcloud/nextcloud.cfg
 hyprland/.config/hypr/hostname.conf
-hyprland/.config/hypr/themes/colors.conf
+hyprland/.config/hypr/themes
 hyprland/.config/sunsetr/geo.toml
 khal/.config/khal/*
 vdirsyncer/.config/vdirsyncer/*
@@ -81,7 +81,7 @@ android/.android/keystores/*
 !qbittorrent/.config/qBittorrent/.gitkeep
 !system/shifty/boot/loader/entries/.gitkeep
 !bat/.config/bat/themes/.gitkeep
-!continue/.continue/config.json
+!continue/.continue/config.yaml
 !data/pkgs/*.asc.gpg
 !freetube/.config/FreeTube/settings.db
 !gallery-dl/.config/gallery-dl/.gitkeep
@@ -101,3 +101,5 @@ android/.android/keystores/*
 !forge/.config/forge/.config.json
 !forge/.config/forge/.mcp.json
 !forge/.config/forge/.forge.toml
+!hyprland/.config/hypr/themes/common.lua
+!hyprland/.config/hypr/themes/theme.lua
