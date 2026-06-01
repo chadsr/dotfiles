@@ -131,7 +131,7 @@ hl.bind(mainMod .. " + ALT + S", hl.dsp.window.move({ workspace = "special", fol
 hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special())
 
 -- Toggle focused window split
-hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("togglesplit"))
+hl.bind(mainMod .. " + V", hl.dsp.layout("togglesplit"))
 
 -- Move focused window to a workspace silently
 hl.bind(mainMod .. " + ALT + 1", hl.dsp.window.move({ workspace = 1, follow = false }))
