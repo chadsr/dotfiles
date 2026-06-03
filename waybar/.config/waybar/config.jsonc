@@ -364,7 +364,7 @@
         "on-click": "pavucontrol"
     },
     "cava": {
-        "cava_config": "$XDG_CONFIG_HOME/cava/cava.conf",
+        "cava_config": "$XDG_CONFIG_HOME/cava/config",
         "method": "pipewire",
         "hide_on_silence": true,
         "sleep_timer": 5,
