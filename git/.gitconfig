@@ -38,6 +38,9 @@
 	log = true
 	ff = false
 
+[rebase]
+	autoStash = true
+
 [pull]
 	ff = only
 
