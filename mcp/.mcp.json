@@ -1,13 +1,12 @@
 {
   "mcpServers": {
-    "brave-search": {
+    "MCP_DOCKER": {
       "args": [
+        "mcp",
+        "gateway",
         "run",
-        "-i",
-        "--rm",
-        "-e",
-        "BRAVE_API_KEY",
-        "docker.io/mcp/brave-search:latest"
+        "--profile",
+        "dev-tools"
       ],
       "command": "docker",
       "disable": false
@@ -22,14 +21,6 @@
       ],
       "command": "npx",
       "disable": false
-    },
-    "debugmcp": {
-      "disable": false,
-      "url": "http://localhost:3001/mcp"
-    },
-    "gitmcp": {
-      "disable": false,
-      "url": "https://gitmcp.io/docs"
     }
   }
 }
