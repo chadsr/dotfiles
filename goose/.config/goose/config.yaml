@@ -190,10 +190,6 @@ extensions:
     timeout: 300
     type: stdio
 providers:
-  custom_z.ai:
-    enabled: true
-    model: glm-5.1
-    configured: true
   zai:
     enabled: true
     model: glm-5.1
