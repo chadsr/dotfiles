@@ -10,26 +10,26 @@ set -euo pipefail
 # we use is not defined in posix
 
 if [[ $# -lt 4 ]] || [[ ! -d $1 ]]; then
-    echo "Usage:
+  echo "Usage:
     $0 <dir containing images> <no|crop|fit> <transition> <interval in seconds>"
-    exit 1
+  exit 1
 fi
 
 # Make sure only 1 instance of awww_randomize
 PIDFILE=~/.local/state/awww-randomize-pidfile.txt
 if [ -e "${PIDFILE}" ]; then
-    OLD_PID="$(<${PIDFILE})"
-    if [ "" != "${OLD_PID}" ] && [ -e "/proc/${OLD_PID}" ]; then
-        OLD_NAME="$(</proc/"${OLD_PID}"/comm)"
-        THIS_NAME="$(</proc/${BASHPID}/comm)"
-        if [ "${OLD_NAME}" = "${THIS_NAME}" ]; then
-            echo "old randomize process ${OLD_PID} is still running"
-            exit 1
-        else
-            echo "process with same ID as old randomize is running: \"${OLD_NAME}\"@${OLD_PID}"
-            echo "Replacing old process ID"
-        fi
+  OLD_PID="$(<${PIDFILE})"
+  if [ "" != "${OLD_PID}" ] && [ -e "/proc/${OLD_PID}" ]; then
+    OLD_NAME="$(</proc/"${OLD_PID}"/comm)"
+    THIS_NAME="$(</proc/${BASHPID}/comm)"
+    if [ "${OLD_NAME}" = "${THIS_NAME}" ]; then
+      echo "old randomize process ${OLD_PID} is still running"
+      exit 1
+    else
+      echo "process with same ID as old randomize is running: \"${OLD_NAME}\"@${OLD_PID}"
+      echo "Replacing old process ID"
     fi
+  fi
 fi
 echo "${BASHPID}" >${PIDFILE}
 
@@ -56,35 +56,35 @@ INTERVAL=$4
 mapfile -t DISPLAY_LIST < <(awww query | sed -E 's/^\s*:?\s*//; s/:.*$//' | sed -E 's/^\s+|\s+$//g' | awk 'NF')
 
 if [ "${#DISPLAY_LIST[@]}" -eq 0 ]; then
-    echo "No displays found!"
-    exit 1
+  echo "No displays found!"
+  exit 1
 fi
 
 while true; do
-    find -L "$PICTURE_DIR" -type f \( -name '*.jpg' -o -name '*.JPG' -o -name '*.png' -o -name '*.PNG' \) |
-        while read -r img; do
-            echo "$RANDOM:$img"
-        done |
-        sort -n | cut -d':' -f2- |
-        tee ~/.local/state/awww-randomize-list.txt |
-        while read -r img; do
-            # Set a different image for each display
-            for disp in "${DISPLAY_LIST[@]}"; do
-                # if there is no image try to get one
-                if [ "" = "${img}" ]; then
-                    if read -r img; then
-                        true
-                    else # if there are no more images, refresh the list
-                        echo "No images in list, refreshing..."
-                        break 2
-                    fi
-                fi
-                awww img --resize="$RESIZE_TYPE" --transition-type="$TRANSITION_TYPE" --outputs "$disp" "$img"
-                # make sure each image is only used once
-                img=""
+  find -L "$PICTURE_DIR" -type f \( -name '*.jpg' -o -name '*.JPG' -o -name '*.png' -o -name '*.PNG' \) |
+    while read -r img; do
+      echo "$RANDOM:$img"
+    done |
+    sort -n | cut -d':' -f2- |
+    tee ~/.local/state/awww-randomize-list.txt |
+    while read -r img; do
+      # Set a different image for each display
+      for disp in "${DISPLAY_LIST[@]}"; do
+        # if there is no image try to get one
+        if [ "" = "${img}" ]; then
+          if read -r img; then
+            true
+          else # if there are no more images, refresh the list
+            echo "No images in list, refreshing..."
+            break 2
+          fi
+        fi
+        awww img --resize="$RESIZE_TYPE" --transition-type="$TRANSITION_TYPE" --outputs "$disp" "$img"
+        # make sure each image is only used once
+        img=""
 
-                echo "Set background for ${disp} successfully"
-            done
-            sleep "$INTERVAL"
-        done
+        echo "Set background for ${disp} successfully"
+      done
+      sleep "$INTERVAL"
+    done
 done

@@ -17,10 +17,29 @@ repos:
     rev: v0.21.0
     hooks:
       - id: yamlfmt
+  - repo: local
+    hooks:
+      # Toml
+      - id: taplo-format
+        alias: taplo
+        name: taplo-format
+        description: Format TOML files
+        entry: taplo format
+        language: python
+        types: [toml]
+        additional_dependencies: [taplo]
+  - repo: https://github.com/scop/pre-commit-shfmt
+    rev: v3.13.1-1
+    hooks:
+      - id: shfmt
   - repo: https://github.com/JohnnyMorganz/StyLua
     rev: v2.5.2
     hooks:
       - id: stylua
+  - repo: https://github.com/executablebooks/mdformat
+    rev: 1.0.0
+    hooks:
+      - id: mdformat
   - repo: https://github.com/editorconfig-checker/editorconfig-checker
     rev: v3.7.0
     hooks:

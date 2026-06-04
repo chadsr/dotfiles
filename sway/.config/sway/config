@@ -44,8 +44,8 @@ smart_borders 1
 
 # class                 border    bg        text      indicator child_border
 client.focused           #0abdc6   #000b1ecc #0abdc6   #0abdc6   #0abdc6
-client.focused_inactive	 #000b1ecc #000b1ecc #0abdc6   #000b1ecc #000b1ecc
-client.unfocused		       #000b1ecc #000b1ecc #0abdc6   #000b1ecc #000b1ecc
+client.focused_inactive     #000b1ecc #000b1ecc #0abdc6   #000b1ecc #000b1ecc
+client.unfocused               #000b1ecc #000b1ecc #0abdc6   #000b1ecc #000b1ecc
 client.urgent            #ea00d9   #ea00d9   #000b1ecc #ea00d9   #ea00d9
 client.placeholder       #000b1e   #000b1ecc #0abdc6   #000b1ecc #000b1ecc
 

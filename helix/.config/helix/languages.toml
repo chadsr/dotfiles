@@ -3,12 +3,12 @@ name = "go"
 auto-format = true
 formatter = { command = "gofmt" }
 language-servers = [
-    { name = "golangci-lint-langserver", only-features = [
-        "diagnostics",
-    ] },
-    { name = "gopls", except-features = [
-        "diagnostics",
-    ] },
+  { name = "golangci-lint-langserver", only-features = [
+    "diagnostics",
+  ] },
+  { name = "gopls", except-features = [
+    "diagnostics",
+  ] },
 ]
 
 [[language]]
@@ -16,11 +16,11 @@ name = "python"
 auto-format = true
 formatter = { command = "ruff", args = ["format", "-"] }
 language-servers = [
-    "ruff-lsp",
-    "pylsp",
-    { name = "pyright", except-features = [
-        "format",
-    ] },
+  "ruff-lsp",
+  "pylsp",
+  { name = "pyright", except-features = [
+    "format",
+  ] },
 ]
 
 [language-server.ruff-lsp]

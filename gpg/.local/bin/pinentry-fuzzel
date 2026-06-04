@@ -4,28 +4,28 @@
 echo "OK"
 
 while read -r cmd rest; do
-    case "$cmd" in
-    GETPIN | getpin)
-        password=$(printf "" | $(which fuzzel) --prompt-only "${rest}" --password --dmenu)
+  case "$cmd" in
+  GETPIN | getpin)
+    password=$(printf "" | $(which fuzzel) --prompt-only "${rest}" --password --dmenu)
 
-        if [ -z "$password" ]; then
-            # user cancelled
-            echo "ERR 83886179 User canceled"
-        else
-            # send password back to gpg
-            echo "D $password"
-            echo "OK"
-        fi
-        ;;
+    if [ -z "$password" ]; then
+      # user cancelled
+      echo "ERR 83886179 User canceled"
+    else
+      # send password back to gpg
+      echo "D $password"
+      echo "OK"
+    fi
+    ;;
 
-    BYE | bye)
-        echo "OK"
-        exit 0
-        ;;
+  BYE | bye)
+    echo "OK"
+    exit 0
+    ;;
 
-    *)
-        # For anything else, just respond OK
-        echo "OK"
-        ;;
-    esac
+  *)
+    # For anything else, just respond OK
+    echo "OK"
+    ;;
+  esac
 done

@@ -1,13 +1,11 @@
----
 - Active: 0728019F
 - Rule:
-  - Test: [thumb_wheel_up, 10]
-  - KeyPress:
-    - Page_Up
-    - click
+    - Test: [thumb_wheel_up, 10]
+    - KeyPress:
+        - Page_Up
+        - click
 - Rule:
-  - Test: [thumb_wheel_down, 10]
-  - KeyPress:
-    - Page_Down
-    - click
-...
+    - Test: [thumb_wheel_down, 10]
+    - KeyPress:
+        - Page_Down
+        - click

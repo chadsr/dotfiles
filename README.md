@@ -35,7 +35,7 @@ stow <FOLDER_NAME>
 
 #### Backup
 
- `store-secrets.sh` encrypts various configs and stores them as ASCII-Armoured `gpg` file outputs. `setup.sh` handles the decryption and checks (such as interactive diffs) for these files.
+`store-secrets.sh` encrypts various configs and stores them as ASCII-Armoured `gpg` file outputs. `setup.sh` handles the decryption and checks (such as interactive diffs) for these files.
 
 ```bash
 ./store-secrets.sh

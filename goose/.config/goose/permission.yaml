@@ -1,37 +1,37 @@
 user:
   always_allow:
-  - memory__remember_memory
-  - context7__get-library-docs
-  - sequentialthinking__sequentialthinking
-  - git__git_add
-  - developer__text_editor
-  - developer__analyze
-  - execute
-  - get_function_details
-  - delegate
-  - load
-  - list_functions
-  - analyze
-  - shell
-  - edit
-  - tree
-  - write
-  - execute_typescript
+    - memory__remember_memory
+    - context7__get-library-docs
+    - sequentialthinking__sequentialthinking
+    - git__git_add
+    - developer__text_editor
+    - developer__analyze
+    - execute
+    - get_function_details
+    - delegate
+    - load
+    - list_functions
+    - analyze
+    - shell
+    - edit
+    - tree
+    - write
+    - execute_typescript
   ask_before:
-  - developer__shell
-  - developer__image_processor
-  - git__git_commit
-  - computercontroller__computer_control
-  - computercontroller__web_scrape
-  - vscode__execute_shell_command
+    - developer__shell
+    - developer__image_processor
+    - git__git_commit
+    - computercontroller__computer_control
+    - computercontroller__web_scrape
+    - vscode__execute_shell_command
   never_allow:
-  - developer__screen_capture
+    - developer__screen_capture
 smart_approve:
   always_allow: []
   ask_before:
-  - execute
-  - edit
-  - execute_typescript
-  - shell
-  - write
+    - execute
+    - edit
+    - execute_typescript
+    - shell
+    - write
   never_allow: []

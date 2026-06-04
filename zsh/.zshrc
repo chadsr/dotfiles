@@ -19,57 +19,34 @@ bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
 
 if [[ $(command -v starship) ]]; then
-    eval "$(starship init zsh)"
+  eval "$(starship init zsh)"
 else
-    echo "starship not installed!"
+  echo "starship not installed!"
 fi
 
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
 
 # ZSH Plugins
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    [ -s /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh ] && \. /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
-    [ -s /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh ] && \. /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+  [ -s /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh ] && \. /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+  [ -s /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh ] && \. /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
-    # zsh-syntax-highlighting must be loaded last
-    [ -s /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && \. /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  # zsh-syntax-highlighting must be loaded last
+  [ -s /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && \. /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-    [ -s "$HOMEBREW_PREFIX/share/zsh-completions" ] && FPATH="$HOMEBREW_PREFIX/share/zsh-completions:$FPATH"
-    [ -s "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && \. "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-    [ -s "$HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh" ] && \. "$HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
+  [ -s "$HOMEBREW_PREFIX/share/zsh-completions" ] && FPATH="$HOMEBREW_PREFIX/share/zsh-completions:$FPATH"
+  [ -s "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && \. "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+  [ -s "$HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh" ] && \. "$HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 
-    # zsh-syntax-highlighting must be loaded last
-    [ -s "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && \. "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+  # zsh-syntax-highlighting must be loaded last
+  [ -s "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && \. "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
-    # OPT + <-/->
-    bindkey "^[^[[C" forward-word
-    bindkey "^[^[[D" backward-word
+  # OPT + <-/->
+  bindkey "^[^[[C" forward-word
+  bindkey "^[^[[D" backward-word
 
-    # fixes GPG smart card availability
-    gpg --card-status >/dev/null
+  # fixes GPG smart card availability
+  gpg --card-status >/dev/null
 fi
-
-# >>> forge initialize >>>
-# !! Contents within this block are managed by 'forge zsh setup' !!
-# !! Do not edit manually - changes will be overwritten !!
-
-# Add required zsh plugins if not already present
-if [[ ! " ${plugins[*]} " =~ " zsh-autosuggestions " ]]; then
-    plugins+=(zsh-autosuggestions)
-fi
-if [[ ! " ${plugins[*]} " =~ " zsh-syntax-highlighting " ]]; then
-    plugins+=(zsh-syntax-highlighting)
-fi
-
-# Load forge shell plugin (commands, completions, keybindings) if not already loaded
-if [[ -z "$_FORGE_PLUGIN_LOADED" ]]; then
-    eval "$(forge zsh plugin)"
-fi
-
-# Load forge shell theme (prompt with AI context) if not already loaded
-if [[ -z "$_FORGE_THEME_LOADED" ]]; then
-    eval "$(forge zsh theme)"
-fi
-# <<< forge initialize <<<
 
 # zprof

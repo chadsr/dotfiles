@@ -139,6 +139,7 @@
     "https://opencode.ai/tui.json": true,
     "https://raw.githubusercontent.com/devcontainers/spec/": true,
     "https://raw.githubusercontent.com/microsoft/vscode/": true,
+    "https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/schema/2025-11-25/schema.json": true,
     "https://schemastore.azurewebsites.net/": true,
     "https://www.schemastore.org/": true
   },
@@ -157,26 +158,6 @@
       "name": "latexmk"
     }
   ],
-  "launch": {
-    "compounds": [],
-    "configurations": [
-      {
-        "name": "Launch Chrome against localhost",
-        "port": 9222,
-        "request": "launch",
-        "runtimeArgs": [
-          "--new-window",
-          "--remote-debugging-port=9222",
-          "--disable-background-networking"
-        ],
-        "runtimeExecutable": "/usr/bin/chromium",
-        "type": "chrome",
-        "url": "http://localhost:5173",
-        "webRoot": "${workspaceFolder}"
-      }
-    ],
-    "version": "0.2.0"
-  },
   "less.validate": false,
   "makefile.configureOnOpen": false,
   "prettier.requireConfig": true,
@@ -222,6 +203,7 @@
   },
   "workbench.iconTheme": "catppuccin-mocha",
   "workbench.list.smoothScrolling": true,
+  "workbench.navigationControl.enabled": false,
   "workbench.panel.defaultLocation": "right",
   "workbench.secondarySideBar.defaultVisibility": "hidden",
   "workbench.settings.applyToAllProfiles": [
@@ -229,6 +211,9 @@
   ],
   "workbench.startupEditor": "none",
   "yaml.schemas": {
+    "file:///Users/ross/.vscode/extensions/continue.continue-1.2.22-darwin-arm64/config-yaml-schema.json": [
+      ".continue/**/*.yaml"
+    ],
     "file:///home/marvin/.vscode-oss/extensions/continue.continue-1.2.22-linux-x64/config-yaml-schema.json": [
       ".continue/**/*.yaml"
     ]

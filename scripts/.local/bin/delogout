@@ -1,9 +1,9 @@
 #!/usr/bin/env sh
 
 if [ "$XDG_CURRENT_DESKTOP" = "Sway" ]; then
-    swaymsg exit
+  swaymsg exit
 elif [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then
-    hyprctl dispatch exit 0
+  hyprctl dispatch exit 0
 else
-    logout
+  logout
 fi

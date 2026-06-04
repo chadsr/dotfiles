@@ -1,5 +1,5 @@
 ANTHROPIC_HOST: https://api.anthropic.com
-GOOSE_DISABLE_KEYRING: ''
+GOOSE_DISABLE_KEYRING: ""
 GOOSE_MODE: smart_approve
 GOOSE_TELEMETRY_ENABLED: false
 OLLAMA_HOST: localhost
@@ -33,44 +33,11 @@ extensions:
     description: Control and inspect a live Chrome browser
     cmd: npx
     args:
-    - -y
-    - chrome-devtools-mcp@latest
-    - --executablePath=/usr/bin/chromium
-    - --isolated=true
-    - --no-usage-statistics
-    envs: {}
-    env_keys: []
-    timeout: 300
-    bundled: null
-    available_tools: []
-  bravesearch:
-    enabled: false
-    type: stdio
-    name: bravesearch
-    description: Retrieve web pages, news, and local business results via Brave API.
-    cmd: docker
-    args:
-    - run
-    - -i
-    - --rm
-    - -e
-    - BRAVE_API_KEY
-    - docker.io/mcp/brave-search
-    envs: {}
-    env_keys:
-    - BRAVE_API_KEY
-    timeout: 300
-    bundled: null
-    available_tools: []
-  context7:
-    enabled: false
-    type: stdio
-    name: context7
-    description: Connects to Context7.com's documentation database to provide up-to-date library and framework documentation with intelligent project ranking and customizable token limits.
-    cmd: npx
-    args:
-    - -y
-    - '@upstash/context7-mcp'
+      - -y
+      - chrome-devtools-mcp@latest
+      - --executablePath=/usr/bin/chromium
+      - --isolated=true
+      - --no-usage-statistics
     envs: {}
     env_keys: []
     timeout: 300
@@ -80,25 +47,10 @@ extensions:
     enabled: true
     type: builtin
     name: computercontroller
-    description: ''
+    description: ""
     display_name: Computer Controller
     timeout: 300
     bundled: true
-    available_tools: []
-  tavily-search:
-    enabled: false
-    type: stdio
-    name: tavily-search
-    description: Integrates with Tavily API to provide real-time web search and content extraction capabilities for research, aggregation, and fact-checking tasks.
-    cmd: npx
-    args:
-    - -y
-    - tavily-mcp
-    envs: {}
-    env_keys:
-    - TAVILY_API_KEY
-    timeout: 300
-    bundled: null
     available_tools: []
   autovisualiser:
     enabled: false
@@ -116,19 +68,6 @@ extensions:
     description: Enable a todo list for goose so it can keep track of what it is doing
     display_name: Todo
     bundled: true
-    available_tools: []
-  pandoc:
-    enabled: false
-    type: stdio
-    name: pandoc
-    description: Document format conversion using Pandoc, enabling transformation of content between PDF, HTML, Markdown, .docx, .rst, .epuc, .latex, and more.
-    cmd: uvx
-    args:
-    - mcp-pandoc
-    envs: {}
-    env_keys: []
-    timeout: 300
-    bundled: null
     available_tools: []
   chatrecall:
     enabled: true
@@ -162,19 +101,6 @@ extensions:
     display_name: Apps
     bundled: true
     available_tools: []
-  debugmcp:
-    enabled: false
-    type: streamable_http
-    name: debugmcp
-    description: DebugMCP - Multi-language debugging support
-    uri: http://localhost:3001/mcp
-    envs: {}
-    env_keys: []
-    headers: {}
-    timeout: 300
-    socket: null
-    bundled: null
-    available_tools: []
   tom:
     enabled: false
     type: platform
@@ -207,22 +133,9 @@ extensions:
     description: Git MCP server for up-to-date docs and project insights
     cmd: npx
     args:
-    - -y
-    - mcp-remote
-    - https://gitmcp.io/docs
-    envs: {}
-    env_keys: []
-    timeout: 300
-    bundled: null
-    available_tools: []
-  beads:
-    enabled: false
-    type: stdio
-    name: Beads
-    description: Git-backed issue tracker for AI agent task management
-    cmd: uvx
-    args:
-    - beads-mcp
+      - -y
+      - mcp-remote
+      - https://gitmcp.io/docs
     envs: {}
     env_keys: []
     timeout: 300
@@ -232,12 +145,12 @@ extensions:
     enabled: true
     type: platform
     name: analyze
-    description: 'Analyze code structure with tree-sitter: directory overviews, file details, symbol call graphs'
+    description: "Analyze code structure with tree-sitter: directory overviews, file details, symbol call graphs"
     display_name: Analyze
     bundled: true
     available_tools: []
   summarize:
-    enabled: false
+    enabled: true
     type: platform
     name: summarize
     description: Load files/directories and get an LLM summary in a single call
@@ -245,10 +158,10 @@ extensions:
     bundled: true
     available_tools: []
   orchestrator:
-    enabled: false
+    enabled: true
     type: platform
     name: orchestrator
-    description: 'Manage agent sessions: list, view, start, send messages, interrupt, and stop agents'
+    description: "Manage agent sessions: list, view, start, send messages, interrupt, and stop agents"
     display_name: Orchestrator
     bundled: true
     available_tools: []
@@ -260,22 +173,31 @@ extensions:
     display_name: Skills
     bundled: true
     available_tools: []
-  instantdomainsearch:
-    enabled: false
-    type: streamable_http
-    name: Instant Domain Search
-    description: ''
-    uri: https://api.instantdomainsearch.com/mcp/streamable-http
-    envs: {}
-    env_keys: []
-    headers: {}
-    timeout: 300
-    socket: null
+  mcpdocker:
+    args:
+      - mcp
+      - gateway
+      - run
+      - --profile
+      - dev-tools
     bundled: null
-    available_tools: []
+    cmd: docker
+    description: The Docker MCP Toolkit allows for easy configuration and consumption of MCP servers from the Docker MCP Catalog
+    enabled: true
+    env_keys: []
+    envs: {}
+    name: mcpdocker
+    timeout: 300
+    type: stdio
 providers:
   custom_z.ai:
     enabled: true
     model: glm-5.1
     configured: true
-active_provider: custom_z.ai
+  zai:
+    enabled: true
+    model: glm-5.1
+    configured: true
+active_provider: zai
+ZAI_BASE_URL: https://api.z.ai/api/anthropic
+GOOSE_THINKING_EFFORT: max

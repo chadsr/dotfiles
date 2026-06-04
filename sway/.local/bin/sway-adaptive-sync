@@ -3,13 +3,13 @@
 # Enables/Disables adaptive_sync
 case "$1" in
 'on')
-    swaymsg "output * adaptive_sync on"
-    ;;
+  swaymsg "output * adaptive_sync on"
+  ;;
 'off')
-    swaymsg "output * adaptive_sync off"
-    ;;
+  swaymsg "output * adaptive_sync off"
+  ;;
 *)
-    echo '<on|off>'
-    exit 1
-    ;;
+  echo '<on|off>'
+  exit 1
+  ;;
 esac

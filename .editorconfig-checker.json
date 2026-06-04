@@ -1,0 +1,8 @@
+{
+  "Exclude": [
+    "\\.git_submodules/",
+    "\\.icc$",
+    "\\.(png|jpe?g|gif|svg|webp|ico)$",
+    "\\.(ttf|otf|woff2?|eot)$"
+  ]
+}

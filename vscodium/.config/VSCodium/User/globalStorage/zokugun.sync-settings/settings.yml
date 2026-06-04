@@ -6,7 +6,6 @@ repository:
   type: git
   url: git@github.com:chadsr/vscode-settings.git
   branch: main
-
 # how to run commands before and after events at https://github.com/zokugun/vscode-sync-settings/blob/master/docs/hooks.md
 hooks:
   post-upload: notify-send -a VSCodium -u low -t 10000 "VSCodium settings have been uploaded"

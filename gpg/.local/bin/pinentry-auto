@@ -3,16 +3,16 @@
 set -Ceu
 
 _exists() {
-    type "$1" >/dev/null 2>&1
+  type "$1" >/dev/null 2>&1
 }
 
 if [ -n "${DISPLAY-}" ]; then
-    _exists pinentry-gtk && pe=$(which pinentry-gtk)
-    _exists pinentry-fuzzel && pe=$(which pinentry-fuzzel)
+  _exists pinentry-gtk && pe=$(which pinentry-gtk)
+  _exists pinentry-fuzzel && pe=$(which pinentry-fuzzel)
 else
-    _exists pinentry-tty && pe=$(which pinentry-tty)
-    _exists pinentry-curses && pe=$(which pinentry-curses)
-    _exists pinentry-mac && pe=$(which pinentry-mac)
+  _exists pinentry-tty && pe=$(which pinentry-tty)
+  _exists pinentry-curses && pe=$(which pinentry-curses)
+  _exists pinentry-mac && pe=$(which pinentry-mac)
 fi
 
 case "${PINENTRY_USER_DATA-}" in
