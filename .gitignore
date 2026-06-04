@@ -92,7 +92,7 @@ xdg/.config/mimeapps.list
 !hyprland/.config/hypr/themes/common.lua
 !hyprland/.config/hypr/themes/theme.lua
 !khal/.config/khal/.gitkeep
-!opencode/.config/opencode/config.jsonc
+!opencode/.config/opencode/opencode.jsonc
 !opencode/.config/opencode/tui.json
 !pass/.password-store/.gpg-id
 !pass/.password-store/*.gpg
