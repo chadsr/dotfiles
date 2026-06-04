@@ -47,6 +47,17 @@
     }
   },
   "mcp": {
+    "MCP_DOCKER": {
+      "args": [
+        "mcp",
+        "gateway",
+        "run",
+        "--profile",
+        "dev-tools"
+      ],
+      "command": "docker",
+      "type": "stdio"
+    },
     "chrome-devtools-mcp": {
       "args": [
         "-y",
@@ -58,12 +69,6 @@
       "command": "npx",
       "disabled": false,
       "type": "stdio"
-    },
-    "debugmcp": {
-      "disabled": false,
-      "timeout": 120,
-      "type": "http",
-      "url": "http://localhost:3001/mcp"
     }
   },
   "options": {
