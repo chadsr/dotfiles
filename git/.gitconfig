@@ -35,14 +35,12 @@
 
 [merge]
 	conflictstyle = diff3
-	log = true
-	ff = false
 
 [rebase]
 	autoStash = true
 
 [pull]
-	ff = only
+    rebase = true
 
 [push]
 	default = simple
@@ -114,3 +112,16 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+
+# force --ff-only on known default/protected branches
+[branch "master"]
+    rebase = false
+	mergeoptions = --ff-only
+
+[branch "main"]
+	rebase = false
+    mergeoptions = --ff-only
+
+[branch "develop"]
+    rebase = false
+	mergeoptions = --ff-only
