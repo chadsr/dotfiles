@@ -1,0 +1,32 @@
+name: Local Config
+version: 1.0.0
+schema: v1
+models:
+  - name: Autodetect
+    provider: ollama
+    model: AUTODETECT
+    roles:
+      - chat
+  - name: qwen2.5-coder:1.5b
+    model: qwen2.5-coder:1.5b
+    provider: ollama
+    roles:
+      - autocomplete
+    autocompleteOptions:
+      debounceDelay: 2000
+      maxPromptTokens: 1024
+      onlyMyCode: true
+  - name: nomic-embed-text:latest
+    model: nomic-embed-text:latest
+    provider: ollama
+    roles:
+      - embed
+mcpServers:
+  - name: MCP_DOCKER
+    command: docker
+    args:
+      - mcp
+      - gateway
+      - run
+      - --profile
+      - dev-tools

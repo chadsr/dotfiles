@@ -244,7 +244,7 @@ done
 declare -a stow_dirs_general=(
     android
     bat
-    continue-minimal
+    continue
     freetube
     ghostty
     helix
