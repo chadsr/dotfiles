@@ -114,6 +114,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   export PATH="/opt/brother/scanner/brscan5:$PATH"
   export PATH="$HOME/.local/bin:$PATH"
   export AMDGPU_TARGETS="gfx1030"
+  export DO_NOT_TRACK=1
   export OPENSPEC_TELEMETRY=0
   export FORGE_TRACKER=false
   export FORGE_CONFIG="$XDG_CONFIG_HOME/forge"
