@@ -1,127 +1,127 @@
 [core]
-	pager = delta
-	symlinks = true
+    pager = delta
+    symlinks = true
 
 [interactive]
-	diffFilter = delta --color-only --features=interactive
+    diffFilter = delta --color-only --features=interactive
 
 [delta]
-	navigate = true    # use n and N to move between diff sections
-	features = decorations
-	syntax-theme = Catppuccin-Mocha
+    navigate = true    # use n and N to move between diff sections
+    features = decorations
+    syntax-theme = Catppuccin-Mocha
 
 [delta "interactive"]
-	keep-plus-minus-markers = false
+    keep-plus-minus-markers = false
 
 [delta "decorations"]
-	commit-style = raw
-	file-style = omit
-	hunk-header-style = file line-number syntax
+    commit-style = raw
+    file-style = omit
+    hunk-header-style = file line-number syntax
 
 [user]
-	name = Ross
-	email = git@ross.ch
-	signingKey = 98B1F6BDC25DDD2560398F212B7340DB13C85766
+    name = Ross
+    email = git@ross.ch
+    signingKey = 98B1F6BDC25DDD2560398F212B7340DB13C85766
 
 [commit]
-	gpgsign = true
+    gpgsign = true
 
 [color]
-	ui = true
+    ui = true
 
 [diff]
-	colorMoved = default
-	mnemonicprefix = true
+    colorMoved = default
+    mnemonicprefix = true
 
 [merge]
-	conflictstyle = diff3
+    conflictstyle = diff3
 
 [rebase]
-	autoStash = true
+    autoStash = true
 
 [pull]
     rebase = true
 
 [push]
-	default = simple
+    default = simple
 
 [rerere]
-	enabled = true
+    enabled = true
 
 [url "https://bitbucket.org/"]
-	insteadOf = bb:
+    insteadOf = bb:
 
 [url "https://github.com/"]
-	insteadOf = gh:
+    insteadOf = gh:
 
 [url "https://gist.github.com/"]
-	insteadOf = gist:
+    insteadOf = gist:
 
 [url "https://gitlab.com/"]
-	insteadOf = gl:
+    insteadOf = gl:
 
 [url "https://codeberg.com/"]
-	insteadOf = cb:
+    insteadOf = cb:
 
 [tag]
-	forceSignAnnotated = true
+    forceSignAnnotated = true
 
 [alias]
-	fea = fetch --all
-	co = checkout
-	cob = checkout -b
-	coo = !git fetch && git checkout
-	br = branch
-	brd = branch -d
-	brD = branch -D
-	merged = branch --merged
-	sts = status
-	aa = add -A .
-	cm = commit -m
-	aacm = !git add -A . && git commit -m
-	cp = cherry-pick
-	amend = commit --amend -m
-	po = push origin
-	pu = !git push origin $(git branch --show-current)
-	plo = pull origin
-	plod = pull origin dev
-	plos = pull origin staging
-	plom = pull origin master
-	ploh = pull origin HEAD
-	rb = !git fetch origin && git rebase --rebase-merges=no-rebase-cousins origin/HEAD
-	rba = rebase --abort
-	rbc = rebase --continue
-	unstage = reset --soft HEAD^
-	fuckit = reset --hard origin/HEAD
-	st = stash
-	stp = stash pop
-	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
-	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
-	f = "!git ls-files | grep -i"
-	gr = grep -Ii
-	la = "!git config -l | grep alias | cut -c 7-"
+    fea = fetch --all
+    co = checkout
+    cob = checkout -b
+    coo = !git fetch && git checkout
+    br = branch
+    brd = branch -d
+    brD = branch -D
+    merged = branch --merged
+    sts = status
+    aa = add -A .
+    cm = commit -m
+    aacm = !git add -A . && git commit -m
+    cp = cherry-pick
+    amend = commit --amend -m
+    po = push origin
+    pu = !git push origin $(git branch --show-current)
+    plo = pull origin
+    plod = pull origin dev
+    plos = pull origin staging
+    plom = pull origin master
+    ploh = pull origin HEAD
+    rb = !git fetch origin && git rebase --rebase-merges=no-rebase-cousins origin/HEAD
+    rba = rebase --abort
+    rbc = rebase --continue
+    unstage = reset --soft HEAD^
+    fuckit = reset --hard origin/HEAD
+    st = stash
+    stp = stash pop
+    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+    f = "!git ls-files | grep -i"
+    gr = grep -Ii
+    la = "!git config -l | grep alias | cut -c 7-"
 
 [credential]
-	helper = cache timeout=14400
+    helper = cache timeout=14400
 
 [init]
-	defaultBranch = main
+    defaultBranch = main
 
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
 
 # force --ff-only on known default/protected branches
 [branch "master"]
     rebase = false
-	mergeoptions = --ff-only
+    mergeoptions = --ff-only
 
 [branch "main"]
-	rebase = false
+    rebase = false
     mergeoptions = --ff-only
 
 [branch "develop"]
     rebase = false
-	mergeoptions = --ff-only
+    mergeoptions = --ff-only

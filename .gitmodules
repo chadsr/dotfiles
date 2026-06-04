@@ -37,14 +37,14 @@
     url = https://github.com/catppuccin/Kvantum.git
     branch = main
 [submodule ".git_submodules/cryptofont"]
-	path = .git_submodules/cryptofont
-	url = https://github.com/Cryptofonts/cryptofont.git
+    path = .git_submodules/cryptofont
+    url = https://github.com/Cryptofonts/cryptofont.git
     branch = master
 [submodule ".git_submodules/catppuccin-btop"]
-	path = .git_submodules/catppuccin-btop
-	url = https://github.com/catppuccin/btop.git
+    path = .git_submodules/catppuccin-btop
+    url = https://github.com/catppuccin/btop.git
     branch = main
 [submodule ".git_submodules/candy-icons"]
-	path = .git_submodules/candy-icons
-	url = https://github.com/EliverLara/candy-icons.git
+    path = .git_submodules/candy-icons
+    url = https://github.com/EliverLara/candy-icons.git
     branch = master

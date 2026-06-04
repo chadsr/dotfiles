@@ -1,1 +1,3 @@
 column_width = 150
+indent_type = "Spaces"
+indent_width = 4

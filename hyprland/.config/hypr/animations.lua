@@ -4,7 +4,7 @@
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/
 
 hl.config({ animations = {
-	enabled = true,
+    enabled = true,
 } })
 
 hl.curve("wind", { type = "bezier", points = { { 0.05, 0.9 }, { 0.1, 1.05 } } })
