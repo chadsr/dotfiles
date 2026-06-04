@@ -20,6 +20,7 @@ cline/.cline/*
 continue/.continue/*
 cura/.config/cura/5.11/cura.cfg
 data/pkgs/*
+docker/.docker/cli-plugins/*
 fonts/.local/share/fonts/TTF/cryptofont.ttf
 forge/.config/forge/*
 freetube/.config/FreeTube/*
@@ -76,6 +77,7 @@ xdg/.config/mimeapps.list
 !cline/.cline/data/settings/global-settings.json
 !continue/.continue/config.yaml
 !data/pkgs/*.asc.gpg
+!docker/.docker/cli-plugins/.gitkeep
 !forge/.config/forge/.config.json
 !forge/.config/forge/.forge.toml
 !forge/.config/forge/.mcp.json

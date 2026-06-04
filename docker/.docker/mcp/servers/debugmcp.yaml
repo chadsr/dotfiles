@@ -1,0 +1,7 @@
+name: debugmcp
+title: "DebugMCP - AI-powered debugging assistant"
+type: remote
+remote:
+  url: "http://localhost:3001/mcp"
+  transport_type: streamable-http
+description: "Let AI agents debug your code inside VS Code - set breakpoints, step through execution, inspect variables, and evaluate expressions."
