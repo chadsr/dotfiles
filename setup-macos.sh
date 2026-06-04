@@ -30,8 +30,7 @@ symlink() {
         }
     fi
 
-    # Stow only supports relative symlinks
-    ln -rs "${1}" "${2}" || {
+    ln -s "${1}" "${2}" || {
         echo "failed to symlink: ${1} to ${2}"
         return 1
     }
@@ -47,7 +46,9 @@ rmrf() {
 declare -a brew_pkgs=(
     bat
     direnv
+    docker
     dua-cli
+    fnm
     font-hack-nerd-font
     ghostty
     gnupg
@@ -273,7 +274,7 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true || {
 }
 
 declare -a ollama_models=(
-    qwen2.5-coder:1.5b-base
+    qwen2.5-coder:1.5b
     nomic-embed-text:latest
 )
 
