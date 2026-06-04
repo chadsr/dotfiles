@@ -694,17 +694,6 @@ if [[ "$current_hostname" == "$laptop_hostname" ]]; then
     systemd_user_enable_start "${systemd_user_unit_laptop}"
   done
 
-  declare -a ollama_models=(
-    qwen2.5-coder:1.5b-base
-    nomic-embed-text:latest
-  )
-
-  for ollama_model in "${ollama_models[@]}"; do
-    ollama pull "${ollama_model}" || {
-      echo "failed to install ${ollama_model}"
-      exit 1
-    }
-  done
 elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
   # Update amdgpu boot parameter
   # https://wiki.archlinux.org/title/AMDGPU#Boot_parameter
@@ -758,18 +747,6 @@ elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
   )
   for systemd_user_unit_desktop in "${systemd_user_units_desktop[@]}"; do
     systemd_user_enable_start "${systemd_user_unit_desktop}"
-  done
-
-  declare -a ollama_models=(
-    qwen2.5-coder:latest
-    nomic-embed-text:latest
-  )
-
-  for ollama_model in "${ollama_models[@]}"; do
-    ollama pull "${ollama_model}" || {
-      echo "failed to install ${ollama_model}"
-      exit 1
-    }
   done
 fi
 
@@ -1047,3 +1024,15 @@ sudo udevadm trigger || {
   echo "Failed to trigger udev rules"
   exit 1
 }
+
+declare -a ollama_models=(
+  qwen2.5-coder:1.5b
+  nomic-embed-text:latest
+)
+
+for ollama_model in "${ollama_models[@]}"; do
+  ollama pull "${ollama_model}" || {
+    echo "failed to install ${ollama_model}"
+    exit 1
+  }
+done
