@@ -1,6 +1,16 @@
 {
+  "delivery": "both",
+  "featureFlags": {},
+  "profile": "core",
   "telemetry": {
     "anonymousId": "anon",
     "noticeSeen": true
-  }
+  },
+  "workflows": [
+    "propose",
+    "explore",
+    "apply",
+    "sync",
+    "archive"
+  ]
 }
