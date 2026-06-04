@@ -7,9 +7,6 @@ targets:
   cline:
     skills:
       path: ~/.cline/skills
-  continue:
-    skills:
-      path: ~/.continue/skills
   crush:
     skills:
       path: ~/.config/crush/skills
@@ -25,8 +22,15 @@ targets:
   universal:
     skills:
       path: ~/.agents/skills
+extras:
+  - name: commands
+    targets:
+      - path: ~/.config/opencode/commands
+        mode: symlink
+      - path: ~/Documents/Cline/Workflows
+        mode: symlink
 ignore:
-  - '**/.DS_Store'
-  - '**/.git/**'
+  - "**/.DS_Store"
+  - "**/.git/**"
 audit:
   block_threshold: CRITICAL
