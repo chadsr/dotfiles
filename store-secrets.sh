@@ -134,3 +134,15 @@ for encrypt_data_paths_tuple in "${encrypt_data_paths_tuples[@]}"; do
     echo "No file found for ${encrypt_data_paths[0]}."
   fi
 done
+
+# Not secrets, but included in this script anyway
+declare -a docker_mcp_profiles=(
+  dev-tools
+)
+
+for docker_mcp_profile in "${docker_mcp_profiles[@]}"; do
+  docker mcp profile export "${docker_mcp_profile}" "${base_path}/docker/.docker/mcp/profiles/${docker_mcp_profile}.yaml" || {
+    echo "failed to export mcp profile ${docker_mcp_profile}"
+    exit 1
+  }
+done

@@ -1036,3 +1036,14 @@ for ollama_model in "${ollama_models[@]}"; do
     exit 1
   }
 done
+
+declare -a docker_mcp_profiles=(
+  dev-tools
+)
+
+for docker_mcp_profile in "${docker_mcp_profiles[@]}"; do
+  docker mcp profile import "${base_path}/docker/.docker/mcp/profiles/${docker_mcp_profile}.yaml" || {
+    echo "failed to import mcp profile ${docker_mcp_profile}"
+    exit 1
+  }
+done
