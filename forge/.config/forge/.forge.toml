@@ -6,6 +6,10 @@ services_url = "http://localhost:1234"
 provider_id = "zai_coding"
 model_id = "glm-5.1"
 
+[reasoning]
+effort = "max"
+enabled = true
+
 [updates]
 frequency = "never"
 auto_update = false
