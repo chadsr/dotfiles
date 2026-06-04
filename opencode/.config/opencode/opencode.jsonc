@@ -1,0 +1,76 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "autoupdate": false,
+  "lsp": {
+    "basedpyright": {
+      "command": [
+        "basedpyright-langserver",
+        "--stdio"
+      ],
+      "extensions": [
+        ".py"
+      ]
+    }
+  },
+  "mcp": {
+    "chrome-devtools-mcp": {
+      "command": [
+        "npx",
+        "-y",
+        "chrome-devtools-mcp@latest",
+        "--executablePath=/usr/bin/chromium",
+        "--isolated=true",
+        "--no-usage-statistics"
+      ],
+      "enabled": true,
+      "type": "local"
+    },
+    "MCP_DOCKER": {
+      "type": "local",
+      "command": [
+        "docker",
+        "mcp",
+        "gateway",
+        "run",
+        "--profile",
+        "dev-tools",
+      ],
+      "enabled": true
+    }
+  },
+  "model": "zai-coding-plan/glm-5.1",
+  "provider": {
+    "zai-coding-plan": {
+      "models": {
+        "glm-5.1": {
+          "reasoning": true,
+          "temperature": true,
+          "interleaved": {
+            "field": "reasoning_content"
+          },
+          "variants": {
+            "high": {
+              "reasoningEffort": "high"
+            },
+            "max": {
+              "reasoningEffort": "max"
+            },
+          },
+          "options": {
+            "thinking": {
+              "type": "enabled",
+              "clear_thinking": false
+            },
+            "reasoningEffort": "max"
+          },
+        }
+      }
+    },
+  },
+  "plugin": [
+    "superpowers@git+https://github.com/obra/superpowers.git"
+  ],
+  "tools": {
+    "write": true
+  }
+}
