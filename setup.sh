@@ -981,17 +981,16 @@ declare -a systemd_user_units=(
   "$base_path"/hyprland/.config/systemd/user/hypr-sunsetr.service
   "$base_path"/hyprland/.config/systemd/user/hypridle.service
   "$base_path"/kanshi/.config/systemd/user/kanshi.service
-  "$base_path"/vdirsyncer/.config/systemd/user/vdirsyncer-sync.service
-  "$base_path"/vdirsyncer/.config/systemd/user/vdirsyncer-sync.timer
   "$base_path"/nextcloud/.config/systemd/user/nextcloud-client.service
   "$base_path"/sway/.config/systemd/user/swayidle.service
   "$base_path"/sway/.config/systemd/user/swayosd.service
   "$base_path"/systemd/.config/systemd/user/enable-linger.service
   "$base_path"/systemd/.config/systemd/user/wlr-sunclock.service
+  "$base_path"/vdirsyncer/.config/systemd/user/vdirsyncer-sync.service
+  "$base_path"/vdirsyncer/.config/systemd/user/vdirsyncer-sync.timer
   "$base_path"/waybar/.config/systemd/user/setup-temps.service
   /usr/lib/systemd/user/app-com.mitchellh.ghostty.service
   /usr/lib/systemd/user/gnome-keyring-daemon.socket
-  /usr/lib/systemd/user/gpu-screen-recorder-ui.service
   /usr/lib/systemd/user/pipewire-pulse.service
   /usr/lib/systemd/user/pipewire.service
   /usr/lib/systemd/user/swaync.service
@@ -1003,6 +1002,7 @@ declare -a systemd_user_units=(
   # "$base_path"/gammastep/.config/systemd/user/geoclue-agent.service
   # "$base_path"/solaar/.config/systemd/user/solaar.service
   # /usr/lib/systemd/user/batsignal.service
+  # /usr/lib/systemd/user/gpu-screen-recorder-ui.service
 )
 for systemd_user_unit in "${systemd_user_units[@]}"; do
   systemd_user_enable_start "${systemd_user_unit}"
