@@ -8,7 +8,7 @@ permissions:
   contents: read
 jobs:
   lint:
-    name: Lint (pre-commit)
+    name: Lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -25,3 +25,5 @@ jobs:
       - uses: j178/prek-action@v2
         with:
           extra-args: "--all-files"
+      - name: agnix-ci
+        uses: agent-sh/agnix@v0.31.0
