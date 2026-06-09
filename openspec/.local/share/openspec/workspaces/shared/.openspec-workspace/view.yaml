@@ -1,0 +1,20 @@
+version: 1
+name: shared
+context: null
+links:
+  dotfiles: https://github.com/chadsr/dotfiles
+preferred_opener:
+  kind: editor
+  id: vscode
+workspace_skills:
+  selected_agents:
+    - opencode
+  last_applied_profile: core
+  last_applied_delivery: both
+  last_applied_workflow_ids:
+    - propose
+    - explore
+    - apply
+    - sync
+    - archive
+  last_applied_at: 2026-06-04T23:33:29.983Z

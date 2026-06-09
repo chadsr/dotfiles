@@ -2,7 +2,7 @@
 sources:
   skills: ~/.config/skillshare/skills
   agents: ~/.config/skillshare/agents
-mode: symlink
+mode: merge
 targets:
   cline:
     skills:
@@ -22,13 +22,24 @@ targets:
   universal:
     skills:
       path: ~/.agents/skills
+# Extras use merge (not symlink) so they can coexist with main targets in the same dirs.
+# OpenSpec extras deploy directly to agent targets because skillshare blocks merge/symlink on its own source dirs.
+# npx @fission-ai/openspec@latest workspace update --workspace shared
+# cd ~/.local/share/openspec/workspaces/shared && npx @fission-ai/openspec@latest init --tools opencode
+# skillshare sync --all
 extras:
   - name: commands
     targets:
       - path: ~/.config/opencode/commands
-        mode: symlink
       - path: ~/Documents/Cline/Workflows
-        mode: symlink
+  - name: openspec-skills
+    source: ~/.local/share/openspec/workspaces/shared/.opencode/skills
+    targets:
+      - path: ~/.config/opencode/skills
+  - name: openspec-commands
+    source: ~/.local/share/openspec/workspaces/shared/.opencode/commands
+    targets:
+      - path: ~/.config/opencode/commands
 ignore:
   - "**/.DS_Store"
   - "**/.git/**"
