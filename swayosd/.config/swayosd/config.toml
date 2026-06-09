@@ -1,0 +1,33 @@
+[server]
+## style file for the OSD
+# style = "/etc/xdg/swayosd/style.css"
+
+## on which height to show the OSD
+# top_margin = 0.85
+
+## The maximum volume that can be reached in %
+# max_volume = 150
+
+## The minimum brightness that can be reached in %
+min_brightness = 5
+
+## show percentage on the right of the OSD
+# show_percentage = true
+
+## set format for the media player OSD
+# playerctl_format = "{artist} - {title}"
+## Available values:
+## artist, albumArtist, title, album, trackNumber, discNumber, autoRating
+
+# If SwayOSD should automatically display the OSD when the keyboard backlight changes or not.
+# Note: Only displays the OSD if the hardware changed the keyboard brightness itself
+# (automatically or through a firmware-handled hotkey being pressed)
+keyboard_backlight = true
+
+# OSD display duration in milliseconds (200-60000)
+# Possible values: 200 - 60000
+# Default value: 1000
+# Note: This is the server wide default which can be overridden by every individual client call.
+# duration = 1000
+
+[client]

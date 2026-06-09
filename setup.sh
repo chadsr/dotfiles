@@ -917,6 +917,7 @@ declare -a stow_dirs_general=(
   starship
   sway
   swaync
+  swayosd
   systemd
   thunar
   tidal-hifi
@@ -983,7 +984,7 @@ declare -a systemd_user_units=(
   "$base_path"/kanshi/.config/systemd/user/kanshi.service
   "$base_path"/nextcloud/.config/systemd/user/nextcloud-client.service
   "$base_path"/sway/.config/systemd/user/swayidle.service
-  "$base_path"/sway/.config/systemd/user/swayosd.service
+  "$base_path"/swayosd/.config/systemd/user/swayosd.service
   "$base_path"/systemd/.config/systemd/user/enable-linger.service
   "$base_path"/systemd/.config/systemd/user/wlr-sunclock.service
   "$base_path"/vdirsyncer/.config/systemd/user/vdirsyncer-sync.service
