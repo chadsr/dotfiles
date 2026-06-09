@@ -640,10 +640,10 @@ hyprpm add https://github.com/hyprwm/hyprland-plugins || {
   echo "hyprland plugins already installed"
 }
 
-hyprpm enable hyprexpo || {
-  echo "failed to enable hyprexpo"
-  exit 1
-}
+# hyprpm enable hyprexpo || {
+#   echo "failed to enable hyprexpo"
+#   exit 1
+# }
 
 hyprpm enable hyprfocus || {
   echo "failed to enable hyprfocus"
