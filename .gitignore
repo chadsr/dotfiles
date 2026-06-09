@@ -37,6 +37,8 @@ hyprland/.config/sunsetr/geo.toml
 khal/.config/khal/*
 nextcloud/.config/Nextcloud/nextcloud.cfg
 opencode/.config/opencode/*
+openspec/.local/share/openspec/workspaces/**/.code-workspace
+openspec/.local/share/openspec/workspaces/**/AGENTS.md
 pass/.password-store/*
 prusaslicer/.config/PrusaSlicer/*
 qbittorrent/.config/qBittorrent/*
@@ -94,6 +96,7 @@ xdg/.config/mimeapps.list
 !khal/.config/khal/.gitkeep
 !opencode/.config/opencode/opencode.jsonc
 !opencode/.config/opencode/tui.json
+!openspec/.local/share/openspec/workspaces/**/.openspec-workspace/view.yaml
 !pass/.password-store/.gpg-id
 !pass/.password-store/*.gpg
 !prusaslicer/.config/PrusaSlicer/.gitkeep
