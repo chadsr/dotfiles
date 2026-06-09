@@ -1,0 +1,4 @@
+exclude = [
+  "skillshare/.config/skillshare/**/*.md",
+  "openspec/.local/share/openspec/workspaces/**/*.md",
+]
