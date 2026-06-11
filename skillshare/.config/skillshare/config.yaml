@@ -41,7 +41,7 @@ extras:
     targets:
       - path: ~/.config/opencode/commands
 ignore:
-  - "**/.DS_Store"
-  - "**/.git/**"
+  - '**/.DS_Store'
+  - '**/.git/**'
 audit:
   block_threshold: CRITICAL

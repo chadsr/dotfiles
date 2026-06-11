@@ -210,6 +210,7 @@
     "latex-workshop.bibtex-fields.sort.enabled"
   ],
   "workbench.startupEditor": "none",
+  "yaml.format.singleQuote": true,
   "yaml.schemas": {
     "file:///Users/ross/.vscode/extensions/continue.continue-1.2.22-darwin-arm64/config-yaml-schema.json": [
       ".continue/**/*.yaml"

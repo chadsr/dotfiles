@@ -1661,7 +1661,7 @@ servers:
       server:
         name: debugmcp
         type: remote
-        image: ""
+        image: ''
         description: Let AI agents debug your code inside VS Code - set breakpoints, step through execution, inspect variables, and evaluate expressions.
         title: DebugMCP - AI-powered debugging assistant
         remote:

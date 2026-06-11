@@ -1,91 +1,91 @@
 matches:
-  - trigger: ":ket:"
-    replace: "⟩"
-  - trigger: ":bra:"
-    replace: "⟨"
-  - trigger: ":identity:"
-    replace: "𝟙"
-  - trigger: ":sqrt:"
-    replace: "√"
-  - trigger: ":int:"
-    replace: "∫"
-  - trigger: ":iint:"
-    replace: "∬"
-  - trigger: ":iiint:"
-    replace: "∭"
-  - trigger: ":oint:"
-    replace: "∮"
-  - trigger: ":oint:"
-    replace: "∯"
-  - trigger: ":oint:"
-    replace: "∰"
-  - trigger: ":sum:"
-    replace: "∑"
-  - trigger: ":prod:"
-    replace: "∏"
-  - trigger: ":Box:"
-    replace: "□"
-  - trigger: ":cdot:"
-    replace: "⋅"
-  - trigger: ":pm:"
-    replace: "±"
-  - trigger: ":mp:"
-    replace: "∓"
-  - trigger: ":equiv:"
-    replace: "≡"
-  - trigger: ":nequiv:"
-    replace: "≢"
-  - trigger: ":neq:"
-    replace: "≠"
-  - trigger: ":approx:"
-    replace: "≈"
-  - trigger: ":leq:"
-    replace: "≤"
-  - trigger: ":geq:"
-    replace: "≥"
-  - trigger: ":gg:"
-    replace: "≫"
-  - trigger: ":ll:"
-    replace: "≪"
-  - trigger: ":leftarrow:"
-    replace: "←"
-  - trigger: ":rightarrow:"
-    replace: "→"
-  - trigger: ":implies:"
-    replace: "⇒"
-  - trigger: ":iff:"
-    replace: "⇔"
-  - trigger: ":infty:"
-    replace: "∞"
-  - trigger: ":nabla:"
-    replace: "∇"
-  - trigger: ":partial:"
-    replace: "𝜕"
-  - trigger: ":forall:"
-    replace: "∀"
-  - trigger: ":exists:"
-    replace: "∃"
-  - trigger: ":nexists:"
-    replace: "∄"
-  - trigger: ":hslash:"
-    replace: "ℏ"
-  - trigger: ":emptyset:"
-    replace: "∅"
-  - trigger: ":varnothing:"
-    replace: "∅"
-  - trigger: ":in:"
-    replace: "∈"
-  - trigger: ":notin:"
-    replace: "∉"
-  - trigger: ":smallin:"
-    replace: "∊"
-  - trigger: ":land:"
-    replace: "∧"
-  - trigger: ":lor:"
-    replace: "∨"
-  - trigger: ":propto:"
-    replace: "∝"
-  - trigger: ":neg:"
-    replace: "¬"
-  - trigger: ":times:"
-    replace: "×"
+  - trigger: ':ket:'
+    replace: '⟩'
+  - trigger: ':bra:'
+    replace: '⟨'
+  - trigger: ':identity:'
+    replace: '𝟙'
+  - trigger: ':sqrt:'
+    replace: '√'
+  - trigger: ':int:'
+    replace: '∫'
+  - trigger: ':iint:'
+    replace: '∬'
+  - trigger: ':iiint:'
+    replace: '∭'
+  - trigger: ':oint:'
+    replace: '∮'
+  - trigger: ':oint:'
+    replace: '∯'
+  - trigger: ':oint:'
+    replace: '∰'
+  - trigger: ':sum:'
+    replace: '∑'
+  - trigger: ':prod:'
+    replace: '∏'
+  - trigger: ':Box:'
+    replace: '□'
+  - trigger: ':cdot:'
+    replace: '⋅'
+  - trigger: ':pm:'
+    replace: '±'
+  - trigger: ':mp:'
+    replace: '∓'
+  - trigger: ':equiv:'
+    replace: '≡'
+  - trigger: ':nequiv:'
+    replace: '≢'
+  - trigger: ':neq:'
+    replace: '≠'
+  - trigger: ':approx:'
+    replace: '≈'
+  - trigger: ':leq:'
+    replace: '≤'
+  - trigger: ':geq:'
+    replace: '≥'
+  - trigger: ':gg:'
+    replace: '≫'
+  - trigger: ':ll:'
+    replace: '≪'
+  - trigger: ':leftarrow:'
+    replace: '←'
+  - trigger: ':rightarrow:'
+    replace: '→'
+  - trigger: ':implies:'
+    replace: '⇒'
+  - trigger: ':iff:'
+    replace: '⇔'
+  - trigger: ':infty:'
+    replace: '∞'
+  - trigger: ':nabla:'
+    replace: '∇'
+  - trigger: ':partial:'
+    replace: '𝜕'
+  - trigger: ':forall:'
+    replace: '∀'
+  - trigger: ':exists:'
+    replace: '∃'
+  - trigger: ':nexists:'
+    replace: '∄'
+  - trigger: ':hslash:'
+    replace: 'ℏ'
+  - trigger: ':emptyset:'
+    replace: '∅'
+  - trigger: ':varnothing:'
+    replace: '∅'
+  - trigger: ':in:'
+    replace: '∈'
+  - trigger: ':notin:'
+    replace: '∉'
+  - trigger: ':smallin:'
+    replace: '∊'
+  - trigger: ':land:'
+    replace: '∧'
+  - trigger: ':lor:'
+    replace: '∨'
+  - trigger: ':propto:'
+    replace: '∝'
+  - trigger: ':neg:'
+    replace: '¬'
+  - trigger: ':times:'
+    replace: '×'
