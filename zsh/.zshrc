@@ -49,4 +49,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   gpg --card-status >/dev/null
 fi
 
+zstyle ':autocomplete:*' min-input 3 # minimum characters before autocomplete kicks in
+zstyle ':autocomplete:*' delay 1.0   # delay before starting autocomplete after typing (seconds)
+
 # zprof
