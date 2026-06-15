@@ -358,6 +358,13 @@ stow_config() {
 
 mkdir -p "$tmp_path"
 
+if command -v yay &>/dev/null; then
+  yay -Y --gendb || {
+    echo "failed to generate yay development package DB"
+    exit 1
+  }
+fi
+
 echo "Updating package databases & packages"
 "$package_manager" -Syu || {
   echo "failed to update package databases"
