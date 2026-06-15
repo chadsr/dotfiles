@@ -38,6 +38,7 @@
 
 [rebase]
     autoStash = true
+    autoSquash = true
 
 [pull]
     rebase = true
@@ -67,39 +68,37 @@
     forceSignAnnotated = true
 
 [alias]
-    fea = fetch --all
-    co = checkout
-    cob = checkout -b
-    coo = !git fetch && git checkout
+    amend = commit --amend -m
     br = branch
     brd = branch -d
     brD = branch -D
-    merged = branch --merged
-    sts = status
-    aa = add -A .
     cm = commit -m
-    aacm = !git add -A . && git commit -m
+    co = switch
+    cob = switch -c
+    coo = !git fetch && git switch
     cp = cherry-pick
-    amend = commit --amend -m
+    f = "!git ls-files | grep -i"
+    fea = fetch --all
+    fixup = "!f() { t=${1:-HEAD}; b=$(git rev-parse $t^); git commit --fixup=$t && GIT_SEQUENCE_EDITOR=: git rebase -i --autosquash $b; }; f" # fixup <hash>: fold staged changes into <hash> (default: last commit), autosquash non-interactively
+    fuckit = reset --hard origin/HEAD
+    gr = grep -Ii
+    la = "!git config -l | grep alias | cut -c 7-"
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+    p = push
+    pf = push --force-with-lease origin
+    pl = pull
     po = push origin
     pu = !git push origin $(git branch --show-current)
-    plo = pull origin
-    plod = pull origin dev
-    plos = pull origin staging
-    plom = pull origin master
-    ploh = pull origin HEAD
     rb = !git fetch origin && git rebase --rebase-merges=no-rebase-cousins origin/HEAD
     rba = rebase --abort
     rbc = rebase --continue
-    unstage = reset --soft HEAD^
-    fuckit = reset --hard origin/HEAD
-    st = stash
+    rbi = "!f() { git rebase -i HEAD~${1:-2}; }; f"
+    rs = restore
+    sh = stash
+    st = status
     stp = stash pop
-    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
-    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
-    f = "!git ls-files | grep -i"
-    gr = grep -Ii
-    la = "!git config -l | grep alias | cut -c 7-"
+    undocommit = reset --soft HEAD^
 
 [credential]
     helper = cache timeout=14400
