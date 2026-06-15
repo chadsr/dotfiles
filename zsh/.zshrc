@@ -5,6 +5,10 @@
 # shellcheck source=.aliases
 source "$HOME"/.aliases
 
+##############
+#  Keybinds  #
+##############
+
 # preserve delete key
 bindkey "\\e[3~" delete-char
 
@@ -16,15 +20,24 @@ bindkey "^[[1;5C" forward-word
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
 
+##########
+#  Init  #
+##########
+
 if [[ $(command -v starship) ]]; then
   eval "$(starship init zsh)"
 else
   echo "starship not installed!"
 fi
 
-export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
+#############
+#  Plugins  #
+#############
 
-# ZSH Plugins
+export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
+export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   [ -s /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh ] && \. /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
   [ -s /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh ] && \. /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
@@ -49,6 +62,10 @@ fi
 
 zstyle ':autocomplete:*' min-input 3 # minimum characters before autocomplete kicks in
 zstyle ':autocomplete:*' delay 1.0   # delay before starting autocomplete after typing (seconds)
+
+###########
+#  Tools  #
+###########
 
 if [[ $(command -v fnm) ]]; then
   eval "$(fnm env --use-on-cd --shell zsh)"
