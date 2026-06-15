@@ -17,27 +17,6 @@ alias calculator='kalker'
 alias calc='calculator'
 alias htop=btop
 
-# git
-alias gitcm='git cm'
-alias gitst='git st'
-alias gitstp='git stp'
-alias gitsts='git sts'
-alias gitadd='git add'
-alias gitrb='git rb'
-alias gitrba='git rba'
-alias gitrbc='git rbc'
-alias gitp='git po'
-alias gitpf='git po -f'
-alias gitpl='git pull'
-alias gitfea='git fea'
-alias gitnbr='git cob'
-alias gitls='git ls'
-alias gitll='git ll'
-alias gitla='git la'
-alias gitcl='git clone'
-alias gitfixup='git rebase -i HEAD~2'
-alias gitstat='git status'
-
 # vscodium
 alias code='codium'
 alias c='code . && exit'
