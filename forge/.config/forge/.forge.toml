@@ -4,12 +4,12 @@ services_url = "http://localhost:1234"
 
 [session]
 provider_id = "zai_coding"
-model_id = "glm-5.1"
-
-[reasoning]
-effort = "max"
-enabled = true
+model_id = "glm-5.2"
 
 [updates]
 frequency = "never"
 auto_update = false
+
+[reasoning]
+effort = "max"
+enabled = true
