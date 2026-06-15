@@ -38,11 +38,11 @@
       "enabled": true
     }
   },
-  "model": "zai-coding-plan/glm-5.1",
+  "model": "zai-coding-plan/glm-5.2",
   "provider": {
     "zai-coding-plan": {
       "models": {
-        "glm-5.1": {
+        "glm-5.2": {
           "reasoning": true,
           "temperature": true,
           "interleaved": {
