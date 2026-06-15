@@ -5,8 +5,6 @@
 # shellcheck source=.aliases
 source "$HOME"/.aliases
 
-eval "$(fnm env --use-on-cd --shell zsh)"
-
 # preserve delete key
 bindkey "\\e[3~" delete-char
 
@@ -51,5 +49,11 @@ fi
 
 zstyle ':autocomplete:*' min-input 3 # minimum characters before autocomplete kicks in
 zstyle ':autocomplete:*' delay 1.0   # delay before starting autocomplete after typing (seconds)
+
+if [[ $(command -v fnm) ]]; then
+  eval "$(fnm env --use-on-cd --shell zsh)"
+else
+  echo "fnm not installed!"
+fi
 
 # zprof
