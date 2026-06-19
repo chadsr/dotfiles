@@ -1,0 +1,81 @@
+{
+  "agent": {
+    "dock": "right",
+    "favorite_models": [],
+    "model_parameters": [],
+    "sidebar_side": "right"
+  },
+  "agent_servers": {
+    "opencode": {
+      "type": "registry"
+    }
+  },
+  "auto_indent_on_paste": true,
+  "autosave": {
+    "after_delay": {
+      "milliseconds": 2000
+    }
+  },
+  "base_keymap": "VSCode",
+  "buffer_font_family": "Hack Nerd Font Mono",
+  "buffer_font_size": 14.0,
+  "debugger": {
+    "dock": "left"
+  },
+  "edit_predictions": {
+    "ollama": {
+      "model": "qwen2.5-coder:1.5b"
+    },
+    "provider": "ollama"
+  },
+  "file_types": {
+    "GitHub Actions": [
+      ".github/workflows/*.yml",
+      ".github/workflows/*.yaml"
+    ],
+    "gitconfig": [
+      ".gitmodules"
+    ],
+    "javascript": [
+      "*.rules"
+    ],
+    "properties": [
+      "*.list",
+      "config"
+    ],
+    "systemd-conf": [
+      "*.unit"
+    ]
+  },
+  "git_panel": {
+    "dock": "left"
+  },
+  "icon_theme": "Catppuccin Mocha",
+  "linked_edits": true,
+  "minimap": {
+    "show": "auto"
+  },
+  "preview_tabs": {
+    "enabled": false
+  },
+  "project_panel": {
+    "dock": "left"
+  },
+  "telemetry": {
+    "anthropic_retention": false,
+    "diagnostics": false,
+    "metrics": false
+  },
+  "theme": {
+    "dark": "Catppuccin Mocha",
+    "light": "Catppuccin Frapp\u00e9",
+    "mode": "system"
+  },
+  "title_bar": {
+    "show_onboarding_banner": false,
+    "show_sign_in": false,
+    "show_user_picture": false
+  },
+  "ui_font_size": 16,
+  "use_on_type_format": true
+}

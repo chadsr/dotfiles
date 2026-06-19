@@ -1,0 +1,1583 @@
+{
+  "extensions": {
+    "caddyfile": {
+      "dev": false,
+      "manifest": {
+        "authors": [
+          "Bowen Sun <me@nusnewob.dev>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "Caddyfile support with syntax highlighting and Tree-sitter grammar.",
+        "grammars": {
+          "caddyfile": {
+            "path": null,
+            "repository": "https://github.com/nusnewob/tree-sitter-caddyfile.git",
+            "rev": "4d34a12f793116241196dbade7070fd725a7136d"
+          }
+        },
+        "icon_themes": [],
+        "id": "caddyfile",
+        "language_servers": {},
+        "languages": [
+          "languages/caddyfile"
+        ],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.7.0"
+        },
+        "name": "Caddyfile",
+        "repository": "https://github.com/nusnewob/caddyfile-zed",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.0.5"
+      }
+    },
+    "catppuccin": {
+      "dev": false,
+      "manifest": {
+        "authors": [
+          "Catppuccin <releases@catppuccin.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "\ud83e\udd80 Soothing pastel theme for Zed",
+        "grammars": {},
+        "icon_themes": [],
+        "id": "catppuccin",
+        "language_servers": {},
+        "languages": [],
+        "lib": {
+          "kind": null,
+          "version": null
+        },
+        "name": "Catppuccin",
+        "repository": "https://github.com/catppuccin/zed",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [
+          "themes/catppuccin-no-italics-mauve.json",
+          "themes/catppuccin-mauve.json"
+        ],
+        "version": "0.2.25"
+      }
+    },
+    "catppuccin-icons": {
+      "dev": false,
+      "manifest": {
+        "authors": [
+          "Catppuccin <releases@catppuccin.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "\ud83e\udd8a Soothing pastel icons for Zed",
+        "grammars": {},
+        "icon_themes": [
+          "icon_themes/catppuccin-icons.json"
+        ],
+        "id": "catppuccin-icons",
+        "language_servers": {},
+        "languages": [],
+        "lib": {
+          "kind": null,
+          "version": null
+        },
+        "name": "Catppuccin Icons",
+        "repository": "https://github.com/catppuccin/zed-icons",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "1.23.1"
+      }
+    },
+    "codebook": {
+      "dev": false,
+      "manifest": {
+        "authors": [
+          "Bo"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "\ud83d\udcd2 A fast, code aware spell checker.",
+        "grammars": {},
+        "icon_themes": [],
+        "id": "codebook",
+        "language_servers": {
+          "codebook": {
+            "code_action_kinds": null,
+            "language": null,
+            "language_ids": {},
+            "languages": [
+              "AsciiDoc",
+              "Astro",
+              "C",
+              "C++",
+              "CSS",
+              "CSharp",
+              "Dart",
+              "Elixir",
+              "Erlang",
+              "Go",
+              "Haskell",
+              "HTML",
+              "Java",
+              "JavaScript",
+              "JavaScript React",
+              "LaTeX",
+              "Lua",
+              "Markdown",
+              "MDX",
+              "OCaml",
+              "Odin",
+              "PHP",
+              "Plain Text",
+              "Python",
+              "R",
+              "Ruby",
+              "Rust",
+              "Shell Script",
+              "Swift",
+              "Svelte",
+              "TOML",
+              "TSX",
+              "TypeScript",
+              "TypeScript React",
+              "Typst",
+              "VHDL",
+              "Vue.js",
+              "YAML",
+              "Zig"
+            ]
+          }
+        },
+        "languages": [],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.7.0"
+        },
+        "name": "Codebook Spell Checker",
+        "repository": "https://github.com/blopker/codebook",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.2.12"
+      }
+    },
+    "csv": {
+      "dev": false,
+      "manifest": {
+        "authors": [
+          "Jason Lee <huacnlee@gmail.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "CSV language support.",
+        "grammars": {
+          "csv": {
+            "path": null,
+            "repository": "https://github.com/arnau/tree-sitter-csv",
+            "rev": "4b25b5d745f9462e54b781e3d7798b8e0a4db703"
+          }
+        },
+        "icon_themes": [],
+        "id": "csv",
+        "language_servers": {},
+        "languages": [
+          "languages/csv"
+        ],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.0.4"
+        },
+        "name": "CSV",
+        "repository": "https://github.com/huacnlee/zed-csv",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.0.3"
+      }
+    },
+    "dockerfile": {
+      "dev": false,
+      "manifest": {
+        "authors": [
+          "d1y <chenhonzho@gmail.com>",
+          "joshmeads <github@joshmeads.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "debug_adapters": {
+          "buildx-dockerfile": {
+            "schema_path": "debug_adapter_schemas/buildx-dockerfile.json"
+          }
+        },
+        "description": "Dockerfile support.",
+        "grammars": {
+          "dockerfile": {
+            "path": null,
+            "repository": "https://github.com/camdencheek/tree-sitter-dockerfile",
+            "rev": "868e44ce378deb68aac902a9db68ff82d2299dd0"
+          }
+        },
+        "icon_themes": [],
+        "id": "dockerfile",
+        "language_servers": {
+          "docker-language-server": {
+            "code_action_kinds": null,
+            "language": "Dockerfile",
+            "language_ids": {
+              "Docker Compose": "docker-compose",
+              "Dockerfile": "dockerfile"
+            },
+            "languages": [
+              "Dockerfile",
+              "Docker Compose"
+            ]
+          },
+          "dockerfile-language-server": {
+            "code_action_kinds": null,
+            "language": "Dockerfile",
+            "language_ids": {},
+            "languages": []
+          }
+        },
+        "languages": [
+          "languages/dockerfile"
+        ],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.7.0"
+        },
+        "name": "Dockerfile",
+        "repository": "https://github.com/zed-extensions/dockerfile",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.2.1"
+      }
+    },
+    "github-actions": {
+      "dev": false,
+      "manifest": {
+        "authors": [
+          "Samantha Nguyen <contact@samanthanguyen.me>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "GitHub Actions LSP support for Zed.",
+        "grammars": {
+          "yaml": {
+            "path": null,
+            "repository": "https://github.com/zed-industries/tree-sitter-yaml",
+            "rev": "baff0b51c64ef6a1fb1f8390f3ad6015b83ec13a"
+          }
+        },
+        "icon_themes": [],
+        "id": "github-actions",
+        "language_servers": {
+          "gh-actions-language-server": {
+            "code_action_kinds": null,
+            "language": null,
+            "language_ids": {},
+            "languages": [
+              "GitHub Actions"
+            ]
+          }
+        },
+        "languages": [
+          "languages/github_actions"
+        ],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.6.0"
+        },
+        "name": "GitHub Actions",
+        "repository": "https://github.com/neoncitylights/zed-github-actions",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.0.1"
+      }
+    },
+    "golangci-lint": {
+      "dev": false,
+      "manifest": {
+        "authors": [
+          "Jordan Gregory <jordan@j4ng5y.dev>",
+          "Joakim Engeset <joakim.engeset@gmail.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "golangci-lint support.",
+        "grammars": {},
+        "icon_themes": [],
+        "id": "golangci-lint",
+        "language_servers": {
+          "golangci-lint": {
+            "code_action_kinds": null,
+            "language": null,
+            "language_ids": {},
+            "languages": [
+              "Go"
+            ]
+          }
+        },
+        "languages": [],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.2.0"
+        },
+        "name": "golangci-lint",
+        "repository": "https://github.com/zed-extensions/golangci-lint",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.2.0"
+      }
+    },
+    "graphql": {
+      "dev": false,
+      "manifest": {
+        "authors": [
+          "Ivan Buryak <ivan.buryak@gmail.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "GraphQL extension for Zed",
+        "grammars": {
+          "graphql": {
+            "path": null,
+            "repository": "https://github.com/11bit/tree-sitter-graphql",
+            "rev": "951bde9fb3145b5f676204231e35f8b21d21f7b3"
+          }
+        },
+        "icon_themes": [],
+        "id": "graphql",
+        "language_servers": {
+          "graphql": {
+            "code_action_kinds": null,
+            "language": "GraphQL",
+            "language_ids": {
+              "Astro": "astro",
+              "GraphQL": "graphql",
+              "JSX": "javascriptreact",
+              "JavaScript": "javascript",
+              "Svelte": "svelte",
+              "TSX": "typescriptreact",
+              "TypeScript": "typescript",
+              "Vue.js": "vuejs"
+            },
+            "languages": [
+              "JavaScript",
+              "JSX",
+              "TypeScript",
+              "TSX",
+              "Vue.js",
+              "GraphQL",
+              "Astro",
+              "Svelte"
+            ]
+          }
+        },
+        "languages": [
+          "languages/graphql"
+        ],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.7.0"
+        },
+        "name": "GraphQL",
+        "repository": "https://github.com/11bit/zed-extension-graphql",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "1.0.5"
+      }
+    },
+    "html": {
+      "dev": false,
+      "manifest": {
+        "authors": [
+          "Isaac Clayton <slightknack@gmail.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "HTML support.",
+        "grammars": {
+          "html": {
+            "path": null,
+            "repository": "https://github.com/tree-sitter/tree-sitter-html",
+            "rev": "bfa075d83c6b97cd48440b3829ab8d24a2319809"
+          }
+        },
+        "icon_themes": [],
+        "id": "html",
+        "language_servers": {
+          "vscode-html-language-server": {
+            "code_action_kinds": null,
+            "language": "HTML",
+            "language_ids": {
+              "CSS": "css",
+              "HTML": "html"
+            },
+            "languages": []
+          }
+        },
+        "languages": [
+          "languages/html"
+        ],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.7.0"
+        },
+        "name": "HTML",
+        "repository": "https://github.com/zed-industries/zed",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.3.1"
+      }
+    },
+    "ini": {
+      "dev": false,
+      "manifest": {
+        "authors": [
+          "Raunak Raj <bajrangcoders@gmail.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "Support for ini and related config files (ini, conf, cfg, config) and systemd unit files (automount, mount, path, scope, service, slice, socket, swap, target, timer)",
+        "grammars": {
+          "ini": {
+            "path": null,
+            "repository": "https://github.com/justinmk/tree-sitter-ini",
+            "rev": "e4018b5176132b4f3c5d6e61cea383f42288d0f5"
+          }
+        },
+        "icon_themes": [],
+        "id": "ini",
+        "language_servers": {},
+        "languages": [
+          "languages/ini"
+        ],
+        "lib": {
+          "kind": null,
+          "version": null
+        },
+        "name": "ini",
+        "repository": "https://github.com/bajrangCoder/zed-ini",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.0.8"
+      }
+    },
+    "kotlin": {
+      "dev": false,
+      "manifest": {
+        "authors": [
+          "evrsen",
+          "cholwell"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "Kotlin language support.",
+        "grammars": {
+          "kotlin": {
+            "path": null,
+            "repository": "https://github.com/fwcd/tree-sitter-kotlin",
+            "rev": "4e909d6cc9ac96b4eaecb3fb538eaca48e9e9ee9"
+          }
+        },
+        "icon_themes": [],
+        "id": "kotlin",
+        "language_servers": {
+          "kotlin-language-server": {
+            "code_action_kinds": null,
+            "language": "Kotlin",
+            "language_ids": {},
+            "languages": []
+          },
+          "kotlin-lsp": {
+            "code_action_kinds": null,
+            "language": "Kotlin",
+            "language_ids": {},
+            "languages": []
+          }
+        },
+        "languages": [
+          "languages/kotlin"
+        ],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.5.0"
+        },
+        "name": "Kotlin",
+        "repository": "https://github.com/zed-extensions/kotlin",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.3.0"
+      }
+    },
+    "latex": {
+      "dev": false,
+      "manifest": {
+        "authors": [
+          "Ruben Zukic <ruben@zukic.net>",
+          "Oli Callaghan <me@olicallaghan.com>",
+          "Luke Naylor <luke.naylr@gmail.com>",
+          "Jan Solanti <jhs@psonet.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "LaTeX language server and syntax highlighting for Zed. See wiki on GitHub for help.",
+        "grammars": {
+          "bibtex": {
+            "path": null,
+            "repository": "https://github.com/latex-lsp/tree-sitter-bibtex",
+            "rev": "ccfd77db0ed799b6c22c214fe9d2937f47bc8b34"
+          },
+          "latex": {
+            "path": null,
+            "repository": "https://github.com/497e0bdf29873/tree-sitter-latex",
+            "rev": "858af2c24547c8ab9386281ece6ead6936dbc8d1"
+          }
+        },
+        "icon_themes": [],
+        "id": "latex",
+        "language_servers": {
+          "texlab": {
+            "code_action_kinds": null,
+            "language": "LaTeX",
+            "language_ids": {},
+            "languages": []
+          }
+        },
+        "languages": [
+          "languages/bibtex",
+          "languages/latex"
+        ],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.1.0"
+        },
+        "name": "LaTeX",
+        "repository": "https://github.com/rzukic/zed-latex",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.2.3"
+      }
+    },
+    "lua": {
+      "dev": false,
+      "manifest": {
+        "authors": [
+          "Max Brunsfeld <max@zed.dev>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "Lua support.",
+        "grammars": {
+          "emmyluadoc": {
+            "path": null,
+            "repository": "https://github.com/EmmyLuaLs/tree-sitter-emmyluadoc",
+            "rev": "ea755c0fd34c07e16597bd62a404d6eba2a3891e"
+          },
+          "lua": {
+            "path": null,
+            "repository": "https://github.com/tree-sitter-grammars/tree-sitter-lua",
+            "rev": "d76023017f7485eae629cb60d406c7a1ca0f40c9"
+          }
+        },
+        "icon_themes": [],
+        "id": "lua",
+        "language_servers": {
+          "lua-language-server": {
+            "code_action_kinds": null,
+            "language": null,
+            "language_ids": {},
+            "languages": [
+              "Lua",
+              "EmmyLuadoc"
+            ]
+          }
+        },
+        "languages": [
+          "languages/emmyluadoc",
+          "languages/lua"
+        ],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.7.0"
+        },
+        "name": "Lua",
+        "repository": "https://github.com/zed-extensions/lua",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.1.9"
+      }
+    },
+    "make": {
+      "dev": false,
+      "manifest": {
+        "authors": [
+          "Caius Durling <dev@caius.name>",
+          "d1y <chenhonzhou@gmail.com>",
+          "Marshall Bowers <elliott.codes@gmail.com>",
+          "Luke Naylor <luke@grahamnaylor.net>",
+          "Igor T\u00e1mara <igor.tamara@gmail.com>",
+          "Michael Alexander <michael.alexander@karlstorz.com>",
+          "Donnie Adams <donnie@thedadams.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "Makefile syntax highlighting",
+        "grammars": {
+          "make": {
+            "path": null,
+            "repository": "https://github.com/tree-sitter-grammars/tree-sitter-make",
+            "rev": "5e9e8f8ff3387b0edcaa90f46ddf3629f4cfeb1d"
+          }
+        },
+        "icon_themes": [],
+        "id": "make",
+        "language_servers": {},
+        "languages": [
+          "languages/make"
+        ],
+        "lib": {
+          "kind": null,
+          "version": null
+        },
+        "name": "Make",
+        "repository": "https://github.com/caius/zed-make",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "1.1.2"
+      }
+    },
+    "markdownlint": {
+      "dev": false,
+      "manifest": {
+        "authors": [
+          "Vitaly Slobodin <vitaliy.slobodin@gmail.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "LSP support for `markdownlint`",
+        "grammars": {},
+        "icon_themes": [],
+        "id": "markdownlint",
+        "language_servers": {
+          "markdownlint": {
+            "code_action_kinds": null,
+            "language": null,
+            "language_ids": {},
+            "languages": [
+              "Markdown",
+              "Markdown-Inline"
+            ]
+          }
+        },
+        "languages": [],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.7.0"
+        },
+        "name": "Markdownlint",
+        "repository": "https://github.com/vitallium/zed-markdownlint",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.4.0"
+      }
+    },
+    "proto": {
+      "dev": false,
+      "manifest": {
+        "authors": [
+          "Zed Industries <support@zed.dev>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "Protocol Buffers support.",
+        "grammars": {
+          "proto": {
+            "path": null,
+            "repository": "https://github.com/coder3101/tree-sitter-proto",
+            "rev": "a6caac94b5aa36b322b5b70040d5b67132f109d0"
+          }
+        },
+        "icon_themes": [],
+        "id": "proto",
+        "language_servers": {
+          "buf": {
+            "code_action_kinds": null,
+            "language": null,
+            "language_ids": {},
+            "languages": [
+              "Proto"
+            ]
+          },
+          "protobuf-language-server": {
+            "code_action_kinds": null,
+            "language": null,
+            "language_ids": {},
+            "languages": [
+              "Proto"
+            ]
+          },
+          "protols": {
+            "code_action_kinds": null,
+            "language": null,
+            "language_ids": {},
+            "languages": [
+              "Proto"
+            ]
+          }
+        },
+        "languages": [
+          "languages/proto"
+        ],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.7.0"
+        },
+        "name": "Proto",
+        "repository": "https://github.com/zed-industries/zed",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.3.2"
+      }
+    },
+    "rainbow-csv": {
+      "dev": false,
+      "manifest": {
+        "authors": [
+          "Hans <weartistt@gmail.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "Highlight CSV with different rainbow colors to make them more readable",
+        "grammars": {
+          "csv": {
+            "path": "csv",
+            "repository": "https://github.com/coroa/rainbow-csv-tree-sitter",
+            "rev": "d82f436727f74298bd587ee696dca903efc42ce6"
+          },
+          "psv": {
+            "path": "psv",
+            "repository": "https://github.com/coroa/rainbow-csv-tree-sitter",
+            "rev": "d82f436727f74298bd587ee696dca903efc42ce6"
+          },
+          "ssv": {
+            "path": "ssv",
+            "repository": "https://github.com/coroa/rainbow-csv-tree-sitter",
+            "rev": "d82f436727f74298bd587ee696dca903efc42ce6"
+          },
+          "tsv": {
+            "path": "tsv",
+            "repository": "https://github.com/coroa/rainbow-csv-tree-sitter",
+            "rev": "d82f436727f74298bd587ee696dca903efc42ce6"
+          }
+        },
+        "icon_themes": [],
+        "id": "rainbow-csv",
+        "language_servers": {},
+        "languages": [
+          "languages/ssv",
+          "languages/psv",
+          "languages/csv",
+          "languages/tsv"
+        ],
+        "lib": {
+          "kind": null,
+          "version": null
+        },
+        "name": "Rainbow CSV",
+        "repository": "https://github.com/weartist/zed-rainbow-csv",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "1.1.0"
+      }
+    },
+    "scss": {
+      "dev": false,
+      "manifest": {
+        "authors": [
+          "Raunak Raj <bajrangcoders@gmail.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "SCSS and SASS support",
+        "grammars": {
+          "sass": {
+            "path": null,
+            "repository": "https://github.com/bajrangCoder/tree-sitter-sass",
+            "rev": "fb280c41b070657e4ff4d4e5e6eea6cb19efd9b8"
+          },
+          "sassdoc": {
+            "path": null,
+            "repository": "https://github.com/simeonoff/tree-sitter-sassdoc",
+            "rev": "38abe86eac15ed8d668de04df963ef0a4c220cfe"
+          },
+          "scss": {
+            "path": null,
+            "repository": "https://github.com/simeonoff/tree-sitter-scss",
+            "rev": "3f918284a73a54b53e4f326b0aa8c74ccbf4ee4d"
+          }
+        },
+        "icon_themes": [],
+        "id": "scss",
+        "language_servers": {
+          "scss-lsp": {
+            "code_action_kinds": null,
+            "language": null,
+            "language_ids": {},
+            "languages": [
+              "SCSS"
+            ]
+          },
+          "some-sass-lsp": {
+            "code_action_kinds": null,
+            "language": null,
+            "language_ids": {
+              "SASS": "sass",
+              "SCSS": "scss"
+            },
+            "languages": [
+              "SCSS",
+              "SASS"
+            ]
+          }
+        },
+        "languages": [
+          "languages/sass",
+          "languages/sassdoc",
+          "languages/scss"
+        ],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.7.0"
+        },
+        "name": "SCSS & SASS",
+        "repository": "https://github.com/bajrangCoder/zed-scss",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.2.0"
+      }
+    },
+    "sql": {
+      "dev": false,
+      "manifest": {
+        "authors": [
+          "nervenes",
+          "notpeter",
+          "phileix",
+          "tammyxiong"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "SQL language support.",
+        "grammars": {
+          "sql": {
+            "path": null,
+            "repository": "https://github.com/DerekStride/tree-sitter-sql",
+            "rev": "4a99c73f5384f2be10adc55208c84d95a7eb1137"
+          }
+        },
+        "icon_themes": [],
+        "id": "sql",
+        "language_servers": {},
+        "languages": [
+          "languages/sql"
+        ],
+        "lib": {
+          "kind": null,
+          "version": null
+        },
+        "name": "SQL",
+        "repository": "https://github.com/zed-extensions/sql",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "1.1.7"
+      }
+    },
+    "svelte": {
+      "dev": false,
+      "manifest": {
+        "authors": [
+          "Zed Industries <support@zed.dev>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "Svelte support",
+        "grammars": {
+          "svelte": {
+            "path": null,
+            "repository": "https://github.com/tree-sitter-grammars/tree-sitter-svelte",
+            "rev": "3f06f705410683adb17d146b5eca28c62fe81ba6"
+          }
+        },
+        "icon_themes": [],
+        "id": "svelte",
+        "language_servers": {
+          "svelte-language-server": {
+            "code_action_kinds": null,
+            "language": "Svelte",
+            "language_ids": {},
+            "languages": []
+          }
+        },
+        "languages": [
+          "languages/svelte"
+        ],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.7.0"
+        },
+        "name": "Svelte",
+        "repository": "https://github.com/zed-extensions/svelte",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.2.11"
+      }
+    },
+    "swift": {
+      "dev": false,
+      "manifest": {
+        "authors": [
+          "ejjonny <https://github.com/ejjonny>",
+          "Samuser107 L.Longheval <samuser107@gmail.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "debug_adapters": {
+          "Swift": {
+            "schema_path": "debug_adapter_schemas/Swift.json"
+          }
+        },
+        "description": "Swift support.",
+        "grammars": {
+          "swift": {
+            "path": null,
+            "repository": "https://github.com/alex-pinkus/tree-sitter-swift",
+            "rev": "33e56e4e2a6455f3fd4e04cfe5c7a314d498612d"
+          }
+        },
+        "icon_themes": [],
+        "id": "swift",
+        "language_servers": {
+          "sourcekit-lsp": {
+            "code_action_kinds": null,
+            "language": "Swift",
+            "language_ids": {},
+            "languages": []
+          }
+        },
+        "languages": [
+          "languages/swift"
+        ],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.6.0"
+        },
+        "name": "Swift",
+        "repository": "https://github.com/zed-extensions/swift",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.4.9"
+      }
+    },
+    "toml": {
+      "dev": false,
+      "manifest": {
+        "authors": [
+          "Max Brunsfeld <max@zed.dev>",
+          "Ammar Arif <evergreenkary@gmail.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "TOML support.",
+        "grammars": {
+          "toml": {
+            "path": null,
+            "repository": "https://github.com/tree-sitter/tree-sitter-toml",
+            "rev": "342d9be207c2dba869b9967124c679b5e6fd0ebe"
+          }
+        },
+        "icon_themes": [],
+        "id": "toml",
+        "language_servers": {},
+        "languages": [
+          "languages/toml"
+        ],
+        "lib": {
+          "kind": null,
+          "version": null
+        },
+        "name": "TOML",
+        "repository": "https://github.com/zed-extensions/toml",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "1.0.3"
+      }
+    },
+    "vue": {
+      "dev": false,
+      "manifest": {
+        "authors": [
+          "Zed Industries <support@zed.dev>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "Vue support.",
+        "grammars": {
+          "vue": {
+            "path": null,
+            "repository": "https://github.com/tree-sitter-grammars/tree-sitter-vue",
+            "rev": "7e48557b903a9db9c38cea3b7839ef7e1f36c693"
+          }
+        },
+        "icon_themes": [],
+        "id": "vue",
+        "language_servers": {
+          "vue-language-server": {
+            "code_action_kinds": [
+              "",
+              "quickfix",
+              "refactor.rewrite"
+            ],
+            "language": "Vue.js",
+            "language_ids": {
+              "Vue.js": "vue"
+            },
+            "languages": []
+          }
+        },
+        "languages": [
+          "languages/vue"
+        ],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.7.0"
+        },
+        "name": "Vue",
+        "repository": "https://github.com/zed-extensions/vue",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.3.4"
+      }
+    },
+    "xml": {
+      "dev": false,
+      "manifest": {
+        "authors": [
+          "sweetppro"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "XML syntax support.",
+        "grammars": {
+          "xml": {
+            "path": "xml",
+            "repository": "https://github.com/tree-sitter-grammars/tree-sitter-xml",
+            "rev": "863dbc381f44f6c136a399e684383b977bb2beaa"
+          }
+        },
+        "icon_themes": [],
+        "id": "xml",
+        "language_servers": {},
+        "languages": [
+          "languages/xml"
+        ],
+        "lib": {
+          "kind": null,
+          "version": null
+        },
+        "name": "XML",
+        "repository": "https://github.com/sweetppro/zed-xml",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.1.0"
+      }
+    }
+  },
+  "icon_themes": {
+    "Catppuccin Frapp\u00e9": {
+      "extension": "catppuccin-icons",
+      "path": "icon_themes/catppuccin-icons.json"
+    },
+    "Catppuccin Latte": {
+      "extension": "catppuccin-icons",
+      "path": "icon_themes/catppuccin-icons.json"
+    },
+    "Catppuccin Macchiato": {
+      "extension": "catppuccin-icons",
+      "path": "icon_themes/catppuccin-icons.json"
+    },
+    "Catppuccin Mocha": {
+      "extension": "catppuccin-icons",
+      "path": "icon_themes/catppuccin-icons.json"
+    }
+  },
+  "languages": {
+    "BibTeX": {
+      "extension": "latex",
+      "grammar": "bibtex",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "bib",
+          "bibtex",
+          "biblatex"
+        ]
+      },
+      "path": "languages/bibtex"
+    },
+    "CSV": {
+      "extension": "csv",
+      "grammar": "csv",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "csv"
+        ]
+      },
+      "path": "languages/csv"
+    },
+    "Caddyfile": {
+      "extension": "caddyfile",
+      "grammar": "caddyfile",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "Caddyfile",
+          "caddyfile"
+        ]
+      },
+      "path": "languages/caddyfile"
+    },
+    "Dockerfile": {
+      "extension": "dockerfile",
+      "grammar": "dockerfile",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "Dockerfile",
+          "Containerfile",
+          "dockerfile"
+        ]
+      },
+      "path": "languages/dockerfile"
+    },
+    "EmmyLuadoc": {
+      "extension": "lua",
+      "grammar": "emmyluadoc",
+      "hidden": true,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": []
+      },
+      "path": "languages/emmyluadoc"
+    },
+    "GitHub Actions": {
+      "extension": "github-actions",
+      "grammar": "yaml",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": []
+      },
+      "path": "languages/github_actions"
+    },
+    "GraphQL": {
+      "extension": "graphql",
+      "grammar": "graphql",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "graphql",
+          "gql",
+          "graphqls"
+        ]
+      },
+      "path": "languages/graphql"
+    },
+    "HTML": {
+      "extension": "html",
+      "grammar": "html",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "html",
+          "htm",
+          "shtml"
+        ]
+      },
+      "path": "languages/html"
+    },
+    "Kotlin": {
+      "extension": "kotlin",
+      "grammar": "kotlin",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "kt",
+          "kts"
+        ]
+      },
+      "path": "languages/kotlin"
+    },
+    "LaTeX": {
+      "extension": "latex",
+      "grammar": "latex",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "tex",
+          "latex",
+          "sty",
+          "cls"
+        ]
+      },
+      "path": "languages/latex"
+    },
+    "Lua": {
+      "extension": "lua",
+      "grammar": "lua",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "lua"
+        ]
+      },
+      "path": "languages/lua"
+    },
+    "Make": {
+      "extension": "make",
+      "grammar": "make",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": "^#!.*\\b(?:make -f)\\b",
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "makefile",
+          "Makefile",
+          "GNUmakefile",
+          "OCamlMakefile",
+          "mk",
+          "mak"
+        ]
+      },
+      "path": "languages/make"
+    },
+    "Proto": {
+      "extension": "proto",
+      "grammar": "proto",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "proto"
+        ]
+      },
+      "path": "languages/proto"
+    },
+    "Rainbow CSV (,)": {
+      "extension": "rainbow-csv",
+      "grammar": "csv",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "csv"
+        ]
+      },
+      "path": "languages/csv"
+    },
+    "Rainbow CSV (;)": {
+      "extension": "rainbow-csv",
+      "grammar": "ssv",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": []
+      },
+      "path": "languages/ssv"
+    },
+    "Rainbow CSV (|)": {
+      "extension": "rainbow-csv",
+      "grammar": "psv",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": []
+      },
+      "path": "languages/psv"
+    },
+    "Rainbow TSV (\u2b72)": {
+      "extension": "rainbow-csv",
+      "grammar": "tsv",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "tsv"
+        ]
+      },
+      "path": "languages/tsv"
+    },
+    "SASS": {
+      "extension": "scss",
+      "grammar": "sass",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "sass"
+        ]
+      },
+      "path": "languages/sass"
+    },
+    "SCSS": {
+      "extension": "scss",
+      "grammar": "scss",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "scss"
+        ]
+      },
+      "path": "languages/scss"
+    },
+    "SQL": {
+      "extension": "sql",
+      "grammar": "sql",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "sql"
+        ]
+      },
+      "path": "languages/sql"
+    },
+    "SassDoc": {
+      "extension": "scss",
+      "grammar": "sassdoc",
+      "hidden": true,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": []
+      },
+      "path": "languages/sassdoc"
+    },
+    "Svelte": {
+      "extension": "svelte",
+      "grammar": "svelte",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "svelte"
+        ]
+      },
+      "path": "languages/svelte"
+    },
+    "Swift": {
+      "extension": "swift",
+      "grammar": "swift",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": "^#!.*\\bswift\\b",
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "swift",
+          "swiftinterface"
+        ]
+      },
+      "path": "languages/swift"
+    },
+    "TOML": {
+      "extension": "toml",
+      "grammar": "toml",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "Cargo.lock",
+          "toml",
+          "Pipfile",
+          "uv.lock"
+        ]
+      },
+      "path": "languages/toml"
+    },
+    "Vue.js": {
+      "extension": "vue",
+      "grammar": "vue",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "vue"
+        ]
+      },
+      "path": "languages/vue"
+    },
+    "XML": {
+      "extension": "xml",
+      "grammar": "xml",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": "^<.*xml",
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "xml"
+        ]
+      },
+      "path": "languages/xml"
+    },
+    "ini": {
+      "extension": "ini",
+      "grammar": "ini",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "ini",
+          "inf",
+          "conf",
+          "cfg",
+          "config",
+          "automount",
+          "mount",
+          "path",
+          "scope",
+          "service",
+          "slice",
+          "socket",
+          "swap",
+          "target",
+          "timer",
+          "container",
+          "volume",
+          "network",
+          "kube",
+          "image",
+          "build",
+          "pod"
+        ]
+      },
+      "path": "languages/ini"
+    }
+  },
+  "themes": {
+    "Catppuccin Frapp\u00e9": {
+      "extension": "catppuccin",
+      "path": "themes/catppuccin-mauve.json"
+    },
+    "Catppuccin Frapp\u00e9 - No Italics": {
+      "extension": "catppuccin",
+      "path": "themes/catppuccin-no-italics-mauve.json"
+    },
+    "Catppuccin Latte": {
+      "extension": "catppuccin",
+      "path": "themes/catppuccin-mauve.json"
+    },
+    "Catppuccin Latte - No Italics": {
+      "extension": "catppuccin",
+      "path": "themes/catppuccin-no-italics-mauve.json"
+    },
+    "Catppuccin Macchiato": {
+      "extension": "catppuccin",
+      "path": "themes/catppuccin-mauve.json"
+    },
+    "Catppuccin Macchiato - No Italics": {
+      "extension": "catppuccin",
+      "path": "themes/catppuccin-no-italics-mauve.json"
+    },
+    "Catppuccin Mocha": {
+      "extension": "catppuccin",
+      "path": "themes/catppuccin-mauve.json"
+    },
+    "Catppuccin Mocha - No Italics": {
+      "extension": "catppuccin",
+      "path": "themes/catppuccin-no-italics-mauve.json"
+    }
+  }
+}
