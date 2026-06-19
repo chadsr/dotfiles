@@ -878,9 +878,11 @@ declare -a stow_dirs_general=(
   coolercontrol
   crush
   cura
+  docker
   dunst
   electron
   espanso
+  figma
   fonts
   forge
   freetube
@@ -913,6 +915,7 @@ declare -a stow_dirs_general=(
   opencode
   openspec
   pass
+  pipewire
   prusaslicer
   qbittorrent
   qt
@@ -922,6 +925,7 @@ declare -a stow_dirs_general=(
   skillshare
   solaar
   starship
+  steam
   sway
   swaync
   swayosd
@@ -937,6 +941,7 @@ declare -a stow_dirs_general=(
   xdg
   yt-dlp
   yubikey
+  zed
 )
 
 echo "Stowing general configs"
