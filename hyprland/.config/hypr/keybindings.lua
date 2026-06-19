@@ -54,8 +54,6 @@ hl.bind(mainMod .. " + SHIFT + G", hl.dsp.exec_cmd("hypr-gamemode"))
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("swayosd-client --brightness +5"), { locked = true, repeating = true }) -- increase brightness
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("swayosd-client --brightness -5"), { locked = true, repeating = true }) -- decrease brightness
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("sunsetr preset day")) -- toggle between day preset and default config
-hl.bind(mainMod .. " + ALT + XF86MonBrightnessDown", hl.dsp.exec_cmd("hyprshade on blue-light-filter")) -- enable blue light filter
-hl.bind(mainMod .. " + ALT + XF86MonBrightnessUp", hl.dsp.exec_cmd("hyprshade off")) -- disable blue light filter
 
 -- Move between grouped windows
 hl.bind(mainMod .. " + CTRL + H", hl.dsp.group.prev())
