@@ -1,19 +1,32 @@
 [core]
+    # Use delta as the pager for diff/log/show.
     pager = delta
-    symlinks = true
+
+    # Built-in file watcher - skips rescanning unchanged paths.
+    fsmonitor = true
+
+    # Cache untracked files for faster status/add.
+    untrackedCache = true
+
+[init]
+    defaultBranch = main
 
 [interactive]
+    # Pipe add -p style diffs through delta.
     diffFilter = delta --color-only --features=interactive
 
 [delta]
-    navigate = true    # use n and N to move between diff sections
+    # n/N jumps between hunks.
+    navigate = true
     features = decorations
     syntax-theme = Catppuccin-Mocha
 
 [delta "interactive"]
+    # Drop +/- markers in interactive add.
     keep-plus-minus-markers = false
 
 [delta "decorations"]
+    # Commit raw, no file header, file:line on hunks.
     commit-style = raw
     file-style = omit
     hunk-header-style = file line-number syntax
@@ -23,96 +36,193 @@
     email = git@ross.ch
     signingKey = 98B1F6BDC25DDD2560398F212B7340DB13C85766
 
+[gpg]
+    format = openpgp
+
 [commit]
     gpgsign = true
 
-[color]
-    ui = true
+[credential]
+    helper = cache timeout=14400
 
 [diff]
+    # Color moved code rather than add+remove.
     colorMoved = default
+
+    # Prefix diffs with i/w/c/o instead of a/b.
     mnemonicprefix = true
 
 [merge]
-    conflictstyle = diff3
+    # Show base inline with both sides.
+    conflictstyle = zdiff3
+
+    tool = nvimdiff3
+
+[mergetool]
+    # Skip the launch prompt.
+    prompt = false
+
+    # No .orig backups after resolving.
+    keepBackup = false
 
 [rebase]
+    # Auto-stash dirty worktree during rebase.
     autoStash = true
+
+    # rebase -i auto-orders fixup!/squash! commits.
     autoSquash = true
 
+    # Move stacked branches whose tips are in range.
+    updateRefs = true
+
+    # Warn if commits drop from an interactive rebase.
+    missingCommitsCheck = warn
+
+    # Show diffstat after rebase.
+    stat = true
+
 [pull]
+    # git pull rebases instead of merging (protected branches force --ff-only below).
     rebase = true
 
 [push]
     default = simple
 
+    # First push auto-sets upstream (no -u needed).
+    autoSetupRemote = true
+
+    # force-with-lease also checks remote-tracking ref is current.
+    useForceIfIncludes = true
+
+    # Push reachable annotated tags too.
+    followTags = true
+
+[fetch]
+    # Delete refs for branches removed on remote.
+    prune = true
+
+[log]
+    # --follow crosses merge commits.
+    followMerges = true
+
+    # Apply .mailmap in log output.
+    mailmap = true
+
 [rerere]
+    # Reuse Recorded Resolution: reapply past conflict resolutions.
     enabled = true
 
-[url "https://bitbucket.org/"]
-    insteadOf = bb:
-
-[url "https://github.com/"]
-    insteadOf = gh:
-
-[url "https://gist.github.com/"]
-    insteadOf = gist:
-
-[url "https://gitlab.com/"]
-    insteadOf = gl:
-
-[url "https://codeberg.com/"]
-    insteadOf = cb:
-
 [tag]
+    # Annotated tags must be signed.
     forceSignAnnotated = true
 
+    # Sort by version instead of lexicographically.
+    sort = version:refname
+
+[help]
+    autocorrect = prompt
+
+[branch]
+    # List branches newest-first.
+    sort = -committerdate
+
 [alias]
-    amend = commit --amend -m
+    a = add
+    ap = add -p
+    amend = commit --amend --no-edit
     br = branch
     brd = branch -d
     brD = branch -D
+    cl = clone
     cm = commit -m
     co = switch
     cob = switch -c
-    coo = !git fetch && git switch
+    sw = switch -
     cp = cherry-pick
-    f = "!git ls-files | grep -i"
-    fea = fetch --all
-    fixup = "!f() { t=${1:-HEAD}; b=$(git rev-parse $t^); git commit --fixup=$t && GIT_SEQUENCE_EDITOR=: git rebase -i --autosquash $b; }; f" # fixup <hash>: fold staged changes into <hash> (default: last commit), autosquash non-interactively
-    fuckit = reset --hard origin/HEAD
+    d = diff
+    dc = diff --cached
+    ds = diff --stat
     gr = grep -Ii
-    la = "!git config -l | grep alias | cut -c 7-"
-    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
-    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
     p = push
-    pf = push --force-with-lease origin
     pl = pull
-    po = push origin
-    pu = !git push origin $(git branch --show-current)
-    rb = !git fetch origin && git rebase --rebase-merges=no-rebase-cousins origin/HEAD
+    rs = restore
+    s = status -sb
+    st = stash push
+    stp = stash pop
     rba = rebase --abort
     rbc = rebase --continue
-    rbi = "!f() { git rebase -i HEAD~${1:-2}; }; f"
-    rs = restore
-    sh = stash
-    st = status
-    stp = stash pop
+
+    # List local branches newest-first: date, short hash, name.
+    b = "!git for-each-ref --sort='-committerdate' --format='%(committerdate:short)%09%(objectname:short)%09%(refname:short)' refs/heads | column -t"
+
+    # Delete a remote branch: git brdr branch | git brdr remote branch.
+    brdr = "!f() { if [ $# -eq 1 ]; then git push origin --delete \"$1\"; else git push \"$1\" --delete \"$2\"; fi; }; f"
+
+    # Commit without GPG signing.
+    cmns = commit --no-gpg-sign -m
+
+    # Fetch then switch (creates tracking branch if remote has it): git coo branch.
+    coo = !git fetch && git switch
+
+    # Find a tracked file: git f pattern.
+    f = "!git ls-files | grep -i"
+
+    # Fetch all remotes and prune deleted branches.
+    fea = fetch --all --prune
+
+    # Fold staged changes into a commit: git fixup [hash] (default HEAD).
+    fixup = "!f() { t=${1:-HEAD}; git rev-parse --verify \"$t^{commit}\" >/dev/null 2>&1 || { echo \"error: $t is not a valid commit\" >&2; exit 1; }; git rev-parse --verify \"$t^\" >/dev/null 2>&1 || { echo \"error: $t is the root commit, cannot fix up\" >&2; exit 1; }; b=$(git rev-parse \"$t^\"); echo \"Fixing up: $(git log -1 --format='%h %s' \"$t\")\"; git commit --fixup=$t && GIT_SEQUENCE_EDITOR=: git rebase -i --autosquash $b; }; f"
+
+    # List every configured alias.
+    la = "!git config -l | grep alias | cut -c 7-"
+
+    # Decorated graph log across all refs.
+    lg = log --graph --decorate --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+
+    # Like lg with a diffstat.
+    lgs = "!git lg --stat"
+
+    # Safe force push (refuses if remote moved).
+    pf = push --force-with-lease
+
+    # Rebase onto upstream or origin default branch: git rb.
+    # --rebase-merges keeps merge commits (no-op on linear history).
+    rb = "!r=$(git remote get-url upstream >/dev/null 2>&1 && echo upstream || echo origin); git fetch \"$r\" && git remote set-head \"$r\" -a 2>/dev/null; git rebase --rebase-merges=no-rebase-cousins \"$r/HEAD\""
+
+    # Interactive rebase onto upstream/origin default: git rbi [ref].
+    rbi = "!f() { r=$(git remote get-url upstream >/dev/null 2>&1 && echo upstream || echo origin); git rebase -i \"${1:-$r/HEAD}\"; }; f"
+
+    # Colorized compact reflog.
+    rl = reflog --pretty=format:'%Cred%h%Creset %C(yellow)%gd%C(reset) %C(auto)%gs%C(reset) %C(green)(%cr)%C(reset) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+    # Colorized stash list.
+    stl = stash list --pretty=format:'%C(red)%h%C(reset) - %C(yellow)(%gd%C(yellow))%C(reset) %<(70,trunc)%s %C(green)(%cr) %C(bold blue)<%an>%C(reset)'
+
+    # Undo last commit, keep changes staged.
     undocommit = reset --soft HEAD^
 
-[credential]
-    helper = cache timeout=14400
+    # Re-add conflict markers to a resolved file.
+    unresolve = "!git checkout --conflict=$(git config merge.conflictStyle || echo merge)"
 
-[init]
-    defaultBranch = main
+    # Clear resolutions for the current merge/rebase.
+    rrc = rerere clear
 
-[filter "lfs"]
-    clean = git-lfs clean -- %f
-    smudge = git-lfs smudge -- %f
-    process = git-lfs filter-process
-    required = true
+    # Show recorded resolutions for current conflict.
+    rrd = rerere diff
 
-# force --ff-only on known default/protected branches
+    # Forget all recorded resolutions.
+    rrf = "!git rerere forget ."
+
+    # Prune stale recorded resolutions.
+    rrg = rerere gc
+
+    # List files with resolutions in current op.
+    rrs = rerere status
+
+    # Per-repo LFS setup: install filters and pull.
+    lfs = "!git lfs install --local && git lfs pull"
+
+# Force fast-forwards on known default/protected branches.
 [branch "master"]
     rebase = false
     mergeoptions = --ff-only
@@ -124,3 +234,33 @@
 [branch "develop"]
     rebase = false
     mergeoptions = --ff-only
+
+[branch "production"]
+    rebase = false
+    mergeoptions = --ff-only
+
+[branch "staging"]
+    rebase = false
+    mergeoptions = --ff-only
+
+# Short aliases clone over SSH (gh:, gl:, bb:, cb:, gist:).
+# pushInsteadOf also routes HTTPS pushes through SSH.
+[url "git@github.com:"]
+    insteadOf = gh:
+    pushInsteadOf = https://github.com/
+
+[url "git@gist.github.com:"]
+    insteadOf = gist:
+    pushInsteadOf = https://gist.github.com/
+
+[url "git@gitlab.com:"]
+    insteadOf = gl:
+    pushInsteadOf = https://gitlab.com/
+
+[url "git@bitbucket.org:"]
+    insteadOf = bb:
+    pushInsteadOf = https://bitbucket.org/
+
+[url "git@codeberg.org:"]
+    insteadOf = cb:
+    pushInsteadOf = https://codeberg.org/
