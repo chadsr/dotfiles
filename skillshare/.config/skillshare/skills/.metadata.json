@@ -1,4 +1,76 @@
 {
-  "entries": {},
+  "entries": {
+    "brainstorming": {
+      "file_hashes": {
+        "SKILL.md": "sha256:e14914605f640e0841758e45d0ab2a53243b59b921f929e47921c99668f2e61d",
+        "scripts/frame-template.html": "sha256:6a8a4e58bd6a44b904e2e3c57de774481d909204597e1498de53f1b2fecc4c4e",
+        "scripts/helper.js": "sha256:43c6d69954a46ec34a2a262bcc62a9a7e83e839c739f199cb72646d397c686e3",
+        "scripts/server.cjs": "sha256:2d2961ea8d11f56c5f4c3a1a68d22709efa5d7601a2246d8c880774e7e9e8412",
+        "scripts/start-server.sh": "sha256:a4e5ae84275bcaacd2f84345afeabe59cf7b00ba080e123da7cc1fb226f12847",
+        "scripts/stop-server.sh": "sha256:0b5ccbbd57f62d3ed88993f7940b5ee0e5c0fc9b21c550c623da4f6292e47daf",
+        "spec-document-reviewer-prompt.md": "sha256:95a0a195de9d984be2fffa95bab16fc8c563bc296a9cfc5e9c29cb3ece0d7457",
+        "visual-companion.md": "sha256:60cbad29b9dd7eaf08da020e301c498a72230b2e13c1813fa967a135ffcc1d71"
+      },
+      "installed_at": "2026-06-19T12:04:47.080926007+02:00",
+      "repo_url": "https://github.com/obra/superpowers.git",
+      "source": "https://github.com/obra/superpowers.git/skills/brainstorming",
+      "subdir": "skills/brainstorming",
+      "tree_hash": "27e73ef7b83994e913cba378081b587412d2e9cb",
+      "type": "github-subdir",
+      "version": "896224c"
+    },
+    "grill-me": {
+      "file_hashes": {
+        "SKILL.md": "sha256:6189dfceb7304a6e5558f75d87e68fa3bc7fcf7ba120e44f21f8a61fe01eba54"
+      },
+      "installed_at": "2026-06-19T12:04:47.743266039+02:00",
+      "repo_url": "https://github.com/mattpocock/skills.git",
+      "source": "https://github.com/mattpocock/skills.git/skills/productivity/grill-me",
+      "subdir": "skills/productivity/grill-me",
+      "tree_hash": "8320e7b87f7b208f50ce165b1dd43d1e93c8e801",
+      "type": "github-subdir",
+      "version": "6eeb81b"
+    },
+    "grill-with-docs": {
+      "file_hashes": {
+        "SKILL.md": "sha256:610d091047bcfb9db0f75c057d15538481a721111579fc5ec7f83ad9131a2165"
+      },
+      "installed_at": "2026-06-19T12:04:47.747586421+02:00",
+      "repo_url": "https://github.com/mattpocock/skills.git",
+      "source": "https://github.com/mattpocock/skills.git/skills/engineering/grill-with-docs",
+      "subdir": "skills/engineering/grill-with-docs",
+      "tree_hash": "21adba95de7d93065d9fec725ddf37f871e01d05",
+      "type": "github-subdir",
+      "version": "6eeb81b"
+    },
+    "improve-codebase-architecture": {
+      "file_hashes": {
+        "HTML-REPORT.md": "sha256:0b0936104158abeef7246ff6cbabefa4dc055f17589f2833f2d93001421910a1",
+        "SKILL.md": "sha256:0026900866ed2a542af0559cef11dd7ae707633b75cc6f668c2e7c0a33e35032"
+      },
+      "installed_at": "2026-06-19T12:04:47.727517469+02:00",
+      "repo_url": "https://github.com/mattpocock/skills.git",
+      "source": "https://github.com/mattpocock/skills.git/skills/engineering/improve-codebase-architecture",
+      "subdir": "skills/engineering/improve-codebase-architecture",
+      "tree_hash": "e5beae48471adf87c513b5cbcb0ca347467546da",
+      "type": "github-subdir",
+      "version": "6eeb81b"
+    },
+    "tdd": {
+      "file_hashes": {
+        "SKILL.md": "sha256:13722957277ed4960061a2d254a0ed7d86f95693e88b40d1c68307e7fdc98287",
+        "mocking.md": "sha256:3ceb807fdf4a47d6a93d4d9a891e5ba6d362a6247bd08adc451feebfc17361ef",
+        "refactoring.md": "sha256:54fced22dd1911b7094c3fe7979b7c1a40d40be307482c4adf7dc0588f27d6cc",
+        "tests.md": "sha256:e12182f5c4c6a844b7c6ab4b8d2623b642aaaae5460fe58ed087efd4f3d5fb8a"
+      },
+      "installed_at": "2026-06-19T12:04:47.740478823+02:00",
+      "repo_url": "https://github.com/mattpocock/skills.git",
+      "source": "https://github.com/mattpocock/skills.git/skills/engineering/tdd",
+      "subdir": "skills/engineering/tdd",
+      "tree_hash": "7e6fad2aedf8648f6154af32915eebd12c6d51cc",
+      "type": "github-subdir",
+      "version": "6eeb81b"
+    }
+  },
   "version": 1
 }
