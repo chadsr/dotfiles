@@ -21,6 +21,10 @@ alias htop=btop
 alias code='codium'
 alias c='code . && exit'
 
+# zed editor
+alias zed='zeditor'
+alias z='zeditor . && exit'
+
 alias dotfiles='cd $DOTFILES'
 alias dots='dotfiles'
 
