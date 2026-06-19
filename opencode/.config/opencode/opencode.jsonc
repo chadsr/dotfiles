@@ -9,8 +9,8 @@
       ],
       "extensions": [
         ".py"
-      ]
-    }
+      ],
+    },
   },
   "mcp": {
     "chrome-devtools-mcp": {
@@ -20,10 +20,10 @@
         "chrome-devtools-mcp@latest",
         "--executablePath=/usr/bin/chromium",
         "--isolated=true",
-        "--no-usage-statistics"
+        "--no-usage-statistics",
       ],
       "enabled": true,
-      "type": "local"
+      "type": "local",
     },
     "MCP_DOCKER": {
       "type": "local",
@@ -33,10 +33,10 @@
         "gateway",
         "run",
         "--profile",
-        "dev-tools",
+        "dev-tools"
       ],
-      "enabled": true
-    }
+      "enabled": true,
+    },
   },
   "model": "zai-coding-plan/glm-5.2",
   "provider": {
@@ -46,31 +46,29 @@
           "reasoning": true,
           "temperature": true,
           "interleaved": {
-            "field": "reasoning_content"
+            "field": "reasoning_content",
           },
           "variants": {
             "high": {
-              "reasoningEffort": "high"
+              "reasoningEffort": "high",
             },
             "max": {
-              "reasoningEffort": "max"
+              "reasoningEffort": "max",
             },
           },
           "options": {
             "thinking": {
               "type": "enabled",
-              "clear_thinking": false
+              "clear_thinking": false,
             },
-            "reasoningEffort": "max"
+            "reasoningEffort": "max",
           },
-        }
-      }
+        },
+      },
     },
   },
-  "plugin": [
-    "superpowers@git+https://github.com/obra/superpowers.git"
-  ],
+  "plugin": [],
   "tools": {
-    "write": true
-  }
+    "write": true,
+  },
 }
