@@ -39,6 +39,8 @@ nextcloud/.config/Nextcloud/nextcloud.cfg
 opencode/.config/opencode/*
 openspec/.local/share/openspec/workspaces/**/.code-workspace
 openspec/.local/share/openspec/workspaces/**/AGENTS.md
+openspec/.local/share/openspec/workspaces/**/**/commands/*
+openspec/.local/share/openspec/workspaces/**/**/skills/*
 pass/.password-store/*
 prusaslicer/.config/PrusaSlicer/*
 qbittorrent/.config/qBittorrent/*
@@ -46,6 +48,9 @@ qt/.config/Kvantum/catppuccin-mocha-mauve
 qt/.config/Kvantum/Sweet
 radicle/.radicle/keys/radicle
 rofi/.config/rofi/catppuccin-mocha.rasi
+skillshare/.config/skillshare/agents/*
+skillshare/.config/skillshare/commands/*
+skillshare/.config/skillshare/skills/*
 ssh/.ssh/*
 system/shifty/boot/loader/entries/*
 tidal-hifi/.config/tidal-hifi/*
@@ -97,10 +102,14 @@ xdg/.config/mimeapps.list
 !opencode/.config/opencode/opencode.jsonc
 !opencode/.config/opencode/tui.json
 !openspec/.local/share/openspec/workspaces/**/.openspec-workspace/view.yaml
+!openspec/.local/share/openspec/workspaces/**/**/commands/.gitkeep
+!openspec/.local/share/openspec/workspaces/**/**/skills/.gitkeep
 !pass/.password-store/.gpg-id
 !pass/.password-store/*.gpg
 !prusaslicer/.config/PrusaSlicer/.gitkeep
 !qbittorrent/.config/qBittorrent/.gitkeep
+!skillshare/.config/skillshare/agents/.gitkeep
+!skillshare/.config/skillshare/extras/commands/.gitkeep
 !ssh/.ssh/yk.pub
 !system/shifty/boot/loader/entries/.gitkeep
 !tidal-hifi/.config/tidal-hifi/.gitkeep
