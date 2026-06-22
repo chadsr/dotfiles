@@ -21,7 +21,7 @@ end)
 hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
 hl.env("XDG_SESSION_DESKTOP", "Hyprland")
 hl.env("XDG_SESSION_TYPE", "wayland")
-hl.env("GRIMBLAST_EDITOR", "swappy -f")
+hl.env("GRIMBLAST_EDITOR", "satty -f")
 
 hl.config({
   ecosystem = {
