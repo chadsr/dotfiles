@@ -905,6 +905,7 @@ declare -a stow_dirs_general=(
   lact
   librewolf
   logseq
+  mako
   mangohud
   mcp
   mpv
