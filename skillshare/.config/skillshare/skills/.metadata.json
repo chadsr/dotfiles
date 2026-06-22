@@ -11,7 +11,7 @@
         "spec-document-reviewer-prompt.md": "sha256:95a0a195de9d984be2fffa95bab16fc8c563bc296a9cfc5e9c29cb3ece0d7457",
         "visual-companion.md": "sha256:60cbad29b9dd7eaf08da020e301c498a72230b2e13c1813fa967a135ffcc1d71"
       },
-      "installed_at": "2026-06-19T12:04:47.080926007+02:00",
+      "installed_at": "2026-06-22T13:24:50.806845455+02:00",
       "repo_url": "https://github.com/obra/superpowers.git",
       "source": "https://github.com/obra/superpowers.git/skills/brainstorming",
       "subdir": "skills/brainstorming",
@@ -23,7 +23,7 @@
       "file_hashes": {
         "SKILL.md": "sha256:6189dfceb7304a6e5558f75d87e68fa3bc7fcf7ba120e44f21f8a61fe01eba54"
       },
-      "installed_at": "2026-06-19T12:04:47.743266039+02:00",
+      "installed_at": "2026-06-22T13:24:51.572109013+02:00",
       "repo_url": "https://github.com/mattpocock/skills.git",
       "source": "https://github.com/mattpocock/skills.git/skills/productivity/grill-me",
       "subdir": "skills/productivity/grill-me",
@@ -35,7 +35,7 @@
       "file_hashes": {
         "SKILL.md": "sha256:610d091047bcfb9db0f75c057d15538481a721111579fc5ec7f83ad9131a2165"
       },
-      "installed_at": "2026-06-19T12:04:47.747586421+02:00",
+      "installed_at": "2026-06-22T13:24:51.574872612+02:00",
       "repo_url": "https://github.com/mattpocock/skills.git",
       "source": "https://github.com/mattpocock/skills.git/skills/engineering/grill-with-docs",
       "subdir": "skills/engineering/grill-with-docs",
@@ -48,7 +48,7 @@
         "HTML-REPORT.md": "sha256:0b0936104158abeef7246ff6cbabefa4dc055f17589f2833f2d93001421910a1",
         "SKILL.md": "sha256:0026900866ed2a542af0559cef11dd7ae707633b75cc6f668c2e7c0a33e35032"
       },
-      "installed_at": "2026-06-19T12:04:47.727517469+02:00",
+      "installed_at": "2026-06-22T13:24:51.598792009+02:00",
       "repo_url": "https://github.com/mattpocock/skills.git",
       "source": "https://github.com/mattpocock/skills.git/skills/engineering/improve-codebase-architecture",
       "subdir": "skills/engineering/improve-codebase-architecture",
@@ -63,7 +63,7 @@
         "refactoring.md": "sha256:54fced22dd1911b7094c3fe7979b7c1a40d40be307482c4adf7dc0588f27d6cc",
         "tests.md": "sha256:e12182f5c4c6a844b7c6ab4b8d2623b642aaaae5460fe58ed087efd4f3d5fb8a"
       },
-      "installed_at": "2026-06-19T12:04:47.740478823+02:00",
+      "installed_at": "2026-06-22T13:24:51.61247193+02:00",
       "repo_url": "https://github.com/mattpocock/skills.git",
       "source": "https://github.com/mattpocock/skills.git/skills/engineering/tdd",
       "subdir": "skills/engineering/tdd",
