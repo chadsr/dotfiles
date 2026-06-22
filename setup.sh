@@ -892,6 +892,8 @@ declare -a stow_dirs_general=(
   gammastep
   ghostty
   goose
+  swappy
+  satty
   gpu-screen-recorder
   gtk
   helix
