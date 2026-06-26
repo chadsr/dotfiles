@@ -713,6 +713,54 @@
         "version": "0.4.0"
       }
     },
+    "nix": {
+      "dev": false,
+      "manifest": {
+        "authors": [
+          "Hasit Mistry <hasitnm@gmail.com>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "Nix support.",
+        "grammars": {
+          "nix": {
+            "path": null,
+            "repository": "https://github.com/nix-community/tree-sitter-nix",
+            "rev": "ea1d87f7996be1329ef6555dcacfa63a69bd55c6"
+          }
+        },
+        "icon_themes": [],
+        "id": "nix",
+        "language_servers": {
+          "nil": {
+            "code_action_kinds": null,
+            "language": "Nix",
+            "language_ids": {},
+            "languages": []
+          },
+          "nixd": {
+            "code_action_kinds": null,
+            "language": "Nix",
+            "language_ids": {},
+            "languages": []
+          }
+        },
+        "languages": [
+          "languages/nix"
+        ],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.7.0"
+        },
+        "name": "Nix",
+        "repository": "https://github.com/zed-extensions/nix",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.1.4"
+      }
+    },
     "proto": {
       "dev": false,
       "manifest": {
@@ -1103,7 +1151,7 @@
         "slash_commands": {},
         "snippets": null,
         "themes": [],
-        "version": "0.3.4"
+        "version": "0.3.6"
       }
     },
     "xml": {
@@ -1330,6 +1378,19 @@
         ]
       },
       "path": "languages/make"
+    },
+    "Nix": {
+      "extension": "nix",
+      "grammar": "nix",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "nix"
+        ]
+      },
+      "path": "languages/nix"
     },
     "Proto": {
       "extension": "proto",

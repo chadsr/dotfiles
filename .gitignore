@@ -38,9 +38,9 @@ khal/.config/khal/*
 nextcloud/.config/Nextcloud/nextcloud.cfg
 opencode/.config/opencode/*
 openspec/.local/share/openspec/workspaces/**/.code-workspace
-openspec/.local/share/openspec/workspaces/**/AGENTS.md
 openspec/.local/share/openspec/workspaces/**/**/commands/*
 openspec/.local/share/openspec/workspaces/**/**/skills/*
+openspec/.local/share/openspec/workspaces/**/AGENTS.md
 pass/.password-store/*
 prusaslicer/.config/PrusaSlicer/*
 qbittorrent/.config/qBittorrent/*
@@ -59,6 +59,7 @@ waybar/.config/waybar-crypto/config.ini
 waybar/.config/waybar/theme.css
 waybar/.local/share/fonts/TTF/*
 xdg/.config/mimeapps.list
+zed/.local/share/zed/*
 
 !android/.android/keystores/.gitkeep
 !android/.config/Google/**/disabled_plugins.txt
@@ -116,3 +117,4 @@ xdg/.config/mimeapps.list
 !vdirsyncer/.config/vdirsyncer/.gitkeep
 !waybar/.config/waybar/modules/crypto/.gitkeep
 !waybar/.local/share/fonts/TTF/.gitkeep
+!zed/.local/share/zed/extensions/index.json
