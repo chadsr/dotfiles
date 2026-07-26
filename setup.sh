@@ -958,8 +958,23 @@ bat cache --build || {
   exit 1
 }
 
+openspec init --tools opencode "${base_path}/openspec/.local/share/openspec/shared" || {
+  echo "failed to init openspec"
+  exit 1
+}
+
+(cd "${base_path}/openspec/.local/share/openspec/shared" && openspec update && cd "$base_path") || {
+  echo "failed to update openspec"
+  exit 1
+}
+
 skillshare init || {
   echo "failed to init skillshare. Is it already initialized?"
+}
+
+skillshare update --all || {
+  echo "failed to sync skillshare"
+  exit 1
 }
 
 skillshare sync --all || {
