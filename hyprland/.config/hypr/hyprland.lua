@@ -112,7 +112,8 @@ hl.config({
 hl.config({
   plugin = {
     hyprfocus = {
-      mode = "flash",
+      keyboard_focus_animation = "flash",
+      mouse_focus_animation = "none",
       fade_opacity = 0.9,
     },
     -- hyprexpo = {
