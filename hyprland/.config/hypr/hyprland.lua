@@ -8,7 +8,7 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("dbus-update-activation-environment --systemd --all") -- for XDPH
   hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP") -- for XDPH
   hl.exec_cmd("systemctl --user start hypr-session.target")
-  hl.exec_cmd("hyprpm reload")
+  -- hl.exec_cmd("hyprpm reload")
   hl.exec_cmd(os.getenv("HOME") .. "/.local/bin/gsettings-gtk")
   hl.exec_cmd("sunsetr preset default")
 end)
@@ -109,22 +109,22 @@ hl.config({
   },
 })
 
-hl.config({
-  plugin = {
-    hyprfocus = {
-      keyboard_focus_animation = "flash",
-      mouse_focus_animation = "none",
-      fade_opacity = 0.9,
-    },
-    -- hyprexpo = {
-    --     columns = 3,
-    --     gap_size = 5,
-    --     bg_col = "rgb(111111)",
-    --     workspace_method = "center current", -- [center/first] [workspace] e.g. first 1 or center m+1
-    --     gesture_distance = 300, -- how far is the "max" for the gesture
-    -- },
-  },
-})
+-- hl.config({
+--   plugin = {
+-- hyprfocus = {
+--   keyboard_focus_animation = "flash",
+--   mouse_focus_animation = "none",
+--   fade_opacity = 0.9,
+-- },
+-- hyprexpo = {
+--     columns = 3,
+--     gap_size = 5,
+--     bg_col = "rgb(111111)",
+--     workspace_method = "center current", -- [center/first] [workspace] e.g. first 1 or center m+1
+--     gesture_distance = 300, -- how far is the "max" for the gesture
+-- },
+--   },
+-- })
 
 -- hl.gesture({
 --     fingers = 3,

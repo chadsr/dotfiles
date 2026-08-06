@@ -21,5 +21,5 @@ hl.animation({ leaf = "borderangle", enabled = true, speed = 100, bezier = "line
 hl.animation({ leaf = "fade", enabled = true, speed = 10, bezier = "default" })
 hl.animation({ leaf = "workspaces", enabled = true, speed = 5, bezier = "wind" })
 
-hl.animation({ leaf = "hyprfocusIn", enabled = true, speed = 2, bezier = "winIn" })
-hl.animation({ leaf = "hyprfocusOut", enabled = true, speed = 2, bezier = "winOut" })
+-- hl.animation({ leaf = "hyprfocusIn", enabled = true, speed = 2, bezier = "winIn" })
+-- hl.animation({ leaf = "hyprfocusOut", enabled = true, speed = 2, bezier = "winOut" })
