@@ -41,7 +41,7 @@ repos:
     hooks:
       - id: mdformat
   - repo: https://github.com/editorconfig-checker/editorconfig-checker
-    rev: v3.8.0
+    rev: v3.9.0
     hooks:
       - id: editorconfig-checker
   - repo: https://github.com/koalaman/shellcheck-precommit
