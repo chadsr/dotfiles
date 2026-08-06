@@ -1,0 +1,74 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "autoupdate": false,
+  "lsp": {
+    "basedpyright": {
+      "command": [
+        "basedpyright-langserver",
+        "--stdio"
+      ],
+      "extensions": [
+        ".py"
+      ]
+    }
+  },
+  "mcp": {
+    "MCP_DOCKER": {
+      "command": [
+        "docker",
+        "mcp",
+        "gateway",
+        "run",
+        "--profile",
+        "dev-tools"
+      ],
+      "enabled": true,
+      "type": "local"
+    },
+    "chrome-devtools-mcp": {
+      "command": [
+        "npx",
+        "-y",
+        "chrome-devtools-mcp@latest",
+        "--executablePath=/usr/bin/chromium",
+        "--isolated=true",
+        "--no-usage-statistics"
+      ],
+      "enabled": true,
+      "type": "local"
+    }
+  },
+  "model": "zai-coding-plan/glm-5.2",
+  "plugin": [],
+  "provider": {
+    "zai-coding-plan": {
+      "models": {
+        "glm-5.2": {
+          "interleaved": {
+            "field": "reasoning_content"
+          },
+          "options": {
+            "reasoningEffort": "max",
+            "thinking": {
+              "clear_thinking": false,
+              "type": "enabled"
+            }
+          },
+          "reasoning": true,
+          "temperature": true,
+          "variants": {
+            "high": {
+              "reasoningEffort": "high"
+            },
+            "max": {
+              "reasoningEffort": "max"
+            }
+          }
+        }
+      }
+    }
+  },
+  "tools": {
+    "write": true
+  }
+}
