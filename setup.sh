@@ -1009,7 +1009,6 @@ declare -a systemd_user_units=(
   "$base_path"/awww/.config/systemd/user/awww-random.service
   "$base_path"/clipse/.config/systemd/user/clipse.service
   "$base_path"/gtk/.config/systemd/user/xsettingsd.service
-  "$base_path"/hyprland/.config/systemd/user/hypr-sunsetr.service
   "$base_path"/hyprland/.config/systemd/user/hypridle.service
   "$base_path"/kanshi/.config/systemd/user/kanshi.service
   "$base_path"/nextcloud/.config/systemd/user/nextcloud-client.service
@@ -1024,6 +1023,7 @@ declare -a systemd_user_units=(
   /usr/lib/systemd/user/gnome-keyring-daemon.socket
   /usr/lib/systemd/user/pipewire-pulse.service
   /usr/lib/systemd/user/pipewire.service
+  /usr/lib/systemd/user/sunsetr.service
   /usr/lib/systemd/user/swaync.service
   /usr/lib/systemd/user/wireplumber.service
   /usr/lib/systemd/user/yubikey-touch-detector.socket
