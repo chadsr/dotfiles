@@ -127,6 +127,7 @@
               "Java",
               "JavaScript",
               "JavaScript React",
+              "Just",
               "LaTeX",
               "Lua",
               "Markdown",
@@ -165,7 +166,7 @@
         "slash_commands": {},
         "snippets": null,
         "themes": [],
-        "version": "0.2.12"
+        "version": "0.2.14"
       }
     },
     "csv": {
@@ -457,7 +458,7 @@
         ],
         "capabilities": [],
         "context_servers": {},
-        "description": "Support for ini and related config files (ini, conf, cfg, config) and systemd unit files (automount, mount, path, scope, service, slice, socket, swap, target, timer)",
+        "description": "Support for ini and ini like files (ini, conf, cfg) and systemd unit files (automount, mount, path, scope, service, slice, socket, swap, target, timer)",
         "grammars": {
           "ini": {
             "path": null,
@@ -481,7 +482,7 @@
         "slash_commands": {},
         "snippets": null,
         "themes": [],
-        "version": "0.0.8"
+        "version": "0.0.9"
       }
     },
     "kotlin": {
@@ -530,7 +531,7 @@
         "slash_commands": {},
         "snippets": null,
         "themes": [],
-        "version": "0.3.0"
+        "version": "0.3.1"
       }
     },
     "latex": {
@@ -602,7 +603,7 @@
           "lua": {
             "path": null,
             "repository": "https://github.com/tree-sitter-grammars/tree-sitter-lua",
-            "rev": "d76023017f7485eae629cb60d406c7a1ca0f40c9"
+            "rev": "10fe0054734eec83049514ea2e718b2a56acd0c9"
           }
         },
         "icon_themes": [],
@@ -619,8 +620,8 @@
           }
         },
         "languages": [
-          "languages/emmyluadoc",
-          "languages/lua"
+          "languages/lua",
+          "languages/emmyluadoc"
         ],
         "lib": {
           "kind": "Rust",
@@ -632,7 +633,7 @@
         "slash_commands": {},
         "snippets": null,
         "themes": [],
-        "version": "0.1.9"
+        "version": "0.1.10"
       }
     },
     "make": {
@@ -925,8 +926,8 @@
           }
         },
         "languages": [
-          "languages/sass",
           "languages/sassdoc",
+          "languages/sass",
           "languages/scss"
         ],
         "lib": {
@@ -939,7 +940,7 @@
         "slash_commands": {},
         "snippets": null,
         "themes": [],
-        "version": "0.2.0"
+        "version": "0.2.1"
       }
     },
     "sql": {
@@ -958,7 +959,7 @@
           "sql": {
             "path": null,
             "repository": "https://github.com/DerekStride/tree-sitter-sql",
-            "rev": "4a99c73f5384f2be10adc55208c84d95a7eb1137"
+            "rev": "851e9cb257ba7c66cc8c14214a31c44d2f1e954e"
           }
         },
         "icon_themes": [],
@@ -977,7 +978,7 @@
         "slash_commands": {},
         "snippets": null,
         "themes": [],
-        "version": "1.1.7"
+        "version": "1.1.8"
       }
     },
     "svelte": {
@@ -1049,9 +1050,21 @@
         "language_servers": {
           "sourcekit-lsp": {
             "code_action_kinds": null,
-            "language": "Swift",
-            "language_ids": {},
-            "languages": []
+            "language": null,
+            "language_ids": {
+              "C": "c",
+              "C++": "cpp",
+              "Objective-C": "objective-c",
+              "Objective-C++": "objective-cpp",
+              "Swift": "swift"
+            },
+            "languages": [
+              "Swift",
+              "C",
+              "C++",
+              "Objective-C",
+              "Objective-C++"
+            ]
           }
         },
         "languages": [
@@ -1067,7 +1080,7 @@
         "slash_commands": {},
         "snippets": null,
         "themes": [],
-        "version": "0.4.9"
+        "version": "0.4.11"
       }
     },
     "toml": {
@@ -1151,7 +1164,7 @@
         "slash_commands": {},
         "snippets": null,
         "themes": [],
-        "version": "0.3.6"
+        "version": "0.4.0"
       }
     },
     "xml": {
@@ -1167,7 +1180,7 @@
           "xml": {
             "path": "xml",
             "repository": "https://github.com/tree-sitter-grammars/tree-sitter-xml",
-            "rev": "863dbc381f44f6c136a399e684383b977bb2beaa"
+            "rev": "5000ae8f22d11fbe93939b05c1e37cf21117162d"
           }
         },
         "icon_themes": [],
@@ -1186,7 +1199,7 @@
         "slash_commands": {},
         "snippets": null,
         "themes": [],
-        "version": "0.1.0"
+        "version": "0.1.1"
       }
     }
   },
@@ -1584,7 +1597,6 @@
           "inf",
           "conf",
           "cfg",
-          "config",
           "automount",
           "mount",
           "path",
