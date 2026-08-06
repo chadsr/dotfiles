@@ -132,6 +132,7 @@
   "json.schemaDownload.trustedDomains": {
     "https://charm.land/crush.json": true,
     "https://developer.microsoft.com/json-schemas/": true,
+    "https://docs.renovatebot.com/renovate-schema.json": true,
     "https://json-schema.org/": true,
     "https://json.schemastore.org/": true,
     "https://models.dev/model-schema.json": true,
@@ -171,6 +172,7 @@
   "python.analysis.typeEvaluation.strictListInference": true,
   "python.analysis.typeEvaluation.strictSetInference": true,
   "python.experiments.enabled": false,
+  "python.languageServer": "None",
   "python.terminal.activateEnvInCurrentTerminal": true,
   "python.testing.pytestArgs": [
     "--capture=tee-sys",
