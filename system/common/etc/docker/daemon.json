@@ -1,0 +1,6 @@
+{
+  "firewall-backend": "nftables",
+  "nri-opts": {
+    "enable": true
+  }
+}
