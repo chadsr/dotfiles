@@ -126,21 +126,6 @@ extensions:
     timeout: 300
     bundled: true
     available_tools: []
-  gitmcp:
-    enabled: false
-    type: stdio
-    name: Git MCP
-    description: Git MCP server for up-to-date docs and project insights
-    cmd: npx
-    args:
-      - -y
-      - mcp-remote
-      - https://gitmcp.io/docs
-    envs: {}
-    env_keys: []
-    timeout: 300
-    bundled: null
-    available_tools: []
   analyze:
     enabled: true
     type: platform
