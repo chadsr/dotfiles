@@ -404,21 +404,24 @@
   "privacy": {
     "icon-spacing": 4,
     "icon-size": 18,
-    "transition-duration": 250,
-    "format-icons": {
-      "screenshare": "🕵️",
-      "audio-in": "👂"
-    },
+    "ignore": [
+      {
+        "type": "audio-in",
+        "name": "cava"
+      }
+    ],
     "modules": [
       {
         "type": "screenshare",
-        "tooltip": true,
-        "tooltip-icon-size": 24
+        "tooltip": true
       },
       {
         "type": "audio-in",
-        "tooltip": true,
-        "tooltip-icon-size": 24
+        "tooltip": true
+      },
+      {
+        "type": "location",
+        "tooltip": true
       }
     ]
   },

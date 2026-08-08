@@ -161,10 +161,12 @@ tooltip label {
 
 #privacy {
   padding: 0px;
+  animation: urgent-animation 2s steps(50) infinite;
 }
 
 #privacy-item.screenshare,
-#privacy-item.audio-in {
+#privacy-item.audio-in,
+#privacy-item.location {
   padding: 0 8px;
 }
 
