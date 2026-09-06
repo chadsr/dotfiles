@@ -20,8 +20,54 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y lua5.4 luarocks
-          # Ensure `lua` resolves to 5.4
           sudo update-alternatives --set lua-interpreter /usr/bin/lua5.4
       - uses: j178/prek-action@v2
         with:
-          extra-args: '--all-files'
+          extra-args: '--all-files --skip nixfmt'
+  nixfmt:
+    name: nixfmt check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: cachix/install-nix-action@v31
+      - run: nix-shell -p nixfmt --run "nixfmt --check $(git ls-files '*.nix')"
+  nix-flake-check:
+    name: nix flake check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: cachix/install-nix-action@v31
+        with:
+          extra_nix_config: |
+            extra-experimental-features = nix-command flakes
+      - name: nix flake check
+        run: nix --extra-experimental-features 'nix-command flakes' flake check --no-build
+  statix:
+    name: Statix lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: cachix/install-nix-action@v31
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - run: nix run nixpkgs#statix -- check .
+  build-hosts:
+    name: Build ${{ matrix.host }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        host: [thinky, shifty]
+    steps:
+      - uses: actions/checkout@v6
+      - uses: cachix/install-nix-action@v31
+        with:
+          extra_nix_config: |
+            extra-experimental-features = nix-command flakes
+      - uses: cachix/cachix-action@v17
+        with:
+          name: chadsr
+          skipPush: true
+      - name: Evaluate host toplevel
+        run: |
+          nix --extra-experimental-features 'nix-command flakes' eval \
+            .#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel.drvPath

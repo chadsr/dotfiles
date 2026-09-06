@@ -1,0 +1,6 @@
+# sops config — GPG backend only (no age). The single recipient is the
+# Yubikey-backed encryption subkey (0x79C70BBE4865D828). Decryption requires the
+# private key on the Yubikey via gpg-agent.
+creation_rules:
+  - path_regex: secrets/secrets\.yaml$
+    pgp: D830226B505C1839B3E05C6F79C70BBE4865D828

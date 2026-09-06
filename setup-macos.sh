@@ -151,17 +151,19 @@ stow -t ~/ stow || {
 
 echo "Appending custom pinentry script to gpg-agent.conf"
 # GNUPG is ridiculous and only allows env-vars in some of the options here, so we have to do this the convoluted way with a line append
-cp -v "$data_path"/gpg/gpg-agent.conf "$base_path"/gpg/.gnupg/gpg-agent.conf || {
+cp -v "$data_path"/gpg/gpg-agent.conf "$base_path"/modules/dots/gpg/.gnupg/gpg-agent.conf || {
   echo "failed to copy gpg-agent.conf from data dir"
   exit 1
 }
-echo "pinentry-program $HOME/.local/bin/pinentry-auto" | tee -a "$base_path"/gpg/.gnupg/gpg-agent.conf
+echo "pinentry-program $HOME/.local/bin/pinentry-auto" | tee -a "$base_path"/modules/dots/gpg/.gnupg/gpg-agent.conf
 
 stow_config() {
+  cd "$base_path/modules/dots"
   stow -v "$1" || {
     echo "Failed to stow ${1} config"
     exit 1
   }
+  cd "$base_path"
 }
 
 declare -a stow_dirs_setup=(
@@ -212,8 +214,8 @@ fi
 
 echo "Decrypting data"
 declare -a decrypt_data_paths_tuples=(
-  "${data_path}/ssh/config.asc.gpg ${base_path}/ssh/.ssh/config"
-  "${data_path}/android/keystores/keystore-rossch.asc.gpg ${base_path}/android/.android/keystores/keystore-rossch"
+  "${data_path}/ssh/config.asc.gpg ${base_path}/modules/dots/ssh/.ssh/config"
+  "${data_path}/android/keystores/keystore-rossch.asc.gpg ${base_path}/modules/dots/android/.android/keystores/keystore-rossch"
 )
 
 for decrypt_data_paths_tuple in "${decrypt_data_paths_tuples[@]}"; do
@@ -233,8 +235,8 @@ mv "${git_submodule_path}"/catppuccin-bat/themes/Catppuccin\ Mocha.tmTheme "${gi
 }
 
 declare -a symlink_paths_tuples=(
-  "${git_submodule_path}/catppuccin-bat/themes/Catppuccin-Mocha.tmTheme ${base_path}/bat/.config/bat/themes/Catppuccin-Mocha.tmTheme"
-  "${git_submodule_path}/catppuccin-helix/themes/default/catppuccin_mocha.toml ${base_path}/helix/.config/helix/themes/catppuccin_mocha.toml"
+  "${git_submodule_path}/catppuccin-bat/themes/Catppuccin-Mocha.tmTheme ${base_path}/modules/dots/bat/.config/bat/themes/Catppuccin-Mocha.tmTheme"
+  "${git_submodule_path}/catppuccin-helix/themes/default/catppuccin_mocha.toml ${base_path}/modules/dots/helix/.config/helix/themes/catppuccin_mocha.toml"
 )
 for symlink_paths_tuple in "${symlink_paths_tuples[@]}"; do
   read -ra symlink_paths <<<"$symlink_paths_tuple"

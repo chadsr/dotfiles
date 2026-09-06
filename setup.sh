@@ -334,26 +334,28 @@ set_default_kernel() {
   esac
 }
 
-rm_if_not_stowed() {
-  if [[ -L "${1}" ]]; then
-    local symlink_path
-    symlink_path=$(readlink -f "${1}")
-    if [[ $symlink_path == *"${base_path}"* ]]; then
-      return 0
-    fi
-  fi
+# rm_if_not_stowed() {
+#   if [[ -L "${1}" ]]; then
+#     local symlink_path
+#     symlink_path=$(readlink -f "${1}")
+#     if [[ $symlink_path == *"${base_path}"* ]]; then
+#       return 0
+#     fi
+#   fi
 
-  rm -rfv "${1}" || {
-    echo "failed to remove conflict path ${1}"
-    return 1
-  }
-}
+#   rm -rfv "${1}" || {
+#     echo "failed to remove conflict path ${1}"
+#     return 1
+#   }
+# }
 
 stow_config() {
+  cd "$base_path/modules/dots"
   stow -v "$1" || {
     echo "Failed to stow ${1} config"
     exit 1
   }
+  cd "$base_path"
 }
 
 mkdir -p "$tmp_path"
@@ -432,46 +434,45 @@ for mk_dir in "${mk_dirs[@]}"; do
   mkdir -p "${mk_dir}"
 done
 
-declare -a conflict_paths=(
-  ~/.bash_env
-  ~/.bash_login
-  ~/.bash_logout
-  ~/.bash_profile
-  ~/.bashrc
-  ~/.config/gtk-3.0
-  ~/.config/gtk-3.0
-  ~/.config/gtk-4.0
-  ~/.config/mimeapps.list
-  ~/.config/Thunar/uca.xml
-  ~/.config/xfce4/xfconf/xfce-perchannel-xml/thunar.xml
-  ~/.gnupg/common.conf
-  ~/.gtkrc-2.0
-  ~/.vscode-oss/argv.json
-  ~/.zlogin
-  ~/.zlogout
-  ~/.zprofile
-  ~/.zshenv
-  ~/.zshrc
-)
-echo "Checking for files/directories that will conflict with stow"
-for conflict_path in "${conflict_paths[@]}"; do
-  rm_if_not_stowed "${conflict_path}"
-done
+# declare -a conflict_paths=(
+#   ~/.bash_env
+#   ~/.bash_login
+#   ~/.bash_logout
+#   ~/.bash_profile
+#   ~/.bashrc
+#   ~/.config/gtk-3.0
+#   ~/.config/gtk-4.0
+#   ~/.config/mimeapps.list
+#   ~/.config/Thunar/uca.xml
+#   ~/.config/xfce4/xfconf/xfce-perchannel-xml/thunar.xml
+#   ~/.gnupg/common.conf
+#   ~/.gtkrc-2.0
+#   ~/.vscode-oss/argv.json
+#   ~/.zlogin
+#   ~/.zlogout
+#   ~/.zprofile
+#   ~/.zshenv
+#   ~/.zshrc
+# )
+# echo "Checking for files/directories that will conflict with stow"
+# for conflict_path in "${conflict_paths[@]}"; do
+#   rm_if_not_stowed "${conflict_path}"
+# done
 
-if ! [ -e "$base_path/hyprland/.config/sunsetr/geo.toml" ]; then
-  touch "$base_path/hyprland/.config/sunsetr/geo.toml" || {
-    echo "failed to create sunsetr geo.toml"
-    exit 1
-  }
-fi
+# if ! [ -e "$base_path/hyprland/.config/sunsetr/geo.toml" ]; then
+#   touch "$base_path/hyprland/.config/sunsetr/geo.toml" || {
+#     echo "failed to create sunsetr geo.toml"
+#     exit 1
+#   }
+# fi
 
 echo "Appending custom pinentry script to gpg-agent.conf"
 # GNUPG is ridiculous and only allows env-vars in some of the options here, so we have to do this the convoluted way with a line append
-cp -v "$data_path"/gpg/gpg-agent.conf "$base_path"/gpg/.gnupg/gpg-agent.conf || {
+cp -v "$data_path"/gpg/gpg-agent.conf "$base_path"/modules/dots/gpg/.gnupg/gpg-agent.conf || {
   echo "failed to copy gpg-agent.conf from data dir"
   exit 1
 }
-echo "pinentry-program $HOME/.local/bin/pinentry-auto" | tee -a "$base_path"/gpg/.gnupg/gpg-agent.conf
+echo "pinentry-program $HOME/.local/bin/pinentry-auto" | tee -a "$base_path"/modules/dots/gpg/.gnupg/gpg-agent.conf
 
 declare -a stow_dirs_setup=(
   bash
@@ -495,9 +496,9 @@ source ~/.bashrc || {
   exit 1
 }
 
-systemd_user_enable_start "$base_path"/gpg/.config/systemd/user/gnupghome.service
+systemd_user_enable_start "$base_path"/modules/dots/gpg/.config/systemd/user/gnupghome.service
 systemd_user_enable_start /usr/lib/systemd/user/gpg-agent.service
-systemd_user_enable_start "$base_path"/gpg/.config/systemd/user/ssh-auth-sock.service
+systemd_user_enable_start "$base_path"/modules/dots/gpg/.config/systemd/user/ssh-auth-sock.service
 
 gpg_ssh_agent
 
@@ -523,24 +524,24 @@ pkglist_remove_path="$data_path"/pkgs/remove.txt
 
 echo "Decrypting data"
 declare -a decrypt_data_paths_tuples=(
-  "${data_path}/android/keystores/keystore-rossch.asc.gpg ${base_path}/android/.android/keystores/keystore-rossch"
-  "${data_path}/cura/cura.cfg.asc.gpg ${base_path}/cura/.config/cura/5.11/cura.cfg"
-  "${data_path}/gallery-dl/config.json.asc.gpg ${base_path}/gallery-dl/.config/gallery-dl/config.json"
-  "${data_path}/gtk/bookmarks.asc.gpg ${base_path}/gtk/.config/gtk-3.0/bookmarks"
-  "${data_path}/khal/config.asc.gpg ${base_path}/khal/.config/khal/config"
-  "${data_path}/nextcloud/nextcloud.cfg.asc.gpg ${base_path}/nextcloud/.config/Nextcloud/nextcloud.cfg"
+  "${data_path}/android/keystores/keystore-rossch.asc.gpg ${base_path}/modules/dots/android/.android/keystores/keystore-rossch"
+  "${data_path}/cura/cura.cfg.asc.gpg ${base_path}/modules/dots/cura/.config/cura/5.11/cura.cfg"
+  "${data_path}/gallery-dl/config.json.asc.gpg ${base_path}/modules/dots/gallery-dl/.config/gallery-dl/config.json"
+  "${data_path}/gtk/bookmarks.asc.gpg ${base_path}/modules/dots/gtk/.config/gtk-3.0/bookmarks"
+  "${data_path}/khal/config.asc.gpg ${base_path}/modules/dots/khal/.config/khal/config"
+  "${data_path}/nextcloud/nextcloud.cfg.asc.gpg ${base_path}/modules/dots/nextcloud/.config/Nextcloud/nextcloud.cfg"
   "${data_path}/pkgs/remove.txt.asc.gpg ${pkglist_remove_path}"
-  "${data_path}/prusaslicer/PrusaSlicer.ini.asc.gpg ${base_path}/prusaslicer/.config/PrusaSlicer/PrusaSlicer.ini"
-  "${data_path}/qbittorrent/categories.json.asc ${base_path}/qbittorrent/.config/qBittorrent/categories.json"
-  "${data_path}/qbittorrent/qBittorrent.conf.asc ${base_path}/qbittorrent/.config/qBittorrent/qBittorrent.conf"
-  "${data_path}/radicle/keys/radicle.asc.gpg ${base_path}/radicle/.radicle/keys/radicle"
-  "${data_path}/ssh/config.asc.gpg ${base_path}/ssh/.ssh/config"
+  "${data_path}/prusaslicer/PrusaSlicer.ini.asc.gpg ${base_path}/modules/dots/prusaslicer/.config/PrusaSlicer/PrusaSlicer.ini"
+  "${data_path}/qbittorrent/categories.json.asc ${base_path}/modules/dots/qbittorrent/.config/qBittorrent/categories.json"
+  "${data_path}/qbittorrent/qBittorrent.conf.asc ${base_path}/modules/dots/qbittorrent/.config/qBittorrent/qBittorrent.conf"
+  "${data_path}/radicle/keys/radicle.asc.gpg ${base_path}/modules/dots/radicle/.radicle/keys/radicle"
+  "${data_path}/ssh/config.asc.gpg ${base_path}/modules/dots/ssh/.ssh/config"
   "${data_path}/system/${current_hostname}/boot/loader/entries/arch-cachyos.asc.conf ${base_path}/system/${current_hostname}/boot/loader/entries/arch-cachyos.conf"
   "${data_path}/system/${current_hostname}/boot/loader/entries/arch-zen.asc.conf ${base_path}/system/${current_hostname}/boot/loader/entries/arch-zen.conf"
-  "${data_path}/tidal-hifi/config.json.asc.gpg ${base_path}/tidal-hifi/.config/tidal-hifi/config.json"
-  "${data_path}/vdirsyncer/config.asc.gpg ${base_path}/vdirsyncer/.config/vdirsyncer/config"
-  "${data_path}/waybar/waybar-crypto/config.ini.asc.gpg ${base_path}/waybar/.config/waybar-crypto/config.ini"
-  "${data_path}/xdg/mimeapps.list.asc.gpg ${base_path}/xdg/.config/mimeapps.list"
+  "${data_path}/tidal-hifi/config.json.asc.gpg ${base_path}/modules/dots/tidal-hifi/.config/tidal-hifi/config.json"
+  "${data_path}/vdirsyncer/config.asc.gpg ${base_path}/modules/dots/vdirsyncer/.config/vdirsyncer/config"
+  "${data_path}/waybar/waybar-crypto/config.ini.asc.gpg ${base_path}/modules/dots/waybar/.config/waybar-crypto/config.ini"
+  "${data_path}/xdg/mimeapps.list.asc.gpg ${base_path}/modules/dots/xdg/.config/mimeapps.list"
 )
 for decrypt_data_paths_tuple in "${decrypt_data_paths_tuples[@]}"; do
   read -ra decrypt_data_paths <<<"$decrypt_data_paths_tuple"
@@ -695,7 +696,7 @@ if [[ "$current_hostname" == "$laptop_hostname" ]]; then
   }
 
   declare -a systemd_user_units_laptop=(
-    "$base_path"/scripts/.config/systemd/user/tablet-rotate.service
+    "$base_path"/modules/dots/scripts/.config/systemd/user/tablet-rotate.service
   )
   for systemd_user_unit_laptop in "${systemd_user_units_laptop[@]}"; do
     systemd_user_enable_start "${systemd_user_unit_laptop}"
@@ -749,8 +750,8 @@ elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
   }
 
   declare -a systemd_user_units_desktop=(
-    "$base_path"/liquidctl/.config/systemd/user/liquidctl.service
-    "$base_path"/coolercontrol/.config/systemd/user/coolercontrol.service
+    "$base_path"/modules/dots/liquidctl/.config/systemd/user/liquidctl.service
+    "$base_path"/modules/dots/coolercontrol/.config/systemd/user/coolercontrol.service
   )
   for systemd_user_unit_desktop in "${systemd_user_units_desktop[@]}"; do
     systemd_user_enable_start "${systemd_user_unit_desktop}"
@@ -785,7 +786,7 @@ fi
 echo "Copying themes from git repo to dotfiles locations"
 
 # If Hackneyed Dark build does not exist, then build it
-if [[ ! -d "$base_path"/gtk/.icons/hackneyed-dark ]] || [[ $hackneyed_updated == true ]]; then
+if [[ ! -d "$base_path"/modules/dots/gtk/.icons/hackneyed-dark ]] || [[ $hackneyed_updated == true ]]; then
   echo "Building hackneyed cursor"
 
   cd "$git_submodule_path"/hackneyed-cursor || {
@@ -803,8 +804,8 @@ if [[ ! -d "$base_path"/gtk/.icons/hackneyed-dark ]] || [[ $hackneyed_updated ==
     exit 1
   }
 
-  rmrf "$base_path"/gtk/.icons/hackneyed-dark
-  cp -rv "$git_submodule_path"/hackneyed-cursor/Hackneyed-Dark "$base_path"/gtk/.icons/hackneyed-dark # cp instead of ln because the build dir will get reset by git
+  rmrf "$base_path"/modules/dots/gtk/.icons/hackneyed-dark
+  cp -rv "$git_submodule_path"/hackneyed-cursor/Hackneyed-Dark "$base_path"/modules/dots/gtk/.icons/hackneyed-dark # cp instead of ln because the build dir will get reset by git
 
   make clean || {
     echo "failed to clean hackneyed make files"
@@ -826,22 +827,22 @@ mv "${git_submodule_path}"/catppuccin-bat/themes/Catppuccin\ Mocha.tmTheme "${gi
 }
 
 declare -a symlink_paths_tuples=(
-  "${base_path}/steam/.steam/steam/steam_dev.cfg ${HOME}/.steam/steam/steam_dev.cfg"
-  "${git_submodule_path}/alacritty-theme/themes ${base_path}/alacritty/.config/alacritty/themes"
-  "${git_submodule_path}/candy-icons ${base_path}/gtk/.icons/candy-icons"
-  "${git_submodule_path}/catppuccin-bat/themes/Catppuccin-Mocha.tmTheme ${base_path}/bat/.config/bat/themes/Catppuccin-Mocha.tmTheme"
-  "${git_submodule_path}/catppuccin-btop/themes/catppuccin_mocha.theme ${base_path}/btop/.config/btop/themes/catppuccin_mocha.theme"
-  "${git_submodule_path}/catppuccin-helix/themes/default/catppuccin_mocha.toml ${base_path}/helix/.config/helix/themes/catppuccin_mocha.toml"
-  "${git_submodule_path}/catppuccin-hyprland/themes/catppuccin-mocha.lua ${base_path}/hyprland/.config/hypr/themes/catppuccin-mocha.lua"
-  "${git_submodule_path}/catppuccin-kvantum/themes/catppuccin-mocha-mauve ${base_path}/qt/.config/Kvantum/catppuccin-mocha-mauve"
-  "${git_submodule_path}/catppuccin-waybar/themes/mocha.css ${base_path}/waybar/.config/waybar/theme.css"
-  "${git_submodule_path}/cryptofont/fonts/cryptofont.ttf ${base_path}/fonts/.local/share/fonts/TTF/cryptofont.ttf"
-  "${git_submodule_path}/sweet-theme/assets ${base_path}/gtk/.themes/Sweet/assets"
-  "${git_submodule_path}/sweet-theme/gtk-2.0 ${base_path}/gtk/.themes/Sweet/gtk-2.0"
-  "${git_submodule_path}/sweet-theme/gtk-3.0 ${base_path}/gtk/.themes/Sweet/gtk-3.0"
-  "${git_submodule_path}/sweet-theme/gtk-4.0 ${base_path}/gtk/.themes/Sweet/gtk-4.0"
-  "${git_submodule_path}/sweet-theme/index.theme ${base_path}/gtk/.themes/Sweet/index.theme"
-  "${git_submodule_path}/sweet-theme/kde/Kvantum/Sweet ${base_path}/qt/.config/Kvantum/Sweet"
+  "${base_path}/modules/dots/steam/.steam/steam/steam_dev.cfg ${HOME}/.steam/steam/steam_dev.cfg"
+  "${git_submodule_path}/alacritty-theme/themes ${base_path}/modules/dots/alacritty/.config/alacritty/themes"
+  "${git_submodule_path}/candy-icons ${base_path}/modules/dots/gtk/.icons/candy-icons"
+  "${git_submodule_path}/catppuccin-bat/themes/Catppuccin-Mocha.tmTheme ${base_path}/modules/dots/bat/.config/bat/themes/Catppuccin-Mocha.tmTheme"
+  "${git_submodule_path}/catppuccin-btop/themes/catppuccin_mocha.theme ${base_path}/modules/dots/btop/.config/btop/themes/catppuccin_mocha.theme"
+  "${git_submodule_path}/catppuccin-helix/themes/default/catppuccin_mocha.toml ${base_path}/modules/dots/helix/.config/helix/themes/catppuccin_mocha.toml"
+  "${git_submodule_path}/catppuccin-hyprland/themes/catppuccin-mocha.lua ${base_path}/modules/dots/hyprland/.config/hypr/themes/catppuccin-mocha.lua"
+  "${git_submodule_path}/catppuccin-kvantum/themes/catppuccin-mocha-mauve ${base_path}/modules/dots/qt/.config/Kvantum/catppuccin-mocha-mauve"
+  "${git_submodule_path}/catppuccin-waybar/themes/mocha.css ${base_path}/modules/dots/waybar/.config/waybar/theme.css"
+  "${git_submodule_path}/cryptofont/fonts/cryptofont.ttf ${base_path}/modules/dots/fonts/.local/share/fonts/TTF/cryptofont.ttf"
+  "${git_submodule_path}/sweet-theme/assets ${base_path}/modules/dots/gtk/.themes/Sweet/assets"
+  "${git_submodule_path}/sweet-theme/gtk-2.0 ${base_path}/modules/dots/gtk/.themes/Sweet/gtk-2.0"
+  "${git_submodule_path}/sweet-theme/gtk-3.0 ${base_path}/modules/dots/gtk/.themes/Sweet/gtk-3.0"
+  "${git_submodule_path}/sweet-theme/gtk-4.0 ${base_path}/modules/dots/gtk/.themes/Sweet/gtk-4.0"
+  "${git_submodule_path}/sweet-theme/index.theme ${base_path}/modules/dots/gtk/.themes/Sweet/index.theme"
+  "${git_submodule_path}/sweet-theme/kde/Kvantum/Sweet ${base_path}/modules/dots/qt/.config/Kvantum/Sweet"
 )
 for symlink_paths_tuple in "${symlink_paths_tuples[@]}"; do
   read -ra symlink_paths <<<"$symlink_paths_tuple"
@@ -923,7 +924,6 @@ declare -a stow_dirs_general=(
   qbittorrent
   qt
   radicle
-  ranger
   scripts
   skillshare
   solaar
@@ -979,8 +979,8 @@ systemctl --user daemon-reload || {
 }
 
 declare -a systemd_user_targets=(
-  "$base_path"/sway/.config/systemd/user/sway-session.target
-  "$base_path"/hyprland/.config/systemd/user/hypr-session.target
+  "$base_path"/modules/dots/sway/.config/systemd/user/sway-session.target
+  "$base_path"/modules/dots/hyprland/.config/systemd/user/hypr-session.target
 )
 for systemd_user_target in "${systemd_user_targets[@]}"; do
   systemctl --user link "${systemd_user_target}" || {
@@ -990,21 +990,21 @@ for systemd_user_target in "${systemd_user_targets[@]}"; do
 done
 
 declare -a systemd_user_units=(
-  "$base_path"/awww/.config/systemd/user/awww-daemon.service
-  "$base_path"/awww/.config/systemd/user/awww-random.service
-  "$base_path"/clipse/.config/systemd/user/clipse.service
-  "$base_path"/gtk/.config/systemd/user/xsettingsd.service
-  "$base_path"/hyprland/.config/systemd/user/hypr-sunsetr.service
-  "$base_path"/hyprland/.config/systemd/user/hypridle.service
-  "$base_path"/kanshi/.config/systemd/user/kanshi.service
-  "$base_path"/nextcloud/.config/systemd/user/nextcloud-client.service
-  "$base_path"/sway/.config/systemd/user/swayidle.service
-  "$base_path"/swayosd/.config/systemd/user/swayosd.service
-  "$base_path"/systemd/.config/systemd/user/enable-linger.service
-  "$base_path"/systemd/.config/systemd/user/wlr-sunclock.service
-  "$base_path"/vdirsyncer/.config/systemd/user/vdirsyncer-sync.service
-  "$base_path"/vdirsyncer/.config/systemd/user/vdirsyncer-sync.timer
-  "$base_path"/waybar/.config/systemd/user/setup-temps.service
+  "$base_path"/modules/dots/awww/.config/systemd/user/awww-daemon.service
+  "$base_path"/modules/dots/awww/.config/systemd/user/awww-random.service
+  "$base_path"/modules/dots/clipse/.config/systemd/user/clipse.service
+  "$base_path"/modules/dots/gtk/.config/systemd/user/xsettingsd.service
+  "$base_path"/modules/dots/hyprland/.config/systemd/user/hypr-sunsetr.service
+  "$base_path"/modules/dots/hyprland/.config/systemd/user/hypridle.service
+  "$base_path"/modules/dots/kanshi/.config/systemd/user/kanshi.service
+  "$base_path"/modules/dots/nextcloud/.config/systemd/user/nextcloud-client.service
+  "$base_path"/modules/dots/sway/.config/systemd/user/swayidle.service
+  "$base_path"/modules/dots/swayosd/.config/systemd/user/swayosd.service
+  "$base_path"/modules/dots/systemd/.config/systemd/user/enable-linger.service
+  "$base_path"/modules/dots/systemd/.config/systemd/user/wlr-sunclock.service
+  "$base_path"/modules/dots/vdirsyncer/.config/systemd/user/vdirsyncer-sync.service
+  "$base_path"/modules/dots/vdirsyncer/.config/systemd/user/vdirsyncer-sync.timer
+  "$base_path"/modules/dots/waybar/.config/systemd/user/setup-temps.service
   /usr/lib/systemd/user/app-com.mitchellh.ghostty.service
   /usr/lib/systemd/user/gnome-keyring-daemon.socket
   /usr/lib/systemd/user/pipewire-pulse.service
@@ -1012,11 +1012,11 @@ declare -a systemd_user_units=(
   /usr/lib/systemd/user/swaync.service
   /usr/lib/systemd/user/wireplumber.service
   /usr/lib/systemd/user/yubikey-touch-detector.socket
-  # "$base_path"/dunst/.config/systemd/user/dunst-wl.service
-  # "$base_path"/espanso/.config/systemd/user/espanso.service
-  # "$base_path"/gammastep/.config/systemd/user/gammastep-wayland.service
-  # "$base_path"/gammastep/.config/systemd/user/geoclue-agent.service
-  # "$base_path"/solaar/.config/systemd/user/solaar.service
+  # "$base_path"/modules/dots/dunst/.config/systemd/user/dunst-wl.service
+  # "$base_path"/modules/dots/espanso/.config/systemd/user/espanso.service
+  # "$base_path"/modules/dots/gammastep/.config/systemd/user/gammastep-wayland.service
+  # "$base_path"/modules/dots/gammastep/.config/systemd/user/geoclue-agent.service
+  # "$base_path"/modules/dots/solaar/.config/systemd/user/solaar.service
   # /usr/lib/systemd/user/batsignal.service
   # /usr/lib/systemd/user/gpu-screen-recorder-ui.service
 )
@@ -1058,7 +1058,7 @@ declare -a docker_mcp_profiles=(
 )
 
 for docker_mcp_profile in "${docker_mcp_profiles[@]}"; do
-  docker mcp profile import "${base_path}/docker/.docker/mcp/profiles/${docker_mcp_profile}.yaml" || {
+  docker mcp profile import "${base_path}/modules/dots/docker/.docker/mcp/profiles/${docker_mcp_profile}.yaml" || {
     echo "failed to import mcp profile ${docker_mcp_profile}"
     exit 1
   }
