@@ -892,8 +892,6 @@ declare -a stow_dirs_general=(
   gammastep
   ghostty
   goose
-  swappy
-  satty
   gpu-screen-recorder
   gtk
   helix
@@ -910,6 +908,7 @@ declare -a stow_dirs_general=(
   mako
   mangohud
   mcp
+  mise
   mpv
   networkmanager
   nextcloud
@@ -924,11 +923,13 @@ declare -a stow_dirs_general=(
   qt
   radicle
   ranger
+  satty
   scripts
   skillshare
   solaar
   starship
   steam
+  swappy
   sway
   swaync
   swayosd

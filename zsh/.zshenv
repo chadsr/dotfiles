@@ -109,6 +109,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   ################
   #    Other     #
   ################
+  export PATH="$HOME/.local/share/mise/shims:$PATH"
   export PATH="/opt/brother/scanner/brscan5:$PATH"
   export PATH="$HOME/.local/bin:$PATH"
   export AMDGPU_TARGETS="gfx1030"

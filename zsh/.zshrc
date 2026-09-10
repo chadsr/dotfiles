@@ -131,10 +131,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   gpg --card-status >/dev/null
 fi
 
-if [[ $(command -v fnm) ]]; then
-  eval "$(fnm env --use-on-cd --shell zsh)"
-else
-  echo "fnm not installed!"
+if [[ $(command -v mise) ]]; then
+  eval "$(mise activate zsh)"
 fi
 
 # zprof
