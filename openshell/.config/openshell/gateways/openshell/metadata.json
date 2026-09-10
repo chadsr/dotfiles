@@ -1,0 +1,7 @@
+{
+  "auth_mode": "mtls",
+  "gateway_endpoint": "https://127.0.0.1:17670",
+  "gateway_port": 0,
+  "is_remote": false,
+  "name": "openshell"
+}

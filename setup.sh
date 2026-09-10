@@ -915,6 +915,7 @@ declare -a stow_dirs_general=(
   nvim
   nvm
   opencode
+  openshell
   openspec
   pass
   pipewire
