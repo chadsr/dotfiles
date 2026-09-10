@@ -93,50 +93,50 @@ tooltip label {
   background: @section-one;
 }
 
-#custom-left-spacer-workspaces,
-#custom-right-spacer-workspaces {
+#custom-left-spacer-workspaces > label,
+#custom-right-spacer-workspaces > label {
   font-size: 20px;
   padding: 0;
 }
 
-#custom-right-spacer-workspaces {
+#custom-right-spacer-workspaces > label {
   color: @section-one;
   background: @section-two;
 }
 
-#custom-right-spacer-tray {
+#custom-right-spacer-tray > label {
   font-size: 20px;
   padding: 0;
   color: @section-two;
 }
 
-#custom-left-spacer-audio {
+#custom-left-spacer-audio > label {
   font-size: 20px;
   color: @section-three;
   padding: 0;
 }
 
-#custom-left-spacer-organisation {
+#custom-left-spacer-organisation > label {
   font-size: 20px;
   color: @section-two;
   padding: 0;
 }
 
-#custom-right-spacer-organisation {
+#custom-right-spacer-organisation > label {
   font-size: 20px;
   color: @section-two;
   background: @section-three;
   padding: 0;
 }
 
-#custom-right-spacer-hardware {
+#custom-right-spacer-hardware > label {
   font-size: 20px;
   padding: 0;
   color: @section-three;
   background: @section-four;
 }
 
-#custom-right-spacer-information {
+#custom-right-spacer-information > label {
   color: @section-three;
   padding: 0;
   font-size: 20px;
@@ -181,7 +181,7 @@ tooltip label {
   background: @section-two;
 }
 
-#custom-yubikey {
+#custom-yubikey > label {
   font-size: 20px;
   animation: urgent-animation 0.5s steps(10) infinite;
 }
@@ -192,7 +192,7 @@ tooltip label {
   background: @section-three;
 }
 
-#custom-crypto {
+#custom-crypto > label {
   font-family: cryptofont, monospace;
 }
 
