@@ -38,31 +38,14 @@
       "type": "local"
     }
   },
-  "model": "zai-coding-plan/glm-5.2",
+  "model": "zai-coding-plan/glm-5.3",
   "plugin": [],
   "provider": {
     "zai-coding-plan": {
       "models": {
-        "glm-5.2": {
-          "interleaved": {
-            "field": "reasoning_content"
-          },
+        "glm-5.3": {
           "options": {
-            "reasoningEffort": "max",
-            "thinking": {
-              "clear_thinking": false,
-              "type": "enabled"
-            }
-          },
-          "reasoning": true,
-          "temperature": true,
-          "variants": {
-            "high": {
-              "reasoningEffort": "high"
-            },
-            "max": {
-              "reasoningEffort": "max"
-            }
+            "reasoningEffort": "max"
           }
         }
       }
