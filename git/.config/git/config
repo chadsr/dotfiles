@@ -171,7 +171,7 @@
     fea = fetch --all --prune
 
     # Fold staged changes into a commit: git fixup [hash] (default HEAD).
-    fixup = "!f() { t=${1:-HEAD}; git rev-parse --verify \"$t^{commit}\" >/dev/null 2>&1 || { echo \"error: $t is not a valid commit\" >&2; exit 1; }; git rev-parse --verify \"$t^\" >/dev/null 2>&1 || { echo \"error: $t is the root commit, cannot fix up\" >&2; exit 1; }; b=$(git rev-parse \"$t^\"); echo \"Fixing up: $(git log -1 --format='%h %s' \"$t\")\"; git commit --fixup=$t && GIT_SEQUENCE_EDITOR=: git rebase -i --autosquash $b; }; f"
+    fixup = "!f() { t=${1:-HEAD}; git rev-parse --verify \"$t^{commit}\" >/dev/null 2>&1 || { echo \"error: $t is not a valid commit\" >&2; exit 1; }; git rev-parse --verify \"$t^\" >/dev/null 2>&1 || { echo \"error: $t is the root commit, cannot fix up\" >&2; exit 1; }; b=$(git rev-parse \"$t^\"); echo \"Fixing up: $(git log -1 --format='%h %s' \"$t\")\"; git commit -S --fixup=$t && GIT_SEQUENCE_EDITOR=: git -c commit.gpgsign=true rebase -i --autosquash $b; }; f"
 
     # List every configured alias.
     la = "!git config -l | grep alias | cut -c 7-"
