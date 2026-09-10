@@ -114,7 +114,6 @@
     "*.list": "properties",
     "*.rules": "javascript",
     "*.unit": "systemd-conf",
-    ".base.floracle.yaml": "esphome",
     ".gitmodules": "gitconfig",
     "config": "properties"
   },
@@ -133,6 +132,7 @@
     "https://charm.land/crush.json": true,
     "https://developer.microsoft.com/json-schemas/": true,
     "https://docs.renovatebot.com/renovate-schema.json": true,
+    "https://inlang.com/schema/project-settings": true,
     "https://json-schema.org/": true,
     "https://json.schemastore.org/": true,
     "https://models.dev/model-schema.json": true,
