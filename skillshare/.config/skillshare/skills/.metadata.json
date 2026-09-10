@@ -2,75 +2,97 @@
   "entries": {
     "openspec-apply-change": {
       "file_hashes": {
-        "SKILL.md": "sha256:a34c1fb93540f6d7ee57277a5652ecdfd76c04d03404889d30c95761fe659cf6"
+        "SKILL.md": "sha256:0cf1cb26935b55d83e240631500c8cee484a7b241c84a705387c0eeb88676ccf"
       },
-      "installed_at": "2026-07-26T14:42:44.029724213+02:00",
+      "installed_at": "2026-09-10T14:21:37.236020228+02:00",
       "repo_url": "https://github.com/Fission-AI/OpenSpec.git",
       "source": "https://github.com/Fission-AI/OpenSpec.git/skills/openspec-apply-change",
       "subdir": "skills/openspec-apply-change",
-      "tree_hash": "d1bb05627e5bb8c70c53a3fd8d7291e6626ad8c3",
+      "tree_hash": "12fc4ed61fc486a8a85bc96d7d6c9efd9fecbdbd",
       "type": "github-subdir",
-      "version": "19d4171"
+      "version": "9d4e597"
     },
     "openspec-archive-change": {
       "file_hashes": {
-        "SKILL.md": "sha256:f5613f5424c9c31a913af7010c62d8b7bad2c4828fae030584626bda97de7c0f"
+        "SKILL.md": "sha256:3ad0def4d299469fdfd5b05e4842284d65558e6b28710b5962f7f214d6153855"
       },
-      "installed_at": "2026-07-26T14:42:44.03752734+02:00",
+      "installed_at": "2026-09-10T14:21:37.246270859+02:00",
       "repo_url": "https://github.com/Fission-AI/OpenSpec.git",
       "source": "https://github.com/Fission-AI/OpenSpec.git/skills/openspec-archive-change",
       "subdir": "skills/openspec-archive-change",
-      "tree_hash": "934f1d85a5b907e0975f5e32ac1f84bd23a1fe6f",
+      "tree_hash": "8b2c9578cca3f76b5dcc17088b676d96f4343aa3",
       "type": "github-subdir",
-      "version": "19d4171"
+      "version": "9d4e597"
     },
     "openspec-explore": {
       "file_hashes": {
-        "SKILL.md": "sha256:fa89dda1125ff19b138f7e36dc5d1d3ba07bbe03ffa52e17d3d8ddcbd98c0272"
+        "SKILL.md": "sha256:7c067bebac7045752437e78a0cc4f0ba46b21648e97acc5229ac44a245e8c0c7"
       },
-      "installed_at": "2026-07-26T14:42:44.048737946+02:00",
+      "installed_at": "2026-09-10T14:21:37.262130664+02:00",
       "repo_url": "https://github.com/Fission-AI/OpenSpec.git",
       "source": "https://github.com/Fission-AI/OpenSpec.git/skills/openspec-explore",
       "subdir": "skills/openspec-explore",
-      "tree_hash": "b44a87af67cdd73d67d6d23e5cc16c57e094feab",
+      "tree_hash": "d4579ec10b7c904634b59676baa05aae7390bda9",
       "type": "github-subdir",
-      "version": "19d4171"
+      "version": "9d4e597"
     },
     "openspec-propose": {
       "file_hashes": {
-        "SKILL.md": "sha256:a0aafe18fe4ce553c80a587d112cbf51a116ecd4dba52783e88f0ae8b09acd49"
+        "SKILL.md": "sha256:af5f5e5ebd0c8af4ee4498e1f7a3e196395030507e51adb52393e181f73a5c89"
       },
-      "installed_at": "2026-07-26T14:42:44.056501647+02:00",
+      "installed_at": "2026-09-10T14:21:37.273441567+02:00",
       "repo_url": "https://github.com/Fission-AI/OpenSpec.git",
       "source": "https://github.com/Fission-AI/OpenSpec.git/skills/openspec-propose",
       "subdir": "skills/openspec-propose",
-      "tree_hash": "56605d2c1abe0111a55b24deae13bd2d1235f646",
+      "tree_hash": "8c418c14aee82ec7495de6d2b6dc9b5ffd95529b",
       "type": "github-subdir",
-      "version": "19d4171"
+      "version": "9d4e597"
     },
     "openspec-sync-specs": {
       "file_hashes": {
-        "SKILL.md": "sha256:270cdc861cd37da20b1721d5da390afffaa5c499e0b3c8312d03c7b16dcde57e"
+        "SKILL.md": "sha256:daf0e52b188a3010e1f494427eb6807fb61a68df653403759b2be54a3aa37e74"
       },
-      "installed_at": "2026-07-26T14:42:44.064660789+02:00",
+      "installed_at": "2026-09-10T14:21:37.285183077+02:00",
       "repo_url": "https://github.com/Fission-AI/OpenSpec.git",
       "source": "https://github.com/Fission-AI/OpenSpec.git/skills/openspec-sync-specs",
       "subdir": "skills/openspec-sync-specs",
-      "tree_hash": "77e4033b6d2d6301f45ece23ad6e71cb39d730ea",
+      "tree_hash": "04985999acb91f7a8bb9db4a3f81d1040ee04ff0",
       "type": "github-subdir",
-      "version": "19d4171"
+      "version": "9d4e597"
     },
     "openspec-update-change": {
       "file_hashes": {
-        "SKILL.md": "sha256:4a7447d9d334bbd11f4e75d0a4f3d086deec0605acbb07907faf2905e295b060"
+        "SKILL.md": "sha256:f9e08302d75e873e9ca801211e6151e3f9b663ac6205903e7d79b6520cea30f5"
       },
-      "installed_at": "2026-07-26T14:42:44.072020884+02:00",
+      "installed_at": "2026-09-10T14:21:37.292136162+02:00",
       "repo_url": "https://github.com/Fission-AI/OpenSpec.git",
       "source": "https://github.com/Fission-AI/OpenSpec.git/skills/openspec-update-change",
       "subdir": "skills/openspec-update-change",
-      "tree_hash": "1ae9c881c0b3ae9b2436265215c03e6b90a2bfbb",
+      "tree_hash": "00bb6186890d8aeb5030037aefad5cad9f991183",
       "type": "github-subdir",
-      "version": "19d4171"
+      "version": "9d4e597"
+    },
+    "shadcn-svelte": {
+      "file_hashes": {
+        "SKILL.md": "sha256:7f56b359c4ea8d82dffbe5845d37bdfa147d0d0bcc8002ca8a65494ef9f87d70",
+        "agents/openai.yml": "sha256:031e9e3bdb879262a05e806b8f65eb6357144520fcbb82bf5d0ed3158e7833c8",
+        "assets/shadcn-svelte-small.png": "sha256:ab571a7acd192a769531b5ea5e2105f40128b52e90fbdeb31e712d5fd18f6350",
+        "assets/shadcn-svelte.png": "sha256:256a06954d29e566b01695f0fa3574c0a6d69991098e756d8cc0704ee376ce3f",
+        "cli.md": "sha256:31957b96f85f388c9fa87aa1ad139e8ab79d775f37eb73c479a2fbc969be00a0",
+        "customization.md": "sha256:8b9a4726468cd3352028eabacac718753f3aa281479a25a7d4c04f30f75d6c60",
+        "evals/evals.json": "sha256:f3c29b8f34044f51e0d42d8711c418bb1cb17bf02e4f09d6d761f610b6553fe7",
+        "rules/composition.md": "sha256:e14fe6271369db30706b859a3de6805eeba2c14d41920508633d2f7dcea93bd0",
+        "rules/forms.md": "sha256:614363e74742e97acb775c8030d738635da230f8ccd8c5fa1d12171e68bfd318",
+        "rules/icons.md": "sha256:cd291c6bf9b916b0e5d625eaf2ee1699e1dda4bbf7802a2c07ef18182a04d848",
+        "rules/styling.md": "sha256:62d661d54f36f0188a123a7f0dd30ea20c37f6ca2843404f3eaa0ba1ac77f575"
+      },
+      "installed_at": "2026-09-10T14:21:45.47827205+02:00",
+      "repo_url": "https://github.com/huntabyte/shadcn-svelte.git",
+      "source": "https://github.com/huntabyte/shadcn-svelte.git/skills/shadcn-svelte",
+      "subdir": "skills/shadcn-svelte",
+      "tree_hash": "4b450ce92bd2b2e4e19f0f1928c5eb6da3d53dce",
+      "type": "github-subdir",
+      "version": "bc3c203"
     }
   },
   "version": 1
