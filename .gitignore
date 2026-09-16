@@ -98,7 +98,7 @@ zed/.local/share/zed/*
 !hyprland/.config/hypr/themes/theme.lua
 !khal/.config/khal/.gitkeep
 !opencode/.config/opencode/opencode.json
-!opencode/.config/opencode/tui.json
+!opencode/.config/opencode/cli.json
 !openspec/.local/share/openspec/shared/.gitkeep
 !pass/.password-store/.gpg-id
 !pass/.password-store/*.gpg
