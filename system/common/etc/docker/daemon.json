@@ -1,6 +1,7 @@
 {
   "firewall-backend": "nftables",
   "nri-opts": {
-    "enable": true
+    "enable": true,
+    "plugin-path": "/usr/lib/docker/nri-plugins"
   }
 }
