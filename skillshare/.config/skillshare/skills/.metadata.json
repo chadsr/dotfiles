@@ -1,10 +1,37 @@
 {
   "entries": {
+    "agents-md": {
+      "file_hashes": {
+        "SKILL.md": "sha256:8a91ada35068f43ef7ee03e38937863bac4f407878b06f0a4f1ddb4af24bec7e",
+        "SOURCES.md": "sha256:14ac842801b7bc938dfbb9efee072fc4e9ab43b456e40f3235fee503544a0721",
+        "SPEC.md": "sha256:4f8cff992ca96fa4d369227051cd3f5aa8b34974c81bf814aa3a1cf18541e74a"
+      },
+      "installed_at": "2026-09-15T23:50:09.187030198+02:00",
+      "repo_url": "https://github.com/getsentry/skills.git",
+      "source": "https://github.com/getsentry/skills.git/skills/agents-md",
+      "subdir": "skills/agents-md",
+      "tree_hash": "79bf72b1b141202a03f515b4a133f4845cf8d9e6",
+      "type": "github-subdir",
+      "version": "c2f99a5"
+    },
+    "grilling": {
+      "file_hashes": {
+        "SKILL.md": "sha256:10ff989e7498b23b5acb49d5048f11dcd906757d2f79c5cdf8a00001381296f2",
+        "agents/openai.yaml": "sha256:1411d7df7d99b7e621a1ff8283c8133cc2464be63d064e52d8ce169c6800ee9b"
+      },
+      "installed_at": "2026-09-15T23:50:09.903101313+02:00",
+      "repo_url": "https://github.com/mattpocock/skills.git",
+      "source": "https://github.com/mattpocock/skills.git/skills/productivity/grilling",
+      "subdir": "skills/productivity/grilling",
+      "tree_hash": "f0732035b8b1b60ae39454e4191caef32fa91903",
+      "type": "github-subdir",
+      "version": "959a8e9"
+    },
     "openspec-apply-change": {
       "file_hashes": {
         "SKILL.md": "sha256:0cf1cb26935b55d83e240631500c8cee484a7b241c84a705387c0eeb88676ccf"
       },
-      "installed_at": "2026-09-10T14:21:37.236020228+02:00",
+      "installed_at": "2026-09-15T23:50:11.086557303+02:00",
       "repo_url": "https://github.com/Fission-AI/OpenSpec.git",
       "source": "https://github.com/Fission-AI/OpenSpec.git/skills/openspec-apply-change",
       "subdir": "skills/openspec-apply-change",
@@ -16,7 +43,7 @@
       "file_hashes": {
         "SKILL.md": "sha256:3ad0def4d299469fdfd5b05e4842284d65558e6b28710b5962f7f214d6153855"
       },
-      "installed_at": "2026-09-10T14:21:37.246270859+02:00",
+      "installed_at": "2026-09-15T23:50:11.096200914+02:00",
       "repo_url": "https://github.com/Fission-AI/OpenSpec.git",
       "source": "https://github.com/Fission-AI/OpenSpec.git/skills/openspec-archive-change",
       "subdir": "skills/openspec-archive-change",
@@ -28,7 +55,7 @@
       "file_hashes": {
         "SKILL.md": "sha256:7c067bebac7045752437e78a0cc4f0ba46b21648e97acc5229ac44a245e8c0c7"
       },
-      "installed_at": "2026-09-10T14:21:37.262130664+02:00",
+      "installed_at": "2026-09-15T23:50:11.112212626+02:00",
       "repo_url": "https://github.com/Fission-AI/OpenSpec.git",
       "source": "https://github.com/Fission-AI/OpenSpec.git/skills/openspec-explore",
       "subdir": "skills/openspec-explore",
@@ -40,7 +67,7 @@
       "file_hashes": {
         "SKILL.md": "sha256:af5f5e5ebd0c8af4ee4498e1f7a3e196395030507e51adb52393e181f73a5c89"
       },
-      "installed_at": "2026-09-10T14:21:37.273441567+02:00",
+      "installed_at": "2026-09-15T23:50:11.056481208+02:00",
       "repo_url": "https://github.com/Fission-AI/OpenSpec.git",
       "source": "https://github.com/Fission-AI/OpenSpec.git/skills/openspec-propose",
       "subdir": "skills/openspec-propose",
@@ -52,7 +79,7 @@
       "file_hashes": {
         "SKILL.md": "sha256:daf0e52b188a3010e1f494427eb6807fb61a68df653403759b2be54a3aa37e74"
       },
-      "installed_at": "2026-09-10T14:21:37.285183077+02:00",
+      "installed_at": "2026-09-15T23:50:11.069928977+02:00",
       "repo_url": "https://github.com/Fission-AI/OpenSpec.git",
       "source": "https://github.com/Fission-AI/OpenSpec.git/skills/openspec-sync-specs",
       "subdir": "skills/openspec-sync-specs",
@@ -64,7 +91,7 @@
       "file_hashes": {
         "SKILL.md": "sha256:f9e08302d75e873e9ca801211e6151e3f9b663ac6205903e7d79b6520cea30f5"
       },
-      "installed_at": "2026-09-10T14:21:37.292136162+02:00",
+      "installed_at": "2026-09-15T23:50:11.078262582+02:00",
       "repo_url": "https://github.com/Fission-AI/OpenSpec.git",
       "source": "https://github.com/Fission-AI/OpenSpec.git/skills/openspec-update-change",
       "subdir": "skills/openspec-update-change",
@@ -86,13 +113,28 @@
         "rules/icons.md": "sha256:cd291c6bf9b916b0e5d625eaf2ee1699e1dda4bbf7802a2c07ef18182a04d848",
         "rules/styling.md": "sha256:62d661d54f36f0188a123a7f0dd30ea20c37f6ca2843404f3eaa0ba1ac77f575"
       },
-      "installed_at": "2026-09-10T14:21:45.47827205+02:00",
+      "installed_at": "2026-09-15T23:50:08.21650735+02:00",
       "repo_url": "https://github.com/huntabyte/shadcn-svelte.git",
       "source": "https://github.com/huntabyte/shadcn-svelte.git/skills/shadcn-svelte",
       "subdir": "skills/shadcn-svelte",
       "tree_hash": "4b450ce92bd2b2e4e19f0f1928c5eb6da3d53dce",
       "type": "github-subdir",
-      "version": "bc3c203"
+      "version": "7f5289a"
+    },
+    "tdd": {
+      "file_hashes": {
+        "SKILL.md": "sha256:cb01f66bebfaa25fa1f88e6b7e769cd9fd9f35b1120b8563749820738814c927",
+        "agents/openai.yaml": "sha256:ea6f01cf1b8c06a4b0f5b649d74b1b8ce8685e72af1b38d70d877693e092af0b",
+        "mocking.md": "sha256:3ceb807fdf4a47d6a93d4d9a891e5ba6d362a6247bd08adc451feebfc17361ef",
+        "tests.md": "sha256:859f9e592c188fda4fc7277dd180e4ce9c7a2e13f6efe1f6f29eccc9d28c106a"
+      },
+      "installed_at": "2026-09-15T23:50:09.898551958+02:00",
+      "repo_url": "https://github.com/mattpocock/skills.git",
+      "source": "https://github.com/mattpocock/skills.git/skills/engineering/tdd",
+      "subdir": "skills/engineering/tdd",
+      "tree_hash": "79288be15c67b849f22b6572056601090fd20913",
+      "type": "github-subdir",
+      "version": "959a8e9"
     }
   },
   "version": 1
