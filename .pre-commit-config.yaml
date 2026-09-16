@@ -29,7 +29,7 @@ repos:
         types: [toml]
         additional_dependencies: [taplo]
   - repo: https://github.com/scop/pre-commit-shfmt
-    rev: v3.13.1-1
+    rev: v3.14.1-1
     hooks:
       - id: shfmt
   - repo: https://github.com/JohnnyMorganz/StyLua
