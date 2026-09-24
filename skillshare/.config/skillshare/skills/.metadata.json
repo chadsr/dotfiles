@@ -1,12 +1,13 @@
 {
   "entries": {
     "agents-md": {
+      "commit": "c2f99a5b04b4cd992ec3022d7c2c3e23e938d241",
       "file_hashes": {
         "SKILL.md": "sha256:8a91ada35068f43ef7ee03e38937863bac4f407878b06f0a4f1ddb4af24bec7e",
         "SOURCES.md": "sha256:14ac842801b7bc938dfbb9efee072fc4e9ab43b456e40f3235fee503544a0721",
         "SPEC.md": "sha256:4f8cff992ca96fa4d369227051cd3f5aa8b34974c81bf814aa3a1cf18541e74a"
       },
-      "installed_at": "2026-09-15T23:50:09.187030198+02:00",
+      "installed_at": "2026-09-24T11:09:59.047102426+02:00",
       "repo_url": "https://github.com/getsentry/skills.git",
       "source": "https://github.com/getsentry/skills.git/skills/agents-md",
       "subdir": "skills/agents-md",
@@ -15,91 +16,99 @@
       "version": "c2f99a5"
     },
     "grilling": {
+      "commit": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
       "file_hashes": {
         "SKILL.md": "sha256:10ff989e7498b23b5acb49d5048f11dcd906757d2f79c5cdf8a00001381296f2",
         "agents/openai.yaml": "sha256:1411d7df7d99b7e621a1ff8283c8133cc2464be63d064e52d8ce169c6800ee9b"
       },
-      "installed_at": "2026-09-15T23:50:09.903101313+02:00",
+      "installed_at": "2026-09-24T11:10:00.572783764+02:00",
       "repo_url": "https://github.com/mattpocock/skills.git",
       "source": "https://github.com/mattpocock/skills.git/skills/productivity/grilling",
       "subdir": "skills/productivity/grilling",
       "tree_hash": "f0732035b8b1b60ae39454e4191caef32fa91903",
       "type": "github-subdir",
-      "version": "959a8e9"
+      "version": "c55ee46"
     },
     "openspec-apply-change": {
+      "commit": "db2309783547a14e150dbcbfc19120e4028446c3",
       "file_hashes": {
-        "SKILL.md": "sha256:0cf1cb26935b55d83e240631500c8cee484a7b241c84a705387c0eeb88676ccf"
+        "SKILL.md": "sha256:c351bf794235d1f3fce5d81ec5b7775bc7ab5c1bb0603cc2f9b0a9be27a0dce7"
       },
-      "installed_at": "2026-09-15T23:50:11.086557303+02:00",
+      "installed_at": "2026-09-24T11:10:06.166105228+02:00",
       "repo_url": "https://github.com/Fission-AI/OpenSpec.git",
       "source": "https://github.com/Fission-AI/OpenSpec.git/skills/openspec-apply-change",
       "subdir": "skills/openspec-apply-change",
-      "tree_hash": "12fc4ed61fc486a8a85bc96d7d6c9efd9fecbdbd",
+      "tree_hash": "23526ac2061f7d11a1896a0bb21ff182a07bc4ba",
       "type": "github-subdir",
-      "version": "9d4e597"
+      "version": "db23097"
     },
     "openspec-archive-change": {
+      "commit": "db2309783547a14e150dbcbfc19120e4028446c3",
       "file_hashes": {
-        "SKILL.md": "sha256:3ad0def4d299469fdfd5b05e4842284d65558e6b28710b5962f7f214d6153855"
+        "SKILL.md": "sha256:e3b33c3de894061e5060ac672b868fd2ff3902d1c00680ab3f6fea0d46bdefb7"
       },
-      "installed_at": "2026-09-15T23:50:11.096200914+02:00",
+      "installed_at": "2026-09-24T11:10:06.179555943+02:00",
       "repo_url": "https://github.com/Fission-AI/OpenSpec.git",
       "source": "https://github.com/Fission-AI/OpenSpec.git/skills/openspec-archive-change",
       "subdir": "skills/openspec-archive-change",
-      "tree_hash": "8b2c9578cca3f76b5dcc17088b676d96f4343aa3",
+      "tree_hash": "727bc3a064979ede518fe1ff4e6e23e467a134e6",
       "type": "github-subdir",
-      "version": "9d4e597"
+      "version": "db23097"
     },
     "openspec-explore": {
+      "commit": "db2309783547a14e150dbcbfc19120e4028446c3",
       "file_hashes": {
-        "SKILL.md": "sha256:7c067bebac7045752437e78a0cc4f0ba46b21648e97acc5229ac44a245e8c0c7"
+        "SKILL.md": "sha256:5bc03c568d0348c61b37f0647167252db5be1775ff5742ca9760b4e03ab9a5ac"
       },
-      "installed_at": "2026-09-15T23:50:11.112212626+02:00",
+      "installed_at": "2026-09-24T11:10:06.198630359+02:00",
       "repo_url": "https://github.com/Fission-AI/OpenSpec.git",
       "source": "https://github.com/Fission-AI/OpenSpec.git/skills/openspec-explore",
       "subdir": "skills/openspec-explore",
-      "tree_hash": "d4579ec10b7c904634b59676baa05aae7390bda9",
+      "tree_hash": "e0f35038ade89dd17e3c2ee893c19ec482520022",
       "type": "github-subdir",
-      "version": "9d4e597"
+      "version": "db23097"
     },
     "openspec-propose": {
+      "commit": "db2309783547a14e150dbcbfc19120e4028446c3",
       "file_hashes": {
-        "SKILL.md": "sha256:af5f5e5ebd0c8af4ee4498e1f7a3e196395030507e51adb52393e181f73a5c89"
+        "SKILL.md": "sha256:7848351e7c513a25c32315b466b224ed228ceb43c75b914c145702aa9957ff0b"
       },
-      "installed_at": "2026-09-15T23:50:11.056481208+02:00",
+      "installed_at": "2026-09-24T11:10:06.212829786+02:00",
       "repo_url": "https://github.com/Fission-AI/OpenSpec.git",
       "source": "https://github.com/Fission-AI/OpenSpec.git/skills/openspec-propose",
       "subdir": "skills/openspec-propose",
-      "tree_hash": "8c418c14aee82ec7495de6d2b6dc9b5ffd95529b",
+      "tree_hash": "c0565ab613a5191113fd6e296fa23ba954c19634",
       "type": "github-subdir",
-      "version": "9d4e597"
+      "version": "db23097"
     },
     "openspec-sync-specs": {
+      "commit": "db2309783547a14e150dbcbfc19120e4028446c3",
       "file_hashes": {
-        "SKILL.md": "sha256:daf0e52b188a3010e1f494427eb6807fb61a68df653403759b2be54a3aa37e74"
+        "SKILL.md": "sha256:474952afb40497c5cb756e5654ddc901619de6b3bd57aaa03fb11d2611a99da3"
       },
-      "installed_at": "2026-09-15T23:50:11.069928977+02:00",
+      "installed_at": "2026-09-24T11:10:06.226763672+02:00",
       "repo_url": "https://github.com/Fission-AI/OpenSpec.git",
       "source": "https://github.com/Fission-AI/OpenSpec.git/skills/openspec-sync-specs",
       "subdir": "skills/openspec-sync-specs",
-      "tree_hash": "04985999acb91f7a8bb9db4a3f81d1040ee04ff0",
+      "tree_hash": "4632c00cd2915a3b8ceea483a434fe65800ef7ac",
       "type": "github-subdir",
-      "version": "9d4e597"
+      "version": "db23097"
     },
     "openspec-update-change": {
+      "commit": "db2309783547a14e150dbcbfc19120e4028446c3",
       "file_hashes": {
-        "SKILL.md": "sha256:f9e08302d75e873e9ca801211e6151e3f9b663ac6205903e7d79b6520cea30f5"
+        "SKILL.md": "sha256:819f15652d398877045a8dd103b117df0d802e91225c88edfe0627dbcdb27bf6"
       },
-      "installed_at": "2026-09-15T23:50:11.078262582+02:00",
+      "installed_at": "2026-09-24T11:10:06.155895393+02:00",
       "repo_url": "https://github.com/Fission-AI/OpenSpec.git",
       "source": "https://github.com/Fission-AI/OpenSpec.git/skills/openspec-update-change",
       "subdir": "skills/openspec-update-change",
-      "tree_hash": "00bb6186890d8aeb5030037aefad5cad9f991183",
+      "tree_hash": "ed16d9dca57e7fd0e3b0c62a41505575d9bba294",
       "type": "github-subdir",
-      "version": "9d4e597"
+      "version": "db23097"
     },
     "shadcn-svelte": {
+      "commit": "9ebdb0bbc0276745c092a86882e2179203be317e",
       "file_hashes": {
         "SKILL.md": "sha256:7f56b359c4ea8d82dffbe5845d37bdfa147d0d0bcc8002ca8a65494ef9f87d70",
         "agents/openai.yml": "sha256:031e9e3bdb879262a05e806b8f65eb6357144520fcbb82bf5d0ed3158e7833c8",
@@ -113,28 +122,29 @@
         "rules/icons.md": "sha256:cd291c6bf9b916b0e5d625eaf2ee1699e1dda4bbf7802a2c07ef18182a04d848",
         "rules/styling.md": "sha256:62d661d54f36f0188a123a7f0dd30ea20c37f6ca2843404f3eaa0ba1ac77f575"
       },
-      "installed_at": "2026-09-15T23:50:08.21650735+02:00",
+      "installed_at": "2026-09-24T11:10:10.13997195+02:00",
       "repo_url": "https://github.com/huntabyte/shadcn-svelte.git",
       "source": "https://github.com/huntabyte/shadcn-svelte.git/skills/shadcn-svelte",
       "subdir": "skills/shadcn-svelte",
       "tree_hash": "4b450ce92bd2b2e4e19f0f1928c5eb6da3d53dce",
       "type": "github-subdir",
-      "version": "7f5289a"
+      "version": "9ebdb0b"
     },
     "tdd": {
+      "commit": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
       "file_hashes": {
         "SKILL.md": "sha256:cb01f66bebfaa25fa1f88e6b7e769cd9fd9f35b1120b8563749820738814c927",
         "agents/openai.yaml": "sha256:ea6f01cf1b8c06a4b0f5b649d74b1b8ce8685e72af1b38d70d877693e092af0b",
         "mocking.md": "sha256:3ceb807fdf4a47d6a93d4d9a891e5ba6d362a6247bd08adc451feebfc17361ef",
         "tests.md": "sha256:859f9e592c188fda4fc7277dd180e4ce9c7a2e13f6efe1f6f29eccc9d28c106a"
       },
-      "installed_at": "2026-09-15T23:50:09.898551958+02:00",
+      "installed_at": "2026-09-24T11:10:00.582308318+02:00",
       "repo_url": "https://github.com/mattpocock/skills.git",
       "source": "https://github.com/mattpocock/skills.git/skills/engineering/tdd",
       "subdir": "skills/engineering/tdd",
       "tree_hash": "79288be15c67b849f22b6572056601090fd20913",
       "type": "github-subdir",
-      "version": "959a8e9"
+      "version": "c55ee46"
     }
   },
   "version": 1
