@@ -194,6 +194,7 @@
   "typescript.updateImportsOnFileMove.enabled": "always",
   "update.showReleaseNotes": false,
   "versionlens.suggestions.showSuggestionsStats": false,
+  "window.menuBarVisibility": "compact",
   "window.titleBarStyle": "custom",
   "workbench.colorCustomizations": {
     "terminal.background": "#00000000"
