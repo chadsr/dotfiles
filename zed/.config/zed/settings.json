@@ -24,8 +24,10 @@
     "dock": "left"
   },
   "edit_predictions": {
+    "mode": "subtle",
     "ollama": {
-      "model": "qwen2.5-coder:1.5b"
+      "model": "qwen2.5-coder:1.5b",
+      "prediction_debounce": 2000
     },
     "provider": "ollama"
   },

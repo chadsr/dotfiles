@@ -13,7 +13,7 @@
           "caddyfile": {
             "path": null,
             "repository": "https://github.com/nusnewob/tree-sitter-caddyfile.git",
-            "rev": "4d34a12f793116241196dbade7070fd725a7136d"
+            "rev": "9d3af6ae44ea5f9015bc2c9a5a02066c192ab627"
           }
         },
         "icon_themes": [],
@@ -32,7 +32,7 @@
         "slash_commands": {},
         "snippets": null,
         "themes": [],
-        "version": "0.0.5"
+        "version": "0.0.6"
       }
     },
     "catppuccin": {
@@ -62,7 +62,7 @@
           "themes/catppuccin-no-italics-mauve.json",
           "themes/catppuccin-mauve.json"
         ],
-        "version": "0.2.25"
+        "version": "0.2.27"
       }
     },
     "catppuccin-icons": {
@@ -91,7 +91,7 @@
         "slash_commands": {},
         "snippets": null,
         "themes": [],
-        "version": "1.23.1"
+        "version": "1.24.0"
       }
     },
     "codebook": {
@@ -204,6 +204,40 @@
         "version": "0.0.3"
       }
     },
+    "docker-compose": {
+      "dev": false,
+      "manifest": {
+        "authors": [
+          "eth0net <eth0net@pm.me>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "description": "Syntax highlighting for Docker Compose files",
+        "grammars": {},
+        "icon_themes": [],
+        "id": "docker-compose",
+        "language_servers": {
+          "docker-compose": {
+            "code_action_kinds": null,
+            "language": "YAML",
+            "language_ids": {},
+            "languages": []
+          }
+        },
+        "languages": [],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.0.6"
+        },
+        "name": "Docker Compose",
+        "repository": "https://github.com/eth0net/zed-docker-compose",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.1.0"
+      }
+    },
     "dockerfile": {
       "dev": false,
       "manifest": {
@@ -218,12 +252,17 @@
             "schema_path": "debug_adapter_schemas/buildx-dockerfile.json"
           }
         },
-        "description": "Dockerfile support.",
+        "description": "Dockerfile and Docker Compose support.",
         "grammars": {
           "dockerfile": {
             "path": null,
             "repository": "https://github.com/camdencheek/tree-sitter-dockerfile",
             "rev": "868e44ce378deb68aac902a9db68ff82d2299dd0"
+          },
+          "yaml": {
+            "path": null,
+            "repository": "https://github.com/zed-industries/tree-sitter-yaml",
+            "rev": "baff0b51c64ef6a1fb1f8390f3ad6015b83ec13a"
           }
         },
         "icon_themes": [],
@@ -233,7 +272,7 @@
             "code_action_kinds": null,
             "language": "Dockerfile",
             "language_ids": {
-              "Docker Compose": "docker-compose",
+              "Docker Compose": "dockercompose",
               "Dockerfile": "dockerfile"
             },
             "languages": [
@@ -249,6 +288,7 @@
           }
         },
         "languages": [
+          "languages/docker-compose",
           "languages/dockerfile"
         ],
         "lib": {
@@ -261,7 +301,7 @@
         "slash_commands": {},
         "snippets": null,
         "themes": [],
-        "version": "0.2.1"
+        "version": "0.3.0"
       }
     },
     "github-actions": {
@@ -402,7 +442,7 @@
         "slash_commands": {},
         "snippets": null,
         "themes": [],
-        "version": "1.0.5"
+        "version": "1.0.6"
       }
     },
     "html": {
@@ -447,7 +487,7 @@
         "slash_commands": {},
         "snippets": null,
         "themes": [],
-        "version": "0.3.1"
+        "version": "0.3.2"
       }
     },
     "ini": {
@@ -499,7 +539,7 @@
           "kotlin": {
             "path": null,
             "repository": "https://github.com/fwcd/tree-sitter-kotlin",
-            "rev": "4e909d6cc9ac96b4eaecb3fb538eaca48e9e9ee9"
+            "rev": "1852ea17b7f60fb3f9d84e0b1555d56b46b39fb1"
           }
         },
         "icon_themes": [],
@@ -531,7 +571,7 @@
         "slash_commands": {},
         "snippets": null,
         "themes": [],
-        "version": "0.3.1"
+        "version": "0.3.2"
       }
     },
     "latex": {
@@ -759,7 +799,7 @@
         "slash_commands": {},
         "snippets": null,
         "themes": [],
-        "version": "0.1.4"
+        "version": "0.1.5"
       }
     },
     "proto": {
@@ -819,7 +859,7 @@
         "slash_commands": {},
         "snippets": null,
         "themes": [],
-        "version": "0.3.2"
+        "version": "0.3.4"
       }
     },
     "rainbow-csv": {
@@ -1201,6 +1241,51 @@
         "themes": [],
         "version": "0.1.1"
       }
+    },
+    "zig": {
+      "dev": false,
+      "manifest": {
+        "authors": [
+          "Allan Calix <contact@acx.dev>"
+        ],
+        "capabilities": [],
+        "context_servers": {},
+        "debug_locators": {
+          "zig-locator": {}
+        },
+        "description": "Zig support.",
+        "grammars": {
+          "zig": {
+            "path": null,
+            "repository": "https://github.com/tree-sitter-grammars/tree-sitter-zig",
+            "rev": "6479aa13f32f701c383083d8b28360ebd682fb7d"
+          }
+        },
+        "icon_themes": [],
+        "id": "zig",
+        "language_servers": {
+          "zls": {
+            "code_action_kinds": null,
+            "language": "Zig",
+            "language_ids": {},
+            "languages": []
+          }
+        },
+        "languages": [
+          "languages/zig"
+        ],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.7.0"
+        },
+        "name": "Zig",
+        "repository": "https://github.com/zed-extensions/zig",
+        "schema_version": 1,
+        "slash_commands": {},
+        "snippets": null,
+        "themes": [],
+        "version": "0.4.2"
+      }
     }
   },
   "icon_themes": {
@@ -1208,7 +1293,15 @@
       "extension": "catppuccin-icons",
       "path": "icon_themes/catppuccin-icons.json"
     },
+    "Catppuccin Frapp\u00e9 Monochrome": {
+      "extension": "catppuccin-icons",
+      "path": "icon_themes/catppuccin-icons.json"
+    },
     "Catppuccin Latte": {
+      "extension": "catppuccin-icons",
+      "path": "icon_themes/catppuccin-icons.json"
+    },
+    "Catppuccin Latte Monochrome": {
       "extension": "catppuccin-icons",
       "path": "icon_themes/catppuccin-icons.json"
     },
@@ -1216,7 +1309,15 @@
       "extension": "catppuccin-icons",
       "path": "icon_themes/catppuccin-icons.json"
     },
+    "Catppuccin Macchiato Monochrome": {
+      "extension": "catppuccin-icons",
+      "path": "icon_themes/catppuccin-icons.json"
+    },
     "Catppuccin Mocha": {
+      "extension": "catppuccin-icons",
+      "path": "icon_themes/catppuccin-icons.json"
+    },
+    "Catppuccin Mocha Monochrome": {
       "extension": "catppuccin-icons",
       "path": "icon_themes/catppuccin-icons.json"
     }
@@ -1235,7 +1336,8 @@
           "biblatex"
         ]
       },
-      "path": "languages/bibtex"
+      "path": "languages/bibtex",
+      "query_files": 5
     },
     "CSV": {
       "extension": "csv",
@@ -1248,7 +1350,8 @@
           "csv"
         ]
       },
-      "path": "languages/csv"
+      "path": "languages/csv",
+      "query_files": 1
     },
     "Caddyfile": {
       "extension": "caddyfile",
@@ -1262,7 +1365,25 @@
           "caddyfile"
         ]
       },
-      "path": "languages/caddyfile"
+      "path": "languages/caddyfile",
+      "query_files": 27
+    },
+    "Docker Compose": {
+      "extension": "dockerfile",
+      "grammar": "yaml",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "docker-compose.yml",
+          "docker-compose.yaml",
+          "compose.yaml",
+          "compose.yml"
+        ]
+      },
+      "path": "languages/docker-compose",
+      "query_files": 231
     },
     "Dockerfile": {
       "extension": "dockerfile",
@@ -1277,7 +1398,8 @@
           "dockerfile"
         ]
       },
-      "path": "languages/dockerfile"
+      "path": "languages/dockerfile",
+      "query_files": 17
     },
     "EmmyLuadoc": {
       "extension": "lua",
@@ -1288,7 +1410,8 @@
         "modeline_aliases": [],
         "path_suffixes": []
       },
-      "path": "languages/emmyluadoc"
+      "path": "languages/emmyluadoc",
+      "query_files": 1
     },
     "GitHub Actions": {
       "extension": "github-actions",
@@ -1299,7 +1422,8 @@
         "modeline_aliases": [],
         "path_suffixes": []
       },
-      "path": "languages/github_actions"
+      "path": "languages/github_actions",
+      "query_files": 71
     },
     "GraphQL": {
       "extension": "graphql",
@@ -1314,7 +1438,8 @@
           "graphqls"
         ]
       },
-      "path": "languages/graphql"
+      "path": "languages/graphql",
+      "query_files": 15
     },
     "HTML": {
       "extension": "html",
@@ -1329,7 +1454,8 @@
           "shtml"
         ]
       },
-      "path": "languages/html"
+      "path": "languages/html",
+      "query_files": 63
     },
     "Kotlin": {
       "extension": "kotlin",
@@ -1343,7 +1469,8 @@
           "kts"
         ]
       },
-      "path": "languages/kotlin"
+      "path": "languages/kotlin",
+      "query_files": 191
     },
     "LaTeX": {
       "extension": "latex",
@@ -1359,7 +1486,8 @@
           "cls"
         ]
       },
-      "path": "languages/latex"
+      "path": "languages/latex",
+      "query_files": 695
     },
     "Lua": {
       "extension": "lua",
@@ -1372,7 +1500,8 @@
           "lua"
         ]
       },
-      "path": "languages/lua"
+      "path": "languages/lua",
+      "query_files": 543
     },
     "Make": {
       "extension": "make",
@@ -1390,7 +1519,8 @@
           "mak"
         ]
       },
-      "path": "languages/make"
+      "path": "languages/make",
+      "query_files": 159
     },
     "Nix": {
       "extension": "nix",
@@ -1403,7 +1533,8 @@
           "nix"
         ]
       },
-      "path": "languages/nix"
+      "path": "languages/nix",
+      "query_files": 31
     },
     "Proto": {
       "extension": "proto",
@@ -1416,7 +1547,8 @@
           "proto"
         ]
       },
-      "path": "languages/proto"
+      "path": "languages/proto",
+      "query_files": 541
     },
     "Rainbow CSV (,)": {
       "extension": "rainbow-csv",
@@ -1429,7 +1561,8 @@
           "csv"
         ]
       },
-      "path": "languages/csv"
+      "path": "languages/csv",
+      "query_files": 1
     },
     "Rainbow CSV (;)": {
       "extension": "rainbow-csv",
@@ -1440,7 +1573,8 @@
         "modeline_aliases": [],
         "path_suffixes": []
       },
-      "path": "languages/ssv"
+      "path": "languages/ssv",
+      "query_files": 1
     },
     "Rainbow CSV (|)": {
       "extension": "rainbow-csv",
@@ -1451,7 +1585,8 @@
         "modeline_aliases": [],
         "path_suffixes": []
       },
-      "path": "languages/psv"
+      "path": "languages/psv",
+      "query_files": 1
     },
     "Rainbow TSV (\u2b72)": {
       "extension": "rainbow-csv",
@@ -1464,7 +1599,8 @@
           "tsv"
         ]
       },
-      "path": "languages/tsv"
+      "path": "languages/tsv",
+      "query_files": 1
     },
     "SASS": {
       "extension": "scss",
@@ -1477,7 +1613,8 @@
           "sass"
         ]
       },
-      "path": "languages/sass"
+      "path": "languages/sass",
+      "query_files": 575
     },
     "SCSS": {
       "extension": "scss",
@@ -1490,7 +1627,8 @@
           "scss"
         ]
       },
-      "path": "languages/scss"
+      "path": "languages/scss",
+      "query_files": 31
     },
     "SQL": {
       "extension": "sql",
@@ -1503,7 +1641,8 @@
           "sql"
         ]
       },
-      "path": "languages/sql"
+      "path": "languages/sql",
+      "query_files": 539
     },
     "SassDoc": {
       "extension": "scss",
@@ -1514,7 +1653,8 @@
         "modeline_aliases": [],
         "path_suffixes": []
       },
-      "path": "languages/sassdoc"
+      "path": "languages/sassdoc",
+      "query_files": 17
     },
     "Svelte": {
       "extension": "svelte",
@@ -1527,7 +1667,8 @@
           "svelte"
         ]
       },
-      "path": "languages/svelte"
+      "path": "languages/svelte",
+      "query_files": 63
     },
     "Swift": {
       "extension": "swift",
@@ -1541,7 +1682,8 @@
           "swiftinterface"
         ]
       },
-      "path": "languages/swift"
+      "path": "languages/swift",
+      "query_files": 671
     },
     "TOML": {
       "extension": "toml",
@@ -1557,7 +1699,8 @@
           "uv.lock"
         ]
       },
-      "path": "languages/toml"
+      "path": "languages/toml",
+      "query_files": 639
     },
     "Vue.js": {
       "extension": "vue",
@@ -1570,7 +1713,8 @@
           "vue"
         ]
       },
-      "path": "languages/vue"
+      "path": "languages/vue",
+      "query_files": 63
     },
     "XML": {
       "extension": "xml",
@@ -1583,7 +1727,23 @@
           "xml"
         ]
       },
-      "path": "languages/xml"
+      "path": "languages/xml",
+      "query_files": 13
+    },
+    "Zig": {
+      "extension": "zig",
+      "grammar": "zig",
+      "hidden": false,
+      "matcher": {
+        "first_line_pattern": null,
+        "modeline_aliases": [],
+        "path_suffixes": [
+          "zig",
+          "zon"
+        ]
+      },
+      "path": "languages/zig",
+      "query_files": 927
     },
     "ini": {
       "extension": "ini",
@@ -1616,7 +1776,8 @@
           "pod"
         ]
       },
-      "path": "languages/ini"
+      "path": "languages/ini",
+      "query_files": 5
     }
   },
   "themes": {
