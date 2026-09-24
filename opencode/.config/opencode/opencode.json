@@ -7,9 +7,14 @@
         "basedpyright-langserver",
         "--stdio"
       ],
+      "disabled": false,
       "extensions": [
-        ".py"
+        ".py",
+        ".pyi"
       ]
+    },
+    "pyright": {
+      "disabled": true
     }
   },
   "mcp": {
@@ -25,17 +30,10 @@
       "enabled": true,
       "type": "local"
     },
-    "chrome-devtools-mcp": {
-      "command": [
-        "npx",
-        "-y",
-        "chrome-devtools-mcp@latest",
-        "--executablePath=/usr/bin/chromium",
-        "--isolated=true",
-        "--no-usage-statistics"
-      ],
+    "debugmcp": {
       "enabled": true,
-      "type": "local"
+      "type": "remote",
+      "url": "http://localhost:3001/mcp"
     }
   },
   "model": "zai-coding-plan/glm-5.3",
