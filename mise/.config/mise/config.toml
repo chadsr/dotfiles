@@ -1,4 +1,5 @@
 [tools]
+go = "1.26"
 hk = "latest"
 node = "lts"
 
