@@ -15,7 +15,7 @@
 #   systemctl --user edit openshell-gateway
 
 [openshell]
-version = 1
+version = 2
 
 [openshell.gateway]
 # Keep the primary listener on the built-in 127.0.0.1:17670 default. The
@@ -24,4 +24,4 @@ version = 1
 
 # The gateway auto-detects in order: Kubernetes, Podman, Docker.
 # Pinning prevents unexpected driver selection.
-compute_drivers = ["docker"]
+compute_driver = "docker"

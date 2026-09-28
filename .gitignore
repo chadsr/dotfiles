@@ -38,6 +38,7 @@ khal/.config/khal/*
 nextcloud/.config/Nextcloud/nextcloud.cfg
 opencode/.config/opencode/*
 openspec/.local/share/openspec/shared/*
+openshell/.config/openshell/gateways/**/mtls
 pass/.password-store/*
 prusaslicer/.config/PrusaSlicer/*
 qbittorrent/.config/qBittorrent/*
