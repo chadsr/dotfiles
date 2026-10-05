@@ -3,7 +3,9 @@
     "dock": "right",
     "favorite_models": [],
     "model_parameters": [],
-    "sidebar_side": "right"
+    "threads_sidebar": {
+      "position": "right"
+    }
   },
   "agent_servers": {
     "opencode": {
@@ -54,6 +56,18 @@
     "dock": "left"
   },
   "icon_theme": "Catppuccin Mocha",
+  "languages": {
+    "Python": {
+      "code_actions_on_format": {
+        "source.organizeImports.ruff": true
+      },
+      "formatter": {
+        "language_server": {
+          "name": "ruff"
+        }
+      }
+    }
+  },
   "linked_edits": true,
   "minimap": {
     "show": "auto"

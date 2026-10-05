@@ -13,7 +13,7 @@
           "caddyfile": {
             "path": null,
             "repository": "https://github.com/nusnewob/tree-sitter-caddyfile.git",
-            "rev": "9d3af6ae44ea5f9015bc2c9a5a02066c192ab627"
+            "rev": "1d0f58e143bf4712325e4945055614425d51ecf2"
           }
         },
         "icon_themes": [],
@@ -32,7 +32,7 @@
         "slash_commands": {},
         "snippets": null,
         "themes": [],
-        "version": "0.0.6"
+        "version": "0.0.7"
       }
     },
     "catppuccin": {
@@ -673,7 +673,7 @@
         "slash_commands": {},
         "snippets": null,
         "themes": [],
-        "version": "0.1.10"
+        "version": "0.1.11"
       }
     },
     "make": {
