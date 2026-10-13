@@ -2144,6 +2144,691 @@ servers:
           tags:
             - community
           registryUrl: https://registry.modelcontextprotocol.io/v0/servers/io.github.ChromeDevTools%2Fchrome-devtools-mcp/versions/1.9.0
+  - type: image
+    secrets: default
+    image: mcp/paper-search@sha256:19d0af269a5531403fbb042aad8277d1a9ec2315c972769c7ca8efb3a76eca34
+    catalog_ref: mcp/docker-mcp-catalog:latest
+    snapshot:
+      server:
+        name: paper-search
+        type: server
+        image: mcp/paper-search@sha256:19d0af269a5531403fbb042aad8277d1a9ec2315c972769c7ca8efb3a76eca34
+        description: MCP, CLI, Skills for searching and downloading academic papers from multiple sources like arXiv, PubMed, bioRxiv, etc.
+        title: Paper Search
+        icon: https://avatars.githubusercontent.com/u/197887910?v=4
+        readme: https://desktop.docker.com/mcp/catalog/v3/readme/paper-search.md
+        remote: {}
+        tools:
+          - name: download_arxiv
+            description: Download PDF of an arXiv paper.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: arXiv paper ID (e.g., '2106.12345').
+              - name: save_path
+                type: string
+                desc: 'Directory to save the PDF (default: ''./downloads'').'
+                optional: true
+          - name: download_base
+            description: Download PDF for a paper from BASE.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: BASE paper identifier.
+              - name: save_path
+                type: string
+                desc: 'Directory to save the PDF (default: ''./downloads'').'
+                optional: true
+          - name: download_biorxiv
+            description: Download PDF of a bioRxiv paper.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: bioRxiv DOI.
+              - name: save_path
+                type: string
+                desc: 'Directory to save the PDF (default: ''./downloads'').'
+                optional: true
+          - name: download_citeseerx
+            description: Download PDF for a paper from CiteSeerX.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: CiteSeerX paper identifier.
+              - name: save_path
+                type: string
+                desc: 'Directory to save the PDF (default: ''./downloads'').'
+                optional: true
+          - name: download_crossref
+            description: Attempt to download PDF of a CrossRef paper.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: CrossRef DOI (e.g., '10.1038/nature12373').
+              - name: save_path
+                type: string
+                desc: 'Directory to save the PDF (default: ''./downloads'').'
+                optional: true
+          - name: download_dblp
+            description: |-
+              Download PDF for a paper from dblp.
+
+                  Note: dblp doesn't provide direct PDF access.
+                  This function returns an informative message.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: dblp paper identifier.
+              - name: save_path
+                type: string
+                desc: 'Directory to save the PDF (default: ''./downloads'').'
+                optional: true
+          - name: download_doaj
+            description: Download PDF for a paper from DOAJ.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: DOAJ paper identifier.
+              - name: save_path
+                type: string
+                desc: 'Directory to save the PDF (default: ''./downloads'').'
+                optional: true
+          - name: download_hal
+            description: Download PDF for a paper from HAL.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: HAL paper identifier.
+              - name: save_path
+                type: string
+                desc: 'Directory to save the PDF (default: ''./downloads'').'
+                optional: true
+          - name: download_iacr
+            description: Download PDF of an IACR ePrint paper.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: IACR paper ID (e.g., '2009/101').
+              - name: save_path
+                type: string
+                desc: 'Directory to save the PDF (default: ''./downloads'').'
+                optional: true
+          - name: download_medrxiv
+            description: Download PDF of a medRxiv paper.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: medRxiv DOI.
+              - name: save_path
+                type: string
+                desc: 'Directory to save the PDF (default: ''./downloads'').'
+                optional: true
+          - name: download_openaire
+            description: Download PDF for a paper from OpenAIRE.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: OpenAIRE paper identifier.
+              - name: save_path
+                type: string
+                desc: 'Directory to save the PDF (default: ''./downloads'').'
+                optional: true
+          - name: download_openalex
+            description: Download PDF for a paper from OpenAlex.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: OpenAlex paper ID.
+              - name: save_path
+                type: string
+                desc: 'Directory to save the PDF (default: ''./downloads'').'
+                optional: true
+          - name: download_pubmed
+            description: Attempt to download PDF of a PubMed paper.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: PubMed ID (PMID).
+              - name: save_path
+                type: string
+                desc: 'Directory to save the PDF (default: ''./downloads'').'
+                optional: true
+          - name: download_scihub
+            description: Download paper PDF via Sci-Hub (optional fallback connector).
+            arguments:
+              - name: identifier
+                type: string
+                desc: DOI, title, PMID, or paper URL.
+              - name: base_url
+                type: string
+                desc: Sci-Hub mirror URL.
+                optional: true
+              - name: save_path
+                type: string
+                desc: Directory to save the PDF.
+                optional: true
+          - name: download_semantic
+            description: Download PDF of a Semantic Scholar paper.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: 'Semantic Scholar paper ID, Paper identifier in one of the following formats:'
+              - name: save_path
+                type: string
+                desc: 'Directory to save the PDF (default: ''./downloads'').'
+                optional: true
+          - name: download_ssrn
+            description: |-
+              Download PDF for a paper from SSRN.
+
+                  Note: SSRN connector is metadata-only and download is not supported.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: SSRN paper identifier.
+              - name: save_path
+                type: string
+                desc: Directory to save the PDF (unused).
+                optional: true
+          - name: download_with_fallback
+            description: Try source-native download, OA repositories, Unpaywall, then optional Sci-Hub.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: Source-native paper identifier.
+              - name: source
+                type: string
+                desc: Source name (arxiv, biorxiv, medrxiv, iacr, semantic, crossref, pubmed, pmc, core, europepmc, citeseerx, doaj, base, zenodo, hal, ssrn).
+              - name: doi
+                type: string
+                desc: Optional DOI used for repository/unpaywall/Sci-Hub fallback.
+                optional: true
+              - name: save_path
+                type: string
+                desc: Directory to save downloaded files.
+                optional: true
+              - name: scihub_base_url
+                type: string
+                desc: Sci-Hub mirror URL for fallback.
+                optional: true
+              - name: title
+                type: string
+                desc: Optional title used for repository/Sci-Hub fallback when DOI is unavailable.
+                optional: true
+              - name: use_scihub
+                type: boolean
+                desc: Whether to fallback to Sci-Hub after OA attempts fail.
+                optional: true
+          - name: download_zenodo
+            description: Download PDF for a paper from Zenodo.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: Zenodo paper identifier.
+              - name: save_path
+                type: string
+                desc: 'Directory to save the PDF (default: ''./downloads'').'
+                optional: true
+          - name: get_crossref_paper_by_doi
+            description: Get a specific paper from CrossRef by its DOI.
+            arguments:
+              - name: doi
+                type: string
+                desc: Digital Object Identifier (e.g., '10.1038/nature12373').
+          - name: read_arxiv_paper
+            description: Read and extract text content from an arXiv paper PDF.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: arXiv paper ID (e.g., '2106.12345').
+              - name: save_path
+                type: string
+                desc: 'Directory where the PDF is/will be saved (default: ''./downloads'').'
+                optional: true
+          - name: read_base_paper
+            description: Read and extract text content from a BASE paper.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: BASE paper identifier.
+              - name: save_path
+                type: string
+                desc: 'Directory where the PDF is/will be saved (default: ''./downloads'').'
+                optional: true
+          - name: read_biorxiv_paper
+            description: Read and extract text content from a bioRxiv paper PDF.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: bioRxiv DOI.
+              - name: save_path
+                type: string
+                desc: 'Directory where the PDF is/will be saved (default: ''./downloads'').'
+                optional: true
+          - name: read_citeseerx_paper
+            description: Read and extract text content from a CiteSeerX paper.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: CiteSeerX paper identifier.
+              - name: save_path
+                type: string
+                desc: 'Directory where the PDF is/will be saved (default: ''./downloads'').'
+                optional: true
+          - name: read_crossref_paper
+            description: Attempt to read and extract text content from a CrossRef paper.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: CrossRef DOI (e.g., '10.1038/nature12373').
+              - name: save_path
+                type: string
+                desc: 'Directory where the PDF is/will be saved (default: ''./downloads'').'
+                optional: true
+          - name: read_dblp_paper
+            description: |-
+              Attempt to read and extract text content from a dblp paper.
+
+                  Note: dblp doesn't provide direct paper content access.
+                  This function returns an informative message.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: dblp paper identifier.
+              - name: save_path
+                type: string
+                desc: Directory where the PDF would be saved (unused).
+                optional: true
+          - name: read_doaj_paper
+            description: Read and extract text content from a DOAJ paper.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: DOAJ paper identifier.
+              - name: save_path
+                type: string
+                desc: 'Directory where the PDF is/will be saved (default: ''./downloads'').'
+                optional: true
+          - name: read_hal_paper
+            description: Read and extract text content from a HAL paper.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: HAL paper identifier.
+              - name: save_path
+                type: string
+                desc: 'Directory where the PDF is/will be saved (default: ''./downloads'').'
+                optional: true
+          - name: read_iacr_paper
+            description: Read and extract text content from an IACR ePrint paper PDF.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: IACR paper ID (e.g., '2009/101').
+              - name: save_path
+                type: string
+                desc: 'Directory where the PDF is/will be saved (default: ''./downloads'').'
+                optional: true
+          - name: read_medrxiv_paper
+            description: Read and extract text content from a medRxiv paper PDF.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: medRxiv DOI.
+              - name: save_path
+                type: string
+                desc: 'Directory where the PDF is/will be saved (default: ''./downloads'').'
+                optional: true
+          - name: read_openaire_paper
+            description: Attempt to read and extract text content from an OpenAIRE paper.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: OpenAIRE paper identifier.
+              - name: save_path
+                type: string
+                desc: 'Directory where the PDF is/will be saved (default: ''./downloads'').'
+                optional: true
+          - name: read_openalex_paper
+            description: Attempt to read and extract text content from an OpenAlex paper.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: OpenAlex paper ID.
+              - name: save_path
+                type: string
+                desc: 'Directory where the PDF is/will be saved (default: ''./downloads'').'
+                optional: true
+          - name: read_pubmed_paper
+            description: Read and extract text content from a PubMed paper.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: PubMed ID (PMID).
+              - name: save_path
+                type: string
+                desc: Directory where the PDF would be saved (unused).
+                optional: true
+          - name: read_semantic_paper
+            description: Read and extract text content from a Semantic Scholar paper.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: 'Semantic Scholar paper ID, Paper identifier in one of the following formats:'
+              - name: save_path
+                type: string
+                desc: 'Directory where the PDF is/will be saved (default: ''./downloads'').'
+                optional: true
+          - name: read_ssrn_paper
+            description: |-
+              Read paper content from SSRN.
+
+                  Note: SSRN connector is metadata-only and read is not supported.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: SSRN paper identifier.
+              - name: save_path
+                type: string
+                desc: Directory where the PDF is/will be saved (unused).
+                optional: true
+          - name: read_zenodo_paper
+            description: Read and extract text content from a Zenodo paper.
+            arguments:
+              - name: paper_id
+                type: string
+                desc: Zenodo paper identifier.
+              - name: save_path
+                type: string
+                desc: 'Directory where the PDF is/will be saved (default: ''./downloads'').'
+                optional: true
+          - name: search_arxiv
+            description: Search academic papers from arXiv.
+            arguments:
+              - name: query
+                type: string
+                desc: Search query string (e.g., 'machine learning').
+              - name: max_results
+                type: integer
+                desc: 'Maximum number of papers to return (default: 10).'
+                optional: true
+              - name: sort_by
+                type: string
+                desc: 'Sort criterion — ''relevance'', ''submittedDate'', or ''lastUpdatedDate'' (default: ''relevance'').'
+                optional: true
+              - name: sort_order
+                type: string
+                desc: 'Sort direction — ''descending'' or ''ascending'' (default: ''descending'').'
+                optional: true
+          - name: search_base
+            description: Search academic papers from BASE (Bielefeld Academic Search Engine).
+            arguments:
+              - name: query
+                type: string
+                desc: Search query string (e.g., 'machine learning').
+              - name: max_results
+                type: integer
+                desc: 'Maximum number of papers to return (default: 10).'
+                optional: true
+          - name: search_biorxiv
+            description: |-
+              Search academic papers from bioRxiv.
+
+                  Note: bioRxiv API filters by category name within the last 30 days, not full-text
+                  keyword search. Use a category keyword such as 'bioinformatics', 'neuroscience',
+                  'cell biology', etc.
+            arguments:
+              - name: query
+                type: string
+                desc: Category name to filter by (e.g., 'bioinformatics', 'neuroscience').
+              - name: max_results
+                type: integer
+                desc: 'Maximum number of papers to return (default: 10).'
+                optional: true
+          - name: search_citeseerx
+            description: Search academic papers from CiteSeerX digital library.
+            arguments:
+              - name: query
+                type: string
+                desc: Search query string (e.g., 'machine learning').
+              - name: max_results
+                type: integer
+                desc: 'Maximum number of papers to return (default: 10).'
+                optional: true
+          - name: search_core
+            description: Search academic papers from CORE.
+            arguments:
+              - name: query
+                type: string
+                desc: Search query string (e.g., 'machine learning').
+              - name: max_results
+                type: integer
+                desc: 'Maximum number of papers to return (default: 10).'
+                optional: true
+          - name: search_crossref
+            description: "Search academic papers from CrossRef database.\n\n    CrossRef is a scholarly infrastructure organization that provides \n    persistent identifiers (DOIs) for scholarly content and metadata.\n    It's one of the largest citation databases covering millions of \n    academic papers, journals, books, and other scholarly content."
+            arguments:
+              - name: query
+                type: string
+                desc: Search query string (e.g., 'machine learning', 'climate change').
+              - name: filter
+                type: string
+                desc: CrossRef filter string (e.g., 'has-full-text:true,from-pub-date:2020').
+                optional: true
+              - name: max_results
+                type: integer
+                desc: 'Maximum number of papers to return (default: 10, max: 1000).'
+                optional: true
+              - name: order
+                type: string
+                desc: Sort order ('asc' or 'desc').
+                optional: true
+              - name: sort
+                type: string
+                desc: Sort field ('relevance', 'published', 'updated', 'deposited', etc.).
+                optional: true
+          - name: search_dblp
+            description: Search academic papers from dblp computer science bibliography.
+            arguments:
+              - name: query
+                type: string
+                desc: Search query string (e.g., 'machine learning').
+              - name: max_results
+                type: integer
+                desc: 'Maximum number of papers to return (default: 10).'
+                optional: true
+          - name: search_doaj
+            description: Search academic papers from DOAJ (Directory of Open Access Journals).
+            arguments:
+              - name: query
+                type: string
+                desc: Search query string (e.g., 'machine learning').
+              - name: max_results
+                type: integer
+                desc: 'Maximum number of papers to return (default: 10).'
+                optional: true
+          - name: search_europepmc
+            description: Search academic papers from Europe PMC.
+            arguments:
+              - name: query
+                type: string
+                desc: Search query string (e.g., 'machine learning').
+              - name: max_results
+                type: integer
+                desc: 'Maximum number of papers to return (default: 10).'
+                optional: true
+          - name: search_google_scholar
+            description: Search academic papers from Google Scholar.
+            arguments:
+              - name: query
+                type: string
+                desc: Search query string (e.g., 'machine learning').
+              - name: max_results
+                type: integer
+                desc: 'Maximum number of papers to return (default: 10).'
+                optional: true
+          - name: search_hal
+            description: Search academic papers from HAL open archive.
+            arguments:
+              - name: query
+                type: string
+                desc: Search query string (e.g., 'machine learning').
+              - name: max_results
+                type: integer
+                desc: 'Maximum number of papers to return (default: 10).'
+                optional: true
+          - name: search_iacr
+            description: Search academic papers from IACR ePrint Archive.
+            arguments:
+              - name: query
+                type: string
+                desc: Search query string (e.g., 'cryptography', 'secret sharing').
+              - name: fetch_details
+                type: boolean
+                desc: 'Whether to fetch detailed information for each paper (default: True).'
+                optional: true
+              - name: max_results
+                type: integer
+                desc: 'Maximum number of papers to return (default: 10).'
+                optional: true
+          - name: search_medrxiv
+            description: |-
+              Search academic papers from medRxiv.
+
+                  Note: medRxiv API filters by category name within the last 30 days, not full-text
+                  keyword search. Use a category keyword such as 'infectious_diseases',
+                  'cardiovascular_medicine', 'oncology', etc.
+            arguments:
+              - name: query
+                type: string
+                desc: Category name to filter by (e.g., 'infectious_diseases', 'oncology').
+              - name: max_results
+                type: integer
+                desc: 'Maximum number of papers to return (default: 10).'
+                optional: true
+          - name: search_openaire
+            description: Search academic papers from OpenAIRE European Open Access infrastructure.
+            arguments:
+              - name: query
+                type: string
+                desc: Search query string (e.g., 'machine learning').
+              - name: max_results
+                type: integer
+                desc: 'Maximum number of papers to return (default: 10).'
+                optional: true
+          - name: search_openalex
+            description: Search academic papers from OpenAlex.
+            arguments:
+              - name: query
+                type: string
+                desc: Search query string (e.g., 'machine learning').
+              - name: max_results
+                type: integer
+                desc: 'Maximum number of papers to return (default: 10).'
+                optional: true
+          - name: search_papers
+            description: Unified top-level search across all configured academic platforms.
+            arguments:
+              - name: query
+                type: string
+                desc: Search query string.
+              - name: max_results_per_source
+                type: integer
+                desc: Max results to fetch from each selected source.
+                optional: true
+              - name: sources
+                type: string
+                desc: Comma-separated source names or 'all'.
+                optional: true
+              - name: year
+                type: string
+                desc: Optional year filter for Semantic Scholar only.
+                optional: true
+          - name: search_pmc
+            description: Search academic papers from PubMed Central (PMC).
+            arguments:
+              - name: query
+                type: string
+                desc: Search query string (e.g., 'machine learning').
+              - name: max_results
+                type: integer
+                desc: 'Maximum number of papers to return (default: 10).'
+                optional: true
+          - name: search_pubmed
+            description: Search academic papers from PubMed.
+            arguments:
+              - name: query
+                type: string
+                desc: Search query string (e.g., 'machine learning').
+              - name: max_results
+                type: integer
+                desc: 'Maximum number of papers to return (default: 10).'
+                optional: true
+              - name: sort
+                type: string
+                desc: 'Sort order — ''relevance'' or ''pub_date'' (default: ''relevance'').'
+                optional: true
+          - name: search_semantic
+            description: Search academic papers from Semantic Scholar.
+            arguments:
+              - name: query
+                type: string
+                desc: Search query string (e.g., 'machine learning').
+              - name: max_results
+                type: integer
+                desc: 'Maximum number of papers to return (default: 10).'
+                optional: true
+              - name: year
+                type: string
+                desc: Optional year filter (e.g., '2019', '2016-2020', '2010-', '-2015').
+                optional: true
+          - name: search_ssrn
+            description: |-
+              Search metadata records from SSRN.
+
+                  Note: SSRN connector is metadata-only and does not support direct PDF download.
+            arguments:
+              - name: query
+                type: string
+                desc: Search query string (e.g., 'machine learning').
+              - name: max_results
+                type: integer
+                desc: 'Maximum number of papers to return (default: 10).'
+                optional: true
+          - name: search_unpaywall
+            description: |-
+              Lookup a DOI via Unpaywall and return OA metadata.
+
+                  Unpaywall is DOI-centric and does not support generic keyword search.
+                  This tool extracts the first DOI from `query` and returns at most one record.
+            arguments:
+              - name: query
+                type: string
+                desc: DOI string or text containing a DOI.
+              - name: max_results
+                type: integer
+                desc: Kept for API consistency; Unpaywall returns max 1 record.
+                optional: true
+          - name: search_zenodo
+            description: Search academic papers from Zenodo open repository.
+            arguments:
+              - name: query
+                type: string
+                desc: Search query string (e.g., 'machine learning').
+              - name: max_results
+                type: integer
+                desc: 'Maximum number of papers to return (default: 10).'
+                optional: true
+        metadata:
+          pulls: 43712
+          stars: 5
+          githubStars: 2649
+          category: search
+          tags:
+            - academic
+            - search
+          license: MIT License
+          owner: openags
 secrets:
   default:
     provider: docker-desktop-store
