@@ -851,7 +851,7 @@ done
 latest_android_config_dir=$(find ~/.config/Google -mindepth 1 -maxdepth 1 -type d -exec stat -c "%Y %n" {} \; | sort -nr | head -n 1 | cut -d' ' -f2-)
 if [ -n "$latest_android_config_dir" ]; then
   # copy the contents of the latest android studio config to dotfiles
-  find "$latest_android_config_dir"/options -maxdepth 3 -type f -iname \*.xml -exec cp -r --parents --update=none {} ./android/ \; || {
+  find -L "$latest_android_config_dir"/options -maxdepth 3 -type f -iname \*.xml -exec cp -r --parents --update=none {} ./android/ \; || {
     echo "failed to copy latest android studio configuration files from ${latest_android_config_dir}"
     exit 1
   }
