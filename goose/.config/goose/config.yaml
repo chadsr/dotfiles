@@ -174,10 +174,17 @@ extensions:
     name: mcpdocker
     timeout: 300
     type: stdio
+  scheduler:
+    enabled: true
+    type: platform
+    name: scheduler
+    description: Create and manage scheduled recipe execution
+    display_name: Scheduler
+    bundled: true
 providers:
   zai:
     enabled: true
-    model: glm-5.2
+    model: glm-5.3
     configured: true
 active_provider: zai
 ZAI_BASE_URL: https://api.z.ai/api/anthropic
