@@ -1,4 +1,5 @@
 {
+  "C_Cpp.intelliSenseEngine": "disabled",
   "[aur-pkgbuild]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
@@ -194,7 +195,7 @@
   "typescript.updateImportsOnFileMove.enabled": "always",
   "update.showReleaseNotes": false,
   "versionlens.suggestions.showSuggestionsStats": false,
-  "window.menuBarVisibility": "compact",
+  "window.menuBarVisibility": "toggle",
   "window.titleBarStyle": "custom",
   "workbench.colorCustomizations": {
     "terminal.background": "#00000000"
