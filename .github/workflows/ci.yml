@@ -16,6 +16,26 @@ jobs:
         with:
           python-version: '3.14'
           check-latest: true
+      - uses: cachix/install-nix-action@v31
+        with:
+          extra_nix_config: |
+            extra-experimental-features = nix-command flakes
+      - name: Install Haskell toolchain
+        id: hs
+        run: |
+          nix profile install nixpkgs#ghc nixpkgs#cabal-install
+          echo "$HOME/.nix-profile/bin" >> "$GITHUB_PATH"
+          echo "ghc=$(nix eval --raw nixpkgs#ghc.outPath)" >> "$GITHUB_OUTPUT"
+      - name: Cache prek & cabal
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/prek
+            ~/.cache/cabal
+            ~/.local/state/cabal
+          key: prek-cabal-${{ runner.os }}-${{ steps.hs.outputs.ghc }}-${{ hashFiles('.pre-commit-config.yaml') }}
+          restore-keys: |
+            prek-cabal-${{ runner.os }}-${{ steps.hs.outputs.ghc }}-
       - name: Install Dependencies
         run: |
           sudo apt-get update
@@ -23,14 +43,8 @@ jobs:
           sudo update-alternatives --set lua-interpreter /usr/bin/lua5.4
       - uses: j178/prek-action@v2
         with:
-          extra-args: '--all-files --skip nixfmt'
-  nixfmt:
-    name: nixfmt check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - uses: cachix/install-nix-action@v31
-      - run: nix-shell -p nixfmt --run "nixfmt --check $(git ls-files '*.nix')"
+          cache: false
+          extra-args: '--all-files'
   nix-flake-check:
     name: nix flake check
     runs-on: ubuntu-latest
