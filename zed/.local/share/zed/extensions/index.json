@@ -571,7 +571,7 @@
         "slash_commands": {},
         "snippets": null,
         "themes": [],
-        "version": "0.3.2"
+        "version": "0.3.4"
       }
     },
     "latex": {
@@ -1142,13 +1142,22 @@
         },
         "icon_themes": [],
         "id": "toml",
-        "language_servers": {},
+        "language_servers": {
+          "taplo": {
+            "code_action_kinds": null,
+            "language": null,
+            "language_ids": {},
+            "languages": [
+              "TOML"
+            ]
+          }
+        },
         "languages": [
           "languages/toml"
         ],
         "lib": {
-          "kind": null,
-          "version": null
+          "kind": "Rust",
+          "version": "0.7.0"
         },
         "name": "TOML",
         "repository": "https://github.com/zed-extensions/toml",
@@ -1156,7 +1165,7 @@
         "slash_commands": {},
         "snippets": null,
         "themes": [],
-        "version": "1.0.3"
+        "version": "1.1.0"
       }
     },
     "vue": {
@@ -1204,14 +1213,16 @@
         "slash_commands": {},
         "snippets": null,
         "themes": [],
-        "version": "0.4.0"
+        "version": "0.4.1"
       }
     },
     "xml": {
       "dev": false,
       "manifest": {
         "authors": [
-          "sweetppro"
+          "sweetppro",
+          "notpeter",
+          "moilolon"
         ],
         "capabilities": [],
         "context_servers": {},
@@ -1225,13 +1236,24 @@
         },
         "icon_themes": [],
         "id": "xml",
-        "language_servers": {},
+        "language_servers": {
+          "lemminx": {
+            "code_action_kinds": null,
+            "language": null,
+            "language_ids": {
+              "XML": "xml"
+            },
+            "languages": [
+              "XML"
+            ]
+          }
+        },
         "languages": [
           "languages/xml"
         ],
         "lib": {
-          "kind": null,
-          "version": null
+          "kind": "Rust",
+          "version": "0.7.0"
         },
         "name": "XML",
         "repository": "https://github.com/sweetppro/zed-xml",
@@ -1239,7 +1261,7 @@
         "slash_commands": {},
         "snippets": null,
         "themes": [],
-        "version": "0.1.1"
+        "version": "0.2.0"
       }
     },
     "zig": {
