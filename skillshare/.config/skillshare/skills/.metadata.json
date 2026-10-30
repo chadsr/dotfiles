@@ -13,21 +13,21 @@
       "subdir": "skills/agents-md",
       "tree_hash": "79bf72b1b141202a03f515b4a133f4845cf8d9e6",
       "type": "github-subdir",
-      "version": "d18b7aa"
+      "version": "d12f250"
     },
     "grilling": {
-      "commit": "49dd158d1076134a641b33efb035946536778336",
+      "commit": "a496f5513d4a4cf889bc48e189e579f4b0bdf6aa",
       "file_hashes": {
-        "SKILL.md": "sha256:befdff1e27a1dfe2a294d5871169ac1afe16d983911daa4f32627514a48c1e15",
+        "SKILL.md": "sha256:a146842ed93ca43d833550fa9adf02e58cb63c83fea9d4b4522995b82242d4e2",
         "agents/openai.yaml": "sha256:1411d7df7d99b7e621a1ff8283c8133cc2464be63d064e52d8ce169c6800ee9b"
       },
-      "installed_at": "2026-10-14T11:49:34.158437051+02:00",
+      "installed_at": "2026-10-29T18:19:23.199488917+01:00",
       "repo_url": "https://github.com/mattpocock/skills.git",
       "source": "https://github.com/mattpocock/skills.git/skills/productivity/grilling",
       "subdir": "skills/productivity/grilling",
-      "tree_hash": "28aceb4c9567b985cb47f7db88cf23c9f33af8b8",
+      "tree_hash": "f551b6e0d219fdda0b6abf277f8f915b3127d1e9",
       "type": "github-subdir",
-      "version": "49dd158"
+      "version": "a496f55"
     },
     "openspec-apply-change": {
       "commit": "9111a7654d7800391459431fff4eaf66e33a3d2e",
@@ -40,7 +40,7 @@
       "subdir": "skills/openspec-apply-change",
       "tree_hash": "5cacb29090c738225810a7e99b5bdf7bd2388025",
       "type": "github-subdir",
-      "version": "9111a76"
+      "version": "6d04a1b"
     },
     "openspec-archive-change": {
       "commit": "9111a7654d7800391459431fff4eaf66e33a3d2e",
@@ -53,33 +53,33 @@
       "subdir": "skills/openspec-archive-change",
       "tree_hash": "43143bd966a2a5839b6ce42feb6bf868b5452d6b",
       "type": "github-subdir",
-      "version": "9111a76"
+      "version": "6d04a1b"
     },
     "openspec-explore": {
-      "commit": "9111a7654d7800391459431fff4eaf66e33a3d2e",
+      "commit": "6d04a1b58dedc95729d34e4f223d9d483aae210a",
       "file_hashes": {
-        "SKILL.md": "sha256:5bc03c568d0348c61b37f0647167252db5be1775ff5742ca9760b4e03ab9a5ac"
+        "SKILL.md": "sha256:e9fe2acf923d5f9376c5e198df235d7cc531913ba3d760faff867f9c60dbfebb"
       },
-      "installed_at": "2026-10-14T11:49:26.484323366+02:00",
+      "installed_at": "2026-10-29T18:19:24.598900539+01:00",
       "repo_url": "https://github.com/Fission-AI/OpenSpec.git",
       "source": "https://github.com/Fission-AI/OpenSpec.git/skills/openspec-explore",
       "subdir": "skills/openspec-explore",
-      "tree_hash": "e0f35038ade89dd17e3c2ee893c19ec482520022",
+      "tree_hash": "8413ce41bf1acd3e4853db8c5deb5a5e873ad412",
       "type": "github-subdir",
-      "version": "9111a76"
+      "version": "6d04a1b"
     },
     "openspec-propose": {
-      "commit": "9111a7654d7800391459431fff4eaf66e33a3d2e",
+      "commit": "6d04a1b58dedc95729d34e4f223d9d483aae210a",
       "file_hashes": {
-        "SKILL.md": "sha256:7848351e7c513a25c32315b466b224ed228ceb43c75b914c145702aa9957ff0b"
+        "SKILL.md": "sha256:e9f4baa05e9fdbc969fcbdb8b13b4795c19640cc920999cf06c30a1a1934bb5c"
       },
-      "installed_at": "2026-10-14T11:49:26.499911729+02:00",
+      "installed_at": "2026-10-29T18:19:24.619467855+01:00",
       "repo_url": "https://github.com/Fission-AI/OpenSpec.git",
       "source": "https://github.com/Fission-AI/OpenSpec.git/skills/openspec-propose",
       "subdir": "skills/openspec-propose",
-      "tree_hash": "c0565ab613a5191113fd6e296fa23ba954c19634",
+      "tree_hash": "efc2afd2337353e2865a20917cfecdb668318ec5",
       "type": "github-subdir",
-      "version": "9111a76"
+      "version": "6d04a1b"
     },
     "openspec-sync-specs": {
       "commit": "9111a7654d7800391459431fff4eaf66e33a3d2e",
@@ -92,20 +92,20 @@
       "subdir": "skills/openspec-sync-specs",
       "tree_hash": "4632c00cd2915a3b8ceea483a434fe65800ef7ac",
       "type": "github-subdir",
-      "version": "9111a76"
+      "version": "6d04a1b"
     },
     "openspec-update-change": {
-      "commit": "9111a7654d7800391459431fff4eaf66e33a3d2e",
+      "commit": "6d04a1b58dedc95729d34e4f223d9d483aae210a",
       "file_hashes": {
-        "SKILL.md": "sha256:819f15652d398877045a8dd103b117df0d802e91225c88edfe0627dbcdb27bf6"
+        "SKILL.md": "sha256:9ca71b1ec6252e743028e561d73df32678e4486f80d2cb63887aa8648dc3a5cb"
       },
-      "installed_at": "2026-10-14T11:49:26.436883614+02:00",
+      "installed_at": "2026-10-29T18:19:24.637432826+01:00",
       "repo_url": "https://github.com/Fission-AI/OpenSpec.git",
       "source": "https://github.com/Fission-AI/OpenSpec.git/skills/openspec-update-change",
       "subdir": "skills/openspec-update-change",
-      "tree_hash": "ed16d9dca57e7fd0e3b0c62a41505575d9bba294",
+      "tree_hash": "0e69f89565a7bb3641cfb25014e69af5c6b7547c",
       "type": "github-subdir",
-      "version": "9111a76"
+      "version": "6d04a1b"
     },
     "shadcn-svelte": {
       "commit": "63bfef7dadfcc412c99f6e87069dc0b36cfd1f72",
@@ -128,37 +128,37 @@
       "subdir": "skills/shadcn-svelte",
       "tree_hash": "b2ccba452ef4541e234c958ec93eba14e0353ccc",
       "type": "github-subdir",
-      "version": "63bfef7"
+      "version": "fe4b0ad"
     },
     "skillshare": {
-      "commit": "109466840801de1656a6324e666d5eeb8237b071",
+      "commit": "5f63b5ced47c223dae5cae3f0af82055a43b06f9",
       "file_hashes": {
-        "SKILL.md": "sha256:ede0f56563641e68e5c61865de4365b78e7134947faaa00e643f122a956c10b4",
+        "SKILL.md": "sha256:c1d00d25ef366d25df55a58fa8aefef04bc363a562bbf2a2997e4a6dfa33ce2b",
         "references/TROUBLESHOOTING.md": "sha256:6964001f3f1fcbaadf0daae7478724ffd12196c20c7b3762876385670660cd99",
         "references/audit.md": "sha256:62370c47cd12258f6b60b8e06788dda937c4bd7a4d3763414ed88e3e2c39e12a",
         "references/backup.md": "sha256:d794b66b18120cfaae0dcb3773031a08426895fd618d02393337a1eb57f98f6f",
         "references/extras.md": "sha256:0845bb01f48b1ee6c91eee756319e301b224cec0f944b90dbee370934d0dbb57",
-        "references/hooks.md": "sha256:c5298cdc89b056ebe39c3ea0e8afe108035157c21493811c6d5e85ce0a59a1d0",
+        "references/hooks.md": "sha256:de0f7c4261adfc9cd1aaa409ff484676c694e45011458d5885afb9108619e07d",
         "references/init.md": "sha256:bd5206d3f614c6c32b1c930cc07dd93fe893bb041838af12b612f17f55af78e3",
-        "references/install.md": "sha256:882ed4c1e55a988d25d2c66a812f30a058673f5e94cee6c80482cd16d9be5e65",
+        "references/install.md": "sha256:56242531d4d4bf4a9fdf799e197415a4d94c65cfffeda0bc82ecd33a2b061bad",
         "references/log.md": "sha256:f726e59328ac1cb367cd7d5eaa257149d7f56ef5c650d9e0f9c7a091c0f9c442",
-        "references/mcp.md": "sha256:14f840755244a409548b6f822c256c1d4ca8a70933dc1578c27623e752d1196f",
+        "references/mcp.md": "sha256:0af560fa5268f627171c7e3b5b9af7875a100615fd85d647776823c581c5d6e7",
         "references/memory-review.md": "sha256:e9fabed005f282c6702788bfe1a01aeca986184d48eadccf3ef0e9f4e465f5e3",
         "references/native-agents.md": "sha256:352d78cb64722717b5660655978afcef3d18638669ab96e0f2325f28d563576e",
-        "references/plugins.md": "sha256:b6a631dae7144894bbe2328943f553c98ae321ca07751484cee11b13db5ad426",
+        "references/plugins.md": "sha256:bbefaca10346814d3201ae9ebb284cc3ee688b40a5777d1960cc46579810d338",
         "references/status.md": "sha256:fce04dff6e5f613aa47f1c1da8b688ac673c0af46c346ba79bc2b7e45a1cdf3e",
-        "references/sync.md": "sha256:ba3211ee47ac86fc07c42868de42fdb08e1415e7c5e7ea65fee6be8d58c0751d",
-        "references/targets.md": "sha256:14738fb5fbb3d67471c1c9c28d0162b3437c5216f24776b946c684992ef8eeb0",
+        "references/sync.md": "sha256:aa2740ae9f92181e318f077ae85250cc8041914dfea67123975de30730276511",
+        "references/targets.md": "sha256:c58ccaf726e8a5448a3da952fc3101923e05e48d93d0ba9f9e39fe160a3f0680",
         "references/trash.md": "sha256:97f69a115db2880f936c5202c54f5fd97be33078058eae4068fd244520a4ea22",
         "scripts/run.sh": "sha256:e434ebdb7d3ae0b37c00ddc36687bc975da9e766b8cb863f9aed9a624ebbdfa9"
       },
-      "installed_at": "2026-10-14T11:49:32.694028658+02:00",
+      "installed_at": "2026-10-30T15:37:19.975992485+01:00",
       "repo_url": "https://github.com/runkids/skillshare.git",
       "source": "https://github.com/runkids/skillshare.git/skills/skillshare",
       "subdir": "skills/skillshare",
-      "tree_hash": "d83d8cf8b41b0a817fd00f8c6a0a5c85de2f5c55",
+      "tree_hash": "91af1a3f47bdb366d1f03ee60388c13d5a45976d",
       "type": "github-subdir",
-      "version": "1094668"
+      "version": "5f63b5c"
     },
     "tdd": {
       "commit": "49dd158d1076134a641b33efb035946536778336",
@@ -174,7 +174,7 @@
       "subdir": "skills/engineering/tdd",
       "tree_hash": "667dbdd00c09d0e2189e082986e6a4d61a67c2a6",
       "type": "github-subdir",
-      "version": "49dd158"
+      "version": "a496f55"
     }
   },
   "version": 1
