@@ -124,6 +124,7 @@
   "git.confirmSync": false,
   "git.enableCommitSigning": true,
   "git.replaceTagsWhenPull": true,
+  "git.suggestSmartCommit": false,
   "git.useIntegratedAskPass": false,
   "githubPullRequests.pullBranch": "never",
   "gitlens.telemetry.enabled": false,
