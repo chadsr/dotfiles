@@ -13,7 +13,7 @@
       "subdir": "skills/agents-md",
       "tree_hash": "79bf72b1b141202a03f515b4a133f4845cf8d9e6",
       "type": "github-subdir",
-      "version": "d12f250"
+      "version": "0c464f4"
     },
     "grilling": {
       "commit": "a496f5513d4a4cf889bc48e189e579f4b0bdf6aa",
@@ -27,7 +27,33 @@
       "subdir": "skills/productivity/grilling",
       "tree_hash": "f551b6e0d219fdda0b6abf277f8f915b3127d1e9",
       "type": "github-subdir",
-      "version": "a496f55"
+      "version": "4ae2317"
+    },
+    "langfuse": {
+      "commit": "dd2b16cda5fde7fcfb363521cff88e0a29300eb7",
+      "file_hashes": {
+        "SKILL.md": "sha256:312a76ca32756062f28f95cbf36368e8aeb02212f2e3296e9ac214c029eaaae5",
+        "references/ci-cd.md": "sha256:3982cd4f5ed88c4402a1fccdb8289e8caedab482f122fc0c8ca712e6a727d2c0",
+        "references/cli.md": "sha256:eeb58ce7557978169fb207f53bda866d85bc3d13330019546ac5695c6941ba8c",
+        "references/cost-optimization.md": "sha256:4e046ff992158272ba17c6dc50adea3585440cedd1af7cf43b12f0745eb791c5",
+        "references/create-dataset.md": "sha256:b0a0b34620d5054c588ffa4b016c39e92ede1fdbed18c210f2e9476c88bb49ae",
+        "references/error-analysis.md": "sha256:a818baef6fee26f682c50ea2380c12902b1c085ef3d7ac8f06499525045e9024",
+        "references/instrumentation.md": "sha256:668440ae785f67a2d01872eaea780ba2e237e0653894b55c74a9dd93fda647c7",
+        "references/judge-calibration.md": "sha256:95edd5f90aae53218cff3e696484079b14a1dba1fa0779940abcb4782285efda",
+        "references/prompt-engineering.md": "sha256:671c6ff54febec23fe5200408e56410b1e4d42bc7d8bd592cf60d112ae991c5e",
+        "references/prompt-migration.md": "sha256:c194a0df3614bf8ebfabab5a1729538d276fad8d6ba89fac3b2cfed38a3ff5bc",
+        "references/setting-up-evals.md": "sha256:bb17bd66132bd05d43f234c820cd12d19403d53bb657ab441c0039248cd61c3a",
+        "references/skill-feedback.md": "sha256:4a95834cdaacfd4248bdd1a079550981472803a461f824a0b2cc506e055f50c7",
+        "references/user-feedback.md": "sha256:1111706198dad1adeea04fd700688b44b8a16ed9459b77198d6ce6a04556f2d6",
+        "references/v4-project-migration.md": "sha256:912d8639e9a60c5e138c42832bc2374e5622916fcc0cfe8814a0420ab06b587e"
+      },
+      "installed_at": "2026-11-04T15:26:59.525743503+01:00",
+      "repo_url": "https://github.com/langfuse/skills.git",
+      "source": "https://github.com/langfuse/skills/skills/langfuse",
+      "subdir": "skills/langfuse",
+      "tree_hash": "e328647f773572c449699be03e719e95ab151a6f",
+      "type": "github-subdir",
+      "version": "dd2b16c"
     },
     "openspec-apply-change": {
       "commit": "9111a7654d7800391459431fff4eaf66e33a3d2e",
@@ -40,7 +66,7 @@
       "subdir": "skills/openspec-apply-change",
       "tree_hash": "5cacb29090c738225810a7e99b5bdf7bd2388025",
       "type": "github-subdir",
-      "version": "6d04a1b"
+      "version": "3e4d5f0"
     },
     "openspec-archive-change": {
       "commit": "9111a7654d7800391459431fff4eaf66e33a3d2e",
@@ -53,7 +79,7 @@
       "subdir": "skills/openspec-archive-change",
       "tree_hash": "43143bd966a2a5839b6ce42feb6bf868b5452d6b",
       "type": "github-subdir",
-      "version": "6d04a1b"
+      "version": "3e4d5f0"
     },
     "openspec-explore": {
       "commit": "6d04a1b58dedc95729d34e4f223d9d483aae210a",
@@ -66,7 +92,7 @@
       "subdir": "skills/openspec-explore",
       "tree_hash": "8413ce41bf1acd3e4853db8c5deb5a5e873ad412",
       "type": "github-subdir",
-      "version": "6d04a1b"
+      "version": "3e4d5f0"
     },
     "openspec-propose": {
       "commit": "6d04a1b58dedc95729d34e4f223d9d483aae210a",
@@ -79,7 +105,7 @@
       "subdir": "skills/openspec-propose",
       "tree_hash": "efc2afd2337353e2865a20917cfecdb668318ec5",
       "type": "github-subdir",
-      "version": "6d04a1b"
+      "version": "3e4d5f0"
     },
     "openspec-sync-specs": {
       "commit": "9111a7654d7800391459431fff4eaf66e33a3d2e",
@@ -92,7 +118,7 @@
       "subdir": "skills/openspec-sync-specs",
       "tree_hash": "4632c00cd2915a3b8ceea483a434fe65800ef7ac",
       "type": "github-subdir",
-      "version": "6d04a1b"
+      "version": "3e4d5f0"
     },
     "openspec-update-change": {
       "commit": "6d04a1b58dedc95729d34e4f223d9d483aae210a",
@@ -105,60 +131,69 @@
       "subdir": "skills/openspec-update-change",
       "tree_hash": "0e69f89565a7bb3641cfb25014e69af5c6b7547c",
       "type": "github-subdir",
-      "version": "6d04a1b"
+      "version": "3e4d5f0"
     },
     "shadcn-svelte": {
-      "commit": "63bfef7dadfcc412c99f6e87069dc0b36cfd1f72",
+      "commit": "3c4152d7d3904e76f6f756ec8ffca7c9ec72f977",
       "file_hashes": {
-        "SKILL.md": "sha256:7f56b359c4ea8d82dffbe5845d37bdfa147d0d0bcc8002ca8a65494ef9f87d70",
+        "SKILL.md": "sha256:1c11b03e380578beb93807b46f3a0c4b243e1aeeef27e8782fe8bf2c8dfcf862",
         "agents/openai.yml": "sha256:39293434702908c2b54a57ef4512f06d0195b43d6a13154d91d577bbd4d3fad7",
         "assets/shadcn-svelte-small.png": "sha256:ab571a7acd192a769531b5ea5e2105f40128b52e90fbdeb31e712d5fd18f6350",
         "assets/shadcn-svelte.png": "sha256:256a06954d29e566b01695f0fa3574c0a6d69991098e756d8cc0704ee376ce3f",
-        "cli.md": "sha256:31957b96f85f388c9fa87aa1ad139e8ab79d775f37eb73c479a2fbc969be00a0",
-        "customization.md": "sha256:8ab1b73ebc08db17a5e8106cfa489a0a2a949903230f5b10d07b914818f2fdab",
-        "evals/evals.json": "sha256:f3c29b8f34044f51e0d42d8711c418bb1cb17bf02e4f09d6d761f610b6553fe7",
+        "assets/showcase/color-pair.svelte": "sha256:9b4dadaf371664d01d211279a968be10e920f4a269101944c0225777d9d6d504",
+        "assets/showcase/preview-state.ts": "sha256:aed90272d955fd4f111d35873d2390cde1a63db159f823b5de9834ba08eec368",
+        "assets/showcase/preview-states.css": "sha256:a11cc8ce59fa3d4c15e610014c44e7954ae277ee41b9201fb03ea75ec8b12f22",
+        "assets/showcase/state-matrix.svelte": "sha256:af76035583bde0f3e846f9510b133e16a5e4b5bec4bf6f771d8090eab7ee3816",
+        "cli.md": "sha256:01a82fbd642d3bf0850264d0dad8890ac9c5c12e004aa61860979cdaa00f8013",
+        "customization.md": "sha256:47b7a33b50fa9eb4ec57475b268cb7ee2698e6ee135ae46aba5d67587656abf8",
+        "design-system-page.md": "sha256:6aab986a6ab26b703d809cebb48f55d56ab87934e4f1cbf701abd8d51fba4190",
+        "design-system.md": "sha256:c30aca83ec50a6310c40ae8ed5d6979e81bb30675525bd2c52a4042ce65bd20e",
+        "evals/evals.json": "sha256:9be80d29deaddfe1d5152023942306c3b7a88a9d12e5e0021cfde44dd2018853",
         "rules/composition.md": "sha256:e14fe6271369db30706b859a3de6805eeba2c14d41920508633d2f7dcea93bd0",
         "rules/forms.md": "sha256:614363e74742e97acb775c8030d738635da230f8ccd8c5fa1d12171e68bfd318",
         "rules/icons.md": "sha256:cd291c6bf9b916b0e5d625eaf2ee1699e1dda4bbf7802a2c07ef18182a04d848",
-        "rules/styling.md": "sha256:62d661d54f36f0188a123a7f0dd30ea20c37f6ca2843404f3eaa0ba1ac77f575"
+        "rules/styling.md": "sha256:62d661d54f36f0188a123a7f0dd30ea20c37f6ca2843404f3eaa0ba1ac77f575",
+        "scripts/showcase-coverage.mjs": "sha256:0eb7b7fc17d95ea35344c144ecabcc75a0f48aa85afd9429f4ca55da2de78d14",
+        "scripts/showcase-coverage.test.mjs": "sha256:f1758071607e9f32469b1781eff653736c69552292118aab5c4bebe149ca175c"
       },
-      "installed_at": "2026-10-14T11:49:27.903355531+02:00",
+      "installed_at": "2026-11-04T13:13:52.925254281+01:00",
       "repo_url": "https://github.com/huntabyte/shadcn-svelte.git",
       "source": "https://github.com/huntabyte/shadcn-svelte.git/skills/shadcn-svelte",
       "subdir": "skills/shadcn-svelte",
-      "tree_hash": "b2ccba452ef4541e234c958ec93eba14e0353ccc",
+      "tree_hash": "e536d87dfdd5aeeb723af8c5fa15c255b75b9fbc",
       "type": "github-subdir",
-      "version": "fe4b0ad"
+      "version": "3c4152d"
     },
     "skillshare": {
-      "commit": "5f63b5ced47c223dae5cae3f0af82055a43b06f9",
+      "commit": "5dd9925c987985027b2848a0689755347c10f3eb",
       "file_hashes": {
-        "SKILL.md": "sha256:c1d00d25ef366d25df55a58fa8aefef04bc363a562bbf2a2997e4a6dfa33ce2b",
+        "SKILL.md": "sha256:69c7f980483fbac69f580ce63092ae1bcccd4d1fcf3ebaacd75a73c6879a89bb",
         "references/TROUBLESHOOTING.md": "sha256:6964001f3f1fcbaadf0daae7478724ffd12196c20c7b3762876385670660cd99",
-        "references/audit.md": "sha256:62370c47cd12258f6b60b8e06788dda937c4bd7a4d3763414ed88e3e2c39e12a",
+        "references/audit-review.md": "sha256:8ce54d8440a56078da8d7a1849000ae985346c950de3c49164eab21049ff2924",
+        "references/audit.md": "sha256:53bef52e11747408a6b1e3db05b14328cc403b5cc8a38f6487c0253b6c5cc1b0",
         "references/backup.md": "sha256:d794b66b18120cfaae0dcb3773031a08426895fd618d02393337a1eb57f98f6f",
         "references/extras.md": "sha256:0845bb01f48b1ee6c91eee756319e301b224cec0f944b90dbee370934d0dbb57",
         "references/hooks.md": "sha256:de0f7c4261adfc9cd1aaa409ff484676c694e45011458d5885afb9108619e07d",
         "references/init.md": "sha256:bd5206d3f614c6c32b1c930cc07dd93fe893bb041838af12b612f17f55af78e3",
         "references/install.md": "sha256:56242531d4d4bf4a9fdf799e197415a4d94c65cfffeda0bc82ecd33a2b061bad",
         "references/log.md": "sha256:f726e59328ac1cb367cd7d5eaa257149d7f56ef5c650d9e0f9c7a091c0f9c442",
-        "references/mcp.md": "sha256:0af560fa5268f627171c7e3b5b9af7875a100615fd85d647776823c581c5d6e7",
+        "references/mcp.md": "sha256:baa59365b244c2bc2fa6a693d5e87b0a57698846d6cf2be21081b3a4e498bfd4",
         "references/memory-review.md": "sha256:e9fabed005f282c6702788bfe1a01aeca986184d48eadccf3ef0e9f4e465f5e3",
         "references/native-agents.md": "sha256:352d78cb64722717b5660655978afcef3d18638669ab96e0f2325f28d563576e",
-        "references/plugins.md": "sha256:bbefaca10346814d3201ae9ebb284cc3ee688b40a5777d1960cc46579810d338",
-        "references/status.md": "sha256:fce04dff6e5f613aa47f1c1da8b688ac673c0af46c346ba79bc2b7e45a1cdf3e",
+        "references/plugins.md": "sha256:6029edc99ec75b34a8c669d5af86c80ad90a08683a90d4271620438c8bb00bb7",
+        "references/status.md": "sha256:f4eb90d8034cff3394d27dd46d5df976e98ec47e08b8e83efd1bdc10e24b19b1",
         "references/sync.md": "sha256:aa2740ae9f92181e318f077ae85250cc8041914dfea67123975de30730276511",
-        "references/targets.md": "sha256:c58ccaf726e8a5448a3da952fc3101923e05e48d93d0ba9f9e39fe160a3f0680",
-        "references/trash.md": "sha256:97f69a115db2880f936c5202c54f5fd97be33078058eae4068fd244520a4ea22",
+        "references/targets.md": "sha256:ec816d1be60380b0e630336513a5dfca7930de11eeaeac1a5c82228e2fd797b8",
+        "references/trash.md": "sha256:e53ddc74ccf633d1c67481e616df584542dd882bac3a10e0857459628322f219",
         "scripts/run.sh": "sha256:e434ebdb7d3ae0b37c00ddc36687bc975da9e766b8cb863f9aed9a624ebbdfa9"
       },
-      "installed_at": "2026-10-30T15:37:19.975992485+01:00",
+      "installed_at": "2026-11-05T14:49:04.441068867+01:00",
       "repo_url": "https://github.com/runkids/skillshare.git",
       "source": "https://github.com/runkids/skillshare.git/skills/skillshare",
       "subdir": "skills/skillshare",
-      "tree_hash": "91af1a3f47bdb366d1f03ee60388c13d5a45976d",
+      "tree_hash": "a604f3abe47976ac22a0a666b27da1d45d07a4b6",
       "type": "github-subdir",
-      "version": "5f63b5c"
+      "version": "5dd9925"
     },
     "tdd": {
       "commit": "49dd158d1076134a641b33efb035946536778336",
@@ -174,7 +209,7 @@
       "subdir": "skills/engineering/tdd",
       "tree_hash": "667dbdd00c09d0e2189e082986e6a4d61a67c2a6",
       "type": "github-subdir",
-      "version": "a496f55"
+      "version": "4ae2317"
     }
   },
   "version": 1
