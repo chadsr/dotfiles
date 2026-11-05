@@ -1,6 +1,5 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "autoupdate": false,
   "lsp": {
     "basedpyright": {
       "command": [
@@ -18,38 +17,47 @@
     }
   },
   "mcp": {
-    "MCP_DOCKER": {
-      "command": [
-        "docker",
-        "mcp",
-        "gateway",
-        "run",
-        "--profile",
-        "dev-tools"
-      ],
-      "enabled": true,
-      "type": "local"
-    },
-    "debugmcp": {
-      "enabled": true,
-      "type": "remote",
-      "url": "http://localhost:3001/mcp"
+    "servers": {
+      "MCP_DOCKER": {
+        "command": [
+          "docker",
+          "mcp",
+          "gateway",
+          "run",
+          "--profile",
+          "dev-tools"
+        ],
+        "type": "local"
+      },
+      "debugmcp": {
+        "type": "remote",
+        "url": "http://localhost:3001/mcp"
+      }
     }
   },
   "model": "zai-coding-plan/glm-5.3",
-  "plugin": [],
-  "provider": {
+  "permissions": [
+    {
+      "action": "external_directory",
+      "effect": "ask",
+      "resource": "*"
+    },
+    {
+      "action": "external_directory",
+      "effect": "allow",
+      "resource": "/tmp/opencode/*"
+    }
+  ],
+  "providers": {
     "zai-coding-plan": {
       "models": {
         "glm-5.3": {
-          "options": {
+          "settings": {
             "reasoningEffort": "max"
           }
         }
       }
     }
   },
-  "tools": {
-    "write": true
-  }
+  "update": "disable"
 }
