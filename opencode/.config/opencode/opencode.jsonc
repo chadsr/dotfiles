@@ -53,11 +53,15 @@
       "models": {
         "glm-5.3": {
           "settings": {
-            "reasoningEffort": "max"
+            "reasoningEffort": "max",
+            "thinking": { "type": "enabled", "clear_thinking": false }
           }
         }
       }
     }
   },
-  "update": "disable"
+  "update": "disable",
+  "plugins": [
+    "@tarquinen/opencode-dcp@latest"
+  ]
 }

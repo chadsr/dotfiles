@@ -100,7 +100,9 @@ zed/.local/share/zed/*
 !khal/.config/khal/.gitkeep
 !opencode/.config/opencode/AGENTS.md
 !opencode/.config/opencode/cli.json
-!opencode/.config/opencode/opencode.json
+!opencode/.config/opencode/opencode.jsonc
+!opencode/.config/opencode/sandbox
+!opencode/.config/opencode/sandbox/**
 !openspec/.local/share/openspec/shared/.gitkeep
 !pass/.password-store/.gpg-id
 !pass/.password-store/*.gpg
