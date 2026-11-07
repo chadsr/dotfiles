@@ -13,7 +13,7 @@
       "subdir": "skills/agents-md",
       "tree_hash": "79bf72b1b141202a03f515b4a133f4845cf8d9e6",
       "type": "github-subdir",
-      "version": "0c464f4"
+      "version": "e94f222"
     },
     "grilling": {
       "commit": "a496f5513d4a4cf889bc48e189e579f4b0bdf6aa",
@@ -30,30 +30,30 @@
       "version": "4ae2317"
     },
     "langfuse": {
-      "commit": "dd2b16cda5fde7fcfb363521cff88e0a29300eb7",
+      "commit": "6fb2baf4413719ec241916e25e4a0330372c9d49",
       "file_hashes": {
-        "SKILL.md": "sha256:312a76ca32756062f28f95cbf36368e8aeb02212f2e3296e9ac214c029eaaae5",
+        "SKILL.md": "sha256:0f7b3ea0f8738a8828aa267d9cc11e2bccd154c56458224d689fa2af2d8da10d",
         "references/ci-cd.md": "sha256:3982cd4f5ed88c4402a1fccdb8289e8caedab482f122fc0c8ca712e6a727d2c0",
-        "references/cli.md": "sha256:eeb58ce7557978169fb207f53bda866d85bc3d13330019546ac5695c6941ba8c",
+        "references/cli.md": "sha256:3e1f6eb1f7d427871d6fbe5d7203e7aa0ed582348c97b9e67aff59bcac526b0b",
         "references/cost-optimization.md": "sha256:4e046ff992158272ba17c6dc50adea3585440cedd1af7cf43b12f0745eb791c5",
-        "references/create-dataset.md": "sha256:b0a0b34620d5054c588ffa4b016c39e92ede1fdbed18c210f2e9476c88bb49ae",
-        "references/error-analysis.md": "sha256:a818baef6fee26f682c50ea2380c12902b1c085ef3d7ac8f06499525045e9024",
-        "references/instrumentation.md": "sha256:668440ae785f67a2d01872eaea780ba2e237e0653894b55c74a9dd93fda647c7",
+        "references/create-dataset.md": "sha256:583e4b4391d0c593233e6b2b899194046c40afd1f5755b7cf39b51ecf9996542",
+        "references/error-analysis.md": "sha256:9af27e709256d11b78e7cb123f0f6476eb53b7b3e893dc3a40aed54f6afbd197",
+        "references/instrumentation.md": "sha256:70177a77d11fb2c26317a752ebc07dc9c13db5df25d87d36caa3d63fe1b16078",
         "references/judge-calibration.md": "sha256:95edd5f90aae53218cff3e696484079b14a1dba1fa0779940abcb4782285efda",
         "references/prompt-engineering.md": "sha256:671c6ff54febec23fe5200408e56410b1e4d42bc7d8bd592cf60d112ae991c5e",
         "references/prompt-migration.md": "sha256:c194a0df3614bf8ebfabab5a1729538d276fad8d6ba89fac3b2cfed38a3ff5bc",
         "references/setting-up-evals.md": "sha256:bb17bd66132bd05d43f234c820cd12d19403d53bb657ab441c0039248cd61c3a",
         "references/skill-feedback.md": "sha256:4a95834cdaacfd4248bdd1a079550981472803a461f824a0b2cc506e055f50c7",
         "references/user-feedback.md": "sha256:1111706198dad1adeea04fd700688b44b8a16ed9459b77198d6ce6a04556f2d6",
-        "references/v4-project-migration.md": "sha256:912d8639e9a60c5e138c42832bc2374e5622916fcc0cfe8814a0420ab06b587e"
+        "references/v4-project-migration.md": "sha256:59108e319d6a5e791101bbd122b7775bcbb65978bf766137314652eeef145b13"
       },
-      "installed_at": "2026-11-04T15:26:59.525743503+01:00",
+      "installed_at": "2026-11-07T10:41:56.701906094+01:00",
       "repo_url": "https://github.com/langfuse/skills.git",
-      "source": "https://github.com/langfuse/skills/skills/langfuse",
+      "source": "https://github.com/langfuse/skills.git/skills/langfuse",
       "subdir": "skills/langfuse",
-      "tree_hash": "e328647f773572c449699be03e719e95ab151a6f",
+      "tree_hash": "42996c667c57b5762367c9e41c033e6039549765",
       "type": "github-subdir",
-      "version": "dd2b16c"
+      "version": "6fb2baf"
     },
     "openspec-apply-change": {
       "commit": "9111a7654d7800391459431fff4eaf66e33a3d2e",
@@ -66,7 +66,7 @@
       "subdir": "skills/openspec-apply-change",
       "tree_hash": "5cacb29090c738225810a7e99b5bdf7bd2388025",
       "type": "github-subdir",
-      "version": "3e4d5f0"
+      "version": "0fa4a97"
     },
     "openspec-archive-change": {
       "commit": "9111a7654d7800391459431fff4eaf66e33a3d2e",
@@ -79,7 +79,7 @@
       "subdir": "skills/openspec-archive-change",
       "tree_hash": "43143bd966a2a5839b6ce42feb6bf868b5452d6b",
       "type": "github-subdir",
-      "version": "3e4d5f0"
+      "version": "0fa4a97"
     },
     "openspec-explore": {
       "commit": "6d04a1b58dedc95729d34e4f223d9d483aae210a",
@@ -92,7 +92,7 @@
       "subdir": "skills/openspec-explore",
       "tree_hash": "8413ce41bf1acd3e4853db8c5deb5a5e873ad412",
       "type": "github-subdir",
-      "version": "3e4d5f0"
+      "version": "0fa4a97"
     },
     "openspec-propose": {
       "commit": "6d04a1b58dedc95729d34e4f223d9d483aae210a",
@@ -105,7 +105,7 @@
       "subdir": "skills/openspec-propose",
       "tree_hash": "efc2afd2337353e2865a20917cfecdb668318ec5",
       "type": "github-subdir",
-      "version": "3e4d5f0"
+      "version": "0fa4a97"
     },
     "openspec-sync-specs": {
       "commit": "9111a7654d7800391459431fff4eaf66e33a3d2e",
@@ -118,7 +118,7 @@
       "subdir": "skills/openspec-sync-specs",
       "tree_hash": "4632c00cd2915a3b8ceea483a434fe65800ef7ac",
       "type": "github-subdir",
-      "version": "3e4d5f0"
+      "version": "0fa4a97"
     },
     "openspec-update-change": {
       "commit": "6d04a1b58dedc95729d34e4f223d9d483aae210a",
@@ -131,7 +131,7 @@
       "subdir": "skills/openspec-update-change",
       "tree_hash": "0e69f89565a7bb3641cfb25014e69af5c6b7547c",
       "type": "github-subdir",
-      "version": "3e4d5f0"
+      "version": "0fa4a97"
     },
     "shadcn-svelte": {
       "commit": "3c4152d7d3904e76f6f756ec8ffca7c9ec72f977",
@@ -165,12 +165,12 @@
       "version": "3c4152d"
     },
     "skillshare": {
-      "commit": "5dd9925c987985027b2848a0689755347c10f3eb",
+      "commit": "c19ff80611c20e9b69392ad4e4aeaf491d5036b7",
       "file_hashes": {
-        "SKILL.md": "sha256:69c7f980483fbac69f580ce63092ae1bcccd4d1fcf3ebaacd75a73c6879a89bb",
+        "SKILL.md": "sha256:ec608ffdcc8edd267a05845aa74df29349e4909d584b95282903f6e2d7191f5a",
         "references/TROUBLESHOOTING.md": "sha256:6964001f3f1fcbaadf0daae7478724ffd12196c20c7b3762876385670660cd99",
         "references/audit-review.md": "sha256:8ce54d8440a56078da8d7a1849000ae985346c950de3c49164eab21049ff2924",
-        "references/audit.md": "sha256:53bef52e11747408a6b1e3db05b14328cc403b5cc8a38f6487c0253b6c5cc1b0",
+        "references/audit.md": "sha256:eba9fefa8c8cc69e4f82d8126bea33f01303bf55e8b99fcb88c4789452eddce8",
         "references/backup.md": "sha256:d794b66b18120cfaae0dcb3773031a08426895fd618d02393337a1eb57f98f6f",
         "references/extras.md": "sha256:0845bb01f48b1ee6c91eee756319e301b224cec0f944b90dbee370934d0dbb57",
         "references/hooks.md": "sha256:de0f7c4261adfc9cd1aaa409ff484676c694e45011458d5885afb9108619e07d",
@@ -183,17 +183,17 @@
         "references/plugins.md": "sha256:6029edc99ec75b34a8c669d5af86c80ad90a08683a90d4271620438c8bb00bb7",
         "references/status.md": "sha256:f4eb90d8034cff3394d27dd46d5df976e98ec47e08b8e83efd1bdc10e24b19b1",
         "references/sync.md": "sha256:aa2740ae9f92181e318f077ae85250cc8041914dfea67123975de30730276511",
-        "references/targets.md": "sha256:ec816d1be60380b0e630336513a5dfca7930de11eeaeac1a5c82228e2fd797b8",
+        "references/targets.md": "sha256:336a1e874696111c27102f07d9c0f5299d0856fc47707f49c4d355383c12f822",
         "references/trash.md": "sha256:e53ddc74ccf633d1c67481e616df584542dd882bac3a10e0857459628322f219",
         "scripts/run.sh": "sha256:e434ebdb7d3ae0b37c00ddc36687bc975da9e766b8cb863f9aed9a624ebbdfa9"
       },
-      "installed_at": "2026-11-05T14:49:04.441068867+01:00",
+      "installed_at": "2026-11-07T10:42:03.113349174+01:00",
       "repo_url": "https://github.com/runkids/skillshare.git",
       "source": "https://github.com/runkids/skillshare.git/skills/skillshare",
       "subdir": "skills/skillshare",
-      "tree_hash": "a604f3abe47976ac22a0a666b27da1d45d07a4b6",
+      "tree_hash": "74814bb76fa0806a67322d902fb95b111c74c999",
       "type": "github-subdir",
-      "version": "5dd9925"
+      "version": "c19ff80"
     },
     "tdd": {
       "commit": "49dd158d1076134a641b33efb035946536778336",
