@@ -140,10 +140,13 @@
     "https://models.dev/model-schema.json": true,
     "https://opencode.ai/config.json": true,
     "https://opencode.ai/tui.json": true,
+    "https://opencode.ai/v2/cli.json": true,
+    "https://raw.githubusercontent.com/Opencode-DCP/opencode-dynamic-context-pruning/master/dcp.schema.json": true,
     "https://raw.githubusercontent.com/devcontainers/spec/": true,
     "https://raw.githubusercontent.com/microsoft/vscode/": true,
     "https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/schema/2025-11-25/schema.json": true,
     "https://schemastore.azurewebsites.net/": true,
+    "https://spec.openapis.org/": true,
     "https://www.schemastore.org/": true
   },
   "jupyter.enableExtendedPythonKernelCompletions": true,
