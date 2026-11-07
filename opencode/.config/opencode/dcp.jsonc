@@ -1,0 +1,11 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Opencode-DCP/opencode-dynamic-context-pruning/master/dcp.schema.json",
+  "compress": {
+    "modelMaxLimits": {
+      "provider/glm-5.3": "50%"
+    },
+    "modelMinLimits": {
+      "provider/glm-5.3": "10%"
+    }
+  }
+}

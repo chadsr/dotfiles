@@ -2,12 +2,15 @@
   "$schema": "https://opencode.ai/v2/cli.json",
   "animations": true,
   "attention": {
-    "enabled": true,
+    "notifications": true,
     "sound": false
   },
   "keybinds": {
     "agent.cycle": "tab"
   },
+  "plugins": [
+    "./herdr-opencode"
+  ],
   "scroll": {
     "acceleration": true
   },
