@@ -1,0 +1,21 @@
+# Sheprd overrides. Saved changes reload automatically.
+# Unset keys inherit config-gpui.toml.
+
+layout = "comfortable-rounded"
+theme = "Catppuccin Mocha"
+status_icons = "wave"
+
+[backdrop]
+opacity = 0.9
+
+[terminal]
+family = "Hack Nerd Font Mono"
+
+[sidebar]
+family = "Hack Nerd Font Mono"
+
+[tabs]
+family = "Hack Nerd Font Mono"
+
+[ui]
+family = "Hack Nerd Font Mono"

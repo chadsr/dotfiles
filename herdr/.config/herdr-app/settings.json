@@ -1,0 +1,11 @@
+{
+  "font": "Hack Nerd Font Mono",
+  "font_ligatures": false,
+  "minimum_contrast": 1,
+  "sounds": {
+    "enabled": false
+  },
+  "telemetry": false,
+  "ui_font": "Hack Nerd Font Mono",
+  "zoom": 1
+}

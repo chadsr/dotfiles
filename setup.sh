@@ -895,6 +895,7 @@ declare -a stow_dirs_general=(
   gpu-screen-recorder
   gtk
   helix
+  herdr
   hyprland
   input-remapper
   java
