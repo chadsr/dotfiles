@@ -394,6 +394,7 @@ echo "Setting up user directory configs"
 
 # Parent dirs that should not be symlinks from stow-ing
 declare -a mk_dirs=(
+  ~/.agents/skills/
   ~/.cargo/
   ~/.config/bat/themes/
   ~/.config/clipse/
