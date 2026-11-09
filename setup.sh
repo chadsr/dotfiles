@@ -978,7 +978,7 @@ skillshare init || {
   echo "failed to init skillshare. Is it already initialized?"
 }
 
-skillshare update --all || {
+skillshare update "$(jq -r '.entries | keys[]' ~/.config/skillshare/skills/.metadata.json)" --force || {
   echo "failed to sync skillshare"
   exit 1
 }
