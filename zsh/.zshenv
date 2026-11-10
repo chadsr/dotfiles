@@ -25,8 +25,11 @@ else
 fi
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-  AGENT_SSH_SOCKET=$(gpgconf --list-dirs agent-ssh-socket)
-  export SSH_AUTH_SOCK=AGENT_SSH_SOCKET
+  # forwarded agent takes priority; fall back to gpg-agent
+  if [[ -z "$SSH_AUTH_SOCK" ]]; then
+    ssh_auth_sock=$(gpgconf --list-dirs agent-ssh-socket)
+    export SSH_AUTH_SOCK=ssh_auth_sock
+  fi
   gpg-connect-agent updatestartuptty /bye >/dev/null
 
   LINUX_ASKPASS=$(which wayprompt-ssh-askpass)
@@ -34,7 +37,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 
   # Export env vars from systemd user units
   # shellcheck disable=SC1090,SC1091
-  source <(systemctl --user show-environment | sed 's/ //g; s/^/export /')
+  source <(systemctl --user show-environment | sed 's/ //g; s/^/export /' | grep -v '^export SSH_AUTH_SOCK=')
 
   export BEMENU_OPTS="-n -m -1 --nb #000b1ecc --tb #000b1ecc --tf #ea00d9ff --nf #0abdc6ff"
 
