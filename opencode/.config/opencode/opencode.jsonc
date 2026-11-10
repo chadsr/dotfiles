@@ -32,6 +32,10 @@
       "debugmcp": {
         "type": "remote",
         "url": "http://localhost:3001/mcp"
+      },
+      "penpot": {
+        "type": "remote",
+        "url": "http://localhost:9001/mcp/stream"
       }
     }
   },
@@ -54,7 +58,10 @@
         "glm-5.3": {
           "settings": {
             "reasoningEffort": "max",
-            "thinking": { "type": "enabled", "clear_thinking": false }
+            "thinking": {
+              "type": "enabled",
+              "clear_thinking": false
+            }
           }
         }
       }
