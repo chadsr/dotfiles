@@ -66,7 +66,7 @@
       "subdir": "skills/openspec-apply-change",
       "tree_hash": "5cacb29090c738225810a7e99b5bdf7bd2388025",
       "type": "github-subdir",
-      "version": "0fa4a97"
+      "version": "579fcac"
     },
     "openspec-archive-change": {
       "commit": "0fa4a9705c20ef1c571fe3ded74435733e4b73a1",
@@ -79,7 +79,7 @@
       "subdir": "skills/openspec-archive-change",
       "tree_hash": "43143bd966a2a5839b6ce42feb6bf868b5452d6b",
       "type": "github-subdir",
-      "version": "0fa4a97"
+      "version": "579fcac"
     },
     "openspec-explore": {
       "commit": "0fa4a9705c20ef1c571fe3ded74435733e4b73a1",
@@ -92,7 +92,7 @@
       "subdir": "skills/openspec-explore",
       "tree_hash": "8413ce41bf1acd3e4853db8c5deb5a5e873ad412",
       "type": "github-subdir",
-      "version": "0fa4a97"
+      "version": "579fcac"
     },
     "openspec-propose": {
       "commit": "0fa4a9705c20ef1c571fe3ded74435733e4b73a1",
@@ -105,7 +105,7 @@
       "subdir": "skills/openspec-propose",
       "tree_hash": "efc2afd2337353e2865a20917cfecdb668318ec5",
       "type": "github-subdir",
-      "version": "0fa4a97"
+      "version": "579fcac"
     },
     "openspec-sync-specs": {
       "commit": "0fa4a9705c20ef1c571fe3ded74435733e4b73a1",
@@ -118,7 +118,7 @@
       "subdir": "skills/openspec-sync-specs",
       "tree_hash": "4632c00cd2915a3b8ceea483a434fe65800ef7ac",
       "type": "github-subdir",
-      "version": "0fa4a97"
+      "version": "579fcac"
     },
     "openspec-update-change": {
       "commit": "6d04a1b58dedc95729d34e4f223d9d483aae210a",
