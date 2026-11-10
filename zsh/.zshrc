@@ -100,7 +100,9 @@ _git_alias_setup() {
       alias "${p}${al}"="git ${al}"
       _git_alias_exp[${p}${al}]="$exp"
       _git_alias_names+=("${p}${al}")
-      [[ "$exp" != '!'* ]] && compdef "_git-${sub}" "${p}${al}"
+
+      # shellcheck disable=SC2154 # 'functions' is a zsh special associative array
+      [[ "$exp" != '!'* ]] && (($+functions[compdef])) && compdef "_git-${sub}" "${p}${al}"
     done
   done < <(git config --get-regexp '^alias\.')
   # Prepend _git_alias_describe so the shorthand names show their expansion in the menu
@@ -120,6 +122,8 @@ _git_alias_setup_hook() {
   add-zsh-hook -d precmd _git_alias_setup_hook
   _git_alias_setup
 }
+# Initialize completion if no plugin did
+[[ -v _comp_setup ]] || { autoload -Uz compinit && compinit; }
 add-zsh-hook precmd _git_alias_setup_hook
 
 ###########
