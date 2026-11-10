@@ -2829,6 +2829,35 @@ servers:
             - search
           license: MIT License
           owner: openags
+  - type: image
+    secrets: default
+    image: ghcr.io/astral-sh/uv:python3.14-trixie-slim
+    snapshot:
+      server:
+        name: penpot
+        type: server
+        image: ghcr.io/astral-sh/uv:python3.14-trixie-slim
+        description: Bridge to a remote Penpot MCP streamable-http endpoint via mcp-proxy.
+        title: Penpot
+        longLived: true
+        remote: {}
+        secrets:
+          - name: penpot.host
+            env: PENPOT_HOST
+          - name: penpot.user_token
+            env: PENPOT_USER_TOKEN
+        env:
+          - name: UV_PYTHON_DOWNLOADS
+            value: '0'
+        command:
+          - sh
+          - -c
+          - exec uvx mcp-proxy --transport streamablehttp -H Authorization "Bearer $(printenv PENPOT_USER_TOKEN)" "$(printenv PENPOT_HOST)/mcp/stream?userToken=$(printenv PENPOT_USER_TOKEN)"
+        volumes:
+          - docker-mcp-uv-cache-penpot:/root/.cache/uv
+          - docker-mcp-uv-tools-penpot:/root/.local/share/uv
+        extraHosts:
+          - host.docker.internal:host-gateway
 secrets:
   default:
     provider: docker-desktop-store

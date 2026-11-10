@@ -1,0 +1,25 @@
+name: penpot
+title: 'Penpot'
+type: server
+description: 'Bridge to a remote Penpot MCP streamable-http endpoint via mcp-proxy.'
+image: ghcr.io/astral-sh/uv:python3.14-trixie-slim
+longLived: true
+extraHosts:
+  - 'host.docker.internal:host-gateway'
+command:
+  - sh
+  - -c
+  - 'exec uvx mcp-proxy --transport streamablehttp -H Authorization "Bearer $(printenv PENPOT_USER_TOKEN)" "$(printenv PENPOT_HOST)/mcp/stream?userToken=$(printenv PENPOT_USER_TOKEN)"'
+env:
+  - name: UV_PYTHON_DOWNLOADS
+    value: '0'
+secrets:
+  - name: penpot.host
+    env: PENPOT_HOST
+    example: https://penpot.example.com
+  - name: penpot.user_token
+    env: PENPOT_USER_TOKEN
+    example: your_penpot_user_token
+volumes:
+  - docker-mcp-uv-cache-penpot:/root/.cache/uv
+  - docker-mcp-uv-tools-penpot:/root/.local/share/uv
