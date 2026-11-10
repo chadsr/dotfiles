@@ -132,7 +132,7 @@
     amend = commit --amend --no-edit
     br = branch
     brd = branch -d
-    brD = branch -D
+    brdf = branch -D
     cl = clone
     cm = commit -m
     co = switch
