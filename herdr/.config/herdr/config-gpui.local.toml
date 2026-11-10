@@ -4,6 +4,7 @@
 layout = "comfortable-rounded"
 theme = "Catppuccin Mocha"
 status_icons = "wave"
+remove_merged_worktrees = true
 
 [backdrop]
 opacity = 0.9
@@ -19,3 +20,7 @@ family = "Hack Nerd Font Mono"
 
 [ui]
 family = "Hack Nerd Font Mono"
+
+[chat]
+glide = true
+max_width = 0

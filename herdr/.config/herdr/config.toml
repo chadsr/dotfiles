@@ -2,3 +2,6 @@
 
 [ui.sound]
 enabled = false
+
+[ui.toast]
+delivery = "herdr"
