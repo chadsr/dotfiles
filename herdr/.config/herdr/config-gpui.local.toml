@@ -5,9 +5,10 @@ layout = "comfortable-rounded"
 theme = "Catppuccin Mocha"
 status_icons = "wave"
 remove_merged_worktrees = true
+herdr_2_terminals = true
 
 [backdrop]
-opacity = 0.9
+opacity = 0.8
 
 [terminal]
 family = "Hack Nerd Font Mono"
@@ -24,3 +25,6 @@ family = "Hack Nerd Font Mono"
 [chat]
 glide = true
 max_width = 0
+
+[tab_labels]
+agent_title = true

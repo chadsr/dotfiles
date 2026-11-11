@@ -4,4 +4,4 @@
 enabled = false
 
 [ui.toast]
-delivery = "herdr"
+delivery = "system"
