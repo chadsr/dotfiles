@@ -25,7 +25,8 @@
           "gateway",
           "run",
           "--profile",
-          "dev-tools"
+          "dev-tools",
+          "--verify-signatures=false"
         ],
         "type": "local"
       },
