@@ -53,7 +53,7 @@
       "subdir": "skills/langfuse",
       "tree_hash": "42996c667c57b5762367c9e41c033e6039549765",
       "type": "github-subdir",
-      "version": "6fb2baf"
+      "version": "f0bcb13"
     },
     "openspec-apply-change": {
       "commit": "0fa4a9705c20ef1c571fe3ded74435733e4b73a1",
@@ -66,7 +66,7 @@
       "subdir": "skills/openspec-apply-change",
       "tree_hash": "5cacb29090c738225810a7e99b5bdf7bd2388025",
       "type": "github-subdir",
-      "version": "579fcac"
+      "version": "a959be7"
     },
     "openspec-archive-change": {
       "commit": "0fa4a9705c20ef1c571fe3ded74435733e4b73a1",
@@ -79,7 +79,7 @@
       "subdir": "skills/openspec-archive-change",
       "tree_hash": "43143bd966a2a5839b6ce42feb6bf868b5452d6b",
       "type": "github-subdir",
-      "version": "579fcac"
+      "version": "a959be7"
     },
     "openspec-explore": {
       "commit": "0fa4a9705c20ef1c571fe3ded74435733e4b73a1",
@@ -92,7 +92,7 @@
       "subdir": "skills/openspec-explore",
       "tree_hash": "8413ce41bf1acd3e4853db8c5deb5a5e873ad412",
       "type": "github-subdir",
-      "version": "579fcac"
+      "version": "a959be7"
     },
     "openspec-propose": {
       "commit": "0fa4a9705c20ef1c571fe3ded74435733e4b73a1",
@@ -105,7 +105,7 @@
       "subdir": "skills/openspec-propose",
       "tree_hash": "efc2afd2337353e2865a20917cfecdb668318ec5",
       "type": "github-subdir",
-      "version": "579fcac"
+      "version": "a959be7"
     },
     "openspec-sync-specs": {
       "commit": "0fa4a9705c20ef1c571fe3ded74435733e4b73a1",
@@ -118,7 +118,7 @@
       "subdir": "skills/openspec-sync-specs",
       "tree_hash": "4632c00cd2915a3b8ceea483a434fe65800ef7ac",
       "type": "github-subdir",
-      "version": "579fcac"
+      "version": "a959be7"
     },
     "openspec-update-change": {
       "commit": "6d04a1b58dedc95729d34e4f223d9d483aae210a",
@@ -131,7 +131,321 @@
       "subdir": "skills/openspec-update-change",
       "tree_hash": "0e69f89565a7bb3641cfb25014e69af5c6b7547c",
       "type": "github-subdir",
-      "version": "0fa4a97"
+      "version": "a959be7"
+    },
+    "penpot-anti-slop": {
+      "commit": "fe4f99e51c7149512d50cd75f0d55204c2458664",
+      "file_hashes": {
+        "SKILL.md": "sha256:d23bd4d8e2de729ed6510ffdafa3abe4eb44b286cb5e75d5ec1b312e75c07ac4",
+        "references/01-penpot-mapping.md": "sha256:add33c820e7715827214980f6ce04ec4c9aba76abbb1d4a067cb48d44ae89175",
+        "references/02-direction-playbook.md": "sha256:89fb1bc6eceee675e656957eda1ce6072c62a9ca356314b05aceee2049e16cad",
+        "references/03-exam-protocol.md": "sha256:48d8ae6e03deb45fe3ad6406d642ad71152daba2d867bb5aeb56e05c0b33b75b",
+        "references/04-deck-tells.md": "sha256:7f100adb603912b995992d76785d72d86a7f8efcd000b5a587dadb7d597d32c4",
+        "scripts/antiSlopPrefs.js": "sha256:ed1d088e380df8e2db74681b8dfa3ecf5a27bc577c42c5fa53fd9b51e0a4b642",
+        "scripts/listFontCandidates.js": "sha256:b486decaec5432b151f91757799f8d901bd34e5a9d5ab0f64d1082c65377b6f6",
+        "scripts/scanSlopProbes.js": "sha256:f4ccdafe2805365e4ad7a69a860c1588edf175c3916c414a40bf8d1095e23650",
+        "scripts/slopScore.js": "sha256:f042d004c9c87a2ea9e841d173f3915f20a1d3b785e92cc76eea6c3a32f2b7c2"
+      },
+      "installed_at": "2026-11-10T19:08:36.377268365+01:00",
+      "repo_url": "https://github.com/penpot/penpot-ai-kit.git",
+      "source": "https://github.com/penpot/penpot-ai-kit/skills/penpot-anti-slop",
+      "subdir": "skills/penpot-anti-slop",
+      "tree_hash": "37307338f5988c544ccf21451aee0dce6e7ba286",
+      "type": "github-subdir",
+      "version": "fe4f99e"
+    },
+    "penpot-audit-accessibility": {
+      "commit": "fe4f99e51c7149512d50cd75f0d55204c2458664",
+      "file_hashes": {
+        "SKILL.md": "sha256:5191ca422e882c7d873ae8c799b10b3ceb6746a83c1156c3c5488e1981f92a94",
+        "references/01-inspection.md": "sha256:5a706c08d943ec0c875f78c44983304a968f9a75f57f2ba0f9ac448941a7defd",
+        "references/02-contrast-checks.md": "sha256:1d271b0e4f0fc60068199a188346ab90eab4c37599f837caf418bfb2c9b4b04c",
+        "references/03-sizing-checks.md": "sha256:550ec4ddf1ad84fece8432ab3245d9c3d3ac03c090d37fa73330f71cfa997950",
+        "references/04-report-generation.md": "sha256:261105d24c20fd4fc4e932f07ca7f44e824e049afd02f288abec4f63ea114502",
+        "scripts/checkColorContrast.js": "sha256:88f91c95421cf9e7b22488917db1c8e464eb953a51af873aba834e87e8c9584d",
+        "scripts/checkTouchTargets.js": "sha256:ec4de0eb5d617c7128e48ad16994ca5cd40c63996975301ac4b145aa75014603",
+        "scripts/collectAccessibilityData.js": "sha256:2055b8e74ceb3cf3c8e211cca83182b9bf8e63a845f0daf407ffe850c7caa908",
+        "scripts/generateReport.js": "sha256:ed25d80908cedcc2265f77b7c9dc0cf0cb075bfe16c1bd997ba13a9b52ef2d2c"
+      },
+      "installed_at": "2026-11-10T19:08:36.40934505+01:00",
+      "repo_url": "https://github.com/penpot/penpot-ai-kit.git",
+      "source": "https://github.com/penpot/penpot-ai-kit/skills/penpot-audit-accessibility",
+      "subdir": "skills/penpot-audit-accessibility",
+      "tree_hash": "1822e9b459b546ff7e48e97c9915e0c4650659b3",
+      "type": "github-subdir",
+      "version": "fe4f99e"
+    },
+    "penpot-audit-tokens": {
+      "commit": "fe4f99e51c7149512d50cd75f0d55204c2458664",
+      "file_hashes": {
+        "SKILL.md": "sha256:c23a82ef7277a65f0b559ea596a7f13e815607f2a28f0f37244838a04d8fb511",
+        "references/01-inspection.md": "sha256:62223b77cdf9865f662f2526de77cfd678ffb86d62de15c5f7bc73c38619ab01",
+        "references/02-hardcoded-value-detection.md": "sha256:d9a22f305750838f2a3644b0c681f547eccfbc920319d8ba034f38c12840fead",
+        "references/03-orphan-and-grid-checks.md": "sha256:c8158224d453361037c0a070433dc42d48c3970768d8ae8584c47e8a6f69e6ea",
+        "references/04-report-generation.md": "sha256:140cb281af753eae66679f30061e562ad5755eb9bd5515bb4705b8a3fa19f2da",
+        "scripts/checkGridAndOrphans.js": "sha256:a5027b7687782f2440bcf24890a9bc78ec085e20735620f033f347a043465dc4",
+        "scripts/collectStyleUsage.js": "sha256:d1f906b6eceee10b8e984d015caef35b17a24fa779e464cb4df90edd2fea3eeb",
+        "scripts/detectHardcodedValues.js": "sha256:e7fbcaaa019e43a9dee7adf73dc0b2656328b4053cd89d6140a0408481b6bcc0",
+        "scripts/generateTokenReport.js": "sha256:2a495daf39fa05f5cdffef2905efaf8480ebcda128fb144a7b1b67dde3c6f3c1"
+      },
+      "installed_at": "2026-11-10T19:08:36.440045227+01:00",
+      "repo_url": "https://github.com/penpot/penpot-ai-kit.git",
+      "source": "https://github.com/penpot/penpot-ai-kit/skills/penpot-audit-tokens",
+      "subdir": "skills/penpot-audit-tokens",
+      "tree_hash": "da5c8ea670813e6dc7e1df39cd761ceb4f06a68a",
+      "type": "github-subdir",
+      "version": "fe4f99e"
+    },
+    "penpot-build-deck": {
+      "commit": "fe4f99e51c7149512d50cd75f0d55204c2458664",
+      "file_hashes": {
+        "SKILL.md": "sha256:09fcd642401c6f1551d935ac6dfa08afa692b5de4021385d190cb75ea7cb7626",
+        "references/01-deck-brief-analysis.md": "sha256:21f880d3eec0a2b837a97ac97305d62dbc433f567db8d52fd7ab92b4a1d1a818",
+        "references/02-deck-styles.md": "sha256:cda09167b1e7003adddd95f5c1ce0f175cee964a626dc64bcb7a03f87f326383",
+        "references/03-slide-archetypes.md": "sha256:3f955048ec00f43295e0a012fb498c38862f0e7149a79cd57b72bc861b768a4e",
+        "references/04-typography-and-grid.md": "sha256:7d97d9a0668328d8656a9f48afad318a375cef5fb5c28e81ed812965755a4b17",
+        "references/05-visuals-and-effects.md": "sha256:24f7053cede7984b0dd1f4b9911c8936f1de21fb9d4ae738f5f2a488ab0d4666",
+        "references/06-flow-and-playback.md": "sha256:fdb6828a5620e18fbdaab5925129c318efc99f56fb3cd67064fdb97ba1a387a8",
+        "references/07-critique-framework.md": "sha256:670c28544b1c636a6e6ec04235948427da66c4ebe61703b62ecbc54afb26aaf4",
+        "references/08-anti-rationalization.md": "sha256:7418135595f33a082e9e6650c520834fa47398d0cbe202c799efe52eecf48f40",
+        "references/09-error-recovery.md": "sha256:4bb3bdc4366e5a133e115314569adbdeba90460f3b23dba6b237bd2aea0329f8",
+        "scripts/applyDeckEffects.js": "sha256:848bc4c962dfbcacc94ec448f6f491913223532a22aaaf66f75fe480183f1145",
+        "scripts/auditDeckQuality.js": "sha256:3422042128517bb7b21ed01ec8b5a19fbf8a382a1aff4bb580df5437db28a389",
+        "scripts/buildSlide.js": "sha256:ff6d61328336939924e96025d6f988cc581deb54f0d8970d22616f6337f9e20e",
+        "scripts/createDeckPage.js": "sha256:b5bdd75514abbd66d28549e173d342063187b6c7b246e6b522c8f31d89152342",
+        "scripts/setupDeckSystem.js": "sha256:96c12bf8c1545a059fa0d6fcc755f0e7a2ef73952218a0b7f456f981bd298a78",
+        "scripts/wireDeckFlow.js": "sha256:786e9d48f4609b4fb03c8783280cbfde47450c5570d25955adc57e1971188adf"
+      },
+      "installed_at": "2026-11-10T19:08:36.621130397+01:00",
+      "repo_url": "https://github.com/penpot/penpot-ai-kit.git",
+      "source": "https://github.com/penpot/penpot-ai-kit/skills/penpot-build-deck",
+      "subdir": "skills/penpot-build-deck",
+      "tree_hash": "9e37ebbcb2090b3a4945d649eabcafe548a002a6",
+      "type": "github-subdir",
+      "version": "fe4f99e"
+    },
+    "penpot-build-from-code": {
+      "commit": "fe4f99e51c7149512d50cd75f0d55204c2458664",
+      "file_hashes": {
+        "SKILL.md": "sha256:dea903fd6dab126546af5713d0eb2a82049a14414d22315a1515c5a2c7cef723",
+        "references/01-discovery.md": "sha256:9d7171a1c5751d4a62ff16b5583acab85b96d469c0989de3a15f2a140690580f",
+        "references/02-component-assembly.md": "sha256:467b017b413efcc0b8d896910b2b0f55997b58b351112ea28472800f7bfdcb08",
+        "references/03-token-binding.md": "sha256:52b1317df4b446a5796b0ef6964ae3162c5b28de91f665f5ff1fe0ba8210d9e4",
+        "references/04-incremental-transform.md": "sha256:8d879d286d86241573685463eb4b1e9588346c6434279fc72200dceccf1a00b0",
+        "references/05-anti-rationalization.md": "sha256:32698fc825b0cdf6c2c7a698559652bac849315393dd3412629075a2a4997621",
+        "references/06-error-recovery.md": "sha256:6ad49285ec76c1a4ba21706ee169c8469ea8051904372439d47dfc6518f04be0",
+        "scripts/buildSection.js": "sha256:b3f5fa2e4f53b270f7ee411c1f082bbfe4b19a41c6dd311aae797a8563d5fc26",
+        "scripts/createScreenWrapper.js": "sha256:eda28b3facd3efc640832d3684a4e0d985cbe0651ecbcd6bbf3061cd84be909d",
+        "scripts/inspectDesignSystem.js": "sha256:a7cb5b46e784e53ae6a1dc061057611801d68d4e79f3e9aa854391bec93c292e",
+        "scripts/validateScreen.js": "sha256:55ac8cbf13e0ddc116b90e9588aa71132ea234cede122cd6ad5405e1517a2521"
+      },
+      "installed_at": "2026-11-10T19:08:36.722972056+01:00",
+      "repo_url": "https://github.com/penpot/penpot-ai-kit.git",
+      "source": "https://github.com/penpot/penpot-ai-kit/skills/penpot-build-from-code",
+      "subdir": "skills/penpot-build-from-code",
+      "tree_hash": "e7483507eb44b5de103663966db23f9020c1b655",
+      "type": "github-subdir",
+      "version": "fe4f99e"
+    },
+    "penpot-build-screen": {
+      "commit": "fe4f99e51c7149512d50cd75f0d55204c2458664",
+      "file_hashes": {
+        "SKILL.md": "sha256:76455afb6cbd18c4acc002d46143413751cfc7a97035c9c63c2c93a8fb01abf9",
+        "references/01-brief-analysis.md": "sha256:5b7b0aa7be7fb8d6e3f4d7798d416602fe926f173d2a9d39242c1dc57b44fd35",
+        "references/02-style-profiles.md": "sha256:d7c151acbf4b1cfb99addcf2aa69627b83597db2662a90d98019987ae1661e84",
+        "references/03-layout-composition.md": "sha256:618ac6e368f134e182de7c5f890ba02e6d7818cebf840c4d4dc96a5b9c21e311",
+        "references/04-component-recipes.md": "sha256:1752ee9a36c945f6cf3fed73cf4f534ea7d75ca409b15fdc57a70d056610e5d9",
+        "references/05-critique-framework.md": "sha256:9234baf7ec9893c17e7efe2f901113651a1504232b0ed5184370d919da927b1b",
+        "references/06-anti-rationalization.md": "sha256:19e891a1febdce6d5bd65275fefc2ac5e4adcca41b557e5a9437b5ad9f4edfb3",
+        "references/07-error-recovery.md": "sha256:3d67963414d3bdaffbced802670be0029b4c2a747eb9addbdf11b750fbb0ab32",
+        "scripts/assembleScreen.js": "sha256:a7102f5cdb2353394af2fe5896d98f173bd52c335fc847bc3e1389c9866d8fdd",
+        "scripts/auditScreenQuality.js": "sha256:1c864f90e933f4fdcda8f224b48728ee3f3739f95777fbdacfc8aad87329e8a5",
+        "scripts/buildSection.js": "sha256:8d72518b1e48fe2d27a3b5218bb73bada519014fcb9b3a938e7769496759901c",
+        "scripts/createScreenFrame.js": "sha256:9c7d6dea044945017c46e566ae30c4f4e8578f399797305ea997edd50ccfa836",
+        "scripts/setupOrReuseSystem.js": "sha256:b99c01e49ab2813066ec07a869f5e79aaf13144070dd59131b4cce04f3a5e848"
+      },
+      "installed_at": "2026-11-10T19:08:36.78320836+01:00",
+      "repo_url": "https://github.com/penpot/penpot-ai-kit.git",
+      "source": "https://github.com/penpot/penpot-ai-kit/skills/penpot-build-screen",
+      "subdir": "skills/penpot-build-screen",
+      "tree_hash": "2368e5f44ca956f78bb3672d85fab4de8eafd5d1",
+      "type": "github-subdir",
+      "version": "fe4f99e"
+    },
+    "penpot-component-factory": {
+      "commit": "fe4f99e51c7149512d50cd75f0d55204c2458664",
+      "file_hashes": {
+        "SKILL.md": "sha256:056e3b41445fa00638b53da4b848bfb54997ea9098ba07c4d1790ab18568a57a",
+        "references/01-variant-axes.md": "sha256:cd502f5cb630a690ff5c3d781741493ad34fdc70bd679307b871a53a8275c6db",
+        "references/02-flex-grid-layout.md": "sha256:218f68133b833f20ba7c75881d2f7ea7e1624ae4c416885f3353c600d606643c",
+        "references/03-variant-api.md": "sha256:0e286580e541766ffb24ecb9a838373cfc27ac4a644b847b9503421eabb5988c",
+        "references/04-instance-swap-detach.md": "sha256:7b9531c1abdcab93acd796b6d5753a4162cc509c8e9fb9379dfe1d2993e2aad2",
+        "references/05-anti-rationalization.md": "sha256:e6b851109dfd77c1cfe7ce6412775fc3e39a0939b8ea2d938f0b9722dbc7ddae",
+        "references/06-error-recovery.md": "sha256:f250257bc8ede6f8ce42dac3e89f58573f2a86daf96a4491b6cdadb84740df91",
+        "scripts/buildComponentBase.js": "sha256:2bea1a113bdb54f0975394557210ed10cead15682d6f8a11295d426cd1955ea0",
+        "scripts/createVariantGroup.js": "sha256:8f7964634d9d814c16c14e87301a0e67b520b0fb1da950c679fad7b1721233c9",
+        "scripts/createVariants.js": "sha256:a8b42f164f47f98ee99d459ab34986f908c0eaad94fc8b81cc72bca05bbf0c70",
+        "scripts/switchVariantDemo.js": "sha256:dd73a41af448d18fae6fbca5bb6b451d4ab67ddf3f2dadaa4e59f7b1cd37ea8d",
+        "scripts/validateComponent.js": "sha256:186a92dc7e9eeefbd149c9562a44e7c6af6067c48fe1fcf5e5f63c9377ffba55"
+      },
+      "installed_at": "2026-11-10T19:08:36.840925356+01:00",
+      "repo_url": "https://github.com/penpot/penpot-ai-kit.git",
+      "source": "https://github.com/penpot/penpot-ai-kit/skills/penpot-component-factory",
+      "subdir": "skills/penpot-component-factory",
+      "tree_hash": "628a7c38753384c4e87066de4bef4c624bdc7f9f",
+      "type": "github-subdir",
+      "version": "fe4f99e"
+    },
+    "penpot-design-md": {
+      "commit": "fe4f99e51c7149512d50cd75f0d55204c2458664",
+      "file_hashes": {
+        "SKILL.md": "sha256:894c8f3debe719c3957e9fc33c800f145cea1aa2d33dec6cc6cb7bfa450d3faa",
+        "references/01-extraction.md": "sha256:5ddc072754c65112bbc0c4b799757dc0c9868c18dd9cfb5ea09306840cb43ae9",
+        "references/02-designmd-format.md": "sha256:72f5468519fb6e461e1a32a2b27fc65842919cf8f3b6627cbace55dea94f6279",
+        "references/03-inference.md": "sha256:365495a8e538678e87cc6af5ed3ec4c9e9ef4d507e2fa5d3a8a811624e5603b6",
+        "references/04-designmd-template.md": "sha256:fec626caddf218dcb46af0b6bdc12f0329f3851c4411a52cf11c3c3e27eddf00",
+        "scripts/extractDesignData.js": "sha256:0eb50a23c2072486ed47e8ea125213e9c88a01763b4716853f299b4a58056d09",
+        "scripts/sampleComponentStyles.js": "sha256:b9325edcc9d3d56765c4b0a270cdaacd3345d391e7d42186802e76b7c2a2df80"
+      },
+      "installed_at": "2026-11-10T19:08:36.904335589+01:00",
+      "repo_url": "https://github.com/penpot/penpot-ai-kit.git",
+      "source": "https://github.com/penpot/penpot-ai-kit/skills/penpot-design-md",
+      "subdir": "skills/penpot-design-md",
+      "tree_hash": "9b2040c52f93a78188fb64fb30544bdee3710ec0",
+      "type": "github-subdir",
+      "version": "fe4f99e"
+    },
+    "penpot-design-to-code-review": {
+      "commit": "fe4f99e51c7149512d50cd75f0d55204c2458664",
+      "file_hashes": {
+        "SKILL.md": "sha256:34077a8957dc852eb8402a34aadda8fbd7ac8b80a9e3bea21515e7b0a8b161ef",
+        "references/01-extract-markup-style.md": "sha256:abd8871d89a7a83e11d31c9115d67c6d85a3bc0e2cce0adc8d2e4257b69e3f91",
+        "references/02-mapping-to-source.md": "sha256:93c7153a597e9977a6bc73ea9eac3f37524ecce8ca5def3ced2c85a83e4d9c1b",
+        "references/03-storybook-compare.md": "sha256:4a9d8c11e89302144f0d64950c8ecfcad01468eb93f42bc7f091b227b9146e03",
+        "references/04-drift-report.md": "sha256:1f25038f34b580d9bdd5ac69783e6c58200dfbdb68611e903b084130913d2f81",
+        "scripts/exportForCompare.js": "sha256:b9f4666099cdb91c3cd466d35b4103b03c5f6c75b92b1952c5695db4a97df8fa",
+        "scripts/extractMarkupStyle.js": "sha256:ccbf0b66badfa063a118a0687083bc9b202da41f96579d6284b250c950f5defb",
+        "scripts/generateDriftReport.js": "sha256:a485722d4c6c6f4ea62291a41a053bb0d94ab8539a589d55b7d63d8ff23b577a"
+      },
+      "installed_at": "2026-11-10T19:08:36.998875587+01:00",
+      "repo_url": "https://github.com/penpot/penpot-ai-kit.git",
+      "source": "https://github.com/penpot/penpot-ai-kit/skills/penpot-design-to-code-review",
+      "subdir": "skills/penpot-design-to-code-review",
+      "tree_hash": "e5aacae49c40decfce433d39d67053a07427433b",
+      "type": "github-subdir",
+      "version": "fe4f99e"
+    },
+    "penpot-document-handoff": {
+      "commit": "fe4f99e51c7149512d50cd75f0d55204c2458664",
+      "file_hashes": {
+        "SKILL.md": "sha256:e73efa5dadafa68dc1764a634cf7565a43131de4521db13231bb0f3e44acac4e",
+        "references/01-annotation-anatomy.md": "sha256:d1ad5a6f8ea037dd1b4365f2dee9420119b86b514cdac26f0314a92e507ac3ec",
+        "references/02-handoff-brief.md": "sha256:32c61f3d3f061d0d6375a7f18629228ace121a596a331e9810cb82a7b8d9b502",
+        "references/03-layout-placement.md": "sha256:e17333a3e1ef5aa90dc3c44244978e738ab21d7760d88f9958e63c11e67eb158",
+        "references/04-component-and-tokens.md": "sha256:1c983c8b2d3f9bcfc9000c14cfaf63003244f28112aed85495ace35ca76c2121",
+        "references/05-anti-rationalization.md": "sha256:dd9373761bb630566406b4557ed250e572ea6df9c4df00e0079b2ae7266511d9",
+        "references/06-error-recovery.md": "sha256:f5bffe54f72e3c009eb041fabe3f356a6710965a5659fe3e650a976b1ccc78b4",
+        "scripts/addTooltipCallout.js": "sha256:60e2a70c5f81503252824fe55ffde556ea8ae24a8c2fdf403f8298d984f25ab7",
+        "scripts/buildContextCard.js": "sha256:48e9956afeb4bee2801d8f1f3e3996871a5509f0282273a031305b237674e20a",
+        "scripts/finalizeHandoff.js": "sha256:22e07d0c017e013f43df6dffc59d414b781286546dcc87028c16a39a3a15e2a0",
+        "scripts/placePinAndNote.js": "sha256:5ac149a833014adcadbee8a77e23e61a334179941822c7fb0a61ee8e1982ad76",
+        "scripts/setupAnnotationKit.js": "sha256:0c70dba63528a1152cb309050bf826f57e5e27833e8ae600e0858e312270a07a"
+      },
+      "installed_at": "2026-11-10T19:08:37.098537429+01:00",
+      "repo_url": "https://github.com/penpot/penpot-ai-kit.git",
+      "source": "https://github.com/penpot/penpot-ai-kit/skills/penpot-document-handoff",
+      "subdir": "skills/penpot-document-handoff",
+      "tree_hash": "8d6b53d5279c9952e266603973a0ec127c2b4d9d",
+      "type": "github-subdir",
+      "version": "fe4f99e"
+    },
+    "penpot-foundations": {
+      "commit": "fe4f99e51c7149512d50cd75f0d55204c2458664",
+      "file_hashes": {
+        "SKILL.md": "sha256:b2e1ab069ab187914ea6d8fc57ca33d415414b9a17b97c23d5e7111fd578b23d",
+        "references/01-discovery.md": "sha256:4c07b36460621c94ceda2a95e052f66b8b195217ab19c502ef89b31c6221d634",
+        "references/02-token-architecture.md": "sha256:93705bb336cc53e2fd6a91d16f2fefe4bca8624d2e93988d5911b387d8b67991",
+        "references/03-infer-from-design.md": "sha256:7560cb1a2174339689593ce8dfb12d09b4a0c7331fdedcc24ba9e92e3b721c79",
+        "references/04-themes-modes.md": "sha256:f2208762085c0b12c5c23a91f7e6125b45098392377ffc8b23f4ac91b21bb52d",
+        "references/05-naming.md": "sha256:60e786f07a2e5387e99e5f83877f4f23c7a0696429ca75bf76565a6dfbea6ac7",
+        "references/06-anti-rationalization.md": "sha256:b65f0ae2b4351878631195af249e7ee6ac3cf155fecb7ce3ac3e73dd7ac1e09b",
+        "references/07-error-recovery.md": "sha256:cf345d7497d1d7a3ce2529c3aa952b066e1ff98ecd09b44954b83e8838c3fbab",
+        "scripts/applyTokensToShapes.js": "sha256:83881e5a97065ead09c190f3d6bf250ddebd8a7725b0d12a4a38e8fcb8363348",
+        "scripts/bindTokensToElements.js": "sha256:1f2ab54a6184cea16e66570f391c4f80f13926de29173923d2c55185f06f4576",
+        "scripts/createSemanticTokens.js": "sha256:2bcdfcf3ffdec619977251edd80a738272e711b23a3297208f702ac5c95833b4",
+        "scripts/createThemes.js": "sha256:0ae692caec3a8054e2f1fd4e0d69cd8fd92d5ad3844baf19f1608306161ca8a3",
+        "scripts/createTokenSet.js": "sha256:0470943b350203b7314240b25239b20916aca726f30805c4732171e8ce037c94",
+        "scripts/inferTokensFromShapes.js": "sha256:b05e894c998d270f40cbb633097a479d3b230ec88ebc2b52c366148595d6ab19",
+        "scripts/inspectFileStructure.js": "sha256:45992703da664f7f4f55e325d5344132dad1f52a3e44037eadbba776dd16709c",
+        "scripts/validateTokens.js": "sha256:aef97ce0f2d03345ee672b0e349bab7a1534061510d512240ee7e2574aed9c15"
+      },
+      "installed_at": "2026-11-10T19:08:37.165437356+01:00",
+      "repo_url": "https://github.com/penpot/penpot-ai-kit.git",
+      "source": "https://github.com/penpot/penpot-ai-kit/skills/penpot-foundations",
+      "subdir": "skills/penpot-foundations",
+      "tree_hash": "816e89412b361b81ed10dc5db504063d70d8b44a",
+      "type": "github-subdir",
+      "version": "fe4f99e"
+    },
+    "penpot-migrate": {
+      "commit": "fe4f99e51c7149512d50cd75f0d55204c2458664",
+      "file_hashes": {
+        "SKILL.md": "sha256:5d9f03b0b97c03e45159750a02d4b760e00427c04dd325d84975395a1632b4e1",
+        "references/01-figma-analysis.md": "sha256:f755fa7e43dd21a0d00f9c2b15980bcacd89eef034567dc870e5ee3ce411ae83",
+        "references/02-ir-building.md": "sha256:4b2032a3f79265254900a38c4af38b4594f4c44d26b67e60e14aff5d0403dc7b",
+        "references/03-token-migration.md": "sha256:8f566f68e089a269b9776bf01506694bb5260381a070269ba007c349bc4aadd7",
+        "references/04-component-migration.md": "sha256:b3377f87fee7f9117939e15d897d753e5d526aaebed62b340dc724575f08731e",
+        "references/05-layout-translation.md": "sha256:dd581fc975e9d4aa6cca2a72c420f5cee465209defc0419bc82ad74c8b891a2e",
+        "references/06-screen-migration.md": "sha256:4c3f21ac6d1e327560cc5ac9b7f8c064884e68805dbe7346a0916232f1a217ed",
+        "references/07-validation.md": "sha256:137a6319857cfc7ac1689540e77b979f533f813a5fe5a4ec20263d22f41ff8b2",
+        "references/08-error-recovery.md": "sha256:3fb0465d731460f9cfbc3a7a364eb62252499a451404be46bd466bdc87f1e988",
+        "scripts/analyzeFigmaStructure.js": "sha256:209e91bc97b4f5495f9fc73db23c10bc20ddd9c20cddeb4d405fa5fd735e02e6",
+        "scripts/buildIR.js": "sha256:4f8b9b3c570128633eacdfb98b9c05c7a27ea5f42d6b4a84b7fe0991d494c1e4",
+        "scripts/migrateComponent.js": "sha256:27985fcc6511dc3ed286b09a8bda571cc46c4512392b9967e088c3ea3fea180e",
+        "scripts/migrateScreen.js": "sha256:dbc988180c243bf31053e007d6b5da2bee86f70997c3e1d2b8ab5a82f7799b20",
+        "scripts/migrateTokens.js": "sha256:960b4ebaa5c54bde00a4b263368f4a678465eb3aa1c8ab07ba726ebcff0dc6eb",
+        "scripts/validateFidelity.js": "sha256:45c2e7e35feab807af0bf03c6932348b9102c17d8cfa6a1586c23ad408ddeb31"
+      },
+      "installed_at": "2026-11-10T19:08:37.208129416+01:00",
+      "repo_url": "https://github.com/penpot/penpot-ai-kit.git",
+      "source": "https://github.com/penpot/penpot-ai-kit/skills/penpot-migrate",
+      "subdir": "skills/penpot-migrate",
+      "tree_hash": "26f35509dc126e54759ab30208499a396b8deb5a",
+      "type": "github-subdir",
+      "version": "fe4f99e"
+    },
+    "penpot-rename-layers": {
+      "commit": "fe4f99e51c7149512d50cd75f0d55204c2458664",
+      "file_hashes": {
+        "SKILL.md": "sha256:28b809f6ba31fce78b31b205ef108c0667ae877277c9725ae34aa30c5d9206f7",
+        "references/01-inspection.md": "sha256:69a05603f16fae2699a507b844cac05c34e70bbc3738846c2975663acb646316",
+        "references/02-semantic-inference.md": "sha256:fe718529a9b78dd0d04a3a18347411a2a05e24db377b122d36bd4caa0678caaf",
+        "references/03-renaming-strategy.md": "sha256:e6f8c0470b5a6b67b2e89e53da93fe812f9a1bab4bc96bf91c1c18678004757f",
+        "scripts/inspectLayerStructure.js": "sha256:a28c6999106deba804520495f471d80550917503deea1f5fc0edf097172dd24f",
+        "scripts/renameLayer.js": "sha256:c4203dd59c8e448c7ae463adc4b1174cae27b2cd7f0b348640136ead059d0211"
+      },
+      "installed_at": "2026-11-10T19:08:37.270588311+01:00",
+      "repo_url": "https://github.com/penpot/penpot-ai-kit.git",
+      "source": "https://github.com/penpot/penpot-ai-kit/skills/penpot-rename-layers",
+      "subdir": "skills/penpot-rename-layers",
+      "tree_hash": "35d2fedcc900d591bb7ad4cb33f036117a67e267",
+      "type": "github-subdir",
+      "version": "fe4f99e"
+    },
+    "penpot-router": {
+      "commit": "fe4f99e51c7149512d50cd75f0d55204c2458664",
+      "file_hashes": {
+        "SKILL.md": "sha256:efcb0b64f17e018e2fa90eb375a38fa9c89e81e265acc73185f68d576756d541",
+        "references/01-intent-taxonomy.md": "sha256:5adb41541913bff9570828f609e50f19f844a3ac3a7049dabbbb6e159c7c3ab9",
+        "references/02-preflight-overview.md": "sha256:d12101de226a70378fa8338c744063c783be110be7770e2d5f42ccbb6f6d426c"
+      },
+      "installed_at": "2026-11-10T19:08:37.324072427+01:00",
+      "repo_url": "https://github.com/penpot/penpot-ai-kit.git",
+      "source": "https://github.com/penpot/penpot-ai-kit/skills/penpot-router",
+      "subdir": "skills/penpot-router",
+      "tree_hash": "984aa3ba9731fc513fceba3ba134c26c2f1cf4ac",
+      "type": "github-subdir",
+      "version": "fe4f99e"
     },
     "shadcn-svelte": {
       "commit": "3c4152d7d3904e76f6f756ec8ffca7c9ec72f977",
@@ -165,35 +479,35 @@
       "version": "3c4152d"
     },
     "skillshare": {
-      "commit": "c19ff80611c20e9b69392ad4e4aeaf491d5036b7",
+      "commit": "b97206e9465c78d4afe674f782a3326cab8b3ace",
       "file_hashes": {
-        "SKILL.md": "sha256:ec608ffdcc8edd267a05845aa74df29349e4909d584b95282903f6e2d7191f5a",
+        "SKILL.md": "sha256:b82706e9afa6d51ccd482877641e1117e3b558d22a4cab7f616c96862d55cce0",
         "references/TROUBLESHOOTING.md": "sha256:6964001f3f1fcbaadf0daae7478724ffd12196c20c7b3762876385670660cd99",
         "references/audit-review.md": "sha256:8ce54d8440a56078da8d7a1849000ae985346c950de3c49164eab21049ff2924",
-        "references/audit.md": "sha256:eba9fefa8c8cc69e4f82d8126bea33f01303bf55e8b99fcb88c4789452eddce8",
+        "references/audit.md": "sha256:acc1bb78086fad168492158a953324fa1d9720e7b6c551bd160b58174c08a982",
         "references/backup.md": "sha256:d794b66b18120cfaae0dcb3773031a08426895fd618d02393337a1eb57f98f6f",
         "references/extras.md": "sha256:0845bb01f48b1ee6c91eee756319e301b224cec0f944b90dbee370934d0dbb57",
         "references/hooks.md": "sha256:de0f7c4261adfc9cd1aaa409ff484676c694e45011458d5885afb9108619e07d",
         "references/init.md": "sha256:bd5206d3f614c6c32b1c930cc07dd93fe893bb041838af12b612f17f55af78e3",
-        "references/install.md": "sha256:56242531d4d4bf4a9fdf799e197415a4d94c65cfffeda0bc82ecd33a2b061bad",
+        "references/install.md": "sha256:fdbe20ab82ef345b908265c8375c15dfbf17c827ecf74e4f139fa35ded683949",
         "references/log.md": "sha256:f726e59328ac1cb367cd7d5eaa257149d7f56ef5c650d9e0f9c7a091c0f9c442",
-        "references/mcp.md": "sha256:baa59365b244c2bc2fa6a693d5e87b0a57698846d6cf2be21081b3a4e498bfd4",
+        "references/mcp.md": "sha256:a46bc834c4ec4ffd815bd68090883e8d669097441296d0e5cfcd36dde51ecb5e",
         "references/memory-review.md": "sha256:e9fabed005f282c6702788bfe1a01aeca986184d48eadccf3ef0e9f4e465f5e3",
         "references/native-agents.md": "sha256:352d78cb64722717b5660655978afcef3d18638669ab96e0f2325f28d563576e",
-        "references/plugins.md": "sha256:6029edc99ec75b34a8c669d5af86c80ad90a08683a90d4271620438c8bb00bb7",
-        "references/status.md": "sha256:f4eb90d8034cff3394d27dd46d5df976e98ec47e08b8e83efd1bdc10e24b19b1",
+        "references/plugins.md": "sha256:c3e10c04858e9b68024708ab47ffa89b3784bcec124f915011c6934f2b361296",
+        "references/status.md": "sha256:a63b2935f280f47dbdcd790c97149173f913710319d61d3e0cbf911e9528ee8b",
         "references/sync.md": "sha256:aa2740ae9f92181e318f077ae85250cc8041914dfea67123975de30730276511",
         "references/targets.md": "sha256:336a1e874696111c27102f07d9c0f5299d0856fc47707f49c4d355383c12f822",
         "references/trash.md": "sha256:e53ddc74ccf633d1c67481e616df584542dd882bac3a10e0857459628322f219",
         "scripts/run.sh": "sha256:e434ebdb7d3ae0b37c00ddc36687bc975da9e766b8cb863f9aed9a624ebbdfa9"
       },
-      "installed_at": "2026-11-07T10:42:03.113349174+01:00",
+      "installed_at": "2026-11-11T10:08:18.267910459+01:00",
       "repo_url": "https://github.com/runkids/skillshare.git",
       "source": "https://github.com/runkids/skillshare.git/skills/skillshare",
       "subdir": "skills/skillshare",
-      "tree_hash": "74814bb76fa0806a67322d902fb95b111c74c999",
+      "tree_hash": "87ae1f3a193409d5b258561a9a03069d704bed71",
       "type": "github-subdir",
-      "version": "c19ff80"
+      "version": "b97206e"
     },
     "tdd": {
       "commit": "49dd158d1076134a641b33efb035946536778336",
