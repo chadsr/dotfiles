@@ -33,10 +33,6 @@
       "debugmcp": {
         "type": "remote",
         "url": "http://localhost:3001/mcp"
-      },
-      "penpot": {
-        "type": "remote",
-        "url": "http://localhost:9001/mcp/stream"
       }
     }
   },
