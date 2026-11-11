@@ -25,8 +25,8 @@ else
 fi
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-  # forwarded agent takes priority; fall back to gpg-agent
-  if [[ -z "$SSH_AUTH_SOCK" ]]; then
+  # forwarded/valid sockets take priority; fall back to local gpg-agent
+  if [[ -z "$SSH_AUTH_SOCK" || ! -S "$SSH_AUTH_SOCK" ]]; then
     ssh_auth_sock=$(gpgconf --list-dirs agent-ssh-socket)
     export SSH_AUTH_SOCK=$ssh_auth_sock
   fi
