@@ -21,9 +21,10 @@ prompt_exit() {
 }
 
 cd_dotfiles() {
+  # shellcheck disable=SC2154
   if [[ -n ${DOTFILES+x} ]] && [[ "$base_path" != "$DOTFILES" ]]; then
     echo "Changing directory to '${DOTFILES}'"
-    cd "$DOTFILES"
+    cd "$DOTFILES" || exit
   fi
 }
 
@@ -64,6 +65,7 @@ symlink() {
 }
 
 install_packages() {
+  # shellcheck disable=SC2154
   case "$package_manager" in
   */brew)
     "$package_manager" install -- "${@}" || {
@@ -123,6 +125,7 @@ diff_files() {
     # If they are identical, then return
     return 0
   else
+    # shellcheck disable=SC2154
     ${diff_command} "$1" "$2" || {
       echo "${diff_command} on ${1} <-> ${2}' exited with error"
       return 1
@@ -141,10 +144,13 @@ gpg_decrypt_file() {
   local output_file_path="${2}"
   local output_filename
   output_filename=$(basename "${output_file_path}")
+
+  # shellcheck disable=SC2154
   local tmp_output_file_path="${tmp_path}/${output_filename}"
 
   echo "Decrypting ${input_file_path} to ${tmp_output_file_path}"
 
+  # shellcheck disable=SC2154
   gpg --quiet --no-verbose --local-user "${gpg_encryption_subkey}" --armor --decrypt --yes --output "${tmp_output_file_path}" "${input_file_path}" >/dev/null || {
     echo "failed to decrypt file ${input_file_path} to ${tmp_output_file_path}"
     return 1
@@ -268,6 +274,7 @@ stow_config() {
 
 import_gpg_pubkey() {
   # If our primary GPG key is not yet imported, import it
+  # shellcheck disable=SC2154
   if [[ ! $(gpg --list-keys "$gpg_primary_key") ]]; then
     gpg --import "$data_path"/gpg/2B7340DB13C85766.asc || {
       echo "failed to import GPG pubkey"
@@ -309,6 +316,7 @@ update_submodules() {
 
 fix_catppuccin_bat_theme() {
   # Fix for spacing breaking the space delimited tuples
+  # shellcheck disable=SC2154
   mv "${git_submodule_path}"/catppuccin-bat/themes/Catppuccin\ Mocha.tmTheme "${git_submodule_path}"/catppuccin-bat/themes/Catppuccin-Mocha.tmTheme || {
     echo "failed to move catppuccin-bat theme"
     exit 1
