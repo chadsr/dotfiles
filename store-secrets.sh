@@ -8,6 +8,7 @@ pkglist_system_path=/etc/pkglist.txt
 current_hostname=$(hostname)
 
 tmp_path=/tmp/secrets-"$current_hostname"
+diff_command="vimdiff -d"
 
 exit_script() {
   rv=$?
@@ -17,6 +18,11 @@ exit_script() {
 
 set -euo pipefail
 trap 'exit_script' ERR INT
+
+source "$(dirname "${BASH_SOURCE[0]}")/setup-lib.sh" || {
+  echo "failed to source setup-lib.sh"
+  exit 1
+}
 
 update_paths() {
   base_path=$PWD
@@ -29,76 +35,10 @@ help() {
   printf "Stores configuration secrets to \"%s\".\n" "$data_path"
 }
 
-diff_files() {
-  if [[ ! -f "$1" ]] && [[ ! -L "$1" ]]; then
-    echo "file ${1} does not exist"
-    return 1
-  fi
-  if [[ ! -f "$1" ]] && [[ ! -L "$1" ]]; then
-    echo "file ${2} does not exist"
-    return 1
-  fi
+cd_dotfiles
+update_paths
 
-  vimdiff -d "$1" "$2" || {
-    echo "vimdiff on ${1} <-> ${2}' exited with error"
-    return 1
-  }
-}
-
-gpg_encrypt_file() {
-  if [[ ! -f "$1" ]] && [[ ! -L "$1" ]]; then
-    echo "input file ${1} does not exist"
-    return 1
-  fi
-
-  local input_file_path="$1"
-  local output_file_path="$2"
-  local output_filename
-  output_filename=$(basename "$output_file_path")
-  local tmp_output_file_path="${tmp_path}/${output_filename}"
-  local input_file_existing_equal=false
-
-  # if the file to replace already exists, perform a diff to check for changes
-  if [[ -f "$output_file_path" ]]; then
-    tmp_output_file_path_current="$tmp_output_file_path".current
-    gpg --quiet --no-verbose --local-user "$gpg_encryption_subkey" --armor --decrypt --yes --output "$tmp_output_file_path_current" "$output_file_path" >/dev/null || {
-      echo "failed to decrypt file ${output_file_path} to ${tmp_output_file_path_current}"
-      return 1
-    }
-
-    if (cmp -s "$tmp_output_file_path_current" "$input_file_path"); then
-      input_file_existing_equal=true
-    else
-      diff_files "$tmp_output_file_path_current" "$input_file_path"
-    fi
-  fi
-
-  if [[ $input_file_existing_equal == true ]]; then
-    printf "%s <-> %s are equal. skipping encryption.\n" "$input_file_path" "$output_file_path"
-  else
-    gpg --quiet --no-verbose --local-user "$gpg_encryption_subkey" --recipient "$gpg_encryption_subkey" --armor --sign --yes --output "$tmp_output_file_path" --encrypt "$input_file_path" >/dev/null || {
-      echo "failed to encrypt file ${input_file_path} to ${tmp_output_file_path}"
-      return 1
-    }
-
-    cp -f "$tmp_output_file_path" "$output_file_path" || {
-      echo "failed to copy '${tmp_output_file_path}' to '${output_file_path}'"
-      return 1
-    }
-
-    printf "%s -> %s\n" "$input_file_path" "$output_file_path"
-  fi
-}
-
-if [[ -n ${DOTFILES+x} ]] && [[ "$base_path" != "$DOTFILES" ]]; then
-  echo "Changing directory to '${DOTFILES}'"
-  cd "$DOTFILES"
-  update_paths
-fi
-
-if [[ ! $(gpg --list-keys "$gpg_primary_key") ]]; then
-  gpg --import "$data_path"/gpg/2B7340DB13C85766.asc
-fi
+import_gpg_pubkey
 
 mkdir -p "$tmp_path"
 
