@@ -24,31 +24,18 @@ declare -a script_pkgs=(
   systemd-ukify
 )
 
-exit_setup() {
-  rv=$?
-  printf "\n\nExiting setup...\n"
-  exit $rv
-}
-
 set -euo pipefail
 trap 'exit_setup' ERR INT
+
+source "$(dirname "${BASH_SOURCE[0]}")/setup-lib.sh" || {
+  echo "failed to source setup-lib.sh"
+  exit 1
+}
 
 script_name=$(basename "$0")
 
 help() {
   printf "Sets up system packages and configurations.\n\nUsage: %s <%s|%s>\n" "$script_name" "$laptop_hostname" "$desktop_hostname"
-}
-
-prompt_exit() {
-  read -rp "$1 Continue or Abort? (y/N)" answer
-  case ${answer:0:1} in
-  y | Y)
-    return 0
-    ;;
-  *)
-    exit_setup 0
-    ;;
-  esac
 }
 
 update_paths() {
@@ -75,55 +62,8 @@ fi
 
 prompt_exit "This script will remove/change existing system settings."
 
-if [[ -n ${DOTFILES+x} ]] && [[ "$base_path" != "$DOTFILES" ]]; then
-  echo "Changing directory to '${DOTFILES}'"
-  cd "$DOTFILES"
-  update_paths
-fi
-
-install_packages() {
-  "$package_manager" -S --noconfirm --needed --noredownload -- "${@}" || {
-    echo "failed to install:"
-    echo "${@}"
-    return 1
-  }
-}
-
-remove_package() {
-  if "$package_manager" -Qi "$1" >/dev/null; then
-    "$package_manager" -R --noconfirm -- "$1" >/dev/null || {
-      :
-    }
-  fi
-}
-
-rmrf() {
-  rm -rf "${1}" || {
-    echo "failed to recursively remove ${1}"
-    return 1
-  }
-}
-
-symlink() {
-  if [[ -e "${2}" ]]; then
-    if [[ ! -L "${2}" ]]; then
-      echo "${2} already exists and is an irregular type. Check manually whether this is safe to replace with ${1}."
-      return 1
-    fi
-
-    echo "Removing existing symlink at ${2}"
-    rmrf "${2}" || {
-      echo "failed to remove old symlink: ${2}"
-      return 1
-    }
-  fi
-
-  # Stow only supports relative symlinks
-  ln -rs "${1}" "${2}" || {
-    echo "failed to symlink: ${1} to ${2}"
-    return 1
-  }
-}
+cd_dotfiles
+update_paths
 
 rsync_system_config() {
   local system_config_full_path="$system_config_path"/"${1}"
@@ -193,97 +133,6 @@ gpg_ssh_agent() {
   gpg-connect-agent updatestartuptty /bye >/dev/null
 }
 
-diff_files() {
-  if [[ ! -f "$1" ]] && [[ ! -L "$1" ]]; then
-    echo "file ${1} does not exist"
-    return 1
-  fi
-  if [[ ! -f "$1" ]] && [[ ! -L "$1" ]]; then
-    echo "file ${2} does not exist"
-    return 1
-  fi
-
-  if (cmp -s "$1" "$2"); then
-    # If they are identical, then return
-    return 0
-  else
-    ${diff_command} "$1" "$2" || {
-      echo "${diff_command} on ${1} <-> ${2}' exited with error"
-      return 1
-    }
-  fi
-}
-
-# gpg is used directly throughout this setup process
-# to handle the non-deterministic nature of gpg encryption, checks/diffs are performed to prevent unwanted changes going un-noticed
-gpg_decrypt_file() {
-  if [[ ! -f "$1" ]] && [[ ! -L "$1" ]]; then
-    echo "input file ${1} does not exist"
-    return 1
-  fi
-
-  local input_file_path="${1}"
-  local output_file_path="${2}"
-  local output_filename
-  output_filename=$(basename "${output_file_path}")
-  local tmp_output_file_path="${tmp_path}/${output_filename}"
-
-  echo "Decrypting ${input_file_path} to ${tmp_output_file_path}"
-
-  gpg --quiet --no-verbose --local-user "${gpg_encryption_subkey}" --armor --decrypt --yes --output "${tmp_output_file_path}" "${input_file_path}" >/dev/null || {
-    echo "failed to decrypt file ${input_file_path} to ${tmp_output_file_path}"
-    return 1
-  }
-
-  # if the file to replace already exists, perform a diff to check for changes
-  if [[ -f "$output_file_path" ]]; then
-    diff_files "$output_file_path" "$tmp_output_file_path"
-  fi
-
-  cp -f "$tmp_output_file_path" "$output_file_path" || {
-    echo "failed to copy '${tmp_output_file_path}' to '${output_file_path}'"
-    return 1
-  }
-}
-
-line_exists() {
-  case $(
-    grep -Fxq "${1}" "${2}" >/dev/null
-    echo $?
-  ) in
-  0)
-    # Found
-    return 0
-    ;;
-  1)
-    # Not found
-    return 1
-    ;;
-  *)
-    exit 1
-    ;;
-  esac
-}
-
-string_exists() {
-  case $(
-    grep -Fq "${1}" "${2}" >/dev/null
-    echo $?
-  ) in
-  0)
-    # Found
-    return 0
-    ;;
-  1)
-    # Not found
-    return 1
-    ;;
-  *)
-    exit 1
-    ;;
-  esac
-}
-
 add_group_user() {
   sudo groupadd "${1}" || {
     :
@@ -332,28 +181,6 @@ set_default_kernel() {
     exit 1
     ;;
   esac
-}
-
-rm_if_not_stowed() {
-  if [[ -L "${1}" ]]; then
-    local symlink_path
-    symlink_path=$(readlink -f "${1}")
-    if [[ $symlink_path == *"${base_path}"* ]]; then
-      return 0
-    fi
-  fi
-
-  rm -rfv "${1}" || {
-    echo "failed to remove conflict path ${1}"
-    return 1
-  }
-}
-
-stow_config() {
-  stow -v "$1" || {
-    echo "Failed to stow ${1} config"
-    exit 1
-  }
 }
 
 mkdir -p "$tmp_path"
@@ -415,6 +242,7 @@ declare -a mk_dirs=(
   ~/.config/VSCodium/User/globalStorage/
   ~/.config/xfce4/xfconf/xfce-perchannel-xml/
   ~/.continue/
+  ~/.gnupg-forward/
   ~/.icons/
   ~/.local/bin/
   ~/.local/share/applications/
@@ -432,6 +260,9 @@ declare -a mk_dirs=(
 for mk_dir in "${mk_dirs[@]}"; do
   mkdir -p "${mk_dir}"
 done
+
+# gpg requires strict perms when ~/.gnupg-forward is used as GNUPGHOME
+chmod 700 ~/.gnupg-forward
 
 declare -a conflict_paths=(
   ~/.bash_env
@@ -469,12 +300,7 @@ if ! [ -e "$base_path/hyprland/.config/sunsetr/geo.toml" ]; then
 fi
 
 echo "Appending custom pinentry script to gpg-agent.conf"
-# GNUPG is ridiculous and only allows env-vars in some of the options here, so we have to do this the convoluted way with a line append
-cp -v "$data_path"/gpg/gpg-agent.conf "$base_path"/gpg/.gnupg/gpg-agent.conf || {
-  echo "failed to copy gpg-agent.conf from data dir"
-  exit 1
-}
-echo "pinentry-program $HOME/.local/bin/pinentry-auto" | tee -a "$base_path"/gpg/.gnupg/gpg-agent.conf
+setup_pinentry
 
 declare -a stow_dirs_setup=(
   bash
@@ -504,18 +330,7 @@ systemd_user_enable_start "$base_path"/gpg/.config/systemd/user/ssh-auth-sock.se
 
 gpg_ssh_agent
 
-# If our primary GPG key is not yet imported, import it
-if [[ ! $(gpg --list-keys "$gpg_primary_key") ]]; then
-  gpg --import "$data_path"/gpg/2B7340DB13C85766.asc || {
-    echo "failed to import GPG pubkey"
-    exit 1
-  }
-
-  gpg --tofu-policy good "$gpg_primary_key" || {
-    echo "failed to set gpg tofu policy"
-    exit 1
-  }
-fi
+import_gpg_pubkey
 
 pass init "$gpg_primary_key" || {
   echo "failed to init pass"
@@ -764,20 +579,7 @@ fi
 hackneyed_updated=false
 hackneyed_hash_old=$(git -C "$git_submodule_path"/hackneyed-cursor rev-parse --short HEAD)
 
-git submodule update --init --recursive --remote --progress || {
-  echo "failed to update git submodules"
-  exit 1
-}
-
-git submodule foreach --recursive git clean -xfd || {
-  echo "failed to clean git submodules"
-  exit 1
-}
-
-git submodule foreach --recursive git reset --hard || {
-  echo "failed to reset git submodules"
-  exit 1
-}
+update_submodules
 
 hackneyed_hash_new=$(git -C "$git_submodule_path"/hackneyed-cursor rev-parse --short HEAD)
 if [[ "$hackneyed_hash_old" != "$hackneyed_hash_new" ]]; then
@@ -822,11 +624,7 @@ else
   echo "Skipping hackneyed cursor build"
 fi
 
-# Fix for spacing breaking the space delimited tuples
-mv "${git_submodule_path}"/catppuccin-bat/themes/Catppuccin\ Mocha.tmTheme "${git_submodule_path}"/catppuccin-bat/themes/Catppuccin-Mocha.tmTheme || {
-  echo "failed to move catppuccin-bat theme"
-  exit 1
-}
+fix_catppuccin_bat_theme
 
 declare -a symlink_paths_tuples=(
   "${base_path}/steam/.steam/steam/steam_dev.cfg ${HOME}/.steam/steam/steam_dev.cfg"
@@ -1057,12 +855,7 @@ declare -a ollama_models=(
   nomic-embed-text:latest
 )
 
-for ollama_model in "${ollama_models[@]}"; do
-  ollama pull "${ollama_model}" || {
-    echo "failed to install ${ollama_model}"
-    exit 1
-  }
-done
+pull_ollama_models "${ollama_models[@]}"
 
 declare -a docker_mcp_profiles=(
   dev-tools
