@@ -24,13 +24,31 @@ else
   export GPG_TTY=$TTY
 fi
 
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-  # forwarded/valid sockets take priority; fall back to local gpg-agent
-  if [[ -z "$SSH_AUTH_SOCK" || ! -S "$SSH_AUTH_SOCK" ]]; then
-    ssh_auth_sock=$(gpgconf --list-dirs agent-ssh-socket)
-    export SSH_AUTH_SOCK=$ssh_auth_sock
+# Use the client's gpg-agent forwarded over ssh (RemoteForward restricted extra socket)
+# The socket is removed at logout by .zlogout
+if [[ -n "${SSH_CONNECTION:-}" && -S "$HOME/.gnupg-forward/S.gpg-agent" ]]; then
+  fwd_alive=1
+  if command -v nc >/dev/null 2>&1; then
+    nc -w1 -U "$HOME/.gnupg-forward/S.gpg-agent" </dev/null >/dev/null 2>&1 || fwd_alive=0
   fi
-  gpg-connect-agent updatestartuptty /bye >/dev/null
+  if [[ "$fwd_alive" == 1 ]]; then
+    export GNUPGHOME="$HOME/.gnupg-forward"
+  else
+    rm -f "$HOME/.gnupg-forward/S.gpg-agent"
+  fi
+  unset fwd_alive
+fi
+
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  # Forwarded/valid sockets take priority; fall back to local gpg-agent
+  # When GNUPGHOME points at a client-forwarded agent (see above), don't touch it
+  if [[ -z "${GNUPGHOME:-}" ]]; then
+    if [[ -z "$SSH_AUTH_SOCK" || ! -S "$SSH_AUTH_SOCK" ]]; then
+      ssh_auth_sock=$(gpgconf --list-dirs agent-ssh-socket)
+      [[ -S "$ssh_auth_sock" ]] && export SSH_AUTH_SOCK=$ssh_auth_sock
+    fi
+    gpg-connect-agent updatestartuptty /bye >/dev/null
+  fi
 
   LINUX_ASKPASS=$(which wayprompt-ssh-askpass)
   export SSH_ASKPASS="$LINUX_ASKPASS"
@@ -123,6 +141,19 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 
   # shellcheck disable=SC1091
   source '/etc/zshrc' # still source /etc/zshrc for anything useful
+
+  export PATH="/opt/homebrew/bin:$PATH"
+  export PATH="$HOME/.local/bin:$PATH"
+
+  # Forwarded/valid sockets take priority; fall back to local gpg-agent
+  # When GNUPGHOME points at a client-forwarded agent (see top), don't touch it
+  if [[ -z "${GNUPGHOME:-}" ]]; then
+    if [[ -z "$SSH_AUTH_SOCK" || ! -S "$SSH_AUTH_SOCK" ]]; then
+      ssh_auth_sock=$(gpgconf --list-dirs agent-ssh-socket)
+      [[ -S "$ssh_auth_sock" ]] && export SSH_AUTH_SOCK=$ssh_auth_sock
+    fi
+    gpg-connect-agent updatestartuptty /bye >/dev/null
+  fi
 
   MAC_ASKPASS=$(which ssh-askpass)
   export SSH_ASKPASS="$MAC_ASKPASS"

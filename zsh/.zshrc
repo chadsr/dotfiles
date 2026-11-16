@@ -130,9 +130,10 @@ add-zsh-hook precmd _git_alias_setup_hook
 #  Tools  #
 ###########
 
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  # fixes GPG smart card availability
-  gpg --card-status >/dev/null
+if [[ "$OSTYPE" == "darwin"* && -z "${GNUPGHOME:-}" ]]; then
+  # fixes GPG smart card availability for the LOCAL card;
+  # skipped when a client-forwarded agent is active
+  gpg --card-status >/dev/null 2>&1
 fi
 
 if [[ $(command -v mise) ]]; then
