@@ -25,12 +25,16 @@ fonts/.local/share/fonts/TTF/cryptofont.ttf
 forge/.config/forge/*
 freetube/.config/FreeTube/*
 gallery-dl/.config/gallery-dl/*
+data/pkgs/*.txt
 goose/.config/goose/*
 gtk/.config/gtk-3.0/bookmarks
 gtk/.config/gtk-4.0/bookmarks
 gtk/.icons/*
 gtk/.themes/Sweet/*
 helix/.config/helix/themes/*
+herdr/.config/herdr/*.log
+herdr/.config/herdr/session.json
+herdr/.config/herdr/session-snapshots/*
 hyprland/.config/hypr/themes/*
 hyprland/.config/sunsetr/geo.toml
 khal/.config/khal/*
