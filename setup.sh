@@ -96,20 +96,6 @@ remove_legacy_files() {
   sudo rm -f /etc/ssh/sshd_config.d/99-hardening.conf
 }
 
-rsync_system_config() {
-  local system_config_full_path="$system_config_path"/"${1}"
-
-  if [[ ! -d "$system_config_full_path" ]]; then
-    echo "The provided path '${system_config_full_path}' does not exist!"
-    return 1
-  fi
-
-  sudo rsync --chown=root:root --open-noatime --exclude='.gitkeep' --progress -ruacv -- "${system_config_full_path}"/* / || {
-    echo "failed to rsync system config from ${system_config_full_path} to root filesystem"
-    return 1
-  }
-}
-
 systemd_enable_start() {
   local unit_path="${1}"
   local unit_name

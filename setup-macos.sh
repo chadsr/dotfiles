@@ -50,6 +50,7 @@ declare -a brew_pkgs=(
   npm
   pinentry-mac
   python
+  rsync
   rust
   starship
   stats
@@ -155,7 +156,7 @@ install_sshd_config() {
   if ! sudo grep -q '^Include /etc/ssh/sshd_config.d' /etc/ssh/sshd_config; then
     echo 'Include /etc/ssh/sshd_config.d/*' | sudo tee -a /etc/ssh/sshd_config >/dev/null
   fi
-  sudo install -o root -g wheel -m 644 system/macos/etc/ssh/sshd_config.d/050-hardening.conf /etc/ssh/sshd_config.d/050-hardening.conf
+  rsync_system_config macos/
   sudo /usr/sbin/sshd -t
 }
 

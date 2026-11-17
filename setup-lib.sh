@@ -265,6 +265,27 @@ rm_if_not_stowed() {
   }
 }
 
+rsync_system_config() {
+  local system_config_full_path="$system_config_path"/"${1}"
+  local rsync_bin="rsync"
+  local rsync_chown="root:root"
+
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    rsync_bin="/opt/homebrew/bin/rsync"
+    rsync_chown="root:wheel"
+  fi
+
+  if [[ ! -d "$system_config_full_path" ]]; then
+    echo "The provided path '${system_config_full_path}' does not exist!"
+    return 1
+  fi
+
+  sudo "$rsync_bin" --chown="$rsync_chown" --open-noatime --exclude='.gitkeep' --progress -ruacvL -- "${system_config_full_path}"/* / || {
+    echo "failed to rsync system config from ${system_config_full_path} to root filesystem"
+    return 1
+  }
+}
+
 stow_config() {
   stow -v "$1" || {
     echo "Failed to stow ${1} config"
