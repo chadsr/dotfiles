@@ -266,6 +266,7 @@ rm_if_not_stowed() {
 }
 
 rsync_system_config() {
+  # shellcheck disable=SC2154
   local system_config_full_path="$system_config_path"/"${1}"
   local rsync_bin="rsync"
   local rsync_chown="root:root"
@@ -280,7 +281,7 @@ rsync_system_config() {
     return 1
   fi
 
-  sudo "$rsync_bin" --chown="$rsync_chown" --open-noatime --exclude='.gitkeep' --progress -ruacvL -- "${system_config_full_path}"/* / || {
+  sudo "$rsync_bin" --chown="$rsync_chown" --open-noatime --exclude='.gitkeep' --progress -ruacvLKO -- "${system_config_full_path}"/* / || {
     echo "failed to rsync system config from ${system_config_full_path} to root filesystem"
     return 1
   }

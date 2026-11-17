@@ -318,32 +318,32 @@ pkglist_remove_path="$data_path"/pkgs/remove.txt
 if [[ "$is_graphical" == true ]]; then
   echo "Decrypting data"
   declare -a decrypt_data_paths_tuples=(
-  "${data_path}/android/keystores/keystore.asc.gpg ${base_path}/android/.android/keystores/keystore"
-  "${data_path}/cura/cura.cfg.asc.gpg ${base_path}/cura/.config/cura/5.11/cura.cfg"
-  "${data_path}/gallery-dl/config.json.asc.gpg ${base_path}/gallery-dl/.config/gallery-dl/config.json"
-  "${data_path}/gtk/bookmarks.asc.gpg ${base_path}/gtk/.config/gtk-3.0/bookmarks"
-  "${data_path}/khal/config.asc.gpg ${base_path}/khal/.config/khal/config"
-  "${data_path}/nextcloud/nextcloud.cfg.asc.gpg ${base_path}/nextcloud/.config/Nextcloud/nextcloud.cfg"
-  "${data_path}/pkgs/remove.txt.asc.gpg ${pkglist_remove_path}"
-  "${data_path}/prusaslicer/PrusaSlicer.ini.asc.gpg ${base_path}/prusaslicer/.config/PrusaSlicer/PrusaSlicer.ini"
-  "${data_path}/qbittorrent/categories.json.asc ${base_path}/qbittorrent/.config/qBittorrent/categories.json"
-  "${data_path}/qbittorrent/qBittorrent.conf.asc ${base_path}/qbittorrent/.config/qBittorrent/qBittorrent.conf"
-  "${data_path}/radicle/keys/radicle.asc.gpg ${base_path}/radicle/.radicle/keys/radicle"
-  "${data_path}/ssh/config.asc.gpg ${base_path}/ssh/.ssh/config"
-  "${data_path}/system/${current_hostname}/boot/loader/entries/arch-cachyos.asc.conf ${base_path}/system/${current_hostname}/boot/loader/entries/arch-cachyos.conf"
-  "${data_path}/system/${current_hostname}/boot/loader/entries/arch-zen.asc.conf ${base_path}/system/${current_hostname}/boot/loader/entries/arch-zen.conf"
-  "${data_path}/tidal-hifi/config.json.asc.gpg ${base_path}/tidal-hifi/.config/tidal-hifi/config.json"
-  "${data_path}/vdirsyncer/config.asc.gpg ${base_path}/vdirsyncer/.config/vdirsyncer/config"
-  "${data_path}/waybar/waybar-crypto/config.ini.asc.gpg ${base_path}/waybar/.config/waybar-crypto/config.ini"
-  "${data_path}/xdg/mimeapps.list.asc.gpg ${base_path}/xdg/.config/mimeapps.list"
-)
-for decrypt_data_paths_tuple in "${decrypt_data_paths_tuples[@]}"; do
-  read -ra decrypt_data_paths <<<"$decrypt_data_paths_tuple"
+    "${data_path}/android/keystores/keystore.asc.gpg ${base_path}/android/.android/keystores/keystore"
+    "${data_path}/cura/cura.cfg.asc.gpg ${base_path}/cura/.config/cura/5.11/cura.cfg"
+    "${data_path}/gallery-dl/config.json.asc.gpg ${base_path}/gallery-dl/.config/gallery-dl/config.json"
+    "${data_path}/gtk/bookmarks.asc.gpg ${base_path}/gtk/.config/gtk-3.0/bookmarks"
+    "${data_path}/khal/config.asc.gpg ${base_path}/khal/.config/khal/config"
+    "${data_path}/nextcloud/nextcloud.cfg.asc.gpg ${base_path}/nextcloud/.config/Nextcloud/nextcloud.cfg"
+    "${data_path}/pkgs/remove.txt.asc.gpg ${pkglist_remove_path}"
+    "${data_path}/prusaslicer/PrusaSlicer.ini.asc.gpg ${base_path}/prusaslicer/.config/PrusaSlicer/PrusaSlicer.ini"
+    "${data_path}/qbittorrent/categories.json.asc ${base_path}/qbittorrent/.config/qBittorrent/categories.json"
+    "${data_path}/qbittorrent/qBittorrent.conf.asc ${base_path}/qbittorrent/.config/qBittorrent/qBittorrent.conf"
+    "${data_path}/radicle/keys/radicle.asc.gpg ${base_path}/radicle/.radicle/keys/radicle"
+    "${data_path}/ssh/config.asc.gpg ${base_path}/ssh/.ssh/config"
+    "${data_path}/system/${current_hostname}/boot/loader/entries/arch-cachyos.asc.conf ${base_path}/system/${current_hostname}/boot/loader/entries/arch-cachyos.conf"
+    "${data_path}/system/${current_hostname}/boot/loader/entries/arch-zen.asc.conf ${base_path}/system/${current_hostname}/boot/loader/entries/arch-zen.conf"
+    "${data_path}/tidal-hifi/config.json.asc.gpg ${base_path}/tidal-hifi/.config/tidal-hifi/config.json"
+    "${data_path}/vdirsyncer/config.asc.gpg ${base_path}/vdirsyncer/.config/vdirsyncer/config"
+    "${data_path}/waybar/waybar-crypto/config.ini.asc.gpg ${base_path}/waybar/.config/waybar-crypto/config.ini"
+    "${data_path}/xdg/mimeapps.list.asc.gpg ${base_path}/xdg/.config/mimeapps.list"
+  )
+  for decrypt_data_paths_tuple in "${decrypt_data_paths_tuples[@]}"; do
+    read -ra decrypt_data_paths <<<"$decrypt_data_paths_tuple"
 
-  if [[ -f "${decrypt_data_paths[0]}" ]]; then
-    gpg_decrypt_file "${decrypt_data_paths[0]}" "${decrypt_data_paths[1]}"
-  fi
-done
+    if [[ -f "${decrypt_data_paths[0]}" ]]; then
+      gpg_decrypt_file "${decrypt_data_paths[0]}" "${decrypt_data_paths[1]}"
+    fi
+  done
 fi
 
 # check for packages to be removed
@@ -578,79 +578,79 @@ fi
 
 # Graphical-only: themes, cursors, submodules
 if [[ "$is_graphical" == true ]]; then
-# Check if certain submodules get updated, so we don't build them uneccessarily
-hackneyed_updated=false
-hackneyed_hash_old=$(git -C "$git_submodule_path"/hackneyed-cursor rev-parse --short HEAD)
+  # Check if certain submodules get updated, so we don't build them uneccessarily
+  hackneyed_updated=false
+  hackneyed_hash_old=$(git -C "$git_submodule_path"/hackneyed-cursor rev-parse --short HEAD)
 
-update_submodules
+  update_submodules
 
-hackneyed_hash_new=$(git -C "$git_submodule_path"/hackneyed-cursor rev-parse --short HEAD)
-if [[ "$hackneyed_hash_old" != "$hackneyed_hash_new" ]]; then
-  hackneyed_updated=true
-  echo "hackneyed-cursor has been updated"
-fi
+  hackneyed_hash_new=$(git -C "$git_submodule_path"/hackneyed-cursor rev-parse --short HEAD)
+  if [[ "$hackneyed_hash_old" != "$hackneyed_hash_new" ]]; then
+    hackneyed_updated=true
+    echo "hackneyed-cursor has been updated"
+  fi
 
-echo "Copying themes from git repo to dotfiles locations"
+  echo "Copying themes from git repo to dotfiles locations"
 
-# If Hackneyed Dark build does not exist, then build it
-if [[ ! -d "$base_path"/gtk/.icons/hackneyed-dark ]] || [[ $hackneyed_updated == true ]]; then
-  echo "Building hackneyed cursor"
+  # If Hackneyed Dark build does not exist, then build it
+  if [[ ! -d "$base_path"/gtk/.icons/hackneyed-dark ]] || [[ $hackneyed_updated == true ]]; then
+    echo "Building hackneyed cursor"
 
-  cd "$git_submodule_path"/hackneyed-cursor || {
-    echo "failed to cd to hackneyed-cursor"
-    exit 1
-  }
+    cd "$git_submodule_path"/hackneyed-cursor || {
+      echo "failed to cd to hackneyed-cursor"
+      exit 1
+    }
 
-  make clean distclean || {
-    echo "failed to clean hackneyed cursor"
-    exit 1
-  }
+    make clean distclean || {
+      echo "failed to clean hackneyed cursor"
+      exit 1
+    }
 
-  make -O DARK_THEME=1 dist || {
-    echo "failed to make hackneyed cursor"
-    exit 1
-  }
+    make -O DARK_THEME=1 dist || {
+      echo "failed to make hackneyed cursor"
+      exit 1
+    }
 
-  rmrf "$base_path"/gtk/.icons/hackneyed-dark
-  cp -rv "$git_submodule_path"/hackneyed-cursor/Hackneyed-Dark "$base_path"/gtk/.icons/hackneyed-dark # cp instead of ln because the build dir will get reset by git
+    rmrf "$base_path"/gtk/.icons/hackneyed-dark
+    cp -rv "$git_submodule_path"/hackneyed-cursor/Hackneyed-Dark "$base_path"/gtk/.icons/hackneyed-dark # cp instead of ln because the build dir will get reset by git
 
-  make clean || {
-    echo "failed to clean hackneyed make files"
-    exit 1
-  }
-  rm -f ./*.tar.bz2
-  cd "$base_path" || {
-    echo "failed to cd to ${base_path}"
-    exit 1
-  }
-else
-  echo "Skipping hackneyed cursor build"
-fi
+    make clean || {
+      echo "failed to clean hackneyed make files"
+      exit 1
+    }
+    rm -f ./*.tar.bz2
+    cd "$base_path" || {
+      echo "failed to cd to ${base_path}"
+      exit 1
+    }
+  else
+    echo "Skipping hackneyed cursor build"
+  fi
 
-fix_catppuccin_bat_theme
+  fix_catppuccin_bat_theme
 
-declare -a symlink_paths_tuples=(
-  "${base_path}/steam/.steam/steam/steam_dev.cfg ${HOME}/.steam/steam/steam_dev.cfg"
-  "${git_submodule_path}/alacritty-theme/themes ${base_path}/alacritty/.config/alacritty/themes"
-  "${git_submodule_path}/candy-icons ${base_path}/gtk/.icons/candy-icons"
-  "${git_submodule_path}/catppuccin-bat/themes/Catppuccin-Mocha.tmTheme ${base_path}/bat/.config/bat/themes/Catppuccin-Mocha.tmTheme"
-  "${git_submodule_path}/catppuccin-btop/themes/catppuccin_mocha.theme ${base_path}/btop/.config/btop/themes/catppuccin_mocha.theme"
-  "${git_submodule_path}/catppuccin-helix/themes/default/catppuccin_mocha.toml ${base_path}/helix/.config/helix/themes/catppuccin_mocha.toml"
-  "${git_submodule_path}/catppuccin-hyprland/themes/catppuccin-mocha.lua ${base_path}/hyprland/.config/hypr/themes/catppuccin-mocha.lua"
-  "${git_submodule_path}/catppuccin-kvantum/themes/catppuccin-mocha-mauve ${base_path}/qt/.config/Kvantum/catppuccin-mocha-mauve"
-  "${git_submodule_path}/catppuccin-waybar/themes/mocha.css ${base_path}/waybar/.config/waybar/theme.css"
-  "${git_submodule_path}/cryptofont/fonts/cryptofont.ttf ${base_path}/fonts/.local/share/fonts/TTF/cryptofont.ttf"
-  "${git_submodule_path}/sweet-theme/assets ${base_path}/gtk/.themes/Sweet/assets"
-  "${git_submodule_path}/sweet-theme/gtk-2.0 ${base_path}/gtk/.themes/Sweet/gtk-2.0"
-  "${git_submodule_path}/sweet-theme/gtk-3.0 ${base_path}/gtk/.themes/Sweet/gtk-3.0"
-  "${git_submodule_path}/sweet-theme/gtk-4.0 ${base_path}/gtk/.themes/Sweet/gtk-4.0"
-  "${git_submodule_path}/sweet-theme/index.theme ${base_path}/gtk/.themes/Sweet/index.theme"
-  "${git_submodule_path}/sweet-theme/kde/Kvantum/Sweet ${base_path}/qt/.config/Kvantum/Sweet"
-)
-for symlink_paths_tuple in "${symlink_paths_tuples[@]}"; do
-  read -ra symlink_paths <<<"$symlink_paths_tuple"
-  symlink "${symlink_paths[0]}" "${symlink_paths[1]}"
-done
+  declare -a symlink_paths_tuples=(
+    "${base_path}/steam/.steam/steam/steam_dev.cfg ${HOME}/.steam/steam/steam_dev.cfg"
+    "${git_submodule_path}/alacritty-theme/themes ${base_path}/alacritty/.config/alacritty/themes"
+    "${git_submodule_path}/candy-icons ${base_path}/gtk/.icons/candy-icons"
+    "${git_submodule_path}/catppuccin-bat/themes/Catppuccin-Mocha.tmTheme ${base_path}/bat/.config/bat/themes/Catppuccin-Mocha.tmTheme"
+    "${git_submodule_path}/catppuccin-btop/themes/catppuccin_mocha.theme ${base_path}/btop/.config/btop/themes/catppuccin_mocha.theme"
+    "${git_submodule_path}/catppuccin-helix/themes/default/catppuccin_mocha.toml ${base_path}/helix/.config/helix/themes/catppuccin_mocha.toml"
+    "${git_submodule_path}/catppuccin-hyprland/themes/catppuccin-mocha.lua ${base_path}/hyprland/.config/hypr/themes/catppuccin-mocha.lua"
+    "${git_submodule_path}/catppuccin-kvantum/themes/catppuccin-mocha-mauve ${base_path}/qt/.config/Kvantum/catppuccin-mocha-mauve"
+    "${git_submodule_path}/catppuccin-waybar/themes/mocha.css ${base_path}/waybar/.config/waybar/theme.css"
+    "${git_submodule_path}/cryptofont/fonts/cryptofont.ttf ${base_path}/fonts/.local/share/fonts/TTF/cryptofont.ttf"
+    "${git_submodule_path}/sweet-theme/assets ${base_path}/gtk/.themes/Sweet/assets"
+    "${git_submodule_path}/sweet-theme/gtk-2.0 ${base_path}/gtk/.themes/Sweet/gtk-2.0"
+    "${git_submodule_path}/sweet-theme/gtk-3.0 ${base_path}/gtk/.themes/Sweet/gtk-3.0"
+    "${git_submodule_path}/sweet-theme/gtk-4.0 ${base_path}/gtk/.themes/Sweet/gtk-4.0"
+    "${git_submodule_path}/sweet-theme/index.theme ${base_path}/gtk/.themes/Sweet/index.theme"
+    "${git_submodule_path}/sweet-theme/kde/Kvantum/Sweet ${base_path}/qt/.config/Kvantum/Sweet"
+  )
+  for symlink_paths_tuple in "${symlink_paths_tuples[@]}"; do
+    read -ra symlink_paths <<<"$symlink_paths_tuple"
+    symlink "${symlink_paths[0]}" "${symlink_paths[1]}"
+  done
 fi
 
 latest_android_config_dir=$(find ~/.config/Google -mindepth 1 -maxdepth 1 -type d -exec stat -c "%Y %n" {} \; | sort -nr | head -n 1 | cut -d' ' -f2-)

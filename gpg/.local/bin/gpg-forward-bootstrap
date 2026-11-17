@@ -8,7 +8,7 @@ FORWARD_HOME=$HOME/.gnupg-forward
 
 mkdir -p "$FORWARD_HOME"
 chmod 700 "$FORWARD_HOME"
-printf 'no-autostart\n' > "$FORWARD_HOME/gpg.conf"
+printf 'no-autostart\n' >"$FORWARD_HOME/gpg.conf"
 
 gpg --homedir "$FORWARD_HOME" --import
 
