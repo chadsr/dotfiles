@@ -107,7 +107,9 @@ declare -a conflict_paths=(
 
 echo "Checking for files/directories that will conflict with stow"
 for conflict_path in "${conflict_paths[@]}"; do
-  rm_if_not_stowed "${conflict_path}"
+  rm_if_not_stowed "${conflict_path}" || {
+    echo "failed to remove stow conflicts"
+  }
 done
 
 echo "Setting up stow"
