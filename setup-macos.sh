@@ -19,6 +19,16 @@ source "$(dirname "${BASH_SOURCE[0]}")/setup-lib.sh" || {
   exit 1
 }
 
+update_paths() {
+  base_path=$PWD
+  data_path="$base_path"/data
+  system_config_path="$base_path"/system
+  git_submodule_path="$base_path"/.git_submodules
+}
+
+cd_dotfiles
+update_paths
+
 mkdir -p "$tmp_path"
 
 prompt_exit "This script will remove/change existing system settings."
@@ -105,9 +115,6 @@ stow -t ~/ stow || {
   exit 1
 }
 
-echo "Appending custom pinentry script to gpg-agent.conf"
-setup_pinentry
-
 declare -a stow_dirs_setup=(
   bash
   git
@@ -136,6 +143,26 @@ for launch_agent_dir in "${launch_agents[@]}"; do
   echo "Loaded $launch_agent_dir"
 done
 
+# Ensure the ssh_login group exists and contains the current user
+ensure_group_member() {
+  sudo dseditgroup -o read ssh_login >/dev/null 2>&1 || sudo dseditgroup -o create ssh_login
+  sudo dseditgroup -o edit -a "$USER" -t user ssh_login
+}
+
+# Install the sshd hardening drop-in and validate the effective config
+install_sshd_config() {
+  sudo mkdir -p /etc/ssh/sshd_config.d
+  if ! sudo grep -q '^Include /etc/ssh/sshd_config.d' /etc/ssh/sshd_config; then
+    echo 'Include /etc/ssh/sshd_config.d/*' | sudo tee -a /etc/ssh/sshd_config >/dev/null
+  fi
+  sudo install -o root -g wheel -m 644 system/macos/etc/ssh/sshd_config.d/050-hardening.conf /etc/ssh/sshd_config.d/050-hardening.conf
+  sudo /usr/sbin/sshd -t
+}
+
+# The group must exist before sshd reads AllowGroups, or the next login locks out
+ensure_group_member
+install_sshd_config
+
 gpg-connect-agent reloadagent /bye || {
   echo "failed to reload gpg-agent"
   exit 1
@@ -146,7 +173,7 @@ import_gpg_pubkey
 echo "Decrypting data"
 declare -a decrypt_data_paths_tuples=(
   "${data_path}/ssh/config.asc.gpg ${base_path}/ssh/.ssh/config"
-  "${data_path}/android/keystores/keystore-rossch.asc.gpg ${base_path}/android/.android/keystores/keystore-rossch"
+  "${data_path}/android/keystores/keystore.asc.gpg ${base_path}/android/.android/keystores/keystore"
 )
 
 for decrypt_data_paths_tuple in "${decrypt_data_paths_tuples[@]}"; do
