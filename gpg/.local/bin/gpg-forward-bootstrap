@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Bootstrap ~/.gnupg-forward on a remote host
+# gpg --export -a | ssh <host> gpg-forward-bootstrap
+
+set -euo pipefail
+
+FORWARD_HOME=$HOME/.gnupg-forward
+
+mkdir -p "$FORWARD_HOME"
+chmod 700 "$FORWARD_HOME"
+printf 'no-autostart\n' >"$FORWARD_HOME/gpg.conf"
+
+gpg --homedir "$FORWARD_HOME" --import
+
+# --import spawns a gpg-agent whose socket would block the RemoteForward bind
+gpgconf --homedir "$FORWARD_HOME" --kill gpg-agent 2>/dev/null || true
+rm -f "$FORWARD_HOME"/S.* "$FORWARD_HOME"/.#lk*

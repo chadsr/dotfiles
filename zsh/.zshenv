@@ -24,13 +24,21 @@ else
   export GPG_TTY=$TTY
 fi
 
+# Use the client's gpg-agent forwarded over ssh; the socket is removed at logout by .zlogout
+if [[ -n "${SSH_CONNECTION:-}" && -S "$HOME/.gnupg-forward/S.gpg-agent" ]]; then
+  export GNUPGHOME="$HOME/.gnupg-forward"
+fi
+
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-  # forwarded/valid sockets take priority; fall back to local gpg-agent
-  if [[ -z "$SSH_AUTH_SOCK" || ! -S "$SSH_AUTH_SOCK" ]]; then
-    ssh_auth_sock=$(gpgconf --list-dirs agent-ssh-socket)
-    export SSH_AUTH_SOCK=$ssh_auth_sock
+  # Forwarded/valid sockets take priority; fall back to local gpg-agent
+  # When GNUPGHOME points at a client-forwarded agent (see above), don't touch it
+  if [[ -z "${GNUPGHOME:-}" ]]; then
+    if [[ -z "$SSH_AUTH_SOCK" || ! -S "$SSH_AUTH_SOCK" ]]; then
+      ssh_auth_sock=$(gpgconf --list-dirs agent-ssh-socket)
+      [[ -S "$ssh_auth_sock" ]] && export SSH_AUTH_SOCK=$ssh_auth_sock
+    fi
+    [[ -n "${GPG_TTY:-}" ]] && gpg-connect-agent updatestartuptty /bye >/dev/null
   fi
-  gpg-connect-agent updatestartuptty /bye >/dev/null
 
   LINUX_ASKPASS=$(which wayprompt-ssh-askpass)
   export SSH_ASKPASS="$LINUX_ASKPASS"
@@ -124,10 +132,23 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   # shellcheck disable=SC1091
   source '/etc/zshrc' # still source /etc/zshrc for anything useful
 
+  export PATH="/opt/homebrew/bin:$PATH"
+  export PATH="$HOME/.local/bin:$PATH"
+
+  # Forwarded/valid sockets take priority; fall back to local gpg-agent
+  # When GNUPGHOME points at a client-forwarded agent (see top), don't touch it
+  if [[ -z "${GNUPGHOME:-}" ]]; then
+    if [[ -z "$SSH_AUTH_SOCK" || ! -S "$SSH_AUTH_SOCK" ]]; then
+      ssh_auth_sock=$(gpgconf --list-dirs agent-ssh-socket)
+      [[ -S "$ssh_auth_sock" ]] && export SSH_AUTH_SOCK=$ssh_auth_sock
+    fi
+    [[ -n "${GPG_TTY:-}" ]] && gpg-connect-agent updatestartuptty /bye >/dev/null
+  fi
+
   MAC_ASKPASS=$(which ssh-askpass)
   export SSH_ASKPASS="$MAC_ASKPASS"
 
-  export PATH="$HOMEBREW_PREFIX/opt/ruby/bin:$PATH"
+  export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 fi
 
 ##########

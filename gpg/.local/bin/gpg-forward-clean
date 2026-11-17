@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Recovery helper for the ssh-forwarded gpg homedir (~/.gnupg-forward)
+
+set -euo pipefail
+
+FORWARD_HOME=$HOME/.gnupg-forward
+
+[[ -d "$FORWARD_HOME" ]] || exit 0
+
+gpgconf --homedir "$FORWARD_HOME" --kill all 2>/dev/null || true
+rm -f "$FORWARD_HOME"/S.* "$FORWARD_HOME"/.#lk*
+echo "cleaned $FORWARD_HOME"

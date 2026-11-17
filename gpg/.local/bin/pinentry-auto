@@ -2,6 +2,8 @@
 
 set -Ceu
 
+PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
+
 _exists() {
   type "$1" >/dev/null 2>&1
 }

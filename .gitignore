@@ -26,7 +26,6 @@ forge/.config/forge/*
 freetube/.config/FreeTube/*
 gallery-dl/.config/gallery-dl/*
 goose/.config/goose/*
-gpg/.gnupg/gpg-agent.conf
 gtk/.config/gtk-3.0/bookmarks
 gtk/.config/gtk-4.0/bookmarks
 gtk/.icons/*

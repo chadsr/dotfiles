@@ -5,6 +5,8 @@ gpg_encryption_subkey=0x79C70BBE4865D828
 
 laptop_hostname="thinky"
 desktop_hostname="shifty"
+
+declare -a server_hostnames=(herdr)
 current_hostname=${HOSTNAME}
 
 tmp_path=/tmp/setup-"$current_hostname"
@@ -32,10 +34,28 @@ source "$(dirname "${BASH_SOURCE[0]}")/setup-lib.sh" || {
   exit 1
 }
 
+command -v "$package_manager" >/dev/null 2>&1 || {
+  echo "prerequisite missing: ${package_manager} — install it first"
+  exit 1
+}
+
 script_name=$(basename "$0")
 
 help() {
-  printf "Sets up system packages and configurations.\n\nUsage: %s <%s|%s>\n" "$script_name" "$laptop_hostname" "$desktop_hostname"
+  local hostnames="${laptop_hostname}|${desktop_hostname}"
+  local server_hostname
+  for server_hostname in "${server_hostnames[@]}"; do
+    hostnames+="|${server_hostname}"
+  done
+  printf "Sets up system packages and configurations.\n\nUsage: %s <%s>\n" "$script_name" "$hostnames"
+}
+
+is_server_hostname() {
+  local server_hostname
+  for server_hostname in "${server_hostnames[@]}"; do
+    [[ "${1}" == "$server_hostname" ]] && return 0
+  done
+  return 1
 }
 
 update_paths() {
@@ -47,8 +67,8 @@ update_paths() {
 
 update_paths
 
-if [[ "$current_hostname" != "$laptop_hostname" ]] && [[ "$current_hostname" != "$desktop_hostname" ]]; then
-  if [[ "$1" != "$laptop_hostname" ]] && [[ "$1" != "$desktop_hostname" ]]; then
+if [[ "$current_hostname" != "$laptop_hostname" ]] && [[ "$current_hostname" != "$desktop_hostname" ]] && ! is_server_hostname "$current_hostname"; then
+  if [[ "$1" != "$laptop_hostname" ]] && [[ "$1" != "$desktop_hostname" ]] && ! is_server_hostname "${1:-}"; then
     echo "Unrecognised hostname! Please provide a valid one."
     help
     exit 1
@@ -60,23 +80,20 @@ else
   echo "Using current hostname \"${current_hostname}\" for configuration."
 fi
 
+if is_server_hostname "$current_hostname"; then
+  is_graphical=false
+else
+  is_graphical=true
+fi
+
 prompt_exit "This script will remove/change existing system settings."
 
 cd_dotfiles
 update_paths
 
-rsync_system_config() {
-  local system_config_full_path="$system_config_path"/"${1}"
-
-  if [[ ! -d "$system_config_full_path" ]]; then
-    echo "The provided path '${system_config_full_path}' does not exist!"
-    return 1
-  fi
-
-  sudo rsync --chown=root:root --open-noatime --exclude='.gitkeep' --progress -ruacv -- "${system_config_full_path}"/* / || {
-    echo "failed to rsync system config from ${system_config_full_path} to root filesystem"
-    return 1
-  }
+# Remove superseded config files from previous deployments
+remove_legacy_files() {
+  sudo rm -f /etc/ssh/sshd_config.d/99-hardening.conf
 }
 
 systemd_enable_start() {
@@ -144,45 +161,6 @@ add_group_user() {
   }
 }
 
-set_default_kernel() {
-  local efi_loader_conf_path=/boot/loader/loader.conf
-  local kernel_suffix="${1}".conf
-
-  case $(
-    sudo grep -G -- '^default.*'"${kernel_suffix}"'$' "${efi_loader_conf_path}" >/dev/null
-    echo $?
-  ) in
-  0)
-    echo "Linux ${kernel_suffix} kernel already default"
-    ;;
-  1)
-    read -p "Make Linux ${kernel_suffix} kernel default (y/N)?" -n 1 -r
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-      case $(
-        sudo grep -G -- '^default.*\*$' "${efi_loader_conf_path}" >/dev/null
-        echo $?
-      ) in
-      0) ;;
-      1)
-        echo "Expected default kernel to be a wildcard (ending with *) in ${efi_loader_conf_path}"
-        exit 1
-        ;;
-      *)
-        echo "Failed to check for wildcard suffix in ${efi_loader_conf_path}"
-        exit 1
-        ;;
-      esac
-      sudo sed -i '/^default/s/$/'"${kernel_suffix}"'/' "${efi_loader_conf_path}"
-    fi
-    echo "Linux ${kernel_suffix} kernel set to default"
-    ;;
-  *)
-    echo "Failed to check ${efi_loader_conf_path} for ${kernel_suffix} kernel"
-    exit 1
-    ;;
-  esac
-}
-
 mkdir -p "$tmp_path"
 
 if command -v yay &>/dev/null; then
@@ -205,6 +183,7 @@ echo "Setting up GPG/SSH"
 gpg --list-keys >/dev/null
 systemd_enable_start /usr/lib/systemd/system/pcscd.socket
 
+mkdir -p "$HOME"/.config
 echo "Removing broken symlinks in ${HOME}/.config"
 find ~/.config/ -xtype l ! -name "SingletonCookie" ! -name "SingletonLock" -print -delete || {
   echo "Failed to remove broken symlinks"
@@ -271,7 +250,6 @@ declare -a conflict_paths=(
   ~/.bash_profile
   ~/.bashrc
   ~/.config/gtk-3.0
-  ~/.config/gtk-3.0
   ~/.config/gtk-4.0
   ~/.config/mimeapps.list
   ~/.config/Thunar/uca.xml
@@ -298,9 +276,6 @@ if ! [ -e "$base_path/hyprland/.config/sunsetr/geo.toml" ]; then
     exit 1
   }
 fi
-
-echo "Appending custom pinentry script to gpg-agent.conf"
-setup_pinentry
 
 declare -a stow_dirs_setup=(
   bash
@@ -339,42 +314,47 @@ pass init "$gpg_primary_key" || {
 
 pkglist_remove_path="$data_path"/pkgs/remove.txt
 
-echo "Decrypting data"
-declare -a decrypt_data_paths_tuples=(
-  "${data_path}/android/keystores/keystore-rossch.asc.gpg ${base_path}/android/.android/keystores/keystore-rossch"
-  "${data_path}/cura/cura.cfg.asc.gpg ${base_path}/cura/.config/cura/5.11/cura.cfg"
-  "${data_path}/gallery-dl/config.json.asc.gpg ${base_path}/gallery-dl/.config/gallery-dl/config.json"
-  "${data_path}/gtk/bookmarks.asc.gpg ${base_path}/gtk/.config/gtk-3.0/bookmarks"
-  "${data_path}/khal/config.asc.gpg ${base_path}/khal/.config/khal/config"
-  "${data_path}/nextcloud/nextcloud.cfg.asc.gpg ${base_path}/nextcloud/.config/Nextcloud/nextcloud.cfg"
-  "${data_path}/pkgs/remove.txt.asc.gpg ${pkglist_remove_path}"
-  "${data_path}/prusaslicer/PrusaSlicer.ini.asc.gpg ${base_path}/prusaslicer/.config/PrusaSlicer/PrusaSlicer.ini"
-  "${data_path}/qbittorrent/categories.json.asc ${base_path}/qbittorrent/.config/qBittorrent/categories.json"
-  "${data_path}/qbittorrent/qBittorrent.conf.asc ${base_path}/qbittorrent/.config/qBittorrent/qBittorrent.conf"
-  "${data_path}/radicle/keys/radicle.asc.gpg ${base_path}/radicle/.radicle/keys/radicle"
-  "${data_path}/ssh/config.asc.gpg ${base_path}/ssh/.ssh/config"
-  "${data_path}/system/${current_hostname}/boot/loader/entries/arch-cachyos.asc.conf ${base_path}/system/${current_hostname}/boot/loader/entries/arch-cachyos.conf"
-  "${data_path}/system/${current_hostname}/boot/loader/entries/arch-zen.asc.conf ${base_path}/system/${current_hostname}/boot/loader/entries/arch-zen.conf"
-  "${data_path}/tidal-hifi/config.json.asc.gpg ${base_path}/tidal-hifi/.config/tidal-hifi/config.json"
-  "${data_path}/vdirsyncer/config.asc.gpg ${base_path}/vdirsyncer/.config/vdirsyncer/config"
-  "${data_path}/waybar/waybar-crypto/config.ini.asc.gpg ${base_path}/waybar/.config/waybar-crypto/config.ini"
-  "${data_path}/xdg/mimeapps.list.asc.gpg ${base_path}/xdg/.config/mimeapps.list"
-)
-for decrypt_data_paths_tuple in "${decrypt_data_paths_tuples[@]}"; do
-  read -ra decrypt_data_paths <<<"$decrypt_data_paths_tuple"
+# Graphical-only: per-host secrets (themes, GUI app configs, keystore)
+if [[ "$is_graphical" == true ]]; then
+  echo "Decrypting data"
+  declare -a decrypt_data_paths_tuples=(
+    "${data_path}/android/keystores/keystore.asc.gpg ${base_path}/android/.android/keystores/keystore"
+    "${data_path}/cura/cura.cfg.asc.gpg ${base_path}/cura/.config/cura/5.11/cura.cfg"
+    "${data_path}/gallery-dl/config.json.asc.gpg ${base_path}/gallery-dl/.config/gallery-dl/config.json"
+    "${data_path}/gtk/bookmarks.asc.gpg ${base_path}/gtk/.config/gtk-3.0/bookmarks"
+    "${data_path}/khal/config.asc.gpg ${base_path}/khal/.config/khal/config"
+    "${data_path}/nextcloud/nextcloud.cfg.asc.gpg ${base_path}/nextcloud/.config/Nextcloud/nextcloud.cfg"
+    "${data_path}/pkgs/remove.txt.asc.gpg ${pkglist_remove_path}"
+    "${data_path}/prusaslicer/PrusaSlicer.ini.asc.gpg ${base_path}/prusaslicer/.config/PrusaSlicer/PrusaSlicer.ini"
+    "${data_path}/qbittorrent/categories.json.asc ${base_path}/qbittorrent/.config/qBittorrent/categories.json"
+    "${data_path}/qbittorrent/qBittorrent.conf.asc ${base_path}/qbittorrent/.config/qBittorrent/qBittorrent.conf"
+    "${data_path}/radicle/keys/radicle.asc.gpg ${base_path}/radicle/.radicle/keys/radicle"
+    "${data_path}/ssh/config.asc.gpg ${base_path}/ssh/.ssh/config"
+    "${data_path}/system/${current_hostname}/boot/loader/entries/arch-cachyos.asc.conf ${base_path}/system/${current_hostname}/boot/loader/entries/arch-cachyos.conf"
+    "${data_path}/system/${current_hostname}/boot/loader/entries/arch-zen.asc.conf ${base_path}/system/${current_hostname}/boot/loader/entries/arch-zen.conf"
+    "${data_path}/tidal-hifi/config.json.asc.gpg ${base_path}/tidal-hifi/.config/tidal-hifi/config.json"
+    "${data_path}/vdirsyncer/config.asc.gpg ${base_path}/vdirsyncer/.config/vdirsyncer/config"
+    "${data_path}/waybar/waybar-crypto/config.ini.asc.gpg ${base_path}/waybar/.config/waybar-crypto/config.ini"
+    "${data_path}/xdg/mimeapps.list.asc.gpg ${base_path}/xdg/.config/mimeapps.list"
+  )
+  for decrypt_data_paths_tuple in "${decrypt_data_paths_tuples[@]}"; do
+    read -ra decrypt_data_paths <<<"$decrypt_data_paths_tuple"
 
-  if [[ -f "${decrypt_data_paths[0]}" ]]; then
-    gpg_decrypt_file "${decrypt_data_paths[0]}" "${decrypt_data_paths[1]}"
-  fi
-done
+    if [[ -f "${decrypt_data_paths[0]}" ]]; then
+      gpg_decrypt_file "${decrypt_data_paths[0]}" "${decrypt_data_paths[1]}"
+    fi
+  done
+fi
 
 # check for packages to be removed
-declare -a old_pkgs=()
-readarray -t old_pkgs <"$pkglist_remove_path"
-echo "Checking for old packages to remove"
-for old_pkg in "${old_pkgs[@]}"; do
-  remove_package "$old_pkg"
-done
+if [[ -f "$pkglist_remove_path" ]]; then
+  declare -a old_pkgs=()
+  readarray -t old_pkgs <"$pkglist_remove_path"
+  echo "Checking for old packages to remove"
+  for old_pkg in "${old_pkgs[@]}"; do
+    remove_package "$old_pkg"
+  done
+fi
 
 # check for packages to be installed
 pkglist_path="$data_path"/pkgs/"$current_hostname".txt
@@ -402,31 +382,45 @@ readarray -t pkgs <"$pkglist_path"
 install_packages "${pkgs[@]}"
 
 # Add user to groups needed by various packages
-declare -a user_groups=(
-  audio
-  docker
-  gamemode
-  games
-  kvm
-  libvirt
-  plugdev
-  ssh_login
-  uucp
-)
+if [[ "$is_graphical" == true ]]; then
+  declare -a user_groups=(
+    audio
+    docker
+    gamemode
+    games
+    kvm
+    libvirt
+    plugdev
+    ssh_login
+    uucp
+  )
+else
+  declare -a user_groups=(
+    docker
+    ssh_login
+  )
+fi
 for user_group in "${user_groups[@]}"; do
   echo "Adding user to group ${user_group}"
   add_group_user "$user_group"
 done
 
-declare -a systemd_units=(
-  /usr/lib/systemd/system/bluetooth.service
-  /usr/lib/systemd/system/clamav-freshclam-once.timer
-  /usr/lib/systemd/system/ly@tty1.service
-  /usr/lib/systemd/system/ollama.service
-  /usr/lib/systemd/system/smartd.service
-  /usr/lib/systemd/system/swayosd-libinput-backend.service
-  # /usr/lib/systemd/system/input-remapper.service
-)
+if [[ "$is_graphical" == true ]]; then
+  declare -a systemd_units=(
+    /usr/lib/systemd/system/bluetooth.service
+    /usr/lib/systemd/system/clamav-freshclam-once.timer
+    /usr/lib/systemd/system/ly@tty1.service
+    /usr/lib/systemd/system/ollama.service
+    /usr/lib/systemd/system/smartd.service
+    /usr/lib/systemd/system/swayosd-libinput-backend.service
+    # /usr/lib/systemd/system/input-remapper.service
+  )
+else
+  declare -a systemd_units=(
+    /usr/lib/systemd/system/clamav-freshclam-once.timer
+    /usr/lib/systemd/system/smartd.service
+  )
+fi
 for systemd_unit in "${systemd_units[@]}"; do
   systemd_enable_start "${systemd_unit}"
 done
@@ -456,27 +450,32 @@ rustup component add clippy rustfmt || {
 
 sudo update-smart-drivedb
 
-hyprpm update || {
-  echo "failed to update hyprpm"
-  exit 1
-}
+if [[ "$is_graphical" == true ]]; then
+  hyprpm update || {
+    echo "failed to update hyprpm"
+    exit 1
+  }
 
-hyprpm add https://github.com/hyprwm/hyprland-plugins || {
-  echo "hyprland plugins already installed"
-}
+  hyprpm add https://github.com/hyprwm/hyprland-plugins || {
+    echo "hyprland plugins already installed"
+  }
 
-# hyprpm enable hyprexpo || {
-#   echo "failed to enable hyprexpo"
-#   exit 1
-# }
+  # hyprpm enable hyprexpo || {
+  #   echo "failed to enable hyprexpo"
+  #   exit 1
+  # }
 
-hyprpm enable hyprfocus || {
-  echo "failed to enable hyprfocus"
-  exit 1
-}
+  hyprpm enable hyprfocus || {
+    echo "failed to enable hyprfocus"
+    exit 1
+  }
+fi
 
 echo "Copying common system configuration"
 rsync_system_config common/
+remove_legacy_files
+sudo sshd -t
+sudo systemctl reload sshd || :
 
 if [[ "$current_hostname" == "$laptop_hostname" ]]; then
   echo "Copying laptop system configuration"
@@ -549,9 +548,6 @@ elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
     stow_config "$stow_dir"
   done
 
-  # TODO: Re-enable once decision on kernel builder is made
-  # set_default_kernel zen
-
   declare -a systemd_units_desktop=(
     /usr/lib/systemd/system/coolercontrold.service
     /usr/lib/systemd/system/lactd.service
@@ -573,81 +569,89 @@ elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
   for systemd_user_unit_desktop in "${systemd_user_units_desktop[@]}"; do
     systemd_user_enable_start "${systemd_user_unit_desktop}"
   done
+elif is_server_hostname "$current_hostname"; then
+  if [[ -d "$system_config_path/$current_hostname" ]]; then
+    echo "Copying server system configuration"
+    rsync_system_config "$current_hostname"/
+  fi
 fi
 
-# Check if certain submodules get updated, so we don't build them uneccessarily
-hackneyed_updated=false
-hackneyed_hash_old=$(git -C "$git_submodule_path"/hackneyed-cursor rev-parse --short HEAD)
+# Graphical-only: themes, cursors, submodules
+if [[ "$is_graphical" == true ]]; then
+  # Check if certain submodules get updated, so we don't build them uneccessarily
+  hackneyed_updated=false
+  hackneyed_hash_old=$(git -C "$git_submodule_path"/hackneyed-cursor rev-parse --short HEAD)
 
-update_submodules
+  update_submodules
 
-hackneyed_hash_new=$(git -C "$git_submodule_path"/hackneyed-cursor rev-parse --short HEAD)
-if [[ "$hackneyed_hash_old" != "$hackneyed_hash_new" ]]; then
-  hackneyed_updated=true
-  echo "hackneyed-cursor has been updated"
+  hackneyed_hash_new=$(git -C "$git_submodule_path"/hackneyed-cursor rev-parse --short HEAD)
+  if [[ "$hackneyed_hash_old" != "$hackneyed_hash_new" ]]; then
+    hackneyed_updated=true
+    echo "hackneyed-cursor has been updated"
+  fi
+
+  echo "Copying themes from git repo to dotfiles locations"
+
+  # If Hackneyed Dark build does not exist, then build it
+  if [[ ! -d "$base_path"/gtk/.icons/hackneyed-dark ]] || [[ $hackneyed_updated == true ]]; then
+    echo "Building hackneyed cursor"
+
+    cd "$git_submodule_path"/hackneyed-cursor || {
+      echo "failed to cd to hackneyed-cursor"
+      exit 1
+    }
+
+    make clean distclean || {
+      echo "failed to clean hackneyed cursor"
+      exit 1
+    }
+
+    make -O DARK_THEME=1 dist || {
+      echo "failed to make hackneyed cursor"
+      exit 1
+    }
+
+    rmrf "$base_path"/gtk/.icons/hackneyed-dark
+    cp -rv "$git_submodule_path"/hackneyed-cursor/Hackneyed-Dark "$base_path"/gtk/.icons/hackneyed-dark # cp instead of ln because the build dir will get reset by git
+
+    make clean || {
+      echo "failed to clean hackneyed make files"
+      exit 1
+    }
+    rm -f ./*.tar.bz2
+    cd "$base_path" || {
+      echo "failed to cd to ${base_path}"
+      exit 1
+    }
+  else
+    echo "Skipping hackneyed cursor build"
+  fi
+
+  fix_catppuccin_bat_theme
+
+  declare -a symlink_paths_tuples=(
+    "${base_path}/steam/.steam/steam/steam_dev.cfg ${HOME}/.steam/steam/steam_dev.cfg"
+    "${git_submodule_path}/alacritty-theme/themes ${base_path}/alacritty/.config/alacritty/themes"
+    "${git_submodule_path}/candy-icons ${base_path}/gtk/.icons/candy-icons"
+    "${git_submodule_path}/catppuccin-bat/themes/Catppuccin-Mocha.tmTheme ${base_path}/bat/.config/bat/themes/Catppuccin-Mocha.tmTheme"
+    "${git_submodule_path}/catppuccin-btop/themes/catppuccin_mocha.theme ${base_path}/btop/.config/btop/themes/catppuccin_mocha.theme"
+    "${git_submodule_path}/catppuccin-helix/themes/default/catppuccin_mocha.toml ${base_path}/helix/.config/helix/themes/catppuccin_mocha.toml"
+    "${git_submodule_path}/catppuccin-hyprland/themes/catppuccin-mocha.lua ${base_path}/hyprland/.config/hypr/themes/catppuccin-mocha.lua"
+    "${git_submodule_path}/catppuccin-kvantum/themes/catppuccin-mocha-mauve ${base_path}/qt/.config/Kvantum/catppuccin-mocha-mauve"
+    "${git_submodule_path}/catppuccin-waybar/themes/mocha.css ${base_path}/waybar/.config/waybar/theme.css"
+    "${git_submodule_path}/cryptofont/fonts/cryptofont.ttf ${base_path}/fonts/.local/share/fonts/TTF/cryptofont.ttf"
+    "${git_submodule_path}/sweet-theme/assets ${base_path}/gtk/.themes/Sweet/assets"
+    "${git_submodule_path}/sweet-theme/gtk-2.0 ${base_path}/gtk/.themes/Sweet/gtk-2.0"
+    "${git_submodule_path}/sweet-theme/gtk-3.0 ${base_path}/gtk/.themes/Sweet/gtk-3.0"
+    "${git_submodule_path}/sweet-theme/gtk-4.0 ${base_path}/gtk/.themes/Sweet/gtk-4.0"
+    "${git_submodule_path}/sweet-theme/index.theme ${base_path}/gtk/.themes/Sweet/index.theme"
+    "${git_submodule_path}/sweet-theme/kde/Kvantum/Sweet ${base_path}/qt/.config/Kvantum/Sweet"
+  )
+  for symlink_paths_tuple in "${symlink_paths_tuples[@]}"; do
+    read -ra symlink_paths <<<"$symlink_paths_tuple"
+    symlink "${symlink_paths[0]}" "${symlink_paths[1]}"
+  done
 fi
-
-echo "Copying themes from git repo to dotfiles locations"
-
-# If Hackneyed Dark build does not exist, then build it
-if [[ ! -d "$base_path"/gtk/.icons/hackneyed-dark ]] || [[ $hackneyed_updated == true ]]; then
-  echo "Building hackneyed cursor"
-
-  cd "$git_submodule_path"/hackneyed-cursor || {
-    echo "failed to cd to hackneyed-cursor"
-    exit 1
-  }
-
-  make clean distclean || {
-    echo "failed to clean hackneyed cursor"
-    exit 1
-  }
-
-  make -O DARK_THEME=1 dist || {
-    echo "failed to make hackneyed cursor"
-    exit 1
-  }
-
-  rmrf "$base_path"/gtk/.icons/hackneyed-dark
-  cp -rv "$git_submodule_path"/hackneyed-cursor/Hackneyed-Dark "$base_path"/gtk/.icons/hackneyed-dark # cp instead of ln because the build dir will get reset by git
-
-  make clean || {
-    echo "failed to clean hackneyed make files"
-    exit 1
-  }
-  rm -f ./*.tar.bz2
-  cd "$base_path" || {
-    echo "failed to cd to ${base_path}"
-    exit 1
-  }
-else
-  echo "Skipping hackneyed cursor build"
-fi
-
-fix_catppuccin_bat_theme
-
-declare -a symlink_paths_tuples=(
-  "${base_path}/steam/.steam/steam/steam_dev.cfg ${HOME}/.steam/steam/steam_dev.cfg"
-  "${git_submodule_path}/alacritty-theme/themes ${base_path}/alacritty/.config/alacritty/themes"
-  "${git_submodule_path}/candy-icons ${base_path}/gtk/.icons/candy-icons"
-  "${git_submodule_path}/catppuccin-bat/themes/Catppuccin-Mocha.tmTheme ${base_path}/bat/.config/bat/themes/Catppuccin-Mocha.tmTheme"
-  "${git_submodule_path}/catppuccin-btop/themes/catppuccin_mocha.theme ${base_path}/btop/.config/btop/themes/catppuccin_mocha.theme"
-  "${git_submodule_path}/catppuccin-helix/themes/default/catppuccin_mocha.toml ${base_path}/helix/.config/helix/themes/catppuccin_mocha.toml"
-  "${git_submodule_path}/catppuccin-hyprland/themes/catppuccin-mocha.lua ${base_path}/hyprland/.config/hypr/themes/catppuccin-mocha.lua"
-  "${git_submodule_path}/catppuccin-kvantum/themes/catppuccin-mocha-mauve ${base_path}/qt/.config/Kvantum/catppuccin-mocha-mauve"
-  "${git_submodule_path}/catppuccin-waybar/themes/mocha.css ${base_path}/waybar/.config/waybar/theme.css"
-  "${git_submodule_path}/cryptofont/fonts/cryptofont.ttf ${base_path}/fonts/.local/share/fonts/TTF/cryptofont.ttf"
-  "${git_submodule_path}/sweet-theme/assets ${base_path}/gtk/.themes/Sweet/assets"
-  "${git_submodule_path}/sweet-theme/gtk-2.0 ${base_path}/gtk/.themes/Sweet/gtk-2.0"
-  "${git_submodule_path}/sweet-theme/gtk-3.0 ${base_path}/gtk/.themes/Sweet/gtk-3.0"
-  "${git_submodule_path}/sweet-theme/gtk-4.0 ${base_path}/gtk/.themes/Sweet/gtk-4.0"
-  "${git_submodule_path}/sweet-theme/index.theme ${base_path}/gtk/.themes/Sweet/index.theme"
-  "${git_submodule_path}/sweet-theme/kde/Kvantum/Sweet ${base_path}/qt/.config/Kvantum/Sweet"
-)
-for symlink_paths_tuple in "${symlink_paths_tuples[@]}"; do
-  read -ra symlink_paths <<<"$symlink_paths_tuple"
-  symlink "${symlink_paths[0]}" "${symlink_paths[1]}"
-done
 
 latest_android_config_dir=$(find ~/.config/Google -mindepth 1 -maxdepth 1 -type d -exec stat -c "%Y %n" {} \; | sort -nr | head -n 1 | cut -d' ' -f2-)
 if [ -n "$latest_android_config_dir" ]; then
@@ -751,6 +755,27 @@ declare -a stow_dirs_general=(
   zed
 )
 
+if [[ "$is_graphical" == false ]]; then
+  declare -a stow_dirs_general=(
+    bat
+    btop
+    continue
+    docker
+    helix
+    herdr
+    mise
+    nvm
+    nvim
+    opencode
+    pass
+    scripts
+    starship
+    systemd
+    xdg
+    yubikey
+  )
+fi
+
 echo "Stowing general configs"
 for stow_dir in "${stow_dirs_general[@]}"; do
   echo "Stowing ${stow_dir}"
@@ -787,10 +812,13 @@ systemctl --user daemon-reload || {
   exit 1
 }
 
-declare -a systemd_user_targets=(
-  "$base_path"/sway/.config/systemd/user/sway-session.target
-  "$base_path"/hyprland/.config/systemd/user/hypr-session.target
-)
+declare -a systemd_user_targets=()
+if [[ "$is_graphical" == true ]]; then
+  systemd_user_targets+=(
+    "$base_path"/sway/.config/systemd/user/sway-session.target
+    "$base_path"/hyprland/.config/systemd/user/hypr-session.target
+  )
+fi
 for systemd_user_target in "${systemd_user_targets[@]}"; do
   systemctl --user link "${systemd_user_target}" || {
     echo "failed to enable target ${systemd_user_target}"
@@ -798,37 +826,40 @@ for systemd_user_target in "${systemd_user_targets[@]}"; do
   }
 done
 
-declare -a systemd_user_units=(
-  "$base_path"/awww/.config/systemd/user/awww-daemon.service
-  "$base_path"/awww/.config/systemd/user/awww-random.service
-  "$base_path"/clipse/.config/systemd/user/clipse.service
-  "$base_path"/gtk/.config/systemd/user/xsettingsd.service
-  "$base_path"/hyprland/.config/systemd/user/hypridle.service
-  "$base_path"/kanshi/.config/systemd/user/kanshi.service
-  "$base_path"/nextcloud/.config/systemd/user/nextcloud-client.service
-  "$base_path"/sway/.config/systemd/user/swayidle.service
-  "$base_path"/swayosd/.config/systemd/user/swayosd.service
-  "$base_path"/systemd/.config/systemd/user/enable-linger.service
-  "$base_path"/systemd/.config/systemd/user/wlr-sunclock.service
-  "$base_path"/vdirsyncer/.config/systemd/user/vdirsyncer-sync.service
-  "$base_path"/vdirsyncer/.config/systemd/user/vdirsyncer-sync.timer
-  "$base_path"/waybar/.config/systemd/user/setup-temps.service
-  /usr/lib/systemd/user/app-com.mitchellh.ghostty.service
-  /usr/lib/systemd/user/gnome-keyring-daemon.socket
-  /usr/lib/systemd/user/pipewire-pulse.service
-  /usr/lib/systemd/user/pipewire.service
-  /usr/lib/systemd/user/sunsetr.service
-  /usr/lib/systemd/user/swaync.service
-  /usr/lib/systemd/user/wireplumber.service
-  /usr/lib/systemd/user/yubikey-touch-detector.socket
-  # "$base_path"/dunst/.config/systemd/user/dunst-wl.service
-  # "$base_path"/espanso/.config/systemd/user/espanso.service
-  # "$base_path"/gammastep/.config/systemd/user/gammastep-wayland.service
-  # "$base_path"/gammastep/.config/systemd/user/geoclue-agent.service
-  # "$base_path"/solaar/.config/systemd/user/solaar.service
-  # /usr/lib/systemd/user/batsignal.service
-  # /usr/lib/systemd/user/gpu-screen-recorder-ui.service
-)
+declare -a systemd_user_units=()
+if [[ "$is_graphical" == true ]]; then
+  systemd_user_units+=(
+    "$base_path"/awww/.config/systemd/user/awww-daemon.service
+    "$base_path"/awww/.config/systemd/user/awww-random.service
+    "$base_path"/clipse/.config/systemd/user/clipse.service
+    "$base_path"/gtk/.config/systemd/user/xsettingsd.service
+    "$base_path"/hyprland/.config/systemd/user/hypridle.service
+    "$base_path"/kanshi/.config/systemd/user/kanshi.service
+    "$base_path"/nextcloud/.config/systemd/user/nextcloud-client.service
+    "$base_path"/sway/.config/systemd/user/swayidle.service
+    "$base_path"/swayosd/.config/systemd/user/swayosd.service
+    "$base_path"/systemd/.config/systemd/user/enable-linger.service
+    "$base_path"/systemd/.config/systemd/user/wlr-sunclock.service
+    "$base_path"/vdirsyncer/.config/systemd/user/vdirsyncer-sync.service
+    "$base_path"/vdirsyncer/.config/systemd/user/vdirsyncer-sync.timer
+    "$base_path"/waybar/.config/systemd/user/setup-temps.service
+    /usr/lib/systemd/user/app-com.mitchellh.ghostty.service
+    /usr/lib/systemd/user/gnome-keyring-daemon.socket
+    /usr/lib/systemd/user/pipewire-pulse.service
+    /usr/lib/systemd/user/pipewire.service
+    /usr/lib/systemd/user/sunsetr.service
+    /usr/lib/systemd/user/swaync.service
+    /usr/lib/systemd/user/wireplumber.service
+    /usr/lib/systemd/user/yubikey-touch-detector.socket
+    # "$base_path"/dunst/.config/systemd/user/dunst-wl.service
+    # "$base_path"/espanso/.config/systemd/user/espanso.service
+    # "$base_path"/gammastep/.config/systemd/user/gammastep-wayland.service
+    # "$base_path"/gammastep/.config/systemd/user/geoclue-agent.service
+    # "$base_path"/solaar/.config/systemd/user/solaar.service
+    # /usr/lib/systemd/user/batsignal.service
+    # /usr/lib/systemd/user/gpu-screen-recorder-ui.service
+  )
+fi
 for systemd_user_unit in "${systemd_user_units[@]}"; do
   systemd_user_enable_start "${systemd_user_unit}"
 done
@@ -850,12 +881,14 @@ sudo udevadm trigger || {
   exit 1
 }
 
-declare -a ollama_models=(
-  qwen2.5-coder:1.5b
-  nomic-embed-text:latest
-)
+if [[ "$is_graphical" == true ]]; then
+  declare -a ollama_models=(
+    qwen2.5-coder:1.5b
+    nomic-embed-text:latest
+  )
 
-pull_ollama_models "${ollama_models[@]}"
+  pull_ollama_models "${ollama_models[@]}"
+fi
 
 declare -a docker_mcp_profiles=(
   dev-tools

@@ -265,6 +265,28 @@ rm_if_not_stowed() {
   }
 }
 
+rsync_system_config() {
+  # shellcheck disable=SC2154
+  local system_config_full_path="$system_config_path"/"${1}"
+  local rsync_bin="rsync"
+  local rsync_chown="root:root"
+
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    rsync_bin="/opt/homebrew/bin/rsync"
+    rsync_chown="root:wheel"
+  fi
+
+  if [[ ! -d "$system_config_full_path" ]]; then
+    echo "The provided path '${system_config_full_path}' does not exist!"
+    return 1
+  fi
+
+  sudo "$rsync_bin" --chown="$rsync_chown" --open-noatime --exclude='.gitkeep' --progress -ruacvLKO -- "${system_config_full_path}"/* / || {
+    echo "failed to rsync system config from ${system_config_full_path} to root filesystem"
+    return 1
+  }
+}
+
 stow_config() {
   stow -v "$1" || {
     echo "Failed to stow ${1} config"
@@ -276,7 +298,7 @@ import_gpg_pubkey() {
   # If our primary GPG key is not yet imported, import it
   # shellcheck disable=SC2154
   if [[ ! $(gpg --list-keys "$gpg_primary_key") ]]; then
-    gpg --import "$data_path"/gpg/2B7340DB13C85766.asc || {
+    gpg --import "$data_path"/gpg/"${gpg_primary_key#0x}".asc || {
       echo "failed to import GPG pubkey"
       exit 1
     }
@@ -286,15 +308,6 @@ import_gpg_pubkey() {
       exit 1
     }
   fi
-}
-
-setup_pinentry() {
-  # GNUPG is ridiculous and only allows env-vars in some of the options here, so we have to do this the convoluted way with a line append
-  cp -v "$data_path"/gpg/gpg-agent.conf "$base_path"/gpg/.gnupg/gpg-agent.conf || {
-    echo "failed to copy gpg-agent.conf from data dir"
-    exit 1
-  }
-  echo "pinentry-program $HOME/.local/bin/pinentry-auto" | tee -a "$base_path"/gpg/.gnupg/gpg-agent.conf
 }
 
 update_submodules() {
