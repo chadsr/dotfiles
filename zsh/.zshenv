@@ -24,19 +24,9 @@ else
   export GPG_TTY=$TTY
 fi
 
-# Use the client's gpg-agent forwarded over ssh (RemoteForward restricted extra socket)
-# The socket is removed at logout by .zlogout
+# Use the client's gpg-agent forwarded over ssh; the socket is removed at logout by .zlogout
 if [[ -n "${SSH_CONNECTION:-}" && -S "$HOME/.gnupg-forward/S.gpg-agent" ]]; then
-  fwd_alive=1
-  if command -v nc >/dev/null 2>&1; then
-    nc -w1 -U "$HOME/.gnupg-forward/S.gpg-agent" </dev/null >/dev/null 2>&1 || fwd_alive=0
-  fi
-  if [[ "$fwd_alive" == 1 ]]; then
-    export GNUPGHOME="$HOME/.gnupg-forward"
-  else
-    rm -f "$HOME/.gnupg-forward/S.gpg-agent"
-  fi
-  unset fwd_alive
+  export GNUPGHOME="$HOME/.gnupg-forward"
 fi
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
@@ -47,7 +37,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
       ssh_auth_sock=$(gpgconf --list-dirs agent-ssh-socket)
       [[ -S "$ssh_auth_sock" ]] && export SSH_AUTH_SOCK=$ssh_auth_sock
     fi
-    gpg-connect-agent updatestartuptty /bye >/dev/null
+    [[ -n "${GPG_TTY:-}" ]] && gpg-connect-agent updatestartuptty /bye >/dev/null
   fi
 
   LINUX_ASKPASS=$(which wayprompt-ssh-askpass)
@@ -152,7 +142,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
       ssh_auth_sock=$(gpgconf --list-dirs agent-ssh-socket)
       [[ -S "$ssh_auth_sock" ]] && export SSH_AUTH_SOCK=$ssh_auth_sock
     fi
-    gpg-connect-agent updatestartuptty /bye >/dev/null
+    [[ -n "${GPG_TTY:-}" ]] && gpg-connect-agent updatestartuptty /bye >/dev/null
   fi
 
   MAC_ASKPASS=$(which ssh-askpass)
