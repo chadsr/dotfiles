@@ -276,7 +276,7 @@ import_gpg_pubkey() {
   # If our primary GPG key is not yet imported, import it
   # shellcheck disable=SC2154
   if [[ ! $(gpg --list-keys "$gpg_primary_key") ]]; then
-    gpg --import "$data_path"/gpg/2B7340DB13C85766.asc || {
+    gpg --import "$data_path"/gpg/"${gpg_primary_key#0x}".asc || {
       echo "failed to import GPG pubkey"
       exit 1
     }
@@ -286,15 +286,6 @@ import_gpg_pubkey() {
       exit 1
     }
   fi
-}
-
-setup_pinentry() {
-  # GNUPG is ridiculous and only allows env-vars in some of the options here, so we have to do this the convoluted way with a line append
-  cp -v "$data_path"/gpg/gpg-agent.conf "$base_path"/gpg/.gnupg/gpg-agent.conf || {
-    echo "failed to copy gpg-agent.conf from data dir"
-    exit 1
-  }
-  echo "pinentry-program $HOME/.local/bin/pinentry-auto" | tee -a "$base_path"/gpg/.gnupg/gpg-agent.conf
 }
 
 update_submodules() {
