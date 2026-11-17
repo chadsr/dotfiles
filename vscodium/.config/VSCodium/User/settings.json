@@ -227,12 +227,5 @@
     "**/.forgejo/workflows/*.yaml"
   ],
   "yaml.format.singleQuote": true,
-  "yaml.schemas": {
-    "file:///Users/ross/.vscode/extensions/continue.continue-1.2.22-darwin-arm64/config-yaml-schema.json": [
-      ".continue/**/*.yaml"
-    ],
-    "file:///home/marvin/.vscode-oss/extensions/continue.continue-1.2.22-linux-x64/config-yaml-schema.json": [
-      ".continue/**/*.yaml"
-    ]
-  }
+  "yaml.schemas": {}
 }
