@@ -158,7 +158,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   MAC_ASKPASS=$(which ssh-askpass)
   export SSH_ASKPASS="$MAC_ASKPASS"
 
-  export PATH="$HOMEBREW_PREFIX/opt/ruby/bin:$PATH"
+  export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 fi
 
 ##########
