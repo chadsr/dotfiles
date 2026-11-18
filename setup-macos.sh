@@ -8,8 +8,8 @@ data_path="$base_path"/data
 git_submodule_path="$base_path"/.git_submodules
 
 package_manager=/opt/homebrew/bin/brew
-diff_command="nvim -d"
-tmp_path=/tmp/setup-"${HOSTNAME}"
+declare -a diff_command=(nvim -d)
+tmp_path=/tmp/setup-"$HOSTNAME"
 
 set -euo pipefail
 trap 'exit_setup' ERR INT
@@ -90,7 +90,7 @@ declare -a mk_dirs=(
 )
 
 for mk_dir in "${mk_dirs[@]}"; do
-  mkdir -p "${mk_dir}"
+  mkdir -p "$mk_dir"
 done
 
 # gpg requires strict perms when ~/.gnupg-forward is used as GNUPGHOME
@@ -107,7 +107,7 @@ declare -a conflict_paths=(
 
 echo "Checking for files/directories that will conflict with stow"
 for conflict_path in "${conflict_paths[@]}"; do
-  rm_if_not_stowed "${conflict_path}" || {
+  rm_if_not_stowed "$conflict_path" || {
     echo "failed to remove stow conflicts"
   }
 done

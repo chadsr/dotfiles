@@ -2,6 +2,7 @@
   "Exclude": [
     "\\.git_submodules/",
     "\\.md$",
+    "\\.edn$",
     "\\.icc$",
     "\\.(png|jpe?g|gif|svg|webp|ico)$",
     "\\.(ttf|otf|woff2?|eot)$"

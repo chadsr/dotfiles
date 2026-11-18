@@ -13,7 +13,7 @@ tmp_path=/tmp/setup-"$current_hostname"
 
 package_manager=/usr/bin/yay
 pkglist_system_path=/etc/pkglist.txt
-diff_command="nvim -d"
+declare -a diff_command=(nvim -d)
 
 # bare minimum packages needed by this script in order to bootstrap
 declare -a script_pkgs=(
@@ -101,16 +101,16 @@ systemd_enable_start() {
   local unit_name
   unit_name=$(basename "${1}")
 
-  if ! (systemctl -q is-enabled -- "${unit_name}"); then
+  if ! (systemctl -q is-enabled -- "$unit_name"); then
     echo "Enabling Systemd Unit ${unit_name}"
-    sudo systemctl enable -- "${unit_path}" || {
+    sudo systemctl enable -- "$unit_path" || {
       echo "failed to enable systemd unit ${unit_name}"
       return 1
     }
   fi
-  if ! (systemctl -q is-active "${unit_name}"); then
+  if ! (systemctl -q is-active "$unit_name"); then
     echo "Starting Systemd Unit ${unit_name}"
-    sudo systemctl start -- "${unit_name}" || {
+    sudo systemctl start -- "$unit_name" || {
       echo "failed to start systemd unit ${unit_name}"
       return 1
     }
@@ -122,16 +122,16 @@ systemd_user_enable_start() {
   local unit_name
   unit_name=$(basename "${1}")
 
-  if ! (systemctl --user -q is-enabled -- "${unit_name}"); then
+  if ! (systemctl --user -q is-enabled -- "$unit_name"); then
     echo "Enabling Systemd User Unit ${unit_name}"
-    systemctl --user enable -- "${unit_path}" || {
+    systemctl --user enable -- "$unit_path" || {
       echo "failed to enable systemd user unit ${unit_name}"
       return 1
     }
   fi
-  if ! (systemctl --user -q is-active -- "${unit_name}"); then
+  if ! (systemctl --user -q is-active -- "$unit_name"); then
     echo "Starting Systemd User Unit ${unit_name}"
-    systemctl --user start -- "${unit_name}" || {
+    systemctl --user start -- "$unit_name" || {
       echo "failed to start systemd user unit ${unit_name}"
       return 1
     }
@@ -237,7 +237,7 @@ declare -a mk_dirs=(
   ~/Pictures/Screenshots/
 )
 for mk_dir in "${mk_dirs[@]}"; do
-  mkdir -p "${mk_dir}"
+  mkdir -p "$mk_dir"
 done
 
 # gpg requires strict perms when ~/.gnupg-forward is used as GNUPGHOME
@@ -265,7 +265,7 @@ declare -a conflict_paths=(
 )
 echo "Checking for files/directories that will conflict with stow"
 for conflict_path in "${conflict_paths[@]}"; do
-  rm_if_not_stowed "${conflict_path}" || {
+  rm_if_not_stowed "$conflict_path" || {
     echo "failed to remove stow conflicts"
   }
 done
@@ -428,7 +428,7 @@ else
   )
 fi
 for systemd_unit in "${systemd_units[@]}"; do
-  systemd_enable_start "${systemd_unit}"
+  systemd_enable_start "$systemd_unit"
 done
 
 echo "Disabling GNOME Keyring SSH Agent (If it exists)"
@@ -456,26 +456,26 @@ rustup component add clippy rustfmt || {
 
 sudo update-smart-drivedb
 
-if [[ "$is_graphical" == true ]]; then
-  hyprpm update || {
-    echo "failed to update hyprpm"
-    exit 1
-  }
+# if [[ "$is_graphical" == true ]]; then
+#   hyprpm update || {
+#     echo "failed to update hyprpm"
+#     exit 1
+#   }
 
-  hyprpm add https://github.com/hyprwm/hyprland-plugins || {
-    echo "hyprland plugins already installed"
-  }
+#   hyprpm add https://github.com/hyprwm/hyprland-plugins || {
+#     echo "hyprland plugins already installed"
+#   }
 
-  # hyprpm enable hyprexpo || {
-  #   echo "failed to enable hyprexpo"
-  #   exit 1
-  # }
+#   # hyprpm enable hyprexpo || {
+#   #   echo "failed to enable hyprexpo"
+#   #   exit 1
+#   # }
 
-  hyprpm enable hyprfocus || {
-    echo "failed to enable hyprfocus"
-    exit 1
-  }
-fi
+#   hyprpm enable hyprfocus || {
+#     echo "failed to enable hyprfocus"
+#     exit 1
+#   }
+# fi
 
 echo "Copying common system configuration"
 rsync_system_config common/
@@ -509,7 +509,7 @@ if [[ "$current_hostname" == "$laptop_hostname" ]]; then
     /etc/systemd/system/powertop.service
   )
   for systemd_unit in "${systemd_units_laptop[@]}"; do
-    systemd_enable_start "${systemd_unit}"
+    systemd_enable_start "$systemd_unit"
   done
 
   systemctl --user daemon-reload || {
@@ -521,7 +521,7 @@ if [[ "$current_hostname" == "$laptop_hostname" ]]; then
     "$base_path"/scripts/.config/systemd/user/tablet-rotate.service
   )
   for systemd_user_unit_laptop in "${systemd_user_units_laptop[@]}"; do
-    systemd_user_enable_start "${systemd_user_unit_laptop}"
+    systemd_user_enable_start "$systemd_user_unit_laptop"
   done
 
 elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
@@ -560,7 +560,7 @@ elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
     /usr/lib/systemd/system/power-profiles-daemon.service
   )
   for systemd_unit_desktop in "${systemd_units_desktop[@]}"; do
-    systemd_enable_start "${systemd_unit_desktop}"
+    systemd_enable_start "$systemd_unit_desktop"
   done
 
   systemctl --user daemon-reload || {
@@ -573,7 +573,7 @@ elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
     "$base_path"/coolercontrol/.config/systemd/user/coolercontrol.service
   )
   for systemd_user_unit_desktop in "${systemd_user_units_desktop[@]}"; do
-    systemd_user_enable_start "${systemd_user_unit_desktop}"
+    systemd_user_enable_start "$systemd_user_unit_desktop"
   done
 elif is_server_hostname "$current_hostname"; then
   if [[ -d "$system_config_path/$current_hostname" ]]; then
@@ -660,7 +660,7 @@ if [[ "$is_graphical" == true ]]; then
 fi
 
 latest_android_config_dir=$(find ~/.config/Google -mindepth 1 -maxdepth 1 -type d -exec stat -c "%Y %n" {} \; | sort -nr | head -n 1 | cut -d' ' -f2-)
-if [ -n "$latest_android_config_dir" ]; then
+if [ "$latest_android_config_dir" != "" ]; then
   # copy the contents of the latest android studio config to dotfiles
   find -L "$latest_android_config_dir"/options -maxdepth 3 -type f -iname \*.xml -exec cp -r --parents --update=none {} ./android/ \; || {
     echo "failed to copy latest android studio configuration files from ${latest_android_config_dir}"
@@ -826,7 +826,7 @@ if [[ "$is_graphical" == true ]]; then
   )
 fi
 for systemd_user_target in "${systemd_user_targets[@]}"; do
-  systemctl --user link "${systemd_user_target}" || {
+  systemctl --user link "$systemd_user_target" || {
     echo "failed to enable target ${systemd_user_target}"
     exit 1
   }
@@ -867,7 +867,7 @@ if [[ "$is_graphical" == true ]]; then
   )
 fi
 for systemd_user_unit in "${systemd_user_units[@]}"; do
-  systemd_user_enable_start "${systemd_user_unit}"
+  systemd_user_enable_start "$systemd_user_unit"
 done
 
 echo "Reloading fonts"

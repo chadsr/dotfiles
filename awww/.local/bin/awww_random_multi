@@ -17,12 +17,12 @@ fi
 
 # Make sure only 1 instance of awww_randomize
 PIDFILE=~/.local/state/awww-randomize-pidfile.txt
-if [ -e "${PIDFILE}" ]; then
-  OLD_PID="$(<${PIDFILE})"
-  if [ "" != "${OLD_PID}" ] && [ -e "/proc/${OLD_PID}" ]; then
-    OLD_NAME="$(</proc/"${OLD_PID}"/comm)"
-    THIS_NAME="$(</proc/${BASHPID}/comm)"
-    if [ "${OLD_NAME}" = "${THIS_NAME}" ]; then
+if [ -e "$PIDFILE" ]; then
+  OLD_PID="$(<"$PIDFILE")"
+  if [ "" != "$OLD_PID" ] && [ -e "/proc/${OLD_PID}" ]; then
+    OLD_NAME="$(</proc/"$OLD_PID"/comm)"
+    THIS_NAME="$(</proc/"$BASHPID"/comm)"
+    if [ "$OLD_NAME" = "$THIS_NAME" ]; then
       echo "old randomize process ${OLD_PID} is still running"
       exit 1
     else
@@ -31,7 +31,7 @@ if [ -e "${PIDFILE}" ]; then
     fi
   fi
 fi
-echo "${BASHPID}" >${PIDFILE}
+echo "$BASHPID" >"$PIDFILE"
 
 # Edit below to control the images transition
 export AWWW_TRANSITION_FPS=60
@@ -71,7 +71,7 @@ while true; do
       # Set a different image for each display
       for disp in "${DISPLAY_LIST[@]}"; do
         # if there is no image try to get one
-        if [ "" = "${img}" ]; then
+        if [ "" = "$img" ]; then
           if read -r img; then
             true
           else # if there are no more images, refresh the list

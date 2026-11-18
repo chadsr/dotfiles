@@ -19,29 +19,29 @@
   "transition-time": 200,
   "widget-config": {
     "backlight": {
-      "label": "\udb80\udcdf"
+      "label": "󰃟"
     },
     "buttons-grid": {
       "actions": [
         {
           "command": "screenlock",
-          "label": "\udb80\udf3e"
+          "label": "󰌾"
         },
         {
           "command": "delogout",
-          "label": "\udb80\udf43"
+          "label": "󰍃"
         },
         {
           "command": "systemctl suspend",
-          "label": "\udb80\udfe5"
+          "label": "󰏥"
         },
         {
           "command": "systemctl reboot",
-          "label": "\udb81\udf09"
+          "label": "󰜉"
         },
         {
           "command": "systemctl poweroff",
-          "label": "\udb81\udc25"
+          "label": "󰐥"
         }
       ],
       "buttons-per-row": 5
@@ -50,12 +50,12 @@
       "text": "Do Not Disturb"
     },
     "title": {
-      "button-text": "\udb80\uddb4 Clear All",
+      "button-text": "󰆴 Clear All",
       "clear-all-button": true,
       "text": "Notifications"
     },
     "volume": {
-      "label": "\uf028"
+      "label": ""
     }
   },
   "widgets": [

@@ -8,12 +8,12 @@ pkglist_system_path=/etc/pkglist.txt
 current_hostname=$(hostname)
 
 tmp_path=/tmp/secrets-"$current_hostname"
-diff_command="vimdiff -d"
+declare -a diff_command=(vimdiff -d)
 
 exit_script() {
   rv=$?
   printf "\n\nExiting...\n"
-  exit $rv
+  exit "$rv"
 }
 
 set -euo pipefail
@@ -69,7 +69,7 @@ for encrypt_data_paths_tuple in "${encrypt_data_paths_tuples[@]}"; do
   read -ra encrypt_data_paths <<<"$encrypt_data_paths_tuple"
 
   if [[ -f "${encrypt_data_paths[0]}" ]]; then
-    echo "${encrypt_data_paths_tuple}"
+    echo "$encrypt_data_paths_tuple"
     gpg_encrypt_file "${encrypt_data_paths[0]}" "${encrypt_data_paths[1]}"
   else
     echo "No file found for ${encrypt_data_paths[0]}."
@@ -82,7 +82,7 @@ declare -a docker_mcp_profiles=(
 )
 
 for docker_mcp_profile in "${docker_mcp_profiles[@]}"; do
-  docker mcp profile export "${docker_mcp_profile}" "${base_path}/docker/.docker/mcp/profiles/${docker_mcp_profile}.yaml" || {
+  docker mcp profile export "$docker_mcp_profile" "${base_path}/docker/.docker/mcp/profiles/${docker_mcp_profile}.yaml" || {
     echo "failed to export mcp profile ${docker_mcp_profile}"
     exit 1
   }

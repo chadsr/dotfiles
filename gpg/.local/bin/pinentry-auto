@@ -8,7 +8,7 @@ _exists() {
   type "$1" >/dev/null 2>&1
 }
 
-if [ -n "${DISPLAY-}" ]; then
+if [ "${DISPLAY-}" != "" ]; then
   _exists pinentry-gtk && pe=$(which pinentry-gtk)
   _exists pinentry-fuzzel && pe=$(which pinentry-fuzzel)
 else
@@ -22,4 +22,4 @@ case "${PINENTRY_USER_DATA-}" in
 *USE_CURSES=1*) pe=$(which pinentry-curses) ;;
 esac
 
-exec $pe "$@"
+exec "$pe" "$@"

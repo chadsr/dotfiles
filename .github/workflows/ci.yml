@@ -8,20 +8,22 @@ permissions:
   contents: read
 jobs:
   lint:
-    name: Lint (pre-commit)
+    name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-python@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
-          python-version: '3.14'
-          check-latest: true
-      - name: Install Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y lua5.4 luarocks
-          # Ensure `lua` resolves to 5.4
-          sudo update-alternatives --set lua-interpreter /usr/bin/lua5.4
-      - uses: j178/prek-action@v2
+          persist-credentials: false
+      - uses: jdx/mise-action@236a21c3b91f5db6d4e174b348674a0f0caac06d # v5
         with:
-          extra-args: '--all-files'
+          install: false
+          cache: false
+      - name: Compute tool versions cache key
+        id: mise-versions
+        run: echo "key=mise-$(mise current | sort | sha256sum | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+        with:
+          path: ~/.local/share/mise
+          key: ${{ steps.mise-versions.outputs.key }}
+      - run: mise install
+      - run: hk check --all

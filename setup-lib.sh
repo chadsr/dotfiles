@@ -5,7 +5,7 @@
 exit_setup() {
   rv=$?
   printf "\n\nExiting setup...\n"
-  exit $rv
+  exit "$rv"
 }
 
 prompt_exit() {
@@ -126,8 +126,8 @@ diff_files() {
     return 0
   else
     # shellcheck disable=SC2154
-    ${diff_command} "$1" "$2" || {
-      echo "${diff_command} on ${1} <-> ${2}' exited with error"
+    "${diff_command[@]}" "$1" "$2" || {
+      echo "${diff_command[0]} on ${1} <-> ${2}' exited with error"
       return 1
     }
   fi
@@ -143,7 +143,7 @@ gpg_decrypt_file() {
   local input_file_path="${1}"
   local output_file_path="${2}"
   local output_filename
-  output_filename=$(basename "${output_file_path}")
+  output_filename=$(basename "$output_file_path")
 
   # shellcheck disable=SC2154
   local tmp_output_file_path="${tmp_path}/${output_filename}"
@@ -151,7 +151,7 @@ gpg_decrypt_file() {
   echo "Decrypting ${input_file_path} to ${tmp_output_file_path}"
 
   # shellcheck disable=SC2154
-  gpg --quiet --no-verbose --local-user "${gpg_encryption_subkey}" --armor --decrypt --yes --output "${tmp_output_file_path}" "${input_file_path}" >/dev/null || {
+  gpg --quiet --no-verbose --local-user "$gpg_encryption_subkey" --armor --decrypt --yes --output "$tmp_output_file_path" "$input_file_path" >/dev/null || {
     echo "failed to decrypt file ${input_file_path} to ${tmp_output_file_path}"
     return 1
   }
@@ -254,7 +254,7 @@ rm_if_not_stowed() {
   if [[ -L "${1}" ]]; then
     local symlink_path
     symlink_path=$(readlink -f "${1}")
-    if [[ $symlink_path == *"${base_path}"* ]]; then
+    if [[ $symlink_path == *"$base_path"* ]]; then
       return 0
     fi
   fi
@@ -281,7 +281,7 @@ rsync_system_config() {
     return 1
   fi
 
-  sudo "$rsync_bin" --chown="$rsync_chown" --open-noatime --exclude='.gitkeep' --progress -ruacvLKO -- "${system_config_full_path}"/* / || {
+  sudo "$rsync_bin" --chown="$rsync_chown" --open-noatime --exclude='.gitkeep' --progress -ruacvLKO -- "$system_config_full_path"/* / || {
     echo "failed to rsync system config from ${system_config_full_path} to root filesystem"
     return 1
   }
@@ -330,7 +330,7 @@ update_submodules() {
 fix_catppuccin_bat_theme() {
   # Fix for spacing breaking the space delimited tuples
   # shellcheck disable=SC2154
-  mv "${git_submodule_path}"/catppuccin-bat/themes/Catppuccin\ Mocha.tmTheme "${git_submodule_path}"/catppuccin-bat/themes/Catppuccin-Mocha.tmTheme || {
+  mv "$git_submodule_path"/catppuccin-bat/themes/Catppuccin\ Mocha.tmTheme "$git_submodule_path"/catppuccin-bat/themes/Catppuccin-Mocha.tmTheme || {
     echo "failed to move catppuccin-bat theme"
     exit 1
   }
@@ -338,7 +338,7 @@ fix_catppuccin_bat_theme() {
 
 pull_ollama_models() {
   for ollama_model in "${@}"; do
-    ollama pull "${ollama_model}" || {
+    ollama pull "$ollama_model" || {
       echo "failed to install ${ollama_model}"
       exit 1
     }

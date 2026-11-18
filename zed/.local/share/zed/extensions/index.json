@@ -43,7 +43,7 @@
         ],
         "capabilities": [],
         "context_servers": {},
-        "description": "\ud83e\udd80 Soothing pastel theme for Zed",
+        "description": "🦀 Soothing pastel theme for Zed",
         "grammars": {},
         "icon_themes": [],
         "id": "catppuccin",
@@ -73,7 +73,7 @@
         ],
         "capabilities": [],
         "context_servers": {},
-        "description": "\ud83e\udd8a Soothing pastel icons for Zed",
+        "description": "🦊 Soothing pastel icons for Zed",
         "grammars": {},
         "icon_themes": [
           "icon_themes/catppuccin-icons.json"
@@ -102,7 +102,7 @@
         ],
         "capabilities": [],
         "context_servers": {},
-        "description": "\ud83d\udcd2 A fast, code aware spell checker.",
+        "description": "📒 A fast, code aware spell checker.",
         "grammars": {},
         "icon_themes": [],
         "id": "codebook",
@@ -738,7 +738,7 @@
           "d1y <chenhonzhou@gmail.com>",
           "Marshall Bowers <elliott.codes@gmail.com>",
           "Luke Naylor <luke@grahamnaylor.net>",
-          "Igor T\u00e1mara <igor.tamara@gmail.com>",
+          "Igor Támara <igor.tamara@gmail.com>",
           "Michael Alexander <michael.alexander@karlstorz.com>",
           "Donnie Adams <donnie@thedadams.com>"
         ],
@@ -1365,11 +1365,11 @@
     }
   },
   "icon_themes": {
-    "Catppuccin Frapp\u00e9": {
+    "Catppuccin Frappé": {
       "extension": "catppuccin-icons",
       "path": "icon_themes/catppuccin-icons.json"
     },
-    "Catppuccin Frapp\u00e9 Monochrome": {
+    "Catppuccin Frappé Monochrome": {
       "extension": "catppuccin-icons",
       "path": "icon_themes/catppuccin-icons.json"
     },
@@ -1744,7 +1744,7 @@
       "path": "languages/psv",
       "query_files": 1
     },
-    "Rainbow TSV (\u2b72)": {
+    "Rainbow TSV (⭲)": {
       "extension": "rainbow-csv",
       "grammar": "tsv",
       "hidden": false,
@@ -1937,11 +1937,11 @@
     }
   },
   "themes": {
-    "Catppuccin Frapp\u00e9": {
+    "Catppuccin Frappé": {
       "extension": "catppuccin",
       "path": "themes/catppuccin-mauve.json"
     },
-    "Catppuccin Frapp\u00e9 - No Italics": {
+    "Catppuccin Frappé - No Italics": {
       "extension": "catppuccin",
       "path": "themes/catppuccin-no-italics-mauve.json"
     },

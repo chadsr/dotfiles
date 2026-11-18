@@ -2,4 +2,4 @@
 
 # Rotates the display
 display=$(swaymsg -t get_outputs --raw | jq '. | map(select(.focused == true)) | .[0].name' -r)
-swaymsg output "${display}" transform "${1}"
+swaymsg output "$display" transform "${1}"

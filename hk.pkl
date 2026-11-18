@@ -1,0 +1,39 @@
+amends "package://github.com/jdx/hk/releases/download/v2.13.0/hk@2.13.0#/Config.pkl"
+import "package://github.com/jdx/hk/releases/download/v2.13.0/hk@2.13.0#/Builtins.pkl"
+
+fail_fast = false
+
+exclude = List(
+    ".git_submodules",
+)
+
+steps = new Mapping {
+    ["detect-private-key"] = Builtins.detect_private_key
+    ["jq"] = Builtins.jq
+    ["trailing-whitespace"] = Builtins.trailing_whitespace
+    ["end-of-file-fixer"] = Builtins.newlines
+    ["mixed-line-ending"] = Builtins.mixed_line_ending
+    ["yamlfmt"] = Builtins.yamlfmt
+    ["taplo-format"] = Builtins.taplo_format
+    ["shfmt"] = Builtins.shfmt
+    ["stylua"] = Builtins.stylua
+    ["rumdl-format"] = (Builtins.rumdl_format) {
+        exclude = List(
+            "skillshare/.config/skillshare/**/*.md",
+        )
+    }
+    ["editorconfig-checker"] = Builtins.editorconfig_checker
+    ["shellcheck"] = Builtins.shellcheck
+    ["luacheck"] = Builtins.luacheck
+    ["actionlint"] = Builtins.actionlint
+    ["shellharden"] = (Builtins.shellharden) {
+        apply_check_diff = false
+        fix = "shellharden --check {{files}}"
+    }
+    ["zizmor"] = Builtins.zizmor
+    ["cljstyle"] = new Step {
+        glob = List("**/*.clj", "**/*.cljc", "**/*.edn")
+        check = "cljstyle check {{files}}"
+        fix = "cljstyle fix {{files}}"
+    }
+}

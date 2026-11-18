@@ -6,9 +6,9 @@ echo "OK"
 while read -r cmd rest; do
   case "$cmd" in
   GETPIN | getpin)
-    password=$(printf "" | $(which fuzzel) --prompt-only "${rest}" --password --dmenu)
+    password=$(printf "" | "$(which fuzzel)" --prompt-only "$rest" --password --dmenu)
 
-    if [ -z "$password" ]; then
+    if [ "$password" = "" ]; then
       # user cancelled
       echo "ERR 83886179 User canceled"
     else
