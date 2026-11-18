@@ -60,6 +60,15 @@
               "clear_thinking": false
             }
           }
+        },
+        "glm-5.3-flash": {
+          "settings": {
+            "reasoningEffort": "max",
+            "thinking": {
+              "type": "enabled",
+              "clear_thinking": false
+            }
+          }
         }
       }
     }

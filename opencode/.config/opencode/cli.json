@@ -5,14 +5,23 @@
     "notifications": true,
     "sound": false
   },
+  "highlights": false,
   "keybinds": {
     "agent.cycle": "tab"
   },
-  "plugins": [
-    "./herdr-opencode"
-  ],
+  "prompt": {
+    "image_preview": true
+  },
   "scroll": {
     "acceleration": true
+  },
+  "session": {
+    "grouping": "auto",
+    "image_preview": true,
+    "permissions": "prompt",
+    "scrollbar": true,
+    "thinking": "hide",
+    "verbosity": "high"
   },
   "tabs": {
     "indicators": "status",
