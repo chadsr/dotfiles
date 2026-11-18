@@ -185,7 +185,7 @@ systemd_enable_start /usr/lib/systemd/system/pcscd.socket
 
 mkdir -p "$HOME"/.config
 echo "Removing broken symlinks in ${HOME}/.config"
-find ~/.config/ -xtype l ! -name "SingletonCookie" ! -name "SingletonLock" -print -delete || {
+find ~/.config/ -xtype l ! -name "SingletonCookie" ! -name "SingletonLock" ! -name "SingletonSocket" ! -name "lock" -print -delete || {
   echo "Failed to remove broken symlinks"
   exit 1
 }
