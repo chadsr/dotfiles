@@ -4,9 +4,6 @@ sources:
   agents: ~/.config/skillshare/agents
 mode: symlink
 targets:
-  goose:
-    skills:
-      path: ~/.config/goose/skills
   opencode:
     skills:
       path: ~/.config/opencode/skills

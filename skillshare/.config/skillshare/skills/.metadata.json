@@ -1,13 +1,13 @@
 {
   "entries": {
     "agents-md": {
-      "commit": "d18b7aa8ba878354e5c348310230e652f7690f9c",
+      "commit": "a582c51ee29d0f35e6ac321340796f77d43da733",
       "file_hashes": {
         "SKILL.md": "sha256:8a91ada35068f43ef7ee03e38937863bac4f407878b06f0a4f1ddb4af24bec7e",
         "SOURCES.md": "sha256:14ac842801b7bc938dfbb9efee072fc4e9ab43b456e40f3235fee503544a0721",
         "SPEC.md": "sha256:4f8cff992ca96fa4d369227051cd3f5aa8b34974c81bf814aa3a1cf18541e74a"
       },
-      "installed_at": "2026-10-14T11:49:33.462492792+02:00",
+      "installed_at": "2026-11-18T14:43:19.49438057+01:00",
       "repo_url": "https://github.com/getsentry/skills.git",
       "source": "https://github.com/getsentry/skills.git/skills/agents-md",
       "subdir": "skills/agents-md",
@@ -16,12 +16,12 @@
       "version": "a582c51"
     },
     "grilling": {
-      "commit": "a496f5513d4a4cf889bc48e189e579f4b0bdf6aa",
+      "commit": "5863806dd4e15c63174bee4e7515a4256792ecfa",
       "file_hashes": {
         "SKILL.md": "sha256:a146842ed93ca43d833550fa9adf02e58cb63c83fea9d4b4522995b82242d4e2",
         "agents/openai.yaml": "sha256:1411d7df7d99b7e621a1ff8283c8133cc2464be63d064e52d8ce169c6800ee9b"
       },
-      "installed_at": "2026-10-29T18:19:23.199488917+01:00",
+      "installed_at": "2026-11-18T14:43:21.104543823+01:00",
       "repo_url": "https://github.com/mattpocock/skills.git",
       "source": "https://github.com/mattpocock/skills.git/skills/productivity/grilling",
       "subdir": "skills/productivity/grilling",
@@ -29,8 +29,48 @@
       "type": "github-subdir",
       "version": "5863806"
     },
+    "herdr-automations": {
+      "commit": "fae8e9fed7546f07f7142784b2922a32c25c8a75",
+      "file_hashes": {
+        "SKILL.md": "sha256:4401e2c93ad0b9883e2930bf3f461a2ce8b02860555eaac7bf857f62b07b387c"
+      },
+      "installed_at": "2026-11-18T14:43:22.976131346+01:00",
+      "repo_url": "https://github.com/sheprd-labs/sheprd.git",
+      "source": "https://github.com/sheprd-labs/sheprd/skills/herdr-automations",
+      "subdir": "skills/herdr-automations",
+      "tree_hash": "19ad5797c0be35a0454aa29227b3f59433d8a6bd",
+      "type": "github-subdir",
+      "version": "fae8e9f"
+    },
+    "herdr-gpui-browser": {
+      "commit": "fae8e9fed7546f07f7142784b2922a32c25c8a75",
+      "file_hashes": {
+        "SKILL.md": "sha256:b86152b49ba16fc50334e6ea940c85b249e42b232ac005ea9d0f87763ce371fd",
+        "examples/instagram-fetch.html": "sha256:8930f7b49a13ad4672008be854d68a25b4337e9560d5e25deb8e35632d338674"
+      },
+      "installed_at": "2026-11-18T14:43:25.016322014+01:00",
+      "repo_url": "https://github.com/sheprd-labs/sheprd.git",
+      "source": "https://github.com/sheprd-labs/sheprd/skills/herdr-gpui-browser",
+      "subdir": "skills/herdr-gpui-browser",
+      "tree_hash": "082726c534ac62906347beb2f48559c478e87390",
+      "type": "github-subdir",
+      "version": "fae8e9f"
+    },
+    "herdr-mods": {
+      "commit": "fae8e9fed7546f07f7142784b2922a32c25c8a75",
+      "file_hashes": {
+        "SKILL.md": "sha256:25611e747a383a98fa6a2bc230d15a0f5caac24aefc33c1cd0734c87983d2dea"
+      },
+      "installed_at": "2026-11-18T14:43:26.86855105+01:00",
+      "repo_url": "https://github.com/sheprd-labs/sheprd.git",
+      "source": "https://github.com/sheprd-labs/sheprd/skills/herdr-mods",
+      "subdir": "skills/herdr-mods",
+      "tree_hash": "a6cb3c3e99d7dca9cc91cceca48752c1be761fc4",
+      "type": "github-subdir",
+      "version": "fae8e9f"
+    },
     "langfuse": {
-      "commit": "6fb2baf4413719ec241916e25e4a0330372c9d49",
+      "commit": "f0bcb13088b490c04b3f4870bace17f6d57b199c",
       "file_hashes": {
         "SKILL.md": "sha256:0f7b3ea0f8738a8828aa267d9cc11e2bccd154c56458224d689fa2af2d8da10d",
         "references/ci-cd.md": "sha256:3982cd4f5ed88c4402a1fccdb8289e8caedab482f122fc0c8ca712e6a727d2c0",
@@ -47,7 +87,7 @@
         "references/user-feedback.md": "sha256:1111706198dad1adeea04fd700688b44b8a16ed9459b77198d6ce6a04556f2d6",
         "references/v4-project-migration.md": "sha256:59108e319d6a5e791101bbd122b7775bcbb65978bf766137314652eeef145b13"
       },
-      "installed_at": "2026-11-07T10:41:56.701906094+01:00",
+      "installed_at": "2026-11-18T14:43:28.186024697+01:00",
       "repo_url": "https://github.com/langfuse/skills.git",
       "source": "https://github.com/langfuse/skills.git/skills/langfuse",
       "subdir": "skills/langfuse",
@@ -60,7 +100,7 @@
       "file_hashes": {
         "SKILL.md": "sha256:a8933b263ab01b4ce0a04ac805bd5321cadab78c84b6717b8617fea7eb2dc7dc"
       },
-      "installed_at": "2026-11-17T12:33:33.484173703+01:00",
+      "installed_at": "2026-11-18T14:43:30.046622408+01:00",
       "repo_url": "https://github.com/Fission-AI/OpenSpec.git",
       "source": "https://github.com/Fission-AI/OpenSpec.git/skills/openspec-apply-change",
       "subdir": "skills/openspec-apply-change",
@@ -73,7 +113,7 @@
       "file_hashes": {
         "SKILL.md": "sha256:a681ea8e78154ea16c66b555c9ae8c90171f27eba6d284c6be2f9164239404f3"
       },
-      "installed_at": "2026-11-17T12:33:33.517505718+01:00",
+      "installed_at": "2026-11-18T14:43:31.983362479+01:00",
       "repo_url": "https://github.com/Fission-AI/OpenSpec.git",
       "source": "https://github.com/Fission-AI/OpenSpec.git/skills/openspec-archive-change",
       "subdir": "skills/openspec-archive-change",
@@ -86,7 +126,7 @@
       "file_hashes": {
         "SKILL.md": "sha256:8eb7074d34277cf09e630ebd189a127154b8007d48445824b2c4c676806d501a"
       },
-      "installed_at": "2026-11-17T12:33:33.558949159+01:00",
+      "installed_at": "2026-11-18T14:43:33.659365411+01:00",
       "repo_url": "https://github.com/Fission-AI/OpenSpec.git",
       "source": "https://github.com/Fission-AI/OpenSpec.git/skills/openspec-explore",
       "subdir": "skills/openspec-explore",
@@ -99,7 +139,7 @@
       "file_hashes": {
         "SKILL.md": "sha256:e353e74472fdef44af4af2c646348085b5b87df60efe06949ca401ff00c972e6"
       },
-      "installed_at": "2026-11-17T12:33:33.590957467+01:00",
+      "installed_at": "2026-11-18T14:43:35.397213342+01:00",
       "repo_url": "https://github.com/Fission-AI/OpenSpec.git",
       "source": "https://github.com/Fission-AI/OpenSpec.git/skills/openspec-propose",
       "subdir": "skills/openspec-propose",
@@ -112,7 +152,7 @@
       "file_hashes": {
         "SKILL.md": "sha256:75556d2ca69892525698a0c681e0c3deead1e25f3b7b9be5449eaaf1621f026b"
       },
-      "installed_at": "2026-11-17T12:33:33.623848621+01:00",
+      "installed_at": "2026-11-18T14:43:37.194726888+01:00",
       "repo_url": "https://github.com/Fission-AI/OpenSpec.git",
       "source": "https://github.com/Fission-AI/OpenSpec.git/skills/openspec-sync-specs",
       "subdir": "skills/openspec-sync-specs",
@@ -125,7 +165,7 @@
       "file_hashes": {
         "SKILL.md": "sha256:ca7ef061078b2260be47c2654e7df29b4c81ac1173dc73cbd565c3ea40879e87"
       },
-      "installed_at": "2026-11-17T12:33:33.648688783+01:00",
+      "installed_at": "2026-11-18T14:43:39.043790504+01:00",
       "repo_url": "https://github.com/Fission-AI/OpenSpec.git",
       "source": "https://github.com/Fission-AI/OpenSpec.git/skills/openspec-update-change",
       "subdir": "skills/openspec-update-change",
@@ -146,7 +186,7 @@
         "scripts/scanSlopProbes.js": "sha256:f4ccdafe2805365e4ad7a69a860c1588edf175c3916c414a40bf8d1095e23650",
         "scripts/slopScore.js": "sha256:f042d004c9c87a2ea9e841d173f3915f20a1d3b785e92cc76eea6c3a32f2b7c2"
       },
-      "installed_at": "2026-11-10T19:08:36.377268365+01:00",
+      "installed_at": "2026-11-18T14:43:40.569442697+01:00",
       "repo_url": "https://github.com/penpot/penpot-ai-kit.git",
       "source": "https://github.com/penpot/penpot-ai-kit/skills/penpot-anti-slop",
       "subdir": "skills/penpot-anti-slop",
@@ -167,7 +207,7 @@
         "scripts/collectAccessibilityData.js": "sha256:2055b8e74ceb3cf3c8e211cca83182b9bf8e63a845f0daf407ffe850c7caa908",
         "scripts/generateReport.js": "sha256:ed25d80908cedcc2265f77b7c9dc0cf0cb075bfe16c1bd997ba13a9b52ef2d2c"
       },
-      "installed_at": "2026-11-10T19:08:36.40934505+01:00",
+      "installed_at": "2026-11-18T14:43:42.021283289+01:00",
       "repo_url": "https://github.com/penpot/penpot-ai-kit.git",
       "source": "https://github.com/penpot/penpot-ai-kit/skills/penpot-audit-accessibility",
       "subdir": "skills/penpot-audit-accessibility",
@@ -188,7 +228,7 @@
         "scripts/detectHardcodedValues.js": "sha256:e7fbcaaa019e43a9dee7adf73dc0b2656328b4053cd89d6140a0408481b6bcc0",
         "scripts/generateTokenReport.js": "sha256:2a495daf39fa05f5cdffef2905efaf8480ebcda128fb144a7b1b67dde3c6f3c1"
       },
-      "installed_at": "2026-11-10T19:08:36.440045227+01:00",
+      "installed_at": "2026-11-18T14:43:43.391618914+01:00",
       "repo_url": "https://github.com/penpot/penpot-ai-kit.git",
       "source": "https://github.com/penpot/penpot-ai-kit/skills/penpot-audit-tokens",
       "subdir": "skills/penpot-audit-tokens",
@@ -216,7 +256,7 @@
         "scripts/setupDeckSystem.js": "sha256:96c12bf8c1545a059fa0d6fcc755f0e7a2ef73952218a0b7f456f981bd298a78",
         "scripts/wireDeckFlow.js": "sha256:786e9d48f4609b4fb03c8783280cbfde47450c5570d25955adc57e1971188adf"
       },
-      "installed_at": "2026-11-10T19:08:36.621130397+01:00",
+      "installed_at": "2026-11-18T14:43:45.131173238+01:00",
       "repo_url": "https://github.com/penpot/penpot-ai-kit.git",
       "source": "https://github.com/penpot/penpot-ai-kit/skills/penpot-build-deck",
       "subdir": "skills/penpot-build-deck",
@@ -239,7 +279,7 @@
         "scripts/inspectDesignSystem.js": "sha256:a7cb5b46e784e53ae6a1dc061057611801d68d4e79f3e9aa854391bec93c292e",
         "scripts/validateScreen.js": "sha256:55ac8cbf13e0ddc116b90e9588aa71132ea234cede122cd6ad5405e1517a2521"
       },
-      "installed_at": "2026-11-10T19:08:36.722972056+01:00",
+      "installed_at": "2026-11-18T14:43:46.739829679+01:00",
       "repo_url": "https://github.com/penpot/penpot-ai-kit.git",
       "source": "https://github.com/penpot/penpot-ai-kit/skills/penpot-build-from-code",
       "subdir": "skills/penpot-build-from-code",
@@ -264,7 +304,7 @@
         "scripts/createScreenFrame.js": "sha256:9c7d6dea044945017c46e566ae30c4f4e8578f399797305ea997edd50ccfa836",
         "scripts/setupOrReuseSystem.js": "sha256:b99c01e49ab2813066ec07a869f5e79aaf13144070dd59131b4cce04f3a5e848"
       },
-      "installed_at": "2026-11-10T19:08:36.78320836+01:00",
+      "installed_at": "2026-11-18T14:43:48.272945277+01:00",
       "repo_url": "https://github.com/penpot/penpot-ai-kit.git",
       "source": "https://github.com/penpot/penpot-ai-kit/skills/penpot-build-screen",
       "subdir": "skills/penpot-build-screen",
@@ -288,7 +328,7 @@
         "scripts/switchVariantDemo.js": "sha256:dd73a41af448d18fae6fbca5bb6b451d4ab67ddf3f2dadaa4e59f7b1cd37ea8d",
         "scripts/validateComponent.js": "sha256:186a92dc7e9eeefbd149c9562a44e7c6af6067c48fe1fcf5e5f63c9377ffba55"
       },
-      "installed_at": "2026-11-10T19:08:36.840925356+01:00",
+      "installed_at": "2026-11-18T14:43:49.770706602+01:00",
       "repo_url": "https://github.com/penpot/penpot-ai-kit.git",
       "source": "https://github.com/penpot/penpot-ai-kit/skills/penpot-component-factory",
       "subdir": "skills/penpot-component-factory",
@@ -307,7 +347,7 @@
         "scripts/extractDesignData.js": "sha256:0eb50a23c2072486ed47e8ea125213e9c88a01763b4716853f299b4a58056d09",
         "scripts/sampleComponentStyles.js": "sha256:b9325edcc9d3d56765c4b0a270cdaacd3345d391e7d42186802e76b7c2a2df80"
       },
-      "installed_at": "2026-11-10T19:08:36.904335589+01:00",
+      "installed_at": "2026-11-18T14:43:51.356836981+01:00",
       "repo_url": "https://github.com/penpot/penpot-ai-kit.git",
       "source": "https://github.com/penpot/penpot-ai-kit/skills/penpot-design-md",
       "subdir": "skills/penpot-design-md",
@@ -327,7 +367,7 @@
         "scripts/extractMarkupStyle.js": "sha256:ccbf0b66badfa063a118a0687083bc9b202da41f96579d6284b250c950f5defb",
         "scripts/generateDriftReport.js": "sha256:a485722d4c6c6f4ea62291a41a053bb0d94ab8539a589d55b7d63d8ff23b577a"
       },
-      "installed_at": "2026-11-10T19:08:36.998875587+01:00",
+      "installed_at": "2026-11-18T14:43:52.85063546+01:00",
       "repo_url": "https://github.com/penpot/penpot-ai-kit.git",
       "source": "https://github.com/penpot/penpot-ai-kit/skills/penpot-design-to-code-review",
       "subdir": "skills/penpot-design-to-code-review",
@@ -351,7 +391,7 @@
         "scripts/placePinAndNote.js": "sha256:5ac149a833014adcadbee8a77e23e61a334179941822c7fb0a61ee8e1982ad76",
         "scripts/setupAnnotationKit.js": "sha256:0c70dba63528a1152cb309050bf826f57e5e27833e8ae600e0858e312270a07a"
       },
-      "installed_at": "2026-11-10T19:08:37.098537429+01:00",
+      "installed_at": "2026-11-18T14:43:54.564163712+01:00",
       "repo_url": "https://github.com/penpot/penpot-ai-kit.git",
       "source": "https://github.com/penpot/penpot-ai-kit/skills/penpot-document-handoff",
       "subdir": "skills/penpot-document-handoff",
@@ -379,7 +419,7 @@
         "scripts/inspectFileStructure.js": "sha256:45992703da664f7f4f55e325d5344132dad1f52a3e44037eadbba776dd16709c",
         "scripts/validateTokens.js": "sha256:aef97ce0f2d03345ee672b0e349bab7a1534061510d512240ee7e2574aed9c15"
       },
-      "installed_at": "2026-11-10T19:08:37.165437356+01:00",
+      "installed_at": "2026-11-18T14:43:56.164418343+01:00",
       "repo_url": "https://github.com/penpot/penpot-ai-kit.git",
       "source": "https://github.com/penpot/penpot-ai-kit/skills/penpot-foundations",
       "subdir": "skills/penpot-foundations",
@@ -406,7 +446,7 @@
         "scripts/migrateTokens.js": "sha256:960b4ebaa5c54bde00a4b263368f4a678465eb3aa1c8ab07ba726ebcff0dc6eb",
         "scripts/validateFidelity.js": "sha256:45c2e7e35feab807af0bf03c6932348b9102c17d8cfa6a1586c23ad408ddeb31"
       },
-      "installed_at": "2026-11-10T19:08:37.208129416+01:00",
+      "installed_at": "2026-11-18T14:43:57.690914757+01:00",
       "repo_url": "https://github.com/penpot/penpot-ai-kit.git",
       "source": "https://github.com/penpot/penpot-ai-kit/skills/penpot-migrate",
       "subdir": "skills/penpot-migrate",
@@ -424,7 +464,7 @@
         "scripts/inspectLayerStructure.js": "sha256:a28c6999106deba804520495f471d80550917503deea1f5fc0edf097172dd24f",
         "scripts/renameLayer.js": "sha256:c4203dd59c8e448c7ae463adc4b1174cae27b2cd7f0b348640136ead059d0211"
       },
-      "installed_at": "2026-11-10T19:08:37.270588311+01:00",
+      "installed_at": "2026-11-18T14:43:59.179166914+01:00",
       "repo_url": "https://github.com/penpot/penpot-ai-kit.git",
       "source": "https://github.com/penpot/penpot-ai-kit/skills/penpot-rename-layers",
       "subdir": "skills/penpot-rename-layers",
@@ -439,7 +479,7 @@
         "references/01-intent-taxonomy.md": "sha256:5adb41541913bff9570828f609e50f19f844a3ac3a7049dabbbb6e159c7c3ab9",
         "references/02-preflight-overview.md": "sha256:d12101de226a70378fa8338c744063c783be110be7770e2d5f42ccbb6f6d426c"
       },
-      "installed_at": "2026-11-10T19:08:37.324072427+01:00",
+      "installed_at": "2026-11-18T14:44:00.644267738+01:00",
       "repo_url": "https://github.com/penpot/penpot-ai-kit.git",
       "source": "https://github.com/penpot/penpot-ai-kit/skills/penpot-router",
       "subdir": "skills/penpot-router",
@@ -448,7 +488,7 @@
       "version": "fe4f99e"
     },
     "shadcn-svelte": {
-      "commit": "3c4152d7d3904e76f6f756ec8ffca7c9ec72f977",
+      "commit": "c3b21a62055c7d7b97a220eb5a9efb4d1b7fc8fc",
       "file_hashes": {
         "SKILL.md": "sha256:1c11b03e380578beb93807b46f3a0c4b243e1aeeef27e8782fe8bf2c8dfcf862",
         "agents/openai.yml": "sha256:39293434702908c2b54a57ef4512f06d0195b43d6a13154d91d577bbd4d3fad7",
@@ -470,7 +510,7 @@
         "scripts/showcase-coverage.mjs": "sha256:0eb7b7fc17d95ea35344c144ecabcc75a0f48aa85afd9429f4ca55da2de78d14",
         "scripts/showcase-coverage.test.mjs": "sha256:f1758071607e9f32469b1781eff653736c69552292118aab5c4bebe149ca175c"
       },
-      "installed_at": "2026-11-04T13:13:52.925254281+01:00",
+      "installed_at": "2026-11-18T14:44:02.492845638+01:00",
       "repo_url": "https://github.com/huntabyte/shadcn-svelte.git",
       "source": "https://github.com/huntabyte/shadcn-svelte.git/skills/shadcn-svelte",
       "subdir": "skills/shadcn-svelte",
@@ -479,7 +519,7 @@
       "version": "c3b21a6"
     },
     "skillshare": {
-      "commit": "bd303e2b9f15bbf4e81011e822edb6160b9fa537",
+      "commit": "d0530b6599319825f602d1a3091aa92c4abd491d",
       "file_hashes": {
         "SKILL.md": "sha256:b410b8154b1cba24e573022df9bcf10bfdab7cce4c22bd009f15d898e2b5f978",
         "references/TROUBLESHOOTING.md": "sha256:6964001f3f1fcbaadf0daae7478724ffd12196c20c7b3762876385670660cd99",
@@ -501,13 +541,13 @@
         "references/trash.md": "sha256:2c708df8e50b415b51713bddfbdb8ea95620e35ed49110946fcfcd0047c66945",
         "scripts/run.sh": "sha256:e434ebdb7d3ae0b37c00ddc36687bc975da9e766b8cb863f9aed9a624ebbdfa9"
       },
-      "installed_at": "2026-11-18T12:28:02.761908297+01:00",
+      "installed_at": "2026-11-18T14:44:04.676101059+01:00",
       "repo_url": "https://github.com/runkids/skillshare.git",
       "source": "https://github.com/runkids/skillshare.git/skills/skillshare",
       "subdir": "skills/skillshare",
       "tree_hash": "e20b2c5a52f7bd1dce75b16b30ebec20fbd14644",
       "type": "github-subdir",
-      "version": "bd303e2"
+      "version": "d0530b6"
     },
     "tdd": {
       "commit": "5863806dd4e15c63174bee4e7515a4256792ecfa",
@@ -517,7 +557,7 @@
         "mocking.md": "sha256:3ceb807fdf4a47d6a93d4d9a891e5ba6d362a6247bd08adc451feebfc17361ef",
         "tests.md": "sha256:859f9e592c188fda4fc7277dd180e4ce9c7a2e13f6efe1f6f29eccc9d28c106a"
       },
-      "installed_at": "2026-11-17T12:54:42.24879793+01:00",
+      "installed_at": "2026-11-18T14:44:06.087527388+01:00",
       "repo_url": "https://github.com/mattpocock/skills.git",
       "source": "https://github.com/mattpocock/skills.git/skills/engineering/tdd",
       "subdir": "skills/engineering/tdd",
