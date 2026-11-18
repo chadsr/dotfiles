@@ -1,0 +1,8 @@
+{
+  "frame.welcomed": "finished",
+  "layout": "main",
+  "workspace.panels": [
+    "files",
+    "changes"
+  ]
+}
