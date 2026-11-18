@@ -81,7 +81,6 @@ zed/.local/share/zed/*
 !android/.config/Google/**/options/jupyter-settings-v2.xml
 !android/.config/Google/**/options/laf.xml
 !android/.config/Google/**/options/linux/keymap.xml
-!android/.config/Google/**/options/project.default.xml
 !android/.config/Google/**/options/runner.layout.xml
 !android/.config/Google/**/options/terminal-font.xml
 !android/.config/Google/**/options/ui.lnf.xml
