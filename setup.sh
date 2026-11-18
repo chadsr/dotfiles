@@ -5,8 +5,8 @@ gpg_encryption_subkey=0x79C70BBE4865D828
 
 laptop_hostname="thinky"
 desktop_hostname="shifty"
-
 declare -a server_hostnames=(herdr)
+
 current_hostname=${HOSTNAME}
 
 tmp_path=/tmp/setup-"$current_hostname"
@@ -314,37 +314,43 @@ pass init "$gpg_primary_key" || {
 
 pkglist_remove_path="$data_path"/pkgs/remove.txt
 
-# Graphical-only: per-host secrets (themes, GUI app configs, keystore)
+declare -a decrypt_data_paths_tuples=(
+  "${data_path}/docker/mcp/config.yaml.asc.gpg ${base_path}/docker/.docker/mcp/config.yaml"
+  "${data_path}/android/keystores/keystore.asc.gpg ${base_path}/android/.android/keystores/keystore"
+  "${data_path}/gallery-dl/config.json.asc.gpg ${base_path}/gallery-dl/.config/gallery-dl/config.json"
+  "${data_path}/pkgs/remove.txt.asc.gpg ${pkglist_remove_path}"
+  "${data_path}/ssh/config.asc.gpg ${base_path}/ssh/.ssh/config"
+  "${data_path}/vdirsyncer/config.asc.gpg ${base_path}/vdirsyncer/.config/vdirsyncer/config"
+  "${data_path}/qbittorrent/categories.json.asc ${base_path}/qbittorrent/.config/qBittorrent/categories.json"
+  "${data_path}/qbittorrent/qBittorrent.conf.asc ${base_path}/qbittorrent/.config/qBittorrent/qBittorrent.conf"
+  "${data_path}/khal/config.asc.gpg ${base_path}/khal/.config/khal/config"
+)
+
+# Graphical-only data
 if [[ "$is_graphical" == true ]]; then
-  echo "Decrypting data"
-  declare -a decrypt_data_paths_tuples=(
-    "${data_path}/android/keystores/keystore.asc.gpg ${base_path}/android/.android/keystores/keystore"
+  declare -a decrypt_data_paths_tuples_graphical=(
     "${data_path}/cura/cura.cfg.asc.gpg ${base_path}/cura/.config/cura/5.11/cura.cfg"
-    "${data_path}/gallery-dl/config.json.asc.gpg ${base_path}/gallery-dl/.config/gallery-dl/config.json"
     "${data_path}/gtk/bookmarks.asc.gpg ${base_path}/gtk/.config/gtk-3.0/bookmarks"
-    "${data_path}/khal/config.asc.gpg ${base_path}/khal/.config/khal/config"
     "${data_path}/nextcloud/nextcloud.cfg.asc.gpg ${base_path}/nextcloud/.config/Nextcloud/nextcloud.cfg"
-    "${data_path}/pkgs/remove.txt.asc.gpg ${pkglist_remove_path}"
     "${data_path}/prusaslicer/PrusaSlicer.ini.asc.gpg ${base_path}/prusaslicer/.config/PrusaSlicer/PrusaSlicer.ini"
-    "${data_path}/qbittorrent/categories.json.asc ${base_path}/qbittorrent/.config/qBittorrent/categories.json"
-    "${data_path}/qbittorrent/qBittorrent.conf.asc ${base_path}/qbittorrent/.config/qBittorrent/qBittorrent.conf"
     "${data_path}/radicle/keys/radicle.asc.gpg ${base_path}/radicle/.radicle/keys/radicle"
-    "${data_path}/ssh/config.asc.gpg ${base_path}/ssh/.ssh/config"
     "${data_path}/system/${current_hostname}/boot/loader/entries/arch-cachyos.asc.conf ${base_path}/system/${current_hostname}/boot/loader/entries/arch-cachyos.conf"
     "${data_path}/system/${current_hostname}/boot/loader/entries/arch-zen.asc.conf ${base_path}/system/${current_hostname}/boot/loader/entries/arch-zen.conf"
     "${data_path}/tidal-hifi/config.json.asc.gpg ${base_path}/tidal-hifi/.config/tidal-hifi/config.json"
-    "${data_path}/vdirsyncer/config.asc.gpg ${base_path}/vdirsyncer/.config/vdirsyncer/config"
     "${data_path}/waybar/waybar-crypto/config.ini.asc.gpg ${base_path}/waybar/.config/waybar-crypto/config.ini"
     "${data_path}/xdg/mimeapps.list.asc.gpg ${base_path}/xdg/.config/mimeapps.list"
   )
-  for decrypt_data_paths_tuple in "${decrypt_data_paths_tuples[@]}"; do
-    read -ra decrypt_data_paths <<<"$decrypt_data_paths_tuple"
-
-    if [[ -f "${decrypt_data_paths[0]}" ]]; then
-      gpg_decrypt_file "${decrypt_data_paths[0]}" "${decrypt_data_paths[1]}"
-    fi
-  done
+  decrypt_data_paths_tuples+=("${decrypt_data_paths_tuples_graphical[@]}")
 fi
+
+echo "Decrypting data"
+for decrypt_data_paths_tuple in "${decrypt_data_paths_tuples[@]}"; do
+  read -ra decrypt_data_paths <<<"$decrypt_data_paths_tuple"
+
+  if [[ -f "${decrypt_data_paths[0]}" ]]; then
+    gpg_decrypt_file "${decrypt_data_paths[0]}" "${decrypt_data_paths[1]}"
+  fi
+done
 
 # check for packages to be removed
 if [[ -f "$pkglist_remove_path" ]]; then
@@ -791,7 +797,7 @@ skillshare init || {
   echo "failed to init skillshare. Is it already initialized?"
 }
 
-skillshare update "$(jq -r '.entries | keys[]' ~/.config/skillshare/skills/.metadata.json)" --force || {
+jq -r '.entries | keys[]' ~/.config/skillshare/skills/.metadata.json | xargs -n 1 skillshare update --force || {
   echo "failed to sync skillshare"
   exit 1
 }

@@ -22,6 +22,7 @@ cura/.config/cura/5.11/cura.cfg
 data/pkgs/*
 data/pkgs/*.txt
 docker/.docker/cli-plugins/*
+docker/.docker/mcp/config.yaml
 fonts/.local/share/fonts/TTF/cryptofont.ttf
 forge/.config/forge/*
 freetube/.config/FreeTube/*
@@ -43,6 +44,8 @@ hyprland/.config/sunsetr/geo.toml
 khal/.config/khal/*
 nextcloud/.config/Nextcloud/nextcloud.cfg
 opencode/.config/opencode/*
+openshell/.config/openshell/active_gateway
+openshell/.config/openshell/gateways/**/last_sandbox
 openshell/.config/openshell/gateways/**/mtls
 openspec/.local/share/openspec/shared/*
 pass/.password-store/*
@@ -107,6 +110,8 @@ zed/.local/share/zed/*
 !opencode/.config/opencode/AGENTS.md
 !opencode/.config/opencode/cli.json
 !opencode/.config/opencode/opencode.jsonc
+!opencode/.config/opencode/tui.jsonc
+!opencode/.config/opencode/dcp.jsonc
 !opencode/.config/opencode/sandbox
 !opencode/.config/opencode/sandbox/**
 !openspec/.local/share/openspec/shared/.gitkeep
