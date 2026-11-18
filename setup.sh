@@ -300,6 +300,7 @@ source ~/.bashrc || {
 }
 
 systemd_user_enable_start "$base_path"/gpg/.config/systemd/user/gnupghome.service
+systemd_user_enable_start "$base_path"/gpg/.config/systemd/user/gnupg-forward-socketdir.service
 systemd_user_enable_start /usr/lib/systemd/user/gpg-agent.service
 systemd_user_enable_start "$base_path"/gpg/.config/systemd/user/ssh-auth-sock.service
 
@@ -397,13 +398,13 @@ if [[ "$is_graphical" == true ]]; then
     kvm
     libvirt
     plugdev
-    ssh_login
+    ssh-users
     uucp
   )
 else
   declare -a user_groups=(
     docker
-    ssh_login
+    ssh-users
   )
 fi
 for user_group in "${user_groups[@]}"; do

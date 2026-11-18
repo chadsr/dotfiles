@@ -1,5 +1,5 @@
 [Unit]
-Description=Set GNUPHHOME Environment Variable
+Description=Set GNUPGHOME Environment Variable
 
 [Service]
 Type=oneshot

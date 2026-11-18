@@ -1,12 +1,21 @@
 #!/usr/bin/env sh
 
-# Initital handshake
+# Initial handshake
 echo "OK"
 
+CR=$(printf '\r')
+prompt=""
+
 while read -r cmd rest; do
+  rest=${rest%"$CR"}
+
   case "$cmd" in
+  SETDESC | SETPROMPT | setdesc | setprompt)
+    prompt=$rest
+    echo "OK"
+    ;;
   GETPIN | getpin)
-    password=$(printf "" | "$(which fuzzel)" --prompt-only "$rest" --password --dmenu)
+    password=$(printf "" | "$(which fuzzel)" --prompt-only "$prompt" --password --dmenu)
 
     if [ "$password" = "" ]; then
       # user cancelled
@@ -17,12 +26,10 @@ while read -r cmd rest; do
       echo "OK"
     fi
     ;;
-
   BYE | bye)
     echo "OK"
     exit 0
     ;;
-
   *)
     # For anything else, just respond OK
     echo "OK"

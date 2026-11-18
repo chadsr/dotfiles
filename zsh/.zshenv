@@ -24,14 +24,19 @@ else
   export GPG_TTY=$TTY
 fi
 
-# Use the client's gpg-agent forwarded over ssh; the socket is removed at logout by .zlogout
-if [[ -n "${SSH_CONNECTION:-}" && -S "$HOME/.gnupg-forward/S.gpg-agent" ]]; then
-  export GNUPGHOME="$HOME/.gnupg-forward"
+# ssh-forwarded gpg-agent; gpgconf finds the right socket path per OS
+# (not yet on PATH here, hence the fallback locations)
+_gpgconf=$(command -v gpgconf 2>/dev/null)
+[[ -z "$_gpgconf" && -x /opt/homebrew/bin/gpgconf ]] && _gpgconf=/opt/homebrew/bin/gpgconf
+[[ -z "$_gpgconf" && -x /usr/local/bin/gpgconf ]] && _gpgconf=/usr/local/bin/gpgconf
+if [[ -n "${SSH_CONNECTION:-}" && -d "$HOME/.gnupg-forward" && -n "${_gpgconf:-}" ]]; then
+  if [[ -S "$(GNUPGHOME="$HOME/.gnupg-forward" "$_gpgconf" --list-dir agent-socket 2>/dev/null)" ]]; then
+    export GNUPGHOME="$HOME/.gnupg-forward"
+  fi
 fi
+unset _gpgconf
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-  # Forwarded/valid sockets take priority; fall back to local gpg-agent
-  # When GNUPGHOME points at a client-forwarded agent (see above), don't touch it
   if [[ -z "${GNUPGHOME:-}" ]]; then
     if [[ -z "$SSH_AUTH_SOCK" || ! -S "$SSH_AUTH_SOCK" ]]; then
       ssh_auth_sock=$(gpgconf --list-dirs agent-ssh-socket)
@@ -44,8 +49,13 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   export SSH_ASKPASS="$LINUX_ASKPASS"
 
   # Export env vars from systemd user units
-  # shellcheck disable=SC1090,SC1091
-  source <(systemctl --user show-environment | sed 's/ //g; s/^/export /' | grep -v '^export SSH_AUTH_SOCK=')
+  while IFS='=' read -r _sd_env_key _sd_env_val; do
+    case "$_sd_env_key" in
+    '' | SSH_AUTH_SOCK | GNUPGHOME) ;;
+    *) export "$_sd_env_key=$_sd_env_val" ;;
+    esac
+  done < <(systemctl --user show-environment 2>/dev/null)
+  unset _sd_env_key _sd_env_val
 
   export BEMENU_OPTS="-n -m -1 --nb #000b1ecc --tb #000b1ecc --tf #ea00d9ff --nf #0abdc6ff"
 
@@ -135,8 +145,6 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   export PATH="/opt/homebrew/bin:$PATH"
   export PATH="$HOME/.local/bin:$PATH"
 
-  # Forwarded/valid sockets take priority; fall back to local gpg-agent
-  # When GNUPGHOME points at a client-forwarded agent (see top), don't touch it
   if [[ -z "${GNUPGHOME:-}" ]]; then
     if [[ -z "$SSH_AUTH_SOCK" || ! -S "$SSH_AUTH_SOCK" ]]; then
       ssh_auth_sock=$(gpgconf --list-dirs agent-ssh-socket)

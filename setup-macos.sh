@@ -11,7 +11,7 @@ package_manager=/opt/homebrew/bin/brew
 declare -a diff_command=(nvim -d)
 tmp_path=/tmp/setup-"$HOSTNAME"
 
-set -euo pipefail
+set -Eeuo pipefail
 trap 'exit_setup' ERR INT
 
 source "$(dirname "${BASH_SOURCE[0]}")/setup-lib.sh" || {
@@ -138,18 +138,16 @@ declare -a launch_agents=(
 )
 
 for launch_agent_dir in "${launch_agents[@]}"; do
-  launchctl unload "$launch_agent_dir"
-  launchctl load "$launch_agent_dir" || {
-    echo "failed to load $launch_agent_dir"
-    exit 1
-  }
-  echo "Loaded $launch_agent_dir"
+  label=$(plutil -extract Label raw "$launch_agent_dir")
+  launchctl bootout "gui/$UID/$label" >/dev/null 2>&1 || true
+  launchctl bootstrap "gui/$UID" "$launch_agent_dir" 2>/dev/null ||
+    echo "Skipped $label: no GUI session (loads at next login)"
 done
 
-# Ensure the ssh_login group exists and contains the current user
+# Ensure the ssh-users group exists and contains the current user
 ensure_group_member() {
-  sudo dseditgroup -o read ssh_login >/dev/null 2>&1 || sudo dseditgroup -o create ssh_login
-  sudo dseditgroup -o edit -a "$USER" -t user ssh_login
+  sudo dseditgroup -o read ssh-users >/dev/null 2>&1 || sudo dseditgroup -o create ssh-users
+  sudo dseditgroup -o edit -a "$USER" -t user ssh-users
 }
 
 # Install the sshd hardening drop-in and validate the effective config

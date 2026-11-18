@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# gpg --export -a | ssh <host> gpg-forward-bootstrap
+# gpg-forward-bootstrap <gpg-fp> <host>
 
 set -euo pipefail
 
@@ -7,11 +7,38 @@ FORWARD_HOME=$HOME/.gnupg-forward
 
 usage() {
   cat <<EOF
-Usage: gpg --export -a <fingerprint> | ssh <host> ${0##*/}
+Usage: ${0##*/} <gpg-fp> <host>
+        gpg --export -a <gpg-fp> | ssh -o ControlMaster=no -o ControlPath=none <host> ${0##*/}
 
 Imports armored public key(s) from stdin into $FORWARD_HOME; the GNUPGHOME used for gpg-agent forwarding over ssh RemoteForward.
+When run as <gpg-fp> <host>, also prints the RemoteForward line to add to this machine's ~/.ssh/config.
 EOF
 }
+
+if [[ $# -eq 2 && $1 != -* && $2 != -* ]]; then
+  gpg --export -a "$1" | ssh -o ControlMaster=no -o ControlPath=none "$2" "${0##*/}"
+
+  # socket path gpg dials on the remote (per-OS)
+  remote_sock=$(ssh -o ControlMaster=no -o ControlPath=none "$2" \
+    'GNUPGHOME=$HOME/.gnupg-forward gpgconf --list-dir agent-socket')
+  local_sock=$(gpgconf --list-dir agent-extra-socket)
+
+  cat <<EOF
+
+Done. Add to ~/.ssh/config on this machine:
+
+  Host $2
+    RemoteForward $remote_sock $local_sock
+
+(the restricted extra socket: sign/decrypt work remotely, keys stay local)
+
+Reconnect with a fresh connection (not an existing ControlMaster mux), then verify:
+
+  ssh $2 'echo \$GNUPGHOME'              # -> /home/<user>/.gnupg-forward
+  ssh $2 gpg --list-secret-keys          # -> keys from the workstation agent
+EOF
+  exit
+fi
 
 for arg in "$@"; do
   case $arg in
@@ -36,16 +63,18 @@ read -r -N 1 -t 2 first || {
   exit 2
 }
 
-# leftover agent squats S.gpg-agent and breaks the RemoteForward bind
+# a leftover agent squats the socket and breaks the RemoteForward bind
 cleanup() {
   gpgconf --homedir "$FORWARD_HOME" --kill gpg-agent 2>/dev/null || true
-  rm -f "$FORWARD_HOME"/S.* "$FORWARD_HOME"/.#lk*
 }
 trap cleanup EXIT
 
 mkdir -p "$FORWARD_HOME"
 chmod 700 "$FORWARD_HOME"
 printf 'no-autostart\n' >"$FORWARD_HOME/gpg.conf"
+
+# create the Linux socketdir gpg dials; no-op on macOS
+gpgconf --homedir "$FORWARD_HOME" --create-socketdir 2>/dev/null || true
 
 {
   printf '%s' "$first"

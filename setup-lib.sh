@@ -4,7 +4,7 @@
 
 exit_setup() {
   rv=$?
-  printf "\n\nExiting setup...\n"
+  printf "\n\nExiting setup (status %s)...\n" "$rv"
   exit "$rv"
 }
 

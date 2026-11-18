@@ -1,0 +1,10 @@
+[Unit]
+Description=Create GnuPG socketdir for the ssh-forwarded agent home
+ConditionPathExists=%h/.gnupg-forward
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/gpgconf --homedir %h/.gnupg-forward --create-socketdir
+
+[Install]
+WantedBy=default.target
