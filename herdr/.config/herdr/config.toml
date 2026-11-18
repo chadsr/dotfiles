@@ -1,4 +1,5 @@
 [ui]
+hide_tab_bar_when_single_tab = true
 
 [ui.sound]
 enabled = false

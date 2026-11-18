@@ -6,6 +6,8 @@ theme = "Catppuccin Mocha"
 status_icons = "wave"
 remove_merged_worktrees = true
 herdr_2_terminals = true
+herdr_2_scrollback = 100000
+tab_layout = "classic"
 
 [backdrop]
 opacity = 0.8
