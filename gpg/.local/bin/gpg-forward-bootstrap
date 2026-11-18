@@ -1,17 +1,53 @@
 #!/usr/bin/env bash
-# Bootstrap ~/.gnupg-forward on a remote host
 # gpg --export -a | ssh <host> gpg-forward-bootstrap
 
 set -euo pipefail
 
 FORWARD_HOME=$HOME/.gnupg-forward
 
+usage() {
+  cat <<EOF
+Usage: gpg --export -a <fingerprint> | ssh <host> ${0##*/}
+
+Imports armored public key(s) from stdin into $FORWARD_HOME; the GNUPGHOME used for gpg-agent forwarding over ssh RemoteForward.
+EOF
+}
+
+for arg in "$@"; do
+  case $arg in
+  -h | --help)
+    usage
+    exit 0
+    ;;
+  *)
+    usage >&2
+    exit 2
+    ;;
+  esac
+done
+
+# no PTY over 'ssh host cmd', so -t 0 alone won't catch a bare remote run
+[[ -t 0 ]] && {
+  usage >&2
+  exit 2
+}
+read -r -N 1 -t 2 first || {
+  usage >&2
+  exit 2
+}
+
+# leftover agent squats S.gpg-agent and breaks the RemoteForward bind
+cleanup() {
+  gpgconf --homedir "$FORWARD_HOME" --kill gpg-agent 2>/dev/null || true
+  rm -f "$FORWARD_HOME"/S.* "$FORWARD_HOME"/.#lk*
+}
+trap cleanup EXIT
+
 mkdir -p "$FORWARD_HOME"
 chmod 700 "$FORWARD_HOME"
 printf 'no-autostart\n' >"$FORWARD_HOME/gpg.conf"
 
-gpg --homedir "$FORWARD_HOME" --import
-
-# --import spawns a gpg-agent whose socket would block the RemoteForward bind
-gpgconf --homedir "$FORWARD_HOME" --kill gpg-agent 2>/dev/null || true
-rm -f "$FORWARD_HOME"/S.* "$FORWARD_HOME"/.#lk*
+{
+  printf '%s' "$first"
+  cat
+} | gpg --homedir "$FORWARD_HOME" --import
