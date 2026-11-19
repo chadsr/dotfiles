@@ -329,7 +329,7 @@ declare -a decrypt_data_paths_tuples=(
 
 # Graphical-only data
 if [[ "$is_graphical" == true ]]; then
-  declare -a decrypt_data_paths_tuples_graphical=(
+  decrypt_data_paths_tuples+=(
     "${data_path}/cura/cura.cfg.asc.gpg ${base_path}/cura/.config/cura/5.11/cura.cfg"
     "${data_path}/gtk/bookmarks.asc.gpg ${base_path}/gtk/.config/gtk-3.0/bookmarks"
     "${data_path}/nextcloud/nextcloud.cfg.asc.gpg ${base_path}/nextcloud/.config/Nextcloud/nextcloud.cfg"
@@ -341,7 +341,6 @@ if [[ "$is_graphical" == true ]]; then
     "${data_path}/waybar/waybar-crypto/config.ini.asc.gpg ${base_path}/waybar/.config/waybar-crypto/config.ini"
     "${data_path}/xdg/mimeapps.list.asc.gpg ${base_path}/xdg/.config/mimeapps.list"
   )
-  decrypt_data_paths_tuples+=("${decrypt_data_paths_tuples_graphical[@]}")
 fi
 
 echo "Decrypting data"
@@ -411,20 +410,17 @@ for user_group in "${user_groups[@]}"; do
   add_group_user "$user_group"
 done
 
+declare -a systemd_units=(
+  /usr/lib/systemd/system/clamav-freshclam-once.timer
+  /usr/lib/systemd/system/smartd.service
+)
 if [[ "$is_graphical" == true ]]; then
-  declare -a systemd_units=(
+  systemd_units+=(
     /usr/lib/systemd/system/bluetooth.service
-    /usr/lib/systemd/system/clamav-freshclam-once.timer
     /usr/lib/systemd/system/ly@tty1.service
     /usr/lib/systemd/system/ollama.service
-    /usr/lib/systemd/system/smartd.service
     /usr/lib/systemd/system/swayosd-libinput-backend.service
     # /usr/lib/systemd/system/input-remapper.service
-  )
-else
-  declare -a systemd_units=(
-    /usr/lib/systemd/system/clamav-freshclam-once.timer
-    /usr/lib/systemd/system/smartd.service
   )
 fi
 for systemd_unit in "${systemd_units[@]}"; do
@@ -677,109 +673,93 @@ fi
 
 declare -a stow_dirs_general=(
   alacritty
-  android
-  awww
   bat
   bemenu
   btop
-  cava
-  chromium
   cline
-  clipse
   continue
-  coolercontrol
   crush
-  cura
   docker
   dunst
-  electron
-  espanso
-  figma
-  fonts
   forge
-  freetube
-  fuzzel
   gallery-dl
-  gamemode
-  gammastep
-  ghostty
   goose
-  gpu-screen-recorder
-  gtk
   helix
   herdr
-  hyprland
-  input-remapper
   java
-  jellyfin
-  kanshi
-  kde
   khal
-  lact
-  librewolf
-  logseq
   mako
-  mangohud
   mcp
   mise
-  mpv
   networkmanager
-  nextcloud
   nvim
   nvm
   opencode
   openshell
   openspec
   pass
-  pipewire
-  prusaslicer
-  qbittorrent
-  qt
   radicle
   ranger
-  satty
   scripts
   skillshare
-  solaar
   starship
-  steam
-  swappy
-  sway
-  swaync
-  swayosd
   systemd
-  thunar
-  tidal-hifi
   todoman
-  ulauncher
   vdirsyncer
-  vscodium
-  waybar
-  wlogout
-  xdg
   yt-dlp
-  yubikey
-  zed
 )
 
-if [[ "$is_graphical" == false ]]; then
-  declare -a stow_dirs_general=(
-    bat
-    btop
-    continue
-    docker
-    helix
-    herdr
-    mise
-    nvm
-    nvim
-    opencode
-    pass
-    scripts
-    starship
-    systemd
+if [[ "$is_graphical" == true ]]; then
+  declare -a stow_dirs_general+=(
+    android
+    awww
+    cava
+    chromium
+    clipse
+    coolercontrol
+    cura
+    electron
+    espanso
+    figma
+    fonts
+    freetube
+    fuzzel
+    gamemode
+    gammastep
+    ghostty
+    gpu-screen-recorder
+    gtk
+    hyprland
+    input-remapper
+    jellyfin
+    kanshi
+    kde
+    lact
+    librewolf
+    logseq
+    mangohud
+    mpv
+    nextcloud
+    pipewire
+    prusaslicer
+    qbittorrent
+    qt
+    satty
+    solaar
+    steam
+    swappy
+    sway
+    swaync
+    swayosd
+    thunar
+    tidal-hifi
+    ulauncher
+    vscodium
+    waybar
+    wlogout
     xdg
     yubikey
+    zed
   )
 fi
 
@@ -787,6 +767,11 @@ echo "Stowing general configs"
 for stow_dir in "${stow_dirs_general[@]}"; do
   echo "Stowing ${stow_dir}"
   stow_config "$stow_dir"
+done
+
+for luau in "$base_path"/herdr/.config/herdr-automate/automations/*.luau; do
+  [ -e "$luau" ] || continue
+  cp "$luau" "${HOME}/.config/herdr-automate/automations/"
 done
 
 bat cache --build || {
