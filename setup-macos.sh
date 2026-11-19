@@ -48,6 +48,7 @@ declare -a brew_pkgs=(
   neovim
   node
   npm
+  pinentry
   pinentry-mac
   python
   rsync
@@ -100,6 +101,7 @@ declare -a conflict_paths=(
   ~/.bashrc
   ~/.continue/config.json
   ~/.gnupg/common.conf
+  ~/.gnupg-forward/gpg.conf
   ~/.zshenv
   ~/.zlogout
   ~/.zshrc
@@ -154,7 +156,11 @@ ensure_group_member() {
 install_sshd_config() {
   sudo mkdir -p /etc/ssh/sshd_config.d
   if ! sudo grep -q '^Include /etc/ssh/sshd_config.d' /etc/ssh/sshd_config; then
-    echo 'Include /etc/ssh/sshd_config.d/*' | sudo tee -a /etc/ssh/sshd_config >/dev/null
+    # sshd is first-obtained-wins, so the Include must precede stock directives
+    {
+      echo 'Include /etc/ssh/sshd_config.d/*'
+      sudo cat /etc/ssh/sshd_config
+    } | sudo tee /etc/ssh/sshd_config >/dev/null
   fi
   rsync_system_config macos/
   sudo /usr/sbin/sshd -t

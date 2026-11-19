@@ -15,7 +15,7 @@ while read -r cmd rest; do
     echo "OK"
     ;;
   GETPIN | getpin)
-    password=$(printf "" | "$(which fuzzel)" --prompt-only "$prompt" --password --dmenu)
+    password=$(printf "" | "$(which fuzzel)" --prompt-only "$prompt " --password --dmenu)
 
     if [ "$password" = "" ]; then
       # user cancelled

@@ -1,0 +1,5 @@
+polkit.addRule(function(action, subject) {
+  if (action.id.indexOf("org.debian.pcsc-lite.") === 0 && subject.isInGroup("scard")) {
+    return polkit.Result.YES;
+  }
+});

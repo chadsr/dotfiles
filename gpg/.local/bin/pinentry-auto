@@ -2,7 +2,7 @@
 
 set -Ceu
 
-PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
+PATH="$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:$PATH"
 
 _exists() {
   type "$1" >/dev/null 2>&1
@@ -11,15 +11,24 @@ _exists() {
 if [ "${DISPLAY-}" != "" ]; then
   _exists pinentry-gtk && pe=$(which pinentry-gtk)
   _exists pinentry-fuzzel && pe=$(which pinentry-fuzzel)
+elif [ "$(uname)" = Darwin ] && [ "${SSH_CONNECTION-}" = "" ]; then
+  _exists pinentry-curses && pe=$(which pinentry-curses)
+  _exists pinentry-mac && pe=$(which pinentry-mac)
 else
   _exists pinentry-tty && pe=$(which pinentry-tty)
   _exists pinentry-curses && pe=$(which pinentry-curses)
-  _exists pinentry-mac && pe=$(which pinentry-mac)
 fi
 
 case "${PINENTRY_USER_DATA-}" in
-*USE_TTY=1*) pe=$(which pinentry-tty) ;;
-*USE_CURSES=1*) pe=$(which pinentry-curses) ;;
+*USE_TTY=1*) pe=$(which pinentry-tty || true) ;;
+*USE_CURSES=1*) pe=$(which pinentry-curses || true) ;;
 esac
+
+# guaranteed fallback
+if [ "${pe:-}" = "" ] && _exists pinentry; then pe=$(which pinentry); fi
+[ "${pe:-}" != "" ] || {
+  echo "pinentry-auto: no pinentry candidate found" >&2
+  exit 1
+}
 
 exec "$pe" "$@"

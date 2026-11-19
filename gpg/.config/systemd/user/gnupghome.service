@@ -1,9 +1,0 @@
-[Unit]
-Description=Set GNUPGHOME Environment Variable
-
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/bash -c 'systemctl --user set-environment GNUPGHOME="${GNUPGHOME:-$HOME/.gnupg}"'
-
-[Install]
-WantedBy=default.target

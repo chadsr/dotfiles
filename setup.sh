@@ -255,6 +255,7 @@ declare -a conflict_paths=(
   ~/.config/Thunar/uca.xml
   ~/.config/xfce4/xfconf/xfce-perchannel-xml/thunar.xml
   ~/.gnupg/common.conf
+  ~/.gnupg-forward/gpg.conf
   ~/.gtkrc-2.0
   ~/.vscode-oss/argv.json
   ~/.zlogin
@@ -299,7 +300,6 @@ source ~/.bashrc || {
   exit 1
 }
 
-systemd_user_enable_start "$base_path"/gpg/.config/systemd/user/gnupghome.service
 systemd_user_enable_start "$base_path"/gpg/.config/systemd/user/gnupg-forward-socketdir.service
 systemd_user_enable_start /usr/lib/systemd/user/gpg-agent.service
 systemd_user_enable_start "$base_path"/gpg/.config/systemd/user/ssh-auth-sock.service
@@ -388,23 +388,22 @@ declare -a pkgs=()
 readarray -t pkgs <"$pkglist_path"
 install_packages "${pkgs[@]}"
 
+declare -a user_groups=(
+  docker
+  kvm
+  libvirt
+  plugdev
+  ssh-users
+  uucp
+  scard
+)
+
 # Add user to groups needed by various packages
 if [[ "$is_graphical" == true ]]; then
-  declare -a user_groups=(
+  user_groups+=(
     audio
-    docker
     gamemode
     games
-    kvm
-    libvirt
-    plugdev
-    ssh-users
-    uucp
-  )
-else
-  declare -a user_groups=(
-    docker
-    ssh-users
   )
 fi
 for user_group in "${user_groups[@]}"; do
@@ -480,6 +479,7 @@ sudo update-smart-drivedb
 
 echo "Copying common system configuration"
 rsync_system_config common/
+
 remove_legacy_files
 sudo sshd -t
 sudo systemctl reload sshd || :
@@ -847,7 +847,6 @@ if [[ "$is_graphical" == true ]]; then
     "$base_path"/swayosd/.config/systemd/user/swayosd.service
     "$base_path"/systemd/.config/systemd/user/enable-linger.service
     "$base_path"/systemd/.config/systemd/user/wlr-sunclock.service
-    "$base_path"/vdirsyncer/.config/systemd/user/vdirsyncer-sync.service
     "$base_path"/vdirsyncer/.config/systemd/user/vdirsyncer-sync.timer
     "$base_path"/waybar/.config/systemd/user/setup-temps.service
     /usr/lib/systemd/user/app-com.mitchellh.ghostty.service

@@ -71,7 +71,7 @@ trap cleanup EXIT
 
 mkdir -p "$FORWARD_HOME"
 chmod 700 "$FORWARD_HOME"
-printf 'no-autostart\n' >"$FORWARD_HOME/gpg.conf"
+[[ -L $FORWARD_HOME/gpg.conf ]] || printf 'no-autostart\n' >"$FORWARD_HOME/gpg.conf"
 
 # create the Linux socketdir gpg dials; no-op on macOS
 gpgconf --homedir "$FORWARD_HOME" --create-socketdir 2>/dev/null || true
