@@ -6,6 +6,3 @@ After=network-online.target nss-lookup.target
 [Service]
 Type=oneshot
 ExecStart=/usr/bin/vdirsyncer sync
-
-[Install]
-WantedBy=default.target
