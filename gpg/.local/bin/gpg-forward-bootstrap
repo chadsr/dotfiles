@@ -8,17 +8,18 @@ FORWARD_HOME=$HOME/.gnupg-forward
 usage() {
   cat <<EOF
 Usage: ${0##*/} <gpg-fp> <host>
-        gpg --export -a <gpg-fp> | ssh -o ControlMaster=no -o ControlPath=none <host> ${0##*/}
+        gpg --export -a <gpg-fp> | ssh -o ClearAllForwardings=yes -o ControlMaster=no -o ControlPath=none <host> ${0##*/}
 
 Imports a public key from stdin into $FORWARD_HOME, the GNUPGHOME used for gpg-agent forwarding over ssh RemoteForward.
 EOF
 }
 
 if [[ $# -eq 2 && $1 != -* && $2 != -* ]]; then
-  gpg --export -a "$1" | ssh -o ControlMaster=no -o ControlPath=none "$2" "${0##*/}"
+  # non-mux ssh must never carry the RemoteForward — it steals the master's socket
+  gpg --export -a "$1" | ssh -o ClearAllForwardings=yes -o ControlMaster=no -o ControlPath=none "$2" "${0##*/}"
 
   # remote socket path is per-OS
-  remote_sock=$(ssh -o ControlMaster=no -o ControlPath=none "$2" \
+  remote_sock=$(ssh -o ClearAllForwardings=yes -o ControlMaster=no -o ControlPath=none "$2" \
     'GNUPGHOME=$HOME/.gnupg-forward gpgconf --list-dir agent-socket')
   local_sock=$(gpgconf --list-dir agent-extra-socket)
 
