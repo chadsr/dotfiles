@@ -14,15 +14,19 @@ opacity = 0.8
 
 [terminal]
 family = "Hack Nerd Font Mono"
+size = 14.0
 
 [sidebar]
 family = "Hack Nerd Font Mono"
+size = 12.0
 
 [tabs]
 family = "Hack Nerd Font Mono"
+size = 12.0
 
 [ui]
 family = "Hack Nerd Font Mono"
+size = 12.0
 
 [chat]
 glide = true
