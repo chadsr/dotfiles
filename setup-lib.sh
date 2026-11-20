@@ -251,12 +251,11 @@ string_exists() {
 }
 
 rm_if_not_stowed() {
-  if [[ -L "${1}" ]]; then
-    local symlink_path
-    symlink_path=$(readlink -f "${1}")
-    if [[ $symlink_path == *"$base_path"* ]]; then
-      return 0
-    fi
+  # never remove what resolves into the repo
+  local resolved
+  resolved=$(readlink -f "${1}" 2>/dev/null || true)
+  if [[ -n "$resolved" && "$resolved" == *"$base_path"* ]]; then
+    return 0
   fi
 
   rm -rfv "${1}" || {
