@@ -208,6 +208,7 @@ declare -a mk_dirs=(
   ~/.config/figma-linux/
   ~/.config/goose/
   ~/.config/gpu-screen-recorder
+  ~/.config/herdr-core
   ~/.config/khal/
   ~/.config/Kvantum/
   ~/.config/Logseq/
