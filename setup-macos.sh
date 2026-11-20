@@ -10,6 +10,7 @@ git_submodule_path="$base_path"/.git_submodules
 package_manager=/opt/homebrew/bin/brew
 declare -a diff_command=(nvim -d)
 tmp_path=/tmp/setup-"$HOSTNAME"
+current_hostname=$(hostname)
 
 set -Eeuo pipefail
 trap 'exit_setup' ERR INT
@@ -85,6 +86,7 @@ declare -a mk_dirs=(
   ~/.gnupg-forward/
   ~/.local/bin/
   ~/.local/share/
+  ~/.local/state/herdr/client/
   ~/.ssh/
   ~/Library/KeyBindings/
   ~/Library/LaunchAgents/
@@ -181,6 +183,7 @@ echo "Decrypting data"
 declare -a decrypt_data_paths_tuples=(
   "${data_path}/ssh/config.asc.gpg ${base_path}/ssh/.ssh/config"
   "${data_path}/android/keystores/keystore.asc.gpg ${base_path}/android/.android/keystores/keystore"
+  "${data_path}/herdr/${current_hostname}/endpoints.json.asc.gpg ${base_path}/herdr/.local/state/herdr/client/endpoints.json"
 )
 
 for decrypt_data_paths_tuple in "${decrypt_data_paths_tuples[@]}"; do

@@ -228,6 +228,7 @@ declare -a mk_dirs=(
   ~/.local/share/applications/
   ~/.local/share/fonts/OTF/
   ~/.local/share/fonts/TTF/
+  ~/.local/state/herdr/client
   ~/.logseq/config/
   ~/.nvm/alias/
   ~/.radicle/keys/
@@ -320,6 +321,7 @@ declare -a decrypt_data_paths_tuples=(
   "${data_path}/docker/mcp/config.yaml.asc.gpg ${base_path}/docker/.docker/mcp/config.yaml"
   "${data_path}/android/keystores/keystore.asc.gpg ${base_path}/android/.android/keystores/keystore"
   "${data_path}/gallery-dl/config.json.asc.gpg ${base_path}/gallery-dl/.config/gallery-dl/config.json"
+  "${data_path}/herdr/${current_hostname}/endpoints.json.asc.gpg ${base_path}/herdr/.local/state/herdr/client/endpoints.json"
   "${data_path}/pkgs/remove.txt.asc.gpg ${pkglist_remove_path}"
   "${data_path}/ssh/config.asc.gpg ${base_path}/ssh/.ssh/config"
   "${data_path}/vdirsyncer/config.asc.gpg ${base_path}/vdirsyncer/.config/vdirsyncer/config"

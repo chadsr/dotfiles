@@ -57,6 +57,7 @@ declare -a encrypt_data_paths_tuples=(
   "${HOME}/.config/vdirsyncer/config ${data_path}/vdirsyncer/config.asc.gpg"
   "${HOME}/.config/waybar-crypto/config.ini ${data_path}/waybar/waybar-crypto/config.ini.asc.gpg"
   "${HOME}/.docker/mcp/config.yaml ${data_path}/docker/mcp/config.yaml.asc.gpg"
+  "${HOME}/.local/state/herdr/client/endpoints.json ${data_path}/herdr/${current_hostname}/endpoints.json.asc.gpg"
   "${HOME}/.radicle/keys/radicle ${data_path}/radicle/keys/radicle.asc.gpg"
   "${HOME}/.ssh/config ${data_path}/ssh/config.asc.gpg"
   "${pkglist_system_path} ${data_path}/pkgs/${current_hostname}.txt.asc.gpg"

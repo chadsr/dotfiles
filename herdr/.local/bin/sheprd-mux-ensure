@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+# bootstrap a ControlMaster at an ssh host's configured path
+set -u
+
+host=${1:-}
+[ "$host" != "" ] || exit 0
+[ "${SHEPRD_MUX_ENSURE:-}" != 1 ] || exit 0
+export SHEPRD_MUX_ENSURE=1
+
+tmp=${TMPDIR:-/tmp}
+log=$tmp/sheprd-mux-ensure.log
+lastfail=$tmp/sheprd-mux-ensure.lastfail
+
+# config dumps and control ops never bootstrap
+if [ -r "/proc/$PPID/cmdline" ] && tr '\0' '\n' <"/proc/$PPID/cmdline" | grep -qx -e -G -e -O; then
+  exit 0
+fi
+
+ctl=$(ssh -n -G "$host" 2>/dev/null | grep -m1 '^controlpath ')
+ctl=${ctl#controlpath }
+case $ctl in
+/*) ;;
+*) exit 0 ;;
+esac
+ssh -n -O check "$host" >/dev/null 2>&1 && exit 0
+
+now=$(date +%s)
+if [ -f "$lastfail" ]; then
+  last=$(cat "$lastfail" 2>/dev/null || printf 0)
+  [ $((now - last)) -ge 30 ] || exit 0
+fi
+
+ssh -fN -o BatchMode=yes -o ConnectTimeout=10 "$host" >/dev/null 2>&1 &
+ssh_pid=$!
+(
+  sleep 30
+  kill "$ssh_pid" 2>/dev/null
+) &
+watchdog=$!
+if wait "$ssh_pid"; then
+  printf '%s bootstrapped: %s -> %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$host" "$ctl" >>"$log"
+  rm -f "$lastfail"
+else
+  printf '%s failed: %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$host" >>"$log"
+  printf '%s\n' "$now" >"$lastfail"
+fi
+kill "$watchdog" 2>/dev/null
+wait "$watchdog" 2>/dev/null
+exit 0
