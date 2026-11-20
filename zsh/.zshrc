@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+# shellcheck shell=bash
 
 # zmodload zsh/zprof
 
@@ -27,7 +27,7 @@ fi
 #  Init  #
 ##########
 
-if [[ $(command -v starship) ]]; then
+if command -v starship >/dev/null; then
   eval "$(starship init zsh)"
 else
   echo "starship not installed!"
@@ -130,13 +130,7 @@ add-zsh-hook precmd _git_alias_setup_hook
 #  Tools  #
 ###########
 
-if [[ "$OSTYPE" == "darwin"* && -z "${GNUPGHOME:-}" ]]; then
-  # fixes GPG smart card availability for the LOCAL card;
-  # skipped when a client-forwarded agent is active
-  gpg --card-status >/dev/null 2>&1
-fi
-
-if [[ $(command -v mise) ]]; then
+if command -v mise >/dev/null; then
   eval "$(mise activate zsh)"
 fi
 
