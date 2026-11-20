@@ -23,6 +23,10 @@ export HISTFILE=~/.zsh_history
 export HISTSIZE=10000
 export SAVEHIST=10000
 
+if [ -n "${SSH_CONNECTION:-}" ] && command -v infocmp >/dev/null 2>&1; then
+  infocmp "${TERM:-}" >/dev/null 2>&1 || TERM=xterm-256color
+fi
+
 ############
 #   GPG    #
 ############
