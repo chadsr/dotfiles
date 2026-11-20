@@ -1,0 +1,2 @@
+# Linux GTK uses 96dpi points, macOS 72dpi (14pt = 16pt on MacOS)
+font-size = 16
