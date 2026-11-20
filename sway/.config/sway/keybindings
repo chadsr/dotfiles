@@ -1,0 +1,124 @@
+# Apps
+bindsym $mod+Return exec $term
+bindsym $mod+e exec ghostty -e yazi
+bindsym $mod+b exec librewolf
+bindsym $mod+x exec $menu
+bindsym $mod+c exec ghostty --class=com.example.clipse -e clipse
+bindsym $mod+n exec swaync-client -t -sw
+bindsym $mod+Period exec emote
+
+# Windows
+bindsym $mod+Shift+q kill
+bindsym $mod+w floating toggle
+bindsym $mod+f fullscreen
+bindsym $mod+g layout toggle tabbed splith
+bindsym $mod+Ctrl+h focus left
+bindsym $mod+Ctrl+l focus right
+bindsym $mod+v layout toggle split
+floating_modifier $mod normal
+
+# Scratchpad (special workspace)
+bindsym $mod+s scratchpad show
+bindsym $mod+Shift+s move container to scratchpad; scratchpad show
+bindsym $mod+Alt+s move container to scratchpad
+
+# Focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+bindsym Alt+Tab focus down
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Workspaces
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+bindsym $mod+Ctrl+Right workspace next_on_output
+bindsym $mod+Ctrl+Left workspace prev_on_output
+bindsym --whole-window $mod+Button4 workspace prev_on_output
+bindsym --whole-window $mod+Button5 workspace next_on_output
+
+# Move window to workspace
+bindsym $mod+Shift+1 move container to workspace 1; workspace 1
+bindsym $mod+Shift+2 move container to workspace 2; workspace 2
+bindsym $mod+Shift+3 move container to workspace 3; workspace 3
+bindsym $mod+Shift+4 move container to workspace 4; workspace 4
+bindsym $mod+Shift+5 move container to workspace 5; workspace 5
+bindsym $mod+Shift+6 move container to workspace 6; workspace 6
+bindsym $mod+Shift+7 move container to workspace 7; workspace 7
+bindsym $mod+Shift+8 move container to workspace 8; workspace 8
+bindsym $mod+Shift+9 move container to workspace 9; workspace 9
+bindsym $mod+Shift+0 move container to workspace 10; workspace 10
+bindsym $mod+Alt+1 move container to workspace 1
+bindsym $mod+Alt+2 move container to workspace 2
+bindsym $mod+Alt+3 move container to workspace 3
+bindsym $mod+Alt+4 move container to workspace 4
+bindsym $mod+Alt+5 move container to workspace 5
+bindsym $mod+Alt+6 move container to workspace 6
+bindsym $mod+Alt+7 move container to workspace 7
+bindsym $mod+Alt+8 move container to workspace 8
+bindsym $mod+Alt+9 move container to workspace 9
+bindsym $mod+Alt+0 move container to workspace 10
+
+# Session
+bindsym $mod+Escape exec ~/.local/bin/swaylock-corrupt
+bindsym $mod+Shift+Escape exit
+bindsym $mod+Shift+r reload; exec systemctl --user try-restart waybar.service
+bindsym $mod+Shift+p exec hyprpicker -a
+bindsym $mod+l exec sunsetr preset day
+bindsym $mod+Shift+g exec gamemode-toggle
+
+# Passthrough
+bindsym Ctrl+Alt+v mode "passthrough"
+mode "passthrough" {
+    bindsym Ctrl+Alt+v mode "default"
+}
+
+# Resize
+bindsym $mod+r mode "resize"
+mode "resize" {
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# Screenshots
+bindsym Print exec screenshot screen
+bindsym Ctrl+Print exec screenshot area
+bindsym Alt+Print exec screenshot window
+bindsym Shift+Print exec screenshot -e screen
+bindsym Ctrl+Shift+Print exec screenshot -e area
+bindsym Alt+Shift+Print exec screenshot -e window
+
+# Media
+bindsym --locked XF86AudioMute exec swayosd-client --output-volume mute-toggle
+bindsym --locked XF86AudioMicMute exec swayosd-client --input-volume mute-toggle
+bindsym --locked XF86AudioRaiseVolume exec swayosd-client --output-volume +5
+bindsym --locked XF86AudioLowerVolume exec swayosd-client --output-volume -5
+bindsym --locked XF86AudioPlay exec playerctl play-pause
+bindsym --locked XF86AudioPause exec playerctl play-pause
+bindsym --locked XF86AudioNext exec playerctl next
+bindsym --locked XF86AudioPrev exec playerctl previous
+
+# Brightness
+bindsym --locked XF86MonBrightnessUp exec swayosd-client --brightness +5
+bindsym --locked XF86MonBrightnessDown exec swayosd-client --brightness -5
+
+# Gestures
+bindgesture swipe:3:right workspace next_on_output
+bindgesture swipe:3:left workspace prev_on_output

@@ -1,0 +1,16 @@
+# catppuccin mocha
+
+gaps inner 4
+gaps outer 8
+
+default_border pixel 2
+default_floating_border pixel 2
+smart_borders on
+
+# class                 border   bg       text     indicator child_border
+client.focused          #cba6f7  #1e1e2e  #cdd6f4  #cba6f7   #cba6f7
+client.focused_inactive #75628b  #1e1e2e  #a6adc8  #75628b   #75628b
+client.unfocused        #75628b  #1e1e2e  #a6adc8  #75628b   #75628b
+client.urgent           #f38ba8  #f38ba8  #11111b  #f38ba8   #f38ba8
+client.placeholder      #75628b  #181825  #cdd6f4  #181825   #181825
+client.background       #1e1e2e

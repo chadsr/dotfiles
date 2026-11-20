@@ -1,0 +1,12 @@
+for_window [app_id="^(org.pulseaudio.pavucontrol)$"] floating enable
+for_window [app_id="^ghostty$" title="^bluetuith$"] floating enable
+for_window [app_id="^(blueman-manager)$"] floating enable
+for_window [class="^(nm-applet)$"] floating enable
+for_window [app_id="^(nm-connection-editor)$"] floating enable
+for_window [app_id="^(org.kde.polkit-kde-authentication-agent-1)$"] floating enable
+for_window [app_id="^(polkit-gnome-authentication-agent-1)$"] floating enable
+for_window [class="^(org.kde.dolphin)$" title="^(Progress Dialog — Dolphin|Copying — Dolphin)$"] floating enable
+for_window [app_id="^(com.example.clipse)$"] floating enable, resize set 660 660
+for_window [app_id="^(com.nextcloud.desktopclient.nextcloud)$" title="^(Nextcloud)$"] floating enable, resize set 600 800, move position 0 24, border none
+
+for_window [shell="xdg_shell"] inhibit_idle fullscreen

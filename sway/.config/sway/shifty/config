@@ -1,7 +1,18 @@
-# Workstation specific config, loaded on hostname "shifty"
+# shifty
 
-output DP-2 {
+output DP-3 {
     mode 3440x1440@143.975Hz
+    adaptive_sync on
+    render_bit_depth 10
+    # ICC needs WLR_RENDERER=vulkan (experimental)
+    color_profile icc /usr/share/color/icc/colord/S3422DWG.icc
+}
+
+# U2415 — verify connector name once plugged in
+output DP-1 {
+    mode 1920x1200@59.95Hz
+    position 3440 -180
+    transform 90
 }
 
 exec nmcli radio wifi off

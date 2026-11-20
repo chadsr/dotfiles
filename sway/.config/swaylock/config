@@ -7,34 +7,35 @@ indicator-radius=64
 indicator-thickness=20
 indicator-caps-lock
 
-key-hl-color=0abdc6
+# catppuccin mocha
+key-hl-color=cba6f7
 
 separator-color=00000000
 
-inside-color=00000088
-inside-clear-color=00000088
-inside-caps-lock-color=009ddc00
-inside-ver-color=d9d8d800
-inside-wrong-color=ee2e2400
+inside-color=181825cc
+inside-clear-color=fab387cc
+inside-caps-lock-color=181825cc
+inside-ver-color=cba6f7cc
+inside-wrong-color=f38ba8cc
 
-ring-color=000b1ecc
-ring-clear-color=000b1ecc
-ring-caps-lock-color=000b1ecc
-ring-ver-color=000b1ecc
-ring-wrong-color=000b1ecc
+ring-color=cba6f7
+ring-clear-color=fab387
+ring-caps-lock-color=f9e2af
+ring-ver-color=cba6f7
+ring-wrong-color=f38ba8
 
 line-color=00000000
-line-clear-color=0abdc6
-line-caps-lock-color=009ddcFF
-line-ver-color=d9d8d8FF
-line-wrong-color=ee2e24FF
+line-clear-color=fab387
+line-caps-lock-color=f9e2af
+line-ver-color=cba6f7
+line-wrong-color=f38ba8
 
-text-color=0abdc6
-text-clear-color=0abdc6
-text-ver-color=d9d8d800
-text-wrong-color=ee2e2400
+text-color=cdd6f4
+text-clear-color=11111b
+text-ver-color=cdd6f4
+text-wrong-color=11111b
 
-bs-hl-color=ee2e24FF
-caps-lock-key-hl-color=ffd204FF
-caps-lock-bs-hl-color=ee2e24FF
-text-caps-lock-color=0abdc6
+bs-hl-color=f38ba8ff
+caps-lock-key-hl-color=f9e2af
+caps-lock-bs-hl-color=f38ba8ff
+text-caps-lock-color=cdd6f4

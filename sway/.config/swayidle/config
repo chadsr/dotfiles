@@ -1,0 +1,7 @@
+timeout 150 'brightnessctl -s set 10' resume 'brightnessctl -r'
+timeout 150 'brightnessctl -sd rgb:kbd_backlight set 0' resume 'brightnessctl -rd rgb:kbd_backlight'
+timeout 300 'pidof swaylock || swaylock-corrupt'
+timeout 330 'swaymsg "output * power off"' resume 'swaymsg "output * power on"'
+timeout 1800 'systemctl suspend'
+before-sleep 'pidof swaylock || swaylock-corrupt'
+after-resume 'swaymsg "output * power on"'
