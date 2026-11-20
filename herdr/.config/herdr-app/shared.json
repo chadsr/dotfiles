@@ -1,6 +1,9 @@
 {
   "frame.welcomed": "finished",
   "layout": "main",
+  "space.colors": {
+    "sp3b353dbbb74c3561444d488fddf3fb88": "ansi6"
+  },
   "workspace.panels": [
     "files",
     "changes"
