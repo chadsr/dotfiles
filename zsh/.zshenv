@@ -3,8 +3,17 @@
 
 # remove duplicate entries from $PATH
 # zsh uses $path array along with $PATH
-# shellcheck disable=SC2034
-typeset -U PATH path
+if [ -n "${ZSH_VERSION:-}" ]; then
+  # shellcheck disable=SC2034
+  typeset -U PATH path
+fi
+
+# repo root derived from this file's stow symlink
+if [ -z "${DOTFILES:-}" ]; then
+  _df_self=$(readlink -f "$HOME/.zshenv" 2>/dev/null) && export DOTFILES="${_df_self%/*/*}"
+  unset _df_self
+fi
+[[ -n "${DOTFILES:-}" ]] && export PATH="$DOTFILES:$PATH"
 
 #################################
 # General Environment Variables #
@@ -45,27 +54,30 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     [[ -n "${GPG_TTY:-}" ]] && gpg-connect-agent updatestartuptty /bye >/dev/null
   fi
 
-  LINUX_ASKPASS=$(which wayprompt-ssh-askpass)
+  LINUX_ASKPASS=$(command -v wayprompt-ssh-askpass)
   export SSH_ASKPASS="$LINUX_ASKPASS"
 
-  # Export env vars from systemd user units
-  while IFS='=' read -r _sd_env_key _sd_env_val; do
-    case "$_sd_env_key" in
-    '' | SSH_AUTH_SOCK | GNUPGHOME) ;;
-    *) export "$_sd_env_key=$_sd_env_val" ;;
-    esac
-  done < <(systemctl --user show-environment 2>/dev/null)
-  unset _sd_env_key _sd_env_val
+  # session vars for non-graphical shells (ssh/tty)
+  if [[ -z "${WAYLAND_DISPLAY:-}" && -z "${DISPLAY:-}" ]]; then
+    while IFS='=' read -r _sd_env_key _sd_env_val; do
+      export "$_sd_env_key=$_sd_env_val"
+    done < <(systemctl --user show-environment 2>/dev/null |
+      grep -E '^(DISPLAY|WAYLAND_DISPLAY|SWAYSOCK|HYPRLAND_INSTANCE_SIGNATURE|XDG_CURRENT_DESKTOP|XDG_SESSION_TYPE)=')
+    unset _sd_env_key _sd_env_val
+  fi
 
-  export BEMENU_OPTS="-n -m -1 --nb #000b1ecc --tb #000b1ecc --tf #ea00d9ff --nf #0abdc6ff"
+  # environment.d (~/.config + /etc) for every shell, via systemd's generator
+  if [[ -x /usr/lib/systemd/user-environment-generators/30-systemd-environment-d-generator ]]; then
+    set -a
+    # shellcheck disable=SC1090
+    source <(/usr/lib/systemd/user-environment-generators/30-systemd-environment-d-generator)
+    set +a
+  fi
 
   ############
   #  Golang  #
   ############
-  export GOPATH="$HOME/go"
-  export GOROOT=/usr/lib/go
-  export PATH="$GOPATH/bin:$GOROOT/bin:$PATH"
-  export GO111MODULE=on
+  export PATH="$HOME/go/bin:$PATH"
 
   ############
   #   Rust   #
@@ -78,25 +90,12 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   ###########
   export ANDROID_HOME="$HOME/Android"
   export ANDROID_USER_HOME="$HOME/.android"
-  ANDROID_STUDIO=$(which android-studio)
+  ANDROID_STUDIO=$(command -v android-studio)
   export CAPACITOR_ANDROID_STUDIO_PATH="$ANDROID_STUDIO"
   export PATH="$ANDROID_HOME/tools:$PATH"
   export PATH="$ANDROID_HOME/tools/bin:$PATH"
   export PATH="$ANDROID_HOME/platform-tools:$PATH"
   export PATH="$ANDROID_HOME/emulator:$PATH"
-
-  ############
-  #   Vim    #
-  ############
-  export EDITOR=/usr/bin/nvim
-  export VISUAL=/usr/bin/nvim
-
-  # Preferred editor for remote sessions
-  if [[ ! -z "${SSH_CONNECTION+x}" ]]; then
-    if [[ ! -n "${SSH_CONNECTION}" ]]; then
-      export EDITOR='vim'
-    fi
-  fi
 
   #############
   #  Node.js  #
@@ -104,22 +103,10 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   NPM_CONFIG_PREFIX=~/.npm-global
   export PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
 
-  NODE_PATH=$(npm root -g)
-  export NODE_PATH
-
-  export NVM_DIR="$HOME/.nvm"
-
   ############
   #  Python  #
   ############
   export PYDEVD_CONTAINER_RANDOM_ACCESS_MAX_ITEMS=1000
-
-  ############
-  #  Conda   #
-  ############
-  export PATH="/opt/anaconda/bin:$PATH"
-  export PATH="/opt/miniconda3/bin:$PATH"
-  export CONDA_AUTO_ACTIVATE_BASE=false
 
   ##########
   #  Perl  #
@@ -131,7 +118,6 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   #    Other     #
   ################
   export PATH="$HOME/.local/share/mise/shims:$PATH"
-  export PATH="/opt/brother/scanner/brscan5:$PATH"
   export PATH="$HOME/.local/bin:$PATH"
   export DO_NOT_TRACK=1
 
@@ -153,7 +139,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     [[ -n "${GPG_TTY:-}" ]] && gpg-connect-agent updatestartuptty /bye >/dev/null
   fi
 
-  MAC_ASKPASS=$(which ssh-askpass)
+  MAC_ASKPASS=$(command -v ssh-askpass)
   export SSH_ASKPASS="$MAC_ASKPASS"
 
   export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
@@ -163,5 +149,20 @@ fi
 #  Ruby  #
 ##########
 export GEM_HOME="$HOME/.gem"
-GEM_BIN=$(gem environment gemdir)/bin
+GEM_BIN="$GEM_HOME/bin"
 export PATH="$GEM_BIN:$PATH"
+
+############
+#  Editor  #
+############
+# placed after OS branches so command -v sees the full PATH
+EDITOR="$(command -v nvim)"
+VISUAL="$EDITOR"
+export EDITOR VISUAL
+
+# Preferred editor for remote sessions
+if [[ ! -z "${SSH_CONNECTION+x}" ]]; then
+  if [[ ! -n "${SSH_CONNECTION}" ]]; then
+    export EDITOR='vim'
+  fi
+fi
