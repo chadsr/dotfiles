@@ -430,14 +430,6 @@ for systemd_unit in "${systemd_units[@]}"; do
   systemd_enable_start "$systemd_unit"
 done
 
-echo "Disabling GNOME Keyring SSH Agent (If it exists)"
-sudo systemctl disable gcr-ssh-agent.socket || {
-  :
-}
-sudo systemctl disable gcr-ssh-agent.service || {
-  :
-}
-
 rustup default stable || {
   echo "failed to setup rust stable toolchain"
   exit 1
