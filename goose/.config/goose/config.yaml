@@ -26,23 +26,6 @@ extensions:
     timeout: null
     bundled: true
     available_tools: []
-  chrome-devtools-mcp:
-    enabled: false
-    type: stdio
-    name: chrome-devtools-mcp
-    description: Control and inspect a live Chrome browser
-    cmd: npx
-    args:
-      - -y
-      - chrome-devtools-mcp@latest
-      - --executablePath=/usr/bin/chromium
-      - --isolated=true
-      - --no-usage-statistics
-    envs: {}
-    env_keys: []
-    timeout: 300
-    bundled: null
-    available_tools: []
   computercontroller:
     enabled: true
     type: builtin

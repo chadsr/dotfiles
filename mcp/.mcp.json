@@ -10,17 +10,6 @@
       ],
       "command": "docker",
       "disable": false
-    },
-    "chrome-devtools-mcp": {
-      "args": [
-        "-y",
-        "chrome-devtools-mcp@latest",
-        "--executablePath=/usr/bin/chromium",
-        "--isolated=true",
-        "--no-usage-statistics"
-      ],
-      "command": "npx",
-      "disable": false
     }
   }
 }
