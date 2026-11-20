@@ -617,7 +617,7 @@
         ],
         "lib": {
           "kind": "Rust",
-          "version": "0.5.0"
+          "version": "0.7.0"
         },
         "name": "Kotlin",
         "repository": "https://github.com/zed-extensions/kotlin",
@@ -625,7 +625,7 @@
         "slash_commands": {},
         "snippets": null,
         "themes": [],
-        "version": "0.3.4"
+        "version": "0.3.5"
       }
     },
     "latex": {

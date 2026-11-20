@@ -76,6 +76,7 @@ waybar/.config/waybar/theme.css
 waybar/.local/share/fonts/TTF/*
 xdg/.config/mimeapps.list
 zed/.local/share/zed/*
+zed/.local/share/zed/extensions/*
 
 !android/.android/keystores/.gitkeep
 !android/.config/Google/**/disabled_plugins.txt
@@ -139,4 +140,5 @@ zed/.local/share/zed/*
 !vdirsyncer/.config/vdirsyncer/.gitkeep
 !waybar/.config/waybar/modules/crypto/.gitkeep
 !waybar/.local/share/fonts/TTF/.gitkeep
+!zed/.local/share/zed/extensions/
 !zed/.local/share/zed/extensions/index.json
