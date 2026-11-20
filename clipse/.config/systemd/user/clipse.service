@@ -10,4 +10,4 @@ ExecStart=/usr/bin/clipse -listen
 
 [Install]
 WantedBy=sway-session.target
-WantedBy=hypr-session.target
+WantedBy=hyprland-session.target

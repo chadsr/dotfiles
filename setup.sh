@@ -808,7 +808,6 @@ declare -a systemd_user_targets=()
 if [[ "$is_graphical" == true ]]; then
   systemd_user_targets+=(
     "$base_path"/sway/.config/systemd/user/sway-session.target
-    "$base_path"/hyprland/.config/systemd/user/hypr-session.target
   )
 fi
 for systemd_user_target in "${systemd_user_targets[@]}"; do

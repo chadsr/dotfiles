@@ -7,8 +7,6 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP") -- for XDPH
   hl.exec_cmd("dbus-update-activation-environment --systemd --all") -- for XDPH
   hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP") -- for XDPH
-  hl.exec_cmd("systemctl --user start hypr-session.target")
-  -- hl.exec_cmd("hyprpm reload")
   hl.exec_cmd(os.getenv("HOME") .. "/.local/bin/gsettings-gtk")
   hl.exec_cmd("sunsetr preset default")
 end)

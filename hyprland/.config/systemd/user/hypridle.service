@@ -11,4 +11,4 @@ ExecStart=/usr/bin/hypridle
 Restart=on-failure
 
 [Install]
-WantedBy=hypr-session.target
+WantedBy=hyprland-session.target

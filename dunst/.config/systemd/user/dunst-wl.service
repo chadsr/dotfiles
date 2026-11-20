@@ -13,4 +13,4 @@ Slice=session.slice
 
 [Install]
 WantedBy=sway-session.target
-WantedBy=hypr-session.target
+WantedBy=hyprland-session.target

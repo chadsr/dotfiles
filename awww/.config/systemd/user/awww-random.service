@@ -12,4 +12,4 @@ ExecStart=%h/.local/bin/awww_random_multi %h/Pictures/Backgrounds crop wave 300
 
 [Install]
 WantedBy=sway-session.target
-WantedBy=hypr-session.target
+WantedBy=hyprland-session.target
