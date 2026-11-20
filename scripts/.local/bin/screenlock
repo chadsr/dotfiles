@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 if [ "$XDG_CURRENT_DESKTOP" = "Sway" ]; then
   swaylock-corrupt

@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# usage: screenshot [-e] {screen|area|window}
+edit=0
+[ "$1" = "-e" ] && {
+  edit=1
+  shift
+}
+mode="${1:-area}"
+
+geom() {
+  case "$1" in
+  area)
+    slurp
+    ;;
+  window)
+    if [ "$SWAYSOCK" != "" ]; then
+      swaymsg -t get_tree | jq -r '.. | select(.focused?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"'
+    else
+      hyprctl -j activewindow | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"'
+    fi
+    ;;
+  screen)
+    if [ "$SWAYSOCK" != "" ]; then
+      swaymsg -t get_outputs | jq -r '.[] | select(.focused) | "\(.x),\(.y) \(.width)x\(.height)"'
+    else
+      hyprctl -j monitors | jq -r '.[] | select(.focused) | "\(.x),\(.y) \(.width)x\(.height)"'
+    fi
+    ;;
+  esac
+}
+
+g=$(geom "$mode")
+[ "$g" != "" ] || exit 0
+
+if [ "$edit" = 1 ]; then
+  grim -g "$g" - | satty -f -
+else
+  dir="${XDG_SCREENSHOTS_DIR:-$HOME/Pictures}"
+  file="$dir/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png"
+  mkdir -p "$dir"
+  grim -g "$g" - | tee "$file" | wl-copy && notify-send -t 3000 "Screenshot" "$file"
+fi

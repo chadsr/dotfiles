@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Enables/Disables adaptive_sync
 case "$1" in
