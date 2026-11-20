@@ -21,6 +21,10 @@ if [ -f "$lastfail" ]; then
 fi
 printf '%s\n' "$now" >"$lastfail"
 
+# forwarding belongs to the master
+sock=$(gpgconf --agent-ssh-socket 2>/dev/null || true)
+[ -S "$sock" ] && export SSH_AUTH_SOCK="$sock"
+
 # detached, so as to not block the triggering ssh's config parse
 ssh -fN -o BatchMode=yes -o ConnectTimeout=10 "$host" </dev/null >/dev/null 2>&1 &
 exit 0
