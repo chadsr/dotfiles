@@ -35,7 +35,7 @@ config_path() {
 
 # link one master at the config's ControlPath
 link() {
-  local ctl=$1 host=$2 cfg
+  local ctl=$1 host=$2 cfg cur
   # liveness: pgrep can race a master mid-death
   ssh -n -O check -o ControlPath="$ctl" "$host" >/dev/null 2>&1 || return 0
   cfg=$(config_path "$host")
@@ -45,6 +45,9 @@ link() {
   esac
   # never replace a real file or socket
   [ -e "$cfg" ] && [ ! -L "$cfg" ] && return 0
+  # log transitions only
+  cur=$(readlink "$cfg" 2>/dev/null || true)
+  [ "$cur" = "$ctl" ] && return 0
   ln -sfn "$ctl" "$cfg" && log "linked: $cfg -> $ctl ($host)"
 }
 
@@ -64,4 +67,3 @@ masters | while read -r ctl host; do
   link "$ctl" "$host"
 done
 cleanup
-log "run done: pid $$"
