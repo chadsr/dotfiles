@@ -48,7 +48,7 @@ hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = tru
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true }) -- toggle between media play and pause
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true }) -- media next
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true }) -- media previous
-hl.bind(mainMod .. " + SHIFT + G", hl.dsp.exec_cmd("hypr-gamemode"))
+hl.bind(mainMod .. " + SHIFT + G", hl.dsp.exec_cmd("gamemode-toggle"))
 
 -- Brightness control
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("swayosd-client --brightness +5"), { locked = true, repeating = true }) -- increase brightness
@@ -60,12 +60,12 @@ hl.bind(mainMod .. " + CTRL + H", hl.dsp.group.prev())
 hl.bind(mainMod .. " + CTRL + L", hl.dsp.group.next())
 
 -- Screenshot/Screencapture
-hl.bind("Print", hl.dsp.exec_cmd("grimblast --notify copysave screen"))
-hl.bind("CTRL + Print", hl.dsp.exec_cmd("grimblast --notify copysave area"))
-hl.bind("ALT + Print", hl.dsp.exec_cmd("grimblast --notify copysave active"))
-hl.bind("SHIFT + Print", hl.dsp.exec_cmd("grimblast edit screen"))
-hl.bind("CTRL + SHIFT + Print", hl.dsp.exec_cmd("grimblast edit area"))
-hl.bind("ALT + SHIFT + Print", hl.dsp.exec_cmd("grimblast edit active"))
+hl.bind("Print", hl.dsp.exec_cmd("screenshot screen"))
+hl.bind("CTRL + Print", hl.dsp.exec_cmd("screenshot area"))
+hl.bind("ALT + Print", hl.dsp.exec_cmd("screenshot window"))
+hl.bind("SHIFT + Print", hl.dsp.exec_cmd("screenshot -e screen"))
+hl.bind("CTRL + SHIFT + Print", hl.dsp.exec_cmd("screenshot -e area"))
+hl.bind("ALT + SHIFT + Print", hl.dsp.exec_cmd("screenshot -e window"))
 
 -- Move/Change window focus
 hl.bind(mainMod .. " + Left", hl.dsp.focus({ direction = "l" }))

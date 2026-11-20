@@ -16,7 +16,6 @@ end)
 hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
 hl.env("XDG_SESSION_DESKTOP", "Hyprland")
 hl.env("XDG_SESSION_TYPE", "wayland")
-hl.env("GRIMBLAST_EDITOR", "satty -f")
 
 hl.config({
   ecosystem = {
@@ -85,7 +84,6 @@ hl.config({
 
 hl.config({
   misc = {
-    vrr = 0,
     disable_hyprland_logo = true,
     disable_splash_rendering = true,
     force_default_wallpaper = 0,
@@ -95,12 +93,6 @@ hl.config({
 hl.config({
   xwayland = {
     force_zero_scaling = true,
-  },
-})
-
-hl.config({
-  ecosystem = {
-    no_update_news = true,
   },
 })
 
