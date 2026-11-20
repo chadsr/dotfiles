@@ -17,6 +17,8 @@ btop/.config/btop/themes/*
 cava/.config/cava/shaders
 cava/.config/cava/themes
 cline/.cline/*
+cline/.cline/data/*
+cline/.cline/data/settings/*
 continue/.continue/*
 cura/.config/cura/5.11/cura.cfg
 data/pkgs/*
@@ -97,6 +99,8 @@ zed/.local/share/zed/extensions/*
 !android/.config/Google/**/options/window.layouts.xml
 !bat/.config/bat/themes/.gitkeep
 !btop/.config/btop/themes/.gitkeep
+!cline/.cline/data/
+!cline/.cline/data/settings/
 !cline/.cline/data/settings/cline_mcp_settings.json
 !cline/.cline/data/settings/global-settings.json
 !continue/.continue/config.yaml
