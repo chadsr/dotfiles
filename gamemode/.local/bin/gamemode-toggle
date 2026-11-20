@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# Toggle a distraction-free layout and pause background session services.
+
+state="${XDG_RUNTIME_DIR:-/tmp}/gamemode-toggle"
+services=(waybar.service awww-random.service sunsetr.service wlr-sunclock.service)
+
+case "$XDG_CURRENT_DESKTOP" in
+Hyprland)
+  idle=hypridle.service
+  enter_gamemode() {
+    hyprctl --batch "\
+        eval hl.config({ animations = { enabled = false } });\
+        eval hl.config({ decoration = { shadow = { enabled = false }, rounding = 0, blur = { enabled = false } } });\
+        eval hl.config({ general = { gaps_in = 0, gaps_out = 0, border_size = 1 } })"
+  }
+  exit_gamemode() { hyprctl reload; }
+  ;;
+sway)
+  idle=swayidle.service
+  enter_gamemode() {
+    swaymsg "gaps inner 0; gaps outer 0; default_border pixel 1; default_floating_border pixel 1; smart_borders off"
+  }
+  exit_gamemode() { swaymsg reload; }
+  ;;
+*)
+  echo "gamemode-toggle: unsupported compositor: ${XDG_CURRENT_DESKTOP:-none}" >&2
+  exit 1
+  ;;
+esac
+
+if [ -e "$state" ]; then
+  rm -f "$state"
+  systemctl --user start "${services[@]}" "$idle"
+  exit_gamemode
+else
+  : >"$state"
+  systemctl --user stop "${services[@]}" "$idle"
+  enter_gamemode
+fi
