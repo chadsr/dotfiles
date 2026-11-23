@@ -5,7 +5,7 @@
 
 --
 hl.monitor({
-  output = "desc:Dell Inc. DELL S3422DWG DKQVS63",
+  output = "desc:Dell Inc. DELL S3422DWG",
   mode = "3440x1440@143.97Hz",
   position = "0x0",
   scale = 1,
@@ -14,7 +14,7 @@ hl.monitor({
   bitdepth = 10,
 })
 hl.monitor({
-  output = "desc:Dell Inc. DELL U2415 XKV0P0414WMU",
+  output = "desc:Dell Inc. DELL U2415",
   mode = "1920x1200@59.95Hz",
   position = "3440x-180",
   scale = 1,
