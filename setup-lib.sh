@@ -141,10 +141,14 @@ diff_files() {
     return 0
   else
     # shellcheck disable=SC2154
-    "${diff_command[@]}" "$1" "$2" || {
-      echo "${diff_command[0]} on ${1} <-> ${2}' exited with error"
+    # exit 1 = differences shown; >=2 is an error
+    local diff_rv=0
+    # shellcheck disable=SC2154
+    "${diff_command[@]}" "$1" "$2" || diff_rv=$?
+    if ((diff_rv > 1)); then
+      echo "${diff_command[0]} on ${1} <-> ${2}' exited with error (${diff_rv})"
       return 1
-    }
+    fi
   fi
 }
 
