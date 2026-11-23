@@ -58,9 +58,7 @@
     "visibleNewProjectBtn": true,
     "windowsState": {}
   },
-  "authedUserIDs": [
-    "909037475001805614"
-  ],
+  "authedUserIDs": [],
   "clientId": "someID",
   "theme": {
     "currentTheme": "Catppuchin_Mocha"
