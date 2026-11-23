@@ -53,7 +53,7 @@ declare -a encrypt_data_paths_tuples=(
   "${HOME}/.config/mimeapps.list ${data_path}/xdg/mimeapps.list.asc.gpg"
   "${HOME}/.config/Nextcloud/nextcloud.cfg ${data_path}/nextcloud/nextcloud.cfg.asc.gpg"
   "${HOME}/.config/PrusaSlicer/PrusaSlicer.ini ${data_path}/prusaslicer/PrusaSlicer.ini.asc.gpg"
-  "${HOME}/.config/qBittorrent/qBittorrent.conf ${data_path}/qbittorrent/categories.json.asc"
+  "${HOME}/.config/qBittorrent/categories.json ${data_path}/qbittorrent/categories.json.asc"
   "${HOME}/.config/qBittorrent/qBittorrent.conf ${data_path}/qbittorrent/qBittorrent.conf.asc"
   "${HOME}/.config/tidal-hifi/config.json ${data_path}/tidal-hifi/config.json.asc.gpg"
   "${HOME}/.config/vdirsyncer/config ${data_path}/vdirsyncer/config.asc.gpg"
