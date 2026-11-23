@@ -26,7 +26,6 @@
           "run",
           "--profile",
           "dev-tools",
-          "--verify-signatures=false"
         ],
         "type": "local"
       },
