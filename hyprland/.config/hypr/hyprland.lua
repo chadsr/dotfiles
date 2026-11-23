@@ -5,7 +5,6 @@
 
 hl.on("hyprland.start", function()
   hl.exec_cmd(os.getenv("HOME") .. "/.local/bin/gsettings-gtk")
-  hl.exec_cmd("sunsetr preset default")
 end)
 
 -- █▀▀ █▄░█ █░█
@@ -93,6 +92,14 @@ hl.config({
 hl.config({
   xwayland = {
     force_zero_scaling = true,
+  },
+})
+
+-- sunsetr (external ctm) disabled for fullscreen
+hl.config({
+  render = {
+    non_shader_cm = 2,
+    non_shader_cm_interop = 2,
   },
 })
 
