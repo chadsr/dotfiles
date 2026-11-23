@@ -13,7 +13,6 @@ if [ -z "${DOTFILES:-}" ]; then
   _df_self=$(readlink -f "$HOME/.zshenv" 2>/dev/null) && export DOTFILES="${_df_self%/*/*}"
   unset _df_self
 fi
-[[ -n "${DOTFILES:-}" ]] && export PATH="$PATH:$DOTFILES"
 
 #################################
 # General Environment Variables #
