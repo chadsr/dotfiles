@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
+# Logout action for wlogout/swaync
 
-if [ "$XDG_CURRENT_DESKTOP" = "Sway" ]; then
-  swaymsg exit
-elif [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then
-  hyprctl dispatch exit 0
+if [[ -n ${SWAYSOCK:-} ]] && command -v swaymsg >/dev/null 2>&1; then
+  exec swaymsg exit
+elif [[ -n ${HYPRLAND_INSTANCE_SIGNATURE:-} ]] && command -v hyprctl >/dev/null 2>&1; then
+  exec hyprctl dispatch exit 0
 else
-  logout
+  exec loginctl terminate-session "${XDG_SESSION_ID:?XDG_SESSION_ID unset}"
 fi
