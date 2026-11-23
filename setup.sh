@@ -581,6 +581,7 @@ fi
 if [[ "$is_graphical" == true ]]; then
   # Check if certain submodules get updated, so we don't build them uneccessarily
   hackneyed_updated=false
+  init_submodules
   hackneyed_hash_old=$(git -C "$git_submodule_path"/hackneyed-cursor rev-parse --short HEAD)
 
   update_submodules

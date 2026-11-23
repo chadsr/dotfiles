@@ -324,6 +324,13 @@ import_gpg_pubkey() {
   fi
 }
 
+init_submodules() {
+  git submodule update --init --recursive --progress || {
+    echo "failed to init git submodules"
+    exit 1
+  }
+}
+
 update_submodules() {
   git submodule update --init --recursive --remote --progress || {
     echo "failed to update git submodules"
