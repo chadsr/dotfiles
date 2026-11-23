@@ -426,6 +426,7 @@ done
 
 declare -a systemd_units=(
   /usr/lib/systemd/system/clamav-freshclam-once.timer
+  /usr/lib/systemd/system/power-profiles-daemon.service
   /usr/lib/systemd/system/smartd.service
 )
 if [[ "$is_graphical" == true ]]; then
@@ -507,9 +508,7 @@ if [[ "$current_hostname" == "$laptop_hostname" ]]; then
   fi
 
   declare -a systemd_units_laptop=(
-    /usr/lib/systemd/system/tlp.service
     /usr/lib/systemd/system/acpid.service
-    /etc/systemd/system/powertop.service
   )
   for systemd_unit in "${systemd_units_laptop[@]}"; do
     systemd_enable_start "$systemd_unit"
@@ -560,7 +559,6 @@ elif [[ "$current_hostname" == "$desktop_hostname" ]]; then
   declare -a systemd_units_desktop=(
     /usr/lib/systemd/system/coolercontrold.service
     /usr/lib/systemd/system/lactd.service
-    /usr/lib/systemd/system/power-profiles-daemon.service
   )
   for systemd_unit_desktop in "${systemd_units_desktop[@]}"; do
     systemd_enable_start "$systemd_unit_desktop"
