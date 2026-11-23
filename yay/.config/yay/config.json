@@ -7,6 +7,7 @@
   "aururl": "https://aur.archlinux.org",
   "batchinstall": false,
   "bottomup": true,
+  "buildDir": "~/.cache/yay",
   "cleanAfter": false,
   "cleanmenu": true,
   "combinedupgrade": true,
@@ -26,9 +27,10 @@
   "makepkgbin": "makepkg",
   "makepkgconf": "",
   "maxconcurrentdownloads": 1,
-  "mflags": "",
+  "mflags": "--nocheck",
   "pacmanbin": "pacman",
   "pacmanconf": "/etc/pacman.conf",
+  "pager": "delta",
   "pgpfetch": true,
   "provides": true,
   "rebuild": "no",
@@ -43,5 +45,6 @@
   "sudobin": "sudo",
   "sudoflags": "",
   "sudoloop": false,
-  "useask": false
+  "useask": false,
+  "version": "13.1.0"
 }
