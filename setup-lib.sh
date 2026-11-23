@@ -271,7 +271,7 @@ rm_if_not_stowed() {
   # never remove what resolves into the repo
   local resolved
   resolved=$(readlink -f "${1}" 2>/dev/null || true)
-  if [[ -n "$resolved" && "$resolved" == *"$base_path"* ]]; then
+  if [[ "$resolved" == "$base_path" || "$resolved" == "$base_path"/* ]]; then
     return 0
   fi
 
