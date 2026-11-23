@@ -301,6 +301,18 @@ rsync_system_config() {
     return 1
   fi
 
+  # only root-apply committed content
+  local -a dirty_system_paths=()
+  while IFS= read -r dirty_line; do
+    dirty_system_paths+=("$dirty_line")
+  done < <(git -C "$base_path" status --porcelain -- system/ 2>/dev/null | grep -Ev 'system/[^/]+/boot/loader/entries/|system/[^/]+/etc/cmdline\.d/' || true)
+
+  if ((${#dirty_system_paths[@]} > 0)); then
+    echo "Uncommitted changes under system/: commit or stash before applying system config as root:"
+    printf '  %s\n' "${dirty_system_paths[@]}"
+    return 1
+  fi
+
   sudo "$rsync_bin" --chown="$rsync_chown" --open-noatime --exclude='.gitkeep' --progress -ruacvLKO -- "$system_config_full_path"/* / || {
     echo "failed to rsync system config from ${system_config_full_path} to root filesystem"
     return 1
