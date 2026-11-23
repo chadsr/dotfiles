@@ -327,10 +327,8 @@ declare -a decrypt_data_paths_tuples=(
   "${data_path}/herdr/${current_hostname}/endpoints.json.asc.gpg ${base_path}/herdr/.local/state/herdr/client/endpoints.json"
   "${data_path}/pkgs/remove.txt.asc.gpg ${pkglist_remove_path}"
   "${data_path}/ssh/config.asc.gpg ${base_path}/ssh/.ssh/config"
-  "${data_path}/vdirsyncer/config.asc.gpg ${base_path}/vdirsyncer/.config/vdirsyncer/config"
   "${data_path}/qbittorrent/categories.json.asc ${base_path}/qbittorrent/.config/qBittorrent/categories.json"
   "${data_path}/qbittorrent/qBittorrent.conf.asc ${base_path}/qbittorrent/.config/qBittorrent/qBittorrent.conf"
-  "${data_path}/khal/config.asc.gpg ${base_path}/khal/.config/khal/config"
 )
 
 # Graphical-only data
@@ -338,12 +336,14 @@ if [[ "$is_graphical" == true ]]; then
   decrypt_data_paths_tuples+=(
     "${data_path}/cura/cura.cfg.asc.gpg ${base_path}/cura/.config/cura/5.11/cura.cfg"
     "${data_path}/gtk/bookmarks.asc.gpg ${base_path}/gtk/.config/gtk-3.0/bookmarks"
+    "${data_path}/khal/config.asc.gpg ${base_path}/khal/.config/khal/config"
     "${data_path}/nextcloud/nextcloud.cfg.asc.gpg ${base_path}/nextcloud/.config/Nextcloud/nextcloud.cfg"
     "${data_path}/prusaslicer/PrusaSlicer.ini.asc.gpg ${base_path}/prusaslicer/.config/PrusaSlicer/PrusaSlicer.ini"
     "${data_path}/radicle/keys/radicle.asc.gpg ${base_path}/radicle/.radicle/keys/radicle"
     "${data_path}/system/${current_hostname}/boot/loader/entries/arch-cachyos.asc.conf ${base_path}/system/${current_hostname}/boot/loader/entries/arch-cachyos.conf"
     "${data_path}/system/${current_hostname}/boot/loader/entries/arch-zen.asc.conf ${base_path}/system/${current_hostname}/boot/loader/entries/arch-zen.conf"
     "${data_path}/tidal-hifi/config.json.asc.gpg ${base_path}/tidal-hifi/.config/tidal-hifi/config.json"
+    "${data_path}/vdirsyncer/config.asc.gpg ${base_path}/vdirsyncer/.config/vdirsyncer/config"
     "${data_path}/waybar/waybar-crypto/config.ini.asc.gpg ${base_path}/waybar/.config/waybar-crypto/config.ini"
     "${data_path}/xdg/mimeapps.list.asc.gpg ${base_path}/xdg/.config/mimeapps.list"
   )
@@ -710,7 +710,6 @@ declare -a stow_dirs_general=(
   starship
   systemd
   todoman
-  vdirsyncer
   yt-dlp
 )
 
@@ -759,6 +758,7 @@ if [[ "$is_graphical" == true ]]; then
     thunar
     tidal-hifi
     ulauncher
+    vdirsyncer
     vscodium
     waybar
     wlogout
@@ -798,10 +798,12 @@ skillshare sync --all || {
   exit 1
 }
 
-vdirsyncer discover || {
-  echo "failed to setup vdirsyncer mailbox"
-  exit 1
-}
+if [[ "$is_graphical" == true ]]; then
+  vdirsyncer discover || {
+    echo "failed to setup vdirsyncer mailbox"
+    exit 1
+  }
+fi
 
 echo "Enabling/Starting Systemd User Units"
 systemctl --user daemon-reload || {
