@@ -9,7 +9,9 @@ host=${1:-}
 [ "${SHEPRD_MUX_ENSURE:-}" != 1 ] || exit 0
 export SHEPRD_MUX_ENSURE=1
 
-lastfail=${TMPDIR:-/tmp}/sheprd-mux-ensure.$host.lastfail
+state_dir=${XDG_STATE_HOME:-$HOME/.local/state}/sheprd
+mkdir -p "$state_dir" 2>/dev/null || exit 0
+lastfail=$state_dir/mux-ensure.$host.lastfail
 
 ssh -n -O check "$host" >/dev/null 2>&1 && exit 0
 
