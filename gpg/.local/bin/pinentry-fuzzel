@@ -15,15 +15,20 @@ while read -r cmd rest; do
     echo "OK"
     ;;
   GETPIN | getpin)
-    password=$(printf "" | "$(which fuzzel)" --prompt-only "$prompt " --password --dmenu)
-
-    if [ "$password" = "" ]; then
-      # user cancelled
-      echo "ERR 83886179 User canceled"
+    if ! pin_prog=$(command -v fuzzel); then
+      echo "ERR 83886179 fuzzel not found" >&2
+      echo "ERR 83886179 No pinentry program"
     else
-      # send password back to gpg
-      echo "D $password"
-      echo "OK"
+      password=$(printf "" | "$pin_prog" --prompt-only "$prompt " --password --dmenu)
+
+      if [ "$password" = "" ]; then
+        # user cancelled
+        echo "ERR 83886179 User canceled"
+      else
+        # send password back to gpg
+        echo "D $password"
+        echo "OK"
+      fi
     fi
     ;;
   BYE | bye)
