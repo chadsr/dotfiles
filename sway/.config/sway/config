@@ -13,7 +13,6 @@ exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK XDG_CURREN
 exec swaymsg -t subscribe '["shutdown"]' && systemctl --user stop sway-session.target
 
 exec_always "$HOME"/.local/bin/gsettings-gtk
-exec sunsetr preset default
 
 # waybar runs via sway-session.target
 bar {
