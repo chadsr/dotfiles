@@ -35,7 +35,7 @@
       }
     }
   },
-  "model": "zai-coding-plan/glm-5.3",
+  "model": "zai-coding-plan/glm-5.4",
   "permissions": [
     {
       "action": "external_directory",
@@ -51,7 +51,7 @@
   "providers": {
     "zai-coding-plan": {
       "models": {
-        "glm-5.3": {
+        "glm-5.4": {
           "settings": {
             "reasoningEffort": "max",
             "thinking": {
@@ -60,15 +60,6 @@
             }
           }
         },
-        "glm-5.3-flash": {
-          "settings": {
-            "reasoningEffort": "max",
-            "thinking": {
-              "type": "enabled",
-              "clear_thinking": false
-            }
-          }
-        }
       }
     }
   },
