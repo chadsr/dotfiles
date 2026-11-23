@@ -11,6 +11,7 @@ quit-after-last-window-closed = false
 window-inherit-font-size = false
 term = xterm-256color
 shell-integration-features = cursor,no-sudo,title,ssh-env,path
+clipboard-write = ask
 
 # Optional per-OS overrides
 config-file = ?macos
