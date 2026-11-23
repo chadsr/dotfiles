@@ -4,12 +4,13 @@ if [[ $# -gt 0 ]] && [[ $1 == "--help" ]] || [[ $1 == "-h" ]]; then
   swaylock --help |& sed -r 's/swaylock/swaylock-corrupter/g' | sed '/--image/d'
 else
   mapfile -t displays < <(swaymsg -t get_outputs -p | grep "Output" | awk '{print $2}')
-  base_file="/tmp/sc"
+  base_dir=$(mktemp -d "${XDG_RUNTIME_DIR:-/tmp}/swaylock-corrupt.XXXXXX")
+  trap 'rm -rf "$base_dir"' EXIT
 
   args=()
 
   for display in "${displays[@]}"; do
-    file=${base_file}${display}.png
+    file=$base_dir/${display}.png
     grim -o "$display" "$file"
     corrupter "$file" "$file"
     args+=(-i "${display}:${file}")
