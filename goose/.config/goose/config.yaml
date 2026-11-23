@@ -167,7 +167,7 @@ extensions:
 providers:
   zai:
     enabled: true
-    model: glm-5.3
+    model: glm-5.4
     configured: true
 active_provider: zai
 ZAI_BASE_URL: https://api.z.ai/api/anthropic
