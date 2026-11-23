@@ -24,6 +24,8 @@ source "$(dirname "${BASH_SOURCE[0]}")/setup-lib.sh" || {
   exit 1
 }
 
+trap 'cleanup_tmp_dir' EXIT
+
 update_paths() {
   base_path=$PWD
   data_path="$base_path"/data
@@ -40,7 +42,7 @@ update_paths
 
 import_gpg_pubkey
 
-mkdir -p "$tmp_path"
+init_tmp_dir
 
 declare -a encrypt_data_paths_tuples=(
   "${HOME}/.android/keystores/keystore ${data_path}/android/keystores/keystore.asc.gpg"

@@ -20,6 +20,8 @@ source "$(dirname "${BASH_SOURCE[0]}")/setup-lib.sh" || {
   exit 1
 }
 
+trap 'cleanup_tmp_dir' EXIT
+
 update_paths() {
   base_path=$PWD
   data_path="$base_path"/data
@@ -30,7 +32,7 @@ update_paths() {
 cd_dotfiles
 update_paths
 
-mkdir -p "$tmp_path"
+init_tmp_dir
 
 prompt_exit "This script will remove/change existing system settings."
 

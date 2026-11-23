@@ -8,6 +8,21 @@ exit_setup() {
   exit "$rv"
 }
 
+init_tmp_dir() {
+  rm -rf "$tmp_path" # purge any plaintext from a crashed run
+  mkdir -p "$tmp_path" || {
+    echo "failed to create ${tmp_path}"
+    return 1
+  }
+  chmod 700 "$tmp_path"
+}
+
+cleanup_tmp_dir() {
+  if [[ -n ${tmp_path+x} && -d $tmp_path ]]; then
+    rm -rf "$tmp_path"
+  fi
+}
+
 prompt_exit() {
   read -rp "$1 Continue or Abort? (y/N)" answer
   case ${answer:0:1} in

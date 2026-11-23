@@ -34,6 +34,8 @@ source "$(dirname "${BASH_SOURCE[0]}")/setup-lib.sh" || {
   exit 1
 }
 
+trap 'cleanup_tmp_dir' EXIT
+
 command -v "$package_manager" >/dev/null 2>&1 || {
   echo "prerequisite missing: ${package_manager} — install it first"
   exit 1
@@ -161,7 +163,7 @@ add_group_user() {
   }
 }
 
-mkdir -p "$tmp_path"
+init_tmp_dir
 
 if command -v yay &>/dev/null; then
   yay -Y --gendb || {
