@@ -109,7 +109,7 @@
   "editor.minimap.enabled": false,
   "editor.smoothScrolling": true,
   "editor.unicodeHighlight.ambiguousCharacters": false,
-  "explorer.confirmDelete": false,
+  "explorer.confirmDelete": true,
   "explorer.confirmDragAndDrop": false,
   "files.associations": {
     "*.list": "properties",
@@ -185,7 +185,7 @@
   ],
   "redhat.telemetry.enabled": false,
   "scss.validate": false,
-  "security.workspace.trust.untrustedFiles": "open",
+  "security.workspace.trust.untrustedFiles": "newWindow",
   "stylelint.validate": [
     "css",
     "scss"
