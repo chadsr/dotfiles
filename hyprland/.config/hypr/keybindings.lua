@@ -55,6 +55,18 @@ hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("swayosd-client --brightness +5")
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("swayosd-client --brightness -5"), { locked = true, repeating = true }) -- decrease brightness
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("sunsetr preset day")) -- toggle between day preset and default config
 
+-- Toggle sunsetr filtering in fullscreen
+hl.bind(mainMod .. " + SHIFT + L", function()
+  local off = hl.get_config("render.non_shader_cm_interop") == 2
+  hl.config({ render = { non_shader_cm_interop = off and 1 or 2 } })
+  -- Restart re-sends the CTM, which triggers hyprland's fullscreen re-evaluation
+  hl.exec_cmd("systemctl --user restart sunsetr.service")
+  hl.notification.create({
+    text = off and "sunsetr: applied in fullscreen" or "sunsetr: skipped in fullscreen",
+    timeout = 3000,
+  })
+end)
+
 -- Move between grouped windows
 hl.bind(mainMod .. " + CTRL + H", hl.dsp.group.prev())
 hl.bind(mainMod .. " + CTRL + L", hl.dsp.group.next())
