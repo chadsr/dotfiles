@@ -9,7 +9,8 @@ window-padding-y = 8
 confirm-close-surface = false
 quit-after-last-window-closed = false
 window-inherit-font-size = false
-shell-integration-features = cursor,no-sudo,title,ssh-env,ssh-terminfo,path
+term = xterm-256color
+shell-integration-features = cursor,no-sudo,title,ssh-env,path
 
 # Optional per-OS overrides
 config-file = ?macos
