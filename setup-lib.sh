@@ -180,6 +180,8 @@ gpg_decrypt_file() {
     echo "failed to copy '${tmp_output_file_path}' to '${output_file_path}'"
     return 1
   }
+
+  chmod 600 "$output_file_path"
 }
 
 gpg_encrypt_file() {
