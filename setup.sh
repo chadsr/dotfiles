@@ -864,18 +864,15 @@ done
 echo "Reloading fonts"
 fc-cache || {
   echo "Failed to reload fonts"
-  exit 1
 }
 
 echo "Reloading udev rules"
 sudo udevadm control --reload-rules || {
   echo "Failed to reload udev rules"
-  exit 1
 }
 
 sudo udevadm trigger || {
   echo "Failed to trigger udev rules"
-  exit 1
 }
 
 if [[ "$is_graphical" == true ]]; then
