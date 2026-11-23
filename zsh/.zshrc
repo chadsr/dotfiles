@@ -23,6 +23,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   bindkey "^[^[[D" backward-word
 fi
 
+setopt HIST_VERIFY EXTENDED_HISTORY SHARE_HISTORY HIST_IGNORE_SPACE
+
 ##########
 #  Init  #
 ##########
@@ -30,7 +32,7 @@ fi
 if command -v starship >/dev/null; then
   eval "$(starship init zsh)"
 else
-  echo "starship not installed!"
+  echo "starship not installed!" >&2
 fi
 
 #############
