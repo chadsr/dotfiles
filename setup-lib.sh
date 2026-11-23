@@ -350,7 +350,7 @@ init_submodules() {
 }
 
 update_submodules() {
-  git submodule update --init --recursive --remote --progress || {
+  git submodule update --init --recursive --progress || {
     echo "failed to update git submodules"
     exit 1
   }
