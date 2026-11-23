@@ -1,7 +1,7 @@
 __pycache__
 .DS_Store
 .vscode/
-alacritty/.config/alacritty/themes
+alacritty/.config/alacritty/themes/*
 android/.android/keystores/*
 android/.config/Google/**/*.db
 android/.config/Google/**/*.jdk
@@ -71,7 +71,7 @@ skillshare/.config/skillshare/agents/*
 skillshare/.config/skillshare/commands/*
 skillshare/.config/skillshare/skills/*
 ssh/.ssh/*
-system/shifty/boot/loader/entries/*
+system/*/boot/loader/entries/*
 tidal-hifi/.config/tidal-hifi/*
 vdirsyncer/.config/vdirsyncer/*
 waybar/.config/waybar-crypto/config.ini
@@ -81,6 +81,7 @@ xdg/.config/mimeapps.list
 zed/.local/share/zed/*
 zed/.local/share/zed/extensions/*
 
+!alacritty/.config/alacritty/themes/catppuccin_mocha.toml
 !android/.android/keystores/.gitkeep
 !android/.config/Google/**/disabled_plugins.txt
 !android/.config/Google/**/options/colors.scheme.xml
@@ -141,7 +142,7 @@ zed/.local/share/zed/extensions/*
 !skillshare/.config/skillshare/agents/.gitkeep
 !skillshare/.config/skillshare/extras/commands/.gitkeep
 !ssh/.ssh/yk.pub
-!system/shifty/boot/loader/entries/.gitkeep
+!system/*/boot/loader/entries/.gitkeep
 !tidal-hifi/.config/tidal-hifi/.gitkeep
 !vdirsyncer/.config/vdirsyncer/.gitkeep
 !waybar/.config/waybar/modules/crypto/.gitkeep
