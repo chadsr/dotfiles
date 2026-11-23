@@ -2,7 +2,7 @@
 # Toggle a distraction-free layout and pause background session services.
 
 state="${XDG_RUNTIME_DIR:-/tmp}/gamemode-toggle"
-services=(waybar.service awww-random.service sunsetr.service wlr-sunclock.service)
+services=(waybar.service awww-random.service wlr-sunclock.service)
 
 case "$XDG_CURRENT_DESKTOP" in
 Hyprland)
