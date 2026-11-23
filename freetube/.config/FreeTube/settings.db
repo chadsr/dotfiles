@@ -4,7 +4,7 @@
 {"_id":"baseTheme","value":"catppuccinMocha"}
 {"_id":"bounds","value":{"x":0,"y":0,"width":1712,"height":1400,"maximized":true,"fullScreen":false}}
 {"_id":"checkForBlogPosts","value":false}
-{"_id":"defaultInvidiousInstance","value":"https://https://yewtu.be"}
+{"_id":"defaultInvidiousInstance","value":"https://yewtu.be"}
 {"_id":"defaultQuality","value":"1440"}
 {"_id":"defaultViewingMode","value":"theatre"}
 {"_id":"disableSmoothScrolling","value":true}
