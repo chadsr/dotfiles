@@ -386,12 +386,20 @@ if [[ -f $pkglist_system_path ]]; then
   ln -fs "$pkglist_system_path" "$pkglist_path"
 else
   # restore from backup
-  gpg_decrypt_file "$data_path/pkgs/$current_hostname.txt.asc.gpg" "$pkglist_path"
+  if [[ -f "$data_path/pkgs/$current_hostname.txt.asc.gpg" ]]; then
+    gpg_decrypt_file "$data_path/pkgs/$current_hostname.txt.asc.gpg" "$pkglist_path"
+  else
+    echo "No pkglist backup for ${current_hostname}; skipping package restore."
+  fi
 fi
 
-declare -a pkgs=()
-readarray -t pkgs <"$pkglist_path"
-install_packages "${pkgs[@]}"
+if [[ -s "$pkglist_path" ]]; then
+  declare -a pkgs=()
+  readarray -t pkgs <"$pkglist_path"
+  install_packages "${pkgs[@]}"
+else
+  echo "pkglist ${pkglist_path} is missing or empty; skipping package installation."
+fi
 
 declare -a user_groups=(
   docker
