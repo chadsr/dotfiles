@@ -86,6 +86,50 @@ hl.window_rule({
   match = { class = "^(com.nextcloud.desktopclient.nextcloud)$", title = "^(Nextcloud)$" },
 })
 
+local pinned = {
+  classes = "mpv", -- "mpv|vlc"
+  titles = "Picture in picture", -- only windows with these titles
+  width = 480,
+  height = 270,
+  margin_x = 10,
+  margin_y = 34,
+  border = 2,
+}
+
+hl.window_rule({
+  name = "pinned-class",
+  match = { class = "^(" .. pinned.classes .. ")$", pin = true },
+  border_size = pinned.border,
+  keep_aspect_ratio = true,
+  no_anim = true,
+})
+
+hl.window_rule({
+  name = "pinned-title",
+  match = { title = "^(" .. pinned.titles .. ")$", pin = true },
+  border_size = pinned.border,
+  keep_aspect_ratio = true,
+  no_anim = true,
+})
+
+hl.on("window.pin", function(w)
+  if w == nil or w.monitor == nil or not w.pinned then
+    return
+  end
+  -- Lua patterns have no "|", so test both lists literally
+  local by_class = ("|" .. pinned.classes .. "|"):find("|" .. (w.class or "") .. "|", 1, true)
+  local by_title = ("|" .. pinned.titles .. "|"):find("|" .. (w.title or "") .. "|", 1, true)
+  if not by_class and not by_title then
+    return
+  end
+  hl.dispatch(hl.dsp.window.resize({ window = w, x = pinned.width, y = pinned.height }))
+  hl.dispatch(hl.dsp.window.move({
+    window = w,
+    x = w.monitor.position.x + w.monitor.size.width - pinned.width - pinned.margin_x,
+    y = w.monitor.position.y + pinned.margin_y,
+  }))
+end)
+
 -- █░░ ▄▀█ █▄█ █▀▀ █▀█   █▀█ █░█ █░░ █▀▀ █▀
 -- █▄▄ █▀█ ░█░ ██▄ █▀▄   █▀▄ █▄█ █▄▄ ██▄ ▄█
 

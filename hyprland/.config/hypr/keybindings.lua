@@ -19,6 +19,7 @@ hl.bind(mainMod .. " + W", hl.dsp.window.float({ action = "toggle" })) -- toggle
 hl.bind(mainMod .. " + G", hl.dsp.group.toggle()) -- toggle the window between focus and group
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen()) -- toggle the window between focus and fullscreen
 hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd("hyprlock")) -- launch lock screen
+hl.bind(mainMod .. " + P", hl.dsp.window.pin()) -- pin a window
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.window.close())
 -- hl.bind(mainMod .. " + grave", function()
 --     hl.plugin.hyprexpo.expo("toggle")
