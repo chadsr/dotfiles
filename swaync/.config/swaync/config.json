@@ -9,13 +9,20 @@
   "layer-shell-cover-screen": true,
   "notification-body-image-height": 100,
   "notification-body-image-width": 200,
+  "notification-visibility": {
+    "yubikey-touch-detector": {
+      "app-name": "yubikey-touch-detector",
+      "override-urgency": "critical",
+      "state": "enabled"
+    }
+  },
   "notification-window-width": 500,
   "positionX": "right",
   "positionY": "top",
   "script-fail-notify": true,
   "timeout": 5,
   "timeout-critical": 0,
-  "timeout-low": 2,
+  "timeout-low": 3,
   "transition-time": 200,
   "widget-config": {
     "backlight": {
