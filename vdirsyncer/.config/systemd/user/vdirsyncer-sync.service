@@ -6,3 +6,5 @@ After=network-online.target nss-lookup.target
 [Service]
 Type=oneshot
 ExecStart=/usr/bin/vdirsyncer sync
+Restart=on-failure
+RestartSec=5min

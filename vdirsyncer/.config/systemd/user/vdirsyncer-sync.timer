@@ -2,7 +2,7 @@
 Description=Sync vdirsyncer with configured remotes (timer)
 
 [Timer]
-OnBootSec=5min
+OnActiveSec=1min
 
 [Install]
-WantedBy=timers.target
+WantedBy=graphical-session.target
