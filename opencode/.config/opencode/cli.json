@@ -28,7 +28,7 @@
     "layout": "horizontal"
   },
   "theme": {
-    "mode": "dark",
+    "mode": "system",
     "name": "catppuccin"
   }
 }
