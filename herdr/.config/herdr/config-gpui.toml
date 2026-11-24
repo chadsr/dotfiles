@@ -560,6 +560,13 @@ size = 12
 # as each chunk lands. Settings > General edits this while ACP chats are on.
 # glide = false
 #
+# Move each terminal agent that starts after the window connected (by you,
+# `herdr agent start`, or another tool) into a chat once it has been idle for
+# 10 seconds, as `sheprd chat convert` does. Herdr 1 panes only; see
+# docs/rich-chat.md. Settings > Chat edits this.
+# Command line: sheprd config set chat.auto_convert true
+# auto_convert = false
+#
 # Where tab strips offer a one-click chat with each installed agent; "+" keeps
 # opening a terminal tab in every placement. "plus" (the agents slide out
 # beside "+" under the pointer), "beside" (right after "+"), "leading" (before
@@ -854,6 +861,11 @@ size = 12
 # Show sheprd-acp chats as native chat views and offer new chats with the
 # agents installed on the host. Off, chat panes keep their terminal.
 # acp_chats = true
+#
+# Open Sheprd in the window Moonframe lays out in Luau, in beta; false opens the
+# classic window. Read when Sheprd starts. Off by default on Windows. On macOS,
+# holding Option as Sheprd starts opens the other window once.
+# moonframe_window = true
 #
 # Open a space's menu when the pointer rests on its sidebar row, without a
 # right click. Moving the pointer anywhere but into that menu closes it again.

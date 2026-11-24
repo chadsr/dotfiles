@@ -2,15 +2,21 @@
 # Unset keys inherit config-gpui.toml.
 
 layout = "comfortable-rounded"
-theme = "Catppuccin Mocha"
+theme = "light:Catppuccin Latte,dark:Catppuccin Mocha"
 status_icons = "wave"
 remove_merged_worktrees = true
 herdr_2_terminals = true
 herdr_2_scrollback = 100000
 tab_layout = "classic"
+edge_rail = true
+contrast = "high"
+
+[features]
+moonframe_window = false
 
 [backdrop]
-opacity = 0.8
+opacity = 0.75
+blur = false
 
 [terminal]
 family = "Hack Nerd Font Mono"
@@ -31,6 +37,7 @@ size = 12.0
 [chat]
 glide = true
 max_width = 0
+layout = "opencode"
 
 [tab_labels]
 agent_title = true
