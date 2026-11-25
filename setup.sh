@@ -484,8 +484,6 @@ echo "Copying common system configuration"
 rsync_system_config common/
 
 remove_legacy_files
-sudo sshd -t
-sudo systemctl reload sshd || :
 
 if [[ "$current_hostname" == "$laptop_hostname" ]]; then
   echo "Copying laptop system configuration"
