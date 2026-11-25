@@ -8,24 +8,20 @@ exclude = List(
 )
 
 steps = new Mapping {
+    ["actionlint"] = Builtins.actionlint
     ["detect-private-key"] = Builtins.detect_private_key
-    ["jq"] = Builtins.jq
-    ["trailing-whitespace"] = Builtins.trailing_whitespace
+    ["editorconfig-checker"] = Builtins.editorconfig_checker
     ["end-of-file-fixer"] = Builtins.newlines
+    ["hadolint"] = Builtins.hadolint
+    ["jq"] = Builtins.jq
+    ["luacheck"] = Builtins.luacheck
     ["mixed-line-ending"] = Builtins.mixed_line_ending
-    ["yamlfmt"] = Builtins.yamlfmt
-    ["taplo-format"] = Builtins.taplo_format
+    ["shellcheck"] = Builtins.shellcheck
     ["shfmt"] = Builtins.shfmt
     ["stylua"] = Builtins.stylua
-    ["rumdl-format"] = (Builtins.rumdl_format) {
-        exclude = List(
-            "skillshare/.config/skillshare/**/*.md",
-        )
-    }
-    ["editorconfig-checker"] = Builtins.editorconfig_checker
-    ["shellcheck"] = Builtins.shellcheck
-    ["luacheck"] = Builtins.luacheck
-    ["actionlint"] = Builtins.actionlint
+    ["taplo-format"] = Builtins.taplo_format
+    ["trailing-whitespace"] = Builtins.trailing_whitespace
+    ["yamlfmt"] = Builtins.yamlfmt
     ["shellharden"] = (Builtins.shellharden) {
         apply_check_diff = false
         fix = "shellharden --check {{files}}"
@@ -35,5 +31,10 @@ steps = new Mapping {
         glob = List("**/*.clj", "**/*.cljc", "**/*.edn")
         check = "cljstyle check {{files}}"
         fix = "cljstyle fix {{files}}"
+    }
+    ["rumdl-format"] = (Builtins.rumdl_format) {
+        exclude = List(
+            "skillshare/.config/skillshare/**/*.md",
+        )
     }
 }
