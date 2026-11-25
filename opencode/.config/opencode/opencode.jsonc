@@ -1,20 +1,21 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "websearch": false,
   "lsp": {
-    "basedpyright": {
-      "command": [
-        "basedpyright-langserver",
-        "--stdio"
-      ],
-      "disabled": false,
-      "extensions": [
-        ".py",
-        ".pyi"
-      ]
-    },
-    "pyright": {
-      "disabled": true
-    }
+    // "basedpyright": {
+    //   "command": [
+    //     "basedpyright-langserver",
+    //     "--stdio"
+    //   ],
+    //   "disabled": false,
+    //   "extensions": [
+    //     ".py",
+    //     ".pyi"
+    //   ]
+    // },
+    // "pyright": {
+    //   "disabled": true
+    // }
   },
   "mcp": {
     "servers": {
@@ -29,10 +30,10 @@
         ],
         "type": "local"
       },
-      "debugmcp": {
-        "type": "remote",
-        "url": "http://localhost:3001/mcp"
-      }
+      // "debugmcp": {
+      //   "type": "remote",
+      //   "url": "http://localhost:3001/mcp"
+      // }
     }
   },
   "model": "zai-coding-plan/glm-5.4",
@@ -45,7 +46,7 @@
     {
       "action": "external_directory",
       "effect": "allow",
-      "resource": "/tmp/opencode/*"
+      "resource": "/tmp/opencode/**"
     }
   ],
   "providers": {
