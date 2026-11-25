@@ -22,9 +22,11 @@ hl.window_rule({
 })
 
 hl.window_rule({
-  name = "bluetuith",
+  name = "ghostty.floattui",
   float = true,
-  match = { class = "^(ghostty)$", title = "^(bluetuith)$" },
+  center = true,
+  border_size = 2,
+  match = { class = "^(ghostty.floattui)$" },
 })
 
 hl.window_rule({
