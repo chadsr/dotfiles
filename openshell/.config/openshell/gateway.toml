@@ -1,27 +1,12 @@
-# SPDX-FileCopyrightText: Copyright (c) 2025-2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
-# SPDX-License-Identifier: Apache-2.0
-#
-# Default gateway configuration for RPM installs.
-#
-# This file is seeded to ~/.config/openshell/gateway.toml on first start
-# of the openshell-gateway.service systemd user unit. Edit that copy to
-# customize. This file is not read directly at runtime.
-#
-# Configuration precedence (highest to lowest):
-#   CLI flag  >  OPENSHELL_* env var  >  TOML file  >  built-in default
-#
-# To override settings without editing this file, set OPENSHELL_* variables
-# in ~/.config/openshell/gateway.env or run:
-#   systemctl --user edit openshell-gateway
+# OpenShell gateway config: vendor-seeded defaults plus local Docker overrides. See openshell/README.md.
 
 [openshell]
 version = 2
 
 [openshell.gateway]
-# Keep the primary listener on the built-in 127.0.0.1:17670 default. The
-# Podman driver reports the callback interface it needs, and the gateway
-# adds a separate listener scoped to that interface.
-
-# The gateway auto-detects in order: Kubernetes, Podman, Docker.
-# Pinning prevents unexpected driver selection.
+# Pinned: the gateway otherwise auto-detects Kubernetes, Podman, then Docker.
 compute_driver = "docker"
+
+[openshell.drivers.docker]
+# docker0 instead of the loopback default, which would force the MCP gateway onto loopback, where it rejects the host.openshell.internal Host header.
+host_gateway_ip = "172.17.0.1"

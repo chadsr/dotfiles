@@ -1,0 +1,11 @@
+# Socket-activation proxy for docker-mcp-gateway.service: started by docker-mcp-gateway.socket, exits once idle.
+[Unit]
+Description=Socket-activation proxy for the docker mcp gateway
+Requires=docker-mcp-gateway.socket
+# Wants=, not Upholds=: a failed start (e.g. a cancelled pinentry) must not be retried in a loop.
+Wants=docker-mcp-gateway.service
+After=docker-mcp-gateway.service
+
+[Service]
+Type=notify
+ExecStart=/usr/lib/systemd/systemd-socket-proxyd --exit-idle-time=5min 172.17.0.1:18811

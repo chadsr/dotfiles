@@ -1,0 +1,15 @@
+# Bearer token of the docker mcp gateway, written at graphical login into $XDG_RUNTIME_DIR/docker-mcp-gateway (removed at graphical logout).
+[Unit]
+Description=docker mcp gateway bearer token file
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+RuntimeDirectory=docker-mcp-gateway
+RuntimeDirectoryMode=0700
+ExecStart=%h/.local/bin/docker-mcp-token
+
+[Install]
+WantedBy=graphical-session.target

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# ExecStartPost of docker-mcp-gateway.service: the start job completes once the gateway accepts connections.
+set -euo pipefail
+
+for _ in {1..100}; do
+  if (exec 3<>/dev/tcp/172.17.0.1/18811) 2>/dev/null; then
+    exit 0
+  fi
+  # The gateway process is gone: do not wait for the timeout.
+  if [[ "${MAINPID:-}" =~ ^[1-9][0-9]*$ ]] && ! kill -0 "$MAINPID" 2>/dev/null; then
+    exit 1
+  fi
+  sleep 0.2
+done
+echo "docker mcp gateway not listening on 172.17.0.1:18811 after 20s" >&2
+exit 1

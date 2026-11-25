@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# OpenCode inside this repo's OpenShell sandbox. See openshell/README.md.
+#   oc [dir]    reconcile, sync the work tree in, run the opencode TUI in the sandbox for dir (default: $PWD), sync commits and edits back
+set -euo pipefail
+
+# The MCP gateway's token file belongs to the docker package: docker-mcp-token creates or refreshes it (pass, through pinentry).
+command -v docker-mcp-token >/dev/null 2>&1 || {
+  echo "ERROR: docker-mcp-token not found on PATH (stow the docker package)" >&2
+  exit 1
+}
+if ! docker-mcp-token; then
+  echo "ERROR: no gateway token; MCP will be refused (see the message above)" >&2
+  exit 1
+fi
+
+REPO_DIR="${1:-$PWD}"
+[[ -d "$REPO_DIR" ]] || {
+  echo "ERROR: not a directory: $REPO_DIR" >&2
+  exit 1
+}
+TOP="$(git -C "$REPO_DIR" rev-parse --show-toplevel 2>/dev/null)" || {
+  echo "ERROR: not a git repository: $REPO_DIR (oc-sync needs git to carry commits back)" >&2
+  exit 1
+}
+
+IFS=$'\t' read -r SANDBOX_NAME REPO_TARGET < <(opencode-sandbox --print "$TOP")
+
+# One session per sandbox: the lock is held until the pull is done.
+LOCK_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/oc-sync"
+mkdir -p -- "$LOCK_DIR"
+exec 9>"$LOCK_DIR/$SANDBOX_NAME.lock"
+flock -n 9 || {
+  echo "ERROR: another oc session is running for this repository" >&2
+  exit 1
+}
+
+opencode-sandbox "$TOP"
+OC_SYNC_LOCKED=1 oc-sync push "$TOP"
+WORKDIR="$REPO_TARGET/$(git -C "$REPO_DIR" rev-parse --show-prefix)"
+STATUS=0
+openshell sandbox exec "$SANDBOX_NAME" --workdir "${WORKDIR%/}" -- opencode || STATUS=$?
+if ! OC_SYNC_LOCKED=1 oc-sync pull "$TOP"; then
+  echo "ERROR: oc-sync pull failed; the session's work is still in sandbox ${SANDBOX_NAME}" >&2
+  echo "        retry with: oc-sync pull ${TOP}" >&2
+fi
+exit "$STATUS"

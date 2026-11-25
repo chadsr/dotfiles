@@ -1,0 +1,221 @@
+#!/usr/bin/env bash
+# Carry a repo checkout into its OpenShell sandbox and the agent's work back: commits as git bundles, uncommitted changes as a git patch (`oc` runs this around a session). See openshell/README.md.
+#   oc-sync push <repo-dir> [--dry-run]   make the sandbox a copy of the host's branch and uncommitted files
+#   oc-sync pull <repo-dir> [--dry-run]   apply the sandbox's patch and commits to the host
+set -euo pipefail
+
+usage() {
+  echo "usage: $0 push|pull <repo-dir> [--dry-run]" >&2
+  exit 1
+}
+
+log() { printf '==> %s\n' "$*"; }
+
+MODE="${1:-}"
+REPO_DIR="${2:-}"
+[[ "$MODE" == push || "$MODE" == pull ]] && [[ -d "$REPO_DIR" ]] || usage
+DRY=0
+shift 2
+for arg in "$@"; do
+  [[ "$arg" == --dry-run && "$DRY" == 0 ]] || usage
+  DRY=1
+done
+
+TOP="$(git -C "$REPO_DIR" rev-parse --show-toplevel 2>/dev/null)" || {
+  echo "ERROR: not a git repository: $REPO_DIR (oc-sync needs git to carry commits back)" >&2
+  exit 1
+}
+IFS=$'\t' read -r NAME TARGET < <(opencode-sandbox --print "$TOP")
+STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/oc-sync"
+STATE="$STATE_DIR/$NAME.env"
+# Resolved: uploading a symlink copies the link, not its files.
+SKILLS_SRC="$(readlink -f "$HOME/.agents/skills" || true)"
+[[ -d "$SKILLS_SRC" ]] || SKILLS_SRC="$(readlink -f "${XDG_CONFIG_HOME:-$HOME/.config}/opencode/skills" || true)"
+OC_CFG="${XDG_CONFIG_HOME:-$HOME/.config}/opencode"
+TIP="" # commit the sandbox is based on after a pull; empty = the next push sends a full bundle
+
+# Every CLI call runs without a login shell (profile files cannot break it), with stdin closed (so no TTY attaches) and without the lock fd.
+sx() { openshell sandbox exec --no-login-shell "$NAME" "$@" </dev/null 9>&-; }
+# The sandbox side (POSIX sh) lives in ../lib/oc-sync, reached through the stow symlink, and goes in as the text of sh -c ($0 oc-sync, then the arguments): nothing is installed in the sandbox.
+LIB="$(dirname "$(readlink -f "$0")")/../lib/oc-sync"
+rsh() {
+  local s="$LIB/$1.sh" text
+  shift
+  text="$(<"$s")" || return
+  sx -- sh -c "$text" oc-sync "$@"
+}
+up() { openshell sandbox upload "$NAME" "$@" </dev/null 9>&-; }
+down() { openshell sandbox download "$NAME" "$@" </dev/null 9>&-; }
+
+mkdir -p -- "$STATE_DIR" "${TMPDIR:-/tmp}/opencode"
+WORK="$(mktemp -d "${TMPDIR:-/tmp}/opencode/work.XXXXXX")"
+trap 'rm -rf -- "$WORK"' EXIT
+cd -- "$TOP"
+if [[ "${OC_SYNC_LOCKED:-}" != 1 ]]; then
+  exec 9>"$STATE_DIR/$NAME.lock"
+  flock -n 9 || {
+    echo "ERROR: another oc session is running for this repository" >&2
+    exit 1
+  }
+fi
+
+# Value of a key in the state file.
+state() { sed -n "s/^$1=//p" "$STATE"; }
+
+# The sandbox's edits since the last push: uncommitted changes come back as one patch (a hunk that does not fit stays as a .rej file beside its target), commits are fast-forwarded. TIP is the commit the sandbox is based on afterwards, empty when the state file is dropped.
+pull() {
+  local base head0 branch0 now c ff out tip keep=1 w="" d="" s rej="" err dir p subs=0
+  TIP=""
+  ((DRY)) && w="would "
+  ((DRY)) && d="would be "
+  if [[ ! -f "$STATE" ]]; then
+    log "nothing to pull (no state file for $NAME)"
+    return
+  fi
+  if ! sx -- test -d "$TARGET/.git"; then
+    log "nothing to pull ($NAME has no checkout; dropping its stale state file)"
+    ((DRY)) || rm -f -- "$STATE"
+    return
+  fi
+  base="$(state base_tree)"
+  head0="$(state host_head)"
+  branch0="$(state branch)"
+  rsh snap "$TARGET" "$base" "$head0"
+  down "$TARGET/.oc-sync-out" "$WORK/out"
+  sx -- rm -rf -- "$TARGET/.oc-sync-out"
+  out="$WORK/out"
+  ff=""
+  { read -r now c && read -r ff || true; } <"$out/.oc-sync-head"
+  if [[ "$now" == "$base" && "$c" == "$head0" && ! -d "$out/sub" ]]; then
+    TIP="$head0"
+    log "nothing to pull"
+    return
+  fi
+  log "${w:+dry run: }pull from $NAME:$TARGET"
+  tr '\t' ' ' <"$out/changes" | sed "s/^/  $w/"
+  if [[ -s "$out/worktree.patch" ]]; then
+    if ((DRY)); then
+      git apply --check --whitespace=nowarn "$out/worktree.patch" 2>/dev/null || echo "  ${w}leave .rej files beside the files the host also changed"
+    elif ! err="$(git apply --reject --whitespace=nowarn "$out/worktree.patch" 2>&1)"; then
+      # Rejected hunks are in the .rej files; the patch also carries what git could not place (a binary, a file the host deleted).
+      cp -- "$out/worktree.patch" "$STATE_DIR/$NAME.rejected.patch"
+      rej="rejected hunks are in *.rej files, the whole patch in $STATE_DIR/$NAME.rejected.patch; "
+      grep '^error:' <<<"$err" | grep -v '^error: while searching for:' | sed 's/^/  /' || true
+    fi
+  fi
+  for dir in "$out"/sub/*/; do
+    [[ -d "$dir" ]] || continue
+    subs=1
+    p="$(<"$dir/path")"
+    p="${p#./}"
+    echo "  ${w}submodule $p: $(git apply --numstat "$dir/patch" | wc -l) files"
+    if ((DRY)); then continue; fi
+    if ! err="$(git -C "$TOP/$p" apply --reject --whitespace=nowarn "$dir/patch" 2>&1)"; then
+      cp -- "$dir/patch" "$STATE_DIR/$NAME.sub.rejected.patch"
+      rej="rejected hunks are in *.rej files, the whole patches in $STATE_DIR/$NAME.*.patch; "
+      grep '^error:' <<<"$err" | grep -v '^error: while searching for:' | sed 's/^/  /' || true
+    fi
+  done
+  ((DRY || subs == 0)) || rsh base "$TARGET"
+  tip="$c"
+  if [[ -f "$out/repo.bundle" ]]; then
+    tip="$(git bundle list-heads "$out/repo.bundle")"
+    tip="${tip%% *}"
+    ((DRY)) || git fetch -q "$out/repo.bundle" "+HEAD:refs/oc-sync/$NAME"
+    if [[ -n "$ff" && "$(git rev-parse HEAD)" == "$head0" && "$(git rev-parse --abbrev-ref HEAD)" == "$branch0" ]]; then
+      echo "  ${w}fast-forward $branch0 to $tip"
+      ((DRY)) || git reset -q "$tip"
+    else
+      echo "  ${w}leave the commits in refs/oc-sync/$NAME ($branch0 moved on the host since launch): git merge oc-sync/$NAME"
+      keep=0
+    fi
+  elif [[ "$(git rev-parse HEAD)" != "$tip" ]]; then
+    echo "  ${w}no commits to bring over: $branch0 keeps its commit, the sandbox is at $tip"
+    keep=0
+  fi
+  TIP="$tip"
+  ((keep)) || TIP=""
+  if ((keep)); then
+    s="state file ${d}updated"
+    ((DRY)) || printf 'top=%s\ntarget=%s\nbranch=%s\nhost_head=%s\nbase_tree=%s\n' "$TOP" "$TARGET" "$(git rev-parse --abbrev-ref HEAD)" "$TIP" "$now" >"$STATE"
+  else
+    s="state file ${d}removed (the next push sends a full bundle)"
+    ((DRY)) || rm -f -- "$STATE"
+  fi
+  log "${w:+would finish: }done: ${rej}${s}"
+}
+
+# The agent's home mirrors the host's skills and opencode config entries; service.json stays on the host.
+home_files() {
+  local stage="$WORK/opencode" name
+  sx -- rm -rf -- /sandbox/.agents/skills /sandbox/.config/opencode/{AGENTS.md,cli.json,commands,dcp.jsonc,opencode.jsonc,tui.jsonc}
+  sx -- mkdir -p /sandbox/.agents /sandbox/.config/opencode
+  if [[ -d "$SKILLS_SRC" ]]; then
+    up "$SKILLS_SRC" /sandbox/.agents --no-git-ignore
+  else
+    echo "WARNING: no skills directory at $SKILLS_SRC; the sandbox runs without skills" >&2
+  fi
+  mkdir -p -- "$stage"
+  for name in AGENTS.md cli.json commands dcp.jsonc opencode.jsonc tui.jsonc; do
+    if [[ -e "$OC_CFG/$name" ]]; then cp -rL -- "$OC_CFG/$name" "$stage/"; fi
+  done
+  up "$stage" /sandbox/.config --no-git-ignore
+}
+
+push() {
+  local old head branch base has_old=0 range=() src=() ident=() k v
+  local gone=()
+  if [[ -f "$STATE" ]]; then
+    pull
+    # A push that fails from here on must not find a state file describing the tree the sandbox had before.
+    ((DRY)) || rm -f -- "$STATE"
+  fi
+  old="$TIP"
+  branch="$(git rev-parse --abbrev-ref HEAD)"
+  head="$(git rev-parse HEAD)"
+  if [[ -n "$old" ]] && sx -- git -C "$TARGET" cat-file -e "$old^{commit}"; then has_old=1; fi
+  mapfile -d '' -t gone < <(git diff --name-only -z --diff-filter=D HEAD)
+  if ((DRY)); then
+    log "dry run: push $TOP -> $NAME:$TARGET ($branch at $head)"
+    if ((has_old)) && [[ "$old" == "$head" ]]; then
+      echo "  would send no commits (the sandbox has $head)"
+    elif ((has_old)) && git cat-file -e "$old^{commit}" 2>/dev/null; then
+      echo "  would send $(git rev-list --count "$old..$head") commits ($old..$head)"
+    elif ((has_old)); then echo "  would send no new commits (the pull brings the sandbox's commits to the host first)"; else echo "  would send the whole history"; fi
+    echo "  would reset the sandbox checkout to the host's branch and copy $(git ls-files -co --exclude-standard | wc -l) working tree files over it"
+    ((${#gone[@]})) && printf '  would delete in the sandbox (deleted on the host): %s\n' "${gone[@]}"
+    echo "  would refresh the skills and opencode config entries in the sandbox's home"
+    echo "  would write $STATE"
+    if [[ -f mise.toml || -f .mise.toml || -f .mise/config.toml || -f .config/mise.toml ]]; then echo "  would run mise trust && mise install"; fi
+    return 0
+  fi
+  log "push $TOP -> $NAME:$TARGET ($branch at $head)"
+  if ((has_old)) && [[ "$old" == "$head" ]]; then
+    src=("$head")
+  else
+    ((has_old)) && range=("^$old")
+    git bundle create "$WORK/repo.bundle" HEAD "${range[@]}"
+    sx -- mkdir -p /sandbox/.oc-sync
+    up "$WORK/repo.bundle" /sandbox/.oc-sync --no-git-ignore
+    src=(FETCH_HEAD)
+  fi
+  rsh prepare "$TARGET" "$branch" "${src[@]}"
+  ((${#gone[@]})) && sx --workdir "$TARGET" -- rm -f -- "${gone[@]}"
+  up . "$TARGET"
+  rsh subs "$TARGET"
+  home_files
+  base="$(rsh tree "$TARGET")"
+  for k in user.name user.email; do
+    if v="$(git config "$k")" && [[ -n "$v" ]]; then ident+=("$k" "$v"); fi
+  done
+  for ((k = 0; k < ${#ident[@]}; k += 2)); do sx -- git -C "$TARGET" config "${ident[k]}" "${ident[k + 1]}"; done
+  if [[ -f mise.toml || -f .mise.toml || -f .mise/config.toml || -f .config/mise.toml ]]; then
+    # Never fatal: the session starts without the repository's tools.
+    rsh mise "$TARGET" ||
+      echo "WARNING: could not install the repository's mise tools; run 'mise install' inside the sandbox" >&2
+  fi
+  printf 'top=%s\ntarget=%s\nbranch=%s\nhost_head=%s\nbase_tree=%s\n' "$TOP" "$TARGET" "$branch" "$head" "$base" >"$STATE"
+  log "pushed: $branch at $head"
+}
+
+"$MODE"

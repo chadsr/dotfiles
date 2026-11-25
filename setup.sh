@@ -823,7 +823,9 @@ for systemd_user_target in "${systemd_user_targets[@]}"; do
   }
 done
 
-declare -a systemd_user_units=()
+declare -a systemd_user_units=(
+  "$base_path"/openshell/.config/systemd/user/docker-mcp-gateway.socket
+)
 if [[ "$is_graphical" == true ]]; then
   systemd_user_units+=(
     "$base_path"/awww/.config/systemd/user/awww-daemon.service
