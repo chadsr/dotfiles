@@ -54,6 +54,15 @@
       "models": {
         "glm-5.4": {
           "settings": {
+            "reasoningEffort": "high",
+            "thinking": {
+              "type": "enabled",
+              "clear_thinking": false
+            }
+          }
+        },
+        "glm-5.3": {
+          "settings": {
             "reasoningEffort": "max",
             "thinking": {
               "type": "enabled",
