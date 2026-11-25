@@ -26,7 +26,7 @@
       "subdir": "skills/chrome-devtools",
       "tree_hash": "1425ccd89c83988f6bdbc9e801f81e9f1faf86ea",
       "type": "github-subdir",
-      "version": "f10fdb8"
+      "version": "93fc8b9"
     },
     "create-agentsmd": {
       "commit": "f10fdb8b2660ce85c98f220b2f1ca24653768a5c",
@@ -39,7 +39,7 @@
       "subdir": "skills/create-agentsmd",
       "tree_hash": "290ab8ae85ba8695e9bceb674e74177e76f8633d",
       "type": "github-subdir",
-      "version": "f10fdb8"
+      "version": "93fc8b9"
     },
     "create-readme": {
       "commit": "f10fdb8b2660ce85c98f220b2f1ca24653768a5c",
@@ -52,7 +52,7 @@
       "subdir": "skills/create-readme",
       "tree_hash": "f65537a3461b663121fe195697979c17a8004ea5",
       "type": "github-subdir",
-      "version": "f10fdb8"
+      "version": "93fc8b9"
     },
     "debug-inference": {
       "commit": "152c59d3178039e3fbb4a5595f9fff7216a6be92",
@@ -65,21 +65,21 @@
       "subdir": "skills/debug-inference",
       "tree_hash": "7b735982d0cba724a89b7b38eb1cf757f789599f",
       "type": "github-subdir",
-      "version": "152c59d"
+      "version": "1fca4c8"
     },
     "debug-openshell-cluster": {
-      "commit": "152c59d3178039e3fbb4a5595f9fff7216a6be92",
+      "commit": "1fca4c8b2ee31d2871a1a35e1b6e13bcd2ede352",
       "file_hashes": {
-        "SKILL.md": "sha256:6eac0ba30277395745e061174a8b109a0accf966b9cf194d5e8228d295d0342e",
+        "SKILL.md": "sha256:a93a1873375508692fb9887aadf33ff10d69eecf2d623f9a25a6925d5d5bb298",
         "references/supervisor-middleware.md": "sha256:e5c705e4498285a94d49e58d722f08dff26fe4184c31e40f5c4b57b96f2f82a2"
       },
-      "installed_at": "2026-11-24T10:56:41.551191146+01:00",
+      "installed_at": "2026-11-25T09:39:44.793059004+01:00",
       "repo_url": "https://github.com/ai-openshell/OpenShell.git",
       "source": "https://github.com/ai-openshell/OpenShell.git/skills/debug-openshell-cluster",
       "subdir": "skills/debug-openshell-cluster",
-      "tree_hash": "1fb17b9bf93d4457aea16e436cf96f1b1c76ccce",
+      "tree_hash": "40e8a40d5e83de8811285232339b489e360de99d",
       "type": "github-subdir",
-      "version": "152c59d"
+      "version": "1fca4c8"
     },
     "generate-sandbox-policy": {
       "commit": "152c59d3178039e3fbb4a5595f9fff7216a6be92",
@@ -93,7 +93,7 @@
       "subdir": "skills/generate-sandbox-policy",
       "tree_hash": "ad1c36304d8d2ad0414a68df0d05d0722c2e3b6b",
       "type": "github-subdir",
-      "version": "152c59d"
+      "version": "1fca4c8"
     },
     "grilling": {
       "commit": "abeeaf95660ba9e8b7c753eb38f441ca707a8823",
@@ -107,7 +107,7 @@
       "subdir": "skills/productivity/grilling",
       "tree_hash": "f551b6e0d219fdda0b6abf277f8f915b3127d1e9",
       "type": "github-subdir",
-      "version": "abeeaf9"
+      "version": "d653911"
     },
     "herdr-automations": {
       "commit": "edf862942135f83a5acc93354530334a0c3bb390",
@@ -120,21 +120,21 @@
       "subdir": "skills/herdr-automations",
       "tree_hash": "19ad5797c0be35a0454aa29227b3f59433d8a6bd",
       "type": "github-subdir",
-      "version": "edf8629"
+      "version": "ae002af"
     },
     "herdr-gpui-browser": {
-      "commit": "edf862942135f83a5acc93354530334a0c3bb390",
+      "commit": "ae002afff887e717bfc5807d3c4eb089165a7ebb",
       "file_hashes": {
-        "SKILL.md": "sha256:188a7b3299333bbca7b716a4363614be40fb90126c17dc35154916454384f7ec",
+        "SKILL.md": "sha256:2f9d23e9efe56df59a536f92f2bd0ae8f464818573b325890b53b04c473dc24e",
         "examples/instagram-fetch.html": "sha256:8930f7b49a13ad4672008be854d68a25b4337e9560d5e25deb8e35632d338674"
       },
-      "installed_at": "2026-11-24T10:56:46.322744455+01:00",
+      "installed_at": "2026-11-25T09:39:57.842921566+01:00",
       "repo_url": "https://github.com/sheprd-labs/sheprd.git",
       "source": "https://github.com/sheprd-labs/sheprd.git/skills/herdr-gpui-browser",
       "subdir": "skills/herdr-gpui-browser",
-      "tree_hash": "fb908d13d3feafed36f187d9a8121e7d56a92500",
+      "tree_hash": "5ad19005d863d37eb949b7e05b1589219ff88735",
       "type": "github-subdir",
-      "version": "edf8629"
+      "version": "ae002af"
     },
     "herdr-mods": {
       "commit": "edf862942135f83a5acc93354530334a0c3bb390",
@@ -147,7 +147,7 @@
       "subdir": "skills/herdr-mods",
       "tree_hash": "a6cb3c3e99d7dca9cc91cceca48752c1be761fc4",
       "type": "github-subdir",
-      "version": "edf8629"
+      "version": "ae002af"
     },
     "langfuse": {
       "commit": "f0bcb13088b490c04b3f4870bace17f6d57b199c",
@@ -186,20 +186,20 @@
       "subdir": "skills/multi-stage-dockerfile",
       "tree_hash": "c48773c7887197168099307c60b5dab2a553259c",
       "type": "github-subdir",
-      "version": "f10fdb8"
+      "version": "93fc8b9"
     },
     "openshell-cli": {
-      "commit": "152c59d3178039e3fbb4a5595f9fff7216a6be92",
+      "commit": "1fca4c8b2ee31d2871a1a35e1b6e13bcd2ede352",
       "file_hashes": {
-        "SKILL.md": "sha256:e4b137c35587e85e8b61035243648cfdd4125c173162662f874903a276752959"
+        "SKILL.md": "sha256:97f6d636c02045b3dd07d3bf92382db6927596502b1f5b6ccea7fc0575beaaec"
       },
-      "installed_at": "2026-11-24T10:56:51.232986491+01:00",
+      "installed_at": "2026-11-25T09:39:44.60959302+01:00",
       "repo_url": "https://github.com/ai-openshell/OpenShell.git",
       "source": "https://github.com/ai-openshell/OpenShell.git/skills/openshell-cli",
       "subdir": "skills/openshell-cli",
-      "tree_hash": "f37812ac1f731eaf9e885e66be618c8735db5199",
+      "tree_hash": "c8dda5c96cc03c9a99e23ded7eb56f32d2338b10",
       "type": "github-subdir",
-      "version": "152c59d"
+      "version": "1fca4c8"
     },
     "openspec-apply-change": {
       "commit": "0c737dc1b543249b38b0f4716816fcf493d894dd",
@@ -212,7 +212,7 @@
       "subdir": "skills/openspec-apply-change",
       "tree_hash": "bde866776c55fa1f9e7472c767f7f26ba31fbb57",
       "type": "github-subdir",
-      "version": "0c737dc"
+      "version": "f1cd852"
     },
     "openspec-archive-change": {
       "commit": "0c737dc1b543249b38b0f4716816fcf493d894dd",
@@ -225,7 +225,7 @@
       "subdir": "skills/openspec-archive-change",
       "tree_hash": "b936998a7f9b28d2e99e8ee9be55187214abe1af",
       "type": "github-subdir",
-      "version": "0c737dc"
+      "version": "f1cd852"
     },
     "openspec-explore": {
       "commit": "0c737dc1b543249b38b0f4716816fcf493d894dd",
@@ -238,7 +238,7 @@
       "subdir": "skills/openspec-explore",
       "tree_hash": "e28ef0a32fff065a6f4f18e6e8d2fa3109d33eed",
       "type": "github-subdir",
-      "version": "0c737dc"
+      "version": "f1cd852"
     },
     "openspec-propose": {
       "commit": "0c737dc1b543249b38b0f4716816fcf493d894dd",
@@ -251,7 +251,7 @@
       "subdir": "skills/openspec-propose",
       "tree_hash": "3cf4ecb86a0d1d812657801ad0e0a18911a46d10",
       "type": "github-subdir",
-      "version": "0c737dc"
+      "version": "f1cd852"
     },
     "openspec-sync-specs": {
       "commit": "0c737dc1b543249b38b0f4716816fcf493d894dd",
@@ -264,7 +264,7 @@
       "subdir": "skills/openspec-sync-specs",
       "tree_hash": "c2852ab2485c68472a30fe5130d59ffc04523af3",
       "type": "github-subdir",
-      "version": "0c737dc"
+      "version": "f1cd852"
     },
     "openspec-update-change": {
       "commit": "0c737dc1b543249b38b0f4716816fcf493d894dd",
@@ -277,7 +277,7 @@
       "subdir": "skills/openspec-update-change",
       "tree_hash": "8e8250f626b3a1b04f0c0dc0f6f6b91d64168007",
       "type": "github-subdir",
-      "version": "0c737dc"
+      "version": "f1cd852"
     },
     "penpot-anti-slop": {
       "commit": "fe4f99e51c7149512d50cd75f0d55204c2458664",
@@ -604,7 +604,7 @@
       "subdir": "crates/openshell-supervisor-process/src/skills/policy-advisor",
       "tree_hash": "ea98336374a1cc0fcd77f315a332db490b08fd5b",
       "type": "github-subdir",
-      "version": "152c59d"
+      "version": "1fca4c8"
     },
     "postgresql-code-review": {
       "commit": "f10fdb8b2660ce85c98f220b2f1ca24653768a5c",
@@ -617,7 +617,7 @@
       "subdir": "skills/postgresql-code-review",
       "tree_hash": "5e41d23340dfe6988fc87a727083d1cd30bc1b1c",
       "type": "github-subdir",
-      "version": "f10fdb8"
+      "version": "93fc8b9"
     },
     "postgresql-optimization": {
       "commit": "f10fdb8b2660ce85c98f220b2f1ca24653768a5c",
@@ -630,7 +630,7 @@
       "subdir": "skills/postgresql-optimization",
       "tree_hash": "c9fb08005c2dc38d46b1369d9cb4bc24075ece50",
       "type": "github-subdir",
-      "version": "f10fdb8"
+      "version": "93fc8b9"
     },
     "refactor": {
       "commit": "f10fdb8b2660ce85c98f220b2f1ca24653768a5c",
@@ -643,7 +643,7 @@
       "subdir": "skills/refactor",
       "tree_hash": "01cfb6a412faf9d680880cc3f631c419121a9916",
       "type": "github-subdir",
-      "version": "f10fdb8"
+      "version": "93fc8b9"
     },
     "shadcn-svelte": {
       "commit": "c3b21a62055c7d7b97a220eb5a9efb4d1b7fc8fc",
@@ -674,38 +674,38 @@
       "subdir": "skills/shadcn-svelte",
       "tree_hash": "e536d87dfdd5aeeb723af8c5fa15c255b75b9fbc",
       "type": "github-subdir",
-      "version": "c3b21a6"
+      "version": "bc58063"
     },
     "skillshare": {
-      "commit": "0cd966dada76fe6d1cf8c42168bd21a8ab99479a",
+      "commit": "71905e753d6d8a07142ae904e7890a85682d6155",
       "file_hashes": {
-        "SKILL.md": "sha256:a199d833da86c449a2fb58e8d6e31ca539fbb9a2fd77260adb86cc00f27f510c",
+        "SKILL.md": "sha256:86ea76f7cd391530571511b71035705a5e65207eedf6bc716d89fdd539223291",
         "references/TROUBLESHOOTING.md": "sha256:6964001f3f1fcbaadf0daae7478724ffd12196c20c7b3762876385670660cd99",
         "references/audit-review.md": "sha256:8ce54d8440a56078da8d7a1849000ae985346c950de3c49164eab21049ff2924",
         "references/audit.md": "sha256:d02da887bdc52a5656527400060fca9ccd3c9a409b8e92c79eb7eb3232398937",
         "references/backup.md": "sha256:d794b66b18120cfaae0dcb3773031a08426895fd618d02393337a1eb57f98f6f",
         "references/extras.md": "sha256:0845bb01f48b1ee6c91eee756319e301b224cec0f944b90dbee370934d0dbb57",
-        "references/hooks.md": "sha256:7280eb6d93dbc69d0af5f3b5d93bc02fc36918cbfe3f2230b6ff8f45935ad784",
+        "references/hooks.md": "sha256:c38d962dbfe3cecacb26a275010f968a17650818c51ac3d7243d9f9fab607945",
         "references/init.md": "sha256:bd5206d3f614c6c32b1c930cc07dd93fe893bb041838af12b612f17f55af78e3",
         "references/install.md": "sha256:fdd11af011c9a6327495dfbdc49e18a99758edeed578d2c00a28d00ff45c0974",
         "references/log.md": "sha256:f726e59328ac1cb367cd7d5eaa257149d7f56ef5c650d9e0f9c7a091c0f9c442",
-        "references/mcp.md": "sha256:28fdb0c42bea926ac20cbf0bd6e2bfe22ec819e85f22adbd7c3febd14c3a26a6",
+        "references/mcp.md": "sha256:772c9251b379c896095c524850e698107b7bf099d6d987cea6321c9321f68020",
         "references/memory-review.md": "sha256:e9fabed005f282c6702788bfe1a01aeca986184d48eadccf3ef0e9f4e465f5e3",
         "references/native-agents.md": "sha256:ad4696441bf8bb2b8bac327e9a409c637fa994b6e6ba92f3d7112ee0d71006e0",
-        "references/plugins.md": "sha256:5b26b665b2acfa07b8699e2b47a5c4c2c14739e18db8b7b5c394dad1ab4db7c7",
+        "references/plugins.md": "sha256:fa31c9f122f17ff83a6f67aa83f2d766a2d1a0e99084c80d4b0b26a2c582087b",
         "references/status.md": "sha256:a63b2935f280f47dbdcd790c97149173f913710319d61d3e0cbf911e9528ee8b",
         "references/sync.md": "sha256:aa2740ae9f92181e318f077ae85250cc8041914dfea67123975de30730276511",
         "references/targets.md": "sha256:f0b2db33056ee697402b3fbcc172379ab25490751237d0159168a56d6778613f",
         "references/trash.md": "sha256:2c708df8e50b415b51713bddfbdb8ea95620e35ed49110946fcfcd0047c66945",
         "scripts/run.sh": "sha256:e434ebdb7d3ae0b37c00ddc36687bc975da9e766b8cb863f9aed9a624ebbdfa9"
       },
-      "installed_at": "2026-11-24T11:31:43.118735183+01:00",
+      "installed_at": "2026-11-25T09:40:10.827691801+01:00",
       "repo_url": "https://github.com/runkids/skillshare.git",
       "source": "https://github.com/runkids/skillshare.git/skills/skillshare",
       "subdir": "skills/skillshare",
-      "tree_hash": "8e4fe141f81141fce1ec702bd094bc73b5fad6a0",
+      "tree_hash": "151e6bc2c6e67d180daaf3f428498c22f8ba7758",
       "type": "github-subdir",
-      "version": "0cd966d"
+      "version": "71905e7"
     },
     "tdd": {
       "commit": "abeeaf95660ba9e8b7c753eb38f441ca707a8823",
@@ -721,7 +721,7 @@
       "subdir": "skills/engineering/tdd",
       "tree_hash": "667dbdd00c09d0e2189e082986e6a4d61a67c2a6",
       "type": "github-subdir",
-      "version": "abeeaf9"
+      "version": "d653911"
     },
     "web-design-reviewer": {
       "commit": "f10fdb8b2660ce85c98f220b2f1ca24653768a5c",
@@ -736,7 +736,7 @@
       "subdir": "skills/web-design-reviewer",
       "tree_hash": "eded2bc5a7d38261501a76b2e4913b703cc547ec",
       "type": "github-subdir",
-      "version": "f10fdb8"
+      "version": "93fc8b9"
     }
   },
   "version": 1
