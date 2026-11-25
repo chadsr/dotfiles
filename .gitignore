@@ -55,6 +55,7 @@ hyprland/.config/hypr/themes/*
 hyprland/.config/sunsetr/geo.toml
 khal/.config/khal/*
 nextcloud/.config/Nextcloud/nextcloud.cfg
+node_modules/
 opencode/.config/opencode/*
 openshell/.config/openshell/active_gateway
 openshell/.config/openshell/gateways/**/last_sandbox
