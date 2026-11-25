@@ -240,7 +240,9 @@
   "disk": {
     "interval": 600,
     "format": "{percentage_used}% 󰋊",
-    "path": "/",
+    "paths": [
+      "/"
+    ],
     "on-click": "ghostty --class=ghostty.floattui -e dua i"
   },
   "power-profiles-daemon": {
