@@ -81,11 +81,11 @@ hl.window_rule({
 hl.window_rule({
   name = "nextcloud",
   float = true,
-  size = { 600, 800 },
+  size = { 1000, 600 },
   move = { 0, 24 },
   border_size = 0,
   no_anim = true,
-  match = { class = "^(com.nextcloud.desktopclient.nextcloud)$", title = "^(Nextcloud)$" },
+  match = { class = "^(com.nextcloud.desktopclient.nextcloud)$", title = "^(Nextcloud Settings)$" },
 })
 
 local pinned = {
