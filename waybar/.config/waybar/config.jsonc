@@ -481,5 +481,15 @@
     "on-click": "swaync-client -t -sw",
     "on-click-right": "swaync-client -d -sw",
     "escape": true
+  },
+  "custom/aibar": {
+    "exec": "ai-usagebar --format '{vendor_short} {session_pct}% · {session_reset}'",
+    "return-type": "json",
+    "interval": 300,
+    "signal": 13,
+    "tooltip": true,
+    "on-click": "ghostty --class=ghostty.floattui -e ai-usagebar-tui",
+    "on-scroll-up": "ai-usagebar --cycle-next",
+    "on-scroll-down": "ai-usagebar --cycle-prev"
   }
 }

@@ -344,6 +344,7 @@ if [[ "$is_graphical" == true ]]; then
     "${data_path}/system/${current_hostname}/boot/loader/entries/arch-zen.asc.conf ${base_path}/system/${current_hostname}/boot/loader/entries/arch-zen.conf"
     "${data_path}/tidal-hifi/config.json.asc.gpg ${base_path}/tidal-hifi/.config/tidal-hifi/config.json"
     "${data_path}/vdirsyncer/config.asc.gpg ${base_path}/vdirsyncer/.config/vdirsyncer/config"
+    "${data_path}/waybar/ai-usagebar/config.toml.asc.gpg ${base_path}/waybar/.config/ai-usagebar/config.toml"
     "${data_path}/waybar/waybar-crypto/config.ini.asc.gpg ${base_path}/waybar/.config/waybar-crypto/config.ini"
     "${data_path}/xdg/mimeapps.list.asc.gpg ${base_path}/xdg/.config/mimeapps.list"
   )

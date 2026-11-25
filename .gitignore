@@ -75,6 +75,7 @@ ssh/.ssh/*
 system/*/boot/loader/entries/*
 tidal-hifi/.config/tidal-hifi/*
 vdirsyncer/.config/vdirsyncer/*
+waybar/.config/ai-usagebar/*
 waybar/.config/waybar-crypto/config.ini
 waybar/.config/waybar/theme.css
 waybar/.local/share/fonts/TTF/*
@@ -146,6 +147,7 @@ zed/.local/share/zed/extensions/*
 !system/*/boot/loader/entries/.gitkeep
 !tidal-hifi/.config/tidal-hifi/.gitkeep
 !vdirsyncer/.config/vdirsyncer/.gitkeep
+!waybar/.config/ai-usagebar/.gitkeep
 !waybar/.config/waybar/modules/crypto/.gitkeep
 !waybar/.local/share/fonts/TTF/.gitkeep
 !zed/.local/share/zed/extensions/

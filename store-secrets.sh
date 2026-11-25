@@ -46,6 +46,7 @@ init_tmp_dir
 
 declare -a encrypt_data_paths_tuples=(
   "${HOME}/.android/keystores/keystore ${data_path}/android/keystores/keystore.asc.gpg"
+  "${HOME}/.config/ai-usagebar/config.toml ${data_path}/waybar/ai-usagebar/config.toml.asc.gpg"
   "${HOME}/.config/cura/5.11/cura.cfg ${data_path}/cura/cura.cfg.asc.gpg"
   "${HOME}/.config/gallery-dl/config.json ${data_path}/gallery-dl/config.json.asc.gpg"
   "${HOME}/.config/gtk-3.0/bookmarks ${data_path}/gtk/bookmarks.asc.gpg"
