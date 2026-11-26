@@ -1,1 +1,1 @@
-ACTION=="add|change", SUBSYSTEM=="power_supply", KERNEL=="BAT0", TEST=="charge_control_start_threshold", TEST=="charge_control_end_threshold", ATTR{charge_control_start_threshold}="50", ATTR{charge_control_end_threshold}="80"
+ACTION=="add|change", SUBSYSTEM=="power_supply", KERNEL=="BAT0", TEST=="charge_control_start_threshold", TEST=="charge_control_end_threshold", ATTR{charge_control_start_threshold}="60", ATTR{charge_control_end_threshold}="80"
