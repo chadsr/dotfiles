@@ -1,0 +1,5 @@
+# Switch to balanced when AC is connected
+SUBSYSTEM=="power_supply", ATTR{type}=="Mains", ENV{POWER_SUPPLY_ONLINE}=="1", ACTION=="change", RUN+="/usr/bin/powerprofilesctl set balanced"
+
+# Switch to power-saver when on battery
+SUBSYSTEM=="power_supply", ATTR{type}=="Mains", ENV{POWER_SUPPLY_ONLINE}=="0", ACTION=="change", RUN+="/usr/bin/powerprofilesctl set power-saver"
