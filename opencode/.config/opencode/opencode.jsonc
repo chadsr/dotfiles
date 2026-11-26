@@ -19,17 +19,14 @@
   },
   "mcp": {
     "servers": {
-      "MCP_DOCKER": {
-        "command": [
-          "docker",
-          "mcp",
-          "gateway",
-          "run",
-          "--profile",
-          "dev-tools",
-        ],
-        "type": "local"
-      },
+      "MCP_GATEWAY": {
+        "type": "remote",
+        "url": "http://172.17.0.1:8811/mcp",
+        "oauth": false,
+        "headers": {
+          "Authorization": "Bearer {file:/run/user/1000/docker-mcp-gateway/token}"
+        }
+      }
       // "debugmcp": {
       //   "type": "remote",
       //   "url": "http://localhost:3001/mcp"

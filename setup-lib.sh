@@ -79,6 +79,20 @@ symlink() {
   fi
 }
 
+hardlink() {
+  if [[ -d "${2}" && ! -L "${2}" ]]; then
+    echo "${2} already exists and is a directory. Check manually whether this is safe to replace with ${1}."
+    return 1
+  fi
+
+  # a hardlink cannot follow a repo file that was rewritten, so the old link is always replaced
+  [[ ! -e "${2}" && ! -L "${2}" ]] || rm -f "${2}"
+  ln "${1}" "${2}" || {
+    echo "failed to hardlink: ${1} to ${2}"
+    return 1
+  }
+}
+
 install_packages() {
   # shellcheck disable=SC2154
   case "$package_manager" in

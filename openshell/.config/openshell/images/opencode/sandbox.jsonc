@@ -1,0 +1,27 @@
+// Sandbox-only opencode overrides, baked into the image as /sandbox/opencode.jsonc.
+{
+  "$schema": "https://opencode.ai/config.json",
+  "providers": {
+    // The built-in provider is not redefined, only pointed at the profile's variable.
+    "zai-coding-plan": {
+      "env": [
+        "ZAI_CODING_PLAN_API_KEY"
+      ],
+      "settings": {
+        "apiKey": "{env:ZAI_CODING_PLAN_API_KEY}"
+      }
+    }
+  },
+  "mcp": {
+    "servers": {
+      "MCP_GATEWAY": {
+        "type": "remote",
+        "url": "http://host.openshell.internal:8811/mcp",
+        "oauth": false,
+        "headers": {
+          "Authorization": "Bearer {env:MCP_GATEWAY_AUTH_TOKEN}"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+# Socket-activation listener for the docker MCP gateway.
+[Unit]
+Description=docker mcp gateway listener (docker0-bound)
+
+[Socket]
+# docker0, not loopback: the gateway rejects the host.openshell.internal Host header on loopback.
+ListenStream=172.17.0.1:8811
+# docker0 may not carry its address yet when this unit starts.
+FreeBind=yes
+Service=docker-mcp-gateway-proxy.service
+
+[Install]
+WantedBy=sockets.target

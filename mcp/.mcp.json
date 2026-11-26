@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "MCP_DOCKER": {
+    "MCP_GATEWAY": {
       "args": [
         "mcp",
         "gateway",

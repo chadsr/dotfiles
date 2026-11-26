@@ -1,0 +1,61 @@
+# Sandbox policy for OpenCode. A change makes the next `oc` recreate the sandbox.
+filesystem_policy:
+  include_workdir: true
+  read_only: [/bin, /usr, /lib, /etc, /app, /proc, /var/log, /dev/urandom]
+  read_write: [/tmp, /dev/null]
+# The MCP gateway endpoint comes from the mcp-gateway profile: no rule for it here.
+network_policies:
+  sandbox_mcp:
+    name: Sandbox OpenCode egress
+    endpoints:
+      - host: models.opencode.ai
+        port: 443
+        protocol: rest
+        access: read-only
+        enforcement: enforce
+      # Plugin updates only.
+      - host: registry.npmjs.org
+        port: 443
+        protocol: rest
+        access: read-only
+        enforcement: enforce
+        allow_encoded_slash: true
+    binaries:
+      - path: /usr/local/bin/opencode
+  # mise downloads tools from GitHub releases, which redirect to *.githubusercontent.com.
+  mise:
+    name: Sandbox mise tool downloads
+    endpoints:
+      - host: mise-versions.jdx.dev
+        port: 443
+        protocol: rest
+        access: read-only
+        enforcement: enforce
+      - host: github.com
+        port: 443
+        protocol: rest
+        access: read-only
+        enforcement: enforce
+      - host: api.github.com
+        port: 443
+        protocol: rest
+        access: read-only
+        enforcement: enforce
+      - host: '*.githubusercontent.com'
+        port: 443
+        protocol: rest
+        access: read-only
+        enforcement: enforce
+      - host: pypi.org
+        port: 443
+        protocol: rest
+        access: read-only
+        enforcement: enforce
+      - host: files.pythonhosted.org
+        port: 443
+        protocol: rest
+        access: read-only
+        enforcement: enforce
+    binaries:
+      - path: /usr/bin/mise
+version: 1

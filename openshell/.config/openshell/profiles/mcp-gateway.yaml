@@ -1,0 +1,537 @@
+# Provider profile for the host's docker MCP gateway: bearer token and MCP tool allowlist. Run `oc setup` after an edit.
+id: mcp-gateway
+display_name: Docker MCP Gateway
+description: Bearer token for the host-local docker-mcp-gateway (dev-tools)
+category: other
+credentials:
+  - name: api_key
+    description: Gateway bearer token
+    env_vars: [MCP_GATEWAY_AUTH_TOKEN]
+    required: true
+    auth_style: bearer
+    header_name: authorization
+    stable_placeholder: true
+endpoints:
+  - host: host.openshell.internal
+    port: 8811
+    path: /mcp
+    protocol: mcp
+    enforcement: enforce
+    allowed_ips: [172.17.0.1/32]
+    mcp:
+      allow_all_known_mcp_methods: false
+      strict_tool_names: true
+      versions: ['2025-03-26', '2025-06-18', '2025-11-25', '2026-07-28']
+    rules:
+      - allow:
+          method: initialize
+      - allow:
+          method: notifications/initialized
+      - allow:
+          method: tools/list
+      - allow:
+          method: ping
+      # negotiation and read-only listings
+      - allow:
+          method: server/discover
+      - allow:
+          method: prompts/list
+      - allow:
+          method: resources/list
+      - allow:
+          method: resources/templates/list
+      # brave: 8 of 8 allowed.
+      - allow:
+          method: tools/call
+          tool: brave_image_search
+      - allow:
+          method: tools/call
+          tool: brave_llm_context
+      - allow:
+          method: tools/call
+          tool: brave_local_search
+      - allow:
+          method: tools/call
+          tool: brave_news_search
+      - allow:
+          method: tools/call
+          tool: brave_place_search
+      - allow:
+          method: tools/call
+          tool: brave_summarizer
+      - allow:
+          method: tools/call
+          tool: brave_video_search
+      - allow:
+          method: tools/call
+          tool: brave_web_search
+      # context7: 2 of 2 allowed.
+      - allow:
+          method: tools/call
+          tool: get-library-docs
+      - allow:
+          method: tools/call
+          tool: resolve-library-id
+      # github-official: 23 of 41 allowed.
+      - allow:
+          method: tools/call
+          tool: get_commit
+      - allow:
+          method: tools/call
+          tool: get_file_contents
+      - allow:
+          method: tools/call
+          tool: get_label
+      - allow:
+          method: tools/call
+          tool: get_latest_release
+      - allow:
+          method: tools/call
+          tool: get_me
+      - allow:
+          method: tools/call
+          tool: get_release_by_tag
+      - allow:
+          method: tools/call
+          tool: get_tag
+      - allow:
+          method: tools/call
+          tool: get_team_members
+      - allow:
+          method: tools/call
+          tool: get_teams
+      - allow:
+          method: tools/call
+          tool: issue_read
+      - allow:
+          method: tools/call
+          tool: list_branches
+      - allow:
+          method: tools/call
+          tool: list_commits
+      - allow:
+          method: tools/call
+          tool: list_issue_types
+      - allow:
+          method: tools/call
+          tool: list_issues
+      - allow:
+          method: tools/call
+          tool: list_pull_requests
+      - allow:
+          method: tools/call
+          tool: list_releases
+      - allow:
+          method: tools/call
+          tool: list_tags
+      - allow:
+          method: tools/call
+          tool: pull_request_read
+      - allow:
+          method: tools/call
+          tool: search_code
+      - allow:
+          method: tools/call
+          tool: search_issues
+      - allow:
+          method: tools/call
+          tool: search_pull_requests
+      - allow:
+          method: tools/call
+          tool: search_repositories
+      - allow:
+          method: tools/call
+          tool: search_users
+      # playwright: 13 of 23 allowed.
+      - allow:
+          method: tools/call
+          tool: browser_click
+      - allow:
+          method: tools/call
+          tool: browser_close
+      - allow:
+          method: tools/call
+          tool: browser_console_messages
+      - allow:
+          method: tools/call
+          tool: browser_hover
+      - allow:
+          method: tools/call
+          tool: browser_navigate
+      - allow:
+          method: tools/call
+          tool: browser_navigate_back
+      - allow:
+          method: tools/call
+          tool: browser_network_request
+      - allow:
+          method: tools/call
+          tool: browser_network_requests
+      - allow:
+          method: tools/call
+          tool: browser_resize
+      - allow:
+          method: tools/call
+          tool: browser_snapshot
+      - allow:
+          method: tools/call
+          tool: browser_tabs
+      - allow:
+          method: tools/call
+          tool: browser_take_screenshot
+      - allow:
+          method: tools/call
+          tool: browser_wait_for
+      # io-github-ChromeDevTools-chrome-devtools-mcp: 18 of 29 allowed.
+      - allow:
+          method: tools/call
+          tool: click
+      - allow:
+          method: tools/call
+          tool: close_page
+      - allow:
+          method: tools/call
+          tool: get_console_message
+      - allow:
+          method: tools/call
+          tool: get_network_request
+      - allow:
+          method: tools/call
+          tool: hover
+      - allow:
+          method: tools/call
+          tool: lighthouse_audit
+      - allow:
+          method: tools/call
+          tool: list_console_messages
+      - allow:
+          method: tools/call
+          tool: list_network_requests
+      - allow:
+          method: tools/call
+          tool: list_pages
+      - allow:
+          method: tools/call
+          tool: new_page
+      - allow:
+          method: tools/call
+          tool: performance_analyze_insight
+      - allow:
+          method: tools/call
+          tool: performance_start_trace
+      - allow:
+          method: tools/call
+          tool: performance_stop_trace
+      - allow:
+          method: tools/call
+          tool: resize_page
+      - allow:
+          method: tools/call
+          tool: select_page
+      - allow:
+          method: tools/call
+          tool: take_screenshot
+      - allow:
+          method: tools/call
+          tool: take_snapshot
+      - allow:
+          method: tools/call
+          tool: wait_for
+      # penpot: 4 of 4 allowed.
+      - allow:
+          method: tools/call
+          tool: execute_code
+      - allow:
+          method: tools/call
+          tool: export_shape
+      - allow:
+          method: tools/call
+          tool: high_level_overview
+      - allow:
+          method: tools/call
+          tool: penpot_api_info
+      # io-github-SylphxAI-pdf-reader-mcp: 3 of 3 allowed.
+      - allow:
+          method: tools/call
+          tool: read_pdf
+      - allow:
+          method: tools/call
+          tool: search_pdf
+      # paper-search: 57 of 57 allowed.
+      - allow:
+          method: tools/call
+          tool: get_crossref_paper_by_doi
+      - allow:
+          method: tools/call
+          tool: read_arxiv_paper
+      - allow:
+          method: tools/call
+          tool: read_base_paper
+      - allow:
+          method: tools/call
+          tool: read_biorxiv_paper
+      - allow:
+          method: tools/call
+          tool: read_citeseerx_paper
+      - allow:
+          method: tools/call
+          tool: read_doaj_paper
+      - allow:
+          method: tools/call
+          tool: read_hal_paper
+      - allow:
+          method: tools/call
+          tool: read_iacr_paper
+      - allow:
+          method: tools/call
+          tool: read_medrxiv_paper
+      - allow:
+          method: tools/call
+          tool: read_openaire_paper
+      - allow:
+          method: tools/call
+          tool: read_semantic_paper
+      - allow:
+          method: tools/call
+          tool: read_zenodo_paper
+      - allow:
+          method: tools/call
+          tool: search_arxiv
+      - allow:
+          method: tools/call
+          tool: search_base
+      - allow:
+          method: tools/call
+          tool: search_biorxiv
+      - allow:
+          method: tools/call
+          tool: search_citeseerx
+      - allow:
+          method: tools/call
+          tool: search_core
+      - allow:
+          method: tools/call
+          tool: search_crossref
+      - allow:
+          method: tools/call
+          tool: search_dblp
+      - allow:
+          method: tools/call
+          tool: search_doaj
+      - allow:
+          method: tools/call
+          tool: search_europepmc
+      - allow:
+          method: tools/call
+          tool: search_google_scholar
+      - allow:
+          method: tools/call
+          tool: search_hal
+      - allow:
+          method: tools/call
+          tool: search_iacr
+      - allow:
+          method: tools/call
+          tool: search_medrxiv
+      - allow:
+          method: tools/call
+          tool: search_openaire
+      - allow:
+          method: tools/call
+          tool: search_openalex
+      - allow:
+          method: tools/call
+          tool: search_papers
+      - allow:
+          method: tools/call
+          tool: search_pmc
+      - allow:
+          method: tools/call
+          tool: search_pubmed
+      - allow:
+          method: tools/call
+          tool: search_semantic
+      - allow:
+          method: tools/call
+          tool: search_ssrn
+      - allow:
+          method: tools/call
+          tool: search_unpaywall
+      - allow:
+          method: tools/call
+          tool: search_zenodo
+      # rest of paper-search and pdf-reader
+      - allow:
+          method: tools/call
+          tool: pdf_evidence
+      - allow:
+          method: tools/call
+          tool: download_arxiv
+      - allow:
+          method: tools/call
+          tool: download_base
+      - allow:
+          method: tools/call
+          tool: download_biorxiv
+      - allow:
+          method: tools/call
+          tool: download_citeseerx
+      - allow:
+          method: tools/call
+          tool: download_crossref
+      - allow:
+          method: tools/call
+          tool: download_dblp
+      - allow:
+          method: tools/call
+          tool: download_doaj
+      - allow:
+          method: tools/call
+          tool: download_hal
+      - allow:
+          method: tools/call
+          tool: download_iacr
+      - allow:
+          method: tools/call
+          tool: download_medrxiv
+      - allow:
+          method: tools/call
+          tool: download_openaire
+      - allow:
+          method: tools/call
+          tool: download_openalex
+      - allow:
+          method: tools/call
+          tool: download_pubmed
+      - allow:
+          method: tools/call
+          tool: download_scihub
+      - allow:
+          method: tools/call
+          tool: download_semantic
+      - allow:
+          method: tools/call
+          tool: download_ssrn
+      - allow:
+          method: tools/call
+          tool: download_with_fallback
+      - allow:
+          method: tools/call
+          tool: download_zenodo
+      - allow:
+          method: tools/call
+          tool: read_crossref_paper
+      - allow:
+          method: tools/call
+          tool: read_dblp_paper
+      - allow:
+          method: tools/call
+          tool: read_openalex_paper
+      - allow:
+          method: tools/call
+          tool: read_pubmed_paper
+      - allow:
+          method: tools/call
+          tool: read_ssrn_paper
+      # gateway-internal: 1 of 8 allowed.
+      - allow:
+          method: tools/call
+          tool: mcp-find
+    deny_rules:
+      # gateway-internal: 7 denied.
+      - method: tools/call
+        tool: code-mode
+      - method: tools/call
+        tool: mcp-activate-profile
+      - method: tools/call
+        tool: mcp-add
+      - method: tools/call
+        tool: mcp-config-set
+      - method: tools/call
+        tool: mcp-create-profile
+      - method: tools/call
+        tool: mcp-exec
+      - method: tools/call
+        tool: mcp-remove
+      # github-official: 18 denied.
+      - method: tools/call
+        tool: add_comment_to_pending_review
+      - method: tools/call
+        tool: add_issue_comment
+      - method: tools/call
+        tool: add_reply_to_pull_request_comment
+      - method: tools/call
+        tool: assign_copilot_to_issue
+      - method: tools/call
+        tool: create_branch
+      - method: tools/call
+        tool: create_or_update_file
+      - method: tools/call
+        tool: create_pull_request
+      - method: tools/call
+        tool: create_repository
+      - method: tools/call
+        tool: delete_file
+      - method: tools/call
+        tool: fork_repository
+      - method: tools/call
+        tool: issue_write
+      - method: tools/call
+        tool: merge_pull_request
+      - method: tools/call
+        tool: pull_request_review_write
+      - method: tools/call
+        tool: push_files
+      - method: tools/call
+        tool: request_copilot_review
+      - method: tools/call
+        tool: sub_issue_write
+      - method: tools/call
+        tool: update_pull_request
+      - method: tools/call
+        tool: update_pull_request_branch
+      # playwright: 10 denied.
+      - method: tools/call
+        tool: browser_drag
+      - method: tools/call
+        tool: browser_drop
+      - method: tools/call
+        tool: browser_evaluate
+      - method: tools/call
+        tool: browser_file_upload
+      - method: tools/call
+        tool: browser_fill_form
+      - method: tools/call
+        tool: browser_handle_dialog
+      - method: tools/call
+        tool: browser_press_key
+      - method: tools/call
+        tool: browser_run_code_unsafe
+      - method: tools/call
+        tool: browser_select_option
+      - method: tools/call
+        tool: browser_type
+      # io-github-ChromeDevTools-chrome-devtools-mcp: 11 denied.
+      - method: tools/call
+        tool: drag
+      - method: tools/call
+        tool: emulate
+      - method: tools/call
+        tool: evaluate_script
+      - method: tools/call
+        tool: fill
+      - method: tools/call
+        tool: fill_form
+      - method: tools/call
+        tool: handle_dialog
+      - method: tools/call
+        tool: navigate_page
+      - method: tools/call
+        tool: press_key
+      - method: tools/call
+        tool: take_heapsnapshot
+      - method: tools/call
+        tool: type_text
+      - method: tools/call
+        tool: upload_file
+binaries: [/usr/local/bin/opencode]

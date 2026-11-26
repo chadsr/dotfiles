@@ -1,0 +1,21 @@
+# OpenShell provider profile: Z.ai coding plan
+id: zai-coding-plan
+display_name: Z.ai Coding Plan
+description: Z.ai GLM coding plan inference API
+category: inference
+inference_capable: true
+credentials:
+  - name: api_key
+    description: Z.ai API key
+    env_vars: [ZAI_CODING_PLAN_API_KEY]
+    required: true
+    auth_style: bearer
+    header_name: authorization
+    stable_placeholder: true
+endpoints:
+  - host: api.z.ai
+    port: 443
+    protocol: rest
+    access: read-write
+    enforcement: enforce
+binaries: [/usr/local/bin/opencode]

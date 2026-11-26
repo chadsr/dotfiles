@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+# Writes the docker MCP gateway bearer token to a token-only file.
+#   docker-mcp-token [--refresh]    write the file when it is missing or empty; --refresh always rewrites it
+set -euo pipefail
+
+PASS_ENTRY=openshell/MCP_GATEWAY_AUTH_TOKEN
+TOKEN_DIR="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/docker-mcp-gateway"
+TOKEN_FILE="$TOKEN_DIR/token"
+TOKEN_TMP="$TOKEN_DIR/.token.$$"
+TOKEN_RE='^[A-Za-z0-9._~-]+$'
+
+case "${1:-}" in
+"" | --refresh) ;;
+*)
+  echo "ERROR: usage: docker-mcp-token [--refresh]" >&2
+  exit 1
+  ;;
+esac
+# An existing token is kept unless --refresh is given.
+[[ "${1:-}" == --refresh || ! -s "$TOKEN_FILE" ]] || exit 0
+
+command -v pass >/dev/null 2>&1 || {
+  echo "ERROR: pass is not installed" >&2
+  exit 1
+}
+# Tests the .gpg file, never decrypts.
+if [[ ! -f "${PASSWORD_STORE_DIR:-$HOME/.password-store}/$PASS_ENTRY.gpg" ]]; then
+  echo "ERROR: no pass entry $PASS_ENTRY" >&2
+  echo "        create it with: openssl rand -hex 32 | pass insert -e $PASS_ENTRY" >&2
+  exit 1
+fi
+if ! TOKEN="$(pass show "$PASS_ENTRY")"; then
+  echo "ERROR: could not decrypt $PASS_ENTRY (gpg-agent locked or pinentry cancelled)" >&2
+  exit 1
+fi
+if [[ ! "$TOKEN" =~ $TOKEN_RE ]]; then
+  echo "ERROR: $PASS_ENTRY has characters outside [A-Za-z0-9._~-] (or is empty); the token file was left unchanged" >&2
+  echo "        generate a new one with: openssl rand -hex 32 | pass insert -e $PASS_ENTRY" >&2
+  exit 1
+fi
+install -d -m 700 -- "$TOKEN_DIR"
+if ! (
+  umask 077
+  printf '%s' "$TOKEN" >"$TOKEN_TMP" && mv -f -- "$TOKEN_TMP" "$TOKEN_FILE"
+); then
+  rm -f -- "$TOKEN_TMP"
+  echo "ERROR: could not write $TOKEN_FILE" >&2
+  exit 1
+fi

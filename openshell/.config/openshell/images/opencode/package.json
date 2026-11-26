@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@tarquinen/opencode-dcp": "^3.2.1"
+  },
+  "name": "openshell-opencode"
+}

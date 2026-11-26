@@ -1,0 +1,15 @@
+# Writes the docker MCP gateway bearer token file at graphical login.
+[Unit]
+Description=docker mcp gateway bearer token file
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+RuntimeDirectory=docker-mcp-gateway
+RuntimeDirectoryMode=0700
+ExecStart=%h/.local/bin/docker-mcp-token
+
+[Install]
+WantedBy=graphical-session.target
