@@ -1,4 +1,4 @@
-# docker MCP gateway backend (host opencode, OpenShell sandboxes), started through docker-mcp-gateway-proxy.service.
+# docker MCP gateway backend, started through docker-mcp-gateway-proxy.service.
 [Unit]
 Description=docker mcp gateway (docker0-bound)
 Wants=network-online.target
@@ -7,14 +7,13 @@ After=network-online.target docker-secrets-engine-shim.service
 BindsTo=docker-mcp-gateway-proxy.service
 
 [Service]
-# Token: $XDG_RUNTIME_DIR/docker-mcp-gateway/token, written by docker-mcp-gateway-token.service.
 ExecStart=%h/.local/bin/docker-mcp-gateway-run
-# The start counts as complete once :18811 listens (gives up after 20s).
+# The start counts as complete once :18811 listens.
 ExecStartPost=%h/.local/bin/docker-mcp-gateway-wait
 Restart=on-failure
 RestartSec=3
 # Exit 1 is both a clean stop and a crash: keep a stop clean, keep a crash restarting.
 SuccessExitStatus=1
 RestartForceExitStatus=1
-# 78 = no token (e.g. pinentry cancelled): stay failed until the proxy starts again.
+# 78 = no token: stay failed until the proxy starts again.
 RestartPreventExitStatus=78

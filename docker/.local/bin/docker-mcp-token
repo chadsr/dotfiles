@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Bearer token of the docker mcp gateway: a token-only file read by docker-mcp-gateway-run.
+# Writes the docker MCP gateway bearer token to a token-only file.
 #   docker-mcp-token [--refresh]    write the file when it is missing or empty; --refresh always rewrites it
 set -euo pipefail
 

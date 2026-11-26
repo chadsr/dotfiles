@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# ExecStart of docker-mcp-gateway.service: provides the bearer token, then runs the gateway.
+# Provides the bearer token, then runs the docker MCP gateway.
 set -euo pipefail
 
 TOKEN_FILE="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/docker-mcp-gateway/token"
 
-# Exit 78 (RestartPreventExitStatus): no token, nothing started.
+# Exit 78 (RestartPreventExitStatus): no token.
 if [[ ! -s "$TOKEN_FILE" ]]; then
   "$(dirname "$(readlink -f "$0")")/docker-mcp-token" || exit 78
 fi

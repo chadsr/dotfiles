@@ -1,46 +1,397 @@
 #!/usr/bin/env bash
-# OpenCode inside this repo's OpenShell sandbox. See openshell/README.md.
-#   oc [dir]    reconcile, sync the work tree in, run the opencode TUI in the sandbox for dir (default: $PWD), sync commits and edits back
+# OpenCode in an OpenShell sandbox for a git repository.
+#
+# Usage:
+#   oc [dir]            start a session in dir (default: $PWD)
+#   oc push [dir]       make the sandbox a copy of the host's branch and uncommitted files
+#   oc pull [dir]       apply the sandbox's changes to the host
+#   oc stop [dir]       sync back, then stop the sandbox
+#   oc rebuild [dir]    rebuild the image; a changed image recreates the sandbox
+#   oc setup            import or update every profile and create missing providers
+
 set -euo pipefail
 
-# The MCP gateway's token file belongs to the docker package: docker-mcp-token creates or refreshes it (pass, through pinentry).
-command -v docker-mcp-token >/dev/null 2>&1 || {
-  echo "ERROR: docker-mcp-token not found on PATH (stow the docker package)" >&2
+CFG="${XDG_CONFIG_HOME:-$HOME/.config}/openshell"
+IMAGE="openshell-opencode"
+IMAGE_DIR="$CFG/images/opencode"
+PROFILES_DIR="$CFG/profiles"
+POLICY_FILE="$CFG/policies/opencode.yaml"
+# The sandbox side of oc (POSIX sh).
+SANDBOX_LIB="$(dirname "$(readlink -f "$0")")/../lib/oc/sandbox.sh"
+# Bump to recreate existing sandboxes at their next start.
+LAYOUT="zero-mount-3"
+STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/oc-sync"
+# Scratch directory, removed on exit.
+WORK=""
+# Commit the sandbox is based on; empty: the next push sends a full bundle.
+TIP=""
+REBUILD=0
+
+log() { printf '==> %s\n' "$*"; }
+die() {
+  echo "ERROR: $*" >&2
   exit 1
 }
-if ! docker-mcp-token; then
-  echo "ERROR: no gateway token; MCP will be refused (see the message above)" >&2
+usage() {
+  echo "usage: oc [dir] | oc push|pull|stop|rebuild [dir] | oc setup" >&2
   exit 1
+}
+cleanup() { [[ -z "$WORK" ]] || rm -rf -- "$WORK"; }
+trap cleanup EXIT
+
+work_dir() {
+  if [[ -z "$WORK" ]]; then
+    # shellcheck disable=SC2174  # the mode applies to the leaf only
+    mkdir -p -m 700 -- "${TMPDIR:-/tmp}/opencode"
+    WORK="$(mktemp -d "${TMPDIR:-/tmp}/opencode/work.XXXXXX")"
+  fi
+}
+
+# Profiles keep `id:` on its own line and an inline `env_vars: [..]`.
+profile_id() { awk '/^id:/{print $2; exit}' "$1"; }
+profile_vars() { sed -n 's/.*env_vars: *\[\(.*\)\].*/\1/p' "$1" | tr -d ' ' | tr ',' '\n' | grep -v '^$' || true; }
+# True if the pass entry exists; tests the .gpg file, never decrypts.
+pass_has() { [[ -f "${PASSWORD_STORE_DIR:-$HOME/.password-store}/openshell/$1.gpg" ]]; }
+# Value of a key in the state file.
+state() { sed -n "s/^$1=//p" "$STATE"; }
+
+profiles() {
+  command -v openshell >/dev/null || die "openshell CLI not found"
+  mapfile -t PROFILE_FILES < <(find -H "$PROFILES_DIR" -maxdepth 1 -name '*.yaml' | sort)
+  ((${#PROFILE_FILES[@]} > 0)) || die "no profiles found in ${PROFILES_DIR}"
+}
+
+lock() {
+  mkdir -p -- "$STATE_DIR"
+  exec 9>"$STATE_DIR/$SANDBOX_NAME.lock"
+  flock -n 9 || die "another oc session is running for this repository"
+}
+
+# CLI calls: no login shell, stdin closed, lock fd closed.
+sx() { openshell sandbox exec --no-login-shell "$SANDBOX_NAME" "$@" </dev/null 9>&-; }
+rsh() {
+  local text
+  text="$(<"$SANDBOX_LIB")" || die "cannot read $SANDBOX_LIB"
+  sx -- sh -c "$text" oc "$@"
+}
+up() { openshell sandbox upload "$SANDBOX_NAME" "$@" </dev/null 9>&-; }
+down() { openshell sandbox download "$SANDBOX_NAME" "$@" </dev/null 9>&-; }
+
+mcp_token() {
+  # Makes sure the gateway token file exists; without it MCP is refused.
+  if command -v docker-mcp-token >/dev/null; then
+    docker-mcp-token || echo "WARNING: no gateway token; MCP servers will be refused" >&2
+  else
+    echo "WARNING: docker-mcp-token not found (stow the docker package); MCP servers will be refused" >&2
+  fi
+}
+
+build_image() {
+  local stage
+  work_dir
+  stage="$WORK/imgctx"
+  mkdir -- "$stage"
+  cp -rL -- "$IMAGE_DIR/." "$stage/"
+  log "image build: ${IMAGE}"
+  docker build -t "$IMAGE" "$stage"
+}
+
+create_sandbox() {
+  local -a providers=()
+  local profile id
+  for profile in "${PROFILE_FILES[@]}"; do
+    id="$(profile_id "$profile")"
+    openshell provider get "$id" >/dev/null 2>&1 || die "provider ${id} not found: run 'oc setup'"
+    providers+=(--provider "$id")
+  done
+  log "sandbox create: ${SANDBOX_NAME} (repo ${TOP} -> ${TARGET})"
+  # --detach: return once the sandbox exists.
+  openshell sandbox create --detach --from "$IMAGE" "${providers[@]}" --policy "$POLICY_FILE" --name "$SANDBOX_NAME" || return 1
+  rsh marker "$MARKER"
+}
+
+# Unsynced work: the sandbox's tree or HEAD moved past what the last sync recorded; unknown counts as moved.
+unsynced() {
+  local have
+  have="$(rsh unsynced "$TARGET" 2>/dev/null)" || return 0
+  [[ "$have" != "$(state base_tree)"$'\n'"$(state host_head)" ]]
+}
+
+recreate_sandbox() {
+  if [[ -f "$STATE" ]] && unsynced; then
+    die "${SANDBOX_NAME} holds unsynced work or cannot be read; nothing was deleted. Pull it with 'oc pull ${TOP}', or delete $STATE to discard it"
+  fi
+  log "$1: recreating ${SANDBOX_NAME}"
+  openshell sandbox delete "$SANDBOX_NAME" >/dev/null || return 1
+  rm -f -- "$STATE"
+  create_sandbox
+}
+
+# Build the image when missing, start the sandbox when stopped, recreate it when its layout, image or config changed.
+reconcile() {
+  local info marker
+  profiles
+  work_dir
+  command -v docker >/dev/null || die "docker not found"
+  if ((REBUILD)) || ! docker image inspect "$IMAGE" >/dev/null 2>&1; then build_image; fi
+  MARKER="$LAYOUT $(docker image inspect -f '{{.Id}}' "$IMAGE") $(cat "$POLICY_FILE" "${PROFILE_FILES[@]}" | sha256sum | cut -c1-12)"
+  if ! info="$(openshell sandbox get "$SANDBOX_NAME" 2>"$WORK/stderr")"; then
+    if grep -q 'sandbox not found' "$WORK/stderr"; then
+      create_sandbox
+      return
+    fi
+    cat "$WORK/stderr" >&2
+    die "cannot read sandbox ${SANDBOX_NAME}"
+  fi
+  log "sandbox exists: ${SANDBOX_NAME}"
+  if [[ "$(awk '/Phase:/{print $NF; exit}' <<<"$info")" != Ready ]]; then
+    log "sandbox start: ${SANDBOX_NAME}"
+    openshell sandbox start "$SANDBOX_NAME" >/dev/null 2>&1 || recreate_sandbox "sandbox does not start"
+  fi
+  marker="$(rsh marker-read)" || die "cannot read the layout marker of ${SANDBOX_NAME} (is it running?)"
+  [[ "$marker" == "$MARKER" ]] || recreate_sandbox "sandbox layout, image or config changed"
+}
+
+# A failed step in pull; the caller decides how to go on.
+pull_fail() {
+  echo "ERROR: cannot read the changes in ${SANDBOX_NAME} (step: $1); nothing was pulled" >&2
+  return 1
+}
+
+# Bring the sandbox's edits back as one patch and its commits as a fast-forward.
+pull() {
+  local base head0 branch0 have now c ff="" out tip keep=1 rej="" err
+  TIP=""
+  if [[ ! -f "$STATE" ]]; then
+    log "nothing to pull (no state file for ${SANDBOX_NAME})"
+    return
+  fi
+  have="$(rsh has-checkout "$TARGET" 2>/dev/null)" || true
+  case "$have" in
+  yes) ;;
+  no)
+    log "nothing to pull (${SANDBOX_NAME} has no checkout; dropping its stale state file)"
+    rm -f -- "$STATE"
+    return
+    ;;
+  *)
+    pull_fail has-checkout
+    return
+    ;;
+  esac
+  base="$(state base_tree)"
+  head0="$(state host_head)"
+  branch0="$(state branch)"
+  # set -e is off in a function called from an if or || list: each step is checked.
+  rsh snap "$TARGET" "$base" "$head0" || pull_fail snap || return
+  work_dir
+  down "$TARGET/.oc-sync-out" "$WORK/out" || pull_fail download || return
+  sx -- rm -rf -- "$TARGET/.oc-sync-out" || pull_fail cleanup || return
+  out="$WORK/out"
+  { read -r now c && read -r ff || true; } <"$out/.oc-sync-head" || pull_fail read || return
+  if [[ "$now" == "$base" && "$c" == "$head0" ]]; then
+    TIP="$head0"
+    log "nothing to pull"
+    return
+  fi
+  log "pull from ${SANDBOX_NAME}:${TARGET}"
+  tr '\t' ' ' <"$out/changes" | sed 's/^/  /'
+  if [[ -s "$out/worktree.patch" ]] && ! err="$(git apply --reject --whitespace=nowarn "$out/worktree.patch" 2>&1)"; then
+    # Keep the whole patch: the .rej files hold only the rejected hunks.
+    cp -- "$out/worktree.patch" "$STATE_DIR/$SANDBOX_NAME.rejected.patch"
+    rej="rejected hunks are in *.rej files, the whole patch in $STATE_DIR/$SANDBOX_NAME.rejected.patch; "
+    grep '^error:' <<<"$err" | grep -v '^error: while searching for:' | sed 's/^/  /' || true
+  fi
+  tip="$c"
+  if [[ -f "$out/repo.bundle" ]]; then
+    tip="$(git bundle list-heads "$out/repo.bundle")"
+    tip="${tip%% *}"
+    git fetch -q "$out/repo.bundle" "+HEAD:refs/oc-sync/$SANDBOX_NAME"
+    if [[ -n "$ff" && "$(git rev-parse HEAD)" == "$head0" && "$(git rev-parse --abbrev-ref HEAD)" == "$branch0" ]]; then
+      echo "  fast-forward $branch0 to $tip"
+      git reset -q "$tip"
+    else
+      echo "  $branch0 moved on the host since launch: the sandbox's commits stay in refs/oc-sync/$SANDBOX_NAME (git merge oc-sync/$SANDBOX_NAME) and its changes are applied as uncommitted edits"
+      keep=0
+    fi
+  elif [[ "$(git rev-parse HEAD)" != "$tip" ]]; then
+    echo "  no commits to bring over: $branch0 keeps its commit, the sandbox is at $tip"
+    keep=0
+  fi
+  TIP="$tip"
+  if ((keep)); then
+    printf 'branch=%s\nhost_head=%s\nbase_tree=%s\n' "$branch0" "$TIP" "$now" >"$STATE"
+    log "done: ${rej}state file updated"
+  else
+    rm -f -- "$STATE"
+    log "done: ${rej}state file removed (the next push sends a full bundle)"
+  fi
+}
+
+# Copy the host's skills and opencode config into the sandbox.
+home_files() {
+  local stage="$WORK/opencode" name skills_src
+  local oc_cfg="${XDG_CONFIG_HOME:-$HOME/.config}/opencode"
+  sx -- rm -rf -- /sandbox/.agents/skills /sandbox/.config/opencode/{AGENTS.md,cli.json,commands,dcp.jsonc,opencode.jsonc,tui.jsonc}
+  sx -- mkdir -p /sandbox/.agents /sandbox/.config/opencode
+  # Resolved: uploading a symlink copies the link, not its files.
+  skills_src="$(readlink -f "$HOME/.agents/skills" || true)"
+  if [[ -d "$skills_src" ]]; then
+    up "$skills_src" /sandbox/.agents --no-git-ignore
+  else
+    echo "WARNING: no skills directory at $HOME/.agents/skills; the sandbox runs without skills" >&2
+  fi
+  mkdir -p -- "$stage"
+  for name in AGENTS.md cli.json commands dcp.jsonc opencode.jsonc tui.jsonc; do
+    if [[ -e "$oc_cfg/$name" ]]; then cp -rL -- "$oc_cfg/$name" "$stage/"; fi
+  done
+  up "$stage" /sandbox/.config --no-git-ignore
+}
+
+push() {
+  local old head branch base has_old=0 commit range=() gone=() k v
+  work_dir
+  if [[ -f "$STATE" ]]; then
+    pull || die "not pushing: the pull failed"
+    # A failed push must not leave the old state file behind.
+    rm -f -- "$STATE"
+  fi
+  old="$TIP"
+  branch="$(git rev-parse --abbrev-ref HEAD)"
+  head="$(git rev-parse HEAD)"
+  if [[ -n "$old" ]] && sx -- git -C "$TARGET" cat-file -e "$old^{commit}"; then has_old=1; fi
+  mapfile -d '' -t gone < <(git diff --name-only -z --diff-filter=D HEAD)
+  log "push $TOP -> $SANDBOX_NAME:$TARGET ($branch at $head)"
+  if ((has_old)) && [[ "$old" == "$head" ]]; then
+    commit="$head"
+  else
+    # Commits go in as a bundle with what the sandbox lacks.
+    range=()
+    ((has_old)) && range=("^$old")
+    git bundle create "$WORK/repo.bundle" HEAD "${range[@]}"
+    sx -- mkdir -p /sandbox/.oc-sync
+    up "$WORK/repo.bundle" /sandbox/.oc-sync --no-git-ignore
+    commit=FETCH_HEAD
+  fi
+  rsh prepare "$TARGET" "$branch" "$commit"
+  # Files deleted on the host are deleted in the sandbox too.
+  ((${#gone[@]})) && sx --workdir "$TARGET" -- rm -f -- "${gone[@]}"
+  up . "$TARGET"
+  rsh subs "$TARGET"
+  home_files
+  base="$(rsh tree "$TARGET")"
+  for k in user.name user.email; do
+    if v="$(git config "$k")" && [[ -n "$v" ]]; then sx -- git -C "$TARGET" config "$k" "$v"; fi
+  done
+  if [[ -f mise.toml || -f .mise.toml || -f .mise/config.toml || -f .config/mise.toml ]]; then
+    # Never fatal: the session starts without the repository's tools.
+    rsh mise "$TARGET" || echo "WARNING: could not install the repository's mise tools; run 'mise install' inside the sandbox" >&2
+  fi
+  printf 'branch=%s\nhost_head=%s\nbase_tree=%s\n' "$branch" "$head" "$base" >"$STATE"
+  log "pushed: $branch at $head"
+}
+
+# Pull when the TUI ends, whatever its exit status.
+finish() {
+  pull || echo "ERROR: the work is still in sandbox ${SANDBOX_NAME}. retry with: oc pull ${TOP}" >&2
+  cleanup
+}
+
+session() {
+  local workdir status=0
+  workdir="$TARGET/$PREFIX"
+  trap finish EXIT
+  openshell sandbox exec "$SANDBOX_NAME" --workdir "${workdir%/}" -- opencode || status=$?
+  exit "$status"
+}
+
+# Import or update every profile and create its missing provider.
+setup() {
+  local profile id rv var
+  local -a vars=() create_env=() create_args=()
+  work_dir
+  for profile in "${PROFILE_FILES[@]}"; do
+    id="$(profile_id "$profile")"
+    [[ -n "$id" ]] || die "no 'id:' line in ${profile}"
+    openshell profile lint -f "$profile" >/dev/null
+    if ! openshell profile describe "$id" --global >/dev/null 2>&1; then
+      log "profile import: ${id}"
+      openshell profile import -f "$profile" --global >/dev/null
+    else
+      # update needs the stored resource_version: it goes into a copy of the file.
+      rv="$(openshell profile export "$id" --global | sed -n 's/^resource_version: *//p')"
+      grep -v '^resource_version:' "$profile" | sed "/^id:/a resource_version: ${rv}" >"$WORK/profile.yaml"
+      log "profile update: ${id}"
+      openshell profile update -f "$WORK/profile.yaml" --global "$id" >/dev/null
+    fi
+    mapfile -t vars < <(profile_vars "$profile")
+    if ((${#vars[@]})) && ! openshell provider get "$id" >/dev/null 2>&1; then
+      # --credential names an environment variable: the pass value never goes on argv.
+      create_env=()
+      create_args=()
+      for var in "${vars[@]}"; do
+        if ! pass_has "$var"; then
+          die "missing pass entry openshell/${var} (profile ${id}); add it with: pass insert openshell/${var}"
+        fi
+        PASS_VAL="$(pass show "openshell/${var}")"
+        create_env+=("$var=${PASS_VAL}")
+        create_args+=(--credential "$var")
+      done
+      log "provider create: ${id}"
+      env "${create_env[@]}" openshell provider create --name "$id" --type "$id" "${create_args[@]}"
+    fi
+  done
+  log "setup done. A changed profile or policy reaches existing sandboxes when oc recreates them"
+}
+
+CMD=session
+case "${1:-}" in
+push | pull | stop | rebuild | setup)
+  CMD=$1
+  shift
+  ;;
+-*) usage ;;
+esac
+
+if [[ "$CMD" == setup ]]; then
+  profiles
+  setup
+  exit 0
 fi
 
 REPO_DIR="${1:-$PWD}"
-[[ -d "$REPO_DIR" ]] || {
-  echo "ERROR: not a directory: $REPO_DIR" >&2
-  exit 1
-}
-TOP="$(git -C "$REPO_DIR" rev-parse --show-toplevel 2>/dev/null)" || {
-  echo "ERROR: not a git repository: $REPO_DIR (oc-sync needs git to carry commits back)" >&2
-  exit 1
-}
+TOP="$(git -C "$REPO_DIR" rev-parse --show-toplevel 2>/dev/null)" || die "not a git repository: $REPO_DIR (oc needs git to carry commits back)"
+[[ "$TOP" != "$HOME" && "$TOP" != "/" ]] || die "refusing to sandbox '${TOP}' (run from a repo directory)"
+REPO_BASE="$(basename -- "$TOP")"
+REPO_BASE="$(printf '%s' "$REPO_BASE" | tr '[:upper:]' '[:lower:]' | tr -cs 'a-z0-9-' '-' | sed -E 's/^-+//; s/-+$//')"
+REPO_BASE="$(printf '%s' "${REPO_BASE:0:9}" | sed -E 's/^-+//; s/-+$//')"
+[[ -n "$REPO_BASE" ]] || REPO_BASE="repo"
+SANDBOX_NAME="oc-${REPO_BASE}-$(printf '%s' "$TOP" | sha1sum | cut -c1-5)"
+TARGET="/sandbox/${REPO_BASE}"
+STATE="$STATE_DIR/$SANDBOX_NAME.env"
+PREFIX="$(git -C "$REPO_DIR" rev-parse --show-prefix)"
+cd -- "$TOP"
 
-IFS=$'\t' read -r SANDBOX_NAME REPO_TARGET < <(opencode-sandbox --print "$TOP")
-
-# One session per sandbox: the lock is held until the pull is done.
-LOCK_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/oc-sync"
-mkdir -p -- "$LOCK_DIR"
-exec 9>"$LOCK_DIR/$SANDBOX_NAME.lock"
-flock -n 9 || {
-  echo "ERROR: another oc session is running for this repository" >&2
-  exit 1
-}
-
-opencode-sandbox "$TOP"
-OC_SYNC_LOCKED=1 oc-sync push "$TOP"
-WORKDIR="$REPO_TARGET/$(git -C "$REPO_DIR" rev-parse --show-prefix)"
-STATUS=0
-openshell sandbox exec "$SANDBOX_NAME" --workdir "${WORKDIR%/}" -- opencode || STATUS=$?
-if ! OC_SYNC_LOCKED=1 oc-sync pull "$TOP"; then
-  echo "ERROR: oc-sync pull failed; the session's work is still in sandbox ${SANDBOX_NAME}" >&2
-  echo "        retry with: oc-sync pull ${TOP}" >&2
-fi
-exit "$STATUS"
+case "$CMD" in
+push | pull)
+  lock
+  "$CMD"
+  ;;
+stop)
+  lock
+  pull || die "not stopping ${SANDBOX_NAME}: the pull failed and its work would stay inside"
+  openshell sandbox stop "$SANDBOX_NAME"
+  ;;
+rebuild)
+  REBUILD=1
+  lock
+  reconcile
+  ;;
+session)
+  mcp_token
+  lock
+  reconcile
+  push
+  session
+  ;;
+esac

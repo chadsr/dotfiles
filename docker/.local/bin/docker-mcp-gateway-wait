@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# ExecStartPost of docker-mcp-gateway.service: the start job completes once the gateway accepts connections.
+# Waits until the docker MCP gateway accepts connections.
 set -euo pipefail
 
 for _ in {1..100}; do

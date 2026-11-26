@@ -1,4 +1,4 @@
-# OpenShell gateway config: vendor-seeded defaults plus local Docker overrides. See openshell/README.md.
+# OpenShell gateway config.
 
 [openshell]
 version = 2
@@ -8,5 +8,5 @@ version = 2
 compute_driver = "docker"
 
 [openshell.drivers.docker]
-# docker0 instead of the loopback default, which would force the MCP gateway onto loopback, where it rejects the host.openshell.internal Host header.
+# docker0 address, not loopback: the gateway rejects the host.openshell.internal Host header on loopback.
 host_gateway_ip = "172.17.0.1"

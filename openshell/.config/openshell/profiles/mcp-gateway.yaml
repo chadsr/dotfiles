@@ -1,5 +1,4 @@
-# OpenShell provider profile: bearer token for the host-local docker-mcp-gateway, plus its MCP tool allowlist. See openshell/README.md.
-# The allowlist lives only here (policies/opencode.yaml carries no copy of the endpoint); deny_rules win over allow rules; after an edit run `opencode-sandbox --setup`.
+# Provider profile for the host's docker MCP gateway: bearer token and MCP tool allowlist. Run `oc setup` after an edit.
 id: mcp-gateway
 display_name: Docker MCP Gateway
 description: Bearer token for the host-local docker-mcp-gateway (dev-tools)
@@ -22,7 +21,7 @@ endpoints:
     mcp:
       allow_all_known_mcp_methods: false
       strict_tool_names: true
-      versions: ['2025-03-26', '2025-06-18', '2025-11-25']
+      versions: ['2025-03-26', '2025-06-18', '2025-11-25', '2026-07-28']
     rules:
       - allow:
           method: initialize
@@ -32,6 +31,15 @@ endpoints:
           method: tools/list
       - allow:
           method: ping
+      # negotiation and read-only listings
+      - allow:
+          method: server/discover
+      - allow:
+          method: prompts/list
+      - allow:
+          method: resources/list
+      - allow:
+          method: resources/templates/list
       # brave: 8 of 8 allowed.
       - allow:
           method: tools/call
@@ -352,7 +360,7 @@ endpoints:
       - allow:
           method: tools/call
           tool: search_zenodo
-      # Also allowed, counted in the server totals above: paper-search download_* and read_*_paper, pdf-reader pdf_evidence.
+      # rest of paper-search and pdf-reader
       - allow:
           method: tools/call
           tool: pdf_evidence
@@ -425,7 +433,7 @@ endpoints:
       - allow:
           method: tools/call
           tool: read_ssrn_paper
-      # gateway-internal: 1 of 8 allowed, a read-only lookup. mcp-exec and code-mode stay denied: they bypass this list.
+      # gateway-internal: 1 of 8 allowed.
       - allow:
           method: tools/call
           tool: mcp-find

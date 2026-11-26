@@ -1,6 +1,6 @@
 # Tool selection
 
-ALWAYS use the most specialized tool for the task; web search via MCP is still web search (fallback only).
-Find it via `search` in `execute` (most MCP tools live under `MCP_DOCKER`) before any web search/fetch; query task nouns, not verbs.
-On tool error, switch tool category; don't retry a similar tool.
-Fetch whole pages via `webfetch` only when the tools above were insufficient; never guess URLs.
+- Use the most specialized tool: find it with `search` in `execute` (MCP tools mostly under `MCP_GATEWAY`), querying nouns, not verbs.
+- Web search (even via MCP) and `webfetch` are fallbacks for when no tool fits; never guess URLs.
+- On an auth failure or a clearly down service, stop and report the failing tool and its error; don't retry, switch tools, or work around it.
+- Other tool errors (e.g. wrong usage) can be retried with a corrected call.

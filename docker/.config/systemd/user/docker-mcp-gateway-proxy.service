@@ -1,8 +1,8 @@
-# Socket-activation proxy for docker-mcp-gateway.service: started by docker-mcp-gateway.socket, exits once idle.
+# Socket-activation proxy for docker-mcp-gateway.service; exits once idle.
 [Unit]
 Description=Socket-activation proxy for the docker mcp gateway
 Requires=docker-mcp-gateway.socket
-# Wants=, not Upholds=: a failed start (e.g. a cancelled pinentry) must not be retried in a loop.
+# Wants=, not Upholds=: a failed start must not be retried in a loop.
 Wants=docker-mcp-gateway.service
 After=docker-mcp-gateway.service
 

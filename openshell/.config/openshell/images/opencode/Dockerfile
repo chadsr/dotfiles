@@ -1,10 +1,6 @@
-# Custom OpenCode sandbox image for OpenShell. See openshell/README.md.
-# uid 1000 gets a passwd entry and owns /sandbox: OpenShell requires one for a numeric USER.
-# Repository tools (basedpyright included) come from mise/uv, not from this image.
-# The base entrypoint stays: OpenShell starts a helper container from this image with no command.
+# OpenCode sandbox image for OpenShell. Repository tools come from mise/uv, not from this image.
 
-# The plugin named in the shared config, installed where opencode keeps its plugin cache: a session starts
-# without a cold install, and opencode still updates it itself. To bump the pin: opencode-sandbox --rebuild
+# The plugin named in the shared config, pre-installed in opencode's plugin cache.
 FROM alpine:3.24.4@sha256:f59abe656b692d901e184be3445e084786602108599d2a51d229c0f5a48c71bf AS plugins
 
 # hadolint ignore=DL3018
@@ -15,6 +11,7 @@ RUN npm install --prefix /out --omit=dev --ignore-scripts --no-audit --no-fund
 
 FROM ghcr.io/anomalyco/opencode:2.4.1@sha256:10e340e3e86d7b23e95cd9960f5a934beae8a87593d7398b5629b6112ed1fc63
 
+# OpenShell needs a passwd entry for a numeric USER.
 # hadolint ignore=DL3018
 RUN apk add --no-cache ca-certificates git mise \
   && addgroup -g 1000 opencode \
@@ -23,10 +20,13 @@ RUN apk add --no-cache ca-certificates git mise \
   && chown -R opencode:opencode /sandbox
 
 COPY --chown=1000:1000 sandbox.jsonc /sandbox/opencode.jsonc
-# opencode uses the newest all-digit generation directory; an update it installs lands beside this one.
+# opencode uses the newest all-digit generation directory.
 COPY --chown=1000:1000 --from=plugins /out /sandbox/.cache/opencode/npm/@tarquinen/opencode-dcp@latest/1
 
 ENV HOME=/sandbox
-# `openshell sandbox exec` runs a login shell, which resets PATH: the shims go back in through profile.d.
-RUN printf 'export PATH="/sandbox/.local/share/mise/shims:$PATH"\n' >/etc/profile.d/mise.sh
+# The login shell of `openshell sandbox exec` resets PATH: put the mise shims back.
+RUN <<'EOF' cat > /etc/profile.d/mise.sh
+export PATH="/sandbox/.local/share/mise/shims:$PATH"
+EOF
+
 USER 1000

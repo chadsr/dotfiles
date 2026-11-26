@@ -1,0 +1,3 @@
+# gateway.toml is deployed as a hardlink (the gateway refuses a symlink)
+^/\.config/openshell/gateway\.toml
+README\..*

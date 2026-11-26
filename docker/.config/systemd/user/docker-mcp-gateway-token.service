@@ -1,4 +1,4 @@
-# Bearer token of the docker mcp gateway, written at graphical login into $XDG_RUNTIME_DIR/docker-mcp-gateway (removed at graphical logout).
+# Writes the docker MCP gateway bearer token file at graphical login.
 [Unit]
 Description=docker mcp gateway bearer token file
 PartOf=graphical-session.target

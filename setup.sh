@@ -217,6 +217,7 @@ declare -a mk_dirs=(
   ~/.config/Logseq/
   ~/.config/Nextcloud/
   ~/.config/nvim/
+  ~/.config/openshell/
   ~/.config/pulse/
   ~/.config/pulseaudio-ctl/
   ~/.config/systemd/user/
@@ -773,6 +774,18 @@ for stow_dir in "${stow_dirs_general[@]}"; do
   stow_config "$stow_dir"
 done
 
+# Files excluded from stow by a package's .stow-local-ignore; deployed as hardlinks instead
+declare -a hardlink_files=(
+  openshell/.config/openshell/gateway.toml
+)
+for hardlink_file in "${hardlink_files[@]}"; do
+  echo "Hardlinking ${hardlink_file}"
+  hardlink "$base_path/$hardlink_file" "$HOME/${hardlink_file#*/}" || {
+    echo "failed to hardlink ${hardlink_file}"
+    exit 1
+  }
+done
+
 for luau in "$base_path"/herdr/.config/herdr-automate/automations/*.luau; do
   [ -e "$luau" ] || continue
   cp "$luau" "${HOME}/.config/herdr-automate/automations/"
@@ -824,7 +837,7 @@ for systemd_user_target in "${systemd_user_targets[@]}"; do
 done
 
 declare -a systemd_user_units=(
-  "$base_path"/openshell/.config/systemd/user/docker-mcp-gateway.socket
+  "$base_path"/docker/.config/systemd/user/docker-mcp-gateway.socket
 )
 if [[ "$is_graphical" == true ]]; then
   systemd_user_units+=(

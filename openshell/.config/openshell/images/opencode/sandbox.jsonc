@@ -1,11 +1,12 @@
-// Sandbox-only opencode overrides, baked into the openshell-opencode image at /sandbox/opencode.jsonc.
-// opencode merges them by ancestor discovery over the shared config, which is RO-bound at /sandbox/.config/opencode. See openshell/README.md.
+// Sandbox-only opencode overrides, baked into the image as /sandbox/opencode.jsonc.
 {
   "$schema": "https://opencode.ai/config.json",
   "providers": {
     // The built-in provider is not redefined, only pointed at the profile's variable.
     "zai-coding-plan": {
-      "env": ["ZAI_CODING_PLAN_API_KEY"],
+      "env": [
+        "ZAI_CODING_PLAN_API_KEY"
+      ],
       "settings": {
         "apiKey": "{env:ZAI_CODING_PLAN_API_KEY}"
       }
@@ -13,7 +14,7 @@
   },
   "mcp": {
     "servers": {
-      "MCP_DOCKER": {
+      "MCP_GATEWAY": {
         "type": "remote",
         "url": "http://host.openshell.internal:8811/mcp",
         "oauth": false,

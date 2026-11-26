@@ -1,134 +1,130 @@
-## Layout
+# OpenShell
 
-| File (under `openshell/`) | Role |
-| --- | --- |
-| `.local/bin/oc` | Entry point: gateway token (`docker-mcp-token`, docker package), reconcile, sync in, OpenCode TUI, sync out. |
-| `.local/bin/oc-sync` | `push` and `pull`: git bundle plus worktree in, commits plus edits out. |
-| `.local/bin/oc-stop` | Syncs out, then stops the sandbox of a directory. |
-| `.local/bin/opencode-sandbox` | `--setup`: profiles and providers. Otherwise the reconciler: image and sandbox. |
-| `.local/lib/oc-sync/*.sh` | Sandbox side of `oc-sync` and `opencode-sandbox` (POSIX sh): sent as the text of `sh -c`, nothing is installed in the sandbox. |
-| `.config/openshell/gateway.toml` | OpenShell gateway: Docker driver pinned, host gateway 172.17.0.1. |
-| `.config/openshell/policies/opencode.yaml` | Sandbox policy: egress allowlist (OpenCode, mise) and filesystem policy. |
-| `.config/openshell/profiles/mcp-gateway.yaml` | Provider profile for the MCP gateway token; holds the MCP tool allowlist. |
-| `.config/openshell/profiles/zai-coding-plan.yaml` | Provider profile for the Z.ai coding plan API key. |
-| `.config/openshell/images/opencode/Dockerfile` | Sandbox image `openshell-opencode:v2`: the official OpenCode image plus git, mise and the pinned DCP plugin. |
-| `.config/openshell/images/opencode/sandbox.jsonc` | Sandbox-only OpenCode config: the MCP server, wired through placeholders. |
-| `../docker/.config/systemd/user/docker-mcp-gateway.*` | Socket-activated MCP gateway: listener on 172.17.0.1:8811, proxy that exits after 5 idle minutes, gateway on 172.17.0.1:18811 serving the `dev-tools` servers. |
-| `README.md` | This file. Stays in the repo: stow ignores `README.*`. |
+> Run OpenCode for a git repository inside an OpenShell sandbox: your working
+> tree goes in, and the agent's work comes back when you quit.
 
-## How it works
+## Quick start
 
-```text
-once   opencode-sandbox --setup    profiles linted, imported or updated; missing providers created
-|                                    secret: pass -> provider store (encrypted, host side only)
-oc <dir>
-| token  docker-mcp-token (docker package): pass -> $XDG_RUNTIME_DIR/docker-mcp-gateway/token, when it is missing
-| recon  opencode-sandbox <dir>  (builds openshell-opencode:v2 when missing; replaces a sandbox
-|          whose image, policy or profiles changed, unless it still holds unsynced work)
-|          sandbox   create when missing (providers, policy; no mounts)
-| push   oc-sync push <dir>
-|          git bundle of the checked-out branch -> a checkout at /sandbox/<base>, same branch
-|          and commit; then the tracked and not-ignored files (uncommitted edits included)
-|          ~/.agents/skills -> /sandbox/.agents/skills; the opencode config entries ->
-|          /sandbox/.config/opencode (both replaced); then mise trust && mise install
-| run    openshell sandbox exec oc-<base>-<hash5> --workdir /sandbox/<base>/<subdir> -- opencode
-| pull   oc-sync pull <dir>
-|          agent commits -> the same branch; uncommitted edits -> one patch on the host worktree
-| egress the sandbox sees openshell:resolve:env:... placeholders only; the proxy restores
-|        the real value for the profile's exact host/port/path
-| MCP    host.openshell.internal:8811/mcp -> docker-mcp-gateway.socket ->
-|        docker-mcp-gateway-proxy.service -> docker-mcp-gateway.service -> MCP containers
+You need the `openshell` CLI with its gateway running, Docker and `pass`. The
+MCP servers also need the `docker` package.
+
+```sh
+# 1. the two secrets (once)
+openssl rand -hex 32 | pass insert -e openshell/MCP_GATEWAY_AUTH_TOKEN
+pass insert openshell/ZAI_CODING_PLAN_API_KEY
+# 2. the profiles and providers (once)
+stow openshell && oc setup
+# 3. a session, from anywhere inside a git repository
+oc
 ```
 
-`pull` fast-forwards the branch unless the host moved since the push; then the commits stay on
-`refs/oc-sync/<sandbox>` (`git merge oc-sync/<sandbox>`). The patch is applied with `git apply --reject`:
-hunks that clash with your own edits are left in `<file>.rej` files. A submodule is a plain directory in
-the sandbox: its edits come back the same way, uncommitted in your submodule.
+The first `oc` builds the image `openshell-opencode` and creates the sandbox.
+OpenCode works on a copy of the repository; when you quit, the agent's commits
+land on your branch and its uncommitted edits on your working tree.
 
 ## Usage
 
+| Command            | Does                                                  |
+| ------------------ | ----------------------------------------------------- |
+| `oc [dir]`         | Sync in, run OpenCode, sync out.                      |
+| `oc pull [dir]`    | Bring the sandbox's commits and edits back.           |
+| `oc push [dir]`    | Send your branch and uncommitted files.               |
+| `oc stop [dir]`    | Sync out, then stop the sandbox.                      |
+| `oc rebuild [dir]` | Rebuild the image; a new image replaces the sandbox.  |
+| `oc setup`         | Import or update the profiles; run after editing one. |
+
+`[dir]` defaults to the current directory. One session per repository at a
+time: a second `oc` there stops at a lock.
+
+## How it works
+
+1. **In:** the commits of your branch as a git bundle, then the tracked and
+   not-ignored files, uncommitted edits included. Your `~/.agents/skills` and
+   OpenCode config are copied in too, and `mise install` runs for the
+   repository's tools.
+2. **Run:** OpenCode in the sandbox, with nothing mounted and placeholders
+   instead of secrets. MCP servers stay on the host, behind the allowlist of
+   the `mcp-gateway` profile.
+3. **Out:** the agent's commits fast-forward your branch, or wait on
+   `refs/oc-sync/<sandbox>` for a `git merge` when your branch moved since
+   launch. Its uncommitted edits come back as one patch; a hunk that clashes
+   with your own edits is left in a `<file>.rej` file.
+
+## Configuration
+
+Everything lives in `.config/openshell/`. The code is `.local/bin/oc` and its
+sandbox side, `.local/lib/oc/sandbox.sh`.
+
+| To change              | Edit                        | Then         |
+| ---------------------- | --------------------------- | ------------ |
+| The MCP tool allowlist | `profiles/mcp-gateway.yaml` | `oc setup`   |
+| Allowed network access | `policies/opencode.yaml`    | `oc`         |
+| The sandbox image      | `images/opencode/`          | `oc rebuild` |
+
+In the profile, `deny_rules` win over `rules`. Do not add the MCP endpoint to
+the policy: the profile contributes it.
+
+> [!IMPORTANT]
+> A changed image, policy or profile makes the next `oc` replace the sandbox,
+> and work that was not pulled is gone with it. `oc` refuses while the sandbox
+> holds unsynced work.
+
+## Secrets
+
+`pass` is the only place a secret is stored. `oc setup` creates each provider
+from the `pass` entry `openshell/<ENV_VAR>` named in its profile.
+
+To rotate a value, update the `pass` entry first, then the provider:
+
 ```sh
-oc [dir]                            # reconcile, sync in, OpenCode TUI, sync out ([dir] defaults to .)
-oc-stop [dir]                       # sync out, then stop that sandbox
-oc-sync pull <dir> [--dry-run]      # only bring the sandbox's commits and edits back
-oc-sync push <dir> [--dry-run]      # only send the host state (pulls first after an interrupted session)
-opencode-sandbox --print <dir>      # sandbox name and its workdir
-opencode-sandbox --rebuild [dir]    # after changing the image, sandbox.jsonc or the plugin pin
-opencode-sandbox --setup            # once after stowing, and after editing a profile
+export MCP_GATEWAY_AUTH_TOKEN="$(pass show openshell/MCP_GATEWAY_AUTH_TOKEN)"
+openshell provider update mcp-gateway --credential MCP_GATEWAY_AUTH_TOKEN --wait
 ```
 
-## Secrets and rotation
+The API key rotates the same way: `ZAI_CODING_PLAN_API_KEY` and
+`zai-coding-plan`.
 
-`pass` is the only place you store a secret. To rotate, edit the entry first, then the provider:
+The gateway reads its token file only at start, so a rotated gateway token
+also needs this (restart a running `opencode serve` in the sandbox too):
 
 ```sh
-openssl rand -hex 32 | pass insert -e openshell/MCP_GATEWAY_AUTH_TOKEN
-pass insert openshell/ZAI_CODING_PLAN_API_KEY
-MCP_GATEWAY_AUTH_TOKEN=$(pass show openshell/MCP_GATEWAY_AUTH_TOKEN) openshell provider update mcp-gateway --credential MCP_GATEWAY_AUTH_TOKEN --wait
-ZAI_CODING_PLAN_API_KEY=$(pass show openshell/ZAI_CODING_PLAN_API_KEY) openshell provider update zai-coding-plan --credential ZAI_CODING_PLAN_API_KEY --wait
+docker-mcp-token --refresh && \
+  systemctl --user restart docker-mcp-gateway.service
 ```
-
-A rotated gateway token also needs its file rewritten (`docker-mcp-token --refresh`).
-
-`stable_placeholder: true` lets a rotated value reach running sessions without a restart, but a
-stale in-sandbox `opencode serve` can still answer MCP 401 until it is restarted.
-
-## Changing things
-
-### Add a provider profile
-
-Copy `profiles/zai-coding-plan.yaml`: `id:` on its own line, an inline `env_vars: [VAR]`. Add a pass entry
-named `openshell/<VAR>`, then run `opencode-sandbox --setup`.
-
-### Change the MCP allowlist
-
-Edit `rules` (allowed) or `deny_rules` (denied; they win) in `profiles/mcp-gateway.yaml`, then run
-`opencode-sandbox --setup`, which also lints the profiles.
-
-### Change the egress policy
-
-Edit `policies/opencode.yaml`. Do not add the MCP endpoint here: the provider contributes it.
-The `mise` rule also covers the processes mise starts, and each download host needs its own endpoint.
-The npm registry entry only serves plugin updates (it needs `allow_encoded_slash`); the plugin pin
-is `DCP_PLUGIN_VERSION` in the Dockerfile.
-
-Any edit to a profile or the policy makes the next `oc` recreate the sandbox, so do it between sessions.
-
-### Change what runs in the sandbox
-
-Edit a file in `.local/lib/oc-sync/`: `oc-sync` and `opencode-sandbox` send it as the text of `sh -c` each time they need it, so there is nothing to install.
 
 ## Troubleshooting
 
-- **Gateway not listening** (a launch warns `docker-mcp-gateway.socket is not listening`; the units are the docker package's):
+- **`WARNING: no gateway token` or `WARNING: docker-mcp-token not found`**:
+  MCP is refused, the session still runs. Stow the `docker` package and start
+  the gateway socket:
 
   ```sh
-  systemctl --user status docker-mcp-gateway.socket
   systemctl --user enable --now docker-mcp-gateway.socket
   ```
 
-- **`ERROR: no pass entry …`** (`docker-mcp-token` behind `oc`) or **`ERROR: missing pass entry …`** (`--setup`): create it as shown above, then run the command again.
-- **`ERROR: docker-mcp-token not found on PATH`** (`oc`): stow the docker package.
-- **`no gateway token`** (a warning from `opencode-sandbox`, an error from `oc`): run `docker-mcp-token`.
-- **`ERROR: provider … not found`**: run `opencode-sandbox --setup`.
-- **`… holds unsynced work`**: run `oc-sync pull <dir>` first, or delete the state file it names to
-  discard that work.
-- **`oc-sync pull failed`**: the sandbox keeps its work. Fix the cause, then `oc-sync pull <dir>`.
-- **`*.rej` files after a pull**: the agent changed lines you had changed too. Merge them by hand; the
-  whole patch is kept as `~/.local/state/oc-sync/<sandbox>.rejected.patch`.
-- **A tool is not installed** (`mise install` warns at each push): run it inside the sandbox.
-- **MCP 401 after a rotation**: run `docker-mcp-token --refresh`, then restart the in-sandbox `opencode serve`.
+- **`ERROR: missing pass entry openshell/<VAR>`**: add it with
+  `pass insert openshell/<VAR>`, then run `oc setup` again.
+- **MCP 403 in the sandbox** (`Version negotiation failed`):
+  `openshell logs <sandbox> --source sandbox | grep DENIED` prints the denied
+  protocol version or method. Allow it in `profiles/mcp-gateway.yaml` and run
+  `oc setup`.
+- **`… holds unsynced work`**: the sandbox has work that is not on the host
+  yet. `oc pull <dir>` brings it back; delete the state file it names to
+  discard it.
+- **`ERROR: the work is still in sandbox …`**: nothing is lost. Fix the cause,
+  then run `oc pull <dir>`.
+- **`*.rej` files**: the agent changed lines you had changed too. Merge them by
+  hand; the whole patch is kept as
+  `~/.local/state/oc-sync/<sandbox>.rejected.patch`.
 
 ## Limits
 
-- The sandbox is a snapshot: host edits reach it at the next `oc`, and its work reaches the host only
+- Host edits reach the sandbox at the next `oc`; the sandbox's work reaches
+  the host only through a pull.
+- gitignored files are not sent.
+- A submodule goes in as a plain directory: its files are there, but edits
+  inside it do not come back.
+- The agent cannot push to GitHub from inside the sandbox. Commits leave
   through a pull.
-- gitignored files are not sent. The first push for a sandbox uploads the full history; every push
-  resends the whole worktree. A submodule's own history is not in the sandbox.
-- A rebuilt image, or a changed policy, profile or layout, replaces the sandbox; what was not pulled is gone.
-- No push to GitHub from inside (no route for OpenCode, GitHub write tools denied): commits leave
-  through `pull`.
-- `basedpyright-langserver` is not in the image: the shared `opencode.jsonc` needs the repository
-  to provide it through mise or uv.
-- MCP servers run outside the sandbox, only while a sandbox has an MCP session open.
-- The gateway's 8 internal tools cannot be disabled alongside `--profile`: `deny_rules` are the control.
+- `basedpyright-langserver` is not in the image; a repository that needs it
+  must provide it through mise or uv.
