@@ -123,6 +123,7 @@
               "Erlang",
               "Go",
               "Haskell",
+              "HCL",
               "HTML",
               "Java",
               "JavaScript",
@@ -132,6 +133,7 @@
               "Lua",
               "Markdown",
               "MDX",
+              "Nix",
               "OCaml",
               "Odin",
               "PHP",
@@ -143,6 +145,8 @@
               "Shell Script",
               "Swift",
               "Svelte",
+              "Terraform",
+              "Terraform Vars",
               "TOML",
               "TSX",
               "TypeScript",
@@ -166,7 +170,7 @@
         "slash_commands": {},
         "snippets": null,
         "themes": [],
-        "version": "0.2.14"
+        "version": "0.2.15"
       }
     },
     "csv": {
@@ -202,40 +206,6 @@
         "snippets": null,
         "themes": [],
         "version": "0.0.3"
-      }
-    },
-    "docker-compose": {
-      "dev": false,
-      "manifest": {
-        "authors": [
-          "eth0net <eth0net@pm.me>"
-        ],
-        "capabilities": [],
-        "context_servers": {},
-        "description": "Syntax highlighting for Docker Compose files",
-        "grammars": {},
-        "icon_themes": [],
-        "id": "docker-compose",
-        "language_servers": {
-          "docker-compose": {
-            "code_action_kinds": null,
-            "language": "YAML",
-            "language_ids": {},
-            "languages": []
-          }
-        },
-        "languages": [],
-        "lib": {
-          "kind": "Rust",
-          "version": "0.0.6"
-        },
-        "name": "Docker Compose",
-        "repository": "https://github.com/eth0net/zed-docker-compose",
-        "schema_version": 1,
-        "slash_commands": {},
-        "snippets": null,
-        "themes": [],
-        "version": "0.1.0"
       }
     },
     "dockerfile": {
@@ -302,60 +272,6 @@
         "snippets": null,
         "themes": [],
         "version": "0.3.0"
-      }
-    },
-    "git-firefly": {
-      "dev": false,
-      "manifest": {
-        "authors": [
-          "d1y <chenhonzhou@gmail.com>",
-          "Peter Tripp <petertripp@gmail.com>"
-        ],
-        "capabilities": [],
-        "context_servers": {},
-        "description": "Provides Git Syntax Highlighting",
-        "grammars": {
-          "git_config": {
-            "path": null,
-            "repository": "https://github.com/the-mikedavis/tree-sitter-git-config",
-            "rev": "3a61756a81a86291a0f48e3eeeaa0692b9981aa9"
-          },
-          "git_rebase": {
-            "path": null,
-            "repository": "https://github.com/the-mikedavis/tree-sitter-git-rebase",
-            "rev": "39bf3b7566c86ccffd70aaa5105c7c8b76788975"
-          },
-          "gitattributes": {
-            "path": null,
-            "repository": "https://github.com/tree-sitter-grammars/tree-sitter-gitattributes",
-            "rev": "1b7af09d45b579f9f288453b95ad555f1f431645"
-          },
-          "gitignore": {
-            "path": null,
-            "repository": "https://github.com/shunsambongi/tree-sitter-gitignore",
-            "rev": "f4685bf11ac466dd278449bcfe5fd014e94aa504"
-          }
-        },
-        "icon_themes": [],
-        "id": "git-firefly",
-        "language_servers": {},
-        "languages": [
-          "languages/gitrebase",
-          "languages/gitignore",
-          "languages/gitattributes",
-          "languages/gitconfig"
-        ],
-        "lib": {
-          "kind": null,
-          "version": null
-        },
-        "name": "Git Firefly",
-        "repository": "https://github.com/d1y/git_firefly",
-        "schema_version": 1,
-        "slash_commands": {},
-        "snippets": null,
-        "themes": [],
-        "version": "0.1.9"
       }
     },
     "github-actions": {
@@ -806,54 +722,6 @@
         "snippets": null,
         "themes": [],
         "version": "0.4.0"
-      }
-    },
-    "nix": {
-      "dev": false,
-      "manifest": {
-        "authors": [
-          "Hasit Mistry <hasitnm@gmail.com>"
-        ],
-        "capabilities": [],
-        "context_servers": {},
-        "description": "Nix support.",
-        "grammars": {
-          "nix": {
-            "path": null,
-            "repository": "https://github.com/nix-community/tree-sitter-nix",
-            "rev": "ea1d87f7996be1329ef6555dcacfa63a69bd55c6"
-          }
-        },
-        "icon_themes": [],
-        "id": "nix",
-        "language_servers": {
-          "nil": {
-            "code_action_kinds": null,
-            "language": "Nix",
-            "language_ids": {},
-            "languages": []
-          },
-          "nixd": {
-            "code_action_kinds": null,
-            "language": "Nix",
-            "language_ids": {},
-            "languages": []
-          }
-        },
-        "languages": [
-          "languages/nix"
-        ],
-        "lib": {
-          "kind": "Rust",
-          "version": "0.7.0"
-        },
-        "name": "Nix",
-        "repository": "https://github.com/zed-extensions/nix",
-        "schema_version": 1,
-        "slash_commands": {},
-        "snippets": null,
-        "themes": [],
-        "version": "0.1.5"
       }
     },
     "proto": {
@@ -1317,51 +1185,6 @@
         "themes": [],
         "version": "0.2.0"
       }
-    },
-    "zig": {
-      "dev": false,
-      "manifest": {
-        "authors": [
-          "Allan Calix <contact@acx.dev>"
-        ],
-        "capabilities": [],
-        "context_servers": {},
-        "debug_locators": {
-          "zig-locator": {}
-        },
-        "description": "Zig support.",
-        "grammars": {
-          "zig": {
-            "path": null,
-            "repository": "https://github.com/tree-sitter-grammars/tree-sitter-zig",
-            "rev": "6479aa13f32f701c383083d8b28360ebd682fb7d"
-          }
-        },
-        "icon_themes": [],
-        "id": "zig",
-        "language_servers": {
-          "zls": {
-            "code_action_kinds": null,
-            "language": "Zig",
-            "language_ids": {},
-            "languages": []
-          }
-        },
-        "languages": [
-          "languages/zig"
-        ],
-        "lib": {
-          "kind": "Rust",
-          "version": "0.7.0"
-        },
-        "name": "Zig",
-        "repository": "https://github.com/zed-extensions/zig",
-        "schema_version": 1,
-        "slash_commands": {},
-        "snippets": null,
-        "themes": [],
-        "version": "0.4.2"
-      }
     }
   },
   "icon_themes": {
@@ -1489,86 +1312,6 @@
       "path": "languages/emmyluadoc",
       "query_files": 1
     },
-    "Git Attributes": {
-      "extension": "git-firefly",
-      "grammar": "gitattributes",
-      "hidden": false,
-      "matcher": {
-        "first_line_pattern": null,
-        "modeline_aliases": [
-          "gitattributes"
-        ],
-        "path_suffixes": [
-          "gitattributes",
-          ".gitattributes"
-        ]
-      },
-      "path": "languages/gitattributes",
-      "query_files": 17
-    },
-    "Git Config": {
-      "extension": "git-firefly",
-      "grammar": "git_config",
-      "hidden": false,
-      "matcher": {
-        "first_line_pattern": null,
-        "modeline_aliases": [
-          "gitconfig"
-        ],
-        "path_suffixes": [
-          "config.worktree",
-          ".gitconfig",
-          ".gitmodules",
-          ".lfsconfig"
-        ]
-      },
-      "path": "languages/gitconfig",
-      "query_files": 17
-    },
-    "Git Ignore": {
-      "extension": "git-firefly",
-      "grammar": "gitignore",
-      "hidden": false,
-      "matcher": {
-        "first_line_pattern": null,
-        "modeline_aliases": [
-          "gitignore"
-        ],
-        "path_suffixes": [
-          ".containerignore",
-          ".cursorignore",
-          ".dockerignore",
-          ".eslintignore",
-          ".fdignore",
-          ".gitignore",
-          ".gitignore_global",
-          ".git-blame-ignore-revs",
-          ".ignore",
-          ".npmignore",
-          ".prettierignore",
-          ".rgignore",
-          ".vscodeignore"
-        ]
-      },
-      "path": "languages/gitignore",
-      "query_files": 17
-    },
-    "Git Rebase": {
-      "extension": "git-firefly",
-      "grammar": "git_rebase",
-      "hidden": false,
-      "matcher": {
-        "first_line_pattern": null,
-        "modeline_aliases": [
-          "gitrebase"
-        ],
-        "path_suffixes": [
-          "git-rebase-todo"
-        ]
-      },
-      "path": "languages/gitrebase",
-      "query_files": 17
-    },
     "GitHub Actions": {
       "extension": "github-actions",
       "grammar": "yaml",
@@ -1677,20 +1420,6 @@
       },
       "path": "languages/make",
       "query_files": 159
-    },
-    "Nix": {
-      "extension": "nix",
-      "grammar": "nix",
-      "hidden": false,
-      "matcher": {
-        "first_line_pattern": null,
-        "modeline_aliases": [],
-        "path_suffixes": [
-          "nix"
-        ]
-      },
-      "path": "languages/nix",
-      "query_files": 31
     },
     "Proto": {
       "extension": "proto",
@@ -1885,21 +1614,6 @@
       },
       "path": "languages/xml",
       "query_files": 13
-    },
-    "Zig": {
-      "extension": "zig",
-      "grammar": "zig",
-      "hidden": false,
-      "matcher": {
-        "first_line_pattern": null,
-        "modeline_aliases": [],
-        "path_suffixes": [
-          "zig",
-          "zon"
-        ]
-      },
-      "path": "languages/zig",
-      "query_files": 927
     },
     "ini": {
       "extension": "ini",
