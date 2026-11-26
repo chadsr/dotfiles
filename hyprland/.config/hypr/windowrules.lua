@@ -26,6 +26,7 @@ hl.window_rule({
   float = true,
   center = true,
   border_size = 2,
+  opaque = true,
   match = { class = "^(ghostty.floattui)$" },
 })
 
