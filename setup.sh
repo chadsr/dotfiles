@@ -638,7 +638,7 @@ if [[ "$is_graphical" == true ]]; then
 
   declare -a symlink_paths_tuples=(
     "${base_path}/steam/.steam/steam/steam_dev.cfg ${HOME}/.steam/steam/steam_dev.cfg"
-    "${git_submodule_path}/alacritty-theme/themes ${base_path}/alacritty/.config/alacritty/themes"
+    "${git_submodule_path}/alacritty-theme/themes/catppuccin_mocha.toml ${base_path}/alacritty/.config/alacritty/themes/catppuccin_mocha.toml"
     "${git_submodule_path}/candy-icons ${base_path}/gtk/.icons/candy-icons"
     "${git_submodule_path}/catppuccin-bat/themes/Catppuccin-Mocha.tmTheme ${base_path}/bat/.config/bat/themes/Catppuccin-Mocha.tmTheme"
     "${git_submodule_path}/catppuccin-btop/themes/catppuccin_mocha.theme ${base_path}/btop/.config/btop/themes/catppuccin_mocha.theme"
