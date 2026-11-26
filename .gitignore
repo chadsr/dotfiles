@@ -19,6 +19,7 @@ cava/.config/cava/themes
 cline/.cline/*
 cline/.cline/data/*
 cline/.cline/data/settings/*
+clipse/.config/clipse/*
 continue/.continue/*
 cura/.config/cura/5.11/cura.cfg
 data/pkgs/*
@@ -47,6 +48,7 @@ herdr/.config/herdr-app/window.json
 herdr/.config/herdr/.plugins.lock
 herdr/.config/herdr/*.gpui-lock
 herdr/.config/herdr/*.log
+herdr/.config/herdr/config-gpui.lock
 herdr/.config/herdr/herdr.sock.agent
 herdr/.config/herdr/session-snapshots/*
 herdr/.config/herdr/session.json
@@ -107,6 +109,8 @@ zed/.local/share/zed/extensions/*
 !cline/.cline/data/settings/
 !cline/.cline/data/settings/cline_mcp_settings.json
 !cline/.cline/data/settings/global-settings.json
+!clipse/.config/clipse/config.json
+!clipse/.config/clipse/custom_theme.json
 !continue/.continue/config.yaml
 !data/pkgs/*.asc.gpg
 !docker/.docker/cli-plugins/.gitkeep
